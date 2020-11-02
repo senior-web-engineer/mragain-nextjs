@@ -1,7 +1,9 @@
 import React from "react";
 import App from "next/app";
+import { ConnectedRouter } from "connected-next-router";
+import { wrapper } from "../configureStore";
 
-export default class MyApp extends App {
+class MyApp extends App {
   constructor(props) {
     super(props);
 
@@ -29,12 +31,16 @@ export default class MyApp extends App {
 
     return (
       <React.Fragment>
-        <Component
-          {...pageProps}
-          setSelectedIndex={this.setSelectedIndex}
-          setValue={this.setValue}
-        />
+        <ConnectedRouter>
+          <Component
+            {...pageProps}
+            setSelectedIndex={this.setSelectedIndex}
+            setValue={this.setValue}
+          />
+        </ConnectedRouter>
       </React.Fragment>
     );
   }
 }
+
+export default wrapper.withRedux(MyApp);
