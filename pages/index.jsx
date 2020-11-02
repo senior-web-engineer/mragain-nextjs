@@ -40,6 +40,7 @@ export default function Home() {
 
         <meta name="theme-color" content="#ffffff" />
       </Helmet>
+      Homepage
     </Main>
   )
 }
