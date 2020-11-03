@@ -16,8 +16,7 @@ import "./NewestShopSection.style.less";
 import { getNewestShopList } from "Service/search/operations.js";
 import { getAccountProfile } from "Service/account/operations.js";
 
-import image3 from "@/assets/images/home_newest_image3.jpg";
-
+const image3 = "/static/media/home_newest_image3.8798cc16.jpg";
 const NewestShopSection = (routerProps) => {
   const history = useHistory();
   const router = useRouter();

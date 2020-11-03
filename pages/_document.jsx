@@ -11,32 +11,32 @@ export default class MyDocument extends Document {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="msapplication-TileColor" content="#06c987" />
           <meta name="theme-color" content="#ffffff" />
-          <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-          <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+          <link rel="icon" href="/favicon.ico" />
+          <link rel="apple-touch-icon" href="/logo192.png" />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
-            href="%PUBLIC_URL%/apple-touch-icon.png"
+            href="/apple-touch-icon.png"
           />
           <link
             rel="icon"
             type="image/png"
             sizes="32x32"
-            href="%PUBLIC_URL%/favicon-32x32.png"
+            href="/favicon-32x32.png"
           />
           <link
             rel="icon"
             type="image/png"
             sizes="16x16"
-            href="%PUBLIC_URL%/favicon-16x16.png"
+            href="/favicon-16x16.png"
           />
-          <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
+          <link rel="manifest" href="/site.webmanifest" />
           <link
             rel="mask-icon"
-            href="%PUBLIC_URL%/safari-pinned-tab.svg"
+            href="/safari-pinned-tab.svg"
             color="#06c987"
           />
-          <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+          <link rel="manifest" href="/manifest.json" />
 
           <script src="https://cdn.jsdelivr.net/npm/semantic-ui-calendar-react@latest/dist/umd/semantic-ui-calendar-react.js"></script>
         </Head>
