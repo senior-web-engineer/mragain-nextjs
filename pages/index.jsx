@@ -4,7 +4,8 @@ import { Main } from "./index.style.jsx";
 import { Helmet } from "react-helmet";
 import { FRONT_END_URL } from "../constants.js";
 
-import { FindBannerSection } from "../components/home"
+import { FindBannerSection, AdvantageSection, NewestShopsSection } from "../components/home"
+import { TestmonialSection } from "../components/global";
 import { Header, Footer } from "../components/global";
 import { useSelector } from "react-redux";
 import { Layout } from "antd";
@@ -48,6 +49,9 @@ export default function Home(routerProps) {
           <meta name="theme-color" content="#ffffff" />
         </Helmet>
         <FindBannerSection />
+        <AdvantageSection />
+        <NewestShopsSection />
+        <TestmonialSection />
       </Main>
       <Footer/>
     </Layout>
