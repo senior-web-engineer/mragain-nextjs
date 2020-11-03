@@ -1,5 +1,6 @@
 import React from "react";
 import Document, { Head, Main, NextScript } from "next/document";
+import { ServerStyleSheet } from "styled-components";
 
 export default class MyDocument extends Document {
   render() {
@@ -71,18 +72,33 @@ MyDocument.getInitialProps = async ctx => {
   // 3. app.render
   // 4. page.render
 
+  // Render app and page and get the context of the page with collected side effects.
+  const sheet = new ServerStyleSheet();
   const originalRenderPage = ctx.renderPage;
-
-  ctx.renderPage = () =>
+  try {
+    ctx.renderPage = () =>
     originalRenderPage({
       // useful for wrapping the whole react tree
-      enhanceApp: (App) => App,
+      enhanceApp: (App) => props => sheet.collectStyles(<App {...props} />),
       // useful for wrapping in a per-page basis
       enhanceComponent: (Component) => Component,
     });
 
-  const initialProps = await Document.getInitialProps(ctx);
+    const initialProps = await Document.getInitialProps(ctx);
 
-  return initialProps;
+    return {
+      ...initialProps,
+      // Styles fragment is rendered after the app and page rendering finish.
+      styles: (
+        <>
+          {initialProps.styles}
+          {sheet.getStyleElement()}
+        </>
+      ),
+    }
+  } finally {
+    sheet.seal();
+  }
+  
   
 };
