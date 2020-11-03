@@ -2,6 +2,7 @@ import React from "react";
 import App from "next/app";
 import { ConnectedRouter } from "connected-next-router";
 import { wrapper } from "../configureStore";
+import "./_app.less";
 
 class MyApp extends App {
   constructor(props) {

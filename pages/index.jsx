@@ -4,6 +4,8 @@ import { Main } from "./index.style.jsx";
 import { Helmet } from "react-helmet";
 import { FRONT_END_URL } from "../constants.js";
 
+import { FindBannerSection } from "../components/home"
+
 export default function Home() {
   return (
     <Main>
@@ -40,7 +42,7 @@ export default function Home() {
 
         <meta name="theme-color" content="#ffffff" />
       </Helmet>
-      Homepage
+      <FindBannerSection />
     </Main>
   )
 }
