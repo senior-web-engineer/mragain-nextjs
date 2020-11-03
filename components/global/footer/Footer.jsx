@@ -1,5 +1,6 @@
 import React from "react";
 import { Icon } from "antd";
+import { useRouter } from "next/router";
 import {
   FooterViewSection,
   FooterViewContainer,
@@ -29,7 +30,8 @@ const IconFont = () => Icon.createFromIconfontCN({
 });
 
 const FooterView = ({ location }) => {
-  const splitUrl = "/" + location.pathname.split("/")[1];
+  const router = useRouter();
+  const splitUrl = "/" + router.pathname.split("/")[1];
   const visible =
     splitUrl === "/" ||
     splitUrl === "/zoek-resultaten" ||

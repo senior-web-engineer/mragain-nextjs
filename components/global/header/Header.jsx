@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { Layout, Menu, Button, Dropdown, Icon, Avatar } from "antd";
 import { useRouter } from "next/router";
 import logo from "@/assets/images/logo.png";
+import Link from "../../../src/Link";
 import "./Header.less";
 import { initUserLoginChange } from "Service/account/action.js";
 import { logout } from "Service/account/operations.js";
@@ -39,26 +40,28 @@ const HeaderView = (routerProps) => {
   const router = useRouter();
 
   const headerClass = (() => {
-    if (location.pathname === "/") return `App-header home-page`;
-    else if (location.pathname === "/over-ons") return `App-header home-page`;
-    else if (location.pathname === "/meld-je-aan-als-reparateur")
+    if (router.pathname === "/") return `App-header home-page`;
+    else if (router.pathname === "/over-ons") return `App-header home-page`;
+    else if (router.pathname === "/meld-je-aan-als-reparateur")
       return `App-header home-page`;
-    else if (location.pathname === "/reparatie-en-service")
+    else if (router.pathname === "/reparatie-en-service")
       return `App-header home-page`;
-    else if (location.pathname === "/veel-gestelde-vragen")
+    else if (router.pathname === "/veel-gestelde-vragen")
       return `App-header home-page`;
-    else if (location.pathname === "/contact") return `App-header home-page`;
+    else if (router.pathname === "/contact") return `App-header home-page`;
     else return `App-header`;
   })();
 
-  if (is_load === true) {
-    let user = localStorage.getItem("auth-user");
-    if (user !== null) {
-      setAuthUser(JSON.parse(user));
+  useEffect(() => {
+    if (is_load === true) {
+      let user = localStorage.getItem("auth-user");
+      if (user !== null) {
+        setAuthUser(JSON.parse(user));
+      }
+      initUserLoginChange(false);
+      setLoad(false);
     }
-    initUserLoginChange(false);
-    setLoad(false);
-  }
+  }, [])
 
   useEffect(() => {
     if (user_login_change === true) {
@@ -109,15 +112,19 @@ const HeaderView = (routerProps) => {
   };
 
   const initSignMenu = () => {
-    if (localStorage.getItem("auth-token") === null) {
+    const [authToken, setAuthToken] = useState("");
+    useEffect(() => {
+      setAuthToken(localStorage.getItem("auth-token"));
+    })
+    if (authToken === null) {
       return (
         <div className="navbar-sign">
-          <NavLink to="/login">
+          <Link href="/login">
             <Button type="login">Inloggen</Button>
-          </NavLink>
-          <NavLink to="/meld-je-aan-als-reparateur">
+          </Link>
+          <Link href="/meld-je-aan-als-reparateur">
             <Button type="register">Registreer</Button>
-          </NavLink>
+          </Link>
         </div>
       );
     }
@@ -130,8 +137,8 @@ const HeaderView = (routerProps) => {
           </Menu.Item>
         )}
         <Menu.Item>
-          <NavLink
-            to={
+          <Link
+            href={
               "/account-gegevens/" +
               (auth_user.account_id === undefined
                 ? admin_Id
@@ -142,11 +149,11 @@ const HeaderView = (routerProps) => {
             }}
           >
             Account Settings
-          </NavLink>
+          </Link>
         </Menu.Item>
         <Menu.Item>
-          <NavLink
-            to={
+          <Link
+            href={
               "/dashboard/" +
               (auth_user.account_id === undefined
                 ? admin_Id
@@ -158,11 +165,11 @@ const HeaderView = (routerProps) => {
             }}
           >
             Dashboard
-          </NavLink>
+          </Link>
         </Menu.Item>
         <Menu.Item>
-          <NavLink
-            to={
+          <Link
+            href={
               "/apparaten-beheer/" +
               (auth_user.account_id === undefined
                 ? admin_Id
@@ -173,11 +180,11 @@ const HeaderView = (routerProps) => {
             }}
           >
             Reparaties & Garanties
-          </NavLink>
+          </Link>
         </Menu.Item>
         <Menu.Item>
-          <NavLink
-            to={
+          <Link
+            href={
               "/profiel-beheer/" +
               (auth_user.account_id === undefined
                 ? admin_Id
@@ -188,7 +195,7 @@ const HeaderView = (routerProps) => {
             }}
           >
             Mijn Profiel
-          </NavLink>
+          </Link>
         </Menu.Item>
         <Menu.Item>
           <span
@@ -239,22 +246,22 @@ const HeaderView = (routerProps) => {
           style={{ lineHeight: "64px" }}
         >
           <Menu.Item key="/">
-            <NavLink className="home-link" to="/">
+            <Link className="home-link" href="/">
               Home
-            </NavLink>
+            </Link>
           </Menu.Item>
           <Menu.Item key="/over-ons">
-            <NavLink to="/over-ons">Over MrAgain</NavLink>
+            <Link href="/over-ons">Over MrAgain</Link>
           </Menu.Item>
           <Menu.Item key="/reparatie-en-service">
-            <NavLink to="/reparatie-en-service">
+            <Link href="/reparatie-en-service">
               Reparatie &amp; Service
-            </NavLink>
+            </Link>
           </Menu.Item>
           <Menu.Item key="/meld-je-aan-als-reparateur">
-            <NavLink to="/meld-je-aan-als-reparateur">
+            <Link href="/meld-je-aan-als-reparateur">
               Meld je aan als reparateur
-            </NavLink>
+            </Link>
           </Menu.Item>
         </Menu>
         {initSignMenu()}
@@ -277,22 +284,22 @@ const HeaderView = (routerProps) => {
           style={{ lineHeight: "64px" }}
         >
           <Menu.Item key="/">
-            <NavLink className="home-link" to="/">
+            <Link className="home-link" href="/">
               Home
-            </NavLink>
+            </Link>
           </Menu.Item>
           <Menu.Item key="/over-ons">
-            <NavLink to="/over-ons">Over MrAgain</NavLink>
+            <Link href="/over-ons">Over MrAgain</Link>
           </Menu.Item>
           <Menu.Item key="/reparatie-en-service">
-            <NavLink to="/reparatie-en-service">
+            <Link href="/reparatie-en-service">
               Reparatie &amp; Service
-            </NavLink>
+            </Link>
           </Menu.Item>
           <Menu.Item key="/meld-je-aan-als-reparateur">
-            <NavLink to="/meld-je-aan-als-reparateur">
+            <Link href="/meld-je-aan-als-reparateur">
               Meld je aan als reparateur
-            </NavLink>
+            </Link>
           </Menu.Item>
         </Menu>
       </Header>

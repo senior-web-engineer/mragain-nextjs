@@ -1,6 +1,7 @@
 import React from "react";
 import App from "next/app";
 import { ConnectedRouter } from "connected-next-router";
+import { connect } from "react-redux";
 import { wrapper } from "../configureStore";
 import "./_app.less";
 
@@ -28,13 +29,15 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, isLoggedIn, getAuthUser } = this.props;
 
     return (
       <React.Fragment>
         <ConnectedRouter>
           <Component
             {...pageProps}
+            isLoggedIn={isLoggedIn}
+            getAuthUser={getAuthUser}
             setSelectedIndex={this.setSelectedIndex}
             setValue={this.setValue}
           />
@@ -44,4 +47,16 @@ class MyApp extends App {
   }
 }
 
-export default wrapper.withRedux(MyApp);
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.account.isLogged,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAuthUser: () => {
+      getAuthUser(dispatch);
+    },
+  };
+};
+
+export default wrapper.withRedux(connect(mapStateToProps, mapDispatchToProps)(MyApp));
