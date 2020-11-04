@@ -1,0 +1,18 @@
+import styled from 'styled-components'
+
+export const AboutBreadcrumb = styled.div`
+  width: 218px;
+  height: 86px;
+  display: flex;
+  flex-direction: row;
+`
+
+export const AboutBannerTitle = styled.div`
+  width: 218px;
+  height: 38px;
+  color: black;
+  font-size: 38px;
+  line-height: 38px;
+  font-weight: bold;
+  color: #fff;
+`
