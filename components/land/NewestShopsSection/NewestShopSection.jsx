@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useRouter } from "next/router";
 import { Container, Row, Button } from "react-bootstrap";
 import { NewestShopSectionArea } from "./NewestShopSection.style";
 import ShopInfoCard from "./ShopInfoCard/ShopInfoCard";
@@ -17,7 +17,7 @@ import { getAccountProfile } from "Service/account/operations.js";
 const image3 = "/static/media/home_newest_image3.8798cc16.jpg";
 
 const NewestShopSection = (routerProps) => {
-  const history = useHistory();
+  const router = useRouter();
   const [shopCount] = useState(5);
   const [isload, setLoad] = useState(false);
   const { newestShopList, getNewestShopList, getAccountProfile } = routerProps;
@@ -27,7 +27,7 @@ const NewestShopSection = (routerProps) => {
   }
 
   const onProfilePage = (shop_name, city, street) => {
-    history.push(`/profiel/${shop_name}-${city}-${street}`);
+    router.push(`/profiel/${shop_name}-${city}-${street}`);
   };
 
   const scrollToTop = () => {

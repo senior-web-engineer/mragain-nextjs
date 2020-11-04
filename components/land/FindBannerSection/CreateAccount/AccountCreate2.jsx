@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { message } from "antd";
-import { useHistory } from "react-router-dom";
+import { useRouter } from "next/router";
 import { Modal } from "react-bootstrap";
 import "./AccountCreate2.less";
 
@@ -19,8 +19,9 @@ function AccountCreate2(routerProps) {
     auth_error,
     isAuth_Error,
     resetAuthError,
-  } = routerProps;
-  const history = useHistory();
+	} = routerProps;
+	
+	const router = useRouter();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -71,7 +72,7 @@ function AccountCreate2(routerProps) {
     if (isSignUp === true) {
       message.success("We hebben je een verificatie email gestuurd waarmee je je aanmelding kunt afronden.", [1]);
       setTimeout(() => {
-        history.push("/");
+        router.push("/");
       }, 3000);
     } else if (isAuth_Error === true) {
       message.error(auth_error, [1]);

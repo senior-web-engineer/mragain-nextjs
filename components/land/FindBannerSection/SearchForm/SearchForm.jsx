@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Button, input, Modal } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useRouter } from "next/router";
 import { searchShopFilter } from "Service/search/operations.js";
 import { setFindedLocation, setSearchFilter } from "Service/search/action.js";
 import lib from "@/assets/js/lib";
@@ -12,7 +12,7 @@ import { message } from "antd";
 const SearchForm = (routerProps) => {
   const { findShopbyFilter, setFindedLocation, setSearchFilter } = routerProps;
   const [location, setLocation] = useState("");
-  const history = useHistory();
+  const router = useRouter();
 
   function handleChange(e) {
     setLocation(e.target.value);
@@ -50,7 +50,7 @@ const SearchForm = (routerProps) => {
       setSearchFilter(_filters);
       findShopbyFilter(filter);
     }
-    history.push("/zoek-resultaten");
+    router.push("/zoek-resultaten");
   }
 
   const [show, setShow] = useState(false);
