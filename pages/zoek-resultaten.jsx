@@ -121,9 +121,7 @@ const SearchShop = (routerProps) => {
   const [isSearch, setIsSearch] = React.useState(false);
   const [showMaps, setShowMaps] = React.useState(false);
   const router = useRouter();
-  console.log(router.query);
   const {device} = router.query;
-  console.log(router.query.device);
   /* eslint-disable */
 
   const {
