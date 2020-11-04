@@ -46,7 +46,7 @@ export async function checkReviewPage(auth) {
 }
 
 export async function createReview(auth, data, dispatch) {
-  return await API
+  return await API()
     .post(`${API_PATH.CREATEREVIEW}/`, {
       auth: auth,
       reviewData: data,
