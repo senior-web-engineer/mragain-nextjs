@@ -1,8 +1,10 @@
 import React from "react";
+import "./_app.less";
 import App from "next/app";
 import { ConnectedRouter } from "connected-next-router";
 import { connect } from "react-redux";
 import { wrapper } from "../configureStore";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 // fontawesome icons
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -11,7 +13,6 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 
 library.add(fas, fab, far);
-import "./_app.less";
 
 class MyApp extends App {
   constructor(props) {
