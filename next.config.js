@@ -16,7 +16,10 @@ module.exports = withSass({
   ...withLess(withCSS({
     lessLoaderOptions: {
       javascriptEnabled: true,
-      modifyVars: themeVariables, // make your antd custom effective
+      modifyVars: {
+        "@primary-color": "#06c987",
+        "@font-family": "Sansation, sans-serif",
+      }, // make your antd custom effective
       importLoaders: 0
     },
     cssLoaderOptions: {
