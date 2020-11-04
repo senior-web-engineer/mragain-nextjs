@@ -61,7 +61,7 @@ export async function createReview(auth, data, dispatch) {
 }
 
 export function getReparationGuarantee(id, dispatch) {
-  API
+  return API()
     .get(`${API_PATH.GETREPARATIONGUARANTEE}/${id}/`)
     .then((res) => {
       dispatch(fetchReparationGuarantee(res.data));
