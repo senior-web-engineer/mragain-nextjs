@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import "./index.less";
@@ -16,8 +16,15 @@ const ShopProfile = (routerProps) => {
     getShopIdByInformation,
     getReparationGuarantee,
     match,
+    isLoggedIn
   } = routerProps;
   const router = useRouter();
+
+  useEffect(() => {
+    if(!isLoggedIn) {
+      router.push("/");
+    }
+  }, [])
 
   async function getShopId(url_str) {
     let shop = await getShopIdByInformation(url_str);
