@@ -33,6 +33,12 @@ const ReparationGuarantee = (routerProps) => {
   const url_shopId = parseInt(router.query.shopId);
 
   useEffect(() => {
+    if(!isLoggedIn) {
+      router.push("/");
+    }
+  }, [isLoggedIn])
+
+  useEffect(() => {
     if (isload === true) {
       let auth_user = JSON.parse(localStorage.getItem("auth-user"));
       if (
