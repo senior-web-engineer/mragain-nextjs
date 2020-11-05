@@ -21,7 +21,7 @@ import {
   CancelAppointment,
   getAppointments,
 } from "Service/appointments/operations.js";
-import { RepairSingleImage } from "./index.style";
+import { RepairSingleImage } from "@/styled-components/reparatie-overzicht.style";
 import {
   uploadImage,
   getSimpleAccountInformation,

@@ -1,5 +1,5 @@
 import React from "react";
-import { Main } from "./contact.style.jsx";
+import { Main } from "@/styled-components/contact.style.jsx";
 import ContactBannerSection from "@/components/contact/ContactBannerSection/ContactBannerSection";
 import { TestmonialSection, Layout } from "@/components/global";
 import ContactMainSection from "@/components/contact/ContactMainSection/ContactMainSection";

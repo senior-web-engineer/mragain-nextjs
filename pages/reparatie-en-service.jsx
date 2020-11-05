@@ -1,5 +1,5 @@
 import React from "react";
-import { Main } from "./reparatie-en-service.style.jsx";
+import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
 import { TestmonialSection } from "components/global";
 import RepairServicingBannerSection from "components/RepairServicing/RepairServicingBannerSection/RepairServicingBannerSection";
 import AdvantageSection from "components/RepairServicing/AdvantageSection/AdvantageSection";

@@ -1,5 +1,5 @@
 import React from "react";
-import { Main } from "./veel-gestelde-vragen.style.jsx";
+import { Main } from "@/styled-components/veel-gestelde-vragen.style.jsx";
 import { Layout } from "@/components/global";
 import FaqSection from "@/components/faq/FaqSection/FaqSection";
 import FaqBannerSection from "@/components/faq/FaqBannerSection/FaqBannerSection";

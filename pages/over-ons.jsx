@@ -1,5 +1,5 @@
 import React from "react";
-import { Main } from "./over-ons.style.jsx";
+import { Main } from "@/styled-components/over-ons.style.jsx";
 import AboutUsSection from "@/components/about-us/AboutUsSection/AboutUsSection"
 import AboutBannerSection1 from "@/components/about-us/AboutBannerSection/AboutBannerSection1";
 import Banner2Section from "@/components/about-us/Banner2/Banner2";

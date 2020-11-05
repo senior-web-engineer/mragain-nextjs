@@ -7,7 +7,7 @@ import { Label } from "semantic-ui-react";
 import moment from "moment";
 import queryString from "query-string";
 import "./maak-een-afspraak.less";
-import { Main } from "./maak-een-afspraak.style.jsx";
+import { Main } from "@/styled-components/maak-een-afspraak.style.jsx";
 import AboutBannerSection from "@/components/shop-appointment/AboutBannerSection/AboutBannerSection";
 import { Layout } from "@/components/global";
 import {

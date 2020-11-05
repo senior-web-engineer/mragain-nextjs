@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import "./index.style.less"
-import { Main } from "./index.style.jsx";
+import { Main } from "@/styled-components/homepage.style";
 import { Helmet } from "react-helmet";
 import { FRONT_END_URL } from "../constants.js";
 

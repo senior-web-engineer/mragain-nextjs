@@ -1,5 +1,5 @@
 import React from "react";
-import { Main } from "./algemene-voorwaarden.style.jsx";
+import { Main } from "@/styled-components/algemene-voorwaarden.style.jsx";
 import { Layout } from "@/components/global";
 import PrivacySection from "@/components/privacy/PrivacySection/PrivacySection";
 import PrivacyBannerSection from "@/components/privacy/PrivacyBannerSection/PrivacyBannerSection";
