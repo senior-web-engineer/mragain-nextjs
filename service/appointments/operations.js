@@ -14,7 +14,7 @@ export function createAppointment(
   datetime,
   dispatch
 ) {
-  API
+  API()
     .post(`${API_PATH.CREATEAPPOINTMENT}/`, {
       appointmentData: data,
       repairSeviceData: data1,
@@ -33,7 +33,7 @@ export function createAppointment(
 }
 
 export async function checkReviewPage(auth) {
-  return await API
+  return await API()
     .post(`${API_PATH.CHECKREVIEWPAGE}/`, {
       auth: auth,
     })
@@ -89,7 +89,7 @@ export async function getAppointmentTimeTable(data) {
 }
 
 export function getAppointments(id, dispatch) {
-  API
+  API()
     .get(`${API_PATH.GETAPPOINTMENTS}/${id}/`, tokenConfig())
     .then((res) => {
       dispatch(fetchAppointmentlist(res.data));
@@ -98,7 +98,7 @@ export function getAppointments(id, dispatch) {
 }
 
 export function filterReparationOverview(data, dispatch) {
-  API
+  API()
     .get(`${API_PATH.FILTERREPARATION}/`, { params: data })
     .then((res) => {
       dispatch(fetchAppointmentlist(res.data));
@@ -108,7 +108,7 @@ export function filterReparationOverview(data, dispatch) {
 
 export function updateAppointment(id, email, data, shop_id, dispatch) {
   let status = data.status;
-  API
+  API()
     .put(`${API_PATH.UPDATEAPPOINTMENT}/${id}/`, data)
     .then((res) => {
       API
@@ -130,7 +130,7 @@ export function updateAppointment(id, email, data, shop_id, dispatch) {
 }
 
 export function CancelAppointment(id, shop_id, dispatch) {
-  API
+  API()
     .delete(
       `${API_PATH.CANCELAPPOINTMENT}/${shop_id}/`,
       tokenConfigGet({ appoint_id: id })
