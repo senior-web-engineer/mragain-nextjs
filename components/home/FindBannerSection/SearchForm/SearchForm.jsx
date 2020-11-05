@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
 import { useRouter } from "next/router";
 import { setFindedLocation, setSearchFilter } from "Service/search/action.js";
 import lib from "@/assets/js/lib";

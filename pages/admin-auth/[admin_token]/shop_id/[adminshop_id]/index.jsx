@@ -28,7 +28,7 @@ const AdminLoginAsUser = (routerProps) => {
 
   /** Redirection path for the admin directly to the dashboard as he gets authenticated for login as user */
   if (Object.keys(authUser).length > 0) {
-    routerProps.history.push(`/dashboard/${adminshop_id}`);
+    router.push(`/dashboard/${adminshop_id}`);
    localStorage.setItem("auth-user", JSON.stringify(authUser));
   }
 

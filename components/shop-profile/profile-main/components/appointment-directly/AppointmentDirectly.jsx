@@ -4,7 +4,7 @@ import { Checkbox } from "antd";
 import moment from "moment";
 // import DayPicker from "react-day-picker";
 import { DatePicker } from "antd";
-import { useHistory } from "react-router-dom";
+import { useRouter } from "next/router";
 import { getAccountProfile } from "Service/account/operations.js";
 import { setAppointmentDate } from "Service/appointments/action.js";
 import "./AppointmentDirectly.less";
@@ -20,7 +20,7 @@ const AppointmentDirectly = (routerProps) => {
   const [enabledDates, setEnabledDates] = useState([]);
   const [disabledDatesflg, setDisabledDatesflg] = useState(false);
 
-  const history = useHistory();
+  const router = useRouter();
 
   const {
     account_invalid_time,
@@ -126,7 +126,7 @@ const AppointmentDirectly = (routerProps) => {
 
     setAppointmentDate(date);
     let flg = 1;
-    history.push(`/maak-een-afspraak?shop=${account_profile.id}&initdate=${flg}`);
+    router.push(`/maak-een-afspraak?shop=${account_profile.id}&initdate=${flg}`);
   }
   let dateArr = [];
   let closeDateArr = [];

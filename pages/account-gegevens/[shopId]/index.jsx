@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { useRouter } from "next/router";
 import { message, Button, Checkbox, Input, Popconfirm, Select } from "antd";
 import lib from "@/assets/js/lib";
@@ -52,7 +51,7 @@ const AccountSetting = (routerProps) => {
         auth_user === null ||
         parseInt(auth_user.account_id) !== parseInt(router.query.shopId)
       ) {
-        history.push("/");
+        router.push("/");
       }
   
       getAccountSettings(shop_id);
@@ -165,7 +164,7 @@ const AccountSetting = (routerProps) => {
     message.success("Je account is succesvol verwijderd", [1]);
     setTimeout(() => {
       logOut();
-      history.push("/");
+      router.push("/");
     }, 3000);
   }
 

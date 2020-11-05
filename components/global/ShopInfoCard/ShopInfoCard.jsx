@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { useRouter } from "next/router"
 import { Card } from "react-bootstrap";
 import { CardInfo } from "./ShopInfoCard.style.jsx";

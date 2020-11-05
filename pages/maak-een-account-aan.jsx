@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { message } from "antd";
-import { useHistory } from "react-router-dom";
+import { useRouter } from "next/router";
 import "./maak-een-account-aan.less";
 import { Layout } from "@/components/global"
 
@@ -19,7 +19,7 @@ function AccountCreate(routerProps) {
     isAuth_Error,
     resetAuthError,
   } = routerProps;
-  const history = useHistory();
+  const router = useRouter();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -70,7 +70,7 @@ function AccountCreate(routerProps) {
     if (isSignUp === true) {
       message.success("You are registered successfully!", [1]);
       setTimeout(() => {
-        history.push("/prijs");
+        router.push("/prijs");
       }, 3000);
     } else if (isAuth_Error === true) {
       message.error(auth_error, [1]);
