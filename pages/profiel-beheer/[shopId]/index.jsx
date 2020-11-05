@@ -30,6 +30,7 @@ import { setLoadedProfile } from "Service/account/action.js";
 import "./index.less";
 import { Helmet } from "react-helmet";
 import { FRONT_END_URL } from "../../../constants.js";
+import { Layout } from "@/components/global";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -632,537 +633,539 @@ function ProfileManage(routerProps) {
   });
 
   return (
-    <div className="repair-shop-profile">
-      <Helmet>
-        <title>Mr Again - Profiel</title>
-        <meta name="Keywords" content="Profiel, MrAgain, Telefoon Reparateur" />
-        <meta name="description" content="Beheer je profiel bij MrAgain" />
-        <link rel="canonical" href={FRONT_END_URL + "/profiel-beheer"} />
-        {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
-        <meta property="og:type" content="website" />
-        <meta
-          name="og_title"
-          property="og:title"
-          content=" Reparatie managementt"
-        />{" "}
-        <meta
-          property="og:description"
-          content="Vind de beste reparateur bij jou in de buurt"
-        />
-        <meta name="og:url" content={FRONT_END_URL} />
-        <meta property="og:image" content="" />
-        <meta name="og_site_name" property="og:site_name" content="Mr Again" />
-        <meta name="theme-color" content="#ffffff" />
-      </Helmet>
-      <div className="repair-shop-profile-container">
-        <div className="shop-profile-wrap">
-          <div className="shop-profile-blog">
-            <div className="profile-picture-about">
-              <div className="profile-picture">
-                {imagePreview ? (
-                  <img
-                    style={{
-                      aspectRatio: 16 / 9,
-                      objectFit: "contain",
-                    }}
-                    alt=""
-                    src={imagePreview}
-                  ></img>
-                ) : (
-                  ""
-                )}
-                <input
-                  className="image-picker-input"
-                  id="car"
-                  type="file"
-                  accept="image/*"
-                  capture="camera"
-                  onChange={(e) => {
-                    handleFileChange(e);
-                  }}
-                />
-                <div className="image-picker-label">
-                  <label className="image-picker-btn" htmlFor="car">
-                    <FontAwesomeIcon
-                      className="margin-10"
-                      icon={["fas", "camera"]}
-                    />
-                    Wijzig foto
-                  </label>
-                  {showButton === false ? (
-                    <Button
-                      className="image-save-btn"
+    <Layout>
+      <div className="repair-shop-profile">
+        <Helmet>
+          <title>Mr Again - Profiel</title>
+          <meta name="Keywords" content="Profiel, MrAgain, Telefoon Reparateur" />
+          <meta name="description" content="Beheer je profiel bij MrAgain" />
+          <link rel="canonical" href={FRONT_END_URL + "/profiel-beheer"} />
+          {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
+          <meta property="og:type" content="website" />
+          <meta
+            name="og_title"
+            property="og:title"
+            content=" Reparatie managementt"
+          />{" "}
+          <meta
+            property="og:description"
+            content="Vind de beste reparateur bij jou in de buurt"
+          />
+          <meta name="og:url" content={FRONT_END_URL} />
+          <meta property="og:image" content="" />
+          <meta name="og_site_name" property="og:site_name" content="Mr Again" />
+          <meta name="theme-color" content="#ffffff" />
+        </Helmet>
+        <div className="repair-shop-profile-container">
+          <div className="shop-profile-wrap">
+            <div className="shop-profile-blog">
+              <div className="profile-picture-about">
+                <div className="profile-picture">
+                  {imagePreview ? (
+                    <img
                       style={{
-                        width: "70px",
-                        height: "35px",
-                        marginBottom: "9px",
+                        aspectRatio: 16 / 9,
+                        objectFit: "contain",
                       }}
-                      onClick={(e) => {
-                        onImageChangeSaveButton(e);
-                      }}
-                    >
-                      save
-                    </Button>
+                      alt=""
+                      src={imagePreview}
+                    ></img>
                   ) : (
                     ""
                   )}
-                </div>
-              </div>
-              <div className="profile-about">
-                <div className="profile-about-title">
-                  <div>Over ons</div>
-                  <Button
-                    className="contact-edit-btn"
-                    onClick={() => {
-                      showOverOnsPopUp();
+                  <input
+                    className="image-picker-input"
+                    id="car"
+                    type="file"
+                    accept="image/*"
+                    capture="camera"
+                    onChange={(e) => {
+                      handleFileChange(e);
                     }}
-                  >
-                    <FontAwesomeIcon icon={["fas", "edit"]} />
-                    Wijzig
-                  </Button>
-                </div>
-                <div className="profile-about-content">
-                  <span className="about-content-1">{aboutUs}</span>
-                </div>
-              </div>
-              <div className="time-blog-title">
-                Standaard & afwijkende openingstijden
-              </div>
-              <div className="edit-opentime-blog">
-                <div className="edit-opentime-blog-left">
-                  <Modal
-                    title="Wijzig openingstijden"
-                    visible={openTimeVisible}
-                    // onOk={(e) => {
-                    //   handleScheduleTimeSlot(e);
-                    // }}
-                    onCancel={() => {
-                      handleCancelScheduleTimePopUp();
-                    }}
-                    footer={[
+                  />
+                  <div className="image-picker-label">
+                    <label className="image-picker-btn" htmlFor="car">
+                      <FontAwesomeIcon
+                        className="margin-10"
+                        icon={["fas", "camera"]}
+                      />
+                      Wijzig foto
+                    </label>
+                    {showButton === false ? (
                       <Button
-                        key="back"
-                        onClick={() => {
-                          handleCancelScheduleTimePopUp();
+                        className="image-save-btn"
+                        style={{
+                          width: "70px",
+                          height: "35px",
+                          marginBottom: "9px",
                         }}
-                        // loading={importBtnLoading}
-                      >
-                        Cancel
-                      </Button>,
-                      <Button
-                        key="submit"
-                        type="primary"
-                        loading={!isScheduleTimeLoading}
                         onClick={(e) => {
-                          handleScheduleTimeSlot(e);
+                          onImageChangeSaveButton(e);
                         }}
                       >
-                        Ok
-                      </Button>,
-                    ]}
-                  >
-                    <div className="open-time-modal-item">
-                      <div className="time-picker-label mr-1">Dag: </div>
-                      <Select
-                        className="contact-modal-input"
-                        placeholder="website"
-                        defaultValue="selecteer"
-                        defaultKey="All"
-                        onChange={onWeekDayChange}
-                      >
-                        {initWeekSelect()}
-                      </Select>
-                    </div>
-                    <div className="select-time-picker">
-                      <div className="open-time-item">
-                        <div className="time-picker-label mr-1">
-                          Openingstijd:{" "}
-                        </div>
-                        <TimePicker
-                          onChange={onOpenTimeChange}
-                          picker="time"
-                          format="HH:mm"
-                          disabled={false}
-                          minuteStep={15}
-                          disabledHours={disabledHours}
-                          hideDisabledOptions={true}
-                        />
-                      </div>
-                      <div className="open-time-item ml-3">
-                        <div className="time-picker-label mr-1">
-                          Sluitingstijd:{" "}
-                        </div>
-                        <TimePicker
-                          onChange={onCloseTimeChange}
-                          picker="time"
-                          format="HH:mm"
-                          disabled={false}
-                          minuteStep={15}
-                          disabledHours={disabledHours}
-                          hideDisabledOptions={true}
-                        />
-                      </div>
-                    </div>
-                    <div className="close-day-check-blog pt-3">
-                      <Checkbox
-                        checked={isCloseDay}
-                        onChange={handleCheckCloseDay}
-                      >
-                        Op deze dag zijn we gesloten
-                      </Checkbox>
-                    </div>
-                  </Modal>
-                  <div className="opentime-blog-title">
-                    Standaard openingstijden
-                  </div>
-                  <div className="opentime-blog-content">
-                    <Table>
-                      <thead>
-                        <tr>
-                          <th>Dag</th>
-                          <th>Openingstijd</th>
-                          <th>Sluitingstijd</th>
-                          {/* <th>
-                            <Button
-                              className="close-all-day-btn"
-                              onClick={handleCloseAllDay}
-                              disabled
-                            >
-                              Close All Day
-                            </Button>
-                          </th> */}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Maandag</td>
-                          <td>{splitOpenTime(openTimeTable.Mon, 0)}</td>
-                          <td>{splitOpenTime(openTimeTable.Mon, 1)}</td>
-                          {/* <td className="check-box-cell">
-                            <Checkbox
-                              name="Mon"
-                              checked={
-                                openTimeTable.Mon === "CLOSED" ? true : false
-                              }
-                              disabled
-                              onChange={handleCheckCloseDay}
-                            ></Checkbox>
-                          </td> */}
-                        </tr>
-                        <tr>
-                          <td>Dinsdag</td>
-                          <td>{splitOpenTime(openTimeTable.Tue, 0)}</td>
-                          <td>{splitOpenTime(openTimeTable.Tue, 1)}</td>
-                          {/* <td className="check-box-cell">
-                            <Checkbox
-                              name="Tue"
-                              checked={
-                                openTimeTable.Tue === "CLOSED" ? true : false
-                              }
-                              disabled
-                              onChange={handleCheckCloseDay}
-                            ></Checkbox>
-                          </td> */}
-                        </tr>
-                        <tr>
-                          <td>Woensdag</td>
-                          <td>{splitOpenTime(openTimeTable.Wed, 0)}</td>
-                          <td>{splitOpenTime(openTimeTable.Wed, 1)}</td>
-                          {/* <td className="check-box-cell">
-                            <Checkbox
-                              name="Wed"
-                              checked={
-                                openTimeTable.Wed === "CLOSED" ? true : false
-                              }
-                              disabled
-                              onChange={handleCheckCloseDay}
-                            ></Checkbox>
-                          </td> */}
-                        </tr>
-                        <tr>
-                          <td>Donderdag</td>
-                          <td>{splitOpenTime(openTimeTable.Thu, 0)}</td>
-                          <td>{splitOpenTime(openTimeTable.Thu, 1)}</td>
-                          {/* <td className="check-box-cell">
-                            <Checkbox
-                              name="Thu"
-                              checked={
-                                openTimeTable.Thu === "CLOSED" ? true : false
-                              }
-                              disabled
-                              onChange={handleCheckCloseDay}
-                            ></Checkbox>
-                          </td> */}
-                        </tr>
-                        <tr>
-                          <td>Vrijdag</td>
-                          <td>{splitOpenTime(openTimeTable.Fri, 0)}</td>
-                          <td>{splitOpenTime(openTimeTable.Fri, 1)}</td>
-                          {/* <td className="check-box-cell">
-                            <Checkbox
-                              name="Fri"
-                              checked={
-                                openTimeTable.Fri === "CLOSED" ? true : false
-                              }
-                              disabled
-                              onChange={handleCheckCloseDay}
-                            ></Checkbox>
-                          </td> */}
-                        </tr>
-                        <tr>
-                          <td>Zaterdag</td>
-                          <td>{splitOpenTime(openTimeTable.Sat, 0)}</td>
-                          <td>{splitOpenTime(openTimeTable.Sat, 1)}</td>
-                          {/* <td className="check-box-cell">
-                            <Checkbox
-                              name="Sat"
-                              checked={
-                                openTimeTable.Sat === "CLOSED" ? true : false
-                              }
-                              disabled
-                              onChange={handleCheckCloseDay}
-                            ></Checkbox>
-                          </td> */}
-                        </tr>
-                        <tr>
-                          <td>Zondag</td>
-                          <td>{splitOpenTime(openTimeTable.Sun, 0)}</td>
-                          <td>{splitOpenTime(openTimeTable.Sun, 1)}</td>
-                          {/* <td className="check-box-cell">
-                            <Checkbox
-                              name="Sun"
-                              checked={
-                                openTimeTable.Sun === "CLOSED" ? true : false
-                              }
-                              disabled
-                              onChange={handleCheckCloseDay}
-                            ></Checkbox>
-                          </td> */}
-                        </tr>
-                      </tbody>
-                    </Table>
-                    <div className="time-change-btn-group">
-                      <Button
-                        className="mr-5"
-                        onClick={() => {
-                          showOpenTimeModal();
-                        }}
-                      >
-                        {editOBtn}
+                        save
                       </Button>
-                    </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
-                <div className="edit-opentime-blog-right">
-                  <Modal
-                    // title="Normal openning times not valid on"
-                    title={invalidTimeTitle}
-                    visible={invalidTimeVisible}
-                    // onOk={() => {
-                    //   handleCheckTime();
-                    // }}
-                    onCancel={() => {
-                      handleCheckTimeCancel();
-                    }}
-                    footer={[
-                      <Button
-                        key="back"
-                        onClick={() => {
-                          handleCheckTimeCancel();
-                        }}
-                        // loading={importBtnLoading}
-                      >
-                        Cancel
-                      </Button>,
-                      <Button
-                        key="submit"
-                        type="primary"
-                        loading={isInvalidTimeLoading}
-                        onClick={() => {
-                          handleCheckTime();
-                        }}
-                      >
-                        Ok
-                      </Button>,
-                    ]}
-                  >
-                    <div className="open-time-modal-item">
-                      <div className="time-picker-label mr-1">Reden: </div>
-                      <Input
-                        placeholder="Reden voor afwijkende openingstijd"
-                        onChange={onChangeCheckReason}
-                      ></Input>
-                    </div>
-                    <div className="select-time-picker">
-                      <div className="open-time-item">
-                        <div className="time-picker-label mr-1">
-                          Openingstijd:{" "}
-                        </div>
-                        <TimePicker
-                          onChange={onCheckOpenTimeChange}
-                          picker="time"
-                          format="HH:mm"
-                          minuteStep={15}
-                          disabledHours={disabledHours}
-                          hideDisabledOptions={true}
-                        />
-                      </div>
-                      <div className="open-time-item ml-3">
-                        <div className="time-picker-label mr-1">
-                          Sluitingstijd:{" "}
-                        </div>
-                        <TimePicker
-                          onChange={onCheckCloseTimeChange}
-                          picker="time"
-                          format="HH:mm"
-                          minuteStep={15}
-                          disabledHours={disabledHours}
-                          hideDisabledOptions={true}
-                        />
-                      </div>
-                    </div>
-                    <div className="close-day-check-blog pt-3">
-                      <Checkbox checked={isClose} onChange={handleCheckClose}>
-                        Deze dag zijn we gesloten
-                      </Checkbox>
-                    </div>
-                  </Modal>
-                  <div className="opentime-blog-title mb-3">
-                    Afwijkende openingstijden
-                  </div>
-                  <div className="opentime-blog-content">
-                    <DayPicker
-                      selectedDays={selectedDay}
-                      onDayClick={selectDate}
-                      month={new Date()}
-                      modifiers={modifiers}
-                      modifiersStyles={modifiersStyles}
-                    />
-                    <div className="">
-                      <Button
-                        className="check-calendar-btn mt-4"
-                        onClick={() => {
-                          showCheckCalendarModal();
-                        }}
-                      >
-                        {editRBtn}
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <Modal
-                title="Over ons"
-                visible={visibleM2}
-                onOk={() => {
-                  handleAboutOk();
-                }}
-                onCancel={() => {
-                  handleAboutCancel();
-                }}
-              >
-                <TextArea
-                  maxLength={400}
-                  className="contact-modal-input mb-0"
-                  placeholder="Over ons"
-                  value={aboutUsTemp}
-                  onChange={(e) => {
-                    handleAboutChange(e);
-                  }}
-                />
-                <p>{CharaterCount}/400</p>
-              </Modal>
-              {/* <Button
-                className="profile-update-btn"
-                onClick={() => {
-                  showOverOnsPopUp();
-                }}
-              >
-                Update
-              </Button> */}
-            </div>
-            <div className="profile-contact-opentime">
-              <div className="contact-opentime-wrap">
-                {/* <div className="profile-contact"> */}
-                {/* <div className="profile-contact-title">
-                    Adres & contact gegevens
-                  </div>
-                  <Divider />
-                  <div className="profile-contact-content">
-                    <div className="contact-site-address">
-                      {siteUrl.site_url}
-                    </div>
-                    <div className="contact-shop-name">
-                      {siteUrl.social_link}
-                    </div>
+                <div className="profile-about">
+                  <div className="profile-about-title">
+                    <div>Over ons</div>
                     <Button
                       className="contact-edit-btn"
                       onClick={() => {
-                        showModalM1();
+                        showOverOnsPopUp();
                       }}
                     >
                       <FontAwesomeIcon icon={["fas", "edit"]} />
                       Wijzig
                     </Button>
-                    <Modal
-                      title="Address & Contact Details"
-                      visible={visibleM1}
-                      onOk={() => {
-                        handleSiteUrl();
-                      }}
-                      onCancel={() => {
-                        handleCancel();
-                      }}
-                    >
-                      <Input
-                        className="contact-modal-input"
-                        placeholder="website"
-                        name="site_url"
-                        onChange={(e) => {
-                          handleSiteUrlChange(e);
-                        }}
-                      />
-                      <Input
-                        name="social_link"
-                        placeholder="Facebook pagina"
-                        onChange={(e) => {
-                          handleSiteUrlChange(e);
-                        }}
-                      />
-                    </Modal>
-                  </div> */}
-                {/* </div> */}
-                <div className="profile-opentime">
-                  <div className="profile-opentime-title">
-                    Toelichting openingstijden
                   </div>
-                  <Divider />
-                  <div className="profile-opentime-content">
-                    <ul>
-                      <li>
-                        De tabel met openingstijden toont de openingstijden die
-                        elke week geldend zijn.
-                      </li>
-                      <li>
-                        De kalender voor afwijkende openingstijden is om aan te
-                        geven welke dagen afwijken van de standaard
-                        openingstijden.
-                      </li>
-                      <li>
-                        Let op: bezoekers kunnen afspraken maken tijdens uw
-                        openingstijden!
-                      </li>
-                      <li>
-                        Voorbeeld 1: U bent maandag open van 09.00-17.00,
-                        bezoekers kunnen tussen 09.00-17.00 afspraken bij u
-                        maken afhankelijk van de afspraak settings die u heeft
-                        (zie account settings). Voorbeeld 2: U bent normaal
-                        gesproken van 09.00-17.00 open op maandag, maar bij
-                        afwijkende openingstijde heeft u aangegeven dat u
-                        maandag 22 juni dicht bent. Op de kalender zien
-                        bezoekers dat u 22 juni dicht bent.
-                      </li>
-                    </ul>
+                  <div className="profile-about-content">
+                    <span className="about-content-1">{aboutUs}</span>
+                  </div>
+                </div>
+                <div className="time-blog-title">
+                  Standaard & afwijkende openingstijden
+                </div>
+                <div className="edit-opentime-blog">
+                  <div className="edit-opentime-blog-left">
+                    <Modal
+                      title="Wijzig openingstijden"
+                      visible={openTimeVisible}
+                      // onOk={(e) => {
+                      //   handleScheduleTimeSlot(e);
+                      // }}
+                      onCancel={() => {
+                        handleCancelScheduleTimePopUp();
+                      }}
+                      footer={[
+                        <Button
+                          key="back"
+                          onClick={() => {
+                            handleCancelScheduleTimePopUp();
+                          }}
+                          // loading={importBtnLoading}
+                        >
+                          Cancel
+                        </Button>,
+                        <Button
+                          key="submit"
+                          type="primary"
+                          loading={!isScheduleTimeLoading}
+                          onClick={(e) => {
+                            handleScheduleTimeSlot(e);
+                          }}
+                        >
+                          Ok
+                        </Button>,
+                      ]}
+                    >
+                      <div className="open-time-modal-item">
+                        <div className="time-picker-label mr-1">Dag: </div>
+                        <Select
+                          className="contact-modal-input"
+                          placeholder="website"
+                          defaultValue="selecteer"
+                          defaultKey="All"
+                          onChange={onWeekDayChange}
+                        >
+                          {initWeekSelect()}
+                        </Select>
+                      </div>
+                      <div className="select-time-picker">
+                        <div className="open-time-item">
+                          <div className="time-picker-label mr-1">
+                            Openingstijd:{" "}
+                          </div>
+                          <TimePicker
+                            onChange={onOpenTimeChange}
+                            picker="time"
+                            format="HH:mm"
+                            disabled={false}
+                            minuteStep={15}
+                            disabledHours={disabledHours}
+                            hideDisabledOptions={true}
+                          />
+                        </div>
+                        <div className="open-time-item ml-3">
+                          <div className="time-picker-label mr-1">
+                            Sluitingstijd:{" "}
+                          </div>
+                          <TimePicker
+                            onChange={onCloseTimeChange}
+                            picker="time"
+                            format="HH:mm"
+                            disabled={false}
+                            minuteStep={15}
+                            disabledHours={disabledHours}
+                            hideDisabledOptions={true}
+                          />
+                        </div>
+                      </div>
+                      <div className="close-day-check-blog pt-3">
+                        <Checkbox
+                          checked={isCloseDay}
+                          onChange={handleCheckCloseDay}
+                        >
+                          Op deze dag zijn we gesloten
+                        </Checkbox>
+                      </div>
+                    </Modal>
+                    <div className="opentime-blog-title">
+                      Standaard openingstijden
+                    </div>
+                    <div className="opentime-blog-content">
+                      <Table>
+                        <thead>
+                          <tr>
+                            <th>Dag</th>
+                            <th>Openingstijd</th>
+                            <th>Sluitingstijd</th>
+                            {/* <th>
+                              <Button
+                                className="close-all-day-btn"
+                                onClick={handleCloseAllDay}
+                                disabled
+                              >
+                                Close All Day
+                              </Button>
+                            </th> */}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Maandag</td>
+                            <td>{splitOpenTime(openTimeTable.Mon, 0)}</td>
+                            <td>{splitOpenTime(openTimeTable.Mon, 1)}</td>
+                            {/* <td className="check-box-cell">
+                              <Checkbox
+                                name="Mon"
+                                checked={
+                                  openTimeTable.Mon === "CLOSED" ? true : false
+                                }
+                                disabled
+                                onChange={handleCheckCloseDay}
+                              ></Checkbox>
+                            </td> */}
+                          </tr>
+                          <tr>
+                            <td>Dinsdag</td>
+                            <td>{splitOpenTime(openTimeTable.Tue, 0)}</td>
+                            <td>{splitOpenTime(openTimeTable.Tue, 1)}</td>
+                            {/* <td className="check-box-cell">
+                              <Checkbox
+                                name="Tue"
+                                checked={
+                                  openTimeTable.Tue === "CLOSED" ? true : false
+                                }
+                                disabled
+                                onChange={handleCheckCloseDay}
+                              ></Checkbox>
+                            </td> */}
+                          </tr>
+                          <tr>
+                            <td>Woensdag</td>
+                            <td>{splitOpenTime(openTimeTable.Wed, 0)}</td>
+                            <td>{splitOpenTime(openTimeTable.Wed, 1)}</td>
+                            {/* <td className="check-box-cell">
+                              <Checkbox
+                                name="Wed"
+                                checked={
+                                  openTimeTable.Wed === "CLOSED" ? true : false
+                                }
+                                disabled
+                                onChange={handleCheckCloseDay}
+                              ></Checkbox>
+                            </td> */}
+                          </tr>
+                          <tr>
+                            <td>Donderdag</td>
+                            <td>{splitOpenTime(openTimeTable.Thu, 0)}</td>
+                            <td>{splitOpenTime(openTimeTable.Thu, 1)}</td>
+                            {/* <td className="check-box-cell">
+                              <Checkbox
+                                name="Thu"
+                                checked={
+                                  openTimeTable.Thu === "CLOSED" ? true : false
+                                }
+                                disabled
+                                onChange={handleCheckCloseDay}
+                              ></Checkbox>
+                            </td> */}
+                          </tr>
+                          <tr>
+                            <td>Vrijdag</td>
+                            <td>{splitOpenTime(openTimeTable.Fri, 0)}</td>
+                            <td>{splitOpenTime(openTimeTable.Fri, 1)}</td>
+                            {/* <td className="check-box-cell">
+                              <Checkbox
+                                name="Fri"
+                                checked={
+                                  openTimeTable.Fri === "CLOSED" ? true : false
+                                }
+                                disabled
+                                onChange={handleCheckCloseDay}
+                              ></Checkbox>
+                            </td> */}
+                          </tr>
+                          <tr>
+                            <td>Zaterdag</td>
+                            <td>{splitOpenTime(openTimeTable.Sat, 0)}</td>
+                            <td>{splitOpenTime(openTimeTable.Sat, 1)}</td>
+                            {/* <td className="check-box-cell">
+                              <Checkbox
+                                name="Sat"
+                                checked={
+                                  openTimeTable.Sat === "CLOSED" ? true : false
+                                }
+                                disabled
+                                onChange={handleCheckCloseDay}
+                              ></Checkbox>
+                            </td> */}
+                          </tr>
+                          <tr>
+                            <td>Zondag</td>
+                            <td>{splitOpenTime(openTimeTable.Sun, 0)}</td>
+                            <td>{splitOpenTime(openTimeTable.Sun, 1)}</td>
+                            {/* <td className="check-box-cell">
+                              <Checkbox
+                                name="Sun"
+                                checked={
+                                  openTimeTable.Sun === "CLOSED" ? true : false
+                                }
+                                disabled
+                                onChange={handleCheckCloseDay}
+                              ></Checkbox>
+                            </td> */}
+                          </tr>
+                        </tbody>
+                      </Table>
+                      <div className="time-change-btn-group">
+                        <Button
+                          className="mr-5"
+                          onClick={() => {
+                            showOpenTimeModal();
+                          }}
+                        >
+                          {editOBtn}
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="edit-opentime-blog-right">
+                    <Modal
+                      // title="Normal openning times not valid on"
+                      title={invalidTimeTitle}
+                      visible={invalidTimeVisible}
+                      // onOk={() => {
+                      //   handleCheckTime();
+                      // }}
+                      onCancel={() => {
+                        handleCheckTimeCancel();
+                      }}
+                      footer={[
+                        <Button
+                          key="back"
+                          onClick={() => {
+                            handleCheckTimeCancel();
+                          }}
+                          // loading={importBtnLoading}
+                        >
+                          Cancel
+                        </Button>,
+                        <Button
+                          key="submit"
+                          type="primary"
+                          loading={isInvalidTimeLoading}
+                          onClick={() => {
+                            handleCheckTime();
+                          }}
+                        >
+                          Ok
+                        </Button>,
+                      ]}
+                    >
+                      <div className="open-time-modal-item">
+                        <div className="time-picker-label mr-1">Reden: </div>
+                        <Input
+                          placeholder="Reden voor afwijkende openingstijd"
+                          onChange={onChangeCheckReason}
+                        ></Input>
+                      </div>
+                      <div className="select-time-picker">
+                        <div className="open-time-item">
+                          <div className="time-picker-label mr-1">
+                            Openingstijd:{" "}
+                          </div>
+                          <TimePicker
+                            onChange={onCheckOpenTimeChange}
+                            picker="time"
+                            format="HH:mm"
+                            minuteStep={15}
+                            disabledHours={disabledHours}
+                            hideDisabledOptions={true}
+                          />
+                        </div>
+                        <div className="open-time-item ml-3">
+                          <div className="time-picker-label mr-1">
+                            Sluitingstijd:{" "}
+                          </div>
+                          <TimePicker
+                            onChange={onCheckCloseTimeChange}
+                            picker="time"
+                            format="HH:mm"
+                            minuteStep={15}
+                            disabledHours={disabledHours}
+                            hideDisabledOptions={true}
+                          />
+                        </div>
+                      </div>
+                      <div className="close-day-check-blog pt-3">
+                        <Checkbox checked={isClose} onChange={handleCheckClose}>
+                          Deze dag zijn we gesloten
+                        </Checkbox>
+                      </div>
+                    </Modal>
+                    <div className="opentime-blog-title mb-3">
+                      Afwijkende openingstijden
+                    </div>
+                    <div className="opentime-blog-content">
+                      <DayPicker
+                        selectedDays={selectedDay}
+                        onDayClick={selectDate}
+                        month={new Date()}
+                        modifiers={modifiers}
+                        modifiersStyles={modifiersStyles}
+                      />
+                      <div className="">
+                        <Button
+                          className="check-calendar-btn mt-4"
+                          onClick={() => {
+                            showCheckCalendarModal();
+                          }}
+                        >
+                          {editRBtn}
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <Modal
+                  title="Over ons"
+                  visible={visibleM2}
+                  onOk={() => {
+                    handleAboutOk();
+                  }}
+                  onCancel={() => {
+                    handleAboutCancel();
+                  }}
+                >
+                  <TextArea
+                    maxLength={400}
+                    className="contact-modal-input mb-0"
+                    placeholder="Over ons"
+                    value={aboutUsTemp}
+                    onChange={(e) => {
+                      handleAboutChange(e);
+                    }}
+                  />
+                  <p>{CharaterCount}/400</p>
+                </Modal>
+                {/* <Button
+                  className="profile-update-btn"
+                  onClick={() => {
+                    showOverOnsPopUp();
+                  }}
+                >
+                  Update
+                </Button> */}
+              </div>
+              <div className="profile-contact-opentime">
+                <div className="contact-opentime-wrap">
+                  {/* <div className="profile-contact"> */}
+                  {/* <div className="profile-contact-title">
+                      Adres & contact gegevens
+                    </div>
+                    <Divider />
+                    <div className="profile-contact-content">
+                      <div className="contact-site-address">
+                        {siteUrl.site_url}
+                      </div>
+                      <div className="contact-shop-name">
+                        {siteUrl.social_link}
+                      </div>
+                      <Button
+                        className="contact-edit-btn"
+                        onClick={() => {
+                          showModalM1();
+                        }}
+                      >
+                        <FontAwesomeIcon icon={["fas", "edit"]} />
+                        Wijzig
+                      </Button>
+                      <Modal
+                        title="Address & Contact Details"
+                        visible={visibleM1}
+                        onOk={() => {
+                          handleSiteUrl();
+                        }}
+                        onCancel={() => {
+                          handleCancel();
+                        }}
+                      >
+                        <Input
+                          className="contact-modal-input"
+                          placeholder="website"
+                          name="site_url"
+                          onChange={(e) => {
+                            handleSiteUrlChange(e);
+                          }}
+                        />
+                        <Input
+                          name="social_link"
+                          placeholder="Facebook pagina"
+                          onChange={(e) => {
+                            handleSiteUrlChange(e);
+                          }}
+                        />
+                      </Modal>
+                    </div> */}
+                  {/* </div> */}
+                  <div className="profile-opentime">
+                    <div className="profile-opentime-title">
+                      Toelichting openingstijden
+                    </div>
+                    <Divider />
+                    <div className="profile-opentime-content">
+                      <ul>
+                        <li>
+                          De tabel met openingstijden toont de openingstijden die
+                          elke week geldend zijn.
+                        </li>
+                        <li>
+                          De kalender voor afwijkende openingstijden is om aan te
+                          geven welke dagen afwijken van de standaard
+                          openingstijden.
+                        </li>
+                        <li>
+                          Let op: bezoekers kunnen afspraken maken tijdens uw
+                          openingstijden!
+                        </li>
+                        <li>
+                          Voorbeeld 1: U bent maandag open van 09.00-17.00,
+                          bezoekers kunnen tussen 09.00-17.00 afspraken bij u
+                          maken afhankelijk van de afspraak settings die u heeft
+                          (zie account settings). Voorbeeld 2: U bent normaal
+                          gesproken van 09.00-17.00 open op maandag, maar bij
+                          afwijkende openingstijde heeft u aangegeven dat u
+                          maandag 22 juni dicht bent. Op de kalender zien
+                          bezoekers dat u 22 juni dicht bent.
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1170,7 +1173,7 @@ function ProfileManage(routerProps) {
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 }
 
