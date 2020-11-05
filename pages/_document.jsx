@@ -1,9 +1,11 @@
 import React from "react";
 import Document, { Head, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
+import { GA_TRACKING_ID } from '../lib/gtag';
 
 export default class MyDocument extends Document {
   render() {
+    const { isProduction } = this.props;
     return (
       <html lang="en">
         <Head>
@@ -39,6 +41,29 @@ export default class MyDocument extends Document {
           <link rel="manifest" href="/manifest.json" />
 
           <script src="https://cdn.jsdelivr.net/npm/semantic-ui-calendar-react@latest/dist/umd/semantic-ui-calendar-react.js"></script>
+          {/* We only want to add the scripts if in production */}
+          {isProduction && (
+            <Fragment>
+              {/* Global Site Tag (gtag.js) - Google Analytics */}
+              <script
+                async
+                src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+              />
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+
+                    gtag('config', '${GA_TRACKING_ID}', {
+                      page_path: window.location.pathname,
+                    });
+                  `,
+                }}
+              />
+            </Fragment>
+          )}
         </Head>
         <body>
           <Main/>
@@ -85,9 +110,11 @@ MyDocument.getInitialProps = async ctx => {
     });
 
     const initialProps = await Document.getInitialProps(ctx);
-
+    // Check if in production
+    const isProduction = process.env.NODE_ENV === 'production'
     return {
       ...initialProps,
+      isProduction,
       // Styles fragment is rendered after the app and page rendering finish.
       styles: (
         <>
@@ -99,6 +126,4 @@ MyDocument.getInitialProps = async ctx => {
   } finally {
     sheet.seal();
   }
-  
-  
 };
