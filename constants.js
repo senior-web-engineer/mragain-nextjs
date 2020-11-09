@@ -62,6 +62,7 @@ export const API_PATH = {
   GETSHOPIDBYINFORMATION: `${API_URL}/get-shopid-by`,
   EXPORTCSV: `${API_URL}/export-csv/`,
   IMPORTCSV: `${API_URL}/import-csv/`,
+  GETSHOPPUBLISHPROFILE: `${API_URL}/get-shops-publish-profile/`,
 };
 
 export default {

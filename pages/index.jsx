@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import React, {useEffect} from 'react';
 import "./index.style.less"
 import { Main } from "@/styled-components/homepage.style";
 import { Helmet } from "react-helmet";
@@ -8,6 +9,8 @@ import { FindBannerSection, AdvantageSection, NewestShopsSection } from "../comp
 import { TestmonialSection } from "../components/global";
 import { Layout } from "../components/global";
 import { useSelector } from "react-redux";
+
+import { getPublishProfies } from "../lib/getPublishProfiles";
 
 export default function Home(routerProps) {
   return (
@@ -53,4 +56,13 @@ export default function Home(routerProps) {
       </Main>
     </Layout>
   )
+}
+
+export async function getStaticProps() {
+  await getPublishProfies();
+  return {
+    props: {
+      data: "data"
+    }
+  }
 }
