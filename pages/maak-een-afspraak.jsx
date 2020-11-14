@@ -5,7 +5,6 @@ import { Button, DatePicker, Input, Select, Divider } from "antd";
 import { Modal } from "react-bootstrap";
 import { Label } from "semantic-ui-react";
 import moment from "moment";
-import queryString from "query-string";
 import "./maak-een-afspraak.less";
 import { Main } from "@/styled-components/maak-een-afspraak.style.jsx";
 import AboutBannerSection from "@/components/shop-appointment/AboutBannerSection/AboutBannerSection";

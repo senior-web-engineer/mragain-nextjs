@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { withRouter } from "react-router";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";

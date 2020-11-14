@@ -1,18 +1,25 @@
 import Head from 'next/head'
 import React, {useEffect} from 'react';
-import "./index.style.less"
-import { Main } from "@/styled-components/homepage.style";
+
+import { 
+  Layout,
+  TestmonialSection
+} from "../components/global";
 import { Helmet } from "react-helmet";
 import { FRONT_END_URL } from "../constants.js";
+import Link from 'next/link'
 
-import { FindBannerSection, AdvantageSection, NewestShopsSection } from "../components/home"
-import { TestmonialSection } from "../components/global";
-import { Layout } from "../components/global";
-import { useSelector } from "react-redux";
-
+import { Main } from "@/styled-components/homepage.style";
 import { getPublishProfies } from "../lib/getPublishProfiles";
+import { 
+  FindBannerSection, 
+  AdvantageSection, 
+  NewestShopsSection,
+} from "../components/home";
 
-export default function Home(routerProps) {
+import "./index.style.less"
+
+export default function Home() {
   return (
     <Layout>
       <Main>
@@ -49,10 +56,10 @@ export default function Home(routerProps) {
 
           <meta name="theme-color" content="#ffffff" />
         </Helmet>
-        <FindBannerSection />
-        <AdvantageSection />
-        <NewestShopsSection />
-        <TestmonialSection />
+        <FindBannerSection/>
+        <AdvantageSection/>
+        <NewestShopsSection/>
+        <TestmonialSection/>
       </Main>
     </Layout>
   )

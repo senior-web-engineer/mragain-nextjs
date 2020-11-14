@@ -1,10 +1,9 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
-import Link from "../src/Link";
+import Link from "next/link";
 import { Row, Col, Button, Result, Modal } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import queryString from "query-string";
 import BrandModelCard from "@/components/phone-repair/brand-model-card/BrandModelCard";
 import "./reparaties.less";
 import classnames from "classnames";

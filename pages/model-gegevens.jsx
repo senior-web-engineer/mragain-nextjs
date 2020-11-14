@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import Link from "../src/Link"
+import Link from "next/link"
 import { useRouter } from "next/router";
 import { Table } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
 import { Input, Button } from "antd";
 import Switch from "react-switch";
-import queryString from "query-string";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   deleteShopGuarantee,

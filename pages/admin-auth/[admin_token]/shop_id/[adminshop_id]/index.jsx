@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
 import { getAuthUser } from "service/account/operations";
 import { Layout } from "@/components/global";
 

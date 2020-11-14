@@ -5,7 +5,7 @@ import moment from "moment";
 import { Input, Button, Avatar, Badge, Checkbox, Select } from "antd";
 import { Label } from "semantic-ui-react";
 import { Table, Modal } from "react-bootstrap";
-import Link from "../../../src/Link";
+import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ImagePicker from "react-image-picker";
 import "react-image-picker/dist/index.css";

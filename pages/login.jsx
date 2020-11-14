@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { message } from "antd";
-import Link from "../src/Link"
+import Link from "next/link"
 import "./login.less";
 
 import { login } from "Service/account/operations.js";
@@ -23,9 +23,6 @@ function Login(routerProps) {
   } = routerProps;
   const router = useRouter();
 
-  const showResetPasswordForm = () => {
-    router.push("/reset-je-wachtwoord");
-  };
   // {{ csrf_token }}
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -122,7 +119,6 @@ function Login(routerProps) {
                 <Link
                   href="/reset-je-wachtwoord"
                   className="login-form-forgot-btn"
-                  onClick={showResetPasswordForm}
                   >
                   Wachtwoord vergeten?
                 </Link>

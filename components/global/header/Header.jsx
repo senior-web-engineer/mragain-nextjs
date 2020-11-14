@@ -1,10 +1,9 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
 import { Layout, Menu, Button, Dropdown, Icon, Avatar } from "antd";
 import { useRouter } from "next/router";
 import logo from "@/assets/images/logo.png";
-import Link from "../../../src/Link";
+import Link from "next/link";
 import "./Header.less";
 import { initUserLoginChange } from "Service/account/action.js";
 import { logout } from "Service/account/operations.js";

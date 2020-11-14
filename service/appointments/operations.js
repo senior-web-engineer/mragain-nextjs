@@ -1,7 +1,6 @@
 import { API_PATH } from "../../constants";
 import axios from "axios";
 import { fetchAppointmentlist, fetchReparationGuarantee } from "./action";
-import jQuery from "jquery";
 // import { tokenConfig, tokenConfigGet } from "Service/account/operations.js";
 import { tokenConfig, tokenConfigGet } from "../account/operations";
 import API from './api'

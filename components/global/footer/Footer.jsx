@@ -25,9 +25,9 @@ import "./Footer.less";
 import logo from "@/assets/images/logo.png";
 import { CookieBanner } from "@palmabit/react-cookie-law";
 
-const IconFont = () => Icon.createFromIconfontCN({
-  scriptUrl: "//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js",
-});
+// const IconFont = () => Icon.createFromIconfontCN({
+//   scriptUrl: "//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js",
+// });
 
 const FooterView = ({ location }) => {
   const router = useRouter();
@@ -131,7 +131,7 @@ const FooterView = ({ location }) => {
                 <li className="facebook">
                   <a href="https://www.facebook.com/Mr-Again-105437267708409/">
                     <div className="icon-circle">
-                      <IconFont type="icon-facebook" theme="filled" />
+                      <Icon type="linkedin" theme="filled" />
                     </div>
                     <div>Facebook</div>
                   </a>
@@ -139,7 +139,7 @@ const FooterView = ({ location }) => {
                 <li className="twitter">
                   <a href="https://twitter.com/MrAgainofficial">
                     <div className="icon-circle">
-                      <IconFont type="icon-twitter" theme="filled" />
+                      <Icon type="linkedin" theme="filled" />
                     </div>
                     <div>Twitter</div>
                   </a>

@@ -2,18 +2,16 @@
   "presets": ["next/babel"],
   "plugins": [
     [
-      "import",
-      {
+      "import", {
         "libraryName": "antd",
         "style": true
       }
     ],
     [
-      "styled-components",
-      {
+      "styled-components", { 
         "ssr": true,
         "displayName": true
-      }
+        }
     ]
   ]
 }

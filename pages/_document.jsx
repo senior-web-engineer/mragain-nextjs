@@ -9,7 +9,7 @@ export default class MyDocument extends Document {
     return (
       <html lang="en">
         <Head>
-          <meta charset="utf-8" />
+          <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="msapplication-TileColor" content="#06c987" />
           <meta name="theme-color" content="#ffffff" />
@@ -42,28 +42,7 @@ export default class MyDocument extends Document {
 
           <script src="https://cdn.jsdelivr.net/npm/semantic-ui-calendar-react@latest/dist/umd/semantic-ui-calendar-react.js"></script>
           {/* We only want to add the scripts if in production */}
-          {isProduction && (
-            <Fragment>
-              {/* Global Site Tag (gtag.js) - Google Analytics */}
-              <script
-                async
-                src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-              />
-              <script
-                dangerouslySetInnerHTML={{
-                  __html: `
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-
-                    gtag('config', '${GA_TRACKING_ID}', {
-                      page_path: window.location.pathname,
-                    });
-                  `,
-                }}
-              />
-            </Fragment>
-          )}
+          
         </Head>
         <body>
           <Main/>

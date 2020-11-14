@@ -1,12 +1,12 @@
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux'
 import { routerReducer, createRouterMiddleware, initialRouterState } from 'connected-next-router'
 import { createWrapper } from 'next-redux-wrapper'
-
+import Router from 'next/router'
 import searchReducer from "./service/search"
 import accountReducer from "./service/account";
 import appointmentReducer from "./service/appointments";
 import thunk from 'redux-thunk';
-import { Router } from "next/router"
+// import { useRouter } from "next/router"
 import { format } from 'url'
 
 const rootReducer = combineReducers({

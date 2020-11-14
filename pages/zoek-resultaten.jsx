@@ -7,7 +7,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { ShopInfoCard, Layout } from "@/components/global";
 import lib from "@/assets/js/lib";
-import queryString from "query-string";
 import { FRONT_END_URL } from "../constants.js";
 import {
   getSearchFilterField,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from "next/link";
 import { Checkbox, Divider } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { setBrandModel, setSelectShopGuarantee } from "Service/account/action";
@@ -157,14 +157,7 @@ const BrandModelCard = (routerProps) => {
               )}
               {checks[i] === true && isEditable === false && (
                 <Link
-                  to={`/model-gegevens/?shopId=${shop_id}&deviceId=${newGuarantees.device_id}&brandId=${brand_id}&modelId=${el.id}&modelName=${el.model_name}`}
-                  onClick={() => {
-                    handleEditReparation(
-                      newGuarantees.device_id,
-                      brand_id,
-                      el.id
-                    );
-                  }}
+                  href={`/model-gegevens/?shopId=${shop_id}&deviceId=${newGuarantees.device_id}&brandId=${brand_id}&modelId=${el.id}&modelName=${el.model_name}`}
                   disabled={isEditGuarantee === true ? false : true}
                 >
                   <FontAwesomeIcon

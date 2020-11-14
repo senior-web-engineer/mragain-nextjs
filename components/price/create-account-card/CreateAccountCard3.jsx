@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "antd";
-import Link from "../../../src/Link";
+import Link from "next/link";
 import "./CreateAccountCard.less";
 
 const CreateAccountCard3 = params => {
