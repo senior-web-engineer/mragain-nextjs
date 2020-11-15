@@ -52,6 +52,10 @@ const FooterView = ({ location }) => {
       ? "flex"
       : "none";
 
+  const IconFont = Icon.createFromIconfontCN({
+    scriptUrl: "//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js",
+  });
+
   return (
     <FooterViewSection>
       <FooterViewContainer show={visible}>
@@ -131,7 +135,7 @@ const FooterView = ({ location }) => {
                 <li className="facebook">
                   <a href="https://www.facebook.com/Mr-Again-105437267708409/">
                     <div className="icon-circle">
-                      <Icon type="linkedin" theme="filled" />
+                      <IconFont type="icon-facebook" theme="filled" />
                     </div>
                     <div>Facebook</div>
                   </a>
@@ -139,7 +143,7 @@ const FooterView = ({ location }) => {
                 <li className="twitter">
                   <a href="https://twitter.com/MrAgainofficial">
                     <div className="icon-circle">
-                      <Icon type="linkedin" theme="filled" />
+                      <IconFont type="icon-twitter" theme="filled" />
                     </div>
                     <div>Twitter</div>
                   </a>

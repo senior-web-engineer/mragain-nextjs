@@ -8,9 +8,9 @@ const LayoutComponent = (props) => {
   const { children } = props;
 
   return (
-    <Layout>
+    <Layout className="App" theme="light">
       <Header/>
-      <Content>
+      <Content className="App-content">
         {children}
       </Content>
       <Footer/>
