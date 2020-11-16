@@ -14,6 +14,7 @@ import { logout } from "Service/account/operations.js";
 import "./index.less";
 import { Helmet } from "react-helmet";
 import { FRONT_END_URL } from "../../../constants.js";
+import { Layout } from "../../../components/global"
 
 const { Option } = Select;
 
@@ -173,252 +174,254 @@ const AccountSetting = (routerProps) => {
   };
 
   return (
-    <div className="account-setting-container">
-      <Helmet>
-        <title>Mr Again - Account gegevens</title>
-        <meta name="Keywords" content="Beheer je account, MrAgain" />
-        <meta name="description" content="Reparateur account beheer" />
-        <link rel="canonical" href={FRONT_END_URL + "/account-gegevens"} />
-        {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
-        <meta name="og_title" property="og:title" content=" Account Settings" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:description"
-          content="Vind de beste reparateur bij jou in de buurt"
-        />
-        <meta name="og:url" content="url" />
-        <meta property="og:image" content="" />
-        <meta name="og_site_name" property="og:site_name" content="Mr Again" />
-        <meta name="theme-color" content="#ffffff" />
-      </Helmet>
-      <div className="account-setting-container-wrap">
-        <div className="setting-title-bar">
-          <div className="setting-title">Account Settings</div>
-          {/*<div className="setting-sub-title">
-            Manage Reparation | abbonement
-          </div>*/}
-        </div>
-        <div className="setting-content">
-          <div className="first-setting-blog">
-            <div className="setting-blog-title">Mijn gegevens</div>
-            <div className="first-setting-blog-content">
-              <div className="first-setting-blog-content-title">
-                Bedrijfsnaam
-              </div>
-              <div className="first-setting-blog-content-value">
-                <Input
-                  placeholder="Bedrijfsnaam"
-                  name="name"
-                  value={settings.name}
-                  onChange={handleDataChange}
-                  disabled={isEdit}
-                ></Input>
-              </div>
-              <div className="first-setting-blog-content-title">Email</div>
-              <div className="first-setting-blog-content-value">
-                <Input
-                  placeholder="Emailadres"
-                  name="email"
-                  disabled
-                  value={settings.email}
-                  onChange={handleDataChange}
-                />
-              </div>
-              <div className="first-setting-blog-content-title">
-                Straat en huisnummer
-              </div>
-              <div className="first-setting-blog-content-value">
-                <Input
-                  placeholder="Adres"
-                  name="street"
-                  value={settings.street}
-                  onChange={handleDataChange}
-                  disabled={isEdit}
-                ></Input>
-              </div>
+    <Layout>
+      <div className="account-setting-container">
+        <Helmet>
+          <title>Mr Again - Account gegevens</title>
+          <meta name="Keywords" content="Beheer je account, MrAgain" />
+          <meta name="description" content="Reparateur account beheer" />
+          <link rel="canonical" href={FRONT_END_URL + "/account-gegevens"} />
+          {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
+          <meta name="og_title" property="og:title" content=" Account Settings" />
+          <meta property="og:type" content="website" />
+          <meta
+            property="og:description"
+            content="Vind de beste reparateur bij jou in de buurt"
+          />
+          <meta name="og:url" content="url" />
+          <meta property="og:image" content="" />
+          <meta name="og_site_name" property="og:site_name" content="Mr Again" />
+          <meta name="theme-color" content="#ffffff" />
+        </Helmet>
+        <div className="account-setting-container-wrap">
+          <div className="setting-title-bar">
+            <div className="setting-title">Account Settings</div>
+            {/*<div className="setting-sub-title">
+              Manage Reparation | abbonement
+            </div>*/}
+          </div>
+          <div className="setting-content">
+            <div className="first-setting-blog">
+              <div className="setting-blog-title">Mijn gegevens</div>
+              <div className="first-setting-blog-content">
+                <div className="first-setting-blog-content-title">
+                  Bedrijfsnaam
+                </div>
+                <div className="first-setting-blog-content-value">
+                  <Input
+                    placeholder="Bedrijfsnaam"
+                    name="name"
+                    value={settings.name}
+                    onChange={handleDataChange}
+                    disabled={isEdit}
+                  ></Input>
+                </div>
+                <div className="first-setting-blog-content-title">Email</div>
+                <div className="first-setting-blog-content-value">
+                  <Input
+                    placeholder="Emailadres"
+                    name="email"
+                    disabled
+                    value={settings.email}
+                    onChange={handleDataChange}
+                  />
+                </div>
+                <div className="first-setting-blog-content-title">
+                  Straat en huisnummer
+                </div>
+                <div className="first-setting-blog-content-value">
+                  <Input
+                    placeholder="Adres"
+                    name="street"
+                    value={settings.street}
+                    onChange={handleDataChange}
+                    disabled={isEdit}
+                  ></Input>
+                </div>
 
-              <div className="first-setting-blog-content-title">Postcode</div>
-              <div className="first-setting-blog-content-value">
-                <Input
-                  placeholder="Postcode"
-                  name="zipcode"
-                  value={settings.zipcode}
-                  onChange={handleDataChange}
-                  disabled={isEdit}
-                ></Input>
-              </div>
+                <div className="first-setting-blog-content-title">Postcode</div>
+                <div className="first-setting-blog-content-value">
+                  <Input
+                    placeholder="Postcode"
+                    name="zipcode"
+                    value={settings.zipcode}
+                    onChange={handleDataChange}
+                    disabled={isEdit}
+                  ></Input>
+                </div>
 
-              <div className="first-setting-blog-content-title">Stad</div>
-              <div className="first-setting-blog-content-value">
-                <Input
-                  placeholder="Stad"
-                  name="city"
-                  value={settings.city}
-                  onChange={handleDataChange}
-                  disabled={isEdit}
-                ></Input>
-              </div>
+                <div className="first-setting-blog-content-title">Stad</div>
+                <div className="first-setting-blog-content-value">
+                  <Input
+                    placeholder="Stad"
+                    name="city"
+                    value={settings.city}
+                    onChange={handleDataChange}
+                    disabled={isEdit}
+                  ></Input>
+                </div>
 
-              <div className="first-setting-blog-content-title">Telefoon</div>
-              <div className="first-setting-blog-content-value">
-                <Input
-                  placeholder="Telefoon nummer"
-                  name="phone_number"
-                  value={settings.phone_number}
-                  onChange={handleDataChange}
-                  disabled={isEdit}
-                ></Input>
-              </div>
+                <div className="first-setting-blog-content-title">Telefoon</div>
+                <div className="first-setting-blog-content-value">
+                  <Input
+                    placeholder="Telefoon nummer"
+                    name="phone_number"
+                    value={settings.phone_number}
+                    onChange={handleDataChange}
+                    disabled={isEdit}
+                  ></Input>
+                </div>
 
-              <div className="first-setting-blog-content-title">kvk nummer</div>
-              <div className="first-setting-blog-content-value">
-                <Input
-                  placeholder="Je kvk nummer"
-                  name="kvk"
-                  value={settings.kvk}
-                  onChange={handleDataChange}
-                  disabled={isEdit}
-                ></Input>
-              </div>
+                <div className="first-setting-blog-content-title">kvk nummer</div>
+                <div className="first-setting-blog-content-value">
+                  <Input
+                    placeholder="Je kvk nummer"
+                    name="kvk"
+                    value={settings.kvk}
+                    onChange={handleDataChange}
+                    disabled={isEdit}
+                  ></Input>
+                </div>
 
-              <div className="first-setting-blog-content-title">BTW nummer</div>
-              <div className="first-setting-blog-content-value">
-                <Input
-                  placeholder="Je BTW nummer"
-                  name="btw"
-                  value={settings.btw}
-                  onChange={handleDataChange}
-                  disabled={isEdit}
-                ></Input>
-              </div>
-              <div className="first-setting-blog-content-title">
-                IBAN rekening
-              </div>
-              <div className="first-setting-blog-content-value">
-                <Input
-                  placeholder="Je IBAN"
-                  name="iban"
-                  value={settings.iban}
-                  onChange={handleDataChange}
-                  disabled={isEdit}
-                />
-              </div>
-              <div className="first-setting-blog-content-title">Website</div>
-              <div className="first-setting-blog-content-value">
-                <Input
-                  placeholder="website"
-                  name="site_url"
-                  value={settings.site_url}
-                  disabled={isEdit}
-                  onChange={handleDataChange}
-                />
-              </div>
-              <div className="first-setting-btn-group">
-                <Popconfirm
-                  title="Weet je zeker dat je je account wilt verwijderen?"
-                  onConfirm={confirm}
-                  okText="Yes"
-                  cancelText="No"
-                >
-                  <Button className="account-delete-btn">
-                    Deactivate Account
+                <div className="first-setting-blog-content-title">BTW nummer</div>
+                <div className="first-setting-blog-content-value">
+                  <Input
+                    placeholder="Je BTW nummer"
+                    name="btw"
+                    value={settings.btw}
+                    onChange={handleDataChange}
+                    disabled={isEdit}
+                  ></Input>
+                </div>
+                <div className="first-setting-blog-content-title">
+                  IBAN rekening
+                </div>
+                <div className="first-setting-blog-content-value">
+                  <Input
+                    placeholder="Je IBAN"
+                    name="iban"
+                    value={settings.iban}
+                    onChange={handleDataChange}
+                    disabled={isEdit}
+                  />
+                </div>
+                <div className="first-setting-blog-content-title">Website</div>
+                <div className="first-setting-blog-content-value">
+                  <Input
+                    placeholder="website"
+                    name="site_url"
+                    value={settings.site_url}
+                    disabled={isEdit}
+                    onChange={handleDataChange}
+                  />
+                </div>
+                <div className="first-setting-btn-group">
+                  <Popconfirm
+                    title="Weet je zeker dat je je account wilt verwijderen?"
+                    onConfirm={confirm}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <Button className="account-delete-btn">
+                      Deactivate Account
+                    </Button>
+                  </Popconfirm>
+
+                  <Button
+                    className="account-change-btn"
+                    onClick={() => {
+                      handleEditStatus();
+                    }}
+                  >
+                    {editBtnName}
                   </Button>
-                </Popconfirm>
-
-                <Button
-                  className="account-change-btn"
-                  onClick={() => {
-                    handleEditStatus();
-                  }}
-                >
-                  {editBtnName}
-                </Button>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="second-setting-blog">
-            <div className="second-setting-blog-sub">
-              <div className="setting-blog-title">Afspraak settings</div>
-              <div className="account-setting-appointment">
-                <div className="time-per-appointment">
-                  <label>Tijd per afspraak:</label>
-                  <Select
-                    defaultValue="Select Times"
-                    onChange={handleTimePerChange}
-                    name="intervals"
-                    value={settings.intervals}
+            <div className="second-setting-blog">
+              <div className="second-setting-blog-sub">
+                <div className="setting-blog-title">Afspraak settings</div>
+                <div className="account-setting-appointment">
+                  <div className="time-per-appointment">
+                    <label>Tijd per afspraak:</label>
+                    <Select
+                      defaultValue="Select Times"
+                      onChange={handleTimePerChange}
+                      name="intervals"
+                      value={settings.intervals}
+                      disabled={isAppEdit}
+                    >
+                      <Option value={15} key={15}>
+                        15
+                      </Option>
+                      <Option value={20} key={20}>
+                        20
+                      </Option>
+                      <Option value={30} key={30}>
+                        30
+                      </Option>
+                    </Select>
+                  </div>
+                  <Checkbox
+                    name="double_appointment"
+                    checked={settings.double_appointment}
+                    onChange={handleCheckDataChange}
                     disabled={isAppEdit}
                   >
-                    <Option value={15} key={15}>
-                      15
-                    </Option>
-                    <Option value={20} key={20}>
-                      20
-                    </Option>
-                    <Option value={30} key={30}>
-                      30
-                    </Option>
-                  </Select>
+                    Dubbele afspraken mogelijk
+                  </Checkbox>
+                  <Button
+                    className="appointment-change-btn"
+                    onClick={() => {
+                      handleAppEditStatus();
+                    }}
+                  >
+                    {editAppBtnName}
+                  </Button>
                 </div>
-                <Checkbox
-                  name="double_appointment"
-                  checked={settings.double_appointment}
-                  onChange={handleCheckDataChange}
-                  disabled={isAppEdit}
-                >
-                  Dubbele afspraken mogelijk
-                </Checkbox>
-                <Button
-                  className="appointment-change-btn"
-                  onClick={() => {
-                    handleAppEditStatus();
-                  }}
-                >
-                  {editAppBtnName}
-                </Button>
               </div>
             </div>
-          </div>
-          <div className="third-setting-blog">
-            <div className="setting-blog-title">Wachtwoord wijzigen</div>
-            <div className="third-setting-blog-content">
-              <Input
-                type="password"
-                name="old_password"
-                className="account-change-password"
-                placeholder="Huidige wachtwoord"
-                value={password.old_password}
-                onChange={handlePasswordChange}
-              />
-              <Input
-                type="password"
-                name="new_password"
-                className="account-change-password"
-                value={password.new_password}
-                placeholder="Nieuw wachtwoord"
-                onChange={handlePasswordChange}
-              />
-              <Input
-                type="password"
-                name="confirm_password"
-                className="account-change-password"
-                placeholder="Bevestig nieuw wachtwoord"
-                value={password.confirm_password}
-                onChange={handlePasswordChange}
-              />
-              <Button
-                className="account-change-password-btn"
-                onClick={() => {
-                  updatePassword();
-                }}
-              >
-                Verander wachtwoord
-              </Button>
+            <div className="third-setting-blog">
+              <div className="setting-blog-title">Wachtwoord wijzigen</div>
+              <div className="third-setting-blog-content">
+                <Input
+                  type="password"
+                  name="old_password"
+                  className="account-change-password"
+                  placeholder="Huidige wachtwoord"
+                  value={password.old_password}
+                  onChange={handlePasswordChange}
+                />
+                <Input
+                  type="password"
+                  name="new_password"
+                  className="account-change-password"
+                  value={password.new_password}
+                  placeholder="Nieuw wachtwoord"
+                  onChange={handlePasswordChange}
+                />
+                <Input
+                  type="password"
+                  name="confirm_password"
+                  className="account-change-password"
+                  placeholder="Bevestig nieuw wachtwoord"
+                  value={password.confirm_password}
+                  onChange={handlePasswordChange}
+                />
+                <Button
+                  className="account-change-password-btn"
+                  onClick={() => {
+                    updatePassword();
+                  }}
+                >
+                  Verander wachtwoord
+                </Button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
