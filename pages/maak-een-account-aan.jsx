@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 import "./maak-een-account-aan.less";
 import { Layout } from "@/components/global"
 
-import { registerUser } from "Service/account/operations.js";
-import { resetAuthError } from "Service/account/action.js";
+import { registerUser } from "service/account/operations.js";
+import { resetAuthError } from "service/account/action.js";
 
 function AccountCreate(routerProps) {
   const [validated, setValidated] = useState(false);

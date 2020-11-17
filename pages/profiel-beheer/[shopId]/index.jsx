@@ -21,12 +21,12 @@ import {
   getAccountProfile,
   updateValidOpenTime,
   updateInvalidOpenTime,
-} from "Service/account/operations.js";
+} from "service/account/operations.js";
 import {
   uploadImage,
   updateAccountProfile,
-} from "Service/account/operations.js";
-import { setLoadedProfile } from "Service/account/action.js";
+} from "service/account/operations.js";
+import { setLoadedProfile } from "service/account/action.js";
 import "./index.less";
 import { Helmet } from "react-helmet";
 import { FRONT_END_URL } from "../../../constants.js";

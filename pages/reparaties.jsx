@@ -12,15 +12,15 @@ import {
   setGuaranteeDevice,
   setLoadPBM,
   setBrandModel,
-} from "Service/account/action";
+} from "service/account/action";
 import {
   createGuaranteeModels,
   deleteGuaranteeModels,
   getShopBrandModel,
   getExportReparationAndGuaranteeCSV,
   createImportReparationAndGuaranteeCSV,
-} from "Service/account/operations";
-import { getSearchFilterField } from "Service/search/operations.js";
+} from "service/account/operations";
+import { getSearchFilterField } from "service/search/operations.js";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import { FRONT_END_URL } from "../constants.js";

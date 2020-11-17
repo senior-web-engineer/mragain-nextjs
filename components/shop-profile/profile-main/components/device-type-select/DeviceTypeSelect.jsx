@@ -4,8 +4,8 @@ import { Select } from "antd";
 import {
   getSearchFilterField,
   getSearchFilterFieldExt,
-} from "Service/search/operations.js";
-import { getModelService } from "Service/search/operations.js";
+} from "service/search/operations.js";
+import { getModelService } from "service/search/operations.js";
 import "./DeviceTypeSelect.less";
 
 const { Option } = Select;

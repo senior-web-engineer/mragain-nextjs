@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import "./ProfileBannerSection.less";
 import StarRatingInfo from "@/components/global/StarRatingInfo/StarRatingInfo";
 import { ProfileBannerContainer } from "./ProfileBannerSection.style";
-import { setLoadedProfile } from "Service/account/action.js";
+import { setLoadedProfile } from "service/account/action.js";
 
 const ProfileBannerSection = (routerProps) => {
   const {

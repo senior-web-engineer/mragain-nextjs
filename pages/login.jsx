@@ -6,8 +6,8 @@ import { message } from "antd";
 import Link from "next/link"
 import "./login.less";
 
-import { login } from "Service/account/operations.js";
-import { resetAuthError } from "Service/account/action.js";
+import { login } from "service/account/operations.js";
+import { resetAuthError } from "service/account/action.js";
 import { Helmet } from "react-helmet";
 import { FRONT_END_URL } from "../constants"
 import { Layout } from "../components/global"

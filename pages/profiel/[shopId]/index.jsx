@@ -7,8 +7,8 @@ import { Layout } from "@/components/global";
 import {
   getAccountProfile,
   getShopIdByInformation,
-} from "Service/account/operations.js";
-import { getReparationGuarantee } from "Service/appointments/operations.js";
+} from "service/account/operations.js";
+import { getReparationGuarantee } from "service/appointments/operations.js";
 
 const ShopProfile = (routerProps) => {
   const {

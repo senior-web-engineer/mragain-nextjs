@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Button } from "react-bootstrap";
 import { useRouter } from "next/router";
-import { setFindedLocation, setSearchFilter } from "Service/search/action.js";
+import { setFindedLocation, setSearchFilter } from "service/search/action.js";
 import lib from "@/assets/js/lib";
 import { CommonText, GreenText } from "./SearchForm.style.jsx";
 import "./SearchForm.style.less";

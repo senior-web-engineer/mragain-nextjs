@@ -5,16 +5,16 @@ import { useRouter } from "next/router";
 import logo from "@/assets/images/logo.png";
 import Link from "next/link";
 import "./Header.less";
-import { initUserLoginChange } from "Service/account/action.js";
-import { logout } from "Service/account/operations.js";
+import { initUserLoginChange } from "service/account/action.js";
+import { logout } from "service/account/operations.js";
 import {
   getSimpleAccountInformation,
   getAccountSettings,
   getAccountProfile,
   getDevices,
   getAuthUser,
-} from "Service/account/operations.js";
-import { getAppointments } from "Service/appointments/operations.js";
+} from "service/account/operations.js";
+import { getAppointments } from "service/appointments/operations.js";
 import { BACK_END_URL } from "constants.js";
 
 const { Header } = Layout;

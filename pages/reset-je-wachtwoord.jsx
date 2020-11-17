@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { message } from "antd";
 import "./reset-je-wachtwoord.less";
-import { resetPasswordEmail } from "Service/account/operations.js";
-import { resetAuthError } from "Service/account/action.js";
+import { resetPasswordEmail } from "service/account/operations.js";
+import { resetAuthError } from "service/account/action.js";
 import { Layout } from "@/components/global";
 import { Helmet } from "react-helmet";
 

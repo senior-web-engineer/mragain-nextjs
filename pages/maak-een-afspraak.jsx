@@ -13,16 +13,16 @@ import {
   getSearchFilterField,
   getSearchFilterFieldExt,
   getModelService,
-} from "Service/search/operations.js";
-import { setLoadService } from "Service/search/action.js";
+} from "service/search/operations.js";
+import { setLoadService } from "service/search/action.js";
 import {
   createAppointment,
   getAppointmentTimeTable,
-} from "Service/appointments/operations";
+} from "service/appointments/operations";
 import { setLoadedProfile } from "../service/account/action";
 
-import { getAccountProfile } from "Service/account/operations.js";
-import { getReparationGuarantee } from "Service/appointments/operations.js";
+import { getAccountProfile } from "service/account/operations.js";
+import { getReparationGuarantee } from "service/appointments/operations.js";
 
 const { Option } = Select;
 

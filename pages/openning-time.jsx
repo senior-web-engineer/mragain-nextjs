@@ -15,7 +15,7 @@ import {
   getAccountProfile,
   updateValidOpenTime,
   updateInvalidOpenTime,
-} from "Service/account/operations.js";
+} from "service/account/operations.js";
 import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
 import "./openning-time.less";

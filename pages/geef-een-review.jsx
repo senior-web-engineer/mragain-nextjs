@@ -7,7 +7,7 @@ import shopReviewIcon from "@/assets/images/shop-review.png";
 import {
   createReview,
   checkReviewPage,
-} from "Service/appointments/operations.js";
+} from "service/appointments/operations.js";
 import { Layout } from "@/components/global";
 
 const CheckoutReview = (routerProps) => {

@@ -7,8 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "antd";
 import "./ShopInfoCard.style.less";
 import StarRatingInfo from "../StarRatingInfo/StarRatingInfo";
-import { getAccountProfile } from "Service/account/operations.js";
-import { getReparationGuarantee } from "Service/appointments/operations.js";
+import { getAccountProfile } from "service/account/operations.js";
+import { getReparationGuarantee } from "service/appointments/operations.js";
 
 const ShopInfoCard = (routerProps) => {
   const { getAccountProfile, getReparationGuarantee } = routerProps;

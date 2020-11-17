@@ -11,8 +11,8 @@ import {
 } from "../component.style.jsx";
 import "../component.style.less";
 import "./NewestShopSection.style.less";
-import { getNewestShopList } from "Service/search/operations.js";
-import { getAccountProfile } from "Service/account/operations.js";
+import { getNewestShopList } from "service/search/operations.js";
+import { getAccountProfile } from "service/account/operations.js";
 
 const image3 = "/static/media/home_newest_image3.8798cc16.jpg";
 

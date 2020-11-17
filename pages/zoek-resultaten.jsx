@@ -12,7 +12,7 @@ import {
   getSearchFilterField,
   getSearchFilterFieldExt,
   searchShopFilter,
-} from "Service/search/operations.js";
+} from "service/search/operations.js";
 import { compose, withProps, lifecycle } from "recompose";
 import {
   google,
@@ -22,7 +22,7 @@ import {
   Marker,
   Map,
 } from "react-google-maps";
-import { setFindOut } from "Service/search/action.js";
+import { setFindOut } from "service/search/action.js";
 import "./zoek-resultaten.less";
 import { Helmet } from "react-helmet";
 import image1 from "@/assets/images/home_newest_image3.jpg";

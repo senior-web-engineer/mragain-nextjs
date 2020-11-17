@@ -10,7 +10,7 @@ import {
   FormSubBlog,
 } from "./MainContactUs.style";
 import { LocateTitle } from "../MainLocateUs/MainLocateUs.style";
-import { contactUs } from "Service/search/operations.js";
+import { contactUs } from "service/search/operations.js";
 
 const MainContactUs = (props) => {
   const { contactUs } = props;

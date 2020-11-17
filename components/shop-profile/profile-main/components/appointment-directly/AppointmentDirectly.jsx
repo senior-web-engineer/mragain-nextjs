@@ -5,8 +5,8 @@ import moment from "moment";
 // import DayPicker from "react-day-picker";
 import { DatePicker } from "antd";
 import { useRouter } from "next/router";
-import { getAccountProfile } from "Service/account/operations.js";
-import { setAppointmentDate } from "Service/appointments/action.js";
+import { getAccountProfile } from "service/account/operations.js";
+import { setAppointmentDate } from "service/appointments/action.js";
 import "./AppointmentDirectly.less";
 
 const AppointmentDirectly = (routerProps) => {

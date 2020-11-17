@@ -25,18 +25,18 @@ import {
   getSearchFilterField,
   getSearchFilterFieldExt,
   getModelService,
-} from "Service/search/operations.js";
-import { setLoadService } from "Service/search/action.js";
-import { setLoadAppointment } from "Service/appointments/action.js";
+} from "service/search/operations.js";
+import { setLoadService } from "service/search/action.js";
+import { setLoadAppointment } from "service/appointments/action.js";
 import {
   getAppointments,
   updateAppointment,
   CancelAppointment,
-} from "Service/appointments/operations.js";
+} from "service/appointments/operations.js";
 import {
   uploadImage,
   getSimpleAccountInformation,
-} from "Service/account/operations.js";
+} from "service/account/operations.js";
 import { Helmet } from "react-helmet";
 import { FRONT_END_URL } from "../../../constants.js";
 

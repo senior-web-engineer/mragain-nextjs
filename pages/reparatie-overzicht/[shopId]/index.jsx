@@ -14,18 +14,18 @@ import menu_icon from "../../../assets/images/menu.png";
 import {
   getSearchFilterField,
   getSearchFilterFieldExt,
-} from "Service/search/operations.js";
-import { setLoadService } from "Service/search/action.js";
-import { setLoadAppointment } from "Service/appointments/action.js";
+} from "service/search/operations.js";
+import { setLoadService } from "service/search/action.js";
+import { setLoadAppointment } from "service/appointments/action.js";
 import {
   CancelAppointment,
   getAppointments,
-} from "Service/appointments/operations.js";
+} from "service/appointments/operations.js";
 import { RepairSingleImage } from "@/styled-components/reparatie-overzicht.style";
 import {
   uploadImage,
   getSimpleAccountInformation,
-} from "Service/account/operations.js";
+} from "service/account/operations.js";
 import { Helmet } from "react-helmet";
 import { FRONT_END_URL } from "../../../constants.js";
 import { Layout } from "@/components/global";

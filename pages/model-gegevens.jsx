@@ -11,9 +11,9 @@ import {
   deleteShopGuarantee,
   getShopBrandModel,
   updateShopModalGuarantees,
-} from "Service/account/operations";
-import { setLoadPBM, setSelectShopGuarantee } from "Service/account/action";
-import { setGuaranteeDevice } from "Service/account/action.js";
+} from "service/account/operations";
+import { setLoadPBM, setSelectShopGuarantee } from "service/account/action";
+import { setGuaranteeDevice } from "service/account/action.js";
 import { Layout } from "@/components/global";
 import "./model-gegevens.less";
 

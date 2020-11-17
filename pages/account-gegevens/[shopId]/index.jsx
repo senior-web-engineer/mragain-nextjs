@@ -8,9 +8,9 @@ import {
   resetPasswordConfirm,
   deleteAccount,
   getAccountSettings,
-} from "Service/account/operations.js";
-import { resetAuthError } from "Service/account/action.js";
-import { logout } from "Service/account/operations.js";
+} from "service/account/operations.js";
+import { resetAuthError } from "service/account/action.js";
+import { logout } from "service/account/operations.js";
 import "./index.less";
 import { Helmet } from "react-helmet";
 import { FRONT_END_URL } from "../../../constants.js";

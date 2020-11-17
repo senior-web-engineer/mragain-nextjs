@@ -1,8 +1,8 @@
 import React from "react";
 import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
 import { TestmonialSection } from "components/global";
-import RepairServicingBannerSection from "components/RepairServicing/RepairServicingBannerSection/RepairServicingBannerSection";
-import AdvantageSection from "components/RepairServicing/AdvantageSection/AdvantageSection";
+import RepairServicingBannerSection from "components/repairServicing/RepairServicingBannerSection/RepairServicingBannerSection";
+import AdvantageSection from "components/repairServicing/AdvantageSection/AdvantageSection";
 import { Layout } from "components/global"
 
 const RepairServicing = () => (
