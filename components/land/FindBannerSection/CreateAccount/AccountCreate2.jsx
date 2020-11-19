@@ -78,7 +78,7 @@ function AccountCreate2(routerProps) {
       message.error(auth_error, [1]);
       resetAuthError(false);
     }
-  }, [isSignUp, isAuth_Error]);
+  });
 
   const showAgreePopup = () => {
     setShowAgree(true);

@@ -39,7 +39,7 @@ function PasswordResetEmail(routerProps) {
         resetAuthError();
       }, 2000);
     }
-  }, []);
+  });
 
   function ValidateEmail(mail) {
     if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {

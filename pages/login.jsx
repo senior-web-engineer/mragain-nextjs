@@ -49,7 +49,7 @@ function Login(routerProps) {
       }
     }
     console.log("isAuthenticated" + isAuthenticated);
-  }, []);
+  });
 
   const onHandleInputChange = (e) => {
     const value = e.target.value;

@@ -624,7 +624,7 @@ function ProfileManage(routerProps) {
         initProfilePage();
       }
     }
-  }, [isLoadedProfile]);
+  });
 
   return (
     <Layout>

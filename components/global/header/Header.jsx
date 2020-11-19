@@ -116,7 +116,7 @@ const HeaderView = (routerProps) => {
     const [authToken, setAuthToken] = useState("");
     useEffect(() => {
       setAuthToken(localStorage.getItem("auth-token"));
-    }, [])
+    })
     if (authToken === null) {
       return (
         <div className="navbar-sign">

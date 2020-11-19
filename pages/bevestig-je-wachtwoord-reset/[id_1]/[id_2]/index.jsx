@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { message } from "antd";
-import "./bevestig-je-wachtwoord-reset.less";
+import "./index.less";
 import { resetPasswordConfirmEmail } from "service/account/operations.js";
 import { resetAuthError } from "service/account/action.js";
 import { Layout } from "@/components/global";
@@ -25,13 +25,13 @@ function PasswordResetConfirm(routerProps) {
 
   useEffect(() => {
     if (isload === false) {
-      let tmp = router.pathname;
-      console.log(router.pathname)
-      setUid(tmp[2]);
-      setToken(tmp[3]);
+      let query = router.query;
+      console.log(router.query)
+      setUid(query.id_1);
+      setToken(query.id_2);
       setLoad(true);
     }
-  }, [isload])
+  }, [])
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -63,7 +63,7 @@ function PasswordResetConfirm(routerProps) {
         resetAuthError();
       }, 2000);
     }
-  }, [isAuth_Error]);
+  });
 
   return (
     <Layout>

@@ -128,10 +128,6 @@ const ShopDashboard = (routerProps) => {
   useEffect(() => {
     if (isLoad === false) {
       let auth_user = JSON.parse(localStorage.getItem("auth-user"));
-      console.log('-----------')
-      console.log(auth_user);
-      console.log(parseInt(auth_user.account_id));
-      console.log(parseInt(shopId));
       if (
         auth_user === null ||
         parseInt(auth_user.account_id) !== parseInt(shopId)
@@ -139,7 +135,6 @@ const ShopDashboard = (routerProps) => {
         router.push("/");
       } else {
         handleGetSimpleAccount();
-        console.log('----------  142 ------------')
         handleGetAppointments();
       }
     }

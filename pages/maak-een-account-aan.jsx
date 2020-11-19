@@ -76,7 +76,7 @@ function AccountCreate(routerProps) {
       message.error(auth_error, [1]);
       resetAuthError(false);
     }
-  }, []);
+  });
 
   function ValidateEmail(mail) {
     if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
