@@ -1,7 +1,22 @@
 import jQuery from "jquery";
 
-export default function authHeader() {
-    getCookie = (name) => {
+export function authHeaderGet() {
+    return {
+        headers: {            
+            "Content-Type": "application/json",
+            Accept: "application/json, text/plain, */*",
+        },
+    }
+}
+
+export function authHeader() {
+    return {
+        withCredentials: true,
+    }
+}
+
+export function authHeaderPost() {
+    const getCookie = (name) => {
         var cookieValue = null;
         if (document.cookie && document.cookie !== "") {
             var cookies = document.cookie.split(";");
@@ -18,15 +33,9 @@ export default function authHeader() {
     }
     return {
         headers: {
-            get: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            post: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": getCookie("csrftoken"),
-                Accept: "application/json",
-            },
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCookie("csrftoken"),
+            Accept: "application/json",
         },
         withCredentials: true,
     }
