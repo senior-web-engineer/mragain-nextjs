@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Link } from "next/link";
+import Link from "next/link";
 import { Checkbox, Divider } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { setBrandModel, setSelectShopGuarantee } from "service/account/action";
