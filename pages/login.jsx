@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router"
 import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { message } from "antd";
 import Link from "next/link"
 import "./login.less";
-
+import classnames from "classnames";
 import { login } from "service/account/operations.js";
 import { resetAuthError } from "service/account/action.js";
 import { Helmet } from "react-helmet";
@@ -13,36 +13,21 @@ import { FRONT_END_URL } from "../constants"
 import { Layout } from "../components/global"
 
 function Login(routerProps) {
-  const [validated, setValidated] = React.useState(false);
+  const [state, setstate] = useState({ email: "", password: "" });
+  const [errors, seterrors] = useState({
+    error_email: null,
+    error_password: null,
+  });
+
   const {
     signin,
     isLogged,
+    isAuthenticated,
     resetAuthError,
     auth_error,
     auth_user,
   } = routerProps;
   const router = useRouter();
-
-  // {{ csrf_token }}
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    const form = event.currentTarget;
-    if (form.checkValidity() === true) {
-      const data = new FormData(event.target);
-      if (ValidateEmail(data.get("email")) === false) {
-        message.error("You have entered an invalid email address!", [1]);
-        return;
-      }
-
-      setValidated(true);
-      const user = {
-        email: data.get("email"),
-        password: data.get("password"),
-      };
-      signin(user);
-    }
-  };
 
   useEffect(() => {
     if (auth_error !== null) {
@@ -52,15 +37,67 @@ function Login(routerProps) {
       }, 2000);
     }
     if (localStorage.getItem("auth-token") !== null) {
+      console.log("object-1");
       const user = JSON.parse(localStorage.getItem("auth-user"));
       router.push(`/dashboard/${user.account_id}`);
     }
     if (isLogged === true) {
+      console.log("object-2");
+
       if (auth_user.id !== undefined) {
         router.push(`/dashboard/${auth_user.account_id}`);
       }
     }
-  });
+    console.log("isAuthenticated" + isAuthenticated);
+  }, []);
+
+  const onHandleInputChange = (e) => {
+    const value = e.target.value;
+    setstate({
+      ...state,
+      [e.target.name]: value,
+    });
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    
+    let validationFlag = true;
+    let errEmail = null;
+    let errPassword = null;
+    const data = new FormData(event.target);
+    if (ValidateEmail(data.get("email")) === false) {
+      errEmail = true;
+      message.error("You have entered an invalid email address!", [1]);
+      console.log("errEmail");
+    }
+    if (state.password.length === 0) {
+      errPassword = true;
+      message.error("You have entered an invalid password!", [2]);
+      console.log("errPassword");
+    }
+
+    if (errEmail === true || errPassword === true) {
+      validationFlag = false;
+      seterrors({
+        error_email: errEmail,
+        error_password: errPassword,
+      });
+    } else {
+      validationFlag = true;
+
+      seterrors({
+        error_email: false,
+        error_password: false,
+      });
+    }
+    if (validationFlag === true) {
+      const user = {
+        email: data.get("email"),
+        password: data.get("password"),
+      };
+      signin(user);
+    }
+  };
 
   function ValidateEmail(mail) {
     if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
@@ -100,21 +137,46 @@ function Login(routerProps) {
         <div className="user-login-container-wrap">
           <div className="user-login-title">Inloggen</div>
           <div className="user-login-form">
-            <Form noValidate validated={validated} onSubmit={handleSubmit}>
-              <Form.Control
-                className="user-login-input"
-                type="text"
-                name="email"
-                placeholder="Emailadres"
-                required
-                />
-              <Form.Control
-                className="user-login-input"
-                name="password"
-                type="password"
-                placeholder="Wachtwoord"
-                required
-                />
+          <Form onSubmit={handleSubmit}>
+            <Form.Control
+              className={classnames(
+                "user-login-input",
+                {
+                  "is-invalid":
+                    errors.error_email === true || isAuthenticated === false,
+                },
+                {
+                  "is-valid": errors.error_email === false || isAuthenticated,
+                }
+              )}
+              type="text"
+              name="email"
+              placeholder="Emailadres"
+              onChange={(e) => {
+                onHandleInputChange(e);
+              }}
+              value={state.email}
+            />
+            <Form.Control
+              className={classnames(
+                "user-login-input",
+                {
+                  "is-invalid":
+                    errors.error_password === true || isAuthenticated === false,
+                },
+                {
+                  "is-valid":
+                    errors.error_password === false || isAuthenticated,
+                }
+              )}
+              name="password"
+              type="password"
+              placeholder="Wachtwoord"
+              onChange={(e) => {
+                onHandleInputChange(e);
+              }}
+              value={state.password}
+            />
               <div className="login-form-forgot">
                 <Link
                   href="/reset-je-wachtwoord"
@@ -139,6 +201,7 @@ const mapStateToProps = (state) => ({
   isLogged: state.account.isLogged,
   auth_error: state.account.auth_error,
   auth_user: state.account.auth_user,
+  isAuthenticated: state.account.isAuthenticated,
 });
 
 const mapDispatchToProps = (dispatch) => {

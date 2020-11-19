@@ -31,7 +31,7 @@ function PasswordResetConfirm(routerProps) {
       setToken(tmp[3]);
       setLoad(true);
     }
-  })
+  }, [isload])
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -63,7 +63,7 @@ function PasswordResetConfirm(routerProps) {
         resetAuthError();
       }, 2000);
     }
-  });
+  }, [isAuth_Error]);
 
   return (
     <Layout>

@@ -57,7 +57,7 @@
         height: 52px;
         background-color: #06c987;
         border: none;
-	font-weight: bold;
+	    font-weight: bold;
         margin-top: 30px;
       }
     }
@@ -68,17 +68,35 @@
   top: initial;
 }
 
-// SC CSS start here
-
-@media (max-width: 662px){
-  .user-login-form{width: 420px !important; padding: 65px 30px !important;}
-  .user-reset-email-form{width: 420px !important; padding: 65px 30px !important;}
-}
-
-@media (max-width: 438px){
-  .user-login-form{width: 310px !important; padding: 65px 30px !important;}
-  .user-reset-email-form{width: 310px !important; padding: 65px 30px !important;}
-}
-@media (max-width: 375px){
-  .user-login-container-wrap .user-login-title{height:116px !important; margin: 90px 0 0 0;}
-}
+.invalid-msg {
+    border: 1px solid red;
+  }
+  // SC CSS start here
+  
+  @media (max-width: 662px) {
+    .user-login-form {
+      width: 420px !important;
+      padding: 65px 30px !important;
+    }
+    .user-reset-email-form {
+      width: 420px !important;
+      padding: 65px 30px !important;
+    }
+  }
+  
+  @media (max-width: 438px) {
+    .user-login-form {
+      width: 310px !important;
+      padding: 65px 30px !important;
+    }
+    .user-reset-email-form {
+      width: 310px !important;
+      padding: 65px 30px !important;
+    }
+  }
+  @media (max-width: 375px) {
+    .user-login-container-wrap .user-login-title {
+      height: 116px !important;
+      margin: 90px 0 0 0;
+    }
+  }

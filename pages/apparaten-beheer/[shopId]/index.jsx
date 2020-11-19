@@ -32,12 +32,6 @@ const ReparationGuarantee = (routerProps) => {
   const url_shopId = parseInt(router.query.shopId);
 
   useEffect(() => {
-    if(!isLoggedIn) {
-      router.push("/");
-    }
-  }, [isLoggedIn])
-
-  useEffect(() => {
     if (isload === true) {
       let auth_user = JSON.parse(localStorage.getItem("auth-user"));
       if (
@@ -196,12 +190,14 @@ const ReparationGuarantee = (routerProps) => {
                             }}
                             className="guarantee-device-edit-link"
                           >
-                            <div className="device-check-box-title">
-                              {el.device_name}
-                            </div>
-                            <FontAwesomeIcon
-                              icon={["fas", "edit"]}
-                            ></FontAwesomeIcon>
+                            <a className="device-check-box-link">
+                                <div className="device-check-box-title">
+                                    {el.device_name}
+                                </div>
+                                <FontAwesomeIcon
+                                icon={["fas", "edit"]}
+                                ></FontAwesomeIcon>
+                            </a>
                           </Link>
                         </li>
                       );

@@ -2,13 +2,13 @@
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
     <url>
       <loc>https://www.mragain.nl/algemene-voorwaarden</loc>
-      <lastmod>2020-11-12</lastmod>
+      <lastmod>2020-11-18</lastmod>
     </url>,<url>
       <loc>https://www.mragain.nl/bevestig-je-wachtwoord-reset</loc>
       <lastmod>2020-11-12</lastmod>
     </url>,<url>
       <loc>https://www.mragain.nl/contact</loc>
-      <lastmod>2020-11-12</lastmod>
+      <lastmod>2020-11-18</lastmod>
     </url>,<url>
       <loc>https://www.mragain.nl/EmailConfirmation</loc>
       <lastmod>2020-11-12</lastmod>
@@ -16,23 +16,26 @@
       <loc>https://www.mragain.nl/geef-een-review</loc>
       <lastmod>2020-11-12</lastmod>
     </url>,<url>
+      <loc>https://www.mragain.nl/hoe-werkt-het</loc>
+      <lastmod>2020-11-18</lastmod>
+    </url>,<url>
       <loc>https://www.mragain.nl</loc>
-      <lastmod>2020-11-14</lastmod>
+      <lastmod>2020-11-18</lastmod>
     </url>,<url>
       <loc>https://www.mragain.nl/index.style</loc>
       <lastmod>2020-11-14</lastmod>
     </url>,<url>
       <loc>https://www.mragain.nl/login</loc>
-      <lastmod>2020-11-12</lastmod>
+      <lastmod>2020-11-18</lastmod>
     </url>,<url>
       <loc>https://www.mragain.nl/maak-een-account-aan</loc>
       <lastmod>2020-11-12</lastmod>
     </url>,<url>
       <loc>https://www.mragain.nl/maak-een-afspraak</loc>
-      <lastmod>2020-11-12</lastmod>
+      <lastmod>2020-11-18</lastmod>
     </url>,<url>
       <loc>https://www.mragain.nl/meld-je-aan-als-reparateur</loc>
-      <lastmod>2020-11-12</lastmod>
+      <lastmod>2020-11-18</lastmod>
     </url>,<url>
       <loc>https://www.mragain.nl/meld-je-aan-als-reparateur.style</loc>
       <lastmod>2020-11-12</lastmod>
@@ -50,16 +53,19 @@
       <lastmod>2020-11-12</lastmod>
     </url>,<url>
       <loc>https://www.mragain.nl/reparatie-en-service</loc>
-      <lastmod>2020-11-12</lastmod>
+      <lastmod>2020-11-17</lastmod>
     </url>,<url>
       <loc>https://www.mragain.nl/reparaties</loc>
       <lastmod>2020-11-12</lastmod>
+    </url>,<url>
+      <loc>https://www.mragain.nl/reparaties_css</loc>
+      <lastmod>2020-11-18</lastmod>
     </url>,<url>
       <loc>https://www.mragain.nl/reset-je-wachtwoord</loc>
       <lastmod>2020-11-12</lastmod>
     </url>,<url>
       <loc>https://www.mragain.nl/veel-gestelde-vragen</loc>
-      <lastmod>2020-11-12</lastmod>
+      <lastmod>2020-11-18</lastmod>
     </url>,<url>
       <loc>https://www.mragain.nl/zoek-resultaten</loc>
       <lastmod>2020-11-12</lastmod>
@@ -67,87 +73,87 @@
       ,
     <url>
         <loc>https://develop.mragain.nl/profiel/Meurs-Culemborg-Kastanjeboom 8</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/Telefoon reparatie Utrecht-Utrech-</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/Pieter Pim Meurs-Culemborg-Kastanjeboom, 8</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/Test Account-Utrecht-Faustdreef 153</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/J-Rotterdam-Hoge Filterweg 80</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/CoffeeCodes-Eindhoven-Pieter Breughelstraat 10</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/The fixerss--</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/eee--</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/The Iphone Maker--</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/All Phone Reparatie--</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/Markable--</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/testuser--</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/TestdeTester-Rotterdam-Hoge filterweg 80</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/Testdetester2-Rotterdam-Hoge Filterweg 80</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/Fixbees Utrecht-Utrecht-Faustdreef 155</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/Gokul tajpara--</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/Phoners--</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/myclepiter--</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/HelloMrAgain-Utrecht-Tolsteegbrug 1</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/Arvind-Berkel en Rodenrijs-Herenstraat 24</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/ArvindKR--</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/arvind1--</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/Rony--</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/manish--</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/kush-Culemborg-Kastanjeboom 8</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/sdfsdfsd--</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/elton lazzarin--</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>,<url>
         <loc>https://develop.mragain.nl/profiel/Pim--</loc>
-        <lastmod>2020-11-17</lastmod>
+        <lastmod>2020-11-18</lastmod>
       </url>
   </urlset>

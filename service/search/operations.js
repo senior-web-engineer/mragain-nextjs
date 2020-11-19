@@ -80,7 +80,6 @@ export function searchShopFilter(data, dispatch) {
         if (res.data[0].model_id === 0) {
           dispatch(setFindOut(true));
           dispatch(resetShopFilterList());
-          alert("input address error!");
           return;
         }
       }

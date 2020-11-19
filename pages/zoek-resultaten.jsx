@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { Alert, Button, Input, Select, Spin, Icon } from "antd";
@@ -21,6 +21,7 @@ import {
   GoogleMap,
   Marker,
   Map,
+  InfoWindow,
 } from "react-google-maps";
 import { setFindOut } from "service/search/action.js";
 import "./zoek-resultaten.less";
@@ -73,6 +74,7 @@ const MyMapComponent = compose(
   function goShopProfile(shop_name, city, street) {
     router.push(`/profiel/${shop_name}-${city}-${street}`);
   }
+  const [shopInfo, setshopInfo] = useState(null);
   return (
     <GoogleMap
       defaultZoom={8}
@@ -84,15 +86,29 @@ const MyMapComponent = compose(
             <Marker
               key={shop.name}
               position={{ lat: shop.geo_lat, lng: shop.geo_long }}
-              draggable={true}
+              draggable={shopInfo === shop.id ? true : false}
               ref={props.onMarkerMounted}
               onPositionChanged={props.onPositionChanged}
-              label={shop.name}
+              // label={shop.name}
               className="map-marker"
               onClick={() => {
                 goShopProfile(shop.name, shop.city, shop.street);
               }}
-            />
+              onMouseOver={() => {
+                setshopInfo(shop.id);
+              }}
+              onMouseOut={() => {
+                setshopInfo(null);
+              }}
+            >
+              {shopInfo === shop.id ? (
+                <InfoWindow>
+                  <span className="text-dark font-weight-bold">
+                    {shop.name}
+                  </span>
+                </InfoWindow>
+              ) : null}
+            </Marker>
           );
         })}
     </GoogleMap>

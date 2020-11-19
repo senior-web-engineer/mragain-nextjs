@@ -51,10 +51,6 @@ const ShopDashboard = (routerProps) => {
   }
 
   useEffect(() => {
-    if(!isLoggedIn) {
-      router.push("/");
-      return;
-    }
     window.addEventListener("resize", updateDimensions);
     setState({
       height: window.innerHeight,
@@ -117,6 +113,8 @@ const ShopDashboard = (routerProps) => {
 
   let repList = [];
   let isExistR = [];
+  const { shopId } = router.query
+  const url_shopId = parseInt(shopId);
 
   const handleGetSimpleAccount = () => {
     getSimpleAccountInformation(url_shopId);
@@ -125,19 +123,23 @@ const ShopDashboard = (routerProps) => {
     getAppointments(url_shopId);
   };
 
-  const { param_shopId } = router.query
-  const url_shopId = parseInt(param_shopId);
+
   
   useEffect(() => {
     if (isLoad === false) {
       let auth_user = JSON.parse(localStorage.getItem("auth-user"));
+      console.log('-----------')
+      console.log(auth_user);
+      console.log(parseInt(auth_user.account_id));
+      console.log(parseInt(shopId));
       if (
         auth_user === null ||
-        parseInt(auth_user.account_id) !== parseInt(param_shopId)
+        parseInt(auth_user.account_id) !== parseInt(shopId)
       ) {
         router.push("/");
       } else {
         handleGetSimpleAccount();
+        console.log('----------  142 ------------')
         handleGetAppointments();
       }
     }
@@ -186,11 +188,6 @@ const ShopDashboard = (routerProps) => {
         let img_url = base64data;
         arr.push(img_url);
         setImageList(arr);
-
-        const formData = new FormData();
-        formData.append("image", file);
-        formData.append("shop_id", auth_user.account_id);
-        uploadImage(formData, true);
       };
     }
   };
@@ -240,10 +237,10 @@ const ShopDashboard = (routerProps) => {
 
   function handlePhoneChange(value, e) {
     setPhone(value);
-    if (brandflg === true) {
-      setBrandflg(false);
+    //if (brandflg === true) {
+      setBrandflg(true);
       setBrand(0);
-    }
+    // }
   }
 
   function handleBrandChange(value, e) {
@@ -664,56 +661,64 @@ const ShopDashboard = (routerProps) => {
                     <Modal.Title>Reparatie details</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <div className="select-device-reparation">
-                      <div>
-                        <Select
-                          className="device-select"
-                          onChange={handlePhoneChange}
-                          value={phone}
-                          disabled={editable}
-                        >
-                          {filterlistPBM.map((element) => {
-                            return (
-                              <Option
-                                value={element.id}
-                                key={element.device_name}
-                              >
-                                {element.device_name}
-                              </Option>
-                            );
-                          })}
-                        </Select>
-                      </div>
-                      <div>
-                        <Select
-                          className="brand-select"
-                          onChange={handleBrandChange}
-                          value={brand}
-                          disabled={editable}
-                        >
-                          {initBrandSelect()}
-                        </Select>
-                      </div>
-                      <div>
-                        <Select
-                          className="model-select"
-                          onChange={handleModelChange}
-                          value={model}
-                          disabled={editable}
-                        >
-                          {initModelSelect()}
-                        </Select>
-                      </div>
-                      <div>
-                        <Select
-                          className="service-select"
-                          onChange={handleReparationChange}
-                          value={reparation}
-                          disabled={editable}
-                        >
-                          {initReparationSelect()}
-                        </Select>
-                      </div>
+                    {/* <div className="select-device-reparation"> */}
+                    <div className="w-100 ">
+                        <div className="row px-2">
+                        <div className="col-md-3 col-sm-6 col- px-1 mx-0">
+                            <Select
+                            // className="device-select"
+                            className="w-100"
+                            onChange={handlePhoneChange}
+                            value={phone}
+                            disabled={editable}
+                            >
+                            {filterlistPBM.map((element) => {
+                                return (
+                                <Option
+                                    value={element.id}
+                                    key={element.device_name}
+                                >
+                                    {element.device_name}
+                                </Option>
+                                );
+                            })}
+                            </Select>
+                        </div>
+                        <div className="col-md-3 col-sm-6 px-1 mx-0">
+                            <Select
+                            // className="brand-select"
+                            className="w-100"
+                            onChange={handleBrandChange}
+                            value={brand === 0 ? "select" : brand}
+                            disabled={editable}
+                            >
+                            {initBrandSelect()}
+                            </Select>
+                        </div>
+                        <div className="col-md-3 col-sm-6 px-1 mx-0">
+                            <Select
+                            // className="model-select"
+                            className="w-100"
+                            onChange={handleModelChange}
+                            value={model === 0 ? "select" : model}
+                            disabled={editable}
+                            >
+                            {initModelSelect()}
+                            </Select>
+                        </div>
+                        <div className="col-md-3 col-sm-6 px-1 mx-0">
+                            <Select
+                            // className="service-select"
+                            className="w-100"
+                            onChange={handleReparationChange}
+                            value={reparation}
+                            disabled={editable}
+                            >
+                            {initReparationSelect()}
+                            </Select>
+                        </div>
+                        </div>
+                        <hr />
                     </div>
                     <div className="repair-input-group">
                       <Label className="repair-input-label">IMEI nummer </Label>

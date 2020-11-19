@@ -1,5 +1,5 @@
 import React from "react";
-import Document, { Head, Main, NextScript } from "next/document";
+import Document, { Head, Main, NextScript, Html } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 import { GA_TRACKING_ID } from '../lib/gtag';
 
@@ -7,10 +7,9 @@ export default class MyDocument extends Document {
   render() {
     const { isProduction } = this.props;
     return (
-      <html lang="en">
+      <Html lang="en">
         <Head>
           <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="msapplication-TileColor" content="#06c987" />
           <meta name="theme-color" content="#ffffff" />
           <link rel="icon" href="/favicon.ico" />
@@ -48,7 +47,7 @@ export default class MyDocument extends Document {
           <Main/>
           <NextScript />
         </body>
-      </html>
+      </Html>
     )
   }
 }

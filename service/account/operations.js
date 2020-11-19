@@ -21,6 +21,9 @@ import {
   setLoadPBM,
   setCreatedGuarantee,
   setDeletedGuarantee,
+  setUpdateScheduleTime,
+  setSuccessData,
+  authenticated,
 } from "./action";
 import Axios from "axios";
 
@@ -93,12 +96,15 @@ export function getAuthUser(dispatch) {
 }
 
 export function login(data, dispatch) {
+  dispatch(authenticated(true));
+
   axios
     .post(`${API_PATH.LOGIN}/`, {
       email: data.email,
       password: data.password,
     })
     .then((res) => {
+      dispatch(authenticated(null));
       let token = res.data.key;
       dispatch(registerAuthToken(token));
       axios
@@ -114,6 +120,7 @@ export function login(data, dispatch) {
         .catch((err) => {});
     })
     .catch((err) => {
+      dispatch(authenticated(false));
       dispatch(loginFail());
     });
 }
@@ -194,6 +201,14 @@ export function getShopBrandModel(data, dispatch) {
     })
     .catch((err) => {});
 }
+
+export async function getShopRepairation(data, dispatch) {
+    const res = await axios.get(
+      `${API_PATH.GETSHOPREPAIRATION}`,
+      tokenConfigGet(data)
+    );
+    return res;
+  }
 
 export async function updateAccountSettings(id, data, dispatch) {
   return await axios
@@ -420,9 +435,13 @@ export function createGuaranteeModels(data, dispatch) {
           })
         )
         .then((res) => {
+          dispatch(setSuccessData(true));
           dispatch(fetchShopModelGuarantee(res.data));
+          dispatch(setSuccessData(null));
         })
-        .catch((err) => {});
+        .catch((err) => {
+            dispatch(logoutA());
+        });
       dispatch(setCreatedGuarantee(true));
     })
     .catch((err) => {});
@@ -449,33 +468,44 @@ export function deleteRepairDevice(id, dispatch) {
     .catch((err) => {});
 }
 
-export function deleteGuaranteeModels(data, dispatch) {
-  dispatch(setDeletedGuarantee(false));
-  axios
-    .put(`${API_PATH.DELETEGUARANTEEMODELS}`, data, tokenConfig())
-    .then((res) => {
-      axios
-        .get(
-          `${API_PATH.REPAIRBRANDMODEL}/${data.shop_id}/`,
-          tokenConfigGet({
-            shop: data.shop_id,
-            device: data.device_id,
-          })
-        )
-        .then((res) => {
-          dispatch(fetchShopModelGuarantee(res.data));
-          dispatch(setDeletedGuarantee(true));
-        })
-        .catch((err) => {});
-    })
-    .catch((err) => {});
-}
+export const deleteGuaranteeModels = async (data, dispatch) => {
+    dispatch(setDeletedGuarantee(false));
+    await axios
+      .put(`${API_PATH.DELETEGUARANTEEMODELS}`, data, tokenConfig())
+      .then((res) => {
+        // axios
+        //   .get(
+        //     `${API_PATH.REPAIRBRANDMODEL}/${data.shop_id}/`,
+        //     tokenConfigGet({
+        //       shop: data.shop_id,
+        //       device: data.device_id,
+        //     })
+        //   )
+        //   .then((res) => {
+        //     dispatch(fetchShopModelGuarantee(res.data));
+        //   })
+        //   .catch((err) => {
+        //     dispatch(logoutA());
+        //   });
+  
+        dispatch(setDeletedGuarantee(true));
+      })
+      .catch((err) => {});
+  };
 
-export const createImportReparationAndGuaranteeCSV = async (data) => {
-  const config = tokenConfigOnly();
-  const result = await axios.post(`${API_PATH.IMPORTCSV}`, data, config);
-  return result;
-};
+  export const createImportReparationAndGuaranteeCSV = async (data, options) => {
+    const configure = {
+      onUploadProgress: (progressEvent) => console.log(progressEvent.loaded),
+    };
+    const config = tokenConfigOnly();
+    const result = await axios.post(
+      `${API_PATH.IMPORTCSV}`,
+      data,
+      config,
+      configure
+    );
+    return result;
+  };
 
 export const getExportReparationAndGuaranteeCSV = async (data) => {
   const result = await Axios.get(

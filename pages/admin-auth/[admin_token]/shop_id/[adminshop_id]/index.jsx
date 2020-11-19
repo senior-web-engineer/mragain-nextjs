@@ -9,7 +9,7 @@ const AdminLoginAsUser = (routerProps) => {
   const router = useRouter();
   const { authUser, getAuthUser } = routerProps;
   const { admin_token, adminshop_id } = router.query;
-  const [auth_user, setAuthUser] = useState({});
+//   const [auth_user, setAuthUser] = useState({});
 
   /** loacal storage used for setting the token from url for the admin to login as user */
   // localStorage.setItem("auth-token", admin_token);
@@ -19,6 +19,7 @@ const AdminLoginAsUser = (routerProps) => {
 
   /** UseEffect : Here we are calling the auth api again for admin to login as user. */
   useEffect(() => {
+    localStorage.setItem("auth-token", admin_token);
     let token = localStorage.getItem("auth-token");
     if (token && Object.keys(authUser).length === 0) {
       getAuthUser();

@@ -20,12 +20,6 @@ const ShopProfile = (routerProps) => {
   } = routerProps;
   const router = useRouter();
 
-  useEffect(() => {
-    if(!isLoggedIn) {
-      router.push("/");
-    }
-  }, [])
-
   async function getShopId(url_str) {
     let shop = await getShopIdByInformation(url_str);
     if (shop !== undefined && shop.length > 0) {

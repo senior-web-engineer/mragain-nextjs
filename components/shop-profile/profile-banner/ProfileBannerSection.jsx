@@ -20,7 +20,7 @@ const ProfileBannerSection = (routerProps) => {
       }
       setLoadedProfile(false);
     }
-  });
+  }, [isLoadedProfile]);
 
   return (
     <ProfileBannerContainer

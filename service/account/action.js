@@ -24,6 +24,10 @@ import {
   SET_SEELCT_SHOP_GUARANTEE,
   SET_CREATED_GUARANTEE,
   SET_DELETED_GUARANTEE,
+  UPDATE_SCHEDULE_TIME,
+  HANDLE_CHECK_TIME,
+  SET_SUCESS_DATA,
+  CHECK_AUTHENTICATION,
 } from "./types";
 
 export const signupSuccess = () => ({
@@ -38,6 +42,11 @@ export const signupFail = (data) => ({
 export const loginFail = () => ({
   type: LOGIN_FAIL,
 });
+
+export const authenticated = (data) => ({
+    type: CHECK_AUTHENTICATION,
+    payload: data,
+  });
 
 export const resetPasswordFail = (data) => ({
   payload: data,
@@ -144,4 +153,14 @@ export const setCreatedGuarantee = (data) => ({
 export const setDeletedGuarantee = (data) => ({
   type: SET_DELETED_GUARANTEE,
   payload: data,
+});
+
+export const setUpdateScheduleTime = (data) => ({
+    type: UPDATE_SCHEDULE_TIME,
+    payload: data,
+  });
+  
+export const setSuccessData = (data) => ({
+    type: SET_SUCESS_DATA,
+    payload: data,
 });

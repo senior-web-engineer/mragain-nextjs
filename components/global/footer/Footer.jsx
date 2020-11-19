@@ -16,14 +16,13 @@ import {
   FooterLinkArea,
   FooterSitemap,
   FooterSitemapTitle,
-  Servicing,
-  ServicingTitle,
   FollowUs,
   FollowUsTitle,
 } from "./Footer.style";
 import "./Footer.less";
 import logo from "@/assets/images/logo.png";
 import { CookieBanner } from "@palmabit/react-cookie-law";
+import Link from "next/link"
 
 // const IconFont = () => Icon.createFromIconfontCN({
 //   scriptUrl: "//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js",
@@ -39,6 +38,7 @@ const FooterView = ({ location }) => {
     splitUrl === "/maak-een-afspraak" ||
     splitUrl === "/bevestig-je-afspraak" ||
     splitUrl === "/over-ons" ||
+    splitUrl === "/hoe-werkt-het" ||
     splitUrl === "/contact" ||
     splitUrl === "/prijs" ||
     splitUrl === "/reparatie-en-service" ||
@@ -90,22 +90,22 @@ const FooterView = ({ location }) => {
               <FooterSitemapTitle>Over MrAgain</FooterSitemapTitle>
               <ul>
                 <li>
-                  <a href="/">Home</a>
+                  <Link href="/">Home</Link>
                 </li>
                 <li>
-                  <a href="/over-ons">Over ons</a>
+                  <Link href="/over-ons">Over ons</Link>
                 </li>
                 <li>
-                  <a href="/reparatie-en-service">Reparatie & Service</a>
+                  <Link href="/reparatie-en-service">Reparatie & Service</Link>
                 </li>
                 <li>
-                  <a href="meld-je-aan-als-reparateur">Meld je aan als reparateur</a>
+                  <Link href="meld-je-aan-als-reparateur">Meld je aan als reparateur</Link>
                 </li>
                 <li>
-                  <a href="/contact">Contact</a>
+                  <Link href="/contact">Contact</Link>
                 </li>
 	        <li> 
-	          <a href="/veel-gestelde-vragen">FAQ</a>
+	          <Link href="/veel-gestelde-vragen">FAQ</Link>
 	        </li>
               </ul>
             </FooterSitemap>
@@ -133,7 +133,7 @@ const FooterView = ({ location }) => {
               <FollowUsTitle>Volg ons op</FollowUsTitle> 
               <ul>
                 <li className="facebook">
-                  <a href="https://www.facebook.com/Mr-Again-105437267708409/">
+                  <a href="https://www.facebook.com/Mr-Again-105437267708409/" target="_blank">
                     <div className="icon-circle">
                       <IconFont type="icon-facebook" theme="filled" />
                     </div>
@@ -141,7 +141,7 @@ const FooterView = ({ location }) => {
                   </a>
                 </li>
                 <li className="twitter">
-                  <a href="https://twitter.com/MrAgainofficial">
+                  <a href="https://twitter.com/MrAgainofficial" target="_blank">
                     <div className="icon-circle">
                       <IconFont type="icon-twitter" theme="filled" />
                     </div>
@@ -149,7 +149,7 @@ const FooterView = ({ location }) => {
                   </a>
                 </li>
                 <li className="linkedin">
-                  <a href="https://www.linkedin.com/company/mragain/">
+                  <a href="https://www.linkedin.com/company/mragain/" target="_blank">
                     <div className="icon-circle">
                       <Icon type="linkedin" theme="filled" />
                     </div>
@@ -157,7 +157,7 @@ const FooterView = ({ location }) => {
                   </a>
                 </li>
                 <li className="instagram">
-                  <a href="https://www.instagram.com/mragainofficial/">
+                  <a href="https://www.instagram.com/mragainofficial/" target="_blank">
                     <div className="icon-circle">
                       <Icon type="instagram" theme="filled" />
                     </div>

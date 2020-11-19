@@ -43,6 +43,7 @@ export const API_PATH = {
   CREATEAPPOINTMENT: `${API_URL}/create-appointment`,
   CREATESHOPREPAIRSERVICE: `${API_URL}/create-shop-repair-service`,
   REPAIRBRANDMODEL: `${API_URL}/repair-brand-model`,
+  GETSHOPREPAIRATION: `${API_URL}/get-shop-reparation`,
   SHOPGUARANTEE: `${API_URL}/shop-guarantee-reparation`,
   GUARANTEEMODELS: `${API_URL}/shop-guarantee-reparation`,
   GETAPPOINTMENTS: `${API_URL}/get-appointments`,

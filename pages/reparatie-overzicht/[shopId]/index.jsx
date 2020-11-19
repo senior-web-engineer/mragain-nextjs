@@ -87,12 +87,6 @@ const ReparationOverView = (routerProps) => {
   } = routerProps;
 
   const router = useRouter();
-  
-  useEffect(() => {
-    if(!isLoggedIn) {
-      router.push("/");
-    }
-  }, [isLoggedIn])
 
   const [showModal, setShowModal] = useState(false);
   const [showModal1, setShowModal1] = useState(false);

@@ -24,36 +24,45 @@ import {
   INITUSERLOGINCHANGE,
   SET_CREATED_GUARANTEE,
   SET_DELETED_GUARANTEE,
+  UPDATE_SCHEDULE_TIME,
+  SET_SUCESS_DATA,
+  CHECK_AUTHENTICATION,
 } from "./types";
 
 const initial_state = {
-  isSignUp: false,
-  isLogged: false,
-  isAuth_Error: false,
-  user_login_change: false,
-  auth_token: "",
-  auth_user: {},
-  auth_error: null,
-  account_settings: {},
-  account_profile: {},
-  account_valid_time: {},
-  account_valid_time_id: null,
-  account_invalid_time: {},
-  account_review: {},
-  account_invalid_time_id: null,
-  repair_devices: [],
-  isLoadedProfile: false,
-  isLoadValidTime: false,
-  loadPBM: false,
-  newGuarantees: {
-    device_id: null,
-    brand: [],
-  },
-  deleteGuarantees: [],
-  shopModelGuarantee: [],
-  selectedShopGuarantee: [],
-  isCreatedGuarantee: true,
-  isDeletedGuarantee: true,
+    isSignUp: false,
+    isLogged: null,
+    isAuth_Error: false,
+    user_login_change: false,
+    auth_token: "",
+    auth_user: {},
+    auth_error: null,
+    account_settings: {},
+    account_profile: {},
+    account_valid_time: {},
+    account_valid_time_id: null,
+    account_invalid_time: {},
+    account_review: {},
+    account_invalid_time_id: null,
+    repair_devices: [],
+    isLoadedProfile: false,
+    isLoadValidTime: false,
+    loadPBM: false,
+    newGuarantees: {
+      device_id: null,
+      brand: [],
+    },
+    deleteGuarantees: [],
+    shopModelGuarantee: [],
+    selectedShopGuarantee: [],
+    reparationData: [],
+    isCreatedGuarantee: true,
+    isDeletedGuarantee: true,
+    isUpdateScheduleTimeLoading: true,
+    isHandleInvalidTimeLoading: true,
+    isGettingModals: null,
+    isRedirect: null,
+    isAuthenticated: null,
 };
 
 const accountReducer = (state = initial_state, action) => {
@@ -105,6 +114,12 @@ const accountReducer = (state = initial_state, action) => {
         ...state,
         auth_error: "Er gaat iets mis, kloppen je emailadres en wachtwoord?",
       };
+    }
+    case CHECK_AUTHENTICATION: {
+        return {
+          ...state,
+          isAuthenticated: action.payload,
+        };
     }
     case SIGNUP_FAIL: {
       return {

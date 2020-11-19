@@ -1,9 +1,10 @@
 import { API_PATH } from "../../constants";
 import axios from "axios";
 import { fetchAppointmentlist, fetchReparationGuarantee } from "./action";
-// import { tokenConfig, tokenConfigGet } from "service/account/operations.js";
 import { tokenConfig, tokenConfigGet } from "../account/operations";
-import API from './api'
+
+import { logoutA } from "../account/action";
+import authHeader from './api';
 
 export function createAppointment(
   data,
@@ -13,18 +14,18 @@ export function createAppointment(
   datetime,
   dispatch
 ) {
-  API()
+    axios
     .post(`${API_PATH.CREATEAPPOINTMENT}/`, {
       appointmentData: data,
       repairSeviceData: data1,
       name,
       address,
       datetime,
-    })
+    }, authHeader())
     .then((res) => {
       data1.appointment = res.data.appointment_id;
-      API
-        .post(`${API_PATH.CREATESHOPREPAIRSERVICE}/`, data1)
+      axios
+        .post(`${API_PATH.CREATESHOPREPAIRSERVICE}/`, data1, authHeader())
         .then((res) => {})
         .catch((err) => {});
     })
@@ -32,10 +33,10 @@ export function createAppointment(
 }
 
 export async function checkReviewPage(auth) {
-  return await API()
+  return await axios
     .post(`${API_PATH.CHECKREVIEWPAGE}/`, {
       auth: auth,
-    })
+    }, authHeader())
     .then((res) => {
       return true;
     })
@@ -45,13 +46,13 @@ export async function checkReviewPage(auth) {
 }
 
 export async function createReview(auth, data, dispatch) {
-  return await API()
+  return await axios
     .post(`${API_PATH.CREATEREVIEW}/`, {
       auth: auth,
       reviewData: data,
-    })
+    }, authHeader())
     .then((res) => {
-      API.get(`${API_PATH.EVALUATERATE}/${data.shop}/`);
+      axios.get(`${API_PATH.EVALUATERATE}/${data.shop}/`, authHeader());
       return true;
     })
     .catch((err) => {
@@ -60,17 +61,17 @@ export async function createReview(auth, data, dispatch) {
 }
 
 export function getReparationGuarantee(id, dispatch) {
-  return API()
-    .get(`${API_PATH.GETREPARATIONGUARANTEE}/${id}/`)
+  return axios
+    .get(`${API_PATH.GETREPARATIONGUARANTEE}/${id}/`, authHeader())
     .then((res) => {
       dispatch(fetchReparationGuarantee(res.data));
     })
-    .catch((err) => {});
+    .catch((err) => {dispatch(logoutA());});
 }
 
 export async function getAppointmentNumber(data) {
   try {
-    const res = await API.post(`${API_PATH.GETAPPOINTMENTNUMBER}/`, data);
+    const res = await axios.post(`${API_PATH.GETAPPOINTMENTNUMBER}/`, data, authHeader());
     return res.data;
   } catch (error) {
     console.warn(error);
@@ -80,7 +81,7 @@ export async function getAppointmentNumber(data) {
 
 export async function getAppointmentTimeTable(data) {
   try {
-    const res = await API.post(`${API_PATH.GETAPPOINTMENTTIMETABLE}/`, data);
+    const res = await axios.post(`${API_PATH.GETAPPOINTMENTTIMETABLE}/`, data, authHeader());
     return res.data;
   } catch (error) {
     return [];
@@ -88,39 +89,39 @@ export async function getAppointmentTimeTable(data) {
 }
 
 export function getAppointments(id, dispatch) {
-  API()
+  axios
     .get(`${API_PATH.GETAPPOINTMENTS}/${id}/`, tokenConfig())
     .then((res) => {
       dispatch(fetchAppointmentlist(res.data));
     })
-    .catch((err) => {});
+    .catch((err) => {dispatch(logoutA());});
 }
 
 export function filterReparationOverview(data, dispatch) {
-  API()
-    .get(`${API_PATH.FILTERREPARATION}/`, { params: data })
+  axios
+    .get(`${API_PATH.FILTERREPARATION}/`, { params: data }, authHeader())
     .then((res) => {
       dispatch(fetchAppointmentlist(res.data));
     })
-    .catch((err) => {});
+    .catch((err) => {dispatch(logoutA());});
 }
 
 export function updateAppointment(id, email, data, shop_id, dispatch) {
   let status = data.status;
-  API()
-    .put(`${API_PATH.UPDATEAPPOINTMENT}/${id}/`, data)
+  axios
+    .put(`${API_PATH.UPDATEAPPOINTMENT}/${id}/`, data, authHeader())
     .then((res) => {
-      API
+      axios
         .get(`${API_PATH.GETAPPOINTMENTS}/${shop_id}/`, tokenConfig())
         .then((res) => {
           dispatch(fetchAppointmentlist(res.data));
           if (status === 1) {
-            API
+            axios
               .post(`${API_PATH.REPAIRCOLSEAUTUEMAIL}/`, {
                 id: id,
                 email: email,
                 shop: shop_id,
-              })
+              }, authHeader())
               .then((res) => {});
           }
         });
@@ -129,17 +130,20 @@ export function updateAppointment(id, email, data, shop_id, dispatch) {
 }
 
 export function CancelAppointment(id, shop_id, dispatch) {
-  API()
+  axios
     .delete(
       `${API_PATH.CANCELAPPOINTMENT}/${shop_id}/`,
       tokenConfigGet({ appoint_id: id })
     )
     .then((res) => {
-      API
+      axios
         .get(`${API_PATH.GETAPPOINTMENTS}/${shop_id}/`, tokenConfig())
         .then((res) => {
           dispatch(fetchAppointmentlist(res.data));
-        });
+        })
+        .catch((err) => {
+            dispatch(logoutA());
+          });
     })
     .catch((err) => {});
 }

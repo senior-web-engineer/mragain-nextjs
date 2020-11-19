@@ -587,32 +587,33 @@ const ShopAppointment = (routerProps) => {
                 </div>
                 <div className="shop-appointment-form-content">
                   <div className="shop-appointment-form-content-wrap">
-                    <div className="shop-appointment-form-group div-flex">
-                      <div className="shop-appointment-form-group-left">
+                    <div className="  shop-appointment-form-group div-flex">
+                        <div className="col-md-6 mx-0  px-0 shop-appointment-form-group-left">
                         <div className="shop-appointment-form-label">
-                          <Label>Selecteer een datum</Label>
+                            <Label>Selecteer een datum</Label>
                         </div>
                         <div>
-                          <DatePicker
+                            <DatePicker
+                            className="w-100"
                             disabledDate={(date) => disabledDate(date)}
                             onChange={(date) => onDateChange(date)}
                             value={app_date}
                             defaultValue={
-                              appointmentDate !== null
+                                appointmentDate !== null
                                 ? moment(appointmentDate)
                                 : null
                             }
                             allowClear={true}
-                          />
+                            />
                         </div>
-                      </div>
-                      <div className="shop-appointment-form-group-right">
+                        </div>
+                        <div className="col-md-6 mx-0 pr-0 shop-appointment-form-group-right">
                         <div className="shop-appointment-form-label">
-                          <Label>Selecteer een tijd</Label>
+                            <Label>Selecteer een tijd</Label>
                         </div>
                         <div>
-                          <Select
-                            className="device-select"
+                            <Select
+                            className="w-100   device-select"
                             onChange={handleTimeChange}
                           >
                             {initTimeSelect()}

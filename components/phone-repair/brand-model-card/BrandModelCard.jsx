@@ -117,7 +117,7 @@ const BrandModelCard = (routerProps) => {
         setLoad(true);
       }
     }
-  }, [load, models, brand_id, listPBM, newGuarantees]);
+  }, [brand_id, listPBM, newGuarantees]);
 
   return (
     

@@ -111,7 +111,7 @@ function ProfileManage(routerProps) {
       let auth_user = JSON.parse(localStorage.getItem("auth-user"));
       if (
         auth_user === null ||
-        parseInt(auth_user.account_id) !== parseInt(router.shopId)
+        parseInt(auth_user.account_id) !== parseInt(router.query.shopId)
       ) {
         router.push("/");
       }
@@ -126,12 +126,6 @@ function ProfileManage(routerProps) {
       setLoad(false);
     }
   }, [is_load])
-
-  useEffect(() => {
-    if(!isLogged) {
-      router.push("/");
-    }
-  }, [isLogged])
 
   function initProfilePage() {
     setPreview(account_profile.bg_photo);
@@ -484,7 +478,7 @@ function ProfileManage(routerProps) {
   const updateIrregularTime = () => {
     let data;
     setIsEditIrregularTimes(false);
-    setIsEditRBtn("Voeg een afwijkende openinstijd toe");
+    setIsEditRBtn("Voeg een afwijkende openingstijd toe");
     if (isInvalidChanged === true) {
       setInvalidTimeLoading(true);
       data = {
@@ -630,7 +624,7 @@ function ProfileManage(routerProps) {
         initProfilePage();
       }
     }
-  });
+  }, [isLoadedProfile]);
 
   return (
     <Layout>
@@ -703,7 +697,7 @@ function ProfileManage(routerProps) {
                           onImageChangeSaveButton(e);
                         }}
                       >
-                        save
+                        Opslaan
                       </Button>
                     ) : (
                       ""
@@ -749,7 +743,7 @@ function ProfileManage(routerProps) {
                           }}
                           // loading={importBtnLoading}
                         >
-                          Cancel
+                          Annuleer
                         </Button>,
                         <Button
                           key="submit"
@@ -759,11 +753,11 @@ function ProfileManage(routerProps) {
                             handleScheduleTimeSlot(e);
                           }}
                         >
-                          Ok
+                          Sla op
                         </Button>,
                       ]}
                     >
-                      <div className="open-time-modal-item">
+                      <div className="open-time-modal-item  day-picker">
                         <div className="time-picker-label mr-1">Dag: </div>
                         <Select
                           className="contact-modal-input"
@@ -974,7 +968,7 @@ function ProfileManage(routerProps) {
                           }}
                           // loading={importBtnLoading}
                         >
-                          Cancel
+                          Annuleer
                         </Button>,
                         <Button
                           key="submit"
@@ -984,7 +978,7 @@ function ProfileManage(routerProps) {
                             handleCheckTime();
                           }}
                         >
-                          Ok
+                          Sla op
                         </Button>,
                       ]}
                     >

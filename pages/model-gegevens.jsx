@@ -8,9 +8,10 @@ import { Input, Button } from "antd";
 import Switch from "react-switch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  deleteShopGuarantee,
-  getShopBrandModel,
-  updateShopModalGuarantees,
+    deleteShopGuarantee,
+    // getShopBrandModel,
+    getShopRepairation,
+    updateShopModalGuarantees,
 } from "service/account/operations";
 import { setLoadPBM, setSelectShopGuarantee } from "service/account/action";
 import { setGuaranteeDevice } from "service/account/action.js";
@@ -30,10 +31,11 @@ const DetailPerPhone = (routerProps) => {
     location,
     auth_user,
     newGuarantees,
-    getShopBrandModel,
+    // getShopBrandModel,
     shopModelGuarantee,
     setSelectShopGuarantee,
     setGuaranteeDevice,
+    reparationData,
   } = routerProps;
 
   // const onDeleteGuarantee = guar_id => {
@@ -43,8 +45,8 @@ const DetailPerPhone = (routerProps) => {
   const router = useRouter();
   const params = router.query;
 
-  if (load === false) {
-  }
+//   if (load === false) {
+//   }
 
   const handleGuaranteeActiveChange = (checked, id) => {
     let glist = [...guaranteeList];
@@ -101,34 +103,41 @@ const DetailPerPhone = (routerProps) => {
       setGuaranteeList(arr);
     };
 
-    if (loadPBM === true) {
-      if (update === true) {
-        let data = shopModelGuarantee.filter(
-          (el) =>
-            el.reparation.device === parseInt(params.deviceId) &&
-            el.brand_id === parseInt(params.brandId) &&
-            el.model_id === parseInt(params.modelId)
-        );
+    // if (loadPBM === true) {
+    //   if (update === true) {
+    //     let data = shopModelGuarantee.filter(
+    //       (el) =>
+    //         el.reparation.device === parseInt(params.deviceId) &&
+    //         el.brand_id === parseInt(params.brandId) &&
+    //         el.model_id === parseInt(params.modelId)
+    //     );
 
-        setSelectShopGuarantee(data);
-        setLoadPBM(false);
-        if (update === true) {
-          setUpdate(false);
-        }
-      }
-    }
+    //     setSelectShopGuarantee(data);
+    //     setLoadPBM(false);
+    //     if (update === true) {
+    //       setUpdate(false);
+    //     }
+    //   }
+    // }
     if (load === false) {
       let data = {
         shop: parseInt(params.shopId),
         device: parseInt(params.deviceId),
+        model: parseInt(params.modelId),
+        brand: parseInt(params.brandId),
       };
-      getShopBrandModel(data);
+    //   getShopBrandModel(data);
+      getShopRepairation(data).then((res) => {
+        console.log(res);
+        setGuaranteeList(res.data);
+      });
       setload(true);
-    } else {
-      if (selectedShopGuarantee.length > 0) {
-        init();
-      }
-    }
+    } 
+    // else {
+    //   if (selectedShopGuarantee.length > 0) {
+    //     init();
+    //   }
+    // }
   }, [
     loadPBM,
     load,
@@ -138,6 +147,8 @@ const DetailPerPhone = (routerProps) => {
     newGuarantees,
     location,
     selectedShopGuarantee,
+    getShopRepairation,
+    reparationData,
   ]);
 
   const handleBrandModel = async (id) => {
@@ -176,7 +187,8 @@ const DetailPerPhone = (routerProps) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {selectedShopGuarantee.map((el) => {
+                      {/* {selectedShopGuarantee.map((el) => { */}
+                      {guaranteeList.map((el, i) => {
                       return (
                         <tr key={el.id}>
                           <td>{el.reparation.reparation_name}</td>
@@ -329,6 +341,7 @@ const mapStateToProps = (state) => ({
   auth_user: state.account.auth_user,
   newGuarantees: state.account.newGuarantees,
   shopModelGuarantee: state.account.shopModelGuarantee,
+  reparationData: state.account.reparationData,
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -337,8 +350,11 @@ const mapDispatchToProps = (dispatch) => {
     deleteShopGuarantee: (id, account, device) => {
       deleteShopGuarantee(id, account, device, dispatch);
     },
-    getShopBrandModel: (data) => {
-      getShopBrandModel(data, dispatch);
+    // getShopBrandModel: (data) => {
+    //   getShopBrandModel(data, dispatch);
+    // },
+    getShopRepairation: (data) => {
+        getShopRepairation(data, dispatch);
     },
     setSelectShopGuarantee: (data) => {
       dispatch(setSelectShopGuarantee(data));

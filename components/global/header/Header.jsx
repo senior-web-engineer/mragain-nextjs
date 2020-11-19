@@ -47,6 +47,8 @@ const HeaderView = (routerProps) => {
       return `App-header home-page`;
     else if (router.pathname === "/veel-gestelde-vragen")
       return `App-header home-page`;
+    else if (router.pathname === "/hoe-werkt-het")
+      return `App-header home-page`;
     else if (router.pathname === "/contact") return `App-header home-page`;
     else return `App-header`;
   })();
@@ -114,7 +116,7 @@ const HeaderView = (routerProps) => {
     const [authToken, setAuthToken] = useState("");
     useEffect(() => {
       setAuthToken(localStorage.getItem("auth-token"));
-    })
+    }, [])
     if (authToken === null) {
       return (
         <div className="navbar-sign">
@@ -195,6 +197,9 @@ const HeaderView = (routerProps) => {
           >
             Mijn Profiel
           </Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link href={"/hoe-werkt-het"}>Hoe werkt het</Link>
         </Menu.Item>
         <Menu.Item>
           <span

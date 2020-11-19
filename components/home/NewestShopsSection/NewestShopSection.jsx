@@ -38,7 +38,7 @@ const NewestShopSection = (routerProps) => {
   };
 
   const loadDefaultShop = () => {
-    let loc = "Utrecht";
+    let loc = "";
     setFindedLocation(loc);
     let _filters = {
       isSearchFilter: false,

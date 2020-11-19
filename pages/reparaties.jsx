@@ -6,6 +6,7 @@ import { Row, Col, Button, Result, Modal } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import BrandModelCard from "@/components/phone-repair/brand-model-card/BrandModelCard";
 import "./reparaties.less";
+import "./reparaties_css.less";
 import classnames from "classnames";
 import swal from "sweetalert";
 import {
@@ -24,6 +25,9 @@ import { getSearchFilterField } from "service/search/operations.js";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import { FRONT_END_URL } from "../constants.js";
+import LoadingOverlay from "react-loading-overlay";
+import axios, { CancelToken } from "axios";
+import { useRef } from "react";
 import { Layout } from "../components/global";
 
 const PhoneRepair = (routerProps) => {
@@ -40,6 +44,9 @@ const PhoneRepair = (routerProps) => {
   const [editButtonLoading, seteditButtonLoading] = useState(false);
   const [saveModalsLoading, setsaveModalsLoading] = useState(false);
   const [visibleExportModal, setvisibleExportModal] = useState(false);
+  const [loading, setloading] = useState(false);
+  const [percentage, setPercentage] = useState({ per: 0 });
+  const cancelFileUpload = useRef(null);
 
   const {
     listPBM,
@@ -63,10 +70,14 @@ const PhoneRepair = (routerProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (isSaveModalsLoading === true && saveModalsLoading === true) {
-      swal("Good job!", "Models saved successfully", "success");
+    if (
+      isSaveModalsLoading === true &&
+      saveModalsLoading === true
+      // isDeletedGuarantee === true
+    ) {
+      swal("Gelukt!", "Je modellen zijn opgeslagen", "success");
     }
-  }, [isSaveModalsLoading, saveModalsLoading]);
+  }, [isSaveModalsLoading, saveModalsLoading, isDeletedGuarantee]);
 
   useEffect(() => {
     const initPBMLIST = () => {
@@ -176,7 +187,9 @@ const PhoneRepair = (routerProps) => {
         device_id: newGuarantees.device_id,
         payload: deleteGuarantees,
       });
-      setsaveModalsLoading(true);
+      setTimeout(() => {
+        setsaveModalsLoading(true);
+      }, 1000);
     } else {
       setEditable(true);
       setBtnLabel("Opslaan");
@@ -258,7 +271,7 @@ const PhoneRepair = (routerProps) => {
     }
   };
 
-  const onImportCSVFile = async () => {
+  const onImportCSVFile = (e) => {
     if (csv_file === null) {
       setCSVFileError("Please select CSV.");
       return "";
@@ -273,33 +286,49 @@ const PhoneRepair = (routerProps) => {
     formData.append("shop_id", params.shopId);
     formData.append("csv_file", csv_file);
 
-    createImportReparationAndGuaranteeCSV(formData)
-      .then((result) => {
-        // console.log(result);
-        swal("Good job!", "File imported successfully", "success").then(
-          (value) => {
-            setCSVFile(null);
+    const options = {
+        onUploadProgress: (ProgressEvent) => {
+          console.log("ProgressEvent");
+          console.log(ProgressEvent);
+          // const { loaded, total } = progressEvent;
+          // let percent = Math.floor((loaded * 100) / total);
+          // console.log(percent);
+  
+          // if (percent < 100) {
+          //   console.log("percent");
+          // }
+        },
+        // cancelToken: new CancelToken(
+        //   (cancel) => (cancelFileUpload.current = cancel)
+        // ),
+      };
+  
+      setShowImportModal(false);
+      createImportReparationAndGuaranteeCSV(formData, options)
+        .then((result) => {
+          setImportBtnLoading(false);
+          setCSVFile(null);
+  
+          swal(
+            "Gelukt!",
+            "Je reparaties zijn succesvol opgeslagen",
+            "success"
+          ).then((value) => {
             getShopBrandModel({ shop: params.shopId, device: params.deviceId });
+          });
+        })
+        .catch((err) => {
+          console.log(err.response);
+  
+          // swal("Error!", "Error occurred, Please try again later", "error").then(
+          swal("Error!", err.response.data.error, "error").then((value) => {
             setShowImportModal(false);
             setImportBtnLoading(false);
-          }
-        );
-      })
-      .catch((err) => {
-        // console.log(err);
-
-        swal("Error!", "Error occurred, Please try again later", "error").then(
-          (value) => {
-            setShowImportModal(false);
-            setImportBtnLoading(false);
-          }
-        );
-      });
-  };
+          });
+        });
+    };
 
   const onExportCsv = async () => {
-    let queryParams = routerProps.location.search;
-    const params = queryString.parse(queryParams);
     setExportBtnLoading(true);
     // try {
 
@@ -331,6 +360,15 @@ const PhoneRepair = (routerProps) => {
 
   return (
     <Layout>
+            <Fragment>
+      {importBtnLoading === true ? (
+        <LoadingOverlay
+          active={importBtnLoading}
+          spinner
+          text={"Importing file.."}
+          // text={<p>ff {percentage} %</p>}
+        ></LoadingOverlay>
+      ) : null}
       <div className="phone-repair-page">
         <Modal
           visible={showImportModal}
@@ -348,7 +386,7 @@ const PhoneRepair = (routerProps) => {
               key="submit"
               type="primary"
               loading={importBtnLoading}
-              onClick={onImportCSVFile}
+              onClick={(e) => onImportCSVFile(e)}
             >
               Submit
             </Button>,
@@ -415,13 +453,15 @@ const PhoneRepair = (routerProps) => {
         <div className="phone-repair-page-content">
           <div className="phone-repair-page-content-wrap">
             <div className="phone-repair-page-content-wrap-header">
-              <div className="repair-content-header-title">Alle merken</div>
-              <div className="repair-content-header-btn">
-                <OverlayTrigger
-                  // key="top"
-                  key="importCSV"
-                  placement="top"
-                  overlay={
+                {brands.length > 0 && (
+                    <Fragment>
+                    <div className="repair-content-header-title">Alle merken</div>
+                    <div className="repair-content-header-btn">
+                    <OverlayTrigger
+                    // key="top"
+                    key="importCSV"
+                    placement="top"
+                    overlay={
                     <Tooltip id={`tooltip-top`}>
                       Importeer de door jou ingevulde csv file en update in een
                       keer al je reparaties!
@@ -437,9 +477,7 @@ const PhoneRepair = (routerProps) => {
                   </Button>
                 </OverlayTrigger>
 
-                {brands.length > 0 && (
-                  <Fragment>
-                    <OverlayTrigger
+                <OverlayTrigger
                       // key="top"
                       key="brands"
                       placement="top"
@@ -462,20 +500,20 @@ const PhoneRepair = (routerProps) => {
                     </OverlayTrigger>
                     <Modal
                       visible={visibleExportModal}
-                      title="Export CSV"
+                      title="Exporteer je reparatie CSV file"
                       onCancel={(e) => toggleEportModal(e)}
                       footer={[
                         <Button key="back" onClick={(e) => toggleEportModal(e)}>
-                          Close
+                          Sluit
                         </Button>,
                       ]}
                     >
                       <p>
-                        You can see the instructions to open the downloaded CSV
-                        file by clicking on the{" "}
-                        <strong>Download Instructions</strong> button below
+                      Download je reparatie file en de instructies voor het
+                        gebruik ervan.
+
                       </p>
-                      <a href="/Instructions_CSV_file.docx" target="_blank" download>
+                      <a href="/MrAgain_Instructies_Model_en_Reparatie_beheer-2020.pdf" target="_blank" download>
                         <Button type="dashed">
                           <FontAwesomeIcon
                             icon={["fas", "download"]}
@@ -492,7 +530,7 @@ const PhoneRepair = (routerProps) => {
                         loading={exportBtnLoading}
                         onClick={onExportCsv}
                       >
-                        Export
+                        Exporteer reparatie CSV file
                       </Button>
                     </Modal>
                     <OverlayTrigger
@@ -527,8 +565,7 @@ const PhoneRepair = (routerProps) => {
                         <div className="pl-1">{editBtnLabel}</div>
                       </Button>
                     </OverlayTrigger>
-                  </Fragment>
-                )}
+                  
                 <Button
                   className="device-manage-btn"
                   onClick={() => {
@@ -544,6 +581,8 @@ const PhoneRepair = (routerProps) => {
                   <div className="pl-1">Terug</div>
                 </Button>
               </div>
+              </Fragment>
+              )}
             </div>
             <div className="phone-repair-page-content-wrap-body">
               <Row>{displayBrands()}</Row>
@@ -551,6 +590,7 @@ const PhoneRepair = (routerProps) => {
           </div>
         </div>
       </div>
+      </Fragment>
     </Layout>
   );
 };
