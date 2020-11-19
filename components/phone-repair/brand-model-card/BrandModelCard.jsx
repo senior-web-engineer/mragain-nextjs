@@ -160,12 +160,12 @@ const BrandModelCard = (routerProps) => {
                   href={`/model-gegevens/?shopId=${shop_id}&deviceId=${newGuarantees.device_id}&brandId=${brand_id}&modelId=${el.id}&modelName=${el.model_name}`}
                 //   disabled={isEditGuarantee === true ? false : true}
                 >
-                    <div>
+                    <a>
                         <FontAwesomeIcon
                             className="brand-model-reparation-edit"
                             icon={["fas", "edit"]}
                         ></FontAwesomeIcon>
-                    </div>
+                    </a>
                 </Link>
               )}
             </div>
