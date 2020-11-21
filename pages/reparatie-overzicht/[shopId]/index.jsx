@@ -12,19 +12,19 @@ import "react-image-picker/dist/index.css";
 import "./index.less";
 import menu_icon from "../../../assets/images/menu.png";
 import {
-  getSearchFilterField,
-  getSearchFilterFieldExt,
+    getSearchFilterField,
+    getSearchFilterFieldExt,
 } from "service/search/operations.js";
 import { setLoadService } from "service/search/action.js";
 import { setLoadAppointment } from "service/appointments/action.js";
 import {
-  CancelAppointment,
-  getAppointments,
+    CancelAppointment,
+    getAppointments,
 } from "service/appointments/operations.js";
 import { RepairSingleImage } from "@/styled-components/reparatie-overzicht.style";
 import {
-  uploadImage,
-  getSimpleAccountInformation,
+    uploadImage,
+    getSimpleAccountInformation,
 } from "service/account/operations.js";
 import { Helmet } from "react-helmet";
 import { FRONT_END_URL } from "../../../constants.js";

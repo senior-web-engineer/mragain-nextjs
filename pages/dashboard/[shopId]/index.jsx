@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import moment from "moment";
 import {
-  Input,
-  Button,
-  Popconfirm,
-  DatePicker,
-  Avatar,
-  Checkbox,
-  Select,
+    Input,
+    Button,
+    Popconfirm,
+    DatePicker,
+    Avatar,
+    Checkbox,
+    Select,
 } from "antd";
 import { Label } from "semantic-ui-react";
 import { Table, Modal } from "react-bootstrap";
@@ -22,20 +22,20 @@ import "react-image-picker/dist/index.css";
 import "./index.less";
 import menu_icon from "../../../assets/images/menu.png";
 import {
-  getSearchFilterField,
-  getSearchFilterFieldExt,
-  getModelService,
+    getSearchFilterField,
+    getSearchFilterFieldExt,
+    getModelService,
 } from "service/search/operations.js";
 import { setLoadService } from "service/search/action.js";
 import { setLoadAppointment } from "service/appointments/action.js";
 import {
-  getAppointments,
-  updateAppointment,
-  CancelAppointment,
+    getAppointments,
+    updateAppointment,
+    CancelAppointment,
 } from "service/appointments/operations.js";
 import {
-  uploadImage,
-  getSimpleAccountInformation,
+    uploadImage,
+    getSimpleAccountInformation,
 } from "service/account/operations.js";
 import { Helmet } from "react-helmet";
 import { FRONT_END_URL } from "../../../constants.js";

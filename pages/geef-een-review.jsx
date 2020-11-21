@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import "./geef-een-review.less";
 import shopReviewIcon from "@/assets/images/shop-review.png";
 import {
-  createReview,
-  checkReviewPage,
+    createReview,
+    checkReviewPage,
 } from "service/appointments/operations.js";
 import { Layout } from "@/components/global";
 

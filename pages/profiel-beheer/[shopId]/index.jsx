@@ -3,28 +3,28 @@ import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import moment from "moment";
 import {
-  TimePicker,
-  Select,
-  message,
-  Checkbox,
-  Button,
-  Divider,
-  Modal,
-  Input,
-  AutoComplete,
+    TimePicker,
+    Select,
+    message,
+    Checkbox,
+    Button,
+    Divider,
+    Modal,
+    Input,
+    AutoComplete,
 } from "antd";
 import { Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
 import {
-  getAccountProfile,
-  updateValidOpenTime,
-  updateInvalidOpenTime,
+    getAccountProfile,
+    updateValidOpenTime,
+    updateInvalidOpenTime,
 } from "service/account/operations.js";
 import {
-  uploadImage,
-  updateAccountProfile,
+    uploadImage,
+    updateAccountProfile,
 } from "service/account/operations.js";
 import { setLoadedProfile } from "service/account/action.js";
 import "./index.less";

@@ -10,14 +10,14 @@ import { Main } from "@/styled-components/maak-een-afspraak.style.jsx";
 import AboutBannerSection from "@/components/shop-appointment/AboutBannerSection/AboutBannerSection";
 import { Layout } from "@/components/global";
 import {
-  getSearchFilterField,
-  getSearchFilterFieldExt,
-  getModelService,
+    getSearchFilterField,
+    getSearchFilterFieldExt,
+    getModelService,
 } from "service/search/operations.js";
 import { setLoadService } from "service/search/action.js";
 import {
-  createAppointment,
-  getAppointmentTimeTable,
+    createAppointment,
+    getAppointmentTimeTable,
 } from "service/appointments/operations";
 import { setLoadedProfile } from "../service/account/action";
 

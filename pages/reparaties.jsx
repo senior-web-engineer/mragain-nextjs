@@ -10,16 +10,16 @@ import "./reparaties_css.less";
 import classnames from "classnames";
 import swal from "sweetalert";
 import {
-  setGuaranteeDevice,
-  setLoadPBM,
-  setBrandModel,
+    setGuaranteeDevice,
+    setLoadPBM,
+    setBrandModel,
 } from "service/account/action";
 import {
-  createGuaranteeModels,
-  deleteGuaranteeModels,
-  getShopBrandModel,
-  getExportReparationAndGuaranteeCSV,
-  createImportReparationAndGuaranteeCSV,
+    createGuaranteeModels,
+    deleteGuaranteeModels,
+    getShopBrandModel,
+    getExportReparationAndGuaranteeCSV,
+    createImportReparationAndGuaranteeCSV,
 } from "service/account/operations";
 import { getSearchFilterField } from "service/search/operations.js";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";

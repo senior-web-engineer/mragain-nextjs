@@ -5,8 +5,8 @@ import "./index.less";
 import { ProfileBannerSection, ProfileMainSection } from "@/components/shop-profile";
 import { Layout } from "@/components/global";
 import {
-  getAccountProfile,
-  getShopIdByInformation,
+    getAccountProfile,
+    getShopIdByInformation,
 } from "service/account/operations.js";
 import { getReparationGuarantee } from "service/appointments/operations.js";
 

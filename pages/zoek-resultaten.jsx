@@ -9,19 +9,19 @@ import { ShopInfoCard, Layout } from "@/components/global";
 import lib from "@/assets/js/lib";
 import { FRONT_END_URL } from "../constants.js";
 import {
-  getSearchFilterField,
-  getSearchFilterFieldExt,
-  searchShopFilter,
+    getSearchFilterField,
+    getSearchFilterFieldExt,
+    searchShopFilter,
 } from "service/search/operations.js";
 import { compose, withProps, lifecycle } from "recompose";
 import {
-  google,
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-  Map,
-  InfoWindow,
+    google,
+    withScriptjs,
+    withGoogleMap,
+    GoogleMap,
+    Marker,
+    Map,
+    InfoWindow,
 } from "react-google-maps";
 import { setFindOut } from "service/search/action.js";
 import "./zoek-resultaten.less";
@@ -30,8 +30,9 @@ import image1 from "@/assets/images/home_newest_image3.jpg";
 import { setSearchFilter, setLoadFilter } from "../service/search/action";
 import { Modal } from "react-bootstrap";
 import { blue } from "@material-ui/core/colors";
+
 const {
-  MarkerWithLabel,
+    MarkerWithLabel,
 } = require("react-google-maps/lib/components/addons/MarkerWithLabel");
 
 const { Option } = Select;

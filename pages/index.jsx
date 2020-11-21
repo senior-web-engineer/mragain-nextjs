@@ -1,9 +1,8 @@
 import Head from 'next/head'
 import React, {useEffect} from 'react';
-
 import { 
-  Layout,
-  TestmonialSection
+    Layout,
+    TestmonialSection
 } from "../components/global";
 import { Helmet } from "react-helmet";
 import { FRONT_END_URL } from "../constants.js";
@@ -12,9 +11,9 @@ import Link from 'next/link'
 import { Main } from "@/styled-components/homepage.style";
 import { getPublishProfies } from "../lib/getPublishProfiles";
 import { 
-  FindBannerSection, 
-  AdvantageSection, 
-  NewestShopsSection,
+    FindBannerSection, 
+    AdvantageSection, 
+    NewestShopsSection,
 } from "../components/home";
 
 import "./index.style.less"

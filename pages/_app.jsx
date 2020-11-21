@@ -6,8 +6,8 @@ import Router from 'next/router';
 import { ConnectedRouter } from 'connected-next-router'
 import { wrapper } from '../configureStore'
 import { connect } from "react-redux";
-import 'bootstrap/dist/css/bootstrap.min.css'
 import "./_app.less"
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 // fontawesome icons
 import { library } from "@fortawesome/fontawesome-svg-core";

@@ -4,10 +4,10 @@ import { useRouter } from "next/router";
 import { message, Button, Checkbox, Input, Popconfirm, Select } from "antd";
 import lib from "@/assets/js/lib";
 import {
-  updateAccountSettings,
-  resetPasswordConfirm,
-  deleteAccount,
-  getAccountSettings,
+    updateAccountSettings,
+    resetPasswordConfirm,
+    deleteAccount,
+    getAccountSettings,
 } from "service/account/operations.js";
 import { resetAuthError } from "service/account/action.js";
 import { logout } from "service/account/operations.js";
