@@ -11,6 +11,7 @@ import {
   setLoadFilter,
 } from "./action";
 import axios from "axios";
+import { logoutA } from "../account/action";
 
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -44,6 +45,11 @@ export async function getSearchFilterField(dispatch) {
   return await axios
     .get(`${API_PATH.GETFILTERFIELDS}/`)
     .then((res) => {
+      // console.log(res.status);
+      if (res.status === 401) {
+        dispatch(logoutA());
+      } else {
+      }
       dispatch(fetchFiterPBMList(res.data));
       return true;
     })

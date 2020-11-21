@@ -78,16 +78,15 @@ const ShopAppointment = (routerProps) => {
   const [initDate, setInitDate] = useState(0);
 
   const router = useRouter();
+  
+  if (isLoad === false) {
+    const params = router.query;
+    const shop_id = parseInt(params.shop);
+    setInitDate(parseInt(params.initdate));
+    getReparationGuarantee(shop_id);
+    getAccountProfile(shop_id);
+}
 
-  useEffect(() => {
-    if (isLoad === false) {
-      const params = router.query;
-      const shop_id = parseInt(params.shop);
-      setInitDate(parseInt(params.initdate));
-      getReparationGuarantee(shop_id);
-      getAccountProfile(shop_id);
-    }
-  }, [isLoad])
 
   useEffect(() => {
     if (isLoadService === true) {
@@ -249,7 +248,7 @@ const ShopAppointment = (routerProps) => {
     formData.append("shop_id", account_profile.id);
 
     tmp = await getAppointmentTimeTable(formData);
-    let time_table = tmp.match(/.{1,5}/g);
+    let time_table = String(tmp).match(/.{1,5}/g);
     return time_table;
   }
 
@@ -572,8 +571,7 @@ const ShopAppointment = (routerProps) => {
         );
       })
     );
-  }
-
+  }  
   return (
     <Layout>
       <Main>
@@ -591,8 +589,8 @@ const ShopAppointment = (routerProps) => {
                         <div className="col-md-6 mx-0  px-0 shop-appointment-form-group-left">
                         <div className="shop-appointment-form-label">
                             <Label>Selecteer een datum</Label>
-                        </div>
-                        <div>
+                        </div>                        
+                        <div>                            
                             <DatePicker
                             className="w-100"
                             disabledDate={(date) => disabledDate(date)}
@@ -785,7 +783,6 @@ const ShopAppointment = (routerProps) => {
     </Layout>
   );
 };
-
 const mapStateToProps = (state) => ({
   //Maps state to redux store as props
   filterlistPBM: state.search.fieldlistPBM,

@@ -109,7 +109,7 @@ export function filterReparationOverview(data, dispatch) {
 export function updateAppointment(id, email, data, shop_id, dispatch) {
   let status = data.status;
   axios
-    .put(`${API_PATH.UPDATEAPPOINTMENT}/${id}/`, data, authHeader())
+    .put(`${API_PATH.UPDATEAPPOINTMENT}/${id}/`, data)
     .then((res) => {
       axios
         .get(`${API_PATH.GETAPPOINTMENTS}/${shop_id}/`, tokenConfig())

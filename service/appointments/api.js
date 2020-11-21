@@ -36,8 +36,7 @@ export function authHeaderPost() {
             "Content-Type": "application/json",
             "X-CSRFToken": getCookie("csrftoken"),
             Accept: "application/json",
-        },
-        withCredentials: true,
+        }
     }
 }
 

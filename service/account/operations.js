@@ -89,11 +89,15 @@ export function registerUser(data, dispatch) {
 }
 
 export function getAuthUser(dispatch) {
-  axios.get(`${API_PATH.GETAUTHUSER}/`, tokenConfig()).then((res) => {
-    dispatch(registerAuthUser(res.data));
-    console.log("getAuthUser -> res.data", res.data)
-  });
-}
+    axios
+      .get(`${API_PATH.GETAUTHUSER}/`, tokenConfig())
+      .then((res) => {
+        dispatch(registerAuthUser(res.data));
+      })
+      .catch((err) => {
+        dispatch(logoutA());
+      });
+  }
 
 export function login(data, dispatch) {
   dispatch(authenticated(true));
@@ -164,13 +168,14 @@ export async function resetPasswordConfirmEmail(_data, dispatch) {
 }
 
 export function getAccountSettings(data, dispatch) {
-  console.log("data", data);
   axios
     .get(`${API_PATH.ACCOUNTSETTING}/${data}/`, tokenConfig())
     .then((res) => {
       dispatch(fetchAccountSettings(res.data));
     })
-    .catch((err) => {});
+    .catch((err) => {
+        dispatch(logoutA());
+    });
 }
 
 export function getDevices(dispatch) {
@@ -179,7 +184,9 @@ export function getDevices(dispatch) {
     .then((res) => {
       dispatch(fetchRepairDevices(res.data));
     })
-    .catch((err) => {});
+    .catch((err) => {
+        dispatch(logoutA());
+    });
 }
 
 export function getShopIdByInformation(str, dispatch) {
@@ -193,13 +200,16 @@ export function getShopIdByInformation(str, dispatch) {
 
 export function getShopBrandModel(data, dispatch) {
   dispatch(setLoadPBM(false));
+
   axios
     .get(`${API_PATH.REPAIRBRANDMODEL}/${data.shop}/`, tokenConfigGet(data))
     .then((res) => {
       dispatch(fetchShopModelGuarantee(res.data));
       // dispatch(setLoadPBM(true));
     })
-    .catch((err) => {});
+    .catch((err) => {
+        dispatch(logoutA());
+    });
 }
 
 export async function getShopRepairation(data, dispatch) {
@@ -278,7 +288,9 @@ export function getSimpleAccountInformation(id, dispatch) {
       dispatch(initAccountProfile(res.data));
       dispatch(setLoadedProfile(true));
     })
-    .catch((err) => {});
+    .catch((err) => {
+        dispatch(logoutA());
+    });
 }
 export function getAccountProfile(id, dispatch) {
   let profile;
@@ -380,43 +392,55 @@ export function updateAccountProfile(id, data, dispatch) {
       console.log("error");
     });
 }
-
 export function updateValidOpenTime(id, data, dispatch) {
+  dispatch(setUpdateScheduleTime(false));
   axios
     .put(`${API_PATH.UPDATEVALIDOPENTIME}/${id}/`, data, tokenConfig())
     .then((res) => {
-      console.log(res);
-      console.log("updateValidOpenTime -> res", res)
+      console.log("updateValidOpenTime -> res", res);
+      dispatch(setUpdateScheduleTime(true));
       return res;
     })
     .catch((err) => {
-      console.log("error");
+      console.log(err);
+      dispatch(setUpdateScheduleTime(true));
     });
 }
 
 export function updateInvalidOpenTime(id, data, dispatch) {
-  axios
-    .put(`${API_PATH.UPDATEINVALIDOPENTIME}/${id}/`, data, tokenConfig())
-    .then((res) => {
-      console.log("success");
-      console.log(res);
-      return res;
-    })
-    .catch((err) => {
-      console.log("error");
-    });
-}
+    const res = axios.put(
+      `${API_PATH.UPDATEINVALIDOPENTIME}/${id}/`,
+      data,
+      tokenConfig()
+    );
+    return res;
+    // .then((res) => {
+    //   // console.log("success");
+    //   console.log(res);
+    //   // dispatch(setHandleCheckTime(true));
+    //   return res;
+    // })
+    // .catch((err) => {
+    //   console.log("error");
+    //   dispatch(setHandleCheckTime(true));
+    // });
+  }
 
 export function createRepairDevice(data, dispatch) {
   axios
     .post(`${API_PATH.REPAIRDEVICES}/`, data, tokenConfig())
     .then((res) => {
+      console.log("object1");
       axios
         .get(`${API_PATH.REPAIRDEVICES}/`, tokenConfig())
         .then((res) => {
+          console.log("object2");
+
           dispatch(fetchRepairDevices(res.data));
         })
-        .catch((err) => {});
+        .catch((err) => {
+            dispatch(logoutA());
+        });
     })
     .catch((err) => {});
 }
@@ -426,6 +450,7 @@ export function createGuaranteeModels(data, dispatch) {
   axios
     .post(`${API_PATH.GUARANTEEMODELS}/`, data, tokenConfig())
     .then((res) => {
+      dispatch(setSuccessData(false));
       axios
         .get(
           `${API_PATH.REPAIRBRANDMODEL}/${data.shop_id}/`,
@@ -461,9 +486,12 @@ export function deleteRepairDevice(id, dispatch) {
       axios
         .get(`${API_PATH.REPAIRDEVICES}/`, tokenConfig())
         .then((res) => {
+
           dispatch(fetchRepairDevices(res.data));
         })
-        .catch((err) => {});
+        .catch((err) => {
+          dispatch(logoutA());
+        });
     })
     .catch((err) => {});
 }
