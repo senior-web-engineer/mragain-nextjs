@@ -277,8 +277,7 @@ const PhoneRepair = (routerProps) => {
       return "";
     }
     setImportBtnLoading(true);
-    let queryParams = routerProps.location.search;
-    const params = queryString.parse(queryParams);
+    const params = router.query;
 
     let formData = new FormData(); //formdata object
 
