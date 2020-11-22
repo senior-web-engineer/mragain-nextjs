@@ -354,7 +354,7 @@ const SearchShop = (routerProps) => {
       guList.map((element) => {
         return (
           <Option value={element} key={element}>
-            {element} month
+            {element} maanden
           </Option>
         );
       })

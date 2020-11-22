@@ -727,7 +727,7 @@ const ShopDashboard = (routerProps) => {
                       />
                     </div>
                     <div className="repair-input-group">
-                      <Label className="repair-input-label">Uitvoering</Label>
+                      <Label className="repair-input-label">Uitvoering/kleur</Label>
                       <Input
                         className="repair-input"
                         onChange={(e) => {
@@ -738,7 +738,7 @@ const ShopDashboard = (routerProps) => {
                       />
                     </div>
                     <div className="repair-input-group">
-                      <Label className="repair-input-label">Omschrijving</Label>
+                      <Label className="repair-input-label">Klacht omschrijving</Label>
                       <Input
                         className="repair-input"
                         onChange={(e) => {

@@ -1154,7 +1154,7 @@ function ProfileManage(routerProps) {
                           maken afhankelijk van de afspraak settings die u heeft
                           (zie account settings). Voorbeeld 2: U bent normaal
                           gesproken van 09.00-17.00 open op maandag, maar bij
-                          afwijkende openingstijde heeft u aangegeven dat u
+                          afwijkende openingstijden heeft u aangegeven dat u
                           maandag 22 juni dicht bent. Op de kalender zien
                           bezoekers dat u 22 juni dicht bent.
                         </li>
