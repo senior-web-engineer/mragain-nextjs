@@ -54,23 +54,25 @@ const CheckoutReview = (routerProps) => {
       avatar: "",
     };
     if(str !== null) {
-
       if (str.uid !== "" && str.uid !== null) {
         _data.uid = str.uid;
-      } else if (str.token !== "" && str.token !== null) {
+      } 
+      if (str.token !== "" && str.token !== null) {
         _data.token = str.token;
-      } else if(str.email !== "" && str.email !== null) {
+      } 
+      if(str.email !== "" && str.email !== null) {
         _data.email = str.email;
-      } else if(str.shop !== "" && str.shop !== null) {
+      } 
+      if(str.shop !== "" && str.shop !== null) {
         _data.shop = str.shop;
-      } else if(str.avatar !== "" && str.avatar !== null) {
+      } 
+      if(str.avatar !== "" && str.avatar !== null) {
         _data.avatar = str.avatar;
-      } else {
-        _data.shop_name = str;
+      } 
+      if (str.shop_name !== "" && str.shop_name !== null) {
+        _data.shop_name = str.shopname;
       }
-      return 0;
     }
-    
     setShopInfo(_data);
     validationReviewPage(_data);
   }
