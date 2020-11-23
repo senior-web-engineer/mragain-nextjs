@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Input, Button, Rate, Radio, message } from "antd";
 import { useRouter } from "next/router";
@@ -27,10 +27,12 @@ const CheckoutReview = (routerProps) => {
 
   const router = useRouter();
 
-  if (isLoad === false) {
-    parseArgument(router.query);
-    setLoad(true);
-  }
+  useEffect(() => {
+      if (isLoad === false) {
+        parseArgument(router.query);
+        setLoad(true);
+      }
+  }, [])
 
   async function validationReviewPage(_data) {
     let _auth = {
