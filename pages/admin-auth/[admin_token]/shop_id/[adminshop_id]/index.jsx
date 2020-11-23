@@ -15,22 +15,19 @@ const AdminLoginAsUser = (routerProps) => {
   // localStorage.setItem("auth-token", admin_token);
   useEffect(() => {
     localStorage.setItem("auth-token", admin_token);
-  }, []);
-
-  /** UseEffect : Here we are calling the auth api again for admin to login as user. */
-  useEffect(() => {
-    localStorage.setItem("auth-token", admin_token);
     let token = localStorage.getItem("auth-token");
     if (token && Object.keys(authUser).length === 0) {
       getAuthUser();
     }
-  }, [authUser, auth_user]);
+  }, []);
 
-  /** Redirection path for the admin directly to the dashboard as he gets authenticated for login as user */
-  if (Object.keys(authUser).length > 0) {
-    router.push(`/dashboard/${adminshop_id}`);
-   localStorage.setItem("auth-user", JSON.stringify(authUser));
-  }
+  /** UseEffect : Here we are calling the auth api again for admin to login as user. */
+  useEffect(() => {
+    if (Object.keys(authUser).length > 0) {
+        localStorage.setItem("auth-user", JSON.stringify(authUser));
+        router.push(`/dashboard/${adminshop_id}`);
+      }
+  }, [authUser]);
 
   return (
     <Layout>
