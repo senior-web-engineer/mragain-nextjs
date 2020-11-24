@@ -4,7 +4,6 @@ import {
     Layout,
     TestmonialSection
 } from "../components/global";
-import { Helmet } from "react-helmet";
 import { FRONT_END_URL } from "../constants.js";
 import Link from 'next/link'
 
@@ -25,7 +24,7 @@ export default function Home() {
   return (
     <Layout>
       <Main>
-        <Helmet>
+        <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title>Mr Again | De beste telefoon reparateurs </title>
           <meta
@@ -57,7 +56,7 @@ export default function Home() {
           <meta name="og_site_name" property="og:site_name" content="Mr Again" />
 
           <meta name="theme-color" content="#ffffff" />
-        </Helmet>
+        </Head>
         <FindBannerSection/>
         <AdvantageSection/>
         <NewestShopsSection/>

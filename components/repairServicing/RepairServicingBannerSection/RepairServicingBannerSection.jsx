@@ -9,12 +9,12 @@ import {
   RepairServicingBannerTitle,
 } from "./RepairServicingBannerSection.style.jsx";
 import "./RepairServicingBannerSection.style.less";
-import { Helmet } from "react-helmet";
+import Head from "next/head";
 import { FRONT_END_URL } from "../../../constants.js";
 
 const RepairServicingBannerSection = () => (
   <RepairServicingSectionArea className="repair-servicing-banner-area">
-    <Helmet>
+    <Head>
       <title> Reparatie & Service </title>
       <meta
         name="Keywords"
@@ -46,7 +46,7 @@ const RepairServicingBannerSection = () => (
       <meta property="og:image" content="" />
       <meta name="og_site_name" property="og:site_name" content="Mr Again" />
       <meta name="theme-color" content="#ffffff" />
-    </Helmet>
+    </Head>
     <RepairServicingContainer className="repair-servicing-banner-container">
       <RepairServicingBreadcrumb>
         <RepairServicingBannerTitle>

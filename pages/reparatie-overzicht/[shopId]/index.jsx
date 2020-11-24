@@ -26,7 +26,8 @@ import {
     uploadImage,
     getSimpleAccountInformation,
 } from "service/account/operations.js";
-import { Helmet } from "react-helmet";
+
+import Head from "next/head";
 import { FRONT_END_URL } from "../../../constants.js";
 import { Layout } from "@/components/global";
 
@@ -414,7 +415,7 @@ const ReparationOverView = (routerProps) => {
           )}
 
           <div className="dashboard-page-content">
-            <Helmet>
+            <Head>
               <title>Mr Again - Reparatie & Garantie Overzicht</title>
               <meta
                 name="Keywords"
@@ -444,7 +445,7 @@ const ReparationOverView = (routerProps) => {
                 content="Mr Again"
               />
               <meta name="theme-color" content="#ffffff" />
-            </Helmet>
+            </Head>
             {/* <div className="dashboard-page-header">
               <div>
                 <Avatar

@@ -3,7 +3,7 @@ import { Main } from "@/styled-components/contact.style.jsx";
 import ContactBannerSection from "@/components/contact/ContactBannerSection/ContactBannerSection";
 import { TestmonialSection, Layout } from "@/components/global";
 import ContactMainSection from "@/components/contact/ContactMainSection/ContactMainSection";
-import { Helmet } from "react-helmet";
+import Head from "next/head"
 
 const Contact = () => {
     useEffect(() => {
@@ -12,7 +12,7 @@ const Contact = () => {
       return (
         <Layout>
             <Main>
-            <Helmet>
+            <Head>
                 <title>Mr Again - Contact</title>
                 <meta
                 name="description"
@@ -37,7 +37,7 @@ const Contact = () => {
                 <meta property="og:image" content="" />
                 <meta name="og_site_name" property="og:site_name" content="Mr Again" />
                 <meta name="theme-color" content="#ffffff" />
-            </Helmet>
+            </Head>
             <ContactBannerSection />
             <ContactMainSection />
             <TestmonialSection />

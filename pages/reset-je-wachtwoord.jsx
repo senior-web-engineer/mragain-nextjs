@@ -6,7 +6,7 @@ import "./reset-je-wachtwoord.less";
 import { resetPasswordEmail } from "service/account/operations.js";
 import { resetAuthError } from "service/account/action.js";
 import { Layout } from "@/components/global";
-import { Helmet } from "react-helmet";
+import Head from "next/head"
 
 function PasswordResetEmail(routerProps) {
   const [validated, setValidated] = React.useState(false);
@@ -51,7 +51,7 @@ function PasswordResetEmail(routerProps) {
   return (
     <Layout>
       <div className="user-login-container">
-        <Helmet>
+        <Head>
           <title itemProp="name">Mr Again - Reset je wachtwoord</title>
           <meta
             name="Keywords"
@@ -77,7 +77,7 @@ function PasswordResetEmail(routerProps) {
           <meta property="og:image" content="" />
           <meta name="og_site_name" property="og:site_name" content="Mr Again" />
           <meta name="theme-color" content="#ffffff" />
-        </Helmet>
+        </Head>
         <div className="user-login-container-wrap">
           <div className="user-login-title">Reset je wachtwoord</div>
           <div className="user-reset-email-form">

@@ -23,7 +23,7 @@ import {
 } from "service/account/operations";
 import { getSearchFilterField } from "service/search/operations.js";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Helmet } from "react-helmet";
+import Head from "next/head"
 import { FRONT_END_URL } from "../constants.js";
 import LoadingOverlay from "react-loading-overlay";
 import axios, { CancelToken } from "axios";
@@ -412,7 +412,7 @@ const PhoneRepair = (routerProps) => {
         </Modal>
 
         <div className="main-title">
-          <Helmet>
+          <Head>
             <title>Mr Again - Reparatie beheer</title>
             <meta
               name="Keywords"
@@ -444,7 +444,7 @@ const PhoneRepair = (routerProps) => {
             />
 
             <meta name="theme-color" content="#ffffff" />
-          </Helmet>
+          </Head>
           <div className="wrap">
             <h4>Overzicht device</h4>
           </div>

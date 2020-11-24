@@ -9,7 +9,7 @@ import tempimg from "@/assets/images/profile_photo.jpg";
 import { createRepairDevice, getDevices } from "service/account/operations.js";
 import { setGuaranteeDevice } from "service/account/action.js";
 import { getShopBrandModel } from "service/account/operations.js";
-import { Helmet } from "react-helmet";
+import Head from 'next/head';
 import { FRONT_END_URL } from "../../../constants.js";
 import { Layout } from "@/components/global";
 
@@ -113,7 +113,7 @@ const ReparationGuarantee = (routerProps) => {
   return (
     <Layout>
       <div className="reparation-guarantee">
-        <Helmet>
+        <Head>
           <title>Mr Again - Apparaten beheer</title>
           <meta
             name="Keywords"
@@ -139,7 +139,7 @@ const ReparationGuarantee = (routerProps) => {
           <meta property="og:image" content="" />
           <meta name="og_site_name" property="og:site_name" content="Mr Again" />
           <meta name="theme-color" content="#ffffff" />
-        </Helmet>
+        </Head>
         <div className="main-title">
           <div className="wrap">
             <h4>Reparatie management</h4>

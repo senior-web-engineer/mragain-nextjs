@@ -1,12 +1,12 @@
 import React from "react";
 import AccountCreate2 from "./CreateAccount/AccountCreate2.jsx";
 import { BannerSection } from "./FindBannerSection.style.jsx";
-import { Helmet } from "react-helmet";
+import Head from "next/head"
 import { FRONT_END_URL } from "../../../constants.js";
 
 const FindBannerSection = () => (
   <BannerSection>
-    <Helmet>
+    <Head>
       <title>Mr Again - Meld je aan als reparateur</title>
       <meta
         name="Keywords"
@@ -40,7 +40,7 @@ const FindBannerSection = () => (
       <meta name="og_site_name" property="og:site_name" content="Mr Again" />
 
       <meta name="theme-color" content="#ffffff" />
-    </Helmet>
+    </Head>
     <AccountCreate2 classname="banner-section"></AccountCreate2>
   </BannerSection>
 );

@@ -3,7 +3,7 @@ import { Main } from "@/styled-components/veel-gestelde-vragen.style.jsx";
 import { Layout } from "@/components/global";
 import FaqSection from "@/components/faq/FaqSection/FaqSection";
 import FaqBannerSection from "@/components/faq/FaqBannerSection/FaqBannerSection";
-import { Helmet } from "react-helmet";
+import Head from "next/head"
 import { FRONT_END_URL} from "../constants.js";
 
 const Faq = () => {
@@ -13,7 +13,7 @@ const Faq = () => {
     return (
         <Layout>
             <Main>
-                <Helmet>
+                <Head>
                     <title>Mr Again - Veel gestelde vragen</title>
                     <meta
                     name="Keywords"
@@ -34,7 +34,7 @@ const Faq = () => {
                     <meta name="og:url" content={FRONT_END_URL} />
                     <meta property="og:image" content="" />
                     <meta name="og_site_name" property="og:site_name" content="Mr Again" />
-                </Helmet>
+                </Head>
             <FaqBannerSection />
             <FaqSection />
             </Main>

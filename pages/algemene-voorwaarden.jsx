@@ -3,13 +3,13 @@ import { Main } from "@/styled-components/algemene-voorwaarden.style.jsx";
 import { Layout } from "@/components/global";
 import PrivacySection from "@/components/privacy/PrivacySection/PrivacySection";
 import PrivacyBannerSection from "@/components/privacy/PrivacyBannerSection/PrivacyBannerSection";
-import { Helmet } from "react-helmet";
+import Head from "next/head"
 import { FRONT_END_URL } from '../constants.js';
 
 const Privacy = () => (
   <Layout>
     <Main>
-      <Helmet>
+      <Head>
         <title>Algemene voorwaarden MrAgain</title>
         <meta name="Keywords" content="Algemene-voorwaarden, Mr-Again" />
         <meta
@@ -33,7 +33,7 @@ const Privacy = () => (
         />
         <meta property="og:image" content="" />
         <meta name="og_site_name" property="og:site_name" content="Mr Again" />
-      </Helmet>
+      </Head>
       <PrivacyBannerSection />
       <PrivacySection />
     </Main>

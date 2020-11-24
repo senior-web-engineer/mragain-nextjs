@@ -8,7 +8,7 @@ import "./login.less";
 import classnames from "classnames";
 import { login } from "service/account/operations.js";
 import { resetAuthError } from "service/account/action.js";
-import { Helmet } from "react-helmet";
+import Head from "next/head"
 import { FRONT_END_URL } from "../constants"
 import { Layout } from "../components/global"
 
@@ -109,7 +109,7 @@ function Login(routerProps) {
   return (
     <Layout>
       <div className="user-login-container">
-        <Helmet>
+        <Head>
           <title>Over Mr Again - Inloggen</title>
           <meta
             name="Keywords"
@@ -133,7 +133,7 @@ function Login(routerProps) {
           <meta name="og_site_name" property="og:site_name" content="Mr Again" />
 
           <meta name="theme-color" content="#ffffff" />
-        </Helmet>
+        </Head>
         <div className="user-login-container-wrap">
           <div className="user-login-title">Inloggen</div>
           <div className="user-login-form">

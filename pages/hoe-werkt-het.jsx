@@ -2,14 +2,14 @@ import React from "react";
 import { Main } from "@/styled-components/how-werkt-het.style"
 import HowSection from "@/components/how/HowSection/HowSection"
 import HowBannerSection from "@/components/how/HowBannerSection/HowBannerSection"
-import { Helmet } from "react-helmet";
+import Head from "next/head"
 import { FRONT_END_URL} from "../constants";
 import { Layout } from "@/components/global"
 
 const How = () => (
     <Layout>
         <Main>
-            <Helmet>
+            <Head>
             <title>Mr Again - Hoe werkt het?</title>
             <meta name="Keywords" content="Veel gestelde vragen, Mr Again, FAQ Mr Again, Telefoon reparaties, Telefoon reparateur, telefoonscherm, garantie, kwaliteit" />
             <meta
@@ -33,7 +33,7 @@ const How = () => (
             />
             <meta property="og:image" content="" />
             <meta name="og_site_name" property="og:site_name" content="Mr Again" />
-            </Helmet>
+            </Head>
             <HowBannerSection />
             <HowSection />
         </Main>

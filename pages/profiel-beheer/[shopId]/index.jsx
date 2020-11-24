@@ -28,7 +28,7 @@ import {
 } from "service/account/operations.js";
 import { setLoadedProfile } from "service/account/action.js";
 import "./index.less";
-import { Helmet } from "react-helmet";
+import Head from "next/head";
 import { FRONT_END_URL } from "../../../constants.js";
 import { Layout } from "@/components/global";
 
@@ -629,7 +629,7 @@ function ProfileManage(routerProps) {
   return (
     <Layout>
       <div className="repair-shop-profile">
-        <Helmet>
+        <Head>
           <title>Mr Again - Profiel</title>
           <meta name="Keywords" content="Profiel, MrAgain, Telefoon Reparateur" />
           <meta name="description" content="Beheer je profiel bij MrAgain" />
@@ -649,7 +649,7 @@ function ProfileManage(routerProps) {
           <meta property="og:image" content="" />
           <meta name="og_site_name" property="og:site_name" content="Mr Again" />
           <meta name="theme-color" content="#ffffff" />
-        </Helmet>
+        </Head>
         <div className="repair-shop-profile-container">
           <div className="shop-profile-wrap">
             <div className="shop-profile-blog">

@@ -12,7 +12,7 @@ import {
 import { resetAuthError } from "service/account/action.js";
 import { logout } from "service/account/operations.js";
 import "./index.less";
-import { Helmet } from "react-helmet";
+import Head from 'next/head';
 import { FRONT_END_URL } from "../../../constants.js";
 import { Layout } from "../../../components/global"
 
@@ -176,7 +176,7 @@ const AccountSetting = (routerProps) => {
   return (
     <Layout>
       <div className="account-setting-container">
-        <Helmet>
+        <Head>
           <title>Mr Again - Account gegevens</title>
           <meta name="Keywords" content="Beheer je account, MrAgain" />
           <meta name="description" content="Reparateur account beheer" />
@@ -192,7 +192,7 @@ const AccountSetting = (routerProps) => {
           <meta property="og:image" content="" />
           <meta name="og_site_name" property="og:site_name" content="Mr Again" />
           <meta name="theme-color" content="#ffffff" />
-        </Helmet>
+        </Head>
         <div className="account-setting-container-wrap">
           <div className="setting-title-bar">
             <div className="setting-title">Account Settings</div>

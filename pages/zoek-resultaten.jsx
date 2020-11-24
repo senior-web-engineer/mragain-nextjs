@@ -25,7 +25,7 @@ import {
 } from "react-google-maps";
 import { setFindOut } from "service/search/action.js";
 import "./zoek-resultaten.less";
-import { Helmet } from "react-helmet";
+import Head from "next/head"
 import image1 from "@/assets/images/home_newest_image3.jpg";
 import { setSearchFilter, setLoadFilter } from "../service/search/action";
 import { Modal } from "react-bootstrap";
@@ -489,7 +489,7 @@ const SearchShop = (routerProps) => {
   return (
     <Layout>
       <div className="serarch-shop-section">
-        <Helmet>
+        <Head>
           <title itemProp="name">Mr Again - Zoek resultaten</title>
           <meta
             name="Keywords"
@@ -513,7 +513,7 @@ const SearchShop = (routerProps) => {
           <meta name="og_site_name" property="og:site_name" content="Mr Again" />
 
           <meta name="theme-color" content="#ffffff" />
-        </Helmet>
+        </Head>
         <div className="main-title">
           <div className="wrap">
             <h4>Zoek resultaten</h4>

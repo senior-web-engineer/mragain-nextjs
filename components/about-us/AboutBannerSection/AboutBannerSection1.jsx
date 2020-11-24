@@ -5,12 +5,12 @@ import {
   AboutBannerTitle,
 } from "./AboutBannerSection1.style.jsx";
 import "./AboutBannerSection1.style.less";
-import { Helmet } from "react-helmet";
+import Head from "next/head"
 import { FRONT_END_URL } from "../../../constants.js";
 
 const AboutBannerSection1 = () => (
   <AboutSectionArea className="about-banner1-area">
-    <Helmet>
+    <Head>
       <title>Over Mr Again</title>
       <meta
         name="description"
@@ -32,7 +32,7 @@ const AboutBannerSection1 = () => (
       <meta property="og:image" content="" />
       <meta name="og_site_name" property="og:site_name" content="Mr Again" />
       <meta name="theme-color" content="#ffffff" />
-    </Helmet>
+    </Head>
     <AboutContainer className="about-banner1-container">
       <AboutBreadcrumb>
         <AboutBannerTitle>Wie wij zijn</AboutBannerTitle>
