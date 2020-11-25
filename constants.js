@@ -1,15 +1,17 @@
 // export const API_URL = "http://127.0.0.1:8000/api";
 // export const API_URL = "https://mragainproduction.eu.pythonanywhere.com/api";
 //export const API_URL = "https://mragain.eu.pythonanywhere.com/api";
-export const API_URL = document.domain.match(/^(www\.)?mragain\.nl$/i)
+
+const isProduct = true;
+export const API_URL = isProduct
   ? "https://mragainproduction.eu.pythonanywhere.com/api"
   : "https://mragain.eu.pythonanywhere.com/api";
 
-export const BACK_END_URL = document.domain.match(/^(www\.)?mragain\.nl$/i)
+export const BACK_END_URL = isProduct
   ? "https://mragainproduction.eu.pythonanywhere.com"
   : "https://mragain.eu.pythonanywhere.com"
 
-export const FRONT_END_URL = document.domain.match(/^(www\.)?mragain\.nl$/i)
+export const FRONT_END_URL = isProduct
   ? "https://mragain.nl" 
   : "https://develop.mragain.nl";
 
