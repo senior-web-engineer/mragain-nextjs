@@ -16,9 +16,8 @@ const AboutUsSection = () => (
         <AboutArticle>
           <AboutArticleTitle>Het team en onze dromen</AboutArticleTitle>
           <AboutArticleContent>
-            <p>MrAgain is een start-up bestaande uit Joost & Pim. Samen willen we graag ondernemen en tegelijkertijd de wereld beter en mooier maken. 
-	Bij MrAgain kunnen we dat allebei doen. Door ervoor te zorgen dat apparaten (goed) gerepareerd worden zorgen we ervoor dat de levensduur van deze apparaten wordt verhoogd. 
-	Dat is niet alleen goed voor je portemonnee, maar ook voor het milieu!
+            <p>MrAgain is een start-up uit Utrecht. We zijn ondernemers, dromers en idealisten met een gezonde dosis optimisme. We zijn MrAgain gestart vanuit het besef dat het repareren van elektronische apparaten de norm moet zijn. We promoten reparatie van elektronische apparatuur - en dus hergebruik - door deze market transparant en overzichtelijk te maken.   
+	Dat is bovenal goed voor het milieu, maar natuurlijk ook voor je portemonnee. 
             </p>
             <br></br>
           </AboutArticleContent>
