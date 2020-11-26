@@ -2,18 +2,22 @@
 // export const API_URL = "https://mragainproduction.eu.pythonanywhere.com/api";
 //export const API_URL = "https://mragain.eu.pythonanywhere.com/api";
 
-const isProduct = true;
-export const API_URL = isProduct
-  ? "https://mragainproduction.eu.pythonanywhere.com/api"
-  : "https://mragain.eu.pythonanywhere.com/api";
+// const isProduct = true;
+// export const API_URL = isProduct
+//   ? "https://mragainproduction.eu.pythonanywhere.com/api"
+//   : "https://mragain.eu.pythonanywhere.com/api";
 
-export const BACK_END_URL = isProduct
-  ? "https://mragainproduction.eu.pythonanywhere.com"
-  : "https://mragain.eu.pythonanywhere.com"
+// export const BACK_END_URL = isProduct
+//   ? "https://mragainproduction.eu.pythonanywhere.com"
+//   : "https://mragain.eu.pythonanywhere.com"
 
-export const FRONT_END_URL = isProduct
-  ? "https://mragain.nl" 
-  : "https://develop.mragain.nl";
+// export const FRONT_END_URL = isProduct
+//   ? "https://mragain.nl" 
+//   : "https://develop.mragain.nl";
+
+export const API_URL = process.env.API_URL;
+export const BACK_END_URL = process.env.BACK_END_URL;
+export const FRONT_END_URL = process.env.FRONT_END_URL;
 
 export const API_PATH = {
   SEARCH: `${API_URL}/searchshop`,
