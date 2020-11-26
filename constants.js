@@ -19,6 +19,7 @@ export const API_URL = process.env.API_URL;
 export const BACK_END_URL = process.env.BACK_END_URL;
 export const FRONT_END_URL = process.env.FRONT_END_URL;
 
+console.log("API_URL",API_URL)
 export const API_PATH = {
   SEARCH: `${API_URL}/searchshop`,
   CONTACTUS: `${API_URL}/contact-us`,
