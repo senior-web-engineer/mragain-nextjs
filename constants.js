@@ -27,6 +27,7 @@ export const API_PATH = {
   REGISTERUSER: `${API_URL}/signup`,
   GETAUTHUSER: `${API_URL}/auth-user`,
   LOGIN: `${API_URL}/rest-auth/login`,
+  LOGINASUSER: `${API_URL}/admin/login-as-user`,
   LOGOUT: `${API_URL}/logout`,
   OBTAINAUTHTOKEN: `${API_URL}/token`,
   ACCOUNTSETTING: `${API_URL}/account-settings`,

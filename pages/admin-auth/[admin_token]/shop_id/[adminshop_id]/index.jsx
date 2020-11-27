@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
-import { getAuthUser } from "service/account/operations";
+import { getAuthUser, loginAsUser } from "service/account/operations";
 import { Layout } from "@/components/global";
 
 const AdminLoginAsUser = (routerProps) => {
@@ -14,6 +14,9 @@ const AdminLoginAsUser = (routerProps) => {
   /** loacal storage used for setting the token from url for the admin to login as user */
   // localStorage.setItem("auth-token", admin_token);
   useEffect(() => {
+    const formData = new FormData();
+    formData.append('token', admin_token);
+    loginAsUser(formData);
     localStorage.setItem("auth-token", admin_token);
     let token = localStorage.getItem("auth-token");
     if (token && Object.keys(authUser).length === 0) {

@@ -129,6 +129,19 @@ export function login(data, dispatch) {
     });
 }
 
+export function loginAsUser(token) {
+    axios
+    .post(`${API_PATH.LOGINASUSER}/`, 
+        token
+    )
+    .then((res) => {
+      console.log(res, '------ res -------');
+    })
+    .catch((err) => {
+      console.log(err, '------ error -------')
+    });
+}
+
 export function logout(dispatch) {
   axios
     .get(`${API_PATH.LOGOUT}/`, tokenConfig())
