@@ -208,7 +208,7 @@ const ReparationOverView = (routerProps) => {
 
   function formatDate(date, frmString) {
     let date1 = new Date(date);
-    date1 = new Date(date1.setDate(date1.getDate() + 1));
+    date1 = new Date(date1.setDate(date1.getDate() ));
     return moment(new Date(date1), frmString).format(frmString);
   }
 
