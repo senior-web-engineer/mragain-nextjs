@@ -202,7 +202,7 @@ const ReparationOverView = (routerProps) => {
   function showGuaranteeDate(el) {
     let date = new Date(el.appointment.date);
     date = new Date(date.setMonth(date.getMonth() + el.guarantee));
-    date = new Date(date.setDate(date.getDate() + 1));
+    date = new Date(date.setDate(date.getDate() ));
     return moment(date, "DD-MM-YYYY").format("DD-MM-YYYY");
   }
 
