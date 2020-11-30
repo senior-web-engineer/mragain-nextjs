@@ -3,28 +3,28 @@ import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import moment from "moment";
 import {
-    TimePicker,
-    Select,
-    message,
-    Checkbox,
-    Button,
-    Divider,
-    Modal,
-    Input,
-    AutoComplete,
+  TimePicker,
+  Select,
+  message,
+  Checkbox,
+  Button,
+  Divider,
+  Modal,
+  Input,
+  AutoComplete,
 } from "antd";
 import { Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
 import {
-    getAccountProfile,
-    updateValidOpenTime,
-    updateInvalidOpenTime,
+  getAccountProfile,
+  updateValidOpenTime,
+  updateInvalidOpenTime,
 } from "service/account/operations.js";
 import {
-    uploadImage,
-    updateAccountProfile,
+  uploadImage,
+  updateAccountProfile,
 } from "service/account/operations.js";
 import { setLoadedProfile } from "service/account/action.js";
 import "./index.less";
@@ -100,7 +100,7 @@ function ProfileManage(routerProps) {
     isScheduleTimeLoading,
     isHandleInvalidTimeLoading,
     setLoadedProfile,
-    isLogged
+    isLogged,
   } = routerProps;
 
   const router = useRouter();
@@ -125,7 +125,7 @@ function ProfileManage(routerProps) {
       }
       setLoad(false);
     }
-  }, [is_load])
+  }, [is_load]);
 
   function initProfilePage() {
     setPreview(account_profile.bg_photo);
@@ -431,6 +431,9 @@ function ProfileManage(routerProps) {
    */
   const handleCancelScheduleTimePopUp = () => {
     setOpenTimeVisible(false);
+    setWeekDay("");
+    setOpenTime("");
+    setCloseTime("");
   };
 
   function onCheckOpenTimeChange(date, dateString) {
@@ -631,7 +634,10 @@ function ProfileManage(routerProps) {
       <div className="repair-shop-profile">
         <Head>
           <title>Mr Again - Profiel</title>
-          <meta name="Keywords" content="Profiel, MrAgain, Telefoon Reparateur" />
+          <meta
+            name="Keywords"
+            content="Profiel, MrAgain, Telefoon Reparateur"
+          />
           <meta name="description" content="Beheer je profiel bij MrAgain" />
           <link rel="canonical" href={FRONT_END_URL + "/profiel-beheer"} />
           {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
@@ -647,7 +653,11 @@ function ProfileManage(routerProps) {
           />
           <meta name="og:url" content={FRONT_END_URL} />
           <meta property="og:image" content="" />
-          <meta name="og_site_name" property="og:site_name" content="Mr Again" />
+          <meta
+            name="og_site_name"
+            property="og:site_name"
+            content="Mr Again"
+          />
           <meta name="theme-color" content="#ffffff" />
         </Head>
         <div className="repair-shop-profile-container">
@@ -762,7 +772,8 @@ function ProfileManage(routerProps) {
                         <Select
                           className="contact-modal-input"
                           placeholder="website"
-                          defaultValue="selecteer"
+                          // defaultValue="selecteer"
+                          value={weekDay === "" ? "Selecteer" : weekDay}
                           defaultKey="All"
                           onChange={onWeekDayChange}
                         >
@@ -780,6 +791,9 @@ function ProfileManage(routerProps) {
                             format="HH:mm"
                             disabled={false}
                             minuteStep={15}
+                            value={
+                              openTime !== "" ? moment(openTime, "HH:mm") : null
+                            }
                             disabledHours={disabledHours}
                             hideDisabledOptions={true}
                           />
@@ -793,6 +807,11 @@ function ProfileManage(routerProps) {
                             picker="time"
                             format="HH:mm"
                             disabled={false}
+                            value={
+                              closeTime !== ""
+                                ? moment(closeTime, "HH:mm")
+                                : null
+                            }
                             minuteStep={15}
                             disabledHours={disabledHours}
                             hideDisabledOptions={true}
@@ -1136,12 +1155,12 @@ function ProfileManage(routerProps) {
                     <div className="profile-opentime-content">
                       <ul>
                         <li>
-                          De tabel met openingstijden toont de openingstijden die
-                          elke week geldend zijn.
+                          De tabel met openingstijden toont de openingstijden
+                          die elke week geldend zijn.
                         </li>
                         <li>
-                          De kalender voor afwijkende openingstijden is om aan te
-                          geven welke dagen afwijken van de standaard
+                          De kalender voor afwijkende openingstijden is om aan
+                          te geven welke dagen afwijken van de standaard
                           openingstijden.
                         </li>
                         <li>

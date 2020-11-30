@@ -2,13 +2,18 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import "./index.less";
-import { ProfileBannerSection, ProfileMainSection } from "@/components/shop-profile";
+import {
+  ProfileBannerSection,
+  ProfileMainSection,
+} from "@/components/shop-profile";
 import { Layout } from "@/components/global";
 import {
-    getAccountProfile,
-    getShopIdByInformation,
+  getAccountProfile,
+  getShopIdByInformation,
 } from "service/account/operations.js";
 import { getReparationGuarantee } from "service/appointments/operations.js";
+import Head from "next/head";
+import { FRONT_END_URL } from "@/constants";
 
 const ShopProfile = (routerProps) => {
   const {
@@ -16,7 +21,7 @@ const ShopProfile = (routerProps) => {
     getShopIdByInformation,
     getReparationGuarantee,
     match,
-    isLoggedIn
+    isLoggedIn,
   } = routerProps;
   const router = useRouter();
 
@@ -36,6 +41,34 @@ const ShopProfile = (routerProps) => {
   return (
     <Layout>
       <div className="profile-container">
+        <Head>
+          <title>Mr Again - Profiel</title>
+          <meta
+            name="Keywords"
+            content="Profiel, MrAgain, Telefoon Reparateur"
+          />
+          <meta name="description" content="Beheer je profiel bij MrAgain" />
+          <link rel="canonical" href={FRONT_END_URL + "/profiel"} />
+          {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
+          <meta property="og:type" content="website" />
+          <meta
+            name="og_title"
+            property="og:title"
+            content=" Reparatie managementt"
+          />{" "}
+          <meta
+            property="og:description"
+            content="Vind de beste reparateur bij jou in de buurt"
+          />
+          <meta name="og:url" content={FRONT_END_URL} />
+          <meta property="og:image" content="" />
+          <meta
+            name="og_site_name"
+            property="og:site_name"
+            content="Mr Again"
+          />
+          <meta name="theme-color" content="#ffffff" />
+        </Head>
         <ProfileBannerSection />
         <ProfileMainSection />
       </div>

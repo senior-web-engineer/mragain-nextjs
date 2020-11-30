@@ -9,30 +9,30 @@ import { ShopInfoCard, Layout } from "@/components/global";
 import lib from "@/assets/js/lib";
 import { FRONT_END_URL } from "../constants.js";
 import {
-    getSearchFilterField,
-    getSearchFilterFieldExt,
-    searchShopFilter,
+  getSearchFilterField,
+  getSearchFilterFieldExt,
+  searchShopFilter,
 } from "service/search/operations.js";
 import { compose, withProps, lifecycle } from "recompose";
 import {
-    google,
-    withScriptjs,
-    withGoogleMap,
-    GoogleMap,
-    Marker,
-    Map,
-    InfoWindow,
+  google,
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker,
+  Map,
+  InfoWindow,
 } from "react-google-maps";
 import { setFindOut } from "service/search/action.js";
 import "./zoek-resultaten.less";
-import Head from "next/head"
+import Head from "next/head";
 import image1 from "@/assets/images/home_newest_image3.jpg";
 import { setSearchFilter, setLoadFilter } from "../service/search/action";
 import { Modal } from "react-bootstrap";
 import { blue } from "@material-ui/core/colors";
 
 const {
-    MarkerWithLabel,
+  MarkerWithLabel,
 } = require("react-google-maps/lib/components/addons/MarkerWithLabel");
 
 const { Option } = Select;
@@ -137,7 +137,7 @@ const SearchShop = (routerProps) => {
   const [isSearch, setIsSearch] = React.useState(false);
   const [showMaps, setShowMaps] = React.useState(false);
   const router = useRouter();
-  const {device} = router.query;
+  const { device } = router.query;
   /* eslint-disable */
 
   const {
@@ -486,6 +486,7 @@ const SearchShop = (routerProps) => {
     }
   }, [isSearch]);
 
+  console.log(filterlistRPG);
   return (
     <Layout>
       <div className="serarch-shop-section">
@@ -510,7 +511,11 @@ const SearchShop = (routerProps) => {
           />
           <meta name="og:url" content={FRONT_END_URL + "/zoek-resultaten"} />
           <meta property="og:image" content="" />
-          <meta name="og_site_name" property="og:site_name" content="Mr Again" />
+          <meta
+            name="og_site_name"
+            property="og:site_name"
+            content="Mr Again"
+          />
 
           <meta name="theme-color" content="#ffffff" />
         </Head>
@@ -576,7 +581,10 @@ const SearchShop = (routerProps) => {
                     </Option>
                     {brandflg && initModelSelect()}
                   </Select>
-                  <Button className="search-button" onClick={onFindShopbyFilter}>
+                  <Button
+                    className="search-button"
+                    onClick={onFindShopbyFilter}
+                  >
                     Zoek
                   </Button>
                 </div>
@@ -715,7 +723,11 @@ const SearchShop = (routerProps) => {
             </div>
           </div>
         </div>
-        <Modal show={showMaps} onHide={hideShopMaps} className="search-shop-map">
+        <Modal
+          show={showMaps}
+          onHide={hideShopMaps}
+          className="search-shop-map"
+        >
           <Modal.Header closeButton></Modal.Header>
           <Modal.Body>
             <MyMapComponent isMarkerShown={true} shoplist={shoplist} />
