@@ -2,19 +2,19 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
 import {
-    TimePicker,
-    Button,
-    Modal,
-    Input,
-    Select,
-    message,
-    Checkbox,
+  TimePicker,
+  Button,
+  Modal,
+  Input,
+  Select,
+  message,
+  Checkbox,
 } from "antd";
 import { Table } from "react-bootstrap";
 import {
-    getAccountProfile,
-    updateValidOpenTime,
-    updateInvalidOpenTime,
+  getAccountProfile,
+  updateValidOpenTime,
+  updateInvalidOpenTime,
 } from "service/account/operations.js";
 import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
@@ -75,7 +75,7 @@ const OpenningTime = (routerProps) => {
 
   const showCheckCalendarModal = () => {
     if (checkDay === null) {
-      message.warning("please select the day in calendar");
+      message.warning("please select the day in calendar", [2.5]);
       return;
     }
     setInvalidTimeVisible(true);
@@ -115,7 +115,7 @@ const OpenningTime = (routerProps) => {
       setInvalidTimeVisible(false);
     } else {
       if (checkOpenTime === null || checkCloseTime === null) {
-        message.warning("opentime and close time have to select both!");
+        message.warning("opentime and close time have to select both!", [2.5]);
         return;
       }
       if (timeValidate(checkOpenTime, checkCloseTime) === true) {
@@ -138,7 +138,7 @@ const OpenningTime = (routerProps) => {
         setCheckTimeTable(objArray);
         setInvalidTimeVisible(false);
       } else {
-        message.error("please select the time correctly!", [1]);
+        message.error("please select the time correctly!", [2.5]);
       }
     }
   };
@@ -194,7 +194,7 @@ const OpenningTime = (routerProps) => {
           Sun: openTime + "-" + closeTime,
         });
       } else if (weekDay === "") {
-        message.error("Selecteer een dag a.u.b.", [1]);
+        message.error("Selecteer een dag a.u.b.", [2.5]);
         return;
       } else {
         setTimeTable({
@@ -204,7 +204,7 @@ const OpenningTime = (routerProps) => {
       }
       setIsEditOpenTimes(false);
     } else {
-      message.error("Er gaat wat fout, heb je een tijd geselecteerd?", [1]);
+      message.error("Er gaat wat fout, heb je een tijd geselecteerd?", [2.5]);
     }
   };
 
@@ -254,7 +254,7 @@ const OpenningTime = (routerProps) => {
       updateValidOpenTime(account_valid_time_id, data);
     }
 
-    message.success("Shop open and close time table is updated!", [1]);
+    message.success("Shop open and close time table is updated!", [2.5]);
     getAccountProfile(auth_user.account_id);
   };
 
@@ -271,7 +271,7 @@ const OpenningTime = (routerProps) => {
       };
       updateInvalidOpenTime(account_invalid_time_id, data);
     }
-    message.success("Shop open and close time table is updated!");
+    message.success("Shop open and close time table is updated!", [2.5]);
     getAccountProfile(auth_user.account_id);
   };
 
@@ -390,7 +390,9 @@ const OpenningTime = (routerProps) => {
                       />
                     </div>
                     <div className="open-time-item ml-3">
-                      <div className="time-picker-label mr-1">Close Time : </div>
+                      <div className="time-picker-label mr-1">
+                        Close Time :{" "}
+                      </div>
                       <TimePicker
                         onChange={onCloseTimeChange}
                         picker="time"
@@ -485,7 +487,9 @@ const OpenningTime = (routerProps) => {
                       />
                     </div>
                     <div className="open-time-item ml-3">
-                      <div className="time-picker-label mr-1">Close Time : </div>
+                      <div className="time-picker-label mr-1">
+                        Close Time :{" "}
+                      </div>
                       <TimePicker
                         onChange={onCheckCloseTimeChange}
                         picker="time"

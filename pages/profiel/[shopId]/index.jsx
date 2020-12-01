@@ -37,6 +37,9 @@ const ShopProfile = (routerProps) => {
   }
 
   getShopId(router.query.shopId);
+  const shopId = router.query.shopId;
+  // console.log(FRONT_END_URL + "/profiel/" + shopId);
+  console.log(router.asPath);
 
   return (
     <Layout>
@@ -54,8 +57,8 @@ const ShopProfile = (routerProps) => {
           <meta
             name="og_title"
             property="og:title"
-            content=" Reparatie managementt"
-          />{" "}
+            content="Reparatie managementt"
+          />
           <meta
             property="og:description"
             content="Vind de beste reparateur bij jou in de buurt"

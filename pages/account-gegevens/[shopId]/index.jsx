@@ -4,17 +4,17 @@ import { useRouter } from "next/router";
 import { message, Button, Checkbox, Input, Popconfirm, Select } from "antd";
 import lib from "@/assets/js/lib";
 import {
-    updateAccountSettings,
-    resetPasswordConfirm,
-    deleteAccount,
-    getAccountSettings,
+  updateAccountSettings,
+  resetPasswordConfirm,
+  deleteAccount,
+  getAccountSettings,
 } from "service/account/operations.js";
 import { resetAuthError } from "service/account/action.js";
 import { logout } from "service/account/operations.js";
 import "./index.less";
-import Head from 'next/head';
+import Head from "next/head";
 import { FRONT_END_URL } from "../../../constants.js";
-import { Layout } from "../../../components/global"
+import { Layout } from "../../../components/global";
 
 const { Option } = Select;
 
@@ -29,7 +29,7 @@ const AccountSetting = (routerProps) => {
     resetAuthError,
     deleteAccount,
     logOut,
-    isLoggedIn
+    isLoggedIn,
   } = routerProps;
 
   const router = useRouter();
@@ -54,10 +54,10 @@ const AccountSetting = (routerProps) => {
       ) {
         router.push("/");
       }
-  
+
       getAccountSettings(shop_id);
     }
-  }, [isLoad])
+  }, [isLoad]);
 
   function handleDataChange(e) {
     setSettings({ ...settings, [e.target.name]: e.target.value });
@@ -113,11 +113,11 @@ const AccountSetting = (routerProps) => {
     data.auth = acc_settings.auth;
     let msg = await updateAccountSettings(id, data);
     if (msg === "error") {
-      message.error("Er gaat wat fout, kloppen je adres en postcode?", [2]);
+      message.error("Er gaat wat fout, kloppen je adres en postcode?", [2.5]);
     } else if (msg === "error1") {
-      message.error("Er gaat wat fout, klopt je postcode?", [2]);
+      message.error("Er gaat wat fout, klopt je postcode?", [2.5]);
     } else {
-      message.success(msg, [1]);
+      message.success(msg, [2.5]);
     }
   }
 
@@ -130,18 +130,18 @@ const AccountSetting = (routerProps) => {
     }
     if (auth_error !== null) {
       if (auth_error === "Je wachtwoord is gewijzigd") {
-        message.success(auth_error, [1]);
+        message.success(auth_error, [2.5]);
         resetAuthError();
         return;
       }
-      message.error(auth_error, [1]);
+      message.error(auth_error, [2.5]);
       resetAuthError();
     }
   }, [isLoad, acc_settings, auth_error, resetAuthError]);
 
   function updatePassword() {
     if (password.new_password !== password.confirm_password) {
-      message.error("Je wachtwoord komt niet overeen", [1]);
+      message.error("Je wachtwoord komt niet overeen", [2.5]);
     } else {
       let token = localStorage.getItem("auth-token");
       let data = {
@@ -162,7 +162,7 @@ const AccountSetting = (routerProps) => {
 
   function confirm(e) {
     deleteAccount(acc_settings.auth);
-    message.success("Je account is succesvol verwijderd", [1]);
+    message.success("Je account is succesvol verwijderd", [2.5]);
     setTimeout(() => {
       logOut();
       router.push("/");
@@ -182,7 +182,11 @@ const AccountSetting = (routerProps) => {
           <meta name="description" content="Reparateur account beheer" />
           <link rel="canonical" href={FRONT_END_URL + "/account-gegevens"} />
           {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
-          <meta name="og_title" property="og:title" content=" Account Settings" />
+          <meta
+            name="og_title"
+            property="og:title"
+            content=" Account Settings"
+          />
           <meta property="og:type" content="website" />
           <meta
             property="og:description"
@@ -190,7 +194,11 @@ const AccountSetting = (routerProps) => {
           />
           <meta name="og:url" content="url" />
           <meta property="og:image" content="" />
-          <meta name="og_site_name" property="og:site_name" content="Mr Again" />
+          <meta
+            name="og_site_name"
+            property="og:site_name"
+            content="Mr Again"
+          />
           <meta name="theme-color" content="#ffffff" />
         </Head>
         <div className="account-setting-container-wrap">
@@ -272,7 +280,9 @@ const AccountSetting = (routerProps) => {
                   ></Input>
                 </div>
 
-                <div className="first-setting-blog-content-title">kvk nummer</div>
+                <div className="first-setting-blog-content-title">
+                  kvk nummer
+                </div>
                 <div className="first-setting-blog-content-value">
                   <Input
                     placeholder="Je kvk nummer"
@@ -283,7 +293,9 @@ const AccountSetting = (routerProps) => {
                   ></Input>
                 </div>
 
-                <div className="first-setting-blog-content-title">BTW nummer</div>
+                <div className="first-setting-blog-content-title">
+                  BTW nummer
+                </div>
                 <div className="first-setting-blog-content-value">
                   <Input
                     placeholder="Je BTW nummer"

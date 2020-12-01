@@ -6,12 +6,13 @@ import "./reset-je-wachtwoord.less";
 import { resetPasswordEmail } from "service/account/operations.js";
 import { resetAuthError } from "service/account/action.js";
 import { Layout } from "@/components/global";
-import Head from "next/head"
+import Head from "next/head";
+import { useState } from "react";
 
 function PasswordResetEmail(routerProps) {
   const [validated, setValidated] = React.useState(false);
   const { resetPasswordEmail, resetAuthError, auth_error } = routerProps;
-
+  const [email, setEmail] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -19,28 +20,35 @@ function PasswordResetEmail(routerProps) {
     if (form.checkValidity() === true) {
       const data = new FormData(event.target);
       if (ValidateEmail(data.get("email")) === false) {
-        message.error("Je hebt een ongeldig emailadres ingevuld.", [1]);
+        message.error("Je hebt een ongeldig emailadres ingevuld.", [2.5]);
         return;
       }
 
+      // console.log(data.get("email").set);
       setValidated(true);
       resetPasswordEmail({ email: data.get("email") });
       message.success(
         "We hebben je een email verzonden waarmee je je wachtwoord kunt wijzigen.",
-        [1]
+        [2.5]
       );
+      setValidated(false);
+
+      setEmail("");
     }
   };
 
   useEffect(() => {
     if (auth_error !== null) {
-      message.error(auth_error, [1]);
+      message.error(auth_error, [2.5]);
       setTimeout(() => {
         resetAuthError();
       }, 2000);
     }
   });
 
+  const onHandleChange = (e) => {
+    setEmail(e.target.value);
+  };
   function ValidateEmail(mail) {
     if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
       return true;
@@ -75,7 +83,11 @@ function PasswordResetEmail(routerProps) {
           />
           <meta name="og:url" content="" />
           <meta property="og:image" content="" />
-          <meta name="og_site_name" property="og:site_name" content="Mr Again" />
+          <meta
+            name="og_site_name"
+            property="og:site_name"
+            content="Mr Again"
+          />
           <meta name="theme-color" content="#ffffff" />
         </Head>
         <div className="user-login-container-wrap">
@@ -86,7 +98,9 @@ function PasswordResetEmail(routerProps) {
                 className="user-login-input"
                 type="text"
                 name="email"
+                onChange={(e) => onHandleChange(e)}
                 placeholder="Je emailadres"
+                value={email}
                 required
               />
 

@@ -1,21 +1,18 @@
-import Head from 'next/head'
-import React, {useEffect} from 'react';
-import { 
-    Layout,
-    TestmonialSection
-} from "../components/global";
+import Head from "next/head";
+import React, { useEffect } from "react";
+import { Layout, TestmonialSection } from "../components/global";
 import { FRONT_END_URL } from "../constants.js";
-import Link from 'next/link'
+import Link from "next/link";
 
 import { Main } from "@/styled-components/homepage.style";
 import { getPublishProfies } from "../lib/getPublishProfiles";
-import { 
-    FindBannerSection, 
-    AdvantageSection, 
-    NewestShopsSection,
+import {
+  FindBannerSection,
+  AdvantageSection,
+  NewestShopsSection,
 } from "../components/home";
 
-import "./index.style.less"
+import "./index.style.less";
 
 export default function Home() {
   useEffect(() => {
@@ -28,6 +25,10 @@ export default function Home() {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title>Mr Again | De beste telefoon reparateurs </title>
           <meta
+            name="google-site-verification"
+            content="x9yvGGGg9jIYKgnj3Q_eQh35g0_6trS-yDTHyKjhImc"
+          />
+          <meta
             name="Keywords"
             content="Telefoon reparatie, Telefoon reparateurs, Scherm vervangen, Batterij vervangen, water schade, MrAgain, Tablet reparatie, Tablet reparateurs, telefoonscherm vervangen, scherm telefoon kapot, telefoonscherm kapot, waterschade telefoon, telefoon in water laten vallen, iphone 6 batterij vervangen, nieuwe batterij iphone 7, iphone reparateur, telefoon in wc gevallen, scherm reparatie, iphone glas vervangen, kapot scherm, iphone glas vervangen, scherm iphone 6, nieuw scherm iphone 6, iphone 6 glas vervangen, telefoonscherm reparatie, scherm ipad vervangen"
           />
@@ -35,10 +36,7 @@ export default function Home() {
             name="description"
             content="Telefoon kapot? Bij MrAgain vind je snel en gemakkelijk de beste telefoon reparateurs bij jou in de buurt."
           />
-          <link
-            rel="canonical"
-            href={ FRONT_END_URL }
-          />
+          <link rel="canonical" href={FRONT_END_URL} />
 
           {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
           <meta property="og:type" content="website" />
@@ -48,29 +46,30 @@ export default function Home() {
             property="og:description"
             content="Vind de beste reparateur bij jou in de buurt"
           />
-          <meta
-            name="og:url"
-            content={ FRONT_END_URL }
-          />
+          <meta name="og:url" content={FRONT_END_URL} />
           <meta property="og:image" content="" />
-          <meta name="og_site_name" property="og:site_name" content="Mr Again" />
+          <meta
+            name="og_site_name"
+            property="og:site_name"
+            content="Mr Again"
+          />
 
           <meta name="theme-color" content="#ffffff" />
         </Head>
-        <FindBannerSection/>
-        <AdvantageSection/>
-        <NewestShopsSection/>
-        <TestmonialSection/>
+        <FindBannerSection />
+        <AdvantageSection />
+        <NewestShopsSection />
+        <TestmonialSection />
       </Main>
     </Layout>
-  )
+  );
 }
 
 export async function getStaticProps() {
   await getPublishProfies();
   return {
     props: {
-      data: "data"
-    }
-  }
+      data: "data",
+    },
+  };
 }

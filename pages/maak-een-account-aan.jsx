@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import { message } from "antd";
 import { useRouter } from "next/router";
 import "./maak-een-account-aan.less";
-import { Layout } from "@/components/global"
+import { Layout } from "@/components/global";
 
 import { registerUser } from "service/account/operations.js";
 import { resetAuthError } from "service/account/action.js";
@@ -28,7 +28,7 @@ function AccountCreate(routerProps) {
     if (form.checkValidity() === true) {
       const data = new FormData(event.target);
       if (ValidateEmail(data.get("email")) === false) {
-        message.error("You have entered an invalid email address!", [1]);
+        message.error("You have entered an invalid email address!", [2.5]);
         return;
       }
 
@@ -36,7 +36,7 @@ function AccountCreate(routerProps) {
         setValidated(true);
       } else {
         setValidated(false);
-        message.error("password and confirm password have to equal!", [1]);
+        message.error("password and confirm password have to equal!", [2.5]);
         return;
       }
       const user = {
@@ -68,12 +68,12 @@ function AccountCreate(routerProps) {
 
   useEffect(() => {
     if (isSignUp === true) {
-      message.success("You are registered successfully!", [1]);
+      message.success("You are registered successfully!", [2.5]);
       setTimeout(() => {
         router.push("/prijs");
       }, 3000);
     } else if (isAuth_Error === true) {
-      message.error(auth_error, [1]);
+      message.error(auth_error, [2.5]);
       resetAuthError(false);
     }
   });

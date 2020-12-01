@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import moment from "moment";
 import {
-    Input,
-    Button,
-    Popconfirm,
-    DatePicker,
-    Avatar,
-    Checkbox,
-    Select,
+  Input,
+  Button,
+  Popconfirm,
+  DatePicker,
+  Avatar,
+  Checkbox,
+  Select,
 } from "antd";
 import { Label } from "semantic-ui-react";
 import { Table, Modal } from "react-bootstrap";
@@ -22,20 +22,20 @@ import "react-image-picker/dist/index.css";
 import "./index.less";
 import menu_icon from "../../../assets/images/menu.png";
 import {
-    getSearchFilterField,
-    getSearchFilterFieldExt,
-    getModelService,
+  getSearchFilterField,
+  getSearchFilterFieldExt,
+  getModelService,
 } from "service/search/operations.js";
 import { setLoadService } from "service/search/action.js";
 import { setLoadAppointment } from "service/appointments/action.js";
 import {
-    getAppointments,
-    updateAppointment,
-    CancelAppointment,
+  getAppointments,
+  updateAppointment,
+  CancelAppointment,
 } from "service/appointments/operations.js";
 import {
-    uploadImage,
-    getSimpleAccountInformation,
+  uploadImage,
+  getSimpleAccountInformation,
 } from "service/account/operations.js";
 import Head from "next/head";
 import { FRONT_END_URL } from "../../../constants.js";
@@ -48,14 +48,14 @@ const ShopDashboard = (routerProps) => {
       height: window.innerHeight,
       width: window.innerWidth,
     });
-  }
+  };
 
   useEffect(() => {
     window.addEventListener("resize", updateDimensions);
     setState({
       height: window.innerHeight,
       width: window.innerWidth,
-    })
+    });
   }, []);
 
   const [state, setState] = useState({
@@ -101,11 +101,11 @@ const ShopDashboard = (routerProps) => {
     setLoadAppointment,
     updateAppointment,
     CancelAppointment,
-    isLoggedIn
+    isLoggedIn,
   } = routerProps;
 
   const router = useRouter();
-  
+
   const [showModal, setShowModal] = useState(false);
   const [imageList, setImageList] = useState([]);
   const [appointlist, setAppointList] = useState([]);
@@ -113,7 +113,7 @@ const ShopDashboard = (routerProps) => {
 
   let repList = [];
   let isExistR = [];
-  const { shopId } = router.query
+  const { shopId } = router.query;
   const url_shopId = parseInt(shopId);
 
   const handleGetSimpleAccount = () => {
@@ -123,8 +123,6 @@ const ShopDashboard = (routerProps) => {
     getAppointments(url_shopId);
   };
 
-
-  
   useEffect(() => {
     if (isLoad === false) {
       let auth_user = JSON.parse(localStorage.getItem("auth-user"));
@@ -138,8 +136,7 @@ const ShopDashboard = (routerProps) => {
         handleGetAppointments();
       }
     }
-  }, [isLoad])
-
+  }, [isLoad]);
 
   if (filterlistRPG !== undefined) {
     filterlistRPG.map((element) => {
@@ -233,8 +230,8 @@ const ShopDashboard = (routerProps) => {
   function handlePhoneChange(value, e) {
     setPhone(value);
     //if (brandflg === true) {
-      setBrandflg(true);
-      setBrand(0);
+    setBrandflg(true);
+    setBrand(0);
     // }
   }
 
@@ -380,7 +377,7 @@ const ShopDashboard = (routerProps) => {
 
   function formatDate(date, frmString) {
     let date1 = new Date(date);
-    date1 = new Date(date1.setDate(date1.getDate() ));
+    date1 = new Date(date1.setDate(date1.getDate()));
     return moment(new Date(date1), frmString).format(frmString);
   }
 
@@ -455,7 +452,11 @@ const ShopDashboard = (routerProps) => {
           />
           <meta name="og:url" content={FRONT_END_URL} />
           <meta property="og:image" content="" />
-          <meta name="og_site_name" property="og:site_name" content="Mr Again" />
+          <meta
+            name="og_site_name"
+            property="og:site_name"
+            content="Mr Again"
+          />
 
           <meta name="theme-color" content="#ffffff" />
         </Head>
@@ -593,6 +594,7 @@ const ShopDashboard = (routerProps) => {
                       <th>Datum</th>
                       <th>Tijd</th>
                       <th>Klant</th>
+                      <th>contact</th>
                       <th>Apparaat</th>
                       <th>Model</th>
                       <th>Type reparatie</th>
@@ -611,6 +613,7 @@ const ShopDashboard = (routerProps) => {
                               </td>
                               <td>{el.appointment.time}</td>
                               <td>{el.appointment.client_name}</td>
+                              <td>{el.appointment.client_phone}</td>
                               <td>{el.device.device_name}</td>
                               <td>{el.model.model_name}</td>
                               <td>{el.reparation.reparation_name}</td>
@@ -628,7 +631,9 @@ const ShopDashboard = (routerProps) => {
                                   <Popconfirm
                                     title="Weet je zeker dat je de afspraak wilt annuleren?"
                                     onConfirm={() => {
-                                      confirmCancelAppointment(el.appointment.id);
+                                      confirmCancelAppointment(
+                                        el.appointment.id
+                                      );
                                     }}
                                     okText="Ja"
                                     cancelText="Nee"
@@ -658,62 +663,62 @@ const ShopDashboard = (routerProps) => {
                   <Modal.Body>
                     {/* <div className="select-device-reparation"> */}
                     <div className="w-100 ">
-                        <div className="row px-2">
+                      <div className="row px-2">
                         <div className="col-md-3 col-sm-6 col- px-1 mx-0">
-                            <Select
+                          <Select
                             // className="device-select"
                             className="w-100"
                             onChange={handlePhoneChange}
                             value={phone}
                             disabled={editable}
-                            >
+                          >
                             {filterlistPBM.map((element) => {
-                                return (
+                              return (
                                 <Option
-                                    value={element.id}
-                                    key={element.device_name}
+                                  value={element.id}
+                                  key={element.device_name}
                                 >
-                                    {element.device_name}
+                                  {element.device_name}
                                 </Option>
-                                );
+                              );
                             })}
-                            </Select>
+                          </Select>
                         </div>
                         <div className="col-md-3 col-sm-6 px-1 mx-0">
-                            <Select
+                          <Select
                             // className="brand-select"
                             className="w-100"
                             onChange={handleBrandChange}
                             value={brand === 0 ? "select" : brand}
                             disabled={editable}
-                            >
+                          >
                             {initBrandSelect()}
-                            </Select>
+                          </Select>
                         </div>
                         <div className="col-md-3 col-sm-6 px-1 mx-0">
-                            <Select
+                          <Select
                             // className="model-select"
                             className="w-100"
                             onChange={handleModelChange}
                             value={model === 0 ? "select" : model}
                             disabled={editable}
-                            >
+                          >
                             {initModelSelect()}
-                            </Select>
+                          </Select>
                         </div>
                         <div className="col-md-3 col-sm-6 px-1 mx-0">
-                            <Select
+                          <Select
                             // className="service-select"
                             className="w-100"
                             onChange={handleReparationChange}
                             value={reparation}
                             disabled={editable}
-                            >
+                          >
                             {initReparationSelect()}
-                            </Select>
+                          </Select>
                         </div>
-                        </div>
-                        <hr />
+                      </div>
+                      <hr />
                     </div>
                     <div className="repair-input-group">
                       <Label className="repair-input-label">IMEI nummer </Label>
@@ -727,7 +732,9 @@ const ShopDashboard = (routerProps) => {
                       />
                     </div>
                     <div className="repair-input-group">
-                      <Label className="repair-input-label">Uitvoering/kleur</Label>
+                      <Label className="repair-input-label">
+                        Uitvoering/kleur
+                      </Label>
                       <Input
                         className="repair-input"
                         onChange={(e) => {
@@ -738,7 +745,9 @@ const ShopDashboard = (routerProps) => {
                       />
                     </div>
                     <div className="repair-input-group">
-                      <Label className="repair-input-label">Klacht omschrijving</Label>
+                      <Label className="repair-input-label">
+                        Klacht omschrijving
+                      </Label>
                       <Input
                         className="repair-input"
                         onChange={(e) => {

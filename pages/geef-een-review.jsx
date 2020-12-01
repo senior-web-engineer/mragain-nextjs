@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import "./geef-een-review.less";
 import shopReviewIcon from "@/assets/images/shop-review.png";
 import {
-    createReview,
-    checkReviewPage,
+  createReview,
+  checkReviewPage,
 } from "service/appointments/operations.js";
 import { Layout } from "@/components/global";
 
@@ -28,11 +28,11 @@ const CheckoutReview = (routerProps) => {
   const router = useRouter();
 
   useEffect(() => {
-      if (isLoad === false) {
-        parseArgument(router.query);
-        setLoad(true);
-      }
-  }, [])
+    if (isLoad === false) {
+      parseArgument(router.query);
+      setLoad(true);
+    }
+  }, []);
 
   async function validationReviewPage(_data) {
     let _auth = {
@@ -55,22 +55,22 @@ const CheckoutReview = (routerProps) => {
       shop_name: "",
       avatar: "",
     };
-    if(str !== null) {
+    if (str !== null) {
       if (str.uid !== "" && str.uid !== null) {
         _data.uid = str.uid;
-      } 
+      }
       if (str.token !== "" && str.token !== null) {
         _data.token = str.token;
-      } 
-      if(str.email !== "" && str.email !== null) {
+      }
+      if (str.email !== "" && str.email !== null) {
         _data.email = str.email;
-      } 
-      if(str.shop !== "" && str.shop !== null) {
+      }
+      if (str.shop !== "" && str.shop !== null) {
         _data.shop = str.shop;
-      } 
-      if(str.avatar !== "" && str.avatar !== null) {
+      }
+      if (str.avatar !== "" && str.avatar !== null) {
         _data.avatar = str.avatar;
-      } 
+      }
       if (str.shop_name !== "" && str.shop_name !== null) {
         _data.shop_name = str.shopname;
       }
@@ -115,7 +115,7 @@ const CheckoutReview = (routerProps) => {
     } else {
       let status = await createReview(_auth, _data);
       if (status === true) {
-        message.success("Je review is verzonden, bedankt!", [1]);
+        message.success("Je review is verzonden, bedankt!", [2.5]);
       } else {
         alert("Het lijkt erop dat je al een review gegeven hebt.");
       }
@@ -128,12 +128,18 @@ const CheckoutReview = (routerProps) => {
       <div className="checkout-review-page">
         <div className="checkout-review-page-container">
           <div className="checkout-review-page-main">
-            <div className="checkout-review-page-main-title">Geef je mening</div>
+            <div className="checkout-review-page-main-title">
+              Geef je mening
+            </div>
             <div className="checkout-review-board">
               <div className="checkout-review-board-title">
                 {console.log(typeof shopInfo.avatar !== "undefined")}
                 <img
-                  src={typeof shopInfo.avatar !== "undefined" ? shopInfo.avatar : shopReviewIcon}
+                  src={
+                    typeof shopInfo.avatar !== "undefined"
+                      ? shopInfo.avatar
+                      : shopReviewIcon
+                  }
                   className="shop-review-icon"
                   alt="Logo"
                 />
@@ -255,7 +261,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CheckoutReview);
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutReview);

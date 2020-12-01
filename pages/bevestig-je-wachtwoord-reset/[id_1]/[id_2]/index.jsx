@@ -26,12 +26,12 @@ function PasswordResetConfirm(routerProps) {
   useEffect(() => {
     if (isload === false) {
       let query = router.query;
-      console.log(router.query)
+      console.log(router.query);
       setUid(query.id_1);
       setToken(query.id_2);
       setLoad(true);
     }
-  }, [])
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -48,7 +48,7 @@ function PasswordResetConfirm(routerProps) {
         token: token,
       });
       if (ret === true) {
-        message.success("Je wachtwoord is succesvol gewijzigd");
+        message.success("Je wachtwoord is succesvol gewijzigd", [2.5]);
         setTimeout(() => {
           router.push("/login");
         }, 3000);
@@ -58,7 +58,7 @@ function PasswordResetConfirm(routerProps) {
 
   useEffect(() => {
     if (isAuth_Error === true) {
-      message.error(auth_error, [2]);
+      message.error(auth_error, [2.5]);
       setTimeout(() => {
         resetAuthError();
       }, 2000);

@@ -229,7 +229,7 @@ function ProfileManage(routerProps) {
     formData.append("image", imagePreviewUrl);
     formData.append("shop_id", auth_user.account_id);
     uploadImage(formData, auth_user.account_id, account_profile.name, true);
-    message.success("Afbeelding succesvol opgeslagen.", [1]);
+    message.success("Afbeelding succesvol opgeslagen.", [2.5]);
     setTimeout(() => {
       setShowButton(true);
     }, 1000);
@@ -308,7 +308,7 @@ function ProfileManage(routerProps) {
         shop: auth_user.account_id,
       };
       updateValidOpenTime(account_valid_time_id, data);
-      message.success("Je openingstijden zijn aangepast.");
+      message.success("Je openingstijden zijn aangepast.", [2.5]);
       setValidChanged(false);
       setWeekDay("");
       setOpenTime("");
@@ -319,7 +319,7 @@ function ProfileManage(routerProps) {
 
   const showCheckCalendarModal = () => {
     if (checkDay === null) {
-      message.warning("Selecteer een dag a.u.b.");
+      message.warning("Selecteer een dag a.u.b.", [2.5]);
       return;
     }
     setInvalidTimeVisible(true);
@@ -361,7 +361,7 @@ function ProfileManage(routerProps) {
           });
         }
       } else if (weekDay === "") {
-        message.error("Selecteer een dag a.u.b.", [1]);
+        message.error("Selecteer een dag a.u.b.", [2.5]);
         return;
       } else {
         if (isCloseDay === true) {
@@ -414,7 +414,7 @@ function ProfileManage(routerProps) {
           return;
         }
       }
-      message.error("Heb je een tijd ingevoerd?", [1]);
+      message.error("Heb je een tijd ingevoerd?", [2.5]);
     }
   };
 
@@ -497,7 +497,7 @@ function ProfileManage(routerProps) {
       updateInvalidOpenTime(account_invalid_time_id, data).then((res) => {
         setInvalidTimeLoading(false);
       });
-      message.success("Je wijzigingen zijn succesvol opgeslagen.", [1]);
+      message.success("Je wijzigingen zijn succesvol opgeslagen.", [2.5]);
       getAccountProfile(auth_user.account_id);
       setInvalidChanged(false);
     }
@@ -533,7 +533,9 @@ function ProfileManage(routerProps) {
       // updateIrregularTime(); // is for setting checkDay "-" closed
     } else {
       if (checkOpenTime === null || checkCloseTime === null) {
-        message.warning("Heb je zowel een open als sluitingstijd aangegeven?");
+        message.warning("Heb je zowel een open als sluitingstijd aangegeven?", [
+          2.5,
+        ]);
         return;
       }
       if (timeValidate(checkOpenTime, checkCloseTime) === true) {
@@ -557,7 +559,7 @@ function ProfileManage(routerProps) {
         setInvalidTimeVisible(false);
         // updateIrregularTime(); // for checkOpenTime + "-" + checkCloseTime,
       } else {
-        message.error("Heb je een tijd geselecteerd?", [1]);
+        message.error("Heb je een tijd geselecteerd?", [2.5]);
       }
     }
   };
