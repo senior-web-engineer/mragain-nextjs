@@ -22,7 +22,7 @@ import {
 import "./Footer.less";
 import logo from "@/assets/images/logo.png";
 import { CookieBanner } from "@palmabit/react-cookie-law";
-import Link from "next/link"
+import Link from "next/link";
 
 // const IconFont = () => Icon.createFromIconfontCN({
 //   scriptUrl: "//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js",
@@ -99,14 +99,16 @@ const FooterView = ({ location }) => {
                   <Link href="/reparatie-en-service">Reparatie & Service</Link>
                 </li>
                 <li>
-                  <Link href="meld-je-aan-als-reparateur">Meld je aan als reparateur</Link>
+                  <Link href="meld-je-aan-als-reparateur">
+                    Meld je aan als reparateur
+                  </Link>
                 </li>
                 <li>
                   <Link href="/contact">Contact</Link>
                 </li>
-	        <li> 
-	          <Link href="/veel-gestelde-vragen">FAQ</Link>
-	        </li>
+                <li>
+                  <Link href="/veel-gestelde-vragen">FAQ</Link>
+                </li>
               </ul>
             </FooterSitemap>
             {/*<Servicing ClassName="custome-footer-servicing">
@@ -130,10 +132,13 @@ const FooterView = ({ location }) => {
               </ul>
             </Servicing>*/}
             <FollowUs className="follow-us">
-              <FollowUsTitle>Volg ons op</FollowUsTitle> 
+              <FollowUsTitle>Volg ons op</FollowUsTitle>
               <ul>
                 <li className="facebook">
-                  <a href="https://www.facebook.com/Mr-Again-105437267708409/" target="_blank">
+                  <a
+                    href="https://www.facebook.com/Mr-Again-105437267708409/"
+                    target="_blank"
+                  >
                     <div className="icon-circle">
                       <IconFont type="icon-facebook" theme="filled" />
                     </div>
@@ -149,7 +154,10 @@ const FooterView = ({ location }) => {
                   </a>
                 </li>
                 <li className="linkedin">
-                  <a href="https://www.linkedin.com/company/mragain/" target="_blank">
+                  <a
+                    href="https://www.linkedin.com/company/mragain/"
+                    target="_blank"
+                  >
                     <div className="icon-circle">
                       <Icon type="linkedin" theme="filled" />
                     </div>
@@ -157,7 +165,10 @@ const FooterView = ({ location }) => {
                   </a>
                 </li>
                 <li className="instagram">
-                  <a href="https://www.instagram.com/mragainofficial/" target="_blank">
+                  <a
+                    href="https://www.instagram.com/mragainofficial/"
+                    target="_blank"
+                  >
                     <div className="icon-circle">
                       <Icon type="instagram" theme="filled" />
                     </div>
@@ -172,12 +183,43 @@ const FooterView = ({ location }) => {
       <FooterCopyright> Copyright @ 2020 MrAgain </FooterCopyright>
       <CookieBanner
         message="We gebruiken cookies met als doel je een optimale gebruikerservaring te geven op onze website."
-        acceptButtonText="Accepteer"
         necessaryOptionText="Ja, ik wil graag een optimale website"
         cookie="user-has-accepted-cookies"
+        declineButtonText="Decline"
+        acceptButtonText="Accepteer"
+        // privacyPolicyLinkText="hhjghghkhjhjgj"
+        showDeclineButton={true}
         showPreferencesOption={false}
         showStatisticsOption={false}
         showMarketingOption={false}
+        // styles={{
+        //   dialog: {
+        //     position: "absolute",
+        //     top: "0px",
+        //     left: "0px",
+        //     right: "0px",
+        //     zIndex: "100000",
+        //     backgroundColor: "white",
+        //     padding: "20px",
+        //   },
+        //   container: { backgroundColor: "white", marginRight: "50px" },
+        //   // policy: { maxHeight: "20px" },
+        //   policy: {
+        //     fontSize: "10pt",
+        //     marginLeft: "10px",
+        //     color: "red",
+        //     maxHeight: "20px",
+        //     // overflow: "hidden",
+        //     textDecoration: "underline",
+        //   },
+        //   button: {
+        //     backgroundColor: "blue",
+        //     marginTop: "30px",
+        //     display: "inline",
+        //     alignItems: "center",
+        //     justifyContent: "center",
+        //   },
+        // }}
       />
     </FooterViewSection>
   );

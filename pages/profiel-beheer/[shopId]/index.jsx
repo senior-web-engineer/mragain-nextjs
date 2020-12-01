@@ -302,7 +302,7 @@ function ProfileManage(routerProps) {
     setIsEditOpenTimes(false);
     setIsEditOBtn("Wijzig openingstijden");
     if (isValidChanged === true) {
-      // setschedulTimeSlotLoading(true);
+      // setschedulTimseSlotLoading(true);
       data = {
         valid_day_time: JSON.stringify(openTimeTable),
         shop: auth_user.account_id,
@@ -310,6 +310,9 @@ function ProfileManage(routerProps) {
       updateValidOpenTime(account_valid_time_id, data);
       message.success("Je openingstijden zijn aangepast.");
       setValidChanged(false);
+      setWeekDay("");
+      setOpenTime("");
+      setCloseTime("");
     }
     getAccountProfile(auth_user.account_id);
   };
@@ -404,6 +407,9 @@ function ProfileManage(routerProps) {
                 [weekDay]: "",
               });
             }
+            setWeekDay("");
+            setOpenTime("");
+            setCloseTime("");
           }
           return;
         }
