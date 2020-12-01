@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Button, Progress, Rate } from "antd";
@@ -65,6 +65,12 @@ const ReviewCheckOut = (routerProps) => {
         setRecomPercent((recom / count).toFixed(2) * 100);
         setIsInit(true);
       }
+      //  else {
+      //   setPriceMark(0);
+      //   setQualityMark(1);
+      //   setServiceMark(1);
+      //   setWaitMark(1);
+      // }
     }
   }
 
@@ -153,7 +159,7 @@ const ReviewCheckOut = (routerProps) => {
                 <div className="review-history-modal-content">
                   {showModal === true &&
                     shopReviews.length > 0 &&
-                    shopReviews.map((el) => {
+                    shopReviews.reverse().map((el) => {
                       let m = moment(el.created_at);
                       let date = m.format("DD-MM-YYYY");
                       return (

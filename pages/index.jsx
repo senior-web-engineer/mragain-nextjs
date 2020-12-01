@@ -2,7 +2,6 @@ import Head from "next/head";
 import React, { useEffect } from "react";
 import { Layout, TestmonialSection } from "../components/global";
 import { FRONT_END_URL } from "../constants.js";
-import Link from "next/link";
 
 import { Main } from "@/styled-components/homepage.style";
 import { getPublishProfies } from "../lib/getPublishProfiles";
@@ -24,10 +23,7 @@ export default function Home() {
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title>Mr Again | De beste telefoon reparateurs </title>
-          <meta
-            name="google-site-verification"
-            content="x9yvGGGg9jIYKgnj3Q_eQh35g0_6trS-yDTHyKjhImc"
-          />
+
           <meta
             name="Keywords"
             content="Telefoon reparatie, Telefoon reparateurs, Scherm vervangen, Batterij vervangen, water schade, MrAgain, Tablet reparatie, Tablet reparateurs, telefoonscherm vervangen, scherm telefoon kapot, telefoonscherm kapot, waterschade telefoon, telefoon in water laten vallen, iphone 6 batterij vervangen, nieuwe batterij iphone 7, iphone reparateur, telefoon in wc gevallen, scherm reparatie, iphone glas vervangen, kapot scherm, iphone glas vervangen, scherm iphone 6, nieuw scherm iphone 6, iphone 6 glas vervangen, telefoonscherm reparatie, scherm ipad vervangen"

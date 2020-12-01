@@ -28,12 +28,12 @@ const MainContactUs = (props) => {
     if (form.checkValidity() === true) {
       const data = new FormData(event.target);
       if (ValidateEmail(data.get("email")) === false) {
-        message.error("You have entered an invalid email address!", [1]);
+        message.error("You have entered an invalid email address!", [2.5]);
         return;
       }
 
       if (ValidatePhoneNumber(data.get("telephone")) === false) {
-        message.error("Klopt je telefoonnummer?", [1]);
+        message.error("Klopt je telefoonnummer?", [2.5]);
         return;
       }
 
@@ -48,7 +48,7 @@ const MainContactUs = (props) => {
       contactUs(contacts);
       setShowModal(true);
     } else {
-      message.error("please input correct data", [1]);
+      message.error("please input correct data", [2.5]);
     }
   };
 
@@ -145,7 +145,10 @@ const MainContactUs = (props) => {
         >
           <Modal.Header closeButton></Modal.Header>
           <Modal.Body>
-            <p>Bedankt voor je bericht, indien nodig nemen we zo snel mogelijk contact met je op!</p>
+            <p>
+              Bedankt voor je bericht, indien nodig nemen we zo snel mogelijk
+              contact met je op!
+            </p>
             <p>{contents}</p>
           </Modal.Body>
         </Modal>
