@@ -313,6 +313,7 @@ function ProfileManage(routerProps) {
       setWeekDay("");
       setOpenTime("");
       setCloseTime("");
+      setIsCloseDay(false);
     }
     getAccountProfile(auth_user.account_id);
   };
@@ -407,9 +408,6 @@ function ProfileManage(routerProps) {
                 [weekDay]: "",
               });
             }
-            setWeekDay("");
-            setOpenTime("");
-            setCloseTime("");
           }
           return;
         }
@@ -440,6 +438,7 @@ function ProfileManage(routerProps) {
     setWeekDay("");
     setOpenTime("");
     setCloseTime("");
+    setIsCloseDay(false);
   };
 
   function onCheckOpenTimeChange(date, dateString) {

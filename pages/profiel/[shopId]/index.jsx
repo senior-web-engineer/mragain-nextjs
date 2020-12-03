@@ -8,7 +8,7 @@ import {
 } from "@/components/shop-profile";
 import { Layout } from "@/components/global";
 import {
-  getAccountProfile,
+  getShopAccountProfile,
   getShopIdByInformation,
 } from "service/account/operations.js";
 import { getReparationGuarantee } from "service/appointments/operations.js";
@@ -17,7 +17,7 @@ import { FRONT_END_URL } from "@/constants";
 
 const ShopProfile = (routerProps) => {
   const {
-    getAccountProfile,
+    getShopAccountProfile,
     getShopIdByInformation,
     getReparationGuarantee,
     match,
@@ -30,7 +30,7 @@ const ShopProfile = (routerProps) => {
     if (shop !== undefined && shop.length > 0) {
       let shop_id = shop[0].id;
       getReparationGuarantee(shop_id);
-      getAccountProfile(shop_id);
+      getShopAccountProfile(shop_id);
     } else {
       router.push("/");
     }
@@ -86,8 +86,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   // Action
   return {
-    getAccountProfile: (id) => {
-      getAccountProfile(id, dispatch);
+    getShopAccountProfile: (id) => {
+      getShopAccountProfile(id, dispatch);
     },
     getShopIdByInformation: (str) => getShopIdByInformation(str, dispatch),
     getReparationGuarantee: (id) => {

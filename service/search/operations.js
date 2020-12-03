@@ -9,9 +9,14 @@ import {
   setLoadService,
   fetchNewestShopList,
   setLoadFilter,
+  setShopDevices,
+  setDeviceBrands,
+  setShopReparationDetails,
+  setReparationData,
 } from "./action";
 import axios from "axios";
 import { logoutA } from "../account/action";
+import { DETAILS_OF_SHOP_REPARATION } from "./types";
 
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -61,10 +66,10 @@ export async function getSearchFilterField(dispatch) {
 export function getModelService(data, dispatch) {
   dispatch(setLoadService(false));
   axios
-    .get(`${API_PATH.GETMODELSERVICE}/`, { params: data })
+    .get(`${API_PATH.GETSHOPREPARATIONDETAILS}/`, { params: data })
     .then((res) => {
       dispatch(fetchModelServices(res.data));
-      // dispatch(setLoadService(true));
+      dispatch(setLoadService(true));
     })
     .catch((err) => {});
 }
@@ -96,6 +101,26 @@ export function searchShopFilter(data, dispatch) {
       dispatch(setFindOut(true));
       dispatch(resetShopFilterList());
     });
+}
+export function getShopDevices(id, dispatch) {
+  axios
+    .get(`${API_PATH.GETSHOPDEVICES}/?shop=${id}`)
+    .then((res) => {
+      dispatch(setShopDevices(res.data));
+      return res;
+    })
+    .catch((err) => {});
+}
+export async function getDeviceBrands(shopId, deviceId, dispatch) {
+  return await axios.get(
+    `${API_PATH.GETDEVICEBRANDS}/?shop=${shopId}&device=${deviceId}`
+  );
+}
+
+export async function getBrandModels(shopId, deviceId, brandId, dispatch) {
+  return await axios.get(
+    `${API_PATH.GETBRANDMODELS}/?shop=${shopId}&device=${deviceId}&brand=${brandId}`
+  );
 }
 
 export function contactUs(data, dispatch) {

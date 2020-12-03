@@ -11,6 +11,12 @@ import {
   SET_LOAD_FILTER,
   SET_SEARCH_FILTER,
   IS_FIND_OUT,
+  GET_SHOP_DEVICES,
+  GET_DEVICE_BRANDS,
+  GET_BRAND_MODELS,
+  GET_SHOP_REPARATION_DETAILS,
+  DETAILS_OF_SHOP_REPARATION,
+  REPARATION_DATA,
 } from "./types";
 
 const initial_state = {
@@ -32,6 +38,7 @@ const initial_state = {
     reparation: null,
   },
   isLoadFilter: false,
+  shopDevices: [],
 };
 
 const searchReducer = (state = initial_state, action) => {
@@ -228,6 +235,13 @@ const searchReducer = (state = initial_state, action) => {
         fieldlistRPG: fields,
       };
     }
+    case GET_SHOP_DEVICES: {
+      return {
+        ...state,
+        shopDevices: action.payload,
+      };
+    }
+
     default: {
       return state;
     }

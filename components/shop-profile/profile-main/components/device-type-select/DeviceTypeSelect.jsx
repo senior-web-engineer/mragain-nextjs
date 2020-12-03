@@ -1,11 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Select } from "antd";
-import {
-  getSearchFilterField,
-  getSearchFilterFieldExt,
-} from "service/search/operations.js";
-import { getModelService } from "service/search/operations.js";
+import { getBrandModels, getDeviceBrands } from "service/search/operations.js";
+import { getModelService, getShopDevices } from "service/search/operations.js";
 import "./DeviceTypeSelect.less";
 
 const { Option } = Select;
@@ -17,13 +14,20 @@ const DeviceTypeSelect = (routerProps) => {
   const [brandflg, setBrandflg] = React.useState(false);
   const [isShowModel, setShowModel] = React.useState(false);
   const [model, setModel] = React.useState(0);
+  const [shopId, setShopId] = React.useState(0);
+  const [deviceId, setDeviceId] = React.useState(0);
+  const [brandId, setBrandId] = React.useState(0);
+  const [shopDeviceBrands, setShopDeviceBrands] = React.useState([]);
+  const [shopBrandModels, setShopBrandModels] = React.useState([]);
+  // const [reparationDetails, setReparationDetails] = React.useState([]);
   const {
-    getSearchFilterField,
-    getSearchFilterFieldExt,
     filterlistPBM,
     filterlistRPG,
     shopReparationList,
     getModelService,
+    getShopDevices,
+    shopDevices,
+    deviceBrands,
     account_profile,
   } = routerProps;
 
@@ -41,12 +45,15 @@ const DeviceTypeSelect = (routerProps) => {
   }
 
   if (isLoad === false) {
-    getSearchFilterField();
     setLoad(true);
   }
 
   function handlePhoneChange(value) {
     setPhone(value);
+    setDeviceId(value);
+    getDeviceBrands(shopId, value).then((res) => {
+      setShopDeviceBrands(res.data);
+    });
     // setPhoneflg(true);
     if (brandflg === true) {
       setBrandflg(false);
@@ -56,6 +63,11 @@ const DeviceTypeSelect = (routerProps) => {
   }
 
   function handleBrandChange(value) {
+    console.log(value);
+    setBrandId(value);
+    getBrandModels(shopId, deviceId, value).then((res) => {
+      setShopBrandModels(res.data);
+    });
     setBrand(value);
     setBrandflg(true);
     setShowModel(true);
@@ -64,17 +76,23 @@ const DeviceTypeSelect = (routerProps) => {
 
   function handleModelChange(value) {
     setModel(value);
-    getSearchFilterFieldExt(value);
+
     let services = {
-      shop_id: account_profile.id,
-      device: phone,
-      brand: brand,
+      shop: shopId,
+      device: deviceId,
+      brand: brandId,
       model: value,
-      reparation: 0,
     };
     getModelService(services);
   }
 
+  useEffect(() => {
+    const id = account_profile.id;
+    if (id) {
+      getShopDevices(id);
+      setShopId(id);
+    }
+  }, [account_profile]);
   function initBrandSelect() {
     let show = false;
     let phoneObj = filterlistPBM.filter((el) => el.id === phone);
@@ -133,7 +151,7 @@ const DeviceTypeSelect = (routerProps) => {
       })
     );
   }
-
+  // console.log(shopDevices);
   return (
     <div className="device-type-select">
       <div className="device-type-wrap">
@@ -143,10 +161,10 @@ const DeviceTypeSelect = (routerProps) => {
           value={phone === 0 ? "Alle apparaten" : phone}
           onChange={handlePhoneChange}
         >
-          {filterlistPBM.map((element) => {
+          {shopDevices.map((element) => {
             return (
-              <Option value={element.id} key={element.id}>
-                {element.device_name}
+              <Option value={element.device_id} key={element.device_id}>
+                {element.device.device_name}
               </Option>
             );
           })}
@@ -157,7 +175,14 @@ const DeviceTypeSelect = (routerProps) => {
           onChange={handleBrandChange}
           value={brand === 0 ? "Alle merken" : brand}
         >
-          {initBrandSelect()}
+          {shopDeviceBrands.map((element) => {
+            return (
+              <Option value={element.brand_id} key={element.brand_id}>
+                {element.brand.brand_name}
+              </Option>
+            );
+          })}
+          {/* {initBrandSelect()} */}
         </Select>
         <Select
           className={isShowModel ? "model-select" : "model-select hidden"}
@@ -165,7 +190,14 @@ const DeviceTypeSelect = (routerProps) => {
           onChange={handleModelChange}
           value={model === 0 ? "Alle modellen" : model}
         >
-          {brandflg && initModelSelect()}
+          {shopBrandModels.map((element) => {
+            return (
+              <Option value={element.model_id} key={element.model_id}>
+                {element.model.model_name}
+              </Option>
+            );
+          })}
+          {/* {brandflg && initModelSelect()} */}
         </Select>
       </div>
     </div>
@@ -178,19 +210,26 @@ const mapStateToProps = (state) => ({
   filterlistRPG: state.search.fieldlistRPG,
   shopReparationList: state.appointment.shopReparationList,
   account_profile: state.account.account_profile,
+  shopDevices: state.search.shopDevices,
+  deviceBrands: state.search.deviceBrands,
+  brandModels: state.search.brandModels,
+  shopReparationDetails: state.search.shopReparationDetails,
 });
 
 const mapDispatchToProps = (dispatch) => {
   // Action
   return {
-    getSearchFilterField: (data) => {
-      getSearchFilterField(dispatch);
-    },
-    getSearchFilterFieldExt: (model_id) => {
-      getSearchFilterFieldExt(model_id, dispatch);
-    },
     getModelService: (data) => {
       getModelService(data, dispatch);
+    },
+    getShopDevices: (id) => {
+      getShopDevices(id, dispatch);
+    },
+    getDeviceBrands: (shopId, deviceId) => {
+      getDeviceBrands(shopId, deviceId, dispatch);
+    },
+    getBrandModels: (shopId, deviceId, brandId) => {
+      getBrandModels(shopId, deviceId, brandId, dispatch);
     },
   };
 };

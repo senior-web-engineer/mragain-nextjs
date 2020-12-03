@@ -89,15 +89,15 @@ export function registerUser(data, dispatch) {
 }
 
 export function getAuthUser(dispatch) {
-    axios
-      .get(`${API_PATH.GETAUTHUSER}/`, tokenConfig())
-      .then((res) => {
-        dispatch(registerAuthUser(res.data));
-      })
-      .catch((err) => {
-        dispatch(logoutA());
-      });
-  }
+  axios
+    .get(`${API_PATH.GETAUTHUSER}/`, tokenConfig())
+    .then((res) => {
+      dispatch(registerAuthUser(res.data));
+    })
+    .catch((err) => {
+      dispatch(logoutA());
+    });
+}
 
 export function login(data, dispatch) {
   dispatch(authenticated(true));
@@ -130,15 +130,13 @@ export function login(data, dispatch) {
 }
 
 export function loginAsUser(token) {
-    axios
-    .post(`${API_PATH.LOGINASUSER}/`, 
-        token
-    )
+  axios
+    .post(`${API_PATH.LOGINASUSER}/`, token)
     .then((res) => {
-      console.log(res, '------ res -------');
+      console.log(res, "------ res -------");
     })
     .catch((err) => {
-      console.log(err, '------ error -------')
+      console.log(err, "------ error -------");
     });
 }
 
@@ -187,7 +185,7 @@ export function getAccountSettings(data, dispatch) {
       dispatch(fetchAccountSettings(res.data));
     })
     .catch((err) => {
-        dispatch(logoutA());
+      dispatch(logoutA());
     });
 }
 
@@ -198,7 +196,7 @@ export function getDevices(dispatch) {
       dispatch(fetchRepairDevices(res.data));
     })
     .catch((err) => {
-        dispatch(logoutA());
+      dispatch(logoutA());
     });
 }
 
@@ -206,6 +204,9 @@ export function getShopIdByInformation(str, dispatch) {
   return axios
     .get(`${API_PATH.GETSHOPIDBYINFORMATION}/`, { params: { shop_info: str } })
     .then((res) => {
+      console.log(res.data);
+      dispatch(initAccountProfile(res.data));
+
       return res.data;
     })
     .catch((err) => {});
@@ -221,17 +222,17 @@ export function getShopBrandModel(data, dispatch) {
       // dispatch(setLoadPBM(true));
     })
     .catch((err) => {
-        dispatch(logoutA());
+      dispatch(logoutA());
     });
 }
 
 export async function getShopRepairation(data, dispatch) {
-    const res = await axios.get(
-      `${API_PATH.GETSHOPREPAIRATION}`,
-      tokenConfigGet(data)
-    );
-    return res;
-  }
+  const res = await axios.get(
+    `${API_PATH.GETSHOPREPAIRATION}`,
+    tokenConfigGet(data)
+  );
+  return res;
+}
 
 export async function updateAccountSettings(id, data, dispatch) {
   return await axios
@@ -302,9 +303,46 @@ export function getSimpleAccountInformation(id, dispatch) {
       dispatch(setLoadedProfile(true));
     })
     .catch((err) => {
-        dispatch(logoutA());
+      dispatch(logoutA());
     });
 }
+// to get searched shop information
+export function getShopAccountProfile(id, dispatch) {
+  let shopDevices;
+  let validTime;
+  let invalidTime;
+  let reviews;
+  dispatch(setLoadedProfile(false));
+
+  axios
+    .get(`${API_PATH.GETVALIDOPENTIME}/${id}/`)
+    .then((res) => {
+      validTime = res.data;
+      axios
+        .get(`${API_PATH.GETINVALIDOPENTIME}/${id}/`)
+        .then((res) => {
+          invalidTime = res.data;
+          axios
+            .get(`${API_PATH.GETREVIEWS}/${id}/`)
+            .then((res) => {
+              reviews = res.data;
+              if (reviews.length === 0) {
+                reviews = [];
+              }
+
+              dispatch(initAccountValidTime(validTime));
+              dispatch(initAccountInvalidTime(invalidTime));
+              dispatch(initAccountReviews(reviews));
+              dispatch(setLoadedProfile(true));
+            })
+            .catch((err) => {});
+        })
+        .catch((err) => {});
+    })
+    .catch((err) => {});
+}
+
+// to get main shop profile info
 export function getAccountProfile(id, dispatch) {
   let profile;
   let validTime;
@@ -315,6 +353,7 @@ export function getAccountProfile(id, dispatch) {
     .get(`${API_PATH.UPDATEACCOUNTPROFILE}/${id}/`)
     .then((res) => {
       profile = res.data;
+      console.log(profile);
       axios
         .get(`${API_PATH.GETVALIDOPENTIME}/${id}/`)
         .then((res) => {
@@ -387,7 +426,7 @@ export async function uploadImage(data, id, name, flg, dispatch) {
 }
 
 /**
- * @description: Function called to upadate the account with the details liek image , id etc 
+ * @description: Function called to upadate the account with the details liek image , id etc
  *
  * @export
  * @param {*} id
@@ -398,7 +437,7 @@ export function updateAccountProfile(id, data, dispatch) {
   axios
     .post(`${API_PATH.UPDATEACCOUNTDETAIL}`, data, tokenConfig())
     .then((res) => {
-      console.log("updateAccountProfile -> res",res);
+      console.log("updateAccountProfile -> res", res);
       return res;
     })
     .catch((err) => {
@@ -421,23 +460,23 @@ export function updateValidOpenTime(id, data, dispatch) {
 }
 
 export function updateInvalidOpenTime(id, data, dispatch) {
-    const res = axios.put(
-      `${API_PATH.UPDATEINVALIDOPENTIME}/${id}/`,
-      data,
-      tokenConfig()
-    );
-    return res;
-    // .then((res) => {
-    //   // console.log("success");
-    //   console.log(res);
-    //   // dispatch(setHandleCheckTime(true));
-    //   return res;
-    // })
-    // .catch((err) => {
-    //   console.log("error");
-    //   dispatch(setHandleCheckTime(true));
-    // });
-  }
+  const res = axios.put(
+    `${API_PATH.UPDATEINVALIDOPENTIME}/${id}/`,
+    data,
+    tokenConfig()
+  );
+  return res;
+  // .then((res) => {
+  //   // console.log("success");
+  //   console.log(res);
+  //   // dispatch(setHandleCheckTime(true));
+  //   return res;
+  // })
+  // .catch((err) => {
+  //   console.log("error");
+  //   dispatch(setHandleCheckTime(true));
+  // });
+}
 
 export function createRepairDevice(data, dispatch) {
   axios
@@ -452,7 +491,7 @@ export function createRepairDevice(data, dispatch) {
           dispatch(fetchRepairDevices(res.data));
         })
         .catch((err) => {
-            dispatch(logoutA());
+          dispatch(logoutA());
         });
     })
     .catch((err) => {});
@@ -478,7 +517,7 @@ export function createGuaranteeModels(data, dispatch) {
           dispatch(setSuccessData(null));
         })
         .catch((err) => {
-            dispatch(logoutA());
+          dispatch(logoutA());
         });
       dispatch(setCreatedGuarantee(true));
     })
@@ -499,7 +538,6 @@ export function deleteRepairDevice(id, dispatch) {
       axios
         .get(`${API_PATH.REPAIRDEVICES}/`, tokenConfig())
         .then((res) => {
-
           dispatch(fetchRepairDevices(res.data));
         })
         .catch((err) => {
@@ -510,43 +548,43 @@ export function deleteRepairDevice(id, dispatch) {
 }
 
 export const deleteGuaranteeModels = async (data, dispatch) => {
-    dispatch(setDeletedGuarantee(false));
-    await axios
-      .put(`${API_PATH.DELETEGUARANTEEMODELS}`, data, tokenConfig())
-      .then((res) => {
-        // axios
-        //   .get(
-        //     `${API_PATH.REPAIRBRANDMODEL}/${data.shop_id}/`,
-        //     tokenConfigGet({
-        //       shop: data.shop_id,
-        //       device: data.device_id,
-        //     })
-        //   )
-        //   .then((res) => {
-        //     dispatch(fetchShopModelGuarantee(res.data));
-        //   })
-        //   .catch((err) => {
-        //     dispatch(logoutA());
-        //   });
-  
-        dispatch(setDeletedGuarantee(true));
-      })
-      .catch((err) => {});
-  };
+  dispatch(setDeletedGuarantee(false));
+  await axios
+    .put(`${API_PATH.DELETEGUARANTEEMODELS}`, data, tokenConfig())
+    .then((res) => {
+      // axios
+      //   .get(
+      //     `${API_PATH.REPAIRBRANDMODEL}/${data.shop_id}/`,
+      //     tokenConfigGet({
+      //       shop: data.shop_id,
+      //       device: data.device_id,
+      //     })
+      //   )
+      //   .then((res) => {
+      //     dispatch(fetchShopModelGuarantee(res.data));
+      //   })
+      //   .catch((err) => {
+      //     dispatch(logoutA());
+      //   });
 
-  export const createImportReparationAndGuaranteeCSV = async (data, options) => {
-    const configure = {
-      onUploadProgress: (progressEvent) => console.log(progressEvent.loaded),
-    };
-    const config = tokenConfigOnly();
-    const result = await axios.post(
-      `${API_PATH.IMPORTCSV}`,
-      data,
-      config,
-      configure
-    );
-    return result;
+      dispatch(setDeletedGuarantee(true));
+    })
+    .catch((err) => {});
+};
+
+export const createImportReparationAndGuaranteeCSV = async (data, options) => {
+  const configure = {
+    onUploadProgress: (progressEvent) => console.log(progressEvent.loaded),
   };
+  const config = tokenConfigOnly();
+  const result = await axios.post(
+    `${API_PATH.IMPORTCSV}`,
+    data,
+    config,
+    configure
+  );
+  return result;
+};
 
 export const getExportReparationAndGuaranteeCSV = async (data) => {
   const result = await Axios.get(

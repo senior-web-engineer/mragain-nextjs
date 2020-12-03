@@ -44,9 +44,9 @@ export const loginFail = () => ({
 });
 
 export const authenticated = (data) => ({
-    type: CHECK_AUTHENTICATION,
-    payload: data,
-  });
+  type: CHECK_AUTHENTICATION,
+  payload: data,
+});
 
 export const resetPasswordFail = (data) => ({
   payload: data,
@@ -156,11 +156,11 @@ export const setDeletedGuarantee = (data) => ({
 });
 
 export const setUpdateScheduleTime = (data) => ({
-    type: UPDATE_SCHEDULE_TIME,
-    payload: data,
-  });
-  
+  type: UPDATE_SCHEDULE_TIME,
+  payload: data,
+});
+
 export const setSuccessData = (data) => ({
-    type: SET_SUCESS_DATA,
-    payload: data,
+  type: SET_SUCESS_DATA,
+  payload: data,
 });

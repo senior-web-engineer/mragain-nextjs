@@ -11,6 +11,9 @@ import {
   SET_LOAD_FILTER,
   SET_SEARCH_FILTER,
   IS_FIND_OUT,
+  GET_SHOP_DEVICES,
+  DETAILS_OF_SHOP_REPARATION,
+  REPARATION_DATA,
 } from "./types";
 
 export const setLoadFilter = (data) => ({
@@ -70,5 +73,10 @@ export const fetchModelServices = (data) => ({
 
 export const setLoadService = (data) => ({
   type: SET_LOAD_SERVICE,
+  payload: data,
+});
+
+export const setShopDevices = (data) => ({
+  type: GET_SHOP_DEVICES,
   payload: data,
 });
