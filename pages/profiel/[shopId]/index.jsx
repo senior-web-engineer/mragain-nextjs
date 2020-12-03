@@ -35,10 +35,12 @@ const ShopProfile = (routerProps) => {
       router.push("/");
     }
   }
-
-  getShopId(router.query.shopId);
+  const id = router.query.shopId;
+  if (id !== undefined) {
+    getShopId(router.query.shopId);
+  }
   const shopId = router.query.shopId;
-  // console.log(FRONT_END_URL + "/profiel/" + shopId);
+  console.log(FRONT_END_URL + "/profiel/" + shopId);
   console.log(router.asPath);
 
   return (

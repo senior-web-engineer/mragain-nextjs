@@ -12,13 +12,13 @@
 //   : "https://mragain.eu.pythonanywhere.com"
 
 // export const FRONT_END_URL = isProduct
-//   ? "https://mragain.nl" 
+//   ? "https://mragain.nl"
 //   : "https://develop.mragain.nl";
 export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const BACK_END_URL = process.env.NEXT_PUBLIC_BACK_END_URL;
 export const FRONT_END_URL = process.env.NEXT_PUBLIC_FRONT_END_URL;
 
-console.log("API_URL",API_URL)
+console.log("API_URL", API_URL);
 export const API_PATH = {
   SEARCH: `${API_URL}/searchshop`,
   CONTACTUS: `${API_URL}/contact-us`,
@@ -70,6 +70,10 @@ export const API_PATH = {
   EXPORTCSV: `${API_URL}/export-csv/`,
   IMPORTCSV: `${API_URL}/import-csv/`,
   GETSHOPPUBLISHPROFILE: `${API_URL}/get-shops-publish-profile/`,
+  GETSHOPDEVICES: `${API_URL}/get-shop-devices`,
+  GETDEVICEBRANDS: `${API_URL}/get-shop-brands`,
+  GETBRANDMODELS: `${API_URL}/get-shop-models`,
+  GETSHOPREPARATIONDETAILS: `${API_URL}/get-shop-reparations`,
 };
 
 export default {
