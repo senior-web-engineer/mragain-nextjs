@@ -14,10 +14,12 @@ const ShopInfoCard = (routerProps) => {
   const { getAccountProfile, getReparationGuarantee } = routerProps;
   const router = useRouter();
   const onProfilePage = (shop_name, city, street) => {
-    // console.log("Profile Page");
-    const shop = shop_name.replace(" ", "-");
-    const cityName = city.replace(" ", "-");
-    const streetName = street.replace(" ", "-");
+    const shop = shop_name.replaceAll(" ", "-");
+    const cityName = city.replaceAll(" ", "-");
+    const streetName = street.replaceAll(" ", "-");
+    // console.log(shop);
+    // console.log(cityName);
+    // console.log(streetName);
     router.push(`/profiel/${shop}--${cityName}--${streetName}`);
   };
 
