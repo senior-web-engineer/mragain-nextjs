@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useRouter } from "next/router"
+import { useRouter } from "next/router";
 import { Card } from "react-bootstrap";
 import { CardInfo } from "./ShopInfoCard.style.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,7 +14,11 @@ const ShopInfoCard = (routerProps) => {
   const { getAccountProfile, getReparationGuarantee } = routerProps;
   const router = useRouter();
   const onProfilePage = (shop_name, city, street) => {
-    router.push(`/profiel/${shop_name}-${city}-${street}`);
+    // console.log("Profile Page");
+    const shop = shop_name.replace(" ", "-");
+    const cityName = city.replace(" ", "-");
+    const streetName = street.replace(" ", "-");
+    router.push(`/profiel/${shop}--${cityName}--${streetName}`);
   };
 
   function onMakeAppointment(shop_id) {
