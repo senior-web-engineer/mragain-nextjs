@@ -72,10 +72,21 @@ const MyMapComponent = compose(
   withGoogleMap
 )((props) => {
   const router = useRouter();
-  function goShopProfile(shop_name, city, street) {
-    router.push(`/profiel/${shop_name}-${city}-${street}`);
-    console.log("profile-push one")	  
-  }
+  const goShopProfile = (shop_name, city, street) => {
+    const shop = shop_name.replaceAll(" ", "-");
+    const cityName = city.replaceAll(" ", "-");
+    const streetName = street.replaceAll(" ", "-");
+    // console.log(shop);
+    // console.log(cityName);
+    // console.log(streetName);
+    router.push(`/profiel/${shop}--${cityName}--${streetName}`);
+};
+
+ // This function is replaced by the constraint above. 	  
+ // function goShopProfile(shop_name, city, street) {
+ //   router.push(`/profiel/${shop_name}-${city}-${street}`);
+ //   console.log("profile-push one")	  
+ // }
   const [shopInfo, setshopInfo] = useState(null);
   return (
     <GoogleMap
