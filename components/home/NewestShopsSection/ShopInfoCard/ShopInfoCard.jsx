@@ -11,6 +11,7 @@ const ShopInfoCard = (params) => (
     <Card.Img
       variant="top"
       src={ BACK_END_URL + params.image }
+      alt="Reparateur-profielfoto"	
       onClick={() => {
         params.onprofilepage();
       }}
