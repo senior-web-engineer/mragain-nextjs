@@ -86,7 +86,7 @@ const MyMapComponent = compose(
           return (
             <Marker
               key={shop.name}
-              position={{ lat: shop.geo_lat, lng: shop.geo_long }}
+              position={{ lat: parseFloat(shop.geo_lat), lng: parseFloat(shop.geo_long) }}
               draggable={shopInfo === shop.id ? true : false}
               ref={props.onMarkerMounted}
               onPositionChanged={props.onPositionChanged}
