@@ -87,6 +87,7 @@ const NewestShopSection = (routerProps) => {
                       ? el.bg_photo
                       : image3
                   }
+		  alt= "Reparateur-profielfoto"    
                   key={el.id}
                   onprofilepage={() =>
                     onProfilePage(el.name, el.city, el.street)
