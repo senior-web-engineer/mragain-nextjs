@@ -74,6 +74,7 @@ const MyMapComponent = compose(
   const router = useRouter();
   function goShopProfile(shop_name, city, street) {
     router.push(`/profiel/${shop_name}-${city}-${street}`);
+    console.log("profile-push one")	  
   }
   const [shopInfo, setshopInfo] = useState(null);
   return (
