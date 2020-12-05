@@ -43,7 +43,6 @@
     "react-switch": "^5.0.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "semantic-ui-calendar-react": "^0.15.3",
     "semantic-ui-react": "^2.0.1",
     "slick-carousel": "^1.8.1",
     "styled-components": "^4.4.1",

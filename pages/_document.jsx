@@ -39,7 +39,8 @@ export default class MyDocument extends Document {
           />
           <link rel="manifest" href="/manifest.json" />
 
-          <script src="https://cdn.jsdelivr.net/npm/semantic-ui-calendar-react@latest/dist/umd/semantic-ui-calendar-react.js"></script>
+	    // Disabled this script as we do not use it! 
+	    {/* <script src="https://cdn.jsdelivr.net/npm/semantic-ui-calendar-react@latest/dist/umd/semantic-ui-calendar-react.js"></script>*/}
           {/* We only want to add the scripts if in production */}
           
         </Head>
