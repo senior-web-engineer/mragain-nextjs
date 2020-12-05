@@ -62,8 +62,7 @@ const ShopInfoCard = (routerProps) => {
     <Card>
       <Card.Img
         variant="top"
-        src={routerProps.image}
-	alt="Reparateur-profielfoto"  
+        <img src={routerProps.image} alt="Reparateur-profielfoto" /> 
         onClick={() =>
           onProfilePage(
             routerProps.shop_name,
