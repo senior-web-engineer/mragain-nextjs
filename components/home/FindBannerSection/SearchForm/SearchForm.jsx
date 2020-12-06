@@ -13,6 +13,7 @@ const SearchForm = (routerProps) => {
   const router = useRouter();
 
   function handleChange(e) {
+  console.log("handleChange is called")	  
     setLocation(e.target.value);
   }
 
@@ -20,7 +21,7 @@ const SearchForm = (routerProps) => {
 	  // it triggers by pressing the enter key
   console.log("handleKeypress function is being called")
     if (e.keyCode === 13) {
-      handleChange();	    
+      onSearch();	    
     }
   };
 
