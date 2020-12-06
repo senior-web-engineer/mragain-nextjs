@@ -19,8 +19,7 @@ const SearchForm = (routerProps) => {
 
   const handleKeyPress = e => {
     if (e.keyCode === 13) {
-      this.btn.click();
-    else 	    
+      this.btn.click();	    
     }
   }
  
