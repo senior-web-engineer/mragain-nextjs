@@ -10,7 +10,7 @@ import "./SearchForm.style.less";
 const SearchForm = (routerProps) => {
   const { setFindedLocation, setSearchFilter } = routerProps;
   const [location, setLocation] = useState("");
-  const router = useRouter();
+  const router = useRouter();}
 
   function handleChange(e) {
     setLocation(e.target.value);
@@ -19,7 +19,7 @@ const SearchForm = (routerProps) => {
   const handleKeypress = e => {
 	  // it triggers by pressing the enter key
     if (e.keyCode === 13) {
-	    handleChange()
+	    handleChange();
     }
   }
 
@@ -30,18 +30,6 @@ const SearchForm = (routerProps) => {
       return;
     }
     setFindedLocation(loc);
-    // if (location !== "") {
-    //   let filter = {
-    //     location: loc,
-    //     distance: 0,
-    //     phone: 0,
-    //     brand: 0,
-    //     model: 0,
-    //     reparation: 0,
-    //     price: -1,
-    //     guarantee: -1,
-    //     sort: 0,
-    //   };
     let _filters = {
       isSearchFilter: false,
       filters: {
