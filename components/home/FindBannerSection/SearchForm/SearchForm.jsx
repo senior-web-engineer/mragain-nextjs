@@ -17,10 +17,10 @@ const SearchForm = (routerProps) => {
     setLocation(e.target.value);
   }
 
-  function handleKeypress(event) {
+  function handleKeypress(e) {
 	  // it triggers by pressing the enter key
   console.log("handleKeypress function is being called")
-    var x = event.keyCode	  
+    var x = e.keyCode	  
     if (x === 13) {
   console.log("keycode=enter")	    
       document.getElementById("Button").click();	    
@@ -72,7 +72,7 @@ const SearchForm = (routerProps) => {
           onChange={(e) => {
             handleChange(e);
           }}
-	  onKeyPress={handleKeypress(event)}
+	  onKeyPress={(e) => {handleKeypress(e)}}
         />
         <Button
           variant="light-green"
