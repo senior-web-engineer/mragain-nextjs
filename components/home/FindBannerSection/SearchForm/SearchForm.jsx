@@ -16,6 +16,13 @@ const SearchForm = (routerProps) => {
     setLocation(e.target.value);
   }
 
+  const handleKeypress = e => {
+	  // it triggers by pressing the enter key
+    if (e.keyCode === 13) {
+	    handleChange();
+    }
+  };
+
   function onSearch() {
     let loc = location;
     if (loc === "zipcode-error") {
@@ -76,6 +83,7 @@ const SearchForm = (routerProps) => {
           onChange={(e) => {
             handleChange(e);
           }}
+	  onKeyPress={(e) => {handleKeyPress}};
         />
         <Button
           variant="light-green"
