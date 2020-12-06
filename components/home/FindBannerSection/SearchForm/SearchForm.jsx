@@ -21,7 +21,7 @@ const SearchForm = (routerProps) => {
     if (e.keyCode === 13) {
 	    handleChange();
     }
-  };
+  }
 
   function onSearch() {
     let loc = location;
