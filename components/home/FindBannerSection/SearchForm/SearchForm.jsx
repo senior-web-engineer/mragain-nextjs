@@ -21,7 +21,7 @@ const SearchForm = (routerProps) => {
 	  // it triggers by pressing the enter key
   console.log("handleKeypress function is being called")
     if (e.keyCode === 13) {
-      onSearch();	    
+      this.btn.click();	    
     }
   };
 
@@ -78,6 +78,7 @@ const SearchForm = (routerProps) => {
           onClick={() => {
             onSearch();
           }}
+	  ref={node => (this.btn = node)}
         >
           Zoek
         </Button>
