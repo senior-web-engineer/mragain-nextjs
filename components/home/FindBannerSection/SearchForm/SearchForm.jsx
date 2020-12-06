@@ -68,7 +68,7 @@ const SearchForm = (routerProps) => {
           onChange={(e) => {
             handleChange(e);
           }}
-	  onKeyPress={handleKeyPress}
+	  onKeyPress={handleKeypress}
         />
         <Button
           variant="light-green"
