@@ -17,7 +17,7 @@ const SearchForm = (routerProps) => {
     setLocation(e.target.value);
   }
 
-  const handleKeyPress = e => {
+  function handleKeyPress(e) {
     if (e.keyCode === 13) {
       this.btn.click();	    
     }
@@ -73,7 +73,7 @@ const SearchForm = (routerProps) => {
         <Button
           variant="light-green"
           type="submit"
-	  ref={()node => (this.btn = node()}
+	  ref={node => (this.btn = node)}
           onClick={() => {
             onSearch();
           }}
