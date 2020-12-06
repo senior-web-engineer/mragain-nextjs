@@ -69,7 +69,7 @@ const SearchForm = (routerProps) => {
           onChange={(e) => {
             handleChange(e);
           }}
-	  onKeyPress={handleKeypress;}
+	  onKeyPress={handleKeypress}
 	  console.log("handleykeypress is now going to be called");
         />
         <Button
