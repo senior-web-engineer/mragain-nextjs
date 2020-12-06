@@ -10,7 +10,7 @@ import "./SearchForm.style.less";
 const SearchForm = (routerProps) => {
   const { setFindedLocation, setSearchFilter } = routerProps;
   const [location, setLocation] = useState("");
-  const router = useRouter();}
+  const router = useRouter();
 
   function handleChange(e) {
     setLocation(e.target.value);
@@ -19,9 +19,9 @@ const SearchForm = (routerProps) => {
   const handleKeypress = e => {
 	  // it triggers by pressing the enter key
     if (e.keyCode === 13) {
-	    handleChange();
+      handleChange();	    
     }
-  }
+  };
 
   function onSearch() {
     let loc = location;
@@ -59,9 +59,6 @@ const SearchForm = (routerProps) => {
         </CommonText>
         <GreenText></GreenText>
       </div>
-      {/*<div className="form-subtitle">
-        <GreenText>Vind de beste reparateur bij jou in de buurt</GreenText>
-      </div>*/}
       <div className="form-group">
         <input
           type="input"
@@ -71,7 +68,7 @@ const SearchForm = (routerProps) => {
           onChange={(e) => {
             handleChange(e);
           }}
-	  onKeyPress={(e) => {handleKeyPress;}}
+	  onKeyPress={handleKeyPress}
         />
         <Button
           variant="light-green"
