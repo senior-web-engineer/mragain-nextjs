@@ -21,6 +21,7 @@ const SearchForm = (routerProps) => {
 	  // it triggers by pressing the enter key
   console.log("handleKeypress function is being called")
     if (e.keyCode === 13) {
+  console.log("keycode=enter")	    
       document.getElementById("Button").click();	    
     }
   };
