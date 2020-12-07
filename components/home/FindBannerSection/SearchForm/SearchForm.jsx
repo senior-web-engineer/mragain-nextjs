@@ -18,8 +18,9 @@ const SearchForm = (routerProps) => {
   }
 
   function handleKeyPress(e) {
-    if (e === 13) {
-      this.btn.click();
+    console.log(e);
+    if (e.key === "Enter") {
+      btnInput.current.click();
     }
   }
 
