@@ -7,7 +7,7 @@ import {
 const AccountVerification = () => {
     const router = useRouter();
     const { mainid, subid } = router.query;
-    const success = "Je email is geverifieerd, je kunt nu inloggen";
+    const success = "Je account is geactiveerd, je kunt nu inloggen!";
 
     const data = {
         mainid: mainid,
