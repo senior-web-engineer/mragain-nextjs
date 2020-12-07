@@ -3,26 +3,26 @@ import { connect } from "react-redux";
 import { Button } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { setFindedLocation, setSearchFilter } from "service/search/action.js";
-import lib from "@/assets/js/lib";
 import { CommonText, GreenText } from "./SearchForm.style.jsx";
 import "./SearchForm.style.less";
 
 const SearchForm = (routerProps) => {
   const { setFindedLocation, setSearchFilter } = routerProps;
+  let btnInput = React.createRef();
   const [location, setLocation] = useState("");
   const router = useRouter();
 
   function handleChange(e) {
-  console.log("handleChange is called")	  
+    console.log("handleChange is called");
     setLocation(e.target.value);
   }
 
   function handleKeyPress(e) {
     if (e === 13) {
-      this.btn.click();	    
+      this.btn.click();
     }
   }
- 
+
   function onSearch() {
     let loc = location;
     if (loc === "zipcode-error") {
@@ -68,13 +68,14 @@ const SearchForm = (routerProps) => {
           onChange={(e) => {
             handleChange(e);
           }}
-	  onKeyPress={(e) => {handleKeyPress(e);
-	  }}
+          onKeyPress={(e) => {
+            handleKeyPress(e);
+          }}
         />
         <Button
           variant="light-green"
           type="submit"
-	  ref={node => (this.btn = node)}
+          ref={btnInput}
           onClick={() => {
             onSearch();
           }}
