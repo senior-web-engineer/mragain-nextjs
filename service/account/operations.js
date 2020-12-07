@@ -234,6 +234,13 @@ export async function getShopRepairation(data, dispatch) {
   return res;
 }
 
+export async function verifyAccount(data, dispatch) {
+    const res = await axios.get(
+        `${API_PATH.VERIFYACCOUNT}/${data.mainid}/${data.subid}/`
+    )
+    return res;
+}
+
 export async function updateAccountSettings(id, data, dispatch) {
   return await axios
     .put(`${API_PATH.ACCOUNTSETTING}/${id}/`, data, tokenConfig())

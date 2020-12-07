@@ -50,6 +50,7 @@ export const API_PATH = {
   CREATESHOPREPAIRSERVICE: `${API_URL}/create-shop-repair-service`,
   REPAIRBRANDMODEL: `${API_URL}/repair-brand-model`,
   GETSHOPREPAIRATION: `${API_URL}/get-shop-reparation`,
+  VERIFYACCOUNT: `${API_URL}/activate`,
   SHOPGUARANTEE: `${API_URL}/shop-guarantee-reparation`,
   GUARANTEEMODELS: `${API_URL}/shop-guarantee-reparation`,
   GETAPPOINTMENTS: `${API_URL}/get-appointments`,
