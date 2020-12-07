@@ -39,13 +39,13 @@ function Login(routerProps) {
     if (localStorage.getItem("auth-token") !== null) {
       console.log("object-1");
       const user = JSON.parse(localStorage.getItem("auth-user"));
-      router.push(`/dashboard/${user.account_id}`);
+      router.push(`/dashboard/${user.name.replaceAll(" ", "-")}`);
     }
     if (isLogged === true) {
       console.log("object-2");
-
+      console.log(auth_user);
       if (auth_user.id !== undefined) {
-        router.push(`/dashboard/${auth_user.account_id}`);
+        router.push(`/dashboard/${auth_user.name.replaceAll(" ", "-")}`);
       }
     }
     console.log("isAuthenticated" + isAuthenticated);

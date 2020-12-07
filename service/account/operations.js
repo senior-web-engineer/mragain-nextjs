@@ -343,7 +343,7 @@ export function getShopAccountProfile(id, dispatch) {
 }
 
 // to get main shop profile info
-export function getAccountProfile(id, dispatch) {
+export function getAccountProfile(id, str, dispatch) {
   let profile;
   let validTime;
   let invalidTime;
@@ -353,7 +353,47 @@ export function getAccountProfile(id, dispatch) {
     .get(`${API_PATH.UPDATEACCOUNTPROFILE}/${id}/`)
     .then((res) => {
       profile = res.data;
-      console.log(profile);
+      axios
+        .get(`${API_PATH.GETVALIDOPENTIME}/${id}/`)
+        .then((res) => {
+          validTime = res.data;
+          axios
+            .get(`${API_PATH.GETINVALIDOPENTIME}/${id}/`)
+            .then((res) => {
+              invalidTime = res.data;
+              axios
+                .get(`${API_PATH.GETREVIEWS}/${id}/`)
+                .then((res) => {
+                  reviews = res.data;
+                  if (reviews.length === 0) {
+                    reviews = [];
+                  }
+                  dispatch(initAccountProfile(profile));
+                  dispatch(initAccountValidTime(validTime));
+                  dispatch(initAccountInvalidTime(invalidTime));
+                  dispatch(initAccountReviews(reviews));
+                  dispatch(setLoadedProfile(true));
+                })
+                .catch((err) => {});
+            })
+            .catch((err) => {});
+        })
+        .catch((err) => {});
+    })
+    .catch((err) => {});
+}
+
+// same as above for shop profile
+export function getShopProfileAccount(id, str, dispatch) {
+  let profile;
+  let validTime;
+  let invalidTime;
+  let reviews;
+  dispatch(setLoadedProfile(false));
+  axios
+    .get(`${API_PATH.GETSHOPIDBYINFORMATION}/`, { params: { shop_info: str } })
+    .then((res) => {
+      profile = res.data;
       axios
         .get(`${API_PATH.GETVALIDOPENTIME}/${id}/`)
         .then((res) => {

@@ -9,7 +9,7 @@ import tempimg from "@/assets/images/profile_photo.jpg";
 import { createRepairDevice, getDevices } from "service/account/operations.js";
 import { setGuaranteeDevice } from "service/account/action.js";
 import { getShopBrandModel } from "service/account/operations.js";
-import Head from 'next/head';
+import Head from "next/head";
 import { FRONT_END_URL } from "../../../constants.js";
 import { Layout } from "@/components/global";
 
@@ -29,21 +29,18 @@ const ReparationGuarantee = (routerProps) => {
 
   const router = useRouter();
 
-  const url_shopId = parseInt(router.query.shopId);
+  const url_shopId = router.query.shopId;
 
   useEffect(() => {
     if (isload === true) {
       let auth_user = JSON.parse(localStorage.getItem("auth-user"));
-      if (
-        auth_user === null ||
-        parseInt(auth_user.account_id) !== parseInt(router.query.shopId)
-      ) {
+      if (auth_user === null || auth_user.name !== router.query.shopId) {
         router.push("/");
       }
       getDevices();
       setIsLoad(false);
     }
-  }, [isload])
+  }, [isload]);
   // console.log(isLoggedIn);
   // if (isLoggedIn === false) {
   //   return <Redirect to="/" />;
@@ -137,7 +134,11 @@ const ReparationGuarantee = (routerProps) => {
           />
           <meta name="og:url" content={FRONT_END_URL} />
           <meta property="og:image" content="" />
-          <meta name="og_site_name" property="og:site_name" content="Mr Again" />
+          <meta
+            name="og_site_name"
+            property="og:site_name"
+            content="Mr Again"
+          />
           <meta name="theme-color" content="#ffffff" />
         </Head>
         <div className="main-title">
@@ -191,12 +192,12 @@ const ReparationGuarantee = (routerProps) => {
                             className="guarantee-device-edit-link"
                           >
                             <a className="device-check-box-link">
-                                <div className="device-check-box-title">
-                                    {el.device_name}
-                                </div>
-                                <FontAwesomeIcon
+                              <div className="device-check-box-title">
+                                {el.device_name}
+                              </div>
+                              <FontAwesomeIcon
                                 icon={["fas", "edit"]}
-                                ></FontAwesomeIcon>
+                              ></FontAwesomeIcon>
                             </a>
                           </Link>
                         </li>

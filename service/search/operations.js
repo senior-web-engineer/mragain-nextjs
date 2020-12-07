@@ -66,6 +66,17 @@ export async function getSearchFilterField(dispatch) {
 export function getModelService(data, dispatch) {
   dispatch(setLoadService(false));
   axios
+    .get(`${API_PATH.GETMODELSERVICE}/`, { params: data })
+    .then((res) => {
+      dispatch(fetchModelServices(res.data));
+      dispatch(setLoadService(true));
+    })
+    .catch((err) => {});
+}
+
+export function getReparationModelDetails(data, dispatch) {
+  dispatch(setLoadService(false));
+  axios
     .get(`${API_PATH.GETSHOPREPARATIONDETAILS}/`, { params: data })
     .then((res) => {
       dispatch(fetchModelServices(res.data));

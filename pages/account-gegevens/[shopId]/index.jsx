@@ -5,6 +5,7 @@ import { message, Button, Checkbox, Input, Popconfirm, Select } from "antd";
 import lib from "@/assets/js/lib";
 import {
   updateAccountSettings,
+  getShopIdByInformation,
   resetPasswordConfirm,
   deleteAccount,
   getAccountSettings,
@@ -30,6 +31,8 @@ const AccountSetting = (routerProps) => {
     deleteAccount,
     logOut,
     isLoggedIn,
+    account_profile,
+    getShopIdByInformation,
   } = routerProps;
 
   const router = useRouter();
@@ -43,19 +46,16 @@ const AccountSetting = (routerProps) => {
     "Wijzig afspraak settings"
   );
   const [siteUrlTemp, setSiteUrlTemp] = useState();
-  const shop_id = parseInt(router.query.shopId);
+  const shop_id = router.query.shopId;
 
   useEffect(() => {
+    const auth_user = JSON.parse(localStorage.getItem("auth-user"));
     if (isLoad === false) {
-      let auth_user = JSON.parse(localStorage.getItem("auth-user"));
-      if (
-        auth_user === null ||
-        parseInt(auth_user.account_id) !== parseInt(router.query.shopId)
-      ) {
+      if (auth_user === null || auth_user.name !== router.query.shopId) {
         router.push("/");
+      } else {
+        getAccountSettings(auth_user.account_id);
       }
-
-      getAccountSettings(shop_id);
     }
   }, [isLoad]);
 
@@ -122,12 +122,13 @@ const AccountSetting = (routerProps) => {
   }
 
   useEffect(() => {
-    if (isLoad === false) {
-      if (Object.keys(acc_settings).length !== 0) {
-        setSettings(acc_settings);
-        setLoad(true);
-      }
-    }
+    // if (isLoad === false) {
+    //   if (Object.keys(acc_settings).length !== 0) {
+    //     setSettings(acc_settings);
+    //     setLoad(true);
+    //   }
+    // }
+    setSettings(acc_settings);
     if (auth_error !== null) {
       if (auth_error === "Je wachtwoord is gewijzigd") {
         message.success(auth_error, [2.5]);
@@ -439,6 +440,7 @@ const AccountSetting = (routerProps) => {
 
 const mapStateToProps = (state) => ({
   //Maps state to redux store as props
+  account_profile: state.account.account_profile,
   acc_settings: state.account.account_settings,
   auth_error: state.account.auth_error,
 });
@@ -459,6 +461,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     deleteAccount: (id) => {
       deleteAccount(id, dispatch);
+    },
+    getShopIdByInformation: (str) => {
+      getShopIdByInformation(str, dispatch);
     },
     logOut: () => {
       logout();

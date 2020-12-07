@@ -35,7 +35,7 @@ import {
 } from "service/appointments/operations.js";
 import {
   uploadImage,
-  getSimpleAccountInformation,
+  getShopIdByInformation,
 } from "service/account/operations.js";
 import Head from "next/head";
 import { FRONT_END_URL } from "../../../constants.js";
@@ -43,6 +43,43 @@ import { FRONT_END_URL } from "../../../constants.js";
 const { Option } = Select;
 
 const ShopDashboard = (routerProps) => {
+  const {
+    // match,
+    // uploadImage,
+    getAppointments,
+    getModelService,
+    getSearchFilterField,
+    getSearchFilterFieldExt,
+    getShopIdByInformation,
+    filterlistPBM,
+    filterlistRPG,
+    auth_user,
+    account_profile,
+    appointmentList,
+    isLoadAppointment,
+    isLoadService,
+    modelServices,
+    setLoadService,
+    setLoadAppointment,
+    updateAppointment,
+    CancelAppointment,
+    isLoggedIn,
+  } = routerProps;
+  const router = useRouter();
+  const { shopId } = router.query;
+  const [shopIdInfo, setShopIdInfo] = useState(null);
+
+  useEffect(() => {
+    getShopIdByInformation(shopId);
+  }, []);
+
+  useEffect(() => {
+    if (account_profile.id !== undefined) {
+      setShopIdInfo(account_profile.id);
+      console.log(account_profile);
+    }
+  }, [account_profile]);
+
   const updateDimensions = () => {
     setState({
       height: window.innerHeight,
@@ -63,6 +100,14 @@ const ShopDashboard = (routerProps) => {
     width: 0,
   });
 
+  useEffect(() => {
+    if (shopIdInfo !== null) {
+      handleGetAppointments();
+      handleGetSimpleAccount();
+    }
+  }, [shopIdInfo]);
+  const url_shopId = shopId;
+
   const [isLoad, setLoad] = React.useState(false);
   const [phone, setPhone] = React.useState(1);
   const [brand, setBrand] = React.useState(0);
@@ -81,31 +126,6 @@ const ShopDashboard = (routerProps) => {
   const [guarantee, setGuarantee] = React.useState(0);
   const [display, setDisplay] = useState("none");
 
-  const {
-    match,
-    uploadImage,
-    getAppointments,
-    getModelService,
-    getSearchFilterField,
-    getSearchFilterFieldExt,
-    getSimpleAccountInformation,
-    filterlistPBM,
-    filterlistRPG,
-    auth_user,
-    account_profile,
-    appointmentList,
-    isLoadAppointment,
-    isLoadService,
-    modelServices,
-    setLoadService,
-    setLoadAppointment,
-    updateAppointment,
-    CancelAppointment,
-    isLoggedIn,
-  } = routerProps;
-
-  const router = useRouter();
-
   const [showModal, setShowModal] = useState(false);
   const [imageList, setImageList] = useState([]);
   const [appointlist, setAppointList] = useState([]);
@@ -113,27 +133,22 @@ const ShopDashboard = (routerProps) => {
 
   let repList = [];
   let isExistR = [];
-  const { shopId } = router.query;
-  const url_shopId = parseInt(shopId);
 
   const handleGetSimpleAccount = () => {
-    getSimpleAccountInformation(url_shopId);
+    getShopIdByInformation(shopId);
   };
   const handleGetAppointments = () => {
-    getAppointments(url_shopId);
+    if (shopIdInfo !== null) {
+      getAppointments(shopIdInfo);
+    }
   };
 
   useEffect(() => {
     if (isLoad === false) {
       let auth_user = JSON.parse(localStorage.getItem("auth-user"));
-      if (
-        auth_user === null ||
-        parseInt(auth_user.account_id) !== parseInt(shopId)
-      ) {
+      // if (auth_user === null || parseInt(auth_user.name) !== parseInt(shopId)) {
+      if (auth_user === null || auth_user.name.replace(" ", "-") !== shopId) {
         router.push("/");
-      } else {
-        handleGetSimpleAccount();
-        handleGetAppointments();
       }
     }
   }, [isLoad]);
@@ -153,7 +168,8 @@ const ShopDashboard = (routerProps) => {
   }
 
   const confirmCancelAppointment = (appoint_id) => {
-    CancelAppointment(appoint_id, url_shopId);
+    // CancelAppointment(appoint_id, url_shopId);
+    CancelAppointment(appoint_id, shopIdInfo);
     alert("De afspraak is geannuleerd");
   };
 
@@ -201,7 +217,8 @@ const ShopDashboard = (routerProps) => {
       guarantee: guarantee,
     };
     setShowModal(false);
-    updateAppointment(id, email, _update, url_shopId);
+    // updateAppointment(id, email, _update, url_shopId);
+    updateAppointment(id, email, _update, shopIdInfo);
   };
   const handleModalShow = (el) => {
     setPhone(el.device.id);
@@ -293,7 +310,7 @@ const ShopDashboard = (routerProps) => {
   function handleReparationChange(value, e) {
     setReparation(value);
     let services = {
-      shop_id: url_shopId,
+      shop_id: shopIdInfo,
       device: phone,
       brand: brand,
       model: model,
@@ -430,7 +447,6 @@ const ShopDashboard = (routerProps) => {
       setDisplay("none");
     }
   };
-
   return (
     <Layout>
       <div className="shop-dashboard-page">
@@ -469,9 +485,14 @@ const ShopDashboard = (routerProps) => {
             <div className="dashboard-page-widget" style={{ display: display }}>
               <Avatar
                 className="shop-widget-avatar"
-                src={account_profile.bg_photo}
+                src={
+                  account_profile.bg_photo !== undefined &&
+                  account_profile.bg_photo
+                }
               />
-              <div className="widget-shop-title">{account_profile.name}</div>
+              <div className="widget-shop-title">
+                {account_profile.name !== undefined && account_profile.name}
+              </div>
               <div className="widget-shop-email">{auth_user.email}</div>
               <div className="widget-shop-appointment">
                 <FontAwesomeIcon
@@ -519,9 +540,14 @@ const ShopDashboard = (routerProps) => {
             <div className="dashboard-page-widget" style={{ display: "block" }}>
               <Avatar
                 className="shop-widget-avatar"
-                src={account_profile.bg_photo}
+                src={
+                  account_profile.bg_photo !== undefined &&
+                  account_profile.bg_photo
+                }
               />
-              <div className="widget-shop-title">{account_profile.name}</div>
+              <div className="widget-shop-title">
+                {account_profile.name !== undefined && account_profile.name}
+              </div>
               <div className="widget-shop-email">{auth_user.email}</div>
               <div className="widget-shop-appointment">
                 <FontAwesomeIcon
@@ -853,6 +879,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     uploadImage: (data, id, name, flg) =>
       uploadImage(data, id, name, flg, dispatch),
+
     getSearchFilterField: (data) => {
       getSearchFilterField(dispatch);
     },
@@ -877,8 +904,8 @@ const mapDispatchToProps = (dispatch) => {
     getAppointments: (id) => {
       getAppointments(id, dispatch);
     },
-    getSimpleAccountInformation: (id) => {
-      getSimpleAccountInformation(id, dispatch);
+    getShopIdByInformation: (str) => {
+      getShopIdByInformation(str, dispatch);
     },
   };
 };

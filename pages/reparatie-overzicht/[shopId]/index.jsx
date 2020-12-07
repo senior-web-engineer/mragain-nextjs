@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import moment from "moment";
-import { Input, Button, Avatar, Badge, Checkbox, Select } from "antd";
+import { Input, Button, Avatar, Checkbox, Select } from "antd";
 import { Label } from "semantic-ui-react";
 import { Table, Modal } from "react-bootstrap";
 import Link from "next/link";
@@ -12,19 +12,20 @@ import "react-image-picker/dist/index.css";
 import "./index.less";
 import menu_icon from "../../../assets/images/menu.png";
 import {
-    getSearchFilterField,
-    getSearchFilterFieldExt,
+  getSearchFilterField,
+  getSearchFilterFieldExt,
 } from "service/search/operations.js";
 import { setLoadService } from "service/search/action.js";
 import { setLoadAppointment } from "service/appointments/action.js";
 import {
-    CancelAppointment,
-    getAppointments,
+  CancelAppointment,
+  getAppointments,
 } from "service/appointments/operations.js";
 import { RepairSingleImage } from "@/styled-components/reparatie-overzicht.style";
 import {
-    uploadImage,
-    getSimpleAccountInformation,
+  uploadImage,
+  getSimpleAccountInformation,
+  getShopIdByInformation,
 } from "service/account/operations.js";
 
 import Head from "next/head";
@@ -34,6 +35,32 @@ import { Layout } from "@/components/global";
 const { Option } = Select;
 
 const ReparationOverView = (routerProps) => {
+  const router = useRouter();
+  const url_shopId = router.query.shopId;
+  const {
+    match,
+    getAppointments,
+    getSearchFilterField,
+    getSearchFilterFieldExt,
+    filterlistPBM,
+    filterlistRPG,
+    auth_user,
+    appointmentList,
+    isLoadAppointment,
+    isLoadService,
+    modelServices,
+    setLoadService,
+    setLoadAppointment,
+    account_profile,
+    getSimpleAccountInformation,
+    isLoggedIn,
+    getShopIdByInformation,
+  } = routerProps;
+
+  useEffect(() => {
+    getShopIdByInformation(url_shopId);
+  }, []);
+
   useEffect(() => {
     window.addEventListener("resize", updateDimensions);
     setState({
@@ -52,7 +79,7 @@ const ReparationOverView = (routerProps) => {
     height: 0,
     width: 0,
   });
-  console.log(state);
+  // console.log(state);
 
   const [isLoad, setLoad] = React.useState(false);
   const [phone, setPhone] = React.useState(1);
@@ -68,27 +95,6 @@ const ReparationOverView = (routerProps) => {
   const [email, setEmail] = React.useState("");
   const [selectImg, setSelectImg] = React.useState("");
   const [display, setDisplay] = useState("none");
-  const {
-    match,
-    getAppointments,
-    getSearchFilterField,
-    getSearchFilterFieldExt,
-    filterlistPBM,
-    filterlistRPG,
-    auth_user,
-    appointmentList,
-    isLoadAppointment,
-    isLoadService,
-    modelServices,
-    setLoadService,
-    setLoadAppointment,
-    account_profile,
-    getSimpleAccountInformation,
-    isLoggedIn
-  } = routerProps;
-
-  const router = useRouter();
-
   const [showModal, setShowModal] = useState(false);
   const [showModal1, setShowModal1] = useState(false);
   const [imageList, setImageList] = useState([]);
@@ -98,31 +104,59 @@ const ReparationOverView = (routerProps) => {
   let repList = [];
   let isExistR = [];
 
-  const url_shopId = parseInt(router.query.shopId);
-
-  const handleGetSimpleAccount = () => {
-    getSimpleAccountInformation(url_shopId);
-  };
-
   const handleGetAppointments = () => {
-    getAppointments(url_shopId);
+    getAppointments(40);
   };
 
   useEffect(() => {
     if (isLoad === false) {
       let auth_user = JSON.parse(localStorage.getItem("auth-user"));
-      if (
-        auth_user === null ||
-        parseInt(auth_user.account_id) !== parseInt(router.query.shopId)
-      ) {
+      if (auth_user === null || auth_user.name !== router.query.shopId) {
         router.push("/");
-      }
-  
-      handleGetSimpleAccount();
-      handleGetAppointments();
+      } else if (auth_user !== null) getAppointments(auth_user.account_id);
+
+      // handleGetSimpleAccount();
+      // handleGetAppointments();
       getSearchFilterField();
     }
-  }, [isLoad])
+  }, [isLoad]);
+
+  useEffect(() => {
+    if (isLoadService === true) {
+      if (modelServices.length > 0) {
+        setLoadService(false);
+      }
+    }
+    if (isLoad === false || isLoadAppointment === true) {
+      if (appointmentList === undefined) {
+        setAppCountAll(0);
+      } else {
+        let count = getAppointmentsCountAll(appointmentList);
+        setAppCountAll(count);
+      }
+      function compare_item(a, b) {
+        if (a.appointment.date < b.appointment.date) {
+          return -1;
+        } else if (a.appointment.date > b.appointment.date) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }
+      let applist = appointmentList.sort(compare_item);
+      setAppointList(applist);
+      setLoadAppointment(false);
+      setLoad(true);
+    }
+  }, [
+    isLoadService,
+    isLoad,
+    isLoadAppointment,
+    appointmentList,
+    modelServices,
+    setLoadService,
+    setLoadAppointment,
+  ]);
 
   if (filterlistRPG !== undefined) {
     filterlistRPG.map((element) => {
@@ -202,52 +236,15 @@ const ReparationOverView = (routerProps) => {
   function showGuaranteeDate(el) {
     let date = new Date(el.appointment.date);
     date = new Date(date.setMonth(date.getMonth() + el.guarantee));
-    date = new Date(date.setDate(date.getDate() ));
+    date = new Date(date.setDate(date.getDate()));
     return moment(date, "DD-MM-YYYY").format("DD-MM-YYYY");
   }
 
   function formatDate(date, frmString) {
     let date1 = new Date(date);
-    date1 = new Date(date1.setDate(date1.getDate() ));
+    date1 = new Date(date1.setDate(date1.getDate()));
     return moment(new Date(date1), frmString).format(frmString);
   }
-
-  useEffect(() => {
-    if (isLoadService === true) {
-      if (modelServices.length > 0) {
-        setLoadService(false);
-      }
-    }
-    if (isLoad === false || isLoadAppointment === true) {
-      if (appointmentList === undefined) {
-        setAppCountAll(0);
-      } else {
-        let count = getAppointmentsCountAll(appointmentList);
-        setAppCountAll(count);
-      }
-      function compare_item(a, b) {
-        if (a.appointment.date < b.appointment.date) {
-          return -1;
-        } else if (a.appointment.date > b.appointment.date) {
-          return 1;
-        } else {
-          return 0;
-        }
-      }
-      let applist = appointmentList.sort(compare_item);
-      setAppointList(applist);
-      setLoadAppointment(false);
-      setLoad(true);
-    }
-  }, [
-    isLoadService,
-    isLoad,
-    isLoadAppointment,
-    appointmentList,
-    modelServices,
-    setLoadService,
-    setLoadAppointment,
-  ]);
 
   function getAppointmentsCountAll(_list) {
     let count = 0;
@@ -315,9 +312,14 @@ const ReparationOverView = (routerProps) => {
             <div className="dashboard-page-widget" style={{ display: display }}>
               <Avatar
                 className="shop-widget-avatar"
-                src={account_profile.bg_photo}
+                src={
+                  account_profile.bg_photo !== undefined &&
+                  account_profile.bg_photo
+                }
               />
-              <div className="widget-shop-title">{account_profile.name}</div>
+              <div className="widget-shop-title">
+                {account_profile.name !== undefined && account_profile.name}
+              </div>
               <div className="widget-shop-email">{auth_user.email}</div>
               <div className="widget-shop-appointment">
                 <FontAwesomeIcon
@@ -365,9 +367,14 @@ const ReparationOverView = (routerProps) => {
             <div className="dashboard-page-widget" style={{ display: "block" }}>
               <Avatar
                 className="shop-widget-avatar"
-                src={account_profile.bg_photo}
+                src={
+                  account_profile.bg_photo !== undefined &&
+                  account_profile.bg_photo
+                }
               />
-              <div className="widget-shop-title">{account_profile.name}</div>
+              <div className="widget-shop-title">
+                {account_profile.name !== undefined && account_profile.name}
+              </div>
               <div className="widget-shop-email">{auth_user.email}</div>
               <div className="widget-shop-appointment">
                 <FontAwesomeIcon
@@ -390,7 +397,6 @@ const ReparationOverView = (routerProps) => {
                   className="calendar-icon"
                   icon={["fas", "tasks"]}
                 />
-
                 <Link href={"/apparaten-beheer/" + url_shopId}>
                   Model & Reparatie beheer
                 </Link>
@@ -599,7 +605,9 @@ const ReparationOverView = (routerProps) => {
                       </div>
                     </div>
                     <div className="repair-input-group">
-                      <Label className="repair-input-label">IMEI nummer : </Label>
+                      <Label className="repair-input-label">
+                        IMEI nummer :{" "}
+                      </Label>
                       <Input
                         className="repair-input"
                         value={serialnumber}
@@ -607,7 +615,9 @@ const ReparationOverView = (routerProps) => {
                       />
                     </div>
                     <div className="repair-input-group">
-                      <Label className="repair-input-label">Uitvoering/kleur</Label>
+                      <Label className="repair-input-label">
+                        Uitvoering/kleur
+                      </Label>
                       <Input
                         className="repair-input"
                         value={color}
@@ -615,7 +625,9 @@ const ReparationOverView = (routerProps) => {
                       />
                     </div>
                     <div className="repair-input-group">
-                      <Label className="repair-input-label">Klacht omschrijving</Label>
+                      <Label className="repair-input-label">
+                        Klacht omschrijving
+                      </Label>
                       <Input
                         className="repair-input"
                         value={memory}
@@ -723,6 +735,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     getSimpleAccountInformation: (id) => {
       getSimpleAccountInformation(id, dispatch);
+    },
+    getShopIdByInformation: (str) => {
+      getShopIdByInformation(str, dispatch);
     },
   };
 };

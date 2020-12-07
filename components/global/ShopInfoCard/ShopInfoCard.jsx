@@ -62,8 +62,8 @@ const ShopInfoCard = (routerProps) => {
     <Card>
       <Card.Img
         variant="top"
-        src={routerProps.image} 
-	alt="Reparateur-profielfoto"
+        src={routerProps.image}
+        alt="Reparateur-profielfoto"
         onClick={() =>
           onProfilePage(
             routerProps.shop_name,
@@ -95,9 +95,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   // Action
   return {
-    getAccountProfile: (id) => {
-      getAccountProfile(id, dispatch);
-    },
+    // getAccountProfile: (id) => {
+    //   getAccountProfile(id, dispatch);
+    // },
     getReparationGuarantee: (id) => {
       getReparationGuarantee(id, dispatch);
     },

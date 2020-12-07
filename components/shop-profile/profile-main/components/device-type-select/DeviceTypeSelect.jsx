@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Select } from "antd";
 import { getBrandModels, getDeviceBrands } from "service/search/operations.js";
-import { getModelService, getShopDevices } from "service/search/operations.js";
+import {
+  getReparationModelDetails,
+  getShopDevices,
+} from "service/search/operations.js";
 import "./DeviceTypeSelect.less";
 
 const { Option } = Select;
@@ -24,7 +27,7 @@ const DeviceTypeSelect = (routerProps) => {
     filterlistPBM,
     filterlistRPG,
     shopReparationList,
-    getModelService,
+    getReparationModelDetails,
     getShopDevices,
     shopDevices,
     deviceBrands,
@@ -83,7 +86,7 @@ const DeviceTypeSelect = (routerProps) => {
       brand: brandId,
       model: value,
     };
-    getModelService(services);
+    getReparationModelDetails(services);
   }
 
   useEffect(() => {
@@ -219,8 +222,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   // Action
   return {
-    getModelService: (data) => {
-      getModelService(data, dispatch);
+    getReparationModelDetails: (data) => {
+      getReparationModelDetails(data, dispatch);
     },
     getShopDevices: (id) => {
       getShopDevices(id, dispatch);

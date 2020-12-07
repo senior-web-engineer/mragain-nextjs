@@ -10,14 +10,14 @@ import { Main } from "@/styled-components/maak-een-afspraak.style.jsx";
 import AboutBannerSection from "@/components/shop-appointment/AboutBannerSection/AboutBannerSection";
 import { Layout } from "@/components/global";
 import {
-    getSearchFilterField,
-    getSearchFilterFieldExt,
-    getModelService,
+  getSearchFilterField,
+  getSearchFilterFieldExt,
+  getModelService,
 } from "service/search/operations.js";
 import { setLoadService } from "service/search/action.js";
 import {
-    createAppointment,
-    getAppointmentTimeTable,
+  createAppointment,
+  getAppointmentTimeTable,
 } from "service/appointments/operations";
 import { setLoadedProfile } from "../service/account/action";
 
@@ -78,15 +78,14 @@ const ShopAppointment = (routerProps) => {
   const [initDate, setInitDate] = useState(0);
 
   const router = useRouter();
-  
+
   if (isLoad === false) {
     const params = router.query;
     const shop_id = parseInt(params.shop);
     setInitDate(parseInt(params.initdate));
     getReparationGuarantee(shop_id);
-    getAccountProfile(shop_id);
-}
-
+    getAccountProfile(shop_id, null);
+  }
 
   useEffect(() => {
     if (isLoadService === true) {
@@ -571,7 +570,7 @@ const ShopAppointment = (routerProps) => {
         );
       })
     );
-  }  
+  }
   return (
     <Layout>
       <Main>
@@ -586,31 +585,31 @@ const ShopAppointment = (routerProps) => {
                 <div className="shop-appointment-form-content">
                   <div className="shop-appointment-form-content-wrap">
                     <div className="  shop-appointment-form-group div-flex">
-                        <div className="col-md-6 mx-0  px-0 shop-appointment-form-group-left">
+                      <div className="col-md-6 mx-0  px-0 shop-appointment-form-group-left">
                         <div className="shop-appointment-form-label">
-                            <Label>Selecteer een datum</Label>
-                        </div>                        
-                        <div>                            
-                            <DatePicker
+                          <Label>Selecteer een datum</Label>
+                        </div>
+                        <div>
+                          <DatePicker
                             className="w-100"
                             disabledDate={(date) => disabledDate(date)}
                             onChange={(date) => onDateChange(date)}
                             value={app_date}
                             defaultValue={
-                                appointmentDate !== null
+                              appointmentDate !== null
                                 ? moment(appointmentDate)
                                 : null
                             }
                             allowClear={true}
-                            />
+                          />
                         </div>
-                        </div>
-                        <div className="col-md-6 mx-0 pr-0 shop-appointment-form-group-right">
+                      </div>
+                      <div className="col-md-6 mx-0 pr-0 shop-appointment-form-group-right">
                         <div className="shop-appointment-form-label">
-                            <Label>Selecteer een tijd</Label>
+                          <Label>Selecteer een tijd</Label>
                         </div>
                         <div>
-                            <Select
+                          <Select
                             className="w-100   device-select"
                             onChange={handleTimeChange}
                           >
@@ -770,7 +769,9 @@ const ShopAppointment = (routerProps) => {
                       <Modal.Header closeButton></Modal.Header>
                       <Modal.Body>
                         <p>Je afspraak is gemaakt</p>
-                        <p>We hebben een bevestigings email naar je verzonden</p>
+                        <p>
+                          We hebben een bevestigings email naar je verzonden
+                        </p>
                       </Modal.Body>
                     </Modal>
                   </div>
@@ -817,8 +818,8 @@ const mapDispatchToProps = (dispatch) => {
     createAppointment: (data1, data2, name, address, datetime) => {
       createAppointment(data1, data2, name, address, datetime, dispatch);
     },
-    getAccountProfile: (id) => {
-      getAccountProfile(id, dispatch);
+    getAccountProfile: (id, data) => {
+      getAccountProfile(id, data, dispatch);
     },
     getReparationGuarantee: (id) => {
       getReparationGuarantee(id, dispatch);

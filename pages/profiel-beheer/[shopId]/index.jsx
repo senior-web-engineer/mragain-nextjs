@@ -11,16 +11,16 @@ import {
   Divider,
   Modal,
   Input,
-  AutoComplete,
 } from "antd";
 import { Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
 import {
-  getAccountProfile,
+  getShopProfileAccount,
   updateValidOpenTime,
   updateInvalidOpenTime,
+  getShopIdByInformation,
 } from "service/account/operations.js";
 import {
   uploadImage,
@@ -36,7 +36,92 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 function ProfileManage(routerProps) {
+  const {
+    match,
+    uploadImage,
+    updateAccountProfile,
+    updateValidOpenTime,
+    account_profile,
+    account_valid_time,
+    account_invalid_time,
+    account_valid_time_id,
+    account_invalid_time_id,
+    getShopProfileAccount,
+    isLoadedProfile,
+    isScheduleTimeLoading,
+    setLoadedProfile,
+    getShopIdByInformation,
+  } = routerProps;
+
+  const router = useRouter();
+
+  const url_shopId = router.query.shopId;
+  useEffect(() => {
+    getShopIdByInformation(url_shopId);
+  }, []);
+
+  const [is_load, setLoad] = useState(true);
   const [auth_user, setAuthUser] = useState({});
+
+  // useEffect(() => {
+  //   if (Object.keys(account_profile).length !== 0) {
+  //     console.log(account_profile);
+  //     setAuthUser(account_profile);
+  //     // getShopProfileAccount(account_profile.id);
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    if (is_load === true) {
+      let auth_user = JSON.parse(localStorage.getItem("auth-user"));
+      if (auth_user === null || auth_user.name !== router.query.shopId) {
+        router.push("/");
+      }
+      getShopProfileAccount(parseInt(auth_user.account_id), url_shopId);
+      if (localStorage.getItem("auth-user") === null) {
+        router.push("/");
+      }
+
+      setLoad(false);
+    }
+  }, [is_load]);
+
+  useEffect(() => {
+    if (isLoadedProfile === true) {
+      if (Object.keys(account_profile).length !== 0) {
+        setLoadedProfile(false);
+        setAuthUser(account_profile);
+
+        initProfilePage();
+      }
+    }
+  });
+
+  function initProfilePage() {
+    setPreview(account_profile.bg_photo);
+    setAboutUs(account_profile.about_us);
+    setAboutUsTemp(account_profile.about_us);
+    // if (account_profile.site_url !== "") {
+    //   let temp = JSON.parse(account_profile.site_url);
+    //   setSiteUrl({ ...temp });
+    // }
+    if (Object.keys(account_valid_time).length !== 0) {
+      // let temp = JSON.parse(account_valid_time);
+      // setValidTime(temp);
+    }
+
+    /** openning time*/
+    let temp = [];
+    if (Object.keys(account_valid_time).length !== 0) {
+      temp = JSON.parse(account_valid_time);
+      setTimeTable(temp);
+    }
+    if (Object.keys(account_invalid_time).length !== 0) {
+      temp = JSON.parse(account_invalid_time);
+      setCheckTimeTable(temp);
+    }
+    /** */
+  }
   const [isCloseDay, setIsCloseDay] = useState(false);
   const [visibleM1, setVisibleM1] = useState(false);
   const [visibleM2, setVisibleM2] = useState(false);
@@ -45,7 +130,6 @@ function ProfileManage(routerProps) {
   const [aboutUs, setAboutUs] = useState();
   const [aboutUsTemp, setAboutUsTemp] = useState("");
   const [CharaterCount, setCharaterCount] = useState(0);
-  const [is_load, setLoad] = useState(true);
   const [isValidChanged, setValidChanged] = useState(false);
   const [isInvalidChanged, setInvalidChanged] = useState(false);
   const [checkDay, setCheckDay] = useState(null);
@@ -85,73 +169,6 @@ function ProfileManage(routerProps) {
   // const [isEditable, setEditable] = useState(false);
 
   /** openning time table*/
-  const {
-    match,
-    uploadImage,
-    updateAccountProfile,
-    updateValidOpenTime,
-    account_profile,
-    account_valid_time,
-    account_invalid_time,
-    account_valid_time_id,
-    account_invalid_time_id,
-    getAccountProfile,
-    isLoadedProfile,
-    isScheduleTimeLoading,
-    isHandleInvalidTimeLoading,
-    setLoadedProfile,
-    isLogged,
-  } = routerProps;
-
-  const router = useRouter();
-
-  const url_shopId = parseInt(router.query.shopId);
-  useEffect(() => {
-    if (is_load === true) {
-      let auth_user = JSON.parse(localStorage.getItem("auth-user"));
-      if (
-        auth_user === null ||
-        parseInt(auth_user.account_id) !== parseInt(router.query.shopId)
-      ) {
-        router.push("/");
-      }
-      getAccountProfile(url_shopId);
-      if (localStorage.getItem("auth-user") === null) {
-        router.push("/");
-      }
-      let user = localStorage.getItem("auth-user");
-      if (user !== null) {
-        setAuthUser(JSON.parse(user));
-      }
-      setLoad(false);
-    }
-  }, [is_load]);
-
-  function initProfilePage() {
-    setPreview(account_profile.bg_photo);
-    setAboutUs(account_profile.about_us);
-    setAboutUsTemp(account_profile.about_us);
-    // if (account_profile.site_url !== "") {
-    //   let temp = JSON.parse(account_profile.site_url);
-    //   setSiteUrl({ ...temp });
-    // }
-    if (Object.keys(account_valid_time).length !== 0) {
-      // let temp = JSON.parse(account_valid_time);
-      // setValidTime(temp);
-    }
-
-    /** openning time*/
-    let temp = [];
-    if (Object.keys(account_valid_time).length !== 0) {
-      temp = JSON.parse(account_valid_time);
-      setTimeTable(temp);
-    }
-    if (Object.keys(account_invalid_time).length !== 0) {
-      temp = JSON.parse(account_invalid_time);
-      setCheckTimeTable(temp);
-    }
-    /** */
-  }
 
   function onChangeCheckReason(e) {
     setCheckReason(e.target.value);
@@ -227,8 +244,10 @@ function ProfileManage(routerProps) {
     e.preventDefault();
     const formData = new FormData();
     formData.append("image", imagePreviewUrl);
-    formData.append("shop_id", auth_user.account_id);
-    uploadImage(formData, auth_user.account_id, account_profile.name, true);
+    // formData.append("shop_id", auth_user.account_id);
+    formData.append("shop_id", auth_user.id);
+    // uploadImage(formData, auth_user.account_id, account_profile.name, true);
+    uploadImage(formData, auth_user.id, account_profile.name, true);
     message.success("Afbeelding succesvol opgeslagen.", [2.5]);
     setTimeout(() => {
       setShowButton(true);
@@ -251,8 +270,12 @@ function ProfileManage(routerProps) {
   const handleAboutOk = () => {
     setVisibleM2(false);
     setAboutUs(aboutUsTemp);
-    updateAccountProfile(auth_user.account_id, {
-      shop_id: auth_user.account_id,
+    // updateAccountProfile(auth_user.account_id, {
+    //   shop_id: auth_user.account_id,
+    //   about_us: aboutUsTemp,
+    // });
+    updateAccountProfile(auth_user.id, {
+      shop_id: auth_user.id,
       about_us: aboutUsTemp,
     });
   };
@@ -305,9 +328,11 @@ function ProfileManage(routerProps) {
       // setschedulTimseSlotLoading(true);
       data = {
         valid_day_time: JSON.stringify(openTimeTable),
-        shop: auth_user.account_id,
+        // shop: auth_user.account_id,
+        shop: auth_user.id,
       };
       updateValidOpenTime(account_valid_time_id, data);
+      getShopProfileAccount(auth_user.id, url_shopId);
       message.success("Je openingstijden zijn aangepast.", [2.5]);
       setValidChanged(false);
       setWeekDay("");
@@ -315,7 +340,6 @@ function ProfileManage(routerProps) {
       setCloseTime("");
       setIsCloseDay(false);
     }
-    getAccountProfile(auth_user.account_id);
   };
 
   const showCheckCalendarModal = () => {
@@ -491,13 +515,15 @@ function ProfileManage(routerProps) {
       setInvalidTimeLoading(true);
       data = {
         invalid_day_time: JSON.stringify(checkTimeTable),
-        shop: auth_user.account_id,
+        // shop: auth_user.account_id,
+        shop: auth_user.id,
       };
       updateInvalidOpenTime(account_invalid_time_id, data).then((res) => {
         setInvalidTimeLoading(false);
       });
       message.success("Je wijzigingen zijn succesvol opgeslagen.", [2.5]);
-      getAccountProfile(auth_user.account_id);
+      // getShopProfileAccount(auth_user.account_id);
+      getShopProfileAccount(auth_user.id, url_shopId);
       setInvalidChanged(false);
     }
     setClose(false);
@@ -626,15 +652,6 @@ function ProfileManage(routerProps) {
     },
   };
   /** calendar initialize end*/
-
-  useEffect(() => {
-    if (isLoadedProfile === true) {
-      if (Object.keys(account_profile).length !== 0) {
-        setLoadedProfile(false);
-        initProfilePage();
-      }
-    }
-  });
 
   return (
     <Layout>
@@ -1199,7 +1216,6 @@ function ProfileManage(routerProps) {
 
 const mapStateToProps = (state) => ({
   //Maps state to redux store as props
-  // auth_user: state.account.auth_user,
   account_profile: state.account.account_profile,
   account_valid_time: state.account.account_valid_time,
   account_valid_time_id: state.account.account_valid_time_id,
@@ -1207,7 +1223,6 @@ const mapStateToProps = (state) => ({
   account_invalid_time_id: state.account.account_invalid_time_id,
   isLoadedProfile: state.account.isLoadedProfile,
   isScheduleTimeLoading: state.account.isUpdateScheduleTimeLoading,
-  // isHandleInvalidTimeLoading: state.account.isHandleInvalidTimeLoading,
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -1225,8 +1240,11 @@ const mapDispatchToProps = (dispatch) => {
     updateValidOpenTime: (id, data) => {
       updateValidOpenTime(id, data, dispatch);
     },
-    getAccountProfile: (id) => {
-      getAccountProfile(id, dispatch);
+    getShopProfileAccount: (id, data) => {
+      getShopProfileAccount(id, data, dispatch);
+    },
+    getShopIdByInformation: (str) => {
+      getShopIdByInformation(str, dispatch);
     },
   };
 };

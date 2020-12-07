@@ -8,7 +8,6 @@ import "./Header.less";
 import { initUserLoginChange } from "service/account/action.js";
 import { logout } from "service/account/operations.js";
 import {
-  getSimpleAccountInformation,
   getAccountSettings,
   getAccountProfile,
   getDevices,
@@ -31,11 +30,11 @@ const HeaderView = (routerProps) => {
     getDevices,
     getAuthUser,
     getAppointments,
-    getSimpleAccountInformation,
   } = routerProps;
   const [auth_user, setAuthUser] = useState({});
   const [admin_Id, setadmin_Id] = useState({});
   const [is_load, setLoad] = useState(true);
+  const [adminName, setAdminName] = useState(null);
   const router = useRouter();
 
   const headerClass = (() => {
@@ -57,12 +56,14 @@ const HeaderView = (routerProps) => {
     if (is_load === true) {
       let user = localStorage.getItem("auth-user");
       if (user !== null) {
+        const authUserData = JSON.parse(user);
+        setAdminName(authUserData.name.replace(" ", "-"));
         setAuthUser(JSON.parse(user));
       }
       initUserLoginChange(false);
       setLoad(false);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (user_login_change === true) {
@@ -77,7 +78,9 @@ const HeaderView = (routerProps) => {
   useEffect(() => {
     let admin_auth = JSON.parse(localStorage.getItem("auth-user"));
     if (admin_auth) {
-      setadmin_Id(admin_auth.account_id);
+      const accountId = admin_auth.name.replace(" ", "-");
+      // setadmin_Id(admin_auth.account_id);
+      setadmin_Id(accountId);
     }
     let token = localStorage.getItem("auth-token");
     if (token && Object.keys(authUser).length === 0) {
@@ -94,15 +97,6 @@ const HeaderView = (routerProps) => {
     // getDevices();
   };
 
-  const handleGetSimpleAccount = () => {
-    const user = JSON.parse(localStorage.getItem("auth-user"));
-    getSimpleAccountInformation(user.account_id);
-  };
-  const handleGetAppointments = () => {
-    const user = JSON.parse(localStorage.getItem("auth-user"));
-    getAppointments(user.account_id);
-  };
-
   const handleAccountSettings = () => {
     const user = JSON.parse(localStorage.getItem("auth-user"));
     getAccountSettings(user.account_id);
@@ -116,7 +110,7 @@ const HeaderView = (routerProps) => {
     const [authToken, setAuthToken] = useState("");
     useEffect(() => {
       setAuthToken(localStorage.getItem("auth-token"));
-    })
+    });
     if (authToken === null) {
       return (
         <div className="navbar-sign">
@@ -141,9 +135,9 @@ const HeaderView = (routerProps) => {
           <Link
             href={
               "/account-gegevens/" +
-              (auth_user.account_id === undefined
+              (auth_user.account_id === undefined && adminName !== null
                 ? admin_Id
-                : auth_user.account_id)
+                : adminName)
             }
             onClick={() => {
               handleAccountSettings();
@@ -156,14 +150,14 @@ const HeaderView = (routerProps) => {
           <Link
             href={
               "/dashboard/" +
-              (auth_user.account_id === undefined
+              (auth_user.account_id === undefined && adminName !== null
                 ? admin_Id
-                : auth_user.account_id)
+                : adminName)
             }
-            onClick={() => {
-              handleGetSimpleAccount();
-              handleGetAppointments();
-            }}
+            // onClick={() => {
+            //   handleGetSimpleAccount();
+            //   handleGetAppointments();
+            // }}
           >
             Dashboard
           </Link>
@@ -172,9 +166,9 @@ const HeaderView = (routerProps) => {
           <Link
             href={
               "/apparaten-beheer/" +
-              (auth_user.account_id === undefined
+              (auth_user.account_id === undefined && adminName !== null
                 ? admin_Id
-                : auth_user.account_id)
+                : adminName)
             }
             onClick={() => {
               handleGetDevice();
@@ -187,9 +181,9 @@ const HeaderView = (routerProps) => {
           <Link
             href={
               "/profiel-beheer/" +
-              (auth_user.account_id === undefined
+              (auth_user.account_id === undefined && adminName !== null
                 ? admin_Id
-                : auth_user.account_id)
+                : adminName)
             }
             onClick={() => {
               handleAccountProfile();
@@ -258,9 +252,7 @@ const HeaderView = (routerProps) => {
             <Link href="/over-ons">Over MrAgain</Link>
           </Menu.Item>
           <Menu.Item key="/reparatie-en-service">
-            <Link href="/reparatie-en-service">
-              Reparatie &amp; Service
-            </Link>
+            <Link href="/reparatie-en-service">Reparatie &amp; Service</Link>
           </Menu.Item>
           <Menu.Item key="/meld-je-aan-als-reparateur">
             <Link href="/meld-je-aan-als-reparateur">
@@ -296,9 +288,7 @@ const HeaderView = (routerProps) => {
             <Link href="/over-ons">Over MrAgain</Link>
           </Menu.Item>
           <Menu.Item key="/reparatie-en-service">
-            <Link href="/reparatie-en-service">
-              Reparatie &amp; Service
-            </Link>
+            <Link href="/reparatie-en-service">Reparatie &amp; Service</Link>
           </Menu.Item>
           <Menu.Item key="/meld-je-aan-als-reparateur">
             <Link href="/meld-je-aan-als-reparateur">
@@ -315,6 +305,7 @@ const mapStateToProps = (state) => ({
   //Maps state to redux store as props
   user_login_change: state.account.user_login_change,
   authUser: state.account.auth_user,
+  account_profile: state.account.account_profile,
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -341,13 +332,7 @@ const mapDispatchToProps = (dispatch) => {
     getAppointments: (id) => {
       getAppointments(id, dispatch);
     },
-    getSimpleAccountInformation: (id) => {
-      getSimpleAccountInformation(id, dispatch);
-    },
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HeaderView);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderView);

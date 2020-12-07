@@ -80,13 +80,13 @@ const MyMapComponent = compose(
     // console.log(cityName);
     // console.log(streetName);
     router.push(`/profiel/${shop}--${cityName}--${streetName}`);
-};
+  };
 
- // This function is replaced by the constraint above. 	  
- // function goShopProfile(shop_name, city, street) {
- //   router.push(`/profiel/${shop_name}-${city}-${street}`);
- //   console.log("profile-push one")	  
- // }
+  // This function is replaced by the constraint above.
+  // function goShopProfile(shop_name, city, street) {
+  //   router.push(`/profiel/${shop_name}-${city}-${street}`);
+  //   console.log("profile-push one")
+  // }
   const [shopInfo, setshopInfo] = useState(null);
   return (
     <GoogleMap
@@ -98,7 +98,10 @@ const MyMapComponent = compose(
           return (
             <Marker
               key={shop.name}
-              position={{ lat: parseFloat(shop.geo_lat), lng: parseFloat(shop.geo_long) }}
+              position={{
+                lat: parseFloat(shop.geo_lat),
+                lng: parseFloat(shop.geo_long),
+              }}
               draggable={shopInfo === shop.id ? true : false}
               ref={props.onMarkerMounted}
               onPositionChanged={props.onPositionChanged}
