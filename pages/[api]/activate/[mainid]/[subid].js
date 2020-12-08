@@ -15,9 +15,11 @@ const AccountVerification = () => {
     }
     const [notification, setNotification] = useState("");
 
-    verifyAccount(data).then((res) => {
-        setNotification(res.data);
-    });
+    useEffect(() => {
+        verifyAccount(data).then((res) => {
+            setNotification(res.data);
+        });
+    }, [])
 
     useEffect(() => {
         if(notification === success) {
