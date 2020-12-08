@@ -20,13 +20,17 @@ const ShopProfile = (routerProps) => {
     getShopAccountProfile,
     getShopIdByInformation,
     getReparationGuarantee,
-    match,
-    isLoggedIn,
   } = routerProps;
   const router = useRouter();
-
+  const shopId = router.query.shopId;
+  useEffect(() => {
+    if (shopId !== undefined) {
+      getShopId(shopId);
+    }
+  }, []);
   async function getShopId(url_str) {
     let shop = await getShopIdByInformation(url_str);
+    console.log("shop=>", shop);
     if (shop !== undefined && shop.length > 0) {
       let shop_id = shop[0].id;
       getReparationGuarantee(shop_id);
@@ -35,11 +39,7 @@ const ShopProfile = (routerProps) => {
       router.push("/");
     }
   }
-  const id = router.query.shopId;
-  if (id !== undefined) {
-    getShopId(router.query.shopId);
-  }
-  const shopId = router.query.shopId;
+
   console.log(FRONT_END_URL + "/profiel/" + shopId);
   console.log(router.asPath);
 

@@ -425,7 +425,6 @@ const ShopDashboard = (routerProps) => {
         }
       }
       let applist = appointmentList.sort(compare_item);
-
       setAppointList(applist);
       setLoadAppointment(false);
       setLoad(true);

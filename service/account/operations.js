@@ -204,7 +204,7 @@ export function getShopIdByInformation(str, dispatch) {
   return axios
     .get(`${API_PATH.GETSHOPIDBYINFORMATION}/`, { params: { shop_info: str } })
     .then((res) => {
-      console.log(res.data);
+      console.log("Account profile response", res.data);
       dispatch(initAccountProfile(res.data));
 
       return res.data;
@@ -235,10 +235,10 @@ export async function getShopRepairation(data, dispatch) {
 }
 
 export async function verifyAccount(data, dispatch) {
-    const res = await axios.get(
-        `${API_PATH.VERIFYACCOUNT}/${data.mainid}/${data.subid}/`
-    )
-    return res;
+  const res = await axios.get(
+    `${API_PATH.VERIFYACCOUNT}/${data.mainid}/${data.subid}/`
+  );
+  return res;
 }
 
 export async function updateAccountSettings(id, data, dispatch) {

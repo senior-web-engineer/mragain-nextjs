@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
-import { Button, Modal, Input } from "antd";
+import { Modal, Input } from "antd";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./index.less";
-import tempimg from "@/assets/images/profile_photo.jpg";
-import { createRepairDevice, getDevices } from "service/account/operations.js";
+import {
+  createRepairDevice,
+  getDevices,
+  getShopIdByInformation,
+} from "service/account/operations.js";
 import { setGuaranteeDevice } from "service/account/action.js";
 import { getShopBrandModel } from "service/account/operations.js";
 import Head from "next/head";
@@ -15,14 +18,19 @@ import { Layout } from "@/components/global";
 
 const ReparationGuarantee = (routerProps) => {
   const [isload, setIsLoad] = useState(true);
+  const [isProfileLoad, setIsProfileLoad] = useState(false);
+  const [accountId, setAccountId] = useState(null);
   const [isShowModal, setIsShowModal] = useState(false);
   const [deviceName, setDeviceName] = useState("");
+
   // const [deleteDeviceValues, setDeleteDeviceValues] = useState([]);
 
   const {
     match,
     getDevices,
     isLoggedIn,
+    account_profile,
+    getShopIdByInformation,
     repairDevices,
     createRepairDevice,
   } = routerProps;
@@ -30,6 +38,17 @@ const ReparationGuarantee = (routerProps) => {
   const router = useRouter();
 
   const url_shopId = router.query.shopId;
+
+  useEffect(() => {
+    getShopIdByInformation(url_shopId);
+  }, []);
+
+  useEffect(() => {
+    if (account_profile.id !== undefined) {
+      setAccountId(account_profile.id);
+      console.log(account_profile);
+    }
+  }, [account_profile]);
 
   useEffect(() => {
     if (isload === true) {
@@ -45,6 +64,13 @@ const ReparationGuarantee = (routerProps) => {
   // if (isLoggedIn === false) {
   //   return <Redirect to="/" />;
   // }
+  useEffect(() => {
+    if (isProfileLoad === false) {
+      if (account_profile.id !== undefined) setAccountId(account_profile.id);
+      setIsProfileLoad(true);
+    }
+  }, [isProfileLoad, account_profile]);
+
   const handleAddDevice = () => {
     setIsShowModal(false);
 
@@ -59,7 +85,6 @@ const ReparationGuarantee = (routerProps) => {
       createRepairDevice(data);
     }
   };
-
   const handleAddDeviceCancel = () => {
     setIsShowModal(false);
   };
@@ -106,7 +131,6 @@ const ReparationGuarantee = (routerProps) => {
   //   }
   //   setDeleteDeviceValues([]);
   // }
-
   return (
     <Layout>
       <div className="reparation-guarantee">
@@ -185,7 +209,9 @@ const ReparationGuarantee = (routerProps) => {
                             disabled
                           ></Checkbox> */}
                           <Link
-                            href={`/reparaties?shopId=${url_shopId}&deviceId=${el.id}`}
+                            href={`/reparaties?shopId=${
+                              accountId !== null && accountId
+                            }&deviceId=${el.id}`}
                             onClick={() => {
                               // handleBrandModel(el.id);
                             }}
@@ -281,6 +307,7 @@ const mapStateToProps = (state) => ({
   repairDevices: state.account.repair_devices,
   auth_user: state.account.auth_user,
   isLoggedIn: state.account.isLogged,
+  account_profile: state.account.account_profile,
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -300,6 +327,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     setGuaranteeDevice: (id) => {
       dispatch(setGuaranteeDevice(id));
+    },
+    getShopIdByInformation: (str) => {
+      getShopIdByInformation(str, dispatch);
     },
   };
 };
