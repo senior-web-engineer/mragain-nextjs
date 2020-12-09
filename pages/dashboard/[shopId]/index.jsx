@@ -166,6 +166,8 @@ const ShopDashboard = (routerProps) => {
   }
 
   useEffect(() => {
+    const auth_user = JSON.parse(localStorage.getItem("auth-user"));
+
     if (isLoadService === true) {
       if (modelServices.length > 0) {
         setPrice(modelServices[0].price);
@@ -174,6 +176,7 @@ const ShopDashboard = (routerProps) => {
       }
     }
     if (isLoad === false || isLoadAppointment === true) {
+      console.log("useEffect load appointment", appointmentList);
       if (appointmentList === undefined) {
         setAppCount(0);
       } else {

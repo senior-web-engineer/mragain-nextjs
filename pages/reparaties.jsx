@@ -10,20 +10,20 @@ import "./reparaties_css.less";
 import classnames from "classnames";
 import swal from "sweetalert";
 import {
-    setGuaranteeDevice,
-    setLoadPBM,
-    setBrandModel,
+  setGuaranteeDevice,
+  setLoadPBM,
+  setBrandModel,
 } from "service/account/action";
 import {
-    createGuaranteeModels,
-    deleteGuaranteeModels,
-    getShopBrandModel,
-    getExportReparationAndGuaranteeCSV,
-    createImportReparationAndGuaranteeCSV,
+  createGuaranteeModels,
+  deleteGuaranteeModels,
+  getShopBrandModel,
+  getExportReparationAndGuaranteeCSV,
+  createImportReparationAndGuaranteeCSV,
 } from "service/account/operations";
 import { getSearchFilterField } from "service/search/operations.js";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import Head from "next/head"
+import Head from "next/head";
 import { FRONT_END_URL } from "../constants.js";
 import LoadingOverlay from "react-loading-overlay";
 import axios, { CancelToken } from "axios";
@@ -68,7 +68,7 @@ const PhoneRepair = (routerProps) => {
   } = routerProps;
 
   const router = useRouter();
-
+  const [shopName, setshopName] = useState(null);
   useEffect(() => {
     if (
       isSaveModalsLoading === true &&
@@ -150,17 +150,20 @@ const PhoneRepair = (routerProps) => {
     return await getSearchFilterField();
   }
 
-  
   const params = router.query;
 
   useEffect(() => {
     if (isload === true) {
       let auth_user = JSON.parse(localStorage.getItem("auth-user"));
-      if (
-        auth_user === null ||
-        parseInt(auth_user.account_id) !== parseInt(params.shopId)
-      ) {
+
+      // if (
+      //   auth_user === null ||
+      //   parseInt(auth_user.account_id) !== parseInt(params.shopId)
+      // ) {
+      if (auth_user === null) {
         router.push("/");
+      } else {
+        setshopName(auth_user.name);
       }
       initSearchFilterField();
       setGuaranteeDevice(parseInt(params.deviceId));
@@ -171,7 +174,7 @@ const PhoneRepair = (routerProps) => {
       getShopBrandModel(data);
       setIsLoad(false);
     }
-  }, [isload])
+  }, [isload]);
 
   const onEditModel = () => {
     if (editable === true) {
@@ -286,46 +289,46 @@ const PhoneRepair = (routerProps) => {
     formData.append("csv_file", csv_file);
 
     const options = {
-        onUploadProgress: (ProgressEvent) => {
-          console.log("ProgressEvent");
-          console.log(ProgressEvent);
-          // const { loaded, total } = progressEvent;
-          // let percent = Math.floor((loaded * 100) / total);
-          // console.log(percent);
-  
-          // if (percent < 100) {
-          //   console.log("percent");
-          // }
-        },
-        // cancelToken: new CancelToken(
-        //   (cancel) => (cancelFileUpload.current = cancel)
-        // ),
-      };
-  
-      setShowImportModal(false);
-      createImportReparationAndGuaranteeCSV(formData, options)
-        .then((result) => {
-          setImportBtnLoading(false);
-          setCSVFile(null);
-  
-          swal(
-            "Gelukt!",
-            "Je reparaties zijn succesvol opgeslagen",
-            "success"
-          ).then((value) => {
-            getShopBrandModel({ shop: params.shopId, device: params.deviceId });
-          });
-        })
-        .catch((err) => {
-          console.log(err.response);
-  
-          // swal("Error!", "Error occurred, Please try again later", "error").then(
-          swal("Error!", err.response.data.error, "error").then((value) => {
-            setShowImportModal(false);
-            setImportBtnLoading(false);
-          });
-        });
+      onUploadProgress: (ProgressEvent) => {
+        console.log("ProgressEvent");
+        console.log(ProgressEvent);
+        // const { loaded, total } = progressEvent;
+        // let percent = Math.floor((loaded * 100) / total);
+        // console.log(percent);
+
+        // if (percent < 100) {
+        //   console.log("percent");
+        // }
+      },
+      // cancelToken: new CancelToken(
+      //   (cancel) => (cancelFileUpload.current = cancel)
+      // ),
     };
+
+    setShowImportModal(false);
+    createImportReparationAndGuaranteeCSV(formData, options)
+      .then((result) => {
+        setImportBtnLoading(false);
+        setCSVFile(null);
+
+        swal(
+          "Gelukt!",
+          "Je reparaties zijn succesvol opgeslagen",
+          "success"
+        ).then((value) => {
+          getShopBrandModel({ shop: params.shopId, device: params.deviceId });
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+
+        // swal("Error!", "Error occurred, Please try again later", "error").then(
+        swal("Error!", err.response.data.error, "error").then((value) => {
+          setShowImportModal(false);
+          setImportBtnLoading(false);
+        });
+      });
+  };
 
   const onExportCsv = async () => {
     setExportBtnLoading(true);
@@ -359,193 +362,224 @@ const PhoneRepair = (routerProps) => {
 
   return (
     <Layout>
-            <Fragment>
-      {importBtnLoading === true ? (
-        <LoadingOverlay
-          active={importBtnLoading}
-          spinner
-          text={"Importing file.."}
-          // text={<p>ff {percentage} %</p>}
-        ></LoadingOverlay>
-      ) : null}
-      <div className="phone-repair-page">
-        <Modal
-          visible={showImportModal}
-          title="Import CSV"
-          onCancel={onToggleImportPopup}
-          footer={[
-            <Button
-              key="back"
-              onClick={onToggleImportPopup}
-              loading={importBtnLoading}
-            >
-              Return
-            </Button>,
-            <Button
-              key="submit"
-              type="primary"
-              loading={importBtnLoading}
-              onClick={(e) => onImportCSVFile(e)}
-            >
-              Submit
-            </Button>,
-          ]}
-        >
-          <div className="form-group">
-            <label>CSV</label>
-            <input
-              type="file"
-              name="csv_file"
-              className={classnames({
-                "form-control": true,
-                "is-invalid": csv_file_error,
-              })}
-              style={{ height: "auto" }}
-              onChange={(e) => onUploadCSV(e)}
-            />
-            {csv_file_error ? (
-              <em id="email-error" className="error invalid-feedback">
-                {csv_file_error}
-              </em>
-            ) : null}
+      <Fragment>
+        {importBtnLoading === true ? (
+          <LoadingOverlay
+            active={importBtnLoading}
+            spinner
+            text={"Importing file.."}
+            // text={<p>ff {percentage} %</p>}
+          ></LoadingOverlay>
+        ) : null}
+        <div className="phone-repair-page">
+          <Modal
+            visible={showImportModal}
+            title="Import CSV"
+            onCancel={onToggleImportPopup}
+            footer={[
+              <Button
+                key="back"
+                onClick={onToggleImportPopup}
+                loading={importBtnLoading}
+              >
+                Return
+              </Button>,
+              <Button
+                key="submit"
+                type="primary"
+                loading={importBtnLoading}
+                onClick={(e) => onImportCSVFile(e)}
+              >
+                Submit
+              </Button>,
+            ]}
+          >
+            <div className="form-group">
+              <label>CSV</label>
+              <input
+                type="file"
+                name="csv_file"
+                className={classnames({
+                  "form-control": true,
+                  "is-invalid": csv_file_error,
+                })}
+                style={{ height: "auto" }}
+                onChange={(e) => onUploadCSV(e)}
+              />
+              {csv_file_error ? (
+                <em id="email-error" className="error invalid-feedback">
+                  {csv_file_error}
+                </em>
+              ) : null}
+            </div>
+          </Modal>
+
+          <div className="main-title">
+            <Head>
+              <title>Mr Again - Reparatie beheer</title>
+              <meta
+                name="Keywords"
+                content="Telefoon reparaties, telefoon modellen, telefoon reparateur, Samsung, Apple, Huawei"
+              />
+              <meta
+                name="description"
+                content="Beheer de modellen die jij repareert"
+              />
+              <link rel="canonical" href={FRONT_END_URL + "/reparaties"} />
+
+              {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
+              <meta property="og:type" content="website" />
+              <meta
+                name="og_title"
+                property="og:title"
+                content=" Overzicht device"
+              />
+              <meta
+                property="og:description"
+                content="Vind de beste reparateur bij jou in de buurt"
+              />
+              <meta name="og:url" content={FRONT_END_URL} />
+              <meta property="og:image" content="" />
+              <meta
+                name="og_site_name"
+                property="og:site_name"
+                content="Mr Again"
+              />
+
+              <meta name="theme-color" content="#ffffff" />
+            </Head>
+            <div className="wrap">
+              <h4>Overzicht device</h4>
+            </div>
           </div>
-        </Modal>
-
-        <div className="main-title">
-          <Head>
-            <title>Mr Again - Reparatie beheer</title>
-            <meta
-              name="Keywords"
-              content="Telefoon reparaties, telefoon modellen, telefoon reparateur, Samsung, Apple, Huawei"
-            />
-            <meta
-              name="description"
-              content="Beheer de modellen die jij repareert"
-            />
-            <link rel="canonical" href={FRONT_END_URL + "/reparaties"} />
-
-            {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
-            <meta property="og:type" content="website" />
-            <meta
-              name="og_title"
-              property="og:title"
-              content=" Overzicht device"
-            />
-            <meta
-              property="og:description"
-              content="Vind de beste reparateur bij jou in de buurt"
-            />
-            <meta name="og:url" content={FRONT_END_URL} />
-            <meta property="og:image" content="" />
-            <meta
-              name="og_site_name"
-              property="og:site_name"
-              content="Mr Again"
-            />
-
-            <meta name="theme-color" content="#ffffff" />
-          </Head>
-          <div className="wrap">
-            <h4>Overzicht device</h4>
-          </div>
-        </div>
-        <div className="phone-repair-page-content">
-          <div className="phone-repair-page-content-wrap">
-            <div className="phone-repair-page-content-wrap-header">
+          <div className="phone-repair-page-content">
+            <div className="phone-repair-page-content-wrap">
+              <div className="phone-repair-page-content-wrap-header">
                 {brands.length > 0 && (
-                    <Fragment>
-                    <div className="repair-content-header-title">Alle merken</div>
+                  <Fragment>
+                    <div className="repair-content-header-title">
+                      Alle merken
+                    </div>
                     <div className="repair-content-header-btn">
-                    <OverlayTrigger
-                    // key="top"
-                    key="importCSV"
-                    placement="top"
-                    overlay={
-                    <Tooltip id={`tooltip-top`}>
-                      Importeer de door jou ingevulde csv file en update in een
-                      keer al je reparaties!
-                    </Tooltip>
-                  }
-                >
-                  <Button
-                    className="device-manage-btn"
-                    onClick={onToggleImportPopup}
-                    loading={importBtnLoading}
-                  >
-                    <div className="pl-2 ">Import</div>
-                  </Button>
-                </OverlayTrigger>
+                      <OverlayTrigger
+                        // key="top"
+                        key="importCSV"
+                        placement="top"
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>
+                            Importeer de door jou ingevulde csv file en update
+                            in een keer al je reparaties!
+                          </Tooltip>
+                        }
+                      >
+                        <Button
+                          className="device-manage-btn"
+                          onClick={onToggleImportPopup}
+                          loading={importBtnLoading}
+                        >
+                          <div className="pl-2 ">Import</div>
+                        </Button>
+                      </OverlayTrigger>
 
-                <OverlayTrigger
-                      // key="top"
-                      key="brands"
-                      placement="top"
-                      overlay={
-                        <Tooltip id={`tooltip-top`}>
-                          Exporteer een csv file waarmee je makkelijk je
-                          reparaties beheert. Vul de velden prijs, garantie,
-                          reparatie tijd en status (True of False) in en upload de
-                          csv weer.
-                        </Tooltip>
-                      }
-                    >
+                      <OverlayTrigger
+                        // key="top"
+                        key="brands"
+                        placement="top"
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>
+                            Exporteer een csv file waarmee je makkelijk je
+                            reparaties beheert. Vul de velden prijs, garantie,
+                            reparatie tijd en status (True of False) in en
+                            upload de csv weer.
+                          </Tooltip>
+                        }
+                      >
+                        <Button
+                          className="device-manage-btn"
+                          onClick={toggleEportModal}
+                          // loading={exportBtnLoading}
+                        >
+                          <div className="pl-2">Export</div>
+                        </Button>
+                      </OverlayTrigger>
+                      <Modal
+                        visible={visibleExportModal}
+                        title="Exporteer je reparatie CSV file"
+                        onCancel={(e) => toggleEportModal(e)}
+                        footer={[
+                          <Button
+                            key="back"
+                            onClick={(e) => toggleEportModal(e)}
+                          >
+                            Sluit
+                          </Button>,
+                        ]}
+                      >
+                        <p>
+                          Download je reparatie file en de instructies voor het
+                          gebruik ervan.
+                        </p>
+                        <a
+                          href="/MrAgain_Instructies_Model_en_Reparatie_beheer-2020.pdf"
+                          target="_blank"
+                          download
+                        >
+                          <Button type="dashed">
+                            <FontAwesomeIcon
+                              icon={["fas", "download"]}
+                            ></FontAwesomeIcon>
+                            <span className="pl-2"> Download Instructions</span>
+                          </Button>
+                        </a>
+                        <p className="mt-3">Or</p>
+                        <Button
+                          key="submit"
+                          type="primary"
+                          size="large"
+                          block
+                          loading={exportBtnLoading}
+                          onClick={onExportCsv}
+                        >
+                          Exporteer reparatie CSV file
+                        </Button>
+                      </Modal>
+                      <OverlayTrigger
+                        key="top"
+                        placement="top"
+                        overlay={
+                          <Tooltip id={"tooltip-top"}>
+                            Selecteer de modellen die jij repareert om je
+                            overzicht up to date te houden.
+                          </Tooltip>
+                        }
+                      >
+                        <Button
+                          className="device-manage-btn w-50"
+                          onClick={() => {
+                            onEditModel();
+                          }}
+                          disabled={
+                            isCreatedGuarantee === true &&
+                            isDeletedGuarantee === true
+                              ? false
+                              : true
+                          }
+                          // loading={!isDeletedGuarantee}
+                          loading={!isCreatedGuarantee || !isDeletedGuarantee}
+                        >
+                          {isDeletedGuarantee && isCreatedGuarantee ? (
+                            <FontAwesomeIcon
+                              icon={["fas", "plus-circle"]}
+                            ></FontAwesomeIcon>
+                          ) : null}
+                          <div className="pl-1">{editBtnLabel}</div>
+                        </Button>
+                      </OverlayTrigger>
+
                       <Button
                         className="device-manage-btn"
-                        onClick={toggleEportModal}
-                        // loading={exportBtnLoading}
-                      >
-                        <div className="pl-2">Export</div>
-                      </Button>
-                    </OverlayTrigger>
-                    <Modal
-                      visible={visibleExportModal}
-                      title="Exporteer je reparatie CSV file"
-                      onCancel={(e) => toggleEportModal(e)}
-                      footer={[
-                        <Button key="back" onClick={(e) => toggleEportModal(e)}>
-                          Sluit
-                        </Button>,
-                      ]}
-                    >
-                      <p>
-                      Download je reparatie file en de instructies voor het
-                        gebruik ervan.
-
-                      </p>
-                      <a href="/MrAgain_Instructies_Model_en_Reparatie_beheer-2020.pdf" target="_blank" download>
-                        <Button type="dashed">
-                          <FontAwesomeIcon
-                            icon={["fas", "download"]}
-                          ></FontAwesomeIcon>
-                          <span className="pl-2"> Download Instructions</span>
-                        </Button>
-                      </a>
-                      <p className="mt-3">Or</p>
-                      <Button
-                        key="submit"
-                        type="primary"
-                        size="large"
-                        block
-                        loading={exportBtnLoading}
-                        onClick={onExportCsv}
-                      >
-                        Exporteer reparatie CSV file
-                      </Button>
-                    </Modal>
-                    <OverlayTrigger
-                      key="top"
-                      placement="top"
-                      overlay={
-                        <Tooltip id={"tooltip-top"}>
-                          Selecteer de modellen die jij repareert om je overzicht
-                          up to date te houden.
-                        </Tooltip>
-                      }
-                    >
-                      <Button
-                        className="device-manage-btn w-50"
                         onClick={() => {
-                          onEditModel();
+                          router.push(`/apparaten-beheer/${shopName}`);
                         }}
                         disabled={
                           isCreatedGuarantee === true &&
@@ -553,42 +587,22 @@ const PhoneRepair = (routerProps) => {
                             ? false
                             : true
                         }
-                        // loading={!isDeletedGuarantee}
-                        loading={!isCreatedGuarantee || !isDeletedGuarantee}
                       >
-                        {isDeletedGuarantee && isCreatedGuarantee ? (
-                          <FontAwesomeIcon
-                            icon={["fas", "plus-circle"]}
-                          ></FontAwesomeIcon>
-                        ) : null}
-                        <div className="pl-1">{editBtnLabel}</div>
+                        <FontAwesomeIcon
+                          icon={["fas", "undo"]}
+                        ></FontAwesomeIcon>
+                        <div className="pl-1">Terug</div>
                       </Button>
-                    </OverlayTrigger>
-                  
-                <Button
-                  className="device-manage-btn"
-                  onClick={() => {
-                    router.push(`/apparaten-beheer/${params.shopId}`);
-                  }}
-                  disabled={
-                    isCreatedGuarantee === true && isDeletedGuarantee === true
-                      ? false
-                      : true
-                  }
-                >
-                  <FontAwesomeIcon icon={["fas", "undo"]}></FontAwesomeIcon>
-                  <div className="pl-1">Terug</div>
-                </Button>
+                    </div>
+                  </Fragment>
+                )}
               </div>
-              </Fragment>
-              )}
-            </div>
-            <div className="phone-repair-page-content-wrap-body">
-              <Row>{displayBrands()}</Row>
+              <div className="phone-repair-page-content-wrap-body">
+                <Row>{displayBrands()}</Row>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </Fragment>
     </Layout>
   );
