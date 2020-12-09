@@ -111,7 +111,8 @@ const ReparationOverView = (routerProps) => {
   useEffect(() => {
     if (isLoad === false) {
       let auth_user = JSON.parse(localStorage.getItem("auth-user"));
-      if (auth_user === null || auth_user.name !== router.query.shopId) {
+      // if (auth_user === null || auth_user.name !== router.query.shopId) {
+      if (auth_user === null) {
         router.push("/");
       } else if (auth_user !== null) getAppointments(auth_user.account_id);
 

@@ -63,7 +63,6 @@ const ShopDashboard = (routerProps) => {
     setLoadAppointment,
     updateAppointment,
     CancelAppointment,
-    isLoggedIn,
   } = routerProps;
   const router = useRouter();
   const { shopId } = router.query;
@@ -76,7 +75,6 @@ const ShopDashboard = (routerProps) => {
   useEffect(() => {
     if (account_profile.id !== undefined) {
       setShopIdInfo(account_profile.id);
-      console.log(account_profile);
     }
   }, [account_profile]);
 
@@ -99,13 +97,13 @@ const ShopDashboard = (routerProps) => {
     height: 0,
     width: 0,
   });
-
   useEffect(() => {
     if (shopIdInfo !== null) {
       handleGetAppointments();
       handleGetSimpleAccount();
     }
   }, [shopIdInfo]);
+
   const url_shopId = shopId;
 
   const [isLoad, setLoad] = React.useState(false);
@@ -146,8 +144,8 @@ const ShopDashboard = (routerProps) => {
   useEffect(() => {
     if (isLoad === false) {
       let auth_user = JSON.parse(localStorage.getItem("auth-user"));
-      // if (auth_user === null || parseInt(auth_user.name) !== parseInt(shopId)) {
-      if (auth_user === null || auth_user.name.replace(" ", "-") !== shopId) {
+      // if (auth_user === null || auth_user.name.replace(" ", "-") !== shopId) {
+      if (auth_user === null) {
         router.push("/");
       }
     }
@@ -166,6 +164,48 @@ const ShopDashboard = (routerProps) => {
   if (isLoad === false) {
     getSearchFilterField();
   }
+
+  useEffect(() => {
+    if (isLoadService === true) {
+      if (modelServices.length > 0) {
+        setPrice(modelServices[0].price);
+        setGuarantee(modelServices[0].guarantee);
+        setLoadService(false);
+      }
+    }
+    if (isLoad === false || isLoadAppointment === true) {
+      if (appointmentList === undefined) {
+        setAppCount(0);
+      } else {
+        console.log(appointmentList);
+        let count = getAppointmentsCountThisWeek(appointmentList);
+        setAppCount(count);
+        count = getAppointmentsCountAll(appointmentList);
+      }
+
+      function compare_item(a, b) {
+        if (a.appointment.date < b.appointment.date) {
+          return -1;
+        } else if (a.appointment.date > b.appointment.date) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }
+      let applist = appointmentList.sort(compare_item);
+      setAppointList(applist);
+      setLoadAppointment(false);
+      setLoad(true);
+    }
+  }, [
+    isLoadService,
+    isLoad,
+    isLoadAppointment,
+    modelServices,
+    setLoadService,
+    appointmentList,
+    setLoadAppointment,
+  ]);
 
   const confirmCancelAppointment = (appoint_id) => {
     // CancelAppointment(appoint_id, url_shopId);
@@ -342,7 +382,9 @@ const ShopDashboard = (routerProps) => {
   function getAppointmentsCountThisWeek(_list) {
     let count = 0;
     let date = new Date();
-    if (_list !== undefined) {
+    // if (_list !== undefined) {
+    console.log(_list);
+    if (_list.length > 0) {
       _list.map((el) => {
         let comp = moment(el.date).isSame(date, "week");
 
@@ -353,6 +395,7 @@ const ShopDashboard = (routerProps) => {
         }
         return true;
       });
+      // }
     }
     return count;
   }
@@ -397,47 +440,6 @@ const ShopDashboard = (routerProps) => {
     date1 = new Date(date1.setDate(date1.getDate()));
     return moment(new Date(date1), frmString).format(frmString);
   }
-
-  useEffect(() => {
-    if (isLoadService === true) {
-      if (modelServices.length > 0) {
-        setPrice(modelServices[0].price);
-        setGuarantee(modelServices[0].guarantee);
-        setLoadService(false);
-      }
-    }
-    if (isLoad === false || isLoadAppointment === true) {
-      if (appointmentList === undefined) {
-        setAppCount(0);
-      } else {
-        let count = getAppointmentsCountThisWeek(appointmentList);
-        setAppCount(count);
-        count = getAppointmentsCountAll(appointmentList);
-      }
-
-      function compare_item(a, b) {
-        if (a.appointment.date < b.appointment.date) {
-          return -1;
-        } else if (a.appointment.date > b.appointment.date) {
-          return 1;
-        } else {
-          return 0;
-        }
-      }
-      let applist = appointmentList.sort(compare_item);
-      setAppointList(applist);
-      setLoadAppointment(false);
-      setLoad(true);
-    }
-  }, [
-    isLoadService,
-    isLoad,
-    isLoadAppointment,
-    modelServices,
-    setLoadService,
-    appointmentList,
-    setLoadAppointment,
-  ]);
 
   const onDisplayChange = (e) => {
     if (display === "none") {
@@ -628,53 +630,57 @@ const ShopDashboard = (routerProps) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {appointlist &&
-                      appointlist.map((el) => {
-                        if (el.status !== 1) {
-                          return (
-                            <tr key={el.id}>
-                              <td>
-                                {formatDate(el.appointment.date, "DD-MM-YYYY")}
-                              </td>
-                              <td>{el.appointment.time}</td>
-                              <td>{el.appointment.client_name}</td>
-                              <td>{el.appointment.client_phone}</td>
-                              <td>{el.device.device_name}</td>
-                              <td>{el.model.model_name}</td>
-                              <td>{el.reparation.reparation_name}</td>
-                              <td>{el.price}</td>
-                              <td className="reparation-action-btn-group">
-                                <Button
-                                  className="reparation-change-btn"
-                                  onClick={() => {
-                                    handleModalShow(el);
-                                  }}
-                                >
-                                  Bewerk reparatie
-                                </Button>
-                                {el.status === -1 && (
-                                  <Popconfirm
-                                    title="Weet je zeker dat je de afspraak wilt annuleren?"
-                                    onConfirm={() => {
-                                      confirmCancelAppointment(
-                                        el.appointment.id
-                                      );
+                    {appointlist.length > 0
+                      ? appointlist.map((el) => {
+                          if (el.status !== 1) {
+                            return (
+                              <tr key={el.id}>
+                                <td>
+                                  {formatDate(
+                                    el.appointment.date,
+                                    "DD-MM-YYYY"
+                                  )}
+                                </td>
+                                <td>{el.appointment.time}</td>
+                                <td>{el.appointment.client_name}</td>
+                                <td>{el.appointment.client_phone}</td>
+                                <td>{el.device.device_name}</td>
+                                <td>{el.model.model_name}</td>
+                                <td>{el.reparation.reparation_name}</td>
+                                <td>{el.price}</td>
+                                <td className="reparation-action-btn-group">
+                                  <Button
+                                    className="reparation-change-btn"
+                                    onClick={() => {
+                                      handleModalShow(el);
                                     }}
-                                    okText="Ja"
-                                    cancelText="Nee"
                                   >
-                                    <Button className="reparation-cancel-btn">
-                                      Annuleer afspraak
-                                    </Button>
-                                  </Popconfirm>
-                                )}
-                              </td>
-                            </tr>
-                          );
-                        } else {
-                          return null;
-                        }
-                      })}
+                                    Bewerk reparatie
+                                  </Button>
+                                  {el.status === -1 && (
+                                    <Popconfirm
+                                      title="Weet je zeker dat je de afspraak wilt annuleren?"
+                                      onConfirm={() => {
+                                        confirmCancelAppointment(
+                                          el.appointment.id
+                                        );
+                                      }}
+                                      okText="Ja"
+                                      cancelText="Nee"
+                                    >
+                                      <Button className="reparation-cancel-btn">
+                                        Annuleer afspraak
+                                      </Button>
+                                    </Popconfirm>
+                                  )}
+                                </td>
+                              </tr>
+                            );
+                          } else {
+                            return null;
+                          }
+                        })
+                      : null}
                   </tbody>
                 </Table>
                 <Modal

@@ -74,7 +74,8 @@ function ProfileManage(routerProps) {
   useEffect(() => {
     if (is_load === true) {
       let auth_user = JSON.parse(localStorage.getItem("auth-user"));
-      if (auth_user === null || auth_user.name !== router.query.shopId) {
+      // if (auth_user === null || auth_user.name !== router.query.shopId) {
+      if (auth_user === null) {
         router.push("/");
       }
       getShopProfileAccount(parseInt(auth_user.account_id), url_shopId);

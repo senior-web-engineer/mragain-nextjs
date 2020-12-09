@@ -52,7 +52,7 @@ const AccountSetting = (routerProps) => {
     const auth_user = JSON.parse(localStorage.getItem("auth-user"));
     if (isLoad === false) {
       // if (auth_user === null || auth_user.name !== router.query.shopId) {
-        if (auth_user === null ) {
+      if (auth_user === null) {
         router.push("/");
       } else {
         getAccountSettings(auth_user.account_id);
@@ -119,9 +119,8 @@ const AccountSetting = (routerProps) => {
     } else if (msg === "error1") {
       message.error("Er gaat wat fout, klopt je postcode?", [2.5]);
     } else {
-      console.log("msg=>",msg)
       message.success(msg, [2.5]);
-      router.reload()
+      router.reload();
     }
   }
 

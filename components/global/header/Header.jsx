@@ -33,7 +33,7 @@ const HeaderView = (routerProps) => {
     getDevices,
     getAuthUser,
     getAppointments,
-    account_profile,
+    // account_profile,
     getShopIdByInformation,
   } = routerProps;
   const [auth_user, setAuthUser] = useState({});
@@ -58,32 +58,32 @@ const HeaderView = (routerProps) => {
     else if (router.pathname === "/contact") return `App-header home-page`;
     else return `App-header`;
   })();
-  useEffect(() => {
-    let localData = JSON.parse(localStorage.getItem("auth-user"));
+  // useEffect(() => {
+  //   let localData = JSON.parse(localStorage.getItem("auth-user"));
 
-    if (
-      router.pathname === "/account-gegevens/[shopId]" ||
-      router.pathname === "/dashboard/[shopId]"
-    ) {
-      getShopIdByInformation(
-        router.query.shopId === localData.name.replaceAll(" ", "-")
-          ? router.query.shopId
-          : localData.name.replaceAll(" ", "-")
-      );
-    }
-  }, []);
+  //   if (
+  //     router.pathname === "/account-gegevens/[shopId]" ||
+  //     router.pathname === "/dashboard/[shopId]"
+  //   ) {
+  //     getShopIdByInformation(
+  //       router.query.shopId === localData.name.replaceAll(" ", "-")
+  //         ? router.query.shopId
+  //         : localData.name.replaceAll(" ", "-")
+  //     );
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    // let localData = JSON.parse(localStorage.getItem("auth-user"));
-    // if (localData) {
-    //   if (account_profile.name !== localData.name) {
-    //     setUserData(localData);
-    //     setAdminName(localData.name.replace(" ", "-"));
-    //     setadmin_Id(localData.name.replace(" ", "-"));
-    //   }
-    // }
-    console.log("Header=>", account_profile);
-  }, [account_profile]);
+  // useEffect(() => {
+  // let localData = JSON.parse(localStorage.getItem("auth-user"));
+  // if (localData) {
+  //   if (account_profile.name !== localData.name) {
+  //     setUserData(localData);
+  //     setAdminName(localData.name.replace(" ", "-"));
+  //     setadmin_Id(localData.name.replace(" ", "-"));
+  //   }
+  // }
+  //   console.log("Header=>", account_profile);
+  // }, [account_profile]);
 
   useEffect(() => {
     if (is_load === true) {
@@ -338,7 +338,7 @@ const mapStateToProps = (state) => ({
   //Maps state to redux store as props
   user_login_change: state.account.user_login_change,
   authUser: state.account.auth_user,
-  account_profile: state.account.account_profile,
+  // account_profile: state.account.account_profile,
 });
 
 const mapDispatchToProps = (dispatch) => {
