@@ -204,7 +204,6 @@ export function getShopIdByInformation(str, dispatch) {
   return axios
     .get(`${API_PATH.GETSHOPIDBYINFORMATION}/`, { params: { shop_info: str } })
     .then((res) => {
-      console.log("Account profile response", res.data);
       dispatch(initAccountProfile(res.data));
 
       return res.data;
@@ -244,7 +243,12 @@ export async function verifyAccount(data, dispatch) {
 export async function updateAccountSettings(id, data, dispatch) {
   return await axios
     .put(`${API_PATH.ACCOUNTSETTING}/${id}/`, data, tokenConfig())
+
     .then((res) => {
+      let user = JSON.parse(localStorage.getItem("auth-user"));
+      user.name = data.name;
+      console.log("local Storage=>", user);
+      localStorage.setItem("auth-user", JSON.stringify(user));
       dispatch(fetchAccountSettings(res.data));
       return axios
         .put(`${API_PATH.UPDATEACCOUNTLOCATION}/${id}/`, data, tokenConfig())

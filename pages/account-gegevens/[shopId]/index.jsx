@@ -51,7 +51,8 @@ const AccountSetting = (routerProps) => {
   useEffect(() => {
     const auth_user = JSON.parse(localStorage.getItem("auth-user"));
     if (isLoad === false) {
-      if (auth_user === null || auth_user.name !== router.query.shopId) {
+      // if (auth_user === null || auth_user.name !== router.query.shopId) {
+        if (auth_user === null ) {
         router.push("/");
       } else {
         getAccountSettings(auth_user.account_id);
@@ -111,13 +112,16 @@ const AccountSetting = (routerProps) => {
     data.zipcode = loc;
     delete data["id"];
     data.auth = acc_settings.auth;
+
     let msg = await updateAccountSettings(id, data);
     if (msg === "error") {
       message.error("Er gaat wat fout, kloppen je adres en postcode?", [2.5]);
     } else if (msg === "error1") {
       message.error("Er gaat wat fout, klopt je postcode?", [2.5]);
     } else {
+      console.log("msg=>",msg)
       message.success(msg, [2.5]);
+      router.reload()
     }
   }
 
@@ -453,6 +457,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateAccountSettings: (id, data) =>
       updateAccountSettings(id, data, dispatch),
+
     resetPasswordConfirm: (data) => {
       resetPasswordConfirm(data, dispatch);
     },

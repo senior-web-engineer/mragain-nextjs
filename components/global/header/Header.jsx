@@ -12,9 +12,12 @@ import {
   getAccountProfile,
   getDevices,
   getAuthUser,
+  getShopIdByInformation,
 } from "service/account/operations.js";
 import { getAppointments } from "service/appointments/operations.js";
 import { BACK_END_URL } from "constants.js";
+import { route } from "next/dist/next-server/server/router";
+import { localeData } from "moment-timezone";
 
 const { Header } = Layout;
 
@@ -30,13 +33,17 @@ const HeaderView = (routerProps) => {
     getDevices,
     getAuthUser,
     getAppointments,
+    account_profile,
+    getShopIdByInformation,
   } = routerProps;
   const [auth_user, setAuthUser] = useState({});
   const [admin_Id, setadmin_Id] = useState({});
   const [is_load, setLoad] = useState(true);
   const [adminName, setAdminName] = useState(null);
   const router = useRouter();
+  const [userData, setUserData] = useState({});
 
+  // const usr = localStorage.getItem("auth-user");
   const headerClass = (() => {
     if (router.pathname === "/") return `App-header home-page`;
     else if (router.pathname === "/over-ons") return `App-header home-page`;
@@ -51,13 +58,40 @@ const HeaderView = (routerProps) => {
     else if (router.pathname === "/contact") return `App-header home-page`;
     else return `App-header`;
   })();
+  useEffect(() => {
+    let localData = JSON.parse(localStorage.getItem("auth-user"));
+
+    if (
+      router.pathname === "/account-gegevens/[shopId]" ||
+      router.pathname === "/dashboard/[shopId]"
+    ) {
+      getShopIdByInformation(
+        router.query.shopId === localData.name.replaceAll(" ", "-")
+          ? router.query.shopId
+          : localData.name.replaceAll(" ", "-")
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    // let localData = JSON.parse(localStorage.getItem("auth-user"));
+    // if (localData) {
+    //   if (account_profile.name !== localData.name) {
+    //     setUserData(localData);
+    //     setAdminName(localData.name.replace(" ", "-"));
+    //     setadmin_Id(localData.name.replace(" ", "-"));
+    //   }
+    // }
+    console.log("Header=>", account_profile);
+  }, [account_profile]);
 
   useEffect(() => {
     if (is_load === true) {
       let user = localStorage.getItem("auth-user");
       if (user !== null) {
         const authUserData = JSON.parse(user);
-        setAdminName(authUserData.name.replace(" ", "-"));
+        // userData = authUserData;
+        setAdminName(authUserData.name.replaceAll(" ", "-"));
         setAuthUser(JSON.parse(user));
       }
       initUserLoginChange(false);
@@ -78,7 +112,7 @@ const HeaderView = (routerProps) => {
   useEffect(() => {
     let admin_auth = JSON.parse(localStorage.getItem("auth-user"));
     if (admin_auth) {
-      const accountId = admin_auth.name.replace(" ", "-");
+      const accountId = admin_auth.name.replaceAll(" ", "-");
       // setadmin_Id(admin_auth.account_id);
       setadmin_Id(accountId);
     }
@@ -96,7 +130,6 @@ const HeaderView = (routerProps) => {
   const handleGetDevice = () => {
     // getDevices();
   };
-
   const handleAccountSettings = () => {
     const user = JSON.parse(localStorage.getItem("auth-user"));
     getAccountSettings(user.account_id);
@@ -331,6 +364,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     getAppointments: (id) => {
       getAppointments(id, dispatch);
+    },
+    getShopIdByInformation: (str) => {
+      getShopIdByInformation(str, dispatch);
     },
   };
 };
