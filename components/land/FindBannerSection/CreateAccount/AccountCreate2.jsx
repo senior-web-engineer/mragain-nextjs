@@ -71,7 +71,7 @@ function AccountCreate2(routerProps) {
   useEffect(() => {
     if (isSignUp === true) {
       message.success(
-        "We hebben je een verificatie email gestuurd waarmee je je aanmelding kunt afronden.",
+        "Bedankt voor je aanmelding bij MrAgain. We voeren nu enkele checks uit waarna je een email van ons ontvangt om je account te activeren. Let op: deze email kan in je spam terecht komen!",
         [2.5]
       );
       setTimeout(() => {

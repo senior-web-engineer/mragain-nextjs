@@ -28,7 +28,7 @@ const MainContactUs = (props) => {
     if (form.checkValidity() === true) {
       const data = new FormData(event.target);
       if (ValidateEmail(data.get("email")) === false) {
-        message.error("You have entered an invalid email address!", [2.5]);
+        message.error("Je email adres lijkt niet te kloppen!", [2.5]);
         return;
       }
 
