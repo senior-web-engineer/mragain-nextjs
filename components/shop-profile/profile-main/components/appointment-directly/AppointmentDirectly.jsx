@@ -126,7 +126,9 @@ const AppointmentDirectly = (routerProps) => {
 
     setAppointmentDate(date);
     let flg = 1;
-    router.push(`/maak-een-afspraak?shop=${account_profile.id}&initdate=${flg}`);
+    router.push(
+      `/maak-een-afspraak?shop=${account_profile.id}&initdate=${flg}`
+    );
   }
   let dateArr = [];
   let closeDateArr = [];
@@ -199,7 +201,7 @@ const AppointmentDirectly = (routerProps) => {
                 Altijd materialen op voorraad
               </Checkbox>
               <Checkbox checked={chkP} onChange={(e) => onChkPro(e)}>
-                Snelle reparatietijd 
+                Snelle reparatietijd
               </Checkbox>
               <Checkbox checked={chkG} onChange={(e) => onChkGuarantee(e)}>
                 Altijd de beste garantie
@@ -216,7 +218,7 @@ const mapStateToProps = (state) => ({
   //Maps state to redux store as props
   account_invalid_time: state.account.account_invalid_time,
   account_valid_time: state.account.account_valid_time,
-  account_profile: state.account.account_profile,
+  account_profile: state.account.shop_account_profile,
 });
 
 const mapDispatchToProps = (dispatch) => {

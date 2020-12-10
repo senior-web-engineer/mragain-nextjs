@@ -24,6 +24,7 @@ import {
   setUpdateScheduleTime,
   setSuccessData,
   authenticated,
+  initShopAccountProfile,
 } from "./action";
 import Axios from "axios";
 
@@ -205,6 +206,18 @@ export function getShopIdByInformation(str, dispatch) {
     .get(`${API_PATH.GETSHOPIDBYINFORMATION}/`, { params: { shop_info: str } })
     .then((res) => {
       dispatch(initAccountProfile(res.data));
+
+      return res.data;
+    })
+    .catch((err) => {});
+}
+// for result search profiles
+export function getShopProfileByInformation(str, dispatch) {
+  return axios
+    .get(`${API_PATH.GETSHOPIDBYINFORMATION}/`, { params: { shop_info: str } })
+    .then((res) => {
+      console.log("shop profile data", res.data);
+      dispatch(initShopAccountProfile(res.data));
 
       return res.data;
     })

@@ -212,7 +212,7 @@ const mapStateToProps = (state) => ({
   filterlistPBM: state.search.fieldlistPBM,
   filterlistRPG: state.search.fieldlistRPG,
   shopReparationList: state.appointment.shopReparationList,
-  account_profile: state.account.account_profile,
+  account_profile: state.account.shop_account_profile,
   shopDevices: state.search.shopDevices,
   deviceBrands: state.search.deviceBrands,
   brandModels: state.search.brandModels,

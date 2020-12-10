@@ -28,6 +28,7 @@ import {
   HANDLE_CHECK_TIME,
   SET_SUCESS_DATA,
   CHECK_AUTHENTICATION,
+  SHOP_ACCOUNT_PROFILE,
 } from "./types";
 
 export const signupSuccess = () => ({
@@ -93,6 +94,11 @@ export const fetchRepairDevices = (data) => ({
 
 export const initAccountProfile = (data) => ({
   type: INIT_ACCOUNT_PROFILE,
+  payload: data[0],
+});
+
+export const initShopAccountProfile = (data) => ({
+  type: SHOP_ACCOUNT_PROFILE,
   payload: data[0],
 });
 

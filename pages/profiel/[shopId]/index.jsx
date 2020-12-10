@@ -10,6 +10,7 @@ import { Layout } from "@/components/global";
 import {
   getShopAccountProfile,
   getShopIdByInformation,
+  getShopProfileByInformation,
 } from "service/account/operations.js";
 import { getReparationGuarantee } from "service/appointments/operations.js";
 import Head from "next/head";
@@ -19,6 +20,7 @@ const ShopProfile = (routerProps) => {
   const {
     getShopAccountProfile,
     getShopIdByInformation,
+    getShopProfileByInformation,
     getReparationGuarantee,
   } = routerProps;
   const router = useRouter();
@@ -29,7 +31,9 @@ const ShopProfile = (routerProps) => {
     }
   }, []);
   async function getShopId(url_str) {
-    let shop = await getShopIdByInformation(url_str);
+    // let shop = await getShopIdByInformation(url_str);
+    let shop = await getShopProfileByInformation(url_str);
+
     console.log("shop=>", shop);
     if (shop !== undefined && shop.length > 0) {
       let shop_id = shop[0].id;
@@ -91,7 +95,10 @@ const mapDispatchToProps = (dispatch) => {
     getShopAccountProfile: (id) => {
       getShopAccountProfile(id, dispatch);
     },
-    getShopIdByInformation: (str) => getShopIdByInformation(str, dispatch),
+    // getShopIdByInformation: (str) => getShopIdByInformation(str, dispatch),
+    getShopProfileByInformation: (str) =>
+      getShopProfileByInformation(str, dispatch),
+
     getReparationGuarantee: (id) => {
       getReparationGuarantee(id, dispatch);
     },

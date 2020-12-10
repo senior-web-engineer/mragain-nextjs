@@ -5,6 +5,7 @@ import { Button, Progress, Rate } from "antd";
 import moment from "moment";
 import StarRatingInfo from "@/components/global/StarRatingInfo/StarRatingInfo";
 import "./ReviewCheckOut.less";
+import { useRouter } from "next/router";
 
 const ReviewCheckOut = (routerProps) => {
   const [price_mark, setPriceMark] = useState(0);
@@ -222,7 +223,7 @@ const ReviewCheckOut = (routerProps) => {
 const mapStateToProps = (state) => ({
   //Maps state to redux store as props
   shopReviews: state.account.account_review,
-  account_profile: state.account.account_profile,
+  account_profile: state.account.shop_account_profile,
 });
 
 const mapDispatchToProps = (dispatch) => {

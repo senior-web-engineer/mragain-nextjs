@@ -55,7 +55,8 @@ const mapStateToProps = (state) => ({
   //Maps state to redux store as props
   shopReviews: state.account.account_review,
   isLoadedProfile: state.account.isLoadedProfile,
-  account_profile: state.account.account_profile,
+  // account_profile: state.account.account_profile,
+  account_profile: state.account.shop_account_profile,
   filterlistPBM: state.search.fieldlistPBM,
 });
 

@@ -27,6 +27,7 @@ import {
   UPDATE_SCHEDULE_TIME,
   SET_SUCESS_DATA,
   CHECK_AUTHENTICATION,
+  SHOP_ACCOUNT_PROFILE,
 } from "./types";
 
 const initial_state = {
@@ -39,6 +40,7 @@ const initial_state = {
   auth_error: null,
   account_settings: {},
   account_profile: {},
+  shop_account_profile: {},
   account_valid_time: {},
   account_valid_time_id: null,
   account_invalid_time: {},
@@ -164,6 +166,12 @@ const accountReducer = (state = initial_state, action) => {
       return {
         ...state,
         account_profile: action.payload,
+      };
+    }
+    case SHOP_ACCOUNT_PROFILE: {
+      return {
+        ...state,
+        shop_account_profile: action.payload,
       };
     }
     case SET_LOADED_PROFILE: {

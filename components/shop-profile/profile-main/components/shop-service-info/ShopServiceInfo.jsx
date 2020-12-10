@@ -114,7 +114,7 @@ const ShopServiceInfo = (routerProps) => {
 const mapStateToProps = (state) => ({
   //Maps state to redux store as props
   account_valid_time: state.account.account_valid_time,
-  account_profile: state.account.account_profile,
+  account_profile: state.account.shop_account_profile,
   isLoadedProfile: state.account.isLoadedProfile,
 });
 
