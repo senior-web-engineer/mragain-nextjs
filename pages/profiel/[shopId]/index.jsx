@@ -51,19 +51,19 @@ const ShopProfile = (routerProps) => {
     <Layout>
       <div className="profile-container">
         <Head>
-          <title>Mr Again - Profiel</title>
+          <title>Telefoon Reparateur - Telefoon en Tablet reparatie - mragain.nl</title>
           <meta
             name="Keywords"
             content="Profiel, MrAgain, Telefoon Reparateur"
           />
-          <meta name="description" content="Beheer je profiel bij MrAgain" />
+          <meta name="description" content="Online je telefoon en tablet reparatie afspraak maken via mragain.nl" />
           <link rel="canonical" href={FRONT_END_URL + "/profiel"} />
           {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
           <meta property="og:type" content="website" />
           <meta
             name="og_title"
             property="og:title"
-            content="Reparatie managementt"
+            content="Telefoon reparatie bij jou in de buurt"
           />
           <meta
             property="og:description"
