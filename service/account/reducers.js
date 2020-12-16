@@ -1,5 +1,6 @@
 import {
   SIGNUP_SUCCESS,
+  SIGNUP_SUCCESS_DELETE,
   SIGNUP_FAIL,
   LOGIN_SUCCESS,
   AUTH_ERROR_RESET,
@@ -74,6 +75,12 @@ const accountReducer = (state = initial_state, action) => {
         ...state,
         auth_token: action.payload,
         isSignUp: true,
+      };
+    }
+    case SIGNUP_SUCCESS_DELETE: {
+      return {
+        ...state,
+        isSignUp: false,
       };
     }
     case LOGIN_SUCCESS: {

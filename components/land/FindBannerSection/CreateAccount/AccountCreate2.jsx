@@ -8,6 +8,7 @@ import "./AccountCreate2.less";
 
 import { registerUser } from "service/account/operations.js";
 import { resetAuthError } from "service/account/action.js";
+import {signupSuccessDelete} from "service/account/action";
 
 function AccountCreate2(routerProps) {
   const [validated, setValidated] = useState(false);
@@ -19,6 +20,7 @@ function AccountCreate2(routerProps) {
     auth_error,
     isAuth_Error,
     resetAuthError,
+    signupSuccessDelete
   } = routerProps;
 
   const router = useRouter();
@@ -28,7 +30,6 @@ function AccountCreate2(routerProps) {
     event.stopPropagation();
     const form = event.currentTarget;
     const data = new FormData(event.target);
-    console.log(data.get("terms"));
     if (data.get("terms")==='on') {
       setValidated(true);
     } else {
@@ -76,19 +77,19 @@ function AccountCreate2(routerProps) {
         geo_long: 0,
         ptype: 0,
       };
-      registerUser(user)
+      registerUser(user);
     }
   };
 
   useEffect(() => {
     if (isSignUp === true) {
-      console.log('formRef',formRef);
-      formRef.current.reset();
       message.success(
         "Bedankt voor je aanmelding bij MrAgain. We voeren nu enkele checks uit waarna je een email van ons ontvangt om je account te activeren. Let op: deze email kan in je spam terecht komen!",
         [2.5]
       );
       setTimeout(() => {
+        signupSuccessDelete();
+        formRef.current.reset();
         router.push("/");
       }, 3000);
     } else if (isAuth_Error === true) {
@@ -739,6 +740,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     registerUser: (data) => {
       registerUser(data, dispatch);
+    },
+    signupSuccessDelete: (data) => {
+      dispatch(signupSuccessDelete(data));
     },
     resetAuthError: (data) => {
       dispatch(resetAuthError(data));

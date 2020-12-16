@@ -1,6 +1,7 @@
 import {
   SET_LOADED_PROFILE,
   SIGNUP_SUCCESS,
+  SIGNUP_SUCCESS_DELETE,
   SIGNUP_FAIL,
   LOGIN_FAIL,
   LOGOUT,
@@ -33,6 +34,10 @@ import {
 
 export const signupSuccess = () => ({
   type: SIGNUP_SUCCESS,
+});
+
+export const signupSuccessDelete = () => ({
+  type: SIGNUP_SUCCESS_DELETE,
 });
 
 export const signupFail = (data) => ({

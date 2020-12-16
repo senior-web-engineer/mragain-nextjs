@@ -1,4 +1,5 @@
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
+export const SIGNUP_SUCCESS_DELETE = "SIGNUP_SUCCESS_DELETE";
 export const SIGNUP_FAIL = "SIGNUP_FAIL";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGOUT = "LOGIN_OUT";
