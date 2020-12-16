@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { message } from "antd";
@@ -22,11 +22,21 @@ function AccountCreate2(routerProps) {
   } = routerProps;
 
   const router = useRouter();
-
+  const formRef = useRef();
   const handleSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
     const form = event.currentTarget;
+    const data = new FormData(event.target);
+    console.log(data.get("terms"));
+    if (data.get("terms")==='on') {
+      setValidated(true);
+    } else {
+      setValidated(false);
+      message.error("Bevestig de algemene voorwaarden!", [2.5]);
+      return;
+    }
+
     if (form.checkValidity() === true) {
       const data = new FormData(event.target);
       if (ValidateEmail(data.get("email")) === false) {
@@ -41,6 +51,8 @@ function AccountCreate2(routerProps) {
         message.error("Je wachtwoorden moeten hetzelfde zijn!", [2.5]);
         return;
       }
+
+
       const user = {
         name: data.get("name"),
         email: data.get("email"),
@@ -64,12 +76,14 @@ function AccountCreate2(routerProps) {
         geo_long: 0,
         ptype: 0,
       };
-      registerUser(user);
+      registerUser(user)
     }
   };
 
   useEffect(() => {
     if (isSignUp === true) {
+      console.log('formRef',formRef);
+      formRef.current.reset();
       message.success(
         "Bedankt voor je aanmelding bij MrAgain. We voeren nu enkele checks uit waarna je een email van ons ontvangt om je account te activeren. Let op: deze email kan in je spam terecht komen!",
         [2.5]
@@ -101,7 +115,7 @@ function AccountCreate2(routerProps) {
     <div className="account-create-container2">
       <div className="account-create-container2-wrap">
         <div className="account-create-form2">
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Form noValidate validated={validated} onSubmit={handleSubmit} ref={formRef}>
             <Form.Control
               className="account-create-input2"
               type="text"
@@ -134,6 +148,7 @@ function AccountCreate2(routerProps) {
               <Form.Check
                 className="account-create-check2"
                 type="checkbox"
+                name={'terms'}
                 label=""
                 required
               />

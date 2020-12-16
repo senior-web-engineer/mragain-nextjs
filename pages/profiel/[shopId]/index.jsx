@@ -22,6 +22,8 @@ const ShopProfile = (routerProps) => {
     getShopIdByInformation,
     getShopProfileByInformation,
     getReparationGuarantee,
+    shop_account_profile,
+    shopDevices,
   } = routerProps;
   const router = useRouter();
   const shopId = router.query.shopId;
@@ -44,30 +46,33 @@ const ShopProfile = (routerProps) => {
     }
   }
 
-  console.log(FRONT_END_URL + "/profiel/" + shopId);
-  console.log(router.asPath);
+  let devices = (shopDevices && shopDevices[0] ) ? shopDevices.map(item=>item.device.device_name)  :[];
+  devices = devices.join(' & ');
+
+  let title = `${shop_account_profile.name} + ${shop_account_profile.city} - ${devices} Reparatie - ${FRONT_END_URL}`;
+  let description = `${shop_account_profile.name}, ${shop_account_profile.street}, ${shop_account_profile.zipcode}, ${shop_account_profile.city}. Laat je telefoon repareren bij ${shop_account_profile.name} via mragain.nl. Transparant, betrouwbaar en snel!`;
 
   return (
     <Layout>
       <div className="profile-container">
         <Head>
-          <title>Mr Again - Profiel</title>
+          <title>{title}</title>
           <meta
             name="Keywords"
             content="Profiel, MrAgain, Telefoon Reparateur"
           />
-          <meta name="description" content="Beheer je profiel bij MrAgain" />
+          <meta name="description" content={description} />
           <link rel="canonical" href={FRONT_END_URL + "/profiel"} />
           {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
           <meta property="og:type" content="website" />
           <meta
             name="og_title"
             property="og:title"
-            content="Reparatie managementt"
+            content={title}
           />
           <meta
             property="og:description"
-            content="Vind de beste reparateur bij jou in de buurt"
+            content={description}
           />
           <meta name="og:url" content={FRONT_END_URL} />
           <meta property="og:image" content="" />
@@ -87,6 +92,9 @@ const ShopProfile = (routerProps) => {
 
 const mapStateToProps = (state) => ({
   //Maps state to redux store as props
+  shop_account_profile:state.account.shop_account_profile,
+  shopDevices:state.search.shopDevices,
+  state:state
 });
 
 const mapDispatchToProps = (dispatch) => {
