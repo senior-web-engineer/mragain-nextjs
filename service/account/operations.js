@@ -353,10 +353,9 @@ export function getShopAccountProfile(id, dispatch) {
               if (reviews.length === 0) {
                 reviews = [];
               }
-
-              dispatch(initAccountValidTime(validTime));
+                dispatch(initAccountReviews(reviews));
+                dispatch(initAccountValidTime(validTime));
               dispatch(initAccountInvalidTime(invalidTime));
-              dispatch(initAccountReviews(reviews));
               dispatch(setLoadedProfile(true));
             })
             .catch((err) => {});

@@ -31,7 +31,7 @@ const ShopProfile = (routerProps) => {
     if (shopId !== undefined) {
       getShopId(shopId);
     }
-  }, []);
+  }, [shopId]);
   async function getShopId(url_str) {
     // let shop = await getShopIdByInformation(url_str);
     let shop = await getShopProfileByInformation(url_str);
@@ -94,7 +94,6 @@ const mapStateToProps = (state) => ({
   //Maps state to redux store as props
   shop_account_profile:state.account.shop_account_profile,
   shopDevices:state.search.shopDevices,
-  state:state
 });
 
 const mapDispatchToProps = (dispatch) => {

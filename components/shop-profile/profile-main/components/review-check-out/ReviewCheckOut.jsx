@@ -27,7 +27,6 @@ const ReviewCheckOut = (routerProps) => {
     let wait = 0;
     let recom = 0;
     let aver_marks = [];
-    // if (isinit === false) {
       if (shopReviews.length > 0) {
         shopReviews.map((el) => {
           price += parseInt(el.price_mark);
@@ -65,14 +64,15 @@ const ReviewCheckOut = (routerProps) => {
         setRecommend(count);
         setRecomPercent((recom / count).toFixed(2) * 100);
         setIsInit(true);
-      }
-       else {
+      }else {
         setPriceMark(0);
         setQualityMark(0);
         setServiceMark(0);
         setWaitMark(0);
+        setAverMark(0);
+        setRecommend(0);
+        setRecomPercent(0);
       }
-    // }
   }
 
   function handleCheckOutModal() {
