@@ -49,7 +49,7 @@ const ShopProfile = (routerProps) => {
   let devices = (shopDevices && shopDevices[0] ) ? shopDevices.map(item=>item.device.device_name)  :[];
   devices = devices.join(' & ');
 
-  let title = `${shop_account_profile.name} + ${shop_account_profile.city} - ${devices} Reparatie - ${FRONT_END_URL}`;
+  let title = `${shop_account_profile.name} ${shop_account_profile.city} - ${devices} Reparatie - ${FRONT_END_URL}`;
   let description = `${shop_account_profile.name}, ${shop_account_profile.street}, ${shop_account_profile.zipcode}, ${shop_account_profile.city}. Laat je telefoon repareren bij ${shop_account_profile.name} via mragain.nl. Transparant, betrouwbaar en snel!`;
 
   return (
