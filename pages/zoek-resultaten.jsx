@@ -247,7 +247,6 @@ const SearchShop = (routerProps) => {
   function handleBrandChange(value) {
     setBrand(value);
     setBrandflg(true);
-
     getModels(phone,value);
     if (value !== 0) {
       setModel(0);
@@ -338,13 +337,12 @@ const SearchShop = (routerProps) => {
   }
 
   function initModelSelect() {
-    console.log('initModelSelect',phone,brand,isLoadFilter)
     if (phone === 0 || brand === 0) {
       return;
     }
 
     if (isLoadFilter === false) {
-      return;
+      // return;
     }
 
     return (
@@ -422,7 +420,7 @@ const SearchShop = (routerProps) => {
 
   useEffect(() => {
     const params = router.query;
-
+    console.log('isSearchFilter',isSearchFilter)
     if (isSearchFilter === true && searchFilters.location === null) {
       return;
     }
@@ -434,15 +432,21 @@ const SearchShop = (routerProps) => {
         }
         let dev = parseInt(searchFilters.device);
         if (dev !== null && dev !== 0) {
-          setPhone(dev);
+          if(dev!==phone) {
+            setPhone(dev);
+            getBrands(dev);
+          }
           let br = parseInt(searchFilters.brand);
           if (br !== null && br !== 0) {
-            setBrand(br);
-            handleBrandChange(br);
+            if(br!==brand){
+              console.log(br,brand);
+              handleBrandChange(br);
+            }
             let mo = parseInt(searchFilters.model);
             if (mo !== null && mo !== 0) {
-              setModel(mo);
-              handleModelChange(mo);
+              if(mo!==model){
+                handleModelChange(mo);
+              }
               let rep = parseInt(searchFilters.reparation);
               if (rep !== null && rep !== 0) {
                 setReparation(rep);
@@ -461,15 +465,22 @@ const SearchShop = (routerProps) => {
         }
         let dev = parseInt(params.device);
         if (dev !== null && dev !== 0) {
-          setPhone(dev);
+          if(dev!==phone) {
+            setPhone(dev);
+            getBrands(dev);
+          }
+
           let br = parseInt(params.brand);
           if (br !== null && br !== 0) {
-            setBrand(br);
-            handleBrandChange(br);
+            console.log(br,brand)
+            if(br!==brand){
+              handleBrandChange(br);
+            }
             let mo = parseInt(params.model);
             if (mo !== null && mo !== 0) {
-              setModel(mo);
-              handleModelChange(mo);
+              if(mo!==model){
+                handleModelChange(mo);
+              }
               let rep = parseInt(params.reparation);
               if (rep !== null && rep !== 0) {
                 setReparation(rep);
@@ -510,7 +521,6 @@ const SearchShop = (routerProps) => {
     }
   }, [isSearch]);
 
-  console.log(filterlistRPG);
   return (
     <Layout>
       <div className="serarch-shop-section">
