@@ -13,8 +13,9 @@ import {
   IS_FIND_OUT,
   GET_SHOP_DEVICES,
   DETAILS_OF_SHOP_REPARATION,
-  REPARATION_DATA,
+  REPARATION_DATA, SET_DEVICES, SET_DEVICE_BRANDS, SET_BRAND_MODELS,
 } from "./types";
+import {SET_BRAND_MODEL} from "@/service/account/types";
 
 export const setLoadFilter = (data) => ({
   type: SET_LOAD_FILTER,
@@ -78,5 +79,17 @@ export const setLoadService = (data) => ({
 
 export const setShopDevices = (data) => ({
   type: GET_SHOP_DEVICES,
+  payload: data,
+});
+export const setDevices = (data) => ({
+  type: SET_DEVICES,
+  payload: data,
+});
+export const setDeviceBrands = (data) => ({
+  type: SET_DEVICE_BRANDS,
+  payload: data,
+});
+export const setBrandModels = (data) => ({
+  type: SET_BRAND_MODELS,
   payload: data,
 });

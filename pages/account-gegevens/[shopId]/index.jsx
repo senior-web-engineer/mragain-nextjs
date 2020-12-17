@@ -16,6 +16,7 @@ import "./index.less";
 import Head from "next/head";
 import { FRONT_END_URL } from "../../../constants.js";
 import { Layout } from "../../../components/global";
+import filterObjectKeys from "../../../scripts/filterObjectKeys";
 
 const { Option } = Select;
 
@@ -111,6 +112,9 @@ const AccountSetting = (routerProps) => {
     }
     data.zipcode = loc;
     delete data["id"];
+
+
+
     data.auth = acc_settings.auth;
 
     let msg = await updateAccountSettings(id, data);

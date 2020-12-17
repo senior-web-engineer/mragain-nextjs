@@ -30,6 +30,7 @@ import image1 from "@/assets/images/home_newest_image3.jpg";
 import { setSearchFilter, setLoadFilter } from "../service/search/action";
 import { Modal } from "react-bootstrap";
 import { blue } from "@material-ui/core/colors";
+import {getBrands, getDevices, getModels} from "service/search/operations";
 
 const {
   MarkerWithLabel,
@@ -156,9 +157,15 @@ const SearchShop = (routerProps) => {
   /* eslint-disable */
 
   const {
+    getDevices,
+    getBrands,
+    getModels,
     getSearchFilterField,
     getSearchFilterFieldExt,
     findShopbyFilter,
+    devices,
+    deviceBrands,
+    brandModels,
     filterlistPBM,
     filterlistRPG,
     shoplist,
@@ -174,6 +181,7 @@ const SearchShop = (routerProps) => {
 
   if (isLoad === false) {
     setLoadFilter(false);
+    getDevices();
     initSearchFilterField();
     setLoad(true);
   }
@@ -224,6 +232,7 @@ const SearchShop = (routerProps) => {
 
   function handlePhoneChange(value) {
     setPhone(value);
+    getBrands(value);
     if (brandflg === true) {
       setBrandflg(false);
     }
@@ -238,6 +247,8 @@ const SearchShop = (routerProps) => {
   function handleBrandChange(value) {
     setBrand(value);
     setBrandflg(true);
+
+    getModels(phone,value);
     if (value !== 0) {
       setModel(0);
     } else {
@@ -285,12 +296,12 @@ const SearchShop = (routerProps) => {
   function onFindShopbyFilter() {
     let loc = location;
     if (loc === "zipcode-error") {
-      alert("Voer een plaats of postcode in");
-      return;
+      // alert("Voer een plaats of postcode in");
+      // return;
     }
-    if (loc === "") {
-      setError(true);
-    } else {
+    // if (loc === "") {
+    //   setError(true);
+    // } else {
       let _filters = {
         isSearchFilter: true,
         filters: {
@@ -309,15 +320,14 @@ const SearchShop = (routerProps) => {
       router.push(
         `/zoek-resultaten?position=${loc}&distance=${distance}&device=${phone}&brand=${brand}&model=${model}&reparation=${reparation}&price=${price}&guarantee=${guarantee}&sort=${sort}`
       );
-    }
+    // }
   }
 
   function initBrandSelect() {
-    let phoneObj = filterlistPBM.filter((el) => el.id === phone);
 
     return (
-      phoneObj[0] !== undefined &&
-      phoneObj[0]["brand"].map((element) => {
+      deviceBrands !== undefined &&
+      deviceBrands.map((element) => {
         return (
           <Option value={element.id} key={element.id}>
             {element.brand_name}
@@ -328,6 +338,7 @@ const SearchShop = (routerProps) => {
   }
 
   function initModelSelect() {
+    console.log('initModelSelect',phone,brand,isLoadFilter)
     if (phone === 0 || brand === 0) {
       return;
     }
@@ -336,11 +347,9 @@ const SearchShop = (routerProps) => {
       return;
     }
 
-    let phoneObj = filterlistPBM.filter((el) => el.id === phone);
-    let modelObj = phoneObj[0]["brand"].filter((e1) => e1.id === brand);
     return (
-      modelObj[0] !== undefined &&
-      modelObj[0]["model"].map((element) => {
+        brandModels !== undefined &&
+      brandModels.map((element) => {
         return (
           <Option value={element.id} key={element.id}>
             {element.model_name}
@@ -557,7 +566,7 @@ const SearchShop = (routerProps) => {
                     <Option value={0} key={0}>
                       Alle apparaten
                     </Option>
-                    {filterlistPBM.map((element) => {
+                    {devices.map((element) => {
                       return (
                         <Option value={element.id} key={element.id}>
                           {element.device_name}
@@ -763,6 +772,9 @@ const mapStateToProps = (state) => ({
   defaultlocation: state.search.location,
   filterlistPBM: state.search.fieldlistPBM,
   filterlistRPG: state.search.fieldlistRPG,
+  devices: state.search.devices,
+  deviceBrands: state.search.deviceBrands,
+  brandModels: state.search.brandModels,
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -774,6 +786,15 @@ const mapDispatchToProps = (dispatch) => {
     },
     findShopbyFilter: (data) => {
       searchShopFilter(data, dispatch);
+    },
+    getDevices: () => {
+      getDevices( dispatch);
+    },
+    getBrands: (id) => {
+      getBrands( id,dispatch);
+    },
+    getModels: (deviceId,brandId) => {
+      getModels( deviceId,brandId,dispatch);
     },
     setFindOut: (data) => {
       dispatch(setFindOut(data));

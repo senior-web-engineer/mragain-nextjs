@@ -1,18 +1,18 @@
 import { API_PATH } from "../../constants";
 import {
-  setFindOut,
-  resetShopFilterList,
-  fetchFiterPBMList,
-  fetchFiterRPGList,
-  fetchShopFilterList,
-  fetchModelServices,
-  setLoadService,
-  fetchNewestShopList,
-  setLoadFilter,
-  setShopDevices,
-  setDeviceBrands,
-  setShopReparationDetails,
-  setReparationData,
+    setFindOut,
+    resetShopFilterList,
+    fetchFiterPBMList,
+    fetchFiterRPGList,
+    fetchShopFilterList,
+    fetchModelServices,
+    setLoadService,
+    fetchNewestShopList,
+    setLoadFilter,
+    setShopDevices,
+    setDeviceBrands,
+    setShopReparationDetails,
+    setReparationData, setDevices, setBrandModels,
 } from "./action";
 import axios from "axios";
 import { logoutA } from "../account/action";
@@ -57,6 +57,60 @@ export async function getSearchFilterField(dispatch) {
       }
       dispatch(fetchFiterPBMList(res.data));
       return true;
+    })
+    .catch((err) => {
+      return false;
+    });
+}
+
+export async function getDevices(dispatch) {
+  dispatch(setLoadFilter(false));
+  return await axios
+    .get(`${API_PATH.GETDEVICES}/`)
+    .then((res) => {
+      // console.log(res.status);
+      if (res.status === 401) {
+        dispatch(logoutA());
+      } else {
+      }
+        dispatch(setDevices(res.data));
+      return true;
+    })
+    .catch((err) => {
+      return false;
+    });
+}
+export async function getBrands(id,dispatch) {
+  dispatch(setLoadFilter(false));
+  return await axios
+    .get(`${API_PATH.GETBRANDS}/?device=${id}`)
+    .then((res) => {
+      // console.log(res.status);
+      if (res.status === 401) {
+        dispatch(logoutA());
+      } else {
+          dispatch(setDeviceBrands(res.data));
+          return true;
+      }
+
+    })
+    .catch((err) => {
+      return false;
+    });
+}
+export async function getModels(deviceId,brandId,dispatch) {
+  dispatch(setLoadFilter(false));
+  return await axios
+    .get(`${API_PATH.GETMODELS}/?device=${deviceId}&brand=${brandId}`)
+    .then((res) => {
+      // console.log(res.status);
+      if (res.status === 401) {
+        dispatch(logoutA());
+      } else {
+          dispatch(setBrandModels(res.data));
+          return true;
+      }
+
     })
     .catch((err) => {
       return false;

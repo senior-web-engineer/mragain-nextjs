@@ -16,7 +16,7 @@ import {
   GET_BRAND_MODELS,
   GET_SHOP_REPARATION_DETAILS,
   DETAILS_OF_SHOP_REPARATION,
-  REPARATION_DATA,
+  REPARATION_DATA, SET_DEVICES, SET_DEVICE_BRANDS, SET_BRAND_MODELS,
 } from "./types";
 
 const initial_state = {
@@ -28,6 +28,9 @@ const initial_state = {
   fieldlistPBM: [],
   fieldlistRPG: [],
   modelServices: [],
+  devices: [],
+  deviceBrands: [],
+  brandModels: [],
   isLoadService: false,
   isSearchFilter: false,
   searchFilters: {
@@ -239,6 +242,25 @@ const searchReducer = (state = initial_state, action) => {
       return {
         ...state,
         shopDevices: action.payload,
+      };
+    }
+    case SET_DEVICES: {
+      return {
+        ...state,
+        devices: action.payload,
+      };
+    }
+    case SET_DEVICE_BRANDS: {
+      return {
+        ...state,
+        deviceBrands: action.payload,
+      };
+    }
+    case SET_BRAND_MODELS: {
+      return {
+        ...state,
+        brandModels: action.payload,
+        isLoadFilter: true,
       };
     }
 

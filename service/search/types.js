@@ -13,6 +13,9 @@ export const SET_SEARCH_FILTER = "SET_SEARCH_FILTER";
 export const IS_FIND_OUT = "IS_FIND_OUT";
 export const SET_LOAD_FILTER = "SET_LOAD_FILTER";
 export const GET_SHOP_DEVICES = "GET_SHOP_DEVICES";
+export const SET_DEVICES = "SET_DEVICES";
+export const SET_DEVICE_BRANDS = "SET_DEVICE_BRANDS";
+export const SET_BRAND_MODELS = "SET_BRAND_MODELS";
 export const GET_DEVICE_BRANDS = "GET_DEVICE_BRANDS";
 export const GET_BRAND_MODELS = "GET_BRAND_MODELS";
 export default {

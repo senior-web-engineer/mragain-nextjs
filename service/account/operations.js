@@ -27,6 +27,7 @@ import {
   initShopAccountProfile,
 } from "./action";
 import Axios from "axios";
+import filterObjectKeys from "@/scripts/filterObjectKeys";
 
 export const tokenConfig = () => {
   const token = localStorage.getItem("auth-token");
@@ -254,7 +255,8 @@ export async function verifyAccount(data, dispatch) {
 }
 
 export async function updateAccountSettings(id, data, dispatch) {
-  return await axios
+    data = filterObjectKeys(data,['auth','name','street','zipcode','city','phone_number','kvk','btw','iban','site_url']);
+    return await axios
     .put(`${API_PATH.ACCOUNTSETTING}/${id}/`, data, tokenConfig())
 
     .then((res) => {
@@ -263,7 +265,8 @@ export async function updateAccountSettings(id, data, dispatch) {
       console.log("local Storage=>", user);
       localStorage.setItem("auth-user", JSON.stringify(user));
       dispatch(fetchAccountSettings(res.data));
-      return axios
+        data = filterObjectKeys(data,['auth','street','zipcode','city']);
+        return axios
         .put(`${API_PATH.UPDATEACCOUNTLOCATION}/${id}/`, data, tokenConfig())
         .then((res) => {
           if (res.data.city === "error") {
