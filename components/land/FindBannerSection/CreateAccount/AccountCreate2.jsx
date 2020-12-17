@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { message } from "antd";
@@ -8,7 +8,6 @@ import "./AccountCreate2.less";
 
 import { registerUser } from "service/account/operations.js";
 import { resetAuthError } from "service/account/action.js";
-import {signupSuccessDelete} from "service/account/action";
 
 function AccountCreate2(routerProps) {
   const [validated, setValidated] = useState(false);
@@ -20,24 +19,14 @@ function AccountCreate2(routerProps) {
     auth_error,
     isAuth_Error,
     resetAuthError,
-    signupSuccessDelete
   } = routerProps;
 
   const router = useRouter();
-  const formRef = useRef();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
     const form = event.currentTarget;
-    const data = new FormData(event.target);
-    if (data.get("terms")==='on') {
-      setValidated(true);
-    } else {
-      setValidated(false);
-      message.error("Bevestig de algemene voorwaarden!", [2.5]);
-      return;
-    }
-
     if (form.checkValidity() === true) {
       const data = new FormData(event.target);
       if (ValidateEmail(data.get("email")) === false) {
@@ -52,8 +41,6 @@ function AccountCreate2(routerProps) {
         message.error("Je wachtwoorden moeten hetzelfde zijn!", [2.5]);
         return;
       }
-
-
       const user = {
         name: data.get("name"),
         email: data.get("email"),
@@ -88,8 +75,6 @@ function AccountCreate2(routerProps) {
         [2.5]
       );
       setTimeout(() => {
-        signupSuccessDelete();
-        formRef.current.reset();
         router.push("/");
       }, 3000);
     } else if (isAuth_Error === true) {
@@ -106,7 +91,7 @@ function AccountCreate2(routerProps) {
   };
 
   function ValidateEmail(mail) {
-    if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+    if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,8})+$/.test(mail)) {
       return true;
     }
     return false;
@@ -116,7 +101,7 @@ function AccountCreate2(routerProps) {
     <div className="account-create-container2">
       <div className="account-create-container2-wrap">
         <div className="account-create-form2">
-          <Form noValidate validated={validated} onSubmit={handleSubmit} ref={formRef}>
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Control
               className="account-create-input2"
               type="text"
@@ -149,7 +134,6 @@ function AccountCreate2(routerProps) {
               <Form.Check
                 className="account-create-check2"
                 type="checkbox"
-                name={'terms'}
                 label=""
                 required
               />
@@ -740,9 +724,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     registerUser: (data) => {
       registerUser(data, dispatch);
-    },
-    signupSuccessDelete: (data) => {
-      dispatch(signupSuccessDelete(data));
     },
     resetAuthError: (data) => {
       dispatch(resetAuthError(data));
