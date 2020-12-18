@@ -63,7 +63,7 @@ function AccountCreate2(routerProps) {
         zipcode: "",
         city: "",
         phonumber: 0,
-        kvk: "",
+        kvk: data.get("kvkNumber"),
         btw: "",
         iban: "",
         status_app_email: 1,
@@ -71,6 +71,7 @@ function AccountCreate2(routerProps) {
         site_url: "",
         about_us: "",
         bg_photo: "",
+        logo_photo: "",
         distance: 0,
         geo_lat: 0,
         geo_long: 0,
@@ -147,6 +148,13 @@ function AccountCreate2(routerProps) {
               name="confirmP"
               type="password"
               placeholder="Bevestig wachtwoord"
+              required
+            />
+            <Form.Control
+              className="account-create-input2"
+              name="kvkNumber"
+              type="text"
+              placeholder="Je kvk nummer"
               required
             />
             <div className="agree-button-group">

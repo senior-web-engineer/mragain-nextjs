@@ -99,7 +99,12 @@ function ProfileManage(routerProps) {
   });
 
   function initProfilePage() {
-    setPreview(account_profile.bg_photo);
+    // setPreview(account_profile.bg_photo);
+    setPreview(
+      account_profile.logo_photo === ""
+        ? account_profile.bg_photo
+        : account_profile.logo_photo
+    );
     setAboutUs(account_profile.about_us);
     setAboutUsTemp(account_profile.about_us);
     // if (account_profile.site_url !== "") {
@@ -123,6 +128,7 @@ function ProfileManage(routerProps) {
     }
     /** */
   }
+
   const [isCloseDay, setIsCloseDay] = useState(false);
   const [visibleM1, setVisibleM1] = useState(false);
   const [visibleM2, setVisibleM2] = useState(false);

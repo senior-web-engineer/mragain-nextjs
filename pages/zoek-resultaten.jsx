@@ -30,7 +30,7 @@ import image1 from "@/assets/images/home_newest_image3.jpg";
 import { setSearchFilter, setLoadFilter } from "../service/search/action";
 import { Modal } from "react-bootstrap";
 import { blue } from "@material-ui/core/colors";
-import {getBrands, getDevices, getModels} from "service/search/operations";
+import { getBrands, getDevices, getModels } from "service/search/operations";
 
 const {
   MarkerWithLabel,
@@ -247,7 +247,7 @@ const SearchShop = (routerProps) => {
   function handleBrandChange(value) {
     setBrand(value);
     setBrandflg(true);
-    getModels(phone,value);
+    getModels(phone, value);
     if (value !== 0) {
       setModel(0);
     } else {
@@ -301,29 +301,28 @@ const SearchShop = (routerProps) => {
     // if (loc === "") {
     //   setError(true);
     // } else {
-      let _filters = {
-        isSearchFilter: true,
-        filters: {
-          location: loc,
-          device: phone,
-          brand,
-          model,
-          reparation,
-        },
-      };
-      setSearchFilter(_filters);
-      if (reparation !== 0) {
-        setShowPrice(true);
-      }
-      setIsSearch(true);
-      router.push(
-        `/zoek-resultaten?position=${loc}&distance=${distance}&device=${phone}&brand=${brand}&model=${model}&reparation=${reparation}&price=${price}&guarantee=${guarantee}&sort=${sort}`
-      );
+    let _filters = {
+      isSearchFilter: true,
+      filters: {
+        location: loc,
+        device: phone,
+        brand,
+        model,
+        reparation,
+      },
+    };
+    setSearchFilter(_filters);
+    if (reparation !== 0) {
+      setShowPrice(true);
+    }
+    setIsSearch(true);
+    router.push(
+      `/zoek-resultaten?position=${loc}&distance=${distance}&device=${phone}&brand=${brand}&model=${model}&reparation=${reparation}&price=${price}&guarantee=${guarantee}&sort=${sort}`
+    );
     // }
   }
 
   function initBrandSelect() {
-
     return (
       deviceBrands !== undefined &&
       deviceBrands.map((element) => {
@@ -346,7 +345,7 @@ const SearchShop = (routerProps) => {
     }
 
     return (
-        brandModels !== undefined &&
+      brandModels !== undefined &&
       brandModels.map((element) => {
         return (
           <Option value={element.id} key={element.id}>
@@ -420,7 +419,7 @@ const SearchShop = (routerProps) => {
 
   useEffect(() => {
     const params = router.query;
-    console.log('isSearchFilter',isSearchFilter)
+    console.log("isSearchFilter", isSearchFilter);
     if (isSearchFilter === true && searchFilters.location === null) {
       return;
     }
@@ -432,19 +431,19 @@ const SearchShop = (routerProps) => {
         }
         let dev = parseInt(searchFilters.device);
         if (dev !== null && dev !== 0) {
-          if(dev!==phone) {
+          if (dev !== phone) {
             setPhone(dev);
             getBrands(dev);
           }
           let br = parseInt(searchFilters.brand);
           if (br !== null && br !== 0) {
-            if(br!==brand){
-              console.log(br,brand);
+            if (br !== brand) {
+              console.log(br, brand);
               handleBrandChange(br);
             }
             let mo = parseInt(searchFilters.model);
             if (mo !== null && mo !== 0) {
-              if(mo!==model){
+              if (mo !== model) {
                 handleModelChange(mo);
               }
               let rep = parseInt(searchFilters.reparation);
@@ -465,20 +464,20 @@ const SearchShop = (routerProps) => {
         }
         let dev = parseInt(params.device);
         if (dev !== null && dev !== 0) {
-          if(dev!==phone) {
+          if (dev !== phone) {
             setPhone(dev);
             getBrands(dev);
           }
 
           let br = parseInt(params.brand);
           if (br !== null && br !== 0) {
-            console.log(br,brand)
-            if(br!==brand){
+            console.log(br, brand);
+            if (br !== brand) {
               handleBrandChange(br);
             }
             let mo = parseInt(params.model);
             if (mo !== null && mo !== 0) {
-              if(mo!==model){
+              if (mo !== model) {
                 handleModelChange(mo);
               }
               let rep = parseInt(params.reparation);
@@ -740,7 +739,9 @@ const SearchShop = (routerProps) => {
                               isShowPrice === true ? `${shop.gua_time} mnd` : -1
                             }
                             image={
-                              shop.bg_photo !== "" && shop.bg_photo !== null
+                              shop.logo_photo !== "" && shop.logo_photo !== null
+                                ? shop.logo_photo
+                                : shop.logo_photo === ""
                                 ? shop.bg_photo
                                 : image1
                             }
@@ -798,13 +799,13 @@ const mapDispatchToProps = (dispatch) => {
       searchShopFilter(data, dispatch);
     },
     getDevices: () => {
-      getDevices( dispatch);
+      getDevices(dispatch);
     },
     getBrands: (id) => {
-      getBrands( id,dispatch);
+      getBrands(id, dispatch);
     },
-    getModels: (deviceId,brandId) => {
-      getModels( deviceId,brandId,dispatch);
+    getModels: (deviceId, brandId) => {
+      getModels(deviceId, brandId, dispatch);
     },
     setFindOut: (data) => {
       dispatch(setFindOut(data));

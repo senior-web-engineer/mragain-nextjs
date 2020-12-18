@@ -313,9 +313,16 @@ const ReparationOverView = (routerProps) => {
             <div className="dashboard-page-widget" style={{ display: display }}>
               <Avatar
                 className="shop-widget-avatar"
+                // src={
+                //   account_profile.bg_photo !== undefined &&
+                //   account_profile.bg_photo
+                // }
                 src={
-                  account_profile.bg_photo !== undefined &&
-                  account_profile.bg_photo
+                  account_profile.logo_photo === "" ||
+                  account_profile.logo_photo !== undefined ||
+                  account_profile.bg_photo !== undefined
+                    ? account_profile.bg_photo
+                    : account_profile.logo_photo
                 }
               />
               <div className="widget-shop-title">
@@ -368,9 +375,16 @@ const ReparationOverView = (routerProps) => {
             <div className="dashboard-page-widget" style={{ display: "block" }}>
               <Avatar
                 className="shop-widget-avatar"
+                // src={
+                //   account_profile.bg_photo !== undefined &&
+                //   account_profile.bg_photo
+                // }
                 src={
-                  account_profile.bg_photo !== undefined &&
-                  account_profile.bg_photo
+                  account_profile.logo_photo === "" ||
+                  account_profile.logo_photo !== undefined ||
+                  account_profile.bg_photo !== undefined
+                    ? account_profile.bg_photo
+                    : account_profile.logo_photo
                 }
               />
               <div className="widget-shop-title">

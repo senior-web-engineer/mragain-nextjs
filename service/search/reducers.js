@@ -16,7 +16,10 @@ import {
   GET_BRAND_MODELS,
   GET_SHOP_REPARATION_DETAILS,
   DETAILS_OF_SHOP_REPARATION,
-  REPARATION_DATA, SET_DEVICES, SET_DEVICE_BRANDS, SET_BRAND_MODELS,
+  REPARATION_DATA,
+  SET_DEVICES,
+  SET_DEVICE_BRANDS,
+  SET_BRAND_MODELS,
 } from "./types";
 
 const initial_state = {
@@ -124,6 +127,7 @@ const searchReducer = (state = initial_state, action) => {
           mark: element.shop.mark,
           gua_time: element.guarantee_time,
           bg_photo: element.shop.bg_photo,
+          logo_photo: element.shop.logo_photo,
           city: element.shop.city,
           street: element.shop.street,
           geo_lat: element.shop.geo_lat,

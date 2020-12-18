@@ -56,7 +56,7 @@ function AccountCreate(routerProps) {
         allow_appointment: 1,
         site_url: "",
         about_us: "",
-        bg_photo: "",
+        logo_photo: "",
         distance: 0,
         geo_lat: 0,
         geo_long: 0,

@@ -85,12 +85,19 @@ const NewestShopSection = (routerProps) => {
                   phone={el.phone_number}
                   position={(el.street, el.city)}
                   open={"NIEUW"}
+                  // image={
+                  //   el.bg_photo !== "" && el.bg_photo !== null
+                  //     ? el.bg_photo
+                  //     : image3
+                  // }
                   image={
-                    el.bg_photo !== "" && el.bg_photo !== null
+                    el.logo_photo !== "" && el.logo_photo !== null
+                      ? el.logo_photo
+                      : el.bg_photo !== "" && el.bg_photo !== null
                       ? el.bg_photo
                       : image3
                   }
-		  alt="Reparateur-profielfoto"    
+                  alt="Reparateur-profielfoto"
                   key={el.id}
                   onprofilepage={() =>
                     onProfilePage(el.name, el.city, el.street)
