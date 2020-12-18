@@ -26,10 +26,7 @@ const ProfileBannerSection = (routerProps) => {
     <ProfileBannerContainer
       className="profile-banner-section"
       bgImage={
-        account_profile.logo_photo !== undefined &&
-        account_profile.logo_photo === ""
-          ? account_profile.bg_photo
-          : account_profile.logo_photo
+        account_profile.bg_photo !== undefined && account_profile.bg_photo
       }
     >
       <div className="wrap">

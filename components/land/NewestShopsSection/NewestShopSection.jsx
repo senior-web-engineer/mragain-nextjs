@@ -27,7 +27,10 @@ const NewestShopSection = (routerProps) => {
   }
 
   const onProfilePage = (shop_name, city, street) => {
-    router.push(`/profiel/${shop_name}-${city}-${street}`);
+    const shop = shop_name.replaceAll(" ", "-");
+    const cityName = city.replaceAll(" ", "-");
+    const streetName = street.replaceAll(" ", "-");
+    router.push(`/profiel/${shop}--${cityName}--${streetName}`);
   };
 
   const scrollToTop = () => {

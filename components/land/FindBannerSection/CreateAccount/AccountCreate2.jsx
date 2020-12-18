@@ -131,6 +131,13 @@ function AccountCreate2(routerProps) {
             />
             <Form.Control
               className="account-create-input2"
+              name="kvkNumber"
+              type="text"
+              placeholder="Je kvk nummer"
+              required
+            />
+            <Form.Control
+              className="account-create-input2"
               type="text"
               name="email"
               placeholder="Emailadres"
@@ -150,13 +157,7 @@ function AccountCreate2(routerProps) {
               placeholder="Bevestig wachtwoord"
               required
             />
-            <Form.Control
-              className="account-create-input2"
-              name="kvkNumber"
-              type="text"
-              placeholder="Je kvk nummer"
-              required
-            />
+
             <div className="agree-button-group">
               <Form.Check
                 className="account-create-check2"
