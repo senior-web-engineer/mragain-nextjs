@@ -17,10 +17,9 @@ const ShopInfoCard = (routerProps) => {
     const shop = shop_name.replaceAll(" ", "-");
     const cityName = city.replaceAll(" ", "-");
     const streetName = street.replaceAll(" ", "-");
-    // console.log(shop);
-    // console.log(cityName);
-    // console.log(streetName);
-    router.push(`/profiel/${shop}--${cityName}--${streetName}`);
+
+    // router.push(`/profiel/${shop}--${cityName}--${streetName}`);
+    router.push(`/${shop}--${cityName}--${streetName}`);
   };
 
   function onMakeAppointment(shop_id) {

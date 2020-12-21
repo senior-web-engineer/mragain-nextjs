@@ -1,13 +1,12 @@
-
-import React from 'react'
+import React from "react";
 import App from "next/app";
-import Router from 'next/router';
+import Router from "next/router";
 
-import { ConnectedRouter } from 'connected-next-router'
-import { wrapper } from '../configureStore'
+import { ConnectedRouter } from "connected-next-router";
+import { wrapper } from "../configureStore";
 import { connect } from "react-redux";
-import "./_app.less"
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "./_app.less";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // fontawesome icons
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -24,11 +23,11 @@ class MyApp extends App {
     this.state = { value: 0, selectedIndex: 0 };
   }
 
-  setValue = index => {
+  setValue = (index) => {
     this.setState({ value: index });
   };
 
-  setSelectedIndex = index => {
+  setSelectedIndex = (index) => {
     this.setState({ selectedIndex: index });
   };
 
@@ -71,4 +70,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default wrapper.withRedux(connect(mapStateToProps, mapDispatchToProps)(MyApp));
+export default wrapper.withRedux(
+  connect(mapStateToProps, mapDispatchToProps)(MyApp)
+);

@@ -77,17 +77,10 @@ const MyMapComponent = compose(
     const shop = shop_name.replaceAll(" ", "-");
     const cityName = city.replaceAll(" ", "-");
     const streetName = street.replaceAll(" ", "-");
-    // console.log(shop);
-    // console.log(cityName);
-    // console.log(streetName);
-    router.push(`/profiel/${shop}--${cityName}--${streetName}`);
+    // router.push(`/profiel/${shop}--${cityName}--${streetName}`);
+    router.push(`/${shop}--${cityName}--${streetName}`);
   };
 
-  // This function is replaced by the constraint above.
-  // function goShopProfile(shop_name, city, street) {
-  //   router.push(`/profiel/${shop_name}-${city}-${street}`);
-  //   console.log("profile-push one")
-  // }
   const [shopInfo, setshopInfo] = useState(null);
   return (
     <GoogleMap
@@ -189,6 +182,7 @@ const SearchShop = (routerProps) => {
   let prList = [],
     guList = [],
     repList = [];
+
   let isExistP = [],
     isExistG = [],
     isExistR = [];
@@ -242,21 +236,22 @@ const SearchShop = (routerProps) => {
     setPrice(-1);
     setGuarantee(-1);
     setShowExFilter(false);
+    setIsSearch(true);
   }
 
   function handleBrandChange(value) {
     setBrand(value);
     setBrandflg(true);
     getModels(phone, value);
-    if (value !== 0) {
-      setModel(0);
-    } else {
-      setModel(0);
-      setReparation(0);
-      setPrice(-1);
-      setGuarantee(-1);
-      setShowExFilter(false);
-    }
+    // if (value !== 0) {
+    //   setModel(0);
+    // } else {
+    setModel(0);
+    // setReparation(0);
+    setPrice(-1);
+    setGuarantee(-1);
+    setShowExFilter(false);
+    // }
   }
 
   function handleModelChange(value) {
@@ -266,18 +261,22 @@ const SearchShop = (routerProps) => {
     setGuarantee(-1);
     setShowExFilter(true);
     getSearchFilterFieldExt(value);
+    setIsSearch(true);
   }
 
   function handleReparationChange(value) {
     setReparation(value);
+    setIsSearch(true);
   }
 
   function handlePriceChange(value) {
     setPrice(value);
+    setIsSearch(true);
   }
 
   function handleGuaranteeChange(value) {
     setGuarantee(value);
+    setIsSearch(true);
   }
 
   function handleLocationChange(e) {
@@ -286,6 +285,7 @@ const SearchShop = (routerProps) => {
 
   function handleDistanceChange(value) {
     setDistance(value);
+    setIsSearch(true);
   }
 
   function handleSortChange(value) {
@@ -302,12 +302,12 @@ const SearchShop = (routerProps) => {
     //   setError(true);
     // } else {
     let _filters = {
-      isSearchFilter: true,
+      isSearchFilter: false,
       filters: {
         location: loc,
         device: phone,
-        brand,
-        model,
+        brand: brand,
+        model: model,
         reparation,
       },
     };
@@ -316,9 +316,9 @@ const SearchShop = (routerProps) => {
       setShowPrice(true);
     }
     setIsSearch(true);
-    router.push(
-      `/zoek-resultaten?position=${loc}&distance=${distance}&device=${phone}&brand=${brand}&model=${model}&reparation=${reparation}&price=${price}&guarantee=${guarantee}&sort=${sort}`
-    );
+    // router.push(
+    //   `/zoek-resultaten?position=${loc}&distance=${distance}&device=${phone}&brand=${brand}&model=${model}&reparation=${reparation}&price=${price}&guarantee=${guarantee}&sort=${sort}`
+    // );
     // }
   }
 
