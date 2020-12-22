@@ -1,18 +1,20 @@
 import { API_PATH } from "../../constants";
 import {
-    setFindOut,
-    resetShopFilterList,
-    fetchFiterPBMList,
-    fetchFiterRPGList,
-    fetchShopFilterList,
-    fetchModelServices,
-    setLoadService,
-    fetchNewestShopList,
-    setLoadFilter,
-    setShopDevices,
-    setDeviceBrands,
-    setShopReparationDetails,
-    setReparationData, setDevices, setBrandModels,
+  setFindOut,
+  resetShopFilterList,
+  fetchFiterPBMList,
+  fetchFiterRPGList,
+  fetchShopFilterList,
+  fetchModelServices,
+  setLoadService,
+  fetchNewestShopList,
+  setLoadFilter,
+  setShopDevices,
+  setDeviceBrands,
+  setShopReparationDetails,
+  setReparationData,
+  setDevices,
+  setBrandModels,
 } from "./action";
 import axios from "axios";
 import { logoutA } from "../account/action";
@@ -45,6 +47,7 @@ export function getNewestShopList(count, city, dispatch) {
     })
     .catch((err) => {});
 }
+
 export async function getSearchFilterField(dispatch) {
   dispatch(setLoadFilter(false));
   return await axios
@@ -73,14 +76,14 @@ export async function getDevices(dispatch) {
         dispatch(logoutA());
       } else {
       }
-        dispatch(setDevices(res.data));
+      dispatch(setDevices(res.data));
       return true;
     })
     .catch((err) => {
       return false;
     });
 }
-export async function getBrands(id,dispatch) {
+export async function getBrands(id, dispatch) {
   dispatch(setLoadFilter(false));
   return await axios
     .get(`${API_PATH.GETBRANDS}/?device=${id}`)
@@ -89,16 +92,15 @@ export async function getBrands(id,dispatch) {
       if (res.status === 401) {
         dispatch(logoutA());
       } else {
-          dispatch(setDeviceBrands(res.data));
-          return true;
+        dispatch(setDeviceBrands(res.data));
+        return true;
       }
-
     })
     .catch((err) => {
       return false;
     });
 }
-export async function getModels(deviceId,brandId,dispatch) {
+export async function getModels(deviceId, brandId, dispatch) {
   dispatch(setLoadFilter(false));
   return await axios
     .get(`${API_PATH.GETMODELS}/?device=${deviceId}&brand=${brandId}`)
@@ -107,10 +109,9 @@ export async function getModels(deviceId,brandId,dispatch) {
       if (res.status === 401) {
         dispatch(logoutA());
       } else {
-          dispatch(setBrandModels(res.data));
-          return true;
+        dispatch(setBrandModels(res.data));
+        return true;
       }
-
     })
     .catch((err) => {
       return false;

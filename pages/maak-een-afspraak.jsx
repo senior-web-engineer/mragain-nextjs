@@ -55,7 +55,6 @@ const ShopAppointment = (routerProps) => {
     filterlistPBM,
     filterlistRPG,
     getModelService,
-    // shopReviews,
     account_valid_time,
     account_invalid_time,
     account_profile,

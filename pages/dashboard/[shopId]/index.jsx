@@ -25,6 +25,7 @@ import {
   getSearchFilterField,
   getSearchFilterFieldExt,
   getModelService,
+  getDevices,
 } from "service/search/operations.js";
 import { setLoadService } from "service/search/action.js";
 import { setLoadAppointment } from "service/appointments/action.js";
@@ -39,6 +40,8 @@ import {
 } from "service/account/operations.js";
 import Head from "next/head";
 import { FRONT_END_URL } from "../../../constants.js";
+import MakeAppointment from "@/components/dashboard/MakeAppointment";
+import { Fragment } from "react";
 
 const { Option } = Select;
 
@@ -53,6 +56,7 @@ const ShopDashboard = (routerProps) => {
     getShopIdByInformation,
     filterlistPBM,
     filterlistRPG,
+    getDevices,
     auth_user,
     account_profile,
     appointmentList,
@@ -70,6 +74,7 @@ const ShopDashboard = (routerProps) => {
 
   useEffect(() => {
     getShopIdByInformation(shopId);
+    getDevices();
   }, []);
 
   useEffect(() => {
@@ -123,7 +128,7 @@ const ShopDashboard = (routerProps) => {
   const [price, setPrice] = React.useState("");
   const [guarantee, setGuarantee] = React.useState(0);
   const [display, setDisplay] = useState("none");
-
+  const [showAppointmentModal, setShowAppointmentModal] = React.useState(false);
   const [showModal, setShowModal] = useState(false);
   const [imageList, setImageList] = useState([]);
   const [appointlist, setAppointList] = useState([]);
@@ -451,6 +456,21 @@ const ShopDashboard = (routerProps) => {
       setDisplay("none");
     }
   };
+  const addReparation = () => {
+    setShowAppointmentModal(true);
+  };
+  const renderReparation = () => {
+    return (
+      <Fragment>
+        <Button className="reparation-change-btn mr-3" onClick={addReparation}>
+          Add Reparation
+        </Button>
+      </Fragment>
+    );
+  };
+  const onChangeModalStatus = () => {
+    setShowAppointmentModal(false);
+  };
   return (
     <Layout>
       <div className="shop-dashboard-page">
@@ -622,6 +642,13 @@ const ShopDashboard = (routerProps) => {
                   Ingeplande afspraken
                 </div>
                 <div className="sort-by-date">
+                  {renderReparation()}
+                  {showAppointmentModal && (
+                    <MakeAppointment
+                      shop={account_profile.id}
+                      onChangeStatus={() => onChangeModalStatus()}
+                    />
+                  )}
                   <DatePicker onChange={(date) => onSortDate(date)} />
                   <div className="sort-by-date-desc">Sorteer op datum</div>
                 </div>
@@ -891,7 +918,6 @@ const mapStateToProps = (state) => ({
   isLoadService: state.search.isLoadService,
   account_profile: state.account.account_profile,
 });
-
 const mapDispatchToProps = (dispatch) => {
   return {
     uploadImage: (data, id, name, flg) =>
@@ -923,6 +949,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     getShopIdByInformation: (str) => {
       getShopIdByInformation(str, dispatch);
+    },
+    getDevices: (data) => {
+      getDevices(dispatch);
     },
   };
 };
