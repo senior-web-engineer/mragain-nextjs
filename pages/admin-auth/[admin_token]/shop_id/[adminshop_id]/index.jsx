@@ -19,7 +19,8 @@ const AdminLoginAsUser = (routerProps) => {
     loginAsUser(formData);
     localStorage.setItem("auth-token", admin_token);
     let token = localStorage.getItem("auth-token");
-    if (token && Object.keys(authUser).length === 0) {
+    // if (token && Object.keys(authUser).length === 0) {
+    if (token && Object.keys(authUser)) {
       getAuthUser();
     }
   }, []);
