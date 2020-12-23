@@ -26,10 +26,11 @@ import { DETAILS_OF_SHOP_REPARATION } from "./types";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
 // axios.defaults.withCredentials = true;
+
 export const tokenConfigure = () => {
   const token = localStorage.getItem("auth-token");
   console.log(token);
-  const config = { headers: {} };
+  let config = { headers: {} };
   if (token) {
     config.headers["Authorization"] = `Token ${token}`;
   }
@@ -219,23 +220,13 @@ export function contactUs(data, dispatch) {
 }
 
 export async function getReparationDetails(data, dispatch) {
-  return await axios
-    .get(
-      `${API_PATH.GETREPARATIONDETAILS}/`,
-      { params: data },
-      tokenConfigure()
-    )
-    .then((res) => {
-      // console.log(res.status);
-      // if (res.status === 401) {
-      //   dispatch(logoutA());
-      // } else {
-      // }
-      dispatch(setReparationDetails(res.data));
-      return true;
-    })
-    .catch((err) => {
-      return false;
-    });
+  const token = localStorage.getItem("auth-token");
+  const headers = {
+    Authorization: `Token ` + token,
+  };
+  return await axios.get(`${API_PATH.GETREPARATIONDETAILS}/`, {
+    params: data,
+    headers,
+  });
 }
 export default { searchShopFilter };

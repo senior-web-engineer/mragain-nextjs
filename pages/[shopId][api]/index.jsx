@@ -25,6 +25,7 @@ const ShopProfile = (routerProps) => {
     shop_account_profile,
     shopDevices,
   } = routerProps;
+
   const router = useRouter();
   const shopId = router.query["shopId][api"];
   console.log("profiel page", router);

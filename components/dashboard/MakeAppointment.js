@@ -10,9 +10,9 @@ import {
   getReparationDetails,
   getReparations,
 } from "service/search/operations";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import "./MakeAppointment.module.css";
-import { setReparationDetails } from "@/service/search/action";
+
 const MakeAppointment = (routerProps) => {
   const {
     shop,
@@ -27,8 +27,11 @@ const MakeAppointment = (routerProps) => {
   const [phone, setPhone] = useState(0);
   const [brand, setBrand] = useState(0);
   const [model, setModel] = useState(0);
+  const [price, setPrice] = useState(0);
+  const [guarantee, setGuarantee] = useState(0);
   const [reparation, setReparation] = useState(0);
   const [reparaties, setReparaties] = useState([]);
+  const [showSaveReparation, setShowSaveReparation] = useState(false);
 
   useEffect(() => {
     // getDevices(dispatch);
@@ -72,8 +75,27 @@ const MakeAppointment = (routerProps) => {
       brand: brand,
       shop: shop,
     };
-    getReparationDetails(data);
+
+    getReparationDetails(data).then((res) => {
+      if (res.data.length > 0) {
+        const details = res.data[0];
+        setPrice(details.price);
+        setGuarantee(details.guarantee_time);
+      }
+    });
+    setShowSaveReparation(true);
   };
+
+  const handlePriceChange = (e) => {
+    console.log(e.target.value);
+    setPrice(e.target.value);
+  };
+
+  function handleGuaranteeChange(e) {
+    setGuarantee(value);
+  }
+
+  console.log(price);
   return (
     <Fragment>
       <Modal
@@ -157,7 +179,6 @@ const MakeAppointment = (routerProps) => {
                   </Select>
                 </div>
               </div>
-
               <div className="pb-3">
                 <div className="shop-appointment-form-label">
                   <Label>Type reparatie</Label>
@@ -181,6 +202,43 @@ const MakeAppointment = (routerProps) => {
                   </Select>
                 </div>
               </div>
+              {showSaveReparation && (
+                <Fragment>
+                  <div className="row">
+                    <div className="col-md-6 pb-3">
+                      <div className="shop-appointment-form-label">
+                        <Label>Price</Label>
+                      </div>
+                      <div>
+                        <Input
+                          className="location-select"
+                          placeholder="price"
+                          onChange={(e) => handlePriceChange(e)}
+                          value={price}
+                        />
+                      </div>
+                    </div>
+                    <div className="col-md-6 pb-3">
+                      <div className="shop-appointment-form-label">
+                        <Label>Guarantee</Label>
+                      </div>
+                      <div>
+                        <Input
+                          className="location-select"
+                          placeholder="guarantee"
+                          onChange={(e) => handleGuaranteeChange(e)}
+                          value={guarantee}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="pb-3">
+                    <Button block className="save-button">
+                      Save
+                    </Button>
+                  </div>
+                </Fragment>
+              )}
             </div>
           </div>
         </Modal.Body>
@@ -202,6 +260,7 @@ const mapStateToProps = (state) => (
     devices: state.search.devices,
     deviceBrands: state.search.deviceBrands,
     brandModels: state.search.brandModels,
+    reparationDetails: state.search.reparationDetails,
   }
 );
 

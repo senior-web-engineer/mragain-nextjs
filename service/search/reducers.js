@@ -15,8 +15,7 @@ import {
   SET_DEVICES,
   SET_DEVICE_BRANDS,
   SET_BRAND_MODELS,
-  SET_REPARATIONS,
-  SET_REPARATIES,
+  GET_REPARATION_DETAILS,
 } from "./types";
 
 const initial_state = {
@@ -42,7 +41,6 @@ const initial_state = {
   },
   isLoadFilter: false,
   shopDevices: [],
-  reparaties: [],
 };
 
 const searchReducer = (state = initial_state, action) => {
@@ -266,7 +264,6 @@ const searchReducer = (state = initial_state, action) => {
         isLoadFilter: true,
       };
     }
-
     default: {
       return state;
     }

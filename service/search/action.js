@@ -95,8 +95,3 @@ export const setBrandModels = (data) => ({
   type: SET_BRAND_MODELS,
   payload: data,
 });
-
-export const setReparationDetails = (data) => ({
-  type: GET_REPARATION_DETAILS,
-  payload: data,
-});
