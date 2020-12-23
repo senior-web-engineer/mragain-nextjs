@@ -3,9 +3,16 @@ import { Fragment } from "react";
 import { Modal } from "react-bootstrap";
 import { Button, DatePicker, Input, Select, Divider } from "antd";
 import { Label } from "semantic-ui-react";
-import { getBrands, getDevices, getModels } from "service/search/operations";
+import {
+  getBrands,
+  getDevices,
+  getModels,
+  getReparationDetails,
+  getReparations,
+} from "service/search/operations";
 import { connect, useDispatch } from "react-redux";
 import "./MakeAppointment.module.css";
+import { setReparationDetails } from "@/service/search/action";
 const MakeAppointment = (routerProps) => {
   const {
     shop,
@@ -20,6 +27,8 @@ const MakeAppointment = (routerProps) => {
   const [phone, setPhone] = useState(0);
   const [brand, setBrand] = useState(0);
   const [model, setModel] = useState(0);
+  const [reparation, setReparation] = useState(0);
+  const [reparaties, setReparaties] = useState([]);
 
   useEffect(() => {
     // getDevices(dispatch);
@@ -40,10 +49,30 @@ const MakeAppointment = (routerProps) => {
   const handleBrandChange = (value) => {
     setBrand(value);
     getModels(phone, value);
+    setModel(0);
   };
+
   const handleModelChange = (value) => {
     setModel(value);
-    getBrands(value);
+    const data = {
+      device: phone,
+      model: value,
+    };
+    getReparations(data).then((res) => {
+      console.log(res.data);
+      setReparaties(res.data);
+    });
+  };
+  const handleReparatiesChange = (value) => {
+    setReparation(value);
+    const data = {
+      device: phone,
+      model: model,
+      repar: value,
+      brand: brand,
+      shop: shop,
+    };
+    getReparationDetails(data);
   };
   return (
     <Fragment>
@@ -136,16 +165,16 @@ const MakeAppointment = (routerProps) => {
                 <div>
                   <Select
                     className="w-100 "
-                    value={phone}
-                    onChange={handleDeviceChange}
+                    value={reparation}
+                    onChange={handleReparatiesChange}
                   >
                     <Option value={0} key={0}>
                       Alle apparaten
                     </Option>
-                    {brandModels.map((element) => {
+                    {reparaties.map((element) => {
                       return (
                         <Option value={element.id} key={element.id}>
-                          {element.brand_name}
+                          {element.reparation_name}
                         </Option>
                       );
                     })}
@@ -183,6 +212,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     getModels: (deviceId, brandId) => {
       getModels(deviceId, brandId, dispatch);
+    },
+    getReparations: (data) => {
+      getReparations(data, dispatch);
+    },
+    getReparationDetails: (data) => {
+      getReparationDetails(data, dispatch);
     },
   };
 };

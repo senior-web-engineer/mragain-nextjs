@@ -47,6 +47,7 @@ export const API_PATH = {
   GETDEVICES: `${API_URL}/get-devices`,
   GETBRANDS: `${API_URL}/get-brands`,
   GETMODELS: `${API_URL}/get-models`,
+  GETREPARATIONS: `${API_URL}/get-reparations`,
   GETAPPOINTMENTNUMBER: `${API_URL}/get_appointment_number`,
   GETAPPOINTMENTTIMETABLE: `${API_URL}/get_appointment_timetable`,
   CREATEAPPOINTMENT: `${API_URL}/create-appointment`,
@@ -78,6 +79,7 @@ export const API_PATH = {
   GETDEVICEBRANDS: `${API_URL}/get-shop-brands`,
   GETBRANDMODELS: `${API_URL}/get-shop-models`,
   GETSHOPREPARATIONDETAILS: `${API_URL}/get-shop-reparations`,
+  GETREPARATIONDETAILS: `${API_URL}/get-shop-reparation-detail`,
 };
 
 export default {

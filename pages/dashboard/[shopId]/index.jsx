@@ -181,11 +181,11 @@ const ShopDashboard = (routerProps) => {
       }
     }
     if (isLoad === false || isLoadAppointment === true) {
-      console.log("useEffect load appointment", appointmentList);
+      // console.log("useEffect load appointment", appointmentList);
       if (appointmentList === undefined) {
         setAppCount(0);
       } else {
-        console.log(appointmentList);
+        // console.log(appointmentList);
         let count = getAppointmentsCountThisWeek(appointmentList);
         setAppCount(count);
         count = getAppointmentsCountAll(appointmentList);
@@ -391,7 +391,7 @@ const ShopDashboard = (routerProps) => {
     let count = 0;
     let date = new Date();
     // if (_list !== undefined) {
-    console.log(_list);
+    // console.log(_list);
     if (_list.length > 0) {
       _list.map((el) => {
         let comp = moment(el.date).isSame(date, "week");

@@ -26,7 +26,8 @@ const ShopProfile = (routerProps) => {
     shopDevices,
   } = routerProps;
   const router = useRouter();
-  const shopId = router.query.shopId;
+  const shopId = router.query["shopId][api"];
+  console.log("profiel page", router);
   useEffect(() => {
     if (shopId !== undefined) {
       getShopId(shopId);
@@ -46,8 +47,11 @@ const ShopProfile = (routerProps) => {
     }
   }
 
-  let devices = (shopDevices && shopDevices[0] ) ? shopDevices.map(item=>item.device.device_name)  :[];
-  devices = devices.join(' & ');
+  let devices =
+    shopDevices && shopDevices[0]
+      ? shopDevices.map((item) => item.device.device_name)
+      : [];
+  devices = devices.join(" & ");
 
   let title = `${shop_account_profile.name} ${shop_account_profile.city} - ${devices} Reparatie - ${FRONT_END_URL}`;
   let description = `${shop_account_profile.name}, ${shop_account_profile.street}, ${shop_account_profile.zipcode}, ${shop_account_profile.city}. Laat je telefoon repareren bij ${shop_account_profile.name} via mragain.nl. Transparant, betrouwbaar en snel!`;
@@ -65,15 +69,8 @@ const ShopProfile = (routerProps) => {
           <link rel="canonical" href={FRONT_END_URL + "/profiel"} />
           {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
           <meta property="og:type" content="website" />
-          <meta
-            name="og_title"
-            property="og:title"
-            content={title}
-          />
-          <meta
-            property="og:description"
-            content={description}
-          />
+          <meta name="og_title" property="og:title" content={title} />
+          <meta property="og:description" content={description} />
           <meta name="og:url" content={FRONT_END_URL} />
           <meta property="og:image" content="" />
           <meta
@@ -92,8 +89,8 @@ const ShopProfile = (routerProps) => {
 
 const mapStateToProps = (state) => ({
   //Maps state to redux store as props
-  shop_account_profile:state.account.shop_account_profile,
-  shopDevices:state.search.shopDevices,
+  shop_account_profile: state.account.shop_account_profile,
+  shopDevices: state.search.shopDevices,
 });
 
 const mapDispatchToProps = (dispatch) => {

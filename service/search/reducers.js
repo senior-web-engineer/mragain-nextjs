@@ -12,14 +12,11 @@ import {
   SET_SEARCH_FILTER,
   IS_FIND_OUT,
   GET_SHOP_DEVICES,
-  GET_DEVICE_BRANDS,
-  GET_BRAND_MODELS,
-  GET_SHOP_REPARATION_DETAILS,
-  DETAILS_OF_SHOP_REPARATION,
-  REPARATION_DATA,
   SET_DEVICES,
   SET_DEVICE_BRANDS,
   SET_BRAND_MODELS,
+  SET_REPARATIONS,
+  SET_REPARATIES,
 } from "./types";
 
 const initial_state = {
@@ -45,6 +42,7 @@ const initial_state = {
   },
   isLoadFilter: false,
   shopDevices: [],
+  reparaties: [],
 };
 
 const searchReducer = (state = initial_state, action) => {
@@ -260,6 +258,7 @@ const searchReducer = (state = initial_state, action) => {
         deviceBrands: action.payload,
       };
     }
+
     case SET_BRAND_MODELS: {
       return {
         ...state,

@@ -15,6 +15,9 @@ import {
   setReparationData,
   setDevices,
   setBrandModels,
+  setReparations,
+  setReparaties,
+  setReparationDetails,
 } from "./action";
 import axios from "axios";
 import { logoutA } from "../account/action";
@@ -23,6 +26,15 @@ import { DETAILS_OF_SHOP_REPARATION } from "./types";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
 // axios.defaults.withCredentials = true;
+export const tokenConfigure = () => {
+  const token = localStorage.getItem("auth-token");
+  console.log(token);
+  const config = { headers: {} };
+  if (token) {
+    config.headers["Authorization"] = `Token ${token}`;
+  }
+  return config;
+};
 
 axios.create({
   headers: {
@@ -129,6 +141,16 @@ export function getModelService(data, dispatch) {
     .catch((err) => {});
 }
 
+export async function getReparations(data, dispatch) {
+  return await axios.get(`${API_PATH.GETREPARATIONS}/`, { params: data });
+  // .then((res) => {
+  //   console.log("operations", res.data);
+  //   dispatch(setReparaties(res.data));
+  //   return;
+  // })
+  // .catch((err) => {});
+}
+
 export function getReparationModelDetails(data, dispatch) {
   dispatch(setLoadService(false));
   axios
@@ -196,4 +218,24 @@ export function contactUs(data, dispatch) {
     .catch((err) => {});
 }
 
+export async function getReparationDetails(data, dispatch) {
+  return await axios
+    .get(
+      `${API_PATH.GETREPARATIONDETAILS}/`,
+      { params: data },
+      tokenConfigure()
+    )
+    .then((res) => {
+      // console.log(res.status);
+      // if (res.status === 401) {
+      //   dispatch(logoutA());
+      // } else {
+      // }
+      dispatch(setReparationDetails(res.data));
+      return true;
+    })
+    .catch((err) => {
+      return false;
+    });
+}
 export default { searchShopFilter };
