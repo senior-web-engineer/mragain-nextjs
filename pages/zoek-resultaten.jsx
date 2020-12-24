@@ -247,7 +247,7 @@ const SearchShop = (routerProps) => {
     //   setModel(0);
     // } else {
     setModel(0);
-    // setReparation(0);
+    setReparation(0);
     setPrice(-1);
     setGuarantee(-1);
     setShowExFilter(false);
@@ -266,11 +266,14 @@ const SearchShop = (routerProps) => {
 
   function handleReparationChange(value) {
     setReparation(value);
+    setPrice(-1);
+    setGuarantee(-1);
     setIsSearch(true);
   }
 
   function handlePriceChange(value) {
     setPrice(value);
+    setGuarantee(-1);
     setIsSearch(true);
   }
 
