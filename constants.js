@@ -80,6 +80,7 @@ export const API_PATH = {
   GETBRANDMODELS: `${API_URL}/get-shop-models`,
   GETSHOPREPARATIONDETAILS: `${API_URL}/get-shop-reparations`,
   GETREPARATIONDETAILS: `${API_URL}/get-shop-reparation-detail`,
+  SAVESHOPREPARATION: `${API_URL}/save-shop-reparation`,
 };
 
 export default {

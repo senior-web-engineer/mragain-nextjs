@@ -23,15 +23,16 @@ const MakeAppointment = (routerProps) => {
     deviceBrands,
     brandModels,
   } = routerProps;
-  const [modal, setmodal] = useState(false);
-  const [phone, setPhone] = useState(0);
+  const [modal, setmodal] = useState(null);
+  const [device, setDevice] = useState(0);
   const [brand, setBrand] = useState(0);
   const [model, setModel] = useState(0);
-  const [price, setPrice] = useState(0);
-  const [guarantee, setGuarantee] = useState(0);
+  const [price, setPrice] = useState(1);
+  const [guarantee, setGuarantee] = useState(1);
   const [reparation, setReparation] = useState(0);
   const [reparaties, setReparaties] = useState([]);
-  const [showSaveReparation, setShowSaveReparation] = useState(false);
+  const [showSaveReparation, setShowSaveReparation] = useState(true);
+  const [isResponse, setIsResponse] = useState(false);
 
   useEffect(() => {
     // getDevices(dispatch);
@@ -44,21 +45,21 @@ const MakeAppointment = (routerProps) => {
   };
 
   const handleDeviceChange = (value) => {
-    setPhone(value);
+    setDevice(value);
     getBrands(value);
     setBrand(0);
     setModel(0);
   };
   const handleBrandChange = (value) => {
     setBrand(value);
-    getModels(phone, value);
+    getModels(device, value);
     setModel(0);
   };
 
   const handleModelChange = (value) => {
     setModel(value);
     const data = {
-      device: phone,
+      device,
       model: value,
     };
     getReparations(data).then((res) => {
@@ -69,15 +70,18 @@ const MakeAppointment = (routerProps) => {
   const handleReparatiesChange = (value) => {
     setReparation(value);
     const data = {
-      device: phone,
-      model: model,
+      device,
+      model,
       repar: value,
-      brand: brand,
-      shop: shop,
+      brand,
+      shop,
     };
 
     getReparationDetails(data).then((res) => {
-      if (res.data.length > 0) {
+      if (res.data.length === 0) {
+        setIsResponse(false);
+      } else {
+        setIsResponse(true);
         const details = res.data[0];
         setPrice(details.price);
         setGuarantee(details.guarantee_time);
@@ -87,15 +91,27 @@ const MakeAppointment = (routerProps) => {
   };
 
   const handlePriceChange = (e) => {
-    console.log(e.target.value);
     setPrice(e.target.value);
   };
 
-  function handleGuaranteeChange(e) {
-    setGuarantee(value);
-  }
+  const handleGuaranteeChange = (e) => {
+    setGuarantee(e.target.value);
+  };
+  const saveReparationDetails = () => {
+    const reparationDetails = {
+      repaData: {
+        device: device,
+        brand: brand,
+        model: model,
+        shop: shop,
+        reparation: reparation,
+        price: price,
+        guarantee_time: guarantee,
+      },
+    };
+    console.log(reparationDetails);
+  };
 
-  console.log(price);
   return (
     <Fragment>
       <Modal
@@ -117,7 +133,7 @@ const MakeAppointment = (routerProps) => {
                 <div>
                   <Select
                     className="w-100 "
-                    value={phone}
+                    value={device}
                     onChange={handleDeviceChange}
                   >
                     <Option value={0} key={0}>
@@ -233,8 +249,12 @@ const MakeAppointment = (routerProps) => {
                     </div>
                   </div>
                   <div className="pb-3">
-                    <Button block className="save-button">
-                      Save
+                    <Button
+                      block
+                      className="save-button"
+                      onClick={() => saveReparationDetails()}
+                    >
+                      Save reparation details
                     </Button>
                   </div>
                 </Fragment>

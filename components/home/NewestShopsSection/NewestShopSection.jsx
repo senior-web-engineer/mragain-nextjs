@@ -38,7 +38,7 @@ const NewestShopSection = (routerProps) => {
     const cityName = city.replaceAll(" ", "-");
     const streetName = street.replaceAll(" ", "-");
     // router.push(`/profiel/${shop}--${cityName}--${streetName}`);
-    router.push(`/${shop}--${cityName}--${streetName}`);
+    router.push(`/${shop}--${cityName}`);
   };
 
   const loadDefaultShop = () => {

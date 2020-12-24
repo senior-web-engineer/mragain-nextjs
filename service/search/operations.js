@@ -27,10 +27,13 @@ axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.xsrfCookieName = "csrftoken";
 // axios.defaults.withCredentials = true;
 
-export const tokenConfigure = () => {
+export const tokenConfig = () => {
   const token = localStorage.getItem("auth-token");
-  console.log(token);
-  let config = { headers: {} };
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
   if (token) {
     config.headers["Authorization"] = `Token ${token}`;
   }
@@ -228,5 +231,12 @@ export async function getReparationDetails(data, dispatch) {
     params: data,
     headers,
   });
+}
+export async function saveReparationData(data, dispatch) {
+  return await axios.post(
+    `${API_PATH.SAVESHOPREPARATION}/`,
+    data,
+    tokenConfig()
+  );
 }
 export default { searchShopFilter };

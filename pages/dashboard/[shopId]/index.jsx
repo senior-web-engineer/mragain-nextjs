@@ -462,9 +462,14 @@ const ShopDashboard = (routerProps) => {
   const renderReparation = () => {
     return (
       <Fragment>
-        <Button className="reparation-change-btn mr-3" onClick={addReparation}>
-          Add Reparation
-        </Button>
+        <div className="col-md-12">
+          <Button
+            className="reparation-change-btn mr-5"
+            onClick={addReparation}
+          >
+            Add Reparation
+          </Button>
+        </div>
       </Fragment>
     );
   };
@@ -637,12 +642,12 @@ const ShopDashboard = (routerProps) => {
                   <Avatar className="appointment-avatar" src={avatar} />
                 </div>
               </div>
-              <div className="shop-appointment-table-header">
+              {/* <div className="row mb-3 float-right">{renderReparation()}</div> */}
+              <div className="shop-appointment-table-header w-100">
                 <div className="shop-appointment-table-title">
                   Ingeplande afspraken
                 </div>
                 <div className="sort-by-date">
-                  {renderReparation()}
                   {showAppointmentModal && (
                     <MakeAppointment
                       shop={account_profile.id}
