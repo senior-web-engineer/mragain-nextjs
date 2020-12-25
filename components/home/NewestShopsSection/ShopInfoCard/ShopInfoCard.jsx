@@ -4,7 +4,7 @@ import { CardInfo } from "./ShopInfoCard.style.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./ShopInfoCard.style.less";
 // import StarRatingInfo from '../../StarRatingInfo/StarRatingInfo'
-// import { BACK_END_URL } from "../../../../constants"
+import { BACK_END_URL } from "../../../../constants"
 
 const ShopInfoCard = (params) => (
   <Card className="shop-infor-card">
