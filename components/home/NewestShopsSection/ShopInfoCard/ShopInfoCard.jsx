@@ -9,8 +9,9 @@ import { BACK_END_URL } from "../../../../constants"
 const ShopInfoCard = (params) => (
   <Card className="shop-infor-card">
     <Card.Img
-      variant="top"
+      variant="top"	
       src={ BACK_END_URL + params.image }
+      console.log(params.image)	
       alt="Reparateur-profielfoto"	
       onClick={() => {
         params.onprofilepage();
