@@ -54,6 +54,7 @@ const NewestShopSection = (routerProps) => {
         <Row className="newshop-card-blog">
           {newestShopList !== undefined &&
             newestShopList.map((el) => {
+              const string = "https://mragain.eu.pythonanywhere.com";
               return (
                 <ShopInfoCard
                   title={el.name}
@@ -61,10 +62,10 @@ const NewestShopSection = (routerProps) => {
                   position={(el.street, el.city)}
                   open={"NIEUW"}
                   image={
-                    el.logo_photo !== "" && el.logo_photo !== null
-                      ? el.logo_photo
-                      : el.bg_photo !== "" && el.bg_photo !== null
-                      ? el.bg_photo
+                    el.logo_photo !== ""
+                      ? el.logo_photo.replace(string, "")
+                      : el.logo_photo === "" && el.bg_photo !== ""
+                      ? bg_photo.replace(string, "")
                       : image3
                   }
                   alt="reparateur-profielfoto"
