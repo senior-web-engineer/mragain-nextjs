@@ -80,7 +80,7 @@ const NewestShopSection = (routerProps) => {
         <Row className="newshop-card-blog">
           {newestShopList !== undefined &&
             newestShopList.map((el) => {
-              const string = "https://mragain.eu.pythonanywhere.com";
+              const string = "https://mragainproduction.eu.pythonanywhere.com";
               return (
                 <ShopInfoCard
                   title={el.name}
