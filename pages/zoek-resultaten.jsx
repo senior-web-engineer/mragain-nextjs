@@ -9,7 +9,6 @@ import { ShopInfoCard, Layout } from "@/components/global";
 import lib from "@/assets/js/lib";
 import { FRONT_END_URL } from "../constants.js";
 import {
-  getSearchFilterField,
   getSearchFilterFieldExt,
   searchShopFilter,
 } from "service/search/operations.js";
@@ -20,7 +19,6 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
-  Map,
   InfoWindow,
 } from "react-google-maps";
 import { setFindOut } from "service/search/action.js";
@@ -29,7 +27,6 @@ import Head from "next/head";
 import image1 from "@/assets/images/home_newest_image3.jpg";
 import { setSearchFilter, setLoadFilter } from "../service/search/action";
 import { Modal } from "react-bootstrap";
-import { blue } from "@material-ui/core/colors";
 import { getBrands, getDevices, getModels } from "service/search/operations";
 
 const {
@@ -153,13 +150,12 @@ const SearchShop = (routerProps) => {
     getDevices,
     getBrands,
     getModels,
-    getSearchFilterField,
     getSearchFilterFieldExt,
     findShopbyFilter,
     devices,
     deviceBrands,
     brandModels,
-    filterlistPBM,
+    // filterlistPBM,
     filterlistRPG,
     shoplist,
     isFindOut,
@@ -169,13 +165,12 @@ const SearchShop = (routerProps) => {
     setLoadFilter,
     setFindOut,
     setSearchFilter,
-    defaultlocation,
+    // defaultlocation,
   } = routerProps;
 
   if (isLoad === false) {
     setLoadFilter(false);
     getDevices();
-    initSearchFilterField();
     setLoad(true);
   }
 
@@ -211,9 +206,89 @@ const SearchShop = (routerProps) => {
 
   const antIcon = <Icon type="loading" spin />;
 
-  async function initSearchFilterField() {
-    return await getSearchFilterField();
-  }
+  useEffect(() => {
+    const params = router.query;
+    console.log("isSearchFilter", isSearchFilter);
+    if (isSearchFilter === true && searchFilters.location === null) {
+      return;
+    }
+
+    // if (isLoadFilter === true) {
+    if (isSearchFilter === true) {
+      if (searchFilters.location !== "") {
+        setLocation(searchFilters.location);
+      }
+      let dev = parseInt(searchFilters.device);
+      if (dev !== null && dev !== 0) {
+        if (dev !== phone) {
+          setPhone(dev);
+          getBrands(dev);
+        }
+        let br = parseInt(searchFilters.brand);
+        if (br !== null && br !== 0) {
+          if (br !== brand) {
+            console.log(br, brand);
+            handleBrandChange(br);
+          }
+          let mo = parseInt(searchFilters.model);
+          if (mo !== null && mo !== 0) {
+            if (mo !== model) {
+              handleModelChange(mo);
+            }
+            let rep = parseInt(searchFilters.reparation);
+            if (rep !== null && rep !== 0) {
+              setReparation(rep);
+            }
+          }
+        }
+      }
+    } else {
+      if (params.position !== "") {
+        setLocation(params.position);
+      }
+      let dist = parseInt(params.distance);
+
+      if (params.distance !== undefined && dist !== null && dist !== 0) {
+        setDistance(dist);
+      }
+      let dev = parseInt(params.device);
+      if (dev !== null && dev !== 0) {
+        if (dev !== phone) {
+          setPhone(dev);
+          getBrands(dev);
+        }
+
+        let br = parseInt(params.brand);
+        if (br !== null && br !== 0) {
+          console.log(br, brand);
+          if (br !== brand) {
+            handleBrandChange(br);
+          }
+          let mo = parseInt(params.model);
+          if (mo !== null && mo !== 0) {
+            if (mo !== model) {
+              handleModelChange(mo);
+            }
+            let rep = parseInt(params.reparation);
+            if (rep !== null && rep !== 0) {
+              setReparation(rep);
+              let price = parseInt(params.price);
+              if (price !== null && price !== 0) {
+                setPrice(price);
+              }
+              let guarantee = parseInt(params.guarantee);
+              if (guarantee !== null && guarantee !== 0) {
+                setGuarantee(guarantee);
+              }
+              setShowPrice(true);
+            }
+          }
+        }
+      }
+    }
+    setIsSearch(true);
+    // }
+  }, [isLoadFilter, isSearchFilter, isLoad]);
 
   const classes = useStyles();
 
@@ -391,7 +466,6 @@ const SearchShop = (routerProps) => {
 
   // if (isLoad === false) {
   //   setLoadFilter(false);
-  //   initSearchFilterField();
   //   setLoad(true);
 
   // let queryParams = routerProps.location.search;
@@ -419,90 +493,6 @@ const SearchShop = (routerProps) => {
   //   }
   // }
   // }
-
-  useEffect(() => {
-    const params = router.query;
-    console.log("isSearchFilter", isSearchFilter);
-    if (isSearchFilter === true && searchFilters.location === null) {
-      return;
-    }
-
-    if (isLoadFilter === true) {
-      if (isSearchFilter === true) {
-        if (searchFilters.location !== "") {
-          setLocation(searchFilters.location);
-        }
-        let dev = parseInt(searchFilters.device);
-        if (dev !== null && dev !== 0) {
-          if (dev !== phone) {
-            setPhone(dev);
-            getBrands(dev);
-          }
-          let br = parseInt(searchFilters.brand);
-          if (br !== null && br !== 0) {
-            if (br !== brand) {
-              console.log(br, brand);
-              handleBrandChange(br);
-            }
-            let mo = parseInt(searchFilters.model);
-            if (mo !== null && mo !== 0) {
-              if (mo !== model) {
-                handleModelChange(mo);
-              }
-              let rep = parseInt(searchFilters.reparation);
-              if (rep !== null && rep !== 0) {
-                setReparation(rep);
-              }
-            }
-          }
-        }
-      } else {
-        if (params.position !== "") {
-          setLocation(params.position);
-        }
-        let dist = parseInt(params.distance);
-
-        if (params.distance !== undefined && dist !== null && dist !== 0) {
-          setDistance(dist);
-        }
-        let dev = parseInt(params.device);
-        if (dev !== null && dev !== 0) {
-          if (dev !== phone) {
-            setPhone(dev);
-            getBrands(dev);
-          }
-
-          let br = parseInt(params.brand);
-          if (br !== null && br !== 0) {
-            console.log(br, brand);
-            if (br !== brand) {
-              handleBrandChange(br);
-            }
-            let mo = parseInt(params.model);
-            if (mo !== null && mo !== 0) {
-              if (mo !== model) {
-                handleModelChange(mo);
-              }
-              let rep = parseInt(params.reparation);
-              if (rep !== null && rep !== 0) {
-                setReparation(rep);
-                let price = parseInt(params.price);
-                if (price !== null && price !== 0) {
-                  setPrice(price);
-                }
-                let guarantee = parseInt(params.guarantee);
-                if (guarantee !== null && guarantee !== 0) {
-                  setGuarantee(guarantee);
-                }
-                setShowPrice(true);
-              }
-            }
-          }
-        }
-      }
-      setIsSearch(true);
-    }
-  }, [isLoadFilter, isSearchFilter, isLoad]);
 
   useEffect(() => {
     if (isSearch === true) {
@@ -783,8 +773,8 @@ const mapStateToProps = (state) => ({
   isFindOut: state.search.isFindOut,
   shoplist: state.search.list,
   searchFilters: state.search.searchFilters,
-  defaultlocation: state.search.location,
-  filterlistPBM: state.search.fieldlistPBM,
+  // defaultlocation: state.search.location,
+  // filterlistPBM: state.search.fieldlistPBM,
   filterlistRPG: state.search.fieldlistRPG,
   devices: state.search.devices,
   deviceBrands: state.search.deviceBrands,
@@ -794,7 +784,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   // Action
   return {
-    getSearchFilterField: (data) => getSearchFilterField(dispatch),
     getSearchFilterFieldExt: (model_id) => {
       getSearchFilterFieldExt(model_id, dispatch);
     },

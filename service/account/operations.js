@@ -255,8 +255,8 @@ export async function verifyAccount(data, dispatch) {
 }
 
 export async function updateAccountSettings(id, data, dispatch) {
-    data = filterObjectKeys(data,['auth','name','street','zipcode','city','phone_number','kvk','btw','iban','site_url']);
-    return await axios
+  // data = filterObjectKeys(data,['auth','name','street','zipcode','city','phone_number','kvk','btw','iban','site_url','inter']);
+  return await axios
     .put(`${API_PATH.ACCOUNTSETTING}/${id}/`, data, tokenConfig())
 
     .then((res) => {
@@ -265,8 +265,8 @@ export async function updateAccountSettings(id, data, dispatch) {
       console.log("local Storage=>", user);
       localStorage.setItem("auth-user", JSON.stringify(user));
       dispatch(fetchAccountSettings(res.data));
-        data = filterObjectKeys(data,['auth','street','zipcode','city']);
-        return axios
+      data = filterObjectKeys(data, ["auth", "street", "zipcode", "city"]);
+      return axios
         .put(`${API_PATH.UPDATEACCOUNTLOCATION}/${id}/`, data, tokenConfig())
         .then((res) => {
           if (res.data.city === "error") {
@@ -356,8 +356,8 @@ export function getShopAccountProfile(id, dispatch) {
               if (reviews.length === 0) {
                 reviews = [];
               }
-                dispatch(initAccountReviews(reviews));
-                dispatch(initAccountValidTime(validTime));
+              dispatch(initAccountReviews(reviews));
+              dispatch(initAccountValidTime(validTime));
               dispatch(initAccountInvalidTime(invalidTime));
               dispatch(setLoadedProfile(true));
             })

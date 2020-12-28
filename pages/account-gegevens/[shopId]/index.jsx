@@ -65,6 +65,7 @@ const AccountSetting = (routerProps) => {
     setSettings({ ...settings, [e.target.name]: e.target.value });
   }
   function handleTimePerChange(e) {
+    console.log("time per change", e);
     let inter = "intervals";
     setSettings({ ...settings, [inter]: e });
   }
@@ -94,8 +95,11 @@ const AccountSetting = (routerProps) => {
   }
 
   async function handleUpdate() {
+    console.log("update");
     let id = acc_settings.id;
     let data = { ...settings };
+
+    console.log(data);
     let loc = lib.formatZipcodeString(data.zipcode);
     if (loc === "zipcode-error") {
       alert("Er gaat wat fout, klopt je postcode?");
@@ -112,8 +116,6 @@ const AccountSetting = (routerProps) => {
     }
     data.zipcode = loc;
     delete data["id"];
-
-
 
     data.auth = acc_settings.auth;
 
