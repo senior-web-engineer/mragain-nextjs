@@ -13,6 +13,7 @@ import "../component.style.less";
 import "./NewestShopSection.style.less";
 import { getNewestShopList } from "service/search/operations.js";
 import { getAccountProfile } from "service/account/operations.js";
+import { BACK_END_URL } from "../../../constants.js";
 
 const image3 = "/static/media/home_newest_image3.8798cc16.jpg";
 
@@ -54,7 +55,7 @@ const NewestShopSection = (routerProps) => {
         <Row className="newshop-card-blog">
           {newestShopList !== undefined &&
             newestShopList.map((el) => {
-              const string = "https://mragain.eu.pythonanywhere.com";
+              const string = {BACK_END_URL};
               return (
                 <ShopInfoCard
                   title={el.name}
