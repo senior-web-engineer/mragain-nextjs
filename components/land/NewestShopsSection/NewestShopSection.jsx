@@ -55,7 +55,7 @@ const NewestShopSection = (routerProps) => {
         <Row className="newshop-card-blog">
           {newestShopList !== undefined &&
             newestShopList.map((el) => {
-              const string = {BACK_END_URL};
+              const string ={BACK_END_URL};
               return (
                 <ShopInfoCard
                   title={el.name}
