@@ -66,7 +66,7 @@ const NewestShopSection = (routerProps) => {
                     el.logo_photo !== ""
                       ? el.logo_photo.replace(string, "")
                       : el.logo_photo === "" && el.bg_photo !== ""
-                      ? bg_photo.replace(string, "")
+                      ? el.bg_photo.replace(string, "")
                       : image3
                   }
                   alt="reparateur-profielfoto"
