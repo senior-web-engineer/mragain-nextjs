@@ -3,13 +3,13 @@ import { Card } from "react-bootstrap";
 import { CardInfo } from "./ShopInfoCard.style.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./ShopInfoCard.style.less";
-import { BACK_END_URL } from "../../../../constants.js";
+
 const ShopInfoCard = (params) => (
   <Card className="shop-infor-card">
     <Card.Img
       variant="top"
       href=""
-      src={ BACK_END_URL + params.image}
+      src={params.image}
       onClick={() => {
         params.onprofilepage();
       }}

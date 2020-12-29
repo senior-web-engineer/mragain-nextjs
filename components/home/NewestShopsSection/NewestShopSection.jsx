@@ -16,7 +16,7 @@ import { getNewestShopList } from "service/search/operations.js";
 import { getAccountProfile } from "service/account/operations.js";
 import { BACK_END_URL } from "../../../constants.js";
 
-const image3 = "/static/media/home_newest_image3.8798cc16.jpg";
+const image3 = BACK_END_URL + "/static/media/home_newest_image3.8798cc16.jpg";
 const NewestShopSection = (routerProps) => {
   const router = useRouter();
   const [shopCount] = useState(5);
@@ -81,24 +81,17 @@ const NewestShopSection = (routerProps) => {
         <Row className="newshop-card-blog">
           {newestShopList !== undefined &&
             newestShopList.map((el) => {
-              const string ={BACK_END_URL};
-	      console.log("BACK_END_URL", BACK_END_URL);
               return (
                 <ShopInfoCard
                   title={el.name}
                   phone={el.phone_number}
                   position={(el.street, el.city)}
                   open={"NIEUW"}
-                  // image={
-                  //   el.bg_photo !== "" && el.bg_photo !== null
-                  //     ? el.bg_photo
-                  //     : image3
-                  // }
                   image={
                     el.logo_photo !== ""
-                      ? el.logo_photo.replace(string, "")
+                      ? el.logo_photo
                       : el.logo_photo === "" && el.bg_photo !== ""
-                      ? el.bg_photo.replace(string, "")
+                      ? el.bg_photo
                       : image3
                   }
                   alt="Reparateur-profielfoto"
