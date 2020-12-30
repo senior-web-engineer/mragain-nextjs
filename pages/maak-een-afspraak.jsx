@@ -13,6 +13,11 @@ import {
   getSearchFilterField,
   getSearchFilterFieldExt,
   getModelService,
+  getBrands,
+  getModels,
+  getReparations,
+  getReparationDetails,
+  getDevices,
 } from "service/search/operations.js";
 import { setLoadService } from "service/search/action.js";
 import {
@@ -23,6 +28,7 @@ import { setLoadedProfile } from "../service/account/action";
 
 import { getAccountProfile } from "service/account/operations.js";
 import { getReparationGuarantee } from "service/appointments/operations.js";
+import { Fragment } from "react";
 
 const { Option } = Select;
 
@@ -48,6 +54,17 @@ const ShopAppointment = (routerProps) => {
   const [cemail, setCEmail] = React.useState("");
   const [cphone, setCPhone] = React.useState("");
 
+  const [manualDevice, setManualDevice] = useState(0);
+  const [manualBrand, setManualBrand] = useState(0);
+  const [manualModel, setManualModel] = useState(0);
+  const [manualPrice, setManualPrice] = useState(1);
+  const [manualGuarantee, setManualGuarantee] = useState(1);
+  const [manualReparation, setManualReparation] = useState(0);
+  const [manualMreparaties, setManualReparaties] = useState([]);
+  const [manualShowSaveReparation, setManualShowSaveReparation] = useState(
+    true
+  );
+  const [misResponse, setIsResponse] = useState(false);
   const {
     match,
     getSearchFilterField,
@@ -67,6 +84,13 @@ const ShopAppointment = (routerProps) => {
     getAccountProfile,
     appointmentDate,
     shopReparationList,
+    // for manual entry
+    getDevices,
+    devices,
+    getBrands,
+    getModels,
+    deviceBrands,
+    brandModels,
   } = routerProps;
 
   const [services, setServices] = useState([]);
@@ -75,18 +99,27 @@ const ShopAppointment = (routerProps) => {
   const [enabledDates, setEnabledDates] = useState([]);
   const [disabledDatesflg, setDisabledDatesflg] = useState(false);
   const [initDate, setInitDate] = useState(0);
+  const [manual, setManual] = useState(false);
+  const [shop, setShop] = useState(null);
 
   const router = useRouter();
 
   if (isLoad === false) {
     const params = router.query;
     const shop_id = parseInt(params.shop);
+    setShop(params.shop);
     setInitDate(parseInt(params.initdate));
+    if (params.manual) {
+      setManual(true);
+    } else {
+      setManual(false);
+    }
     getReparationGuarantee(shop_id);
     getAccountProfile(shop_id, null);
   }
 
   useEffect(() => {
+    getDevices();
     if (isLoadService === true) {
       if (modelServices.length > 0) {
         setServices(modelServices);
@@ -570,6 +603,54 @@ const ShopAppointment = (routerProps) => {
       })
     );
   }
+  // ============= for manual add reparation start ===========
+  const handleManualDeviceChange = (value) => {
+    setManualDevice(value);
+    getBrands(value);
+    setManualBrand(0);
+    setManualModel(0);
+  };
+
+  const handleManualBrandChange = (value) => {
+    setManualBrand(value);
+    getModels(manualDevice, value);
+    setManualModel(0);
+  };
+
+  const handleManualModelChange = (value) => {
+    setManualModel(value);
+    const data = {
+      device: manualDevice,
+      model: value,
+    };
+    getReparations(data).then((res) => {
+      setManualReparaties(res.data);
+    });
+  };
+
+  const handleManualReparatiesChange = (value) => {
+    setManualReparation(value);
+    const data = {
+      device: manualDevice,
+      model: manualModel,
+      repar: value,
+      brand: manualBrand,
+      shop: shop,
+    };
+
+    getReparationDetails(data).then((res) => {
+      if (res.data.length === 0) {
+        setIsResponse(false);
+      } else {
+        setIsResponse(true);
+        const details = res.data[0];
+        setManualPrice(details.price);
+        setManualGuarantee(details.guarantee_time);
+      }
+    });
+    setManualShowSaveReparation(true);
+  };
+
   return (
     <Layout>
       <Main>
@@ -617,74 +698,185 @@ const ShopAppointment = (routerProps) => {
                         </div>
                       </div>
                     </div>
-                    <div className="shop-appointment-form-group">
-                      <div className="shop-appointment-form-label">
-                        <Label>Selecteer je device</Label>
-                      </div>
-                      <div>
-                        <Select
-                          className="device-select"
-                          defaultValue="Smartphones"
-                          onChange={handlePhoneChange}
-                        >
-                          {initDeviceSelect()}
-                          {/* {filterlistPBM.map((element) => {
+
+                    {/* ========== manual Appointment = false start ========== */}
+                    {!manual ? (
+                      <Fragment>
+                        <div className="shop-appointment-form-group">
+                          <div className="shop-appointment-form-label">
+                            <Label>Selecteer je device</Label>
+                          </div>
+                          <div>
+                            <Select
+                              className="device-select"
+                              defaultValue="Smartphones"
+                              onChange={handlePhoneChange}
+                            >
+                              {initDeviceSelect()}
+                              {/* {filterlistPBM.map((element) => {
                             return (
                               <Option
-                                value={element.id}
-                                key={element.device_name}
+                              value={element.id}
+                              key={element.device_name}
                               >
-                                {element.device_name}
+                              {element.device_name}
                               </Option>
-                            );
-                          })} */}
-                        </Select>
-                      </div>
-                    </div>
-                    <div className="shop-appointment-form-group">
-                      <div className="shop-appointment-form-label">
-                        <Label>Selecteer je merk</Label>
-                      </div>
-                      <div>
-                        <Select
-                          className="brand-select"
-                          defaultValue="Merk"
-                          onChange={handleBrandChange}
-                          value={brand === 0 ? "Merk" : brand}
-                        >
-                          {initBrandSelect()}
-                        </Select>
-                      </div>
-                    </div>
-                    <div className="shop-appointment-form-group">
-                      <div className="shop-appointment-form-label">
-                        <Label>Selecteer je model</Label>
-                      </div>
-                      <div>
-                        <Select
-                          className="model-select"
-                          defaultValue="Model"
-                          onChange={handleModelChange}
-                          value={model === 0 ? "Model" : model}
-                        >
-                          {brandflg && initModelSelect()}
-                        </Select>
-                      </div>
-                    </div>
-                    <div className="shop-appointment-form-group">
-                      <div className="shop-appointment-form-label">
-                        <Label>Type reparatie</Label>
-                      </div>
-                      <div>
-                        <Select
-                          className="service-select"
-                          defaultValue="Alle reparaties"
-                          onChange={handleReparationChange}
-                        >
-                          {isShowExFilter && initReparationSelect()}
-                        </Select>
-                      </div>
-                    </div>
+                              );
+                            })} */}
+                            </Select>
+                          </div>
+                        </div>
+                        <div className="shop-appointment-form-group">
+                          <div className="shop-appointment-form-label">
+                            <Label>Selecteer je merk</Label>
+                          </div>
+                          <div>
+                            <Select
+                              className="brand-select"
+                              defaultValue="Merk"
+                              onChange={handleBrandChange}
+                              value={brand === 0 ? "Merk" : brand}
+                            >
+                              {initBrandSelect()}
+                            </Select>
+                          </div>
+                        </div>
+                        <div className="shop-appointment-form-group">
+                          <div className="shop-appointment-form-label">
+                            <Label>Selecteer je model</Label>
+                          </div>
+                          <div>
+                            <Select
+                              className="model-select"
+                              defaultValue="Model"
+                              onChange={handleModelChange}
+                              value={model === 0 ? "Model" : model}
+                            >
+                              {brandflg && initModelSelect()}
+                            </Select>
+                          </div>
+                        </div>
+                        <div className="shop-appointment-form-group">
+                          <div className="shop-appointment-form-label">
+                            <Label>Type reparatie</Label>
+                          </div>
+                          <div>
+                            <Select
+                              className="service-select"
+                              defaultValue="Alle reparaties"
+                              onChange={handleReparationChange}
+                            >
+                              {isShowExFilter && initReparationSelect()}
+                            </Select>
+                          </div>
+                        </div>
+                      </Fragment>
+                    ) : (
+                      <Fragment>
+                        <div className="shop-appointment-form-group">
+                          <div className="shop-appointment-form-label">
+                            <Label>--Selecteer je device</Label>
+                          </div>
+                          <div>
+                            <Select
+                              className="device-select"
+                              value={manualDevice}
+                              onChange={handleManualDeviceChange}
+                            >
+                              <Option value={0} key={0}>
+                                Alle apparaten
+                              </Option>
+                              {devices.map((element) => {
+                                return (
+                                  <Option value={element.id} key={element.id}>
+                                    {element.device_name}
+                                  </Option>
+                                );
+                              })}
+                            </Select>
+                          </div>
+                        </div>
+                        <div className="shop-appointment-form-group">
+                          <div className="shop-appointment-form-label">
+                            <Label>--Selecteer je merk</Label>
+                          </div>
+                          <div>
+                            <Select
+                              className="brand-select"
+                              value={manualBrand}
+                              onChange={handleManualBrandChange}
+                            >
+                              <Option value={0} key={0}>
+                                Alle apparaten
+                              </Option>
+                              {deviceBrands.map((element) => {
+                                return (
+                                  <Option value={element.id} key={element.id}>
+                                    {element.brand_name}
+                                  </Option>
+                                );
+                              })}
+                            </Select>
+                          </div>
+                        </div>
+                        <div className="shop-appointment-form-group">
+                          <div className="shop-appointment-form-label">
+                            <Label>--Selecteer je model</Label>
+                          </div>
+                          <div>
+                            <Select
+                              className="model-select"
+                              defaultValue="Model"
+                              value={manualModel}
+                              onChange={handleManualModelChange}
+                            >
+                              <Option value={0} key={0}>
+                                Alle apparaten
+                              </Option>
+                              {brandModels.map((element) => {
+                                return (
+                                  <Option value={element.id} key={element.id}>
+                                    {element.model_name}
+                                  </Option>
+                                );
+                              })}
+                            </Select>
+                          </div>
+                        </div>
+                        <div className="shop-appointment-form-group">
+                          <div className="shop-appointment-form-label">
+                            <Label>--Type reparatie</Label>
+                          </div>
+                          <div>
+                            <Select
+                              className="service-select"
+                              value={reparation}
+                              onChange={handleManualReparatiesChange}
+                            >
+                              <Option value={0} key={0}>
+                                Alle apparaten
+                              </Option>
+                              {manualMreparaties.map((element) => {
+                                return (
+                                  <Option value={element.id} key={element.id}>
+                                    {element.reparation_name}
+                                  </Option>
+                                );
+                              })}
+                            </Select>
+                          </div>
+                        </div>
+                        <div className="shop-appointment-form-group">
+                          <div className="shop-appointment-form-label">
+                            <Label>--Selecteer je merk</Label>
+                          </div>
+                          <div className="shop-appointment-form-input">
+                            <Input type="text" />
+                          </div>
+                        </div>
+                      </Fragment>
+                    )}
+                    {/* ========== manual Appointment = false start ========== */}
                     <Button
                       className="make-appointment"
                       onClick={handleShowModal}
@@ -785,6 +977,7 @@ const ShopAppointment = (routerProps) => {
 };
 const mapStateToProps = (state) => ({
   //Maps state to redux store as props
+  auth_user: state.account.auth_user,
   filterlistPBM: state.search.fieldlistPBM,
   filterlistRPG: state.search.fieldlistRPG,
   shopReviews: state.account.account_review,
@@ -796,8 +989,11 @@ const mapStateToProps = (state) => ({
   isLoadService: state.search.isLoadService,
   shopReparationList: state.appointment.shopReparationList,
   appointmentDate: state.appointment.appointmentDate,
+  devices: state.search.devices,
+  deviceBrands: state.search.deviceBrands,
+  brandModels: state.search.brandModels,
+  reparationDetails: state.search.reparationDetails,
 });
-
 const mapDispatchToProps = (dispatch) => {
   // Action
   return {
@@ -822,6 +1018,22 @@ const mapDispatchToProps = (dispatch) => {
     },
     getReparationGuarantee: (id) => {
       getReparationGuarantee(id, dispatch);
+    },
+    // ============ for Manual
+    getDevices: (data) => {
+      getDevices(dispatch);
+    },
+    getBrands: (id) => {
+      getBrands(id, dispatch);
+    },
+    getModels: (deviceId, brandId) => {
+      getModels(deviceId, brandId, dispatch);
+    },
+    getReparations: (data) => {
+      getReparations(data, dispatch);
+    },
+    getReparationDetails: (data) => {
+      getReparationDetails(data, dispatch);
     },
   };
 };

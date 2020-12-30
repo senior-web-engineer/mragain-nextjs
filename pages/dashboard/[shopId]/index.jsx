@@ -74,7 +74,7 @@ const ShopDashboard = (routerProps) => {
 
   useEffect(() => {
     getShopIdByInformation(shopId);
-    getDevices();
+    // getDevices();
   }, []);
 
   useEffect(() => {
@@ -457,7 +457,10 @@ const ShopDashboard = (routerProps) => {
     }
   };
   const addReparation = () => {
-    setShowAppointmentModal(true);
+    // setShowAppointmentModal(true);
+    router.push(
+      `/maak-een-afspraak?shop=${shopIdInfo}&initdate=${0}&manual=true`
+    );
   };
   const renderReparation = () => {
     return (
@@ -642,7 +645,7 @@ const ShopDashboard = (routerProps) => {
                   <Avatar className="appointment-avatar" src={avatar} />
                 </div>
               </div>
-              {/* <div className="row mb-3 float-right">{renderReparation()}</div> */}
+              <div className="row mb-3 float-right">{renderReparation()}</div>
               <div className="shop-appointment-table-header w-100">
                 <div className="shop-appointment-table-title">
                   Ingeplande afspraken

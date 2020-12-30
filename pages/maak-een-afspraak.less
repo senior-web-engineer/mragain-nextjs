@@ -25,7 +25,8 @@
         }
         &-content {
           width: 100%;
-          height: 680px;
+          height: fit-content;
+          padding-bottom: 35px;
           border: 1px solid #e1e1e1;
           box-shadow: 5px 10px #e1e1e1;
           &-wrap {
@@ -46,6 +47,12 @@
                 height: 50px;
                 display: flex;
                 align-items: center;
+              }
+              .shop-appointment-form-input Input {
+                width: 100%;
+                height: 50px;
+                // display: flex;
+                // align-items: center;
               }
               .ant-calendar-picker-input {
                 width: 100%;
@@ -175,38 +182,37 @@
 }
 
 @media (max-width: 650px) {
-    .appointment-confirm-modal .modal-content {
-      width: 400px;
-      display: table;
-      margin: 0px auto;
-    }
-    .appointment-confirm-success-modal .modal-content {
-      width: 400px;
-      display: table;
-      margin: 0px auto;
-    }
+  .appointment-confirm-modal .modal-content {
+    width: 400px;
+    display: table;
+    margin: 0px auto;
   }
-  
-  @media (max-width: 500px) {
-    .appointment-confirm-modal .modal-content {
-      width: 250px;
-      display: table;
-      margin: 0px auto;
-    }
-    .appointment-confirm-success-modal .modal-content {
-      width: 250px;
-      display: table;
-      margin: 0px auto;
-    }
+  .appointment-confirm-success-modal .modal-content {
+    width: 400px;
+    display: table;
+    margin: 0px auto;
   }
-  
-  .ant-select-selection--single .ant-select-selection__rendered {
-    margin-right: 24px;
-    width: 100% !important;
+}
+
+@media (max-width: 500px) {
+  .appointment-confirm-modal .modal-content {
+    width: 250px;
+    display: table;
+    margin: 0px auto;
   }
-  // .shop-appointment-container-wrap
-  //   .shop-appointment-form-content-wrap
-  //   .shop-appointment-form-group {
-  //   width: none !important;
-  // }
-  
+  .appointment-confirm-success-modal .modal-content {
+    width: 250px;
+    display: table;
+    margin: 0px auto;
+  }
+}
+
+.ant-select-selection--single .ant-select-selection__rendered {
+  margin-right: 24px;
+  width: 100% !important;
+}
+// .shop-appointment-container-wrap
+//   .shop-appointment-form-content-wrap
+//   .shop-appointment-form-group {
+//   width: none !important;
+// }
