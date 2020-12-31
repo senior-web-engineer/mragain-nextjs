@@ -18,6 +18,8 @@ import {
   setReparations,
   setReparaties,
   setReparationDetails,
+  updateReparationLoading,
+  saveReparationStatus,
 } from "./action";
 import axios from "axios";
 import { logoutA } from "../account/action";
@@ -232,11 +234,43 @@ export async function getReparationDetails(data, dispatch) {
     headers,
   });
 }
-export async function saveReparationData(data, dispatch) {
-  return await axios.post(
-    `${API_PATH.SAVESHOPREPARATION}/`,
-    data,
-    tokenConfig()
-  );
+export function saveReparationData(data, dispatch) {
+  axios
+    .post(`${API_PATH.SAVESHOPREPARATION}/`, data, tokenConfig())
+    .then((res) => {
+      dispatch(saveReparationStatus(true));
+      setTimeout(() => {
+        dispatch(saveReparationStatus(false));
+      }, 1500);
+      return res;
+    })
+    .catch((err) => {
+      dispatch(saveReparationStatus("error"));
+      setTimeout(() => {
+        dispatch(saveReparationStatus(false));
+      }, 1500);
+      return err;
+    });
 }
+
+export function updateReparationData(data, shop, dispatch) {
+  axios
+    .put(`${API_PATH.UPDATESHOPREPARATION}/${shop}/`, data, tokenConfig())
+    .then((res) => {
+      dispatch(updateReparationLoading(true));
+      setTimeout(() => {
+        dispatch(updateReparationLoading(false));
+      }, 1500);
+      return res;
+    })
+    .catch((err) => {
+      dispatch(updateReparationLoading("error"));
+      setTimeout(() => {
+        dispatch(updateReparationLoading(false));
+      }, 1500);
+
+      return err;
+    });
+}
+
 export default { searchShopFilter };

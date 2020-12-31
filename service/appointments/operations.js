@@ -1,10 +1,14 @@
 import { API_PATH } from "../../constants";
 import axios from "axios";
-import { fetchAppointmentlist, fetchReparationGuarantee } from "./action";
+import {
+  fetchAppointmentlist,
+  fetchReparationGuarantee,
+  manualAppointmentStatus,
+} from "./action";
 import { tokenConfig, tokenConfigGet } from "../account/operations";
 
 import { logoutA } from "../account/action";
-import { authHeaderPost, authHeader } from './api';
+import { authHeaderPost, authHeader } from "./api";
 
 export function createAppointment(
   data,
@@ -14,14 +18,18 @@ export function createAppointment(
   datetime,
   dispatch
 ) {
-    axios
-    .post(`${API_PATH.CREATEAPPOINTMENT}/`, {
-      appointmentData: data,
-      repairSeviceData: data1,
-      name,
-      address,
-      datetime,
-    }, authHeaderPost())
+  axios
+    .post(
+      `${API_PATH.CREATEAPPOINTMENT}/`,
+      {
+        appointmentData: data,
+        repairSeviceData: data1,
+        name,
+        address,
+        datetime,
+      },
+      authHeaderPost()
+    )
     .then((res) => {
       data1.appointment = res.data.appointment_id;
       axios
@@ -34,9 +42,13 @@ export function createAppointment(
 
 export async function checkReviewPage(auth) {
   return await axios
-    .post(`${API_PATH.CHECKREVIEWPAGE}/`, {
-      auth: auth,
-    }, authHeaderPost())
+    .post(
+      `${API_PATH.CHECKREVIEWPAGE}/`,
+      {
+        auth: auth,
+      },
+      authHeaderPost()
+    )
     .then((res) => {
       return true;
     })
@@ -47,10 +59,14 @@ export async function checkReviewPage(auth) {
 
 export async function createReview(auth, data, dispatch) {
   return await axios
-    .post(`${API_PATH.CREATEREVIEW}/`, {
-      auth: auth,
-      reviewData: data,
-    }, authHeaderPost())
+    .post(
+      `${API_PATH.CREATEREVIEW}/`,
+      {
+        auth: auth,
+        reviewData: data,
+      },
+      authHeaderPost()
+    )
     .then((res) => {
       axios.get(`${API_PATH.EVALUATERATE}/${data.shop}/`);
       return true;
@@ -66,12 +82,18 @@ export function getReparationGuarantee(id, dispatch) {
     .then((res) => {
       dispatch(fetchReparationGuarantee(res.data));
     })
-    .catch((err) => {dispatch(logoutA());});
+    .catch((err) => {
+      dispatch(logoutA());
+    });
 }
 
 export async function getAppointmentNumber(data) {
   try {
-    const res = await axios.post(`${API_PATH.GETAPPOINTMENTNUMBER}/`, data, authHeaderPost());
+    const res = await axios.post(
+      `${API_PATH.GETAPPOINTMENTNUMBER}/`,
+      data,
+      authHeaderPost()
+    );
     return res.data;
   } catch (error) {
     console.warn(error);
@@ -81,7 +103,11 @@ export async function getAppointmentNumber(data) {
 
 export async function getAppointmentTimeTable(data) {
   try {
-    const res = await axios.post(`${API_PATH.GETAPPOINTMENTTIMETABLE}/`, data, authHeaderPost());
+    const res = await axios.post(
+      `${API_PATH.GETAPPOINTMENTTIMETABLE}/`,
+      data,
+      authHeaderPost()
+    );
     return res.data;
   } catch (error) {
     return [];
@@ -94,7 +120,9 @@ export function getAppointments(id, dispatch) {
     .then((res) => {
       dispatch(fetchAppointmentlist(res.data));
     })
-    .catch((err) => {dispatch(logoutA());});
+    .catch((err) => {
+      dispatch(logoutA());
+    });
 }
 
 export function filterReparationOverview(data, dispatch) {
@@ -103,7 +131,9 @@ export function filterReparationOverview(data, dispatch) {
     .then((res) => {
       dispatch(fetchAppointmentlist(res.data));
     })
-    .catch((err) => {dispatch(logoutA());});
+    .catch((err) => {
+      dispatch(logoutA());
+    });
 }
 
 export function updateAppointment(id, email, data, shop_id, dispatch) {
@@ -117,11 +147,15 @@ export function updateAppointment(id, email, data, shop_id, dispatch) {
           dispatch(fetchAppointmentlist(res.data));
           if (status === 1) {
             axios
-              .post(`${API_PATH.REPAIRCOLSEAUTUEMAIL}/`, {
-                id: id,
-                email: email,
-                shop: shop_id,
-              }, authHeaderPost())
+              .post(
+                `${API_PATH.REPAIRCOLSEAUTUEMAIL}/`,
+                {
+                  id: id,
+                  email: email,
+                  shop: shop_id,
+                },
+                authHeaderPost()
+              )
               .then((res) => {});
           }
         });
@@ -142,10 +176,29 @@ export function CancelAppointment(id, shop_id, dispatch) {
           dispatch(fetchAppointmentlist(res.data));
         })
         .catch((err) => {
-            dispatch(logoutA());
-          });
+          dispatch(logoutA());
+        });
     })
     .catch((err) => {});
 }
 
+export function createManualAppointment(data, shop, dispatch) {
+  axios
+    .post(`${API_PATH.CREATEAPPOINTMENTMANUALLY}`, data, tokenConfig())
+    .then((res) => {
+      dispatch(manualAppointmentStatus(true));
+      setTimeout(() => {
+        dispatch(manualAppointmentStatus(false));
+      }, 1500);
+      return res;
+    })
+    .catch((err) => {
+      dispatch(manualAppointmentStatus("error"));
+      setTimeout(() => {
+        dispatch(manualAppointmentStatus(false));
+      }, 1500);
+
+      return err;
+    });
+}
 export default { createAppointment };

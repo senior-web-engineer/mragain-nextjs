@@ -4,13 +4,16 @@ import {
   FETCH_REPARATION_LIST,
   SET_LOAD_APPOINTMENT,
   SET_APPOINTMENT_DATE,
+  MANUAL_APPOINTMENT_STATUS,
 } from "./types";
+
 const initial_state = {
   appointmentDate: null,
   appointmentList: [],
   appointmentNum: 0,
   isLoadAppointment: 0,
   shopReparationList: [],
+  manualAppointmentLoading: false,
 };
 
 const appointmentReducer = (state = initial_state, action) => {
@@ -46,6 +49,13 @@ const appointmentReducer = (state = initial_state, action) => {
         isLoadAppointment: false,
       };
     }
+    case MANUAL_APPOINTMENT_STATUS: {
+      return {
+        ...state,
+        manualAppointmentLoading: action.payload,
+      };
+    }
+
     default: {
       return state;
     }

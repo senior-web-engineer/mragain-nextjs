@@ -40,7 +40,7 @@ import {
 } from "service/account/operations.js";
 import Head from "next/head";
 import { FRONT_END_URL } from "../../../constants.js";
-import MakeAppointment from "@/components/dashboard/MakeAppointment";
+// import MakeAppointment from "@/components/dashboard/MakeAppointment";
 import { Fragment } from "react";
 
 const { Option } = Select;

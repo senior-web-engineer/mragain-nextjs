@@ -81,6 +81,8 @@ export const API_PATH = {
   GETSHOPREPARATIONDETAILS: `${API_URL}/get-shop-reparations`,
   GETREPARATIONDETAILS: `${API_URL}/get-shop-reparation-detail`,
   SAVESHOPREPARATION: `${API_URL}/save-shop-reparation`,
+  UPDATESHOPREPARATION: `${API_URL}/update-shop-reparation`,
+  CREATEAPPOINTMENTMANUALLY: `${API_URL}/shop-create-appointment`,
 };
 
 export default {

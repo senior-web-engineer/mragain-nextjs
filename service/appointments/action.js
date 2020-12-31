@@ -4,6 +4,7 @@ import {
   SET_LOAD_APPOINTMENT,
   SET_APPOINTMENT_DATE,
   FETCH_REPARATION_LIST,
+  MANUAL_APPOINTMENT_STATUS,
 } from "./types";
 
 export const fetchAppointmentCount = (data) => ({
@@ -29,4 +30,9 @@ export const setLoadAppointment = (data) => ({
 export const setAppointmentDate = (date) => ({
   type: SET_APPOINTMENT_DATE,
   payload: date,
+});
+
+export const manualAppointmentStatus = (data) => ({
+  type: MANUAL_APPOINTMENT_STATUS,
+  payload: data,
 });

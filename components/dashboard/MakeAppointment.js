@@ -302,3 +302,26 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MakeAppointment);
+if (isResponse) {
+  const updateData = {
+    id: manualReparation,
+    price: manualPrice,
+    guarantee_time: manualGuarantee,
+  };
+  updateReparationData(updateData).then((res) =>
+    console.log("🚀  => updateData", res)
+  );
+} else {
+  const reparationDetails = {
+    repaData: {
+      device: manualDevice,
+      brand: manualBrand,
+      model: manualModel,
+      shop: shop,
+      reparation: manualReparation,
+      price: manualPrice,
+      guarantee_time: manualGuarantee,
+    },
+  };
+  saveReparationData(reparationDetails).then((res) => {});
+}

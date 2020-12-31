@@ -17,6 +17,8 @@ import {
   SET_BRAND_MODELS,
   SET_REPARATIES,
   GET_REPARATION_DETAILS,
+  UPDATE_REPARATION_LOADING,
+  SAVE_REPARATION_LOADING,
 } from "./types";
 
 export const setLoadFilter = (data) => ({
@@ -93,5 +95,14 @@ export const setDeviceBrands = (data) => ({
 });
 export const setBrandModels = (data) => ({
   type: SET_BRAND_MODELS,
+  payload: data,
+});
+
+export const updateReparationLoading = (data) => ({
+  type: UPDATE_REPARATION_LOADING,
+  payload: data,
+});
+export const saveReparationStatus = (data) => ({
+  type: SAVE_REPARATION_LOADING,
   payload: data,
 });

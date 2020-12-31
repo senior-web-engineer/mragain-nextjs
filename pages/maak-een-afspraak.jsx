@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
-import { Button, DatePicker, Input, Select, Divider } from "antd";
+import { Button, DatePicker, Input, Select, Divider, message } from "antd";
 import { Modal } from "react-bootstrap";
 import { Label } from "semantic-ui-react";
 import moment from "moment";
@@ -18,6 +18,8 @@ import {
   getReparations,
   getReparationDetails,
   getDevices,
+  saveReparationData,
+  updateReparationData,
 } from "service/search/operations.js";
 import { setLoadService } from "service/search/action.js";
 import {
@@ -58,13 +60,17 @@ const ShopAppointment = (routerProps) => {
   const [manualBrand, setManualBrand] = useState(0);
   const [manualModel, setManualModel] = useState(0);
   const [manualPrice, setManualPrice] = useState(1);
+  const [manualActualPrice, setManualActualPrice] = useState(1);
+  const [manualActualGuarantee, setManualActualGuarantee] = useState(1);
   const [manualGuarantee, setManualGuarantee] = useState(1);
   const [manualReparation, setManualReparation] = useState(0);
+  const [reparationId, setReparationId] = useState(0);
   const [manualMreparaties, setManualReparaties] = useState([]);
   const [manualShowSaveReparation, setManualShowSaveReparation] = useState(
     true
   );
-  const [misResponse, setIsResponse] = useState(false);
+  const [isResponse, setIsResponse] = useState(null);
+  const [showSaveButton, setShowSaveButton] = useState(false);
   const {
     match,
     getSearchFilterField,
@@ -78,6 +84,8 @@ const ShopAppointment = (routerProps) => {
     isLoadService,
     isLoadedProfile,
     setLoadService,
+    saveReparationData,
+    updateReparationData,
     modelServices,
     getAppointmentTimeTable,
     getReparationGuarantee,
@@ -91,6 +99,9 @@ const ShopAppointment = (routerProps) => {
     getModels,
     deviceBrands,
     brandModels,
+    updateReparationLoading,
+    saveReparationLoading,
+    manualAppointmentLoading,
   } = routerProps;
 
   const [services, setServices] = useState([]);
@@ -119,7 +130,7 @@ const ShopAppointment = (routerProps) => {
   }
 
   useEffect(() => {
-    getDevices();
+    // getDevices();
     if (isLoadService === true) {
       if (modelServices.length > 0) {
         setServices(modelServices);
@@ -136,7 +147,27 @@ const ShopAppointment = (routerProps) => {
         }
       }
     }
-  }, [isLoadService, isLoadedProfile, modelServices, setLoadService]);
+    if (updateReparationLoading === true) {
+      message.success("Reparation details updated successfully", [2.5]);
+    }
+    if (saveReparationLoading === true) {
+      message.success("Reparation details saved successfully", [2.5]);
+    }
+    if (
+      updateReparationLoading === "error" ||
+      saveReparationLoading === "error" ||
+      manualAppointmentLoading === "error"
+    ) {
+      message.success("Something went wrong", [2.5]);
+    }
+  }, [
+    isLoadService,
+    isLoadedProfile,
+    modelServices,
+    setLoadService,
+    updateReparationLoading,
+    saveReparationLoading,
+  ]);
 
   const handleClose = () => setShow(false);
   const handleSuccessClose = () => {
@@ -174,55 +205,95 @@ const ShopAppointment = (routerProps) => {
       return;
     }
 
-    let appointmentM = {
-      date: date,
-      time: appoint_time,
-      reparation: reparation,
-      client_name: cname,
-      client_email: cemail,
-      client_phone: cphone,
-      shop: account_profile.id,
-      active: true,
-    };
+    if (manual === false) {
+      let appointmentM = {
+        date: date,
+        time: appoint_time,
+        reparation: reparation,
+        client_name: cname,
+        client_email: cemail,
+        client_phone: cphone,
+        shop: account_profile.id,
+        active: true,
+      };
 
-    let reparationM = {
-      device: phone,
-      brand: brand,
-      model: model,
-      status: -1,
-      price: services[0].price,
-      guarantee: services[0].guarantee,
-      reparation: reparation,
-    };
+      let reparationM = {
+        device: phone,
+        brand: brand,
+        model: model,
+        status: -1,
+        price: services[0].price,
+        guarantee: services[0].guarantee,
+        reparation: reparation,
+      };
 
-    let address = `${
-      account_profile.address !== undefined ? account_profile.address : ""
-    } ${account_profile.street !== undefined ? account_profile.street : ""} ${
-      account_profile.city !== undefined ? account_profile.city : ""
-    }`;
+      let address = `${
+        account_profile.address !== undefined ? account_profile.address : ""
+      } ${account_profile.street !== undefined ? account_profile.street : ""} ${
+        account_profile.city !== undefined ? account_profile.city : ""
+      }`;
 
-    createAppointment(
-      appointmentM,
-      reparationM,
-      account_profile.name,
-      address,
-      `${dateTimeFormat} - ${appoint_time}`
-    );
+      createAppointment(
+        appointmentM,
+        reparationM,
+        account_profile.name,
+        address,
+        `${dateTimeFormat} - ${appoint_time}`
+      );
+    } else {
+      const appointmentObj = {
+        appointmentData: {
+          date: date,
+          time: appoint_time,
+          reparation: manualReparation,
+          client_name: cname,
+          client_email: cemail,
+          client_phone: cphone,
+          shop: shop,
+          active: true,
+        },
+        repairSeviceData: {
+          device: manualDevice,
+          brand: manualBrand,
+          model: manualModel,
+          status: -1,
+          price: `€ ${manualPrice}`,
+          guarantee: manualGuarantee,
+          reparation: manualReparation,
+        },
+      };
+    }
 
     handleClose();
     setSuccessShow(true);
   };
   const handleShowModal = () => {
-    if (
-      app_date !== undefined &&
-      phone !== 0 &&
-      brand !== 0 &&
-      model !== 0 &&
-      reparation !== 0
-    ) {
-      setShow(true);
+    if (manual === true) {
+      if (
+        app_date !== undefined &&
+        appoint_time !== undefined &&
+        manualDevice !== 0 &&
+        manualBrand !== 0 &&
+        manualModel !== 0 &&
+        manualReparation !== 0
+      ) {
+        setShow(true);
+      } else {
+        // alert("Manual Sommige verplichte velden zijn niet ingevuld");
+        message.error("Sommige verplichte velden zijn niet ingevuld", [2.5]);
+      }
     } else {
-      alert("Sommige verplichte velden zijn niet ingevuld");
+      if (
+        app_date !== undefined &&
+        phone !== 0 &&
+        brand !== 0 &&
+        model !== 0 &&
+        reparation !== 0
+      ) {
+        setShow(true);
+      } else {
+        alert("Sommige verplichte velden zijn niet ingevuld");
+      }
     }
   };
 
@@ -451,6 +522,7 @@ const ShopAppointment = (routerProps) => {
 
   function handleTimeChange(value, e) {
     setAppointTime(value);
+    getDevices();
   }
 
   function handlePhoneChange(value, e) {
@@ -604,21 +676,28 @@ const ShopAppointment = (routerProps) => {
     );
   }
   // ============= for manual add reparation start ===========
-  const handleManualDeviceChange = (value) => {
+  const handleManualDeviceChange = (value, e) => {
     setManualDevice(value);
     getBrands(value);
     setManualBrand(0);
     setManualModel(0);
+    setManualReparation(0);
+    setShowSaveButton(null);
+    setPhoneN(e.key);
   };
 
-  const handleManualBrandChange = (value) => {
+  const handleManualBrandChange = (value, e) => {
     setManualBrand(value);
     getModels(manualDevice, value);
     setManualModel(0);
+    setManualReparation(0);
+    setShowSaveButton(null);
+    setBrandN(e.key);
   };
 
-  const handleManualModelChange = (value) => {
+  const handleManualModelChange = (value, e) => {
     setManualModel(value);
+    setManualReparation(0);
     const data = {
       device: manualDevice,
       model: value,
@@ -626,9 +705,11 @@ const ShopAppointment = (routerProps) => {
     getReparations(data).then((res) => {
       setManualReparaties(res.data);
     });
+    setModelN(e.key);
+    setShowSaveButton(null);
   };
 
-  const handleManualReparatiesChange = (value) => {
+  const handleManualReparatiesChange = (value, e) => {
     setManualReparation(value);
     const data = {
       device: manualDevice,
@@ -637,18 +718,66 @@ const ShopAppointment = (routerProps) => {
       brand: manualBrand,
       shop: shop,
     };
+    setShowSaveButton(null);
+    setReparationN(e.key);
 
     getReparationDetails(data).then((res) => {
       if (res.data.length === 0) {
         setIsResponse(false);
+        setShowSaveButton(true);
       } else {
         setIsResponse(true);
+        setShowSaveButton(false);
         const details = res.data[0];
+        setReparationId(details.id);
         setManualPrice(details.price);
+        setManualActualPrice(details.price);
         setManualGuarantee(details.guarantee_time);
+        setManualActualGuarantee(details.guarantee_time);
       }
     });
     setManualShowSaveReparation(true);
+  };
+  const handlePriceChange = (e) => {
+    setManualPrice(e.target.value);
+    setShowSaveButton(true);
+  };
+
+  const handleGuaranteeChange = (e) => {
+    setManualGuarantee(e.target.value);
+    setShowSaveButton(true);
+  };
+  const saveReparationDetails = () => {
+    setShowSaveButton(false);
+    if (isResponse) {
+      const updateData = {
+        id: reparationId,
+        price: manualPrice,
+        guarantee_time: manualGuarantee,
+      };
+      if (
+        manualPrice !== manualActualPrice ||
+        manualGuarantee !== manualActualGuarantee
+      ) {
+        updateReparationData(updateData, shop);
+        setManualActualPrice(manualPrice);
+        setManualActualGuarantee(manualGuarantee);
+      }
+    } else {
+      const reparationDetails = {
+        repaData: {
+          device: manualDevice,
+          brand: manualBrand,
+          model: manualModel,
+          shop: parseInt(shop),
+          reparation: manualReparation,
+          price: parseInt(manualPrice),
+          guarantee_time: parseInt(manualGuarantee),
+        },
+      };
+      saveReparationData(reparationDetails);
+      setIsResponse(null);
+    }
   };
 
   return (
@@ -788,7 +917,10 @@ const ShopAppointment = (routerProps) => {
                               </Option>
                               {devices.map((element) => {
                                 return (
-                                  <Option value={element.id} key={element.id}>
+                                  <Option
+                                    value={element.id}
+                                    key={element.device_name}
+                                  >
                                     {element.device_name}
                                   </Option>
                                 );
@@ -811,7 +943,10 @@ const ShopAppointment = (routerProps) => {
                               </Option>
                               {deviceBrands.map((element) => {
                                 return (
-                                  <Option value={element.id} key={element.id}>
+                                  <Option
+                                    value={element.id}
+                                    key={element.brand_name}
+                                  >
                                     {element.brand_name}
                                   </Option>
                                 );
@@ -835,7 +970,10 @@ const ShopAppointment = (routerProps) => {
                               </Option>
                               {brandModels.map((element) => {
                                 return (
-                                  <Option value={element.id} key={element.id}>
+                                  <Option
+                                    value={element.id}
+                                    key={element.model_name}
+                                  >
                                     {element.model_name}
                                   </Option>
                                 );
@@ -850,7 +988,7 @@ const ShopAppointment = (routerProps) => {
                           <div>
                             <Select
                               className="service-select"
-                              value={reparation}
+                              value={manualReparation}
                               onChange={handleManualReparatiesChange}
                             >
                               <Option value={0} key={0}>
@@ -858,7 +996,10 @@ const ShopAppointment = (routerProps) => {
                               </Option>
                               {manualMreparaties.map((element) => {
                                 return (
-                                  <Option value={element.id} key={element.id}>
+                                  <Option
+                                    value={element.id}
+                                    key={element.reparation_name}
+                                  >
                                     {element.reparation_name}
                                   </Option>
                                 );
@@ -867,22 +1008,56 @@ const ShopAppointment = (routerProps) => {
                           </div>
                         </div>
                         <div className="shop-appointment-form-group">
-                          <div className="shop-appointment-form-label">
-                            <Label>--Selecteer je merk</Label>
-                          </div>
-                          <div className="shop-appointment-form-input">
-                            <Input type="text" />
+                          <div className="row">
+                            <div className="col-md-6">
+                              <div className="shop-appointment-form-label">
+                                <Label>--Prijs</Label>
+                              </div>
+                              <div className="shop-appointment-form-input">
+                                <Input
+                                  type="text"
+                                  placeholder="Prijs"
+                                  value={manualPrice}
+                                  onChange={(e) => handlePriceChange(e)}
+                                />
+                              </div>
+                            </div>
+                            <div className="col-md-6">
+                              <div className="shop-appointment-form-label">
+                                <Label>--Guarantee</Label>
+                              </div>
+                              <div className="shop-appointment-form-input">
+                                <Input
+                                  type="text"
+                                  placeholder="Guarantee"
+                                  value={manualGuarantee}
+                                  onChange={(e) => handleGuaranteeChange(e)}
+                                />
+                              </div>
+                            </div>
                           </div>
                         </div>
+                        {showSaveButton === true ? (
+                          <div className="shop-appointment-form-group">
+                            <Button
+                              block
+                              className="save-button"
+                              onClick={(e) => saveReparationDetails(e)}
+                            >
+                              Save reparation details
+                            </Button>
+                          </div>
+                        ) : null}
                       </Fragment>
                     )}
-                    {/* ========== manual Appointment = false start ========== */}
                     <Button
                       className="make-appointment"
                       onClick={handleShowModal}
                     >
                       Maak afspraak
                     </Button>
+                    {/* ========== manual Appointment = false End ========== */}
+
                     <Modal
                       show={show}
                       onHide={handleClose}
@@ -922,10 +1097,18 @@ const ShopAppointment = (routerProps) => {
                         <Divider />
                         <Label>Model: {modelN}</Label>
                         <Divider />
-                        <Label>
-                          Prijs:
-                          {services[0] !== undefined && showReparationPrice()}
-                        </Label>
+                        {manual === true ? (
+                          <Fragment>
+                            <Label>Prijs: €{manualPrice}</Label>
+                            <Divider />
+                            <Label>Guarantee: {manualGuarantee} Maanden</Label>
+                          </Fragment>
+                        ) : (
+                          <Label>
+                            Prijs: €
+                            {services[0] !== undefined && showReparationPrice()}
+                          </Label>
+                        )}
                         <Label className="modal-sub-title">Jouw gegevens</Label>
                         <Input
                           placeholder="Je naam"
@@ -993,7 +1176,11 @@ const mapStateToProps = (state) => ({
   deviceBrands: state.search.deviceBrands,
   brandModels: state.search.brandModels,
   reparationDetails: state.search.reparationDetails,
+  updateReparationLoading: state.search.updateReparationLoading,
+  saveReparationLoading: state.search.saveReparationLoading,
+  manualAppointmentLoading: state.appointment.manualAppointmentLoading,
 });
+
 const mapDispatchToProps = (dispatch) => {
   // Action
   return {
@@ -1034,6 +1221,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     getReparationDetails: (data) => {
       getReparationDetails(data, dispatch);
+    },
+    saveReparationData: (data) => {
+      saveReparationData(data, dispatch);
+    },
+    updateReparationData: (data, shop) => {
+      updateReparationData(data, shop, dispatch);
     },
   };
 };

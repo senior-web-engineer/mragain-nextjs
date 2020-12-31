@@ -16,6 +16,8 @@ import {
   SET_DEVICE_BRANDS,
   SET_BRAND_MODELS,
   GET_REPARATION_DETAILS,
+  UPDATE_REPARATION_LOADING,
+  SAVE_REPARATION_LOADING,
 } from "./types";
 
 const initial_state = {
@@ -41,6 +43,8 @@ const initial_state = {
   },
   isLoadFilter: false,
   shopDevices: [],
+  updateReparationLoading: false,
+  saveReparationLoading: false,
 };
 
 const searchReducer = (state = initial_state, action) => {
@@ -262,6 +266,18 @@ const searchReducer = (state = initial_state, action) => {
         ...state,
         brandModels: action.payload,
         isLoadFilter: true,
+      };
+    }
+    case UPDATE_REPARATION_LOADING: {
+      return {
+        ...state,
+        updateReparationLoading: action.payload,
+      };
+    }
+    case SAVE_REPARATION_LOADING: {
+      return {
+        ...state,
+        saveReparationLoading: action.payload,
       };
     }
     default: {
