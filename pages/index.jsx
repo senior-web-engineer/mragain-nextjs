@@ -36,14 +36,14 @@ export default function Home() {
 
           {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
           <meta property="og:type" content="website" />
-          <meta name="og_title" property="og:title" content="Mr Again - Home" />
+          <meta name="og_title" property="og:title" content="Bij MrAgain vind je de beste reparateurs bij jou in de buurt" />
 
           <meta
             property="og:description"
             content="Vind de beste reparateur bij jou in de buurt"
           />
           <meta name="og:url" content={FRONT_END_URL} />
-          <meta property="og:image" content="" />
+          <meta property="og:image" content={FRONT_END_URL + /contact_banner_image.jpg} />
           <meta
             name="og_site_name"
             property="og:site_name"
