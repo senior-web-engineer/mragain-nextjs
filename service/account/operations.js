@@ -370,6 +370,7 @@ export function getShopAccountProfile(id, dispatch) {
 
 // to get main shop profile info
 export function getAccountProfile(id, str, dispatch) {
+  // console.log(str);
   let profile;
   let validTime;
   let invalidTime;
@@ -394,7 +395,13 @@ export function getAccountProfile(id, str, dispatch) {
                   if (reviews.length === 0) {
                     reviews = [];
                   }
-                  dispatch(initAccountProfile(profile));
+                  if (str === true) {
+                    dispatch(initShopAccountProfile(profile));
+                    console.log("true string");
+                  } else {
+                    dispatch(initAccountProfile(profile));
+                    console.log("false string");
+                  }
                   dispatch(initAccountValidTime(validTime));
                   dispatch(initAccountInvalidTime(invalidTime));
                   dispatch(initAccountReviews(reviews));

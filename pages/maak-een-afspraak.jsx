@@ -82,7 +82,7 @@ const ShopAppointment = (routerProps) => {
     getModelService,
     account_valid_time,
     account_invalid_time,
-    account_profile,
+    shop_account_profile,
     isLoadService,
     isLoadedProfile,
     setLoadService,
@@ -130,7 +130,7 @@ const ShopAppointment = (routerProps) => {
       setManual(false);
     }
     getReparationGuarantee(shop_id);
-    getAccountProfile(shop_id, null);
+    getAccountProfile(shop_id, true);
   }
 
   useEffect(() => {
@@ -185,7 +185,7 @@ const ShopAppointment = (routerProps) => {
   const handleClose = () => setShow(false);
   const handleSuccessClose = () => {
     if (manual === true) {
-      const shopName = account_profile.name.replaceAll(" ", "-");
+      const shopName = shop_account_profile.name.replaceAll(" ", "-");
       router.push(`/dashboard/${shopName}`);
     } else {
       router.push("/");
@@ -231,7 +231,7 @@ const ShopAppointment = (routerProps) => {
         client_name: cname,
         client_email: cemail,
         client_phone: cphone,
-        shop: account_profile.id,
+        shop: shop_account_profile.id,
         active: true,
       };
 
@@ -246,15 +246,21 @@ const ShopAppointment = (routerProps) => {
       };
 
       let address = `${
-        account_profile.address !== undefined ? account_profile.address : ""
-      } ${account_profile.street !== undefined ? account_profile.street : ""} ${
-        account_profile.city !== undefined ? account_profile.city : ""
+        shop_account_profile.address !== undefined
+          ? shop_account_profile.address
+          : ""
+      } ${
+        shop_account_profile.street !== undefined
+          ? shop_account_profile.street
+          : ""
+      } ${
+        shop_account_profile.city !== undefined ? shop_account_profile.city : ""
       }`;
 
       createAppointment(
         appointmentM,
         reparationM,
-        account_profile.name,
+        shop_account_profile.name,
         address,
         `${dateTimeFormat} - ${appoint_time}`
       );
@@ -372,7 +378,7 @@ const ShopAppointment = (routerProps) => {
     let formData = new FormData();
     formData.append("date", strDate);
     formData.append("time_table", app_intervals);
-    formData.append("shop_id", account_profile.id);
+    formData.append("shop_id", shop_account_profile.id);
 
     tmp = await getAppointmentTimeTable(formData);
     let time_table = String(tmp).match(/.{1,5}/g);
@@ -442,7 +448,7 @@ const ShopAppointment = (routerProps) => {
       alert("Helaas, deze datum is al geweest!");
       return;
     }
-    let interval = parseInt(account_profile.intervals);
+    let interval = parseInt(shop_account_profile.intervals);
     let isClose = -1;
     let app_intervals = [];
 
@@ -576,7 +582,7 @@ const ShopAppointment = (routerProps) => {
     setReparationN(e.key);
     setReparation(value);
     let services = {
-      shop_id: account_profile.id,
+      shop_id: shop_account_profile.id,
       device: phone,
       brand: brand,
       model: model,
@@ -591,7 +597,7 @@ const ShopAppointment = (routerProps) => {
     setShowExFilter(true);
     getSearchFilterFieldExt(value);
     let services = {
-      shop_id: account_profile.id,
+      shop_id: shop_account_profile.id,
       device: phone,
       brand: brand,
       model: value,
@@ -1104,19 +1110,19 @@ const ShopAppointment = (routerProps) => {
                         <Label className="modal-sub-title">
                           Afspraak details
                         </Label>
-                        <Label>{account_profile.name}</Label>
+                        <Label>{shop_account_profile.name}</Label>
                         <Label>
                           {`${
-                            account_profile.address !== undefined
-                              ? account_profile.address
+                            shop_account_profile.address !== undefined
+                              ? shop_account_profile.address
                               : ""
                           } ${
-                            account_profile.street !== undefined
-                              ? account_profile.street
+                            shop_account_profile.street !== undefined
+                              ? shop_account_profile.street
                               : ""
                           } ${
-                            account_profile.city !== undefined
-                              ? account_profile.city
+                            shop_account_profile.city !== undefined
+                              ? shop_account_profile.city
                               : ""
                           }`}
                         </Label>
@@ -1200,7 +1206,7 @@ const mapStateToProps = (state) => ({
   shopReviews: state.account.account_review,
   account_valid_time: state.account.account_valid_time,
   account_invalid_time: state.account.account_invalid_time,
-  account_profile: state.account.account_profile,
+  shop_account_profile: state.account.shop_account_profile,
   isLoadedProfile: state.account.isLoadedProfile,
   modelServices: state.search.modelServices,
   isLoadService: state.search.isLoadService,
