@@ -254,6 +254,8 @@ export function saveReparationData(data, dispatch) {
 }
 
 export function updateReparationData(data, shop, dispatch) {
+  // dispatch(updateReparationLoading(false));
+
   axios
     .put(`${API_PATH.UPDATESHOPREPARATION}/${shop}/`, data, tokenConfig())
     .then((res) => {

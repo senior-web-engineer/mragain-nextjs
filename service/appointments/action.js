@@ -32,7 +32,10 @@ export const setAppointmentDate = (date) => ({
   payload: date,
 });
 
-export const manualAppointmentStatus = (data) => ({
-  type: MANUAL_APPOINTMENT_STATUS,
-  payload: data,
-});
+export const manualAppointmentStatus = (data) => (
+  console.log("🚀 => data", data),
+  {
+    type: MANUAL_APPOINTMENT_STATUS,
+    payload: data,
+  }
+);

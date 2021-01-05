@@ -24,6 +24,7 @@ import {
 import { setLoadService } from "service/search/action.js";
 import {
   createAppointment,
+  createManualAppointment,
   getAppointmentTimeTable,
 } from "service/appointments/operations";
 import { setLoadedProfile } from "../service/account/action";
@@ -59,10 +60,10 @@ const ShopAppointment = (routerProps) => {
   const [manualDevice, setManualDevice] = useState(0);
   const [manualBrand, setManualBrand] = useState(0);
   const [manualModel, setManualModel] = useState(0);
-  const [manualPrice, setManualPrice] = useState(1);
-  const [manualActualPrice, setManualActualPrice] = useState(1);
-  const [manualActualGuarantee, setManualActualGuarantee] = useState(1);
-  const [manualGuarantee, setManualGuarantee] = useState(1);
+  const [manualPrice, setManualPrice] = useState(0);
+  const [manualActualPrice, setManualActualPrice] = useState(0);
+  const [manualActualGuarantee, setManualActualGuarantee] = useState(0);
+  const [manualGuarantee, setManualGuarantee] = useState(0);
   const [manualReparation, setManualReparation] = useState(0);
   const [reparationId, setReparationId] = useState(0);
   const [manualMreparaties, setManualReparaties] = useState([]);
@@ -71,6 +72,7 @@ const ShopAppointment = (routerProps) => {
   );
   const [isResponse, setIsResponse] = useState(null);
   const [showSaveButton, setShowSaveButton] = useState(false);
+
   const {
     match,
     getSearchFilterField,
@@ -101,6 +103,7 @@ const ShopAppointment = (routerProps) => {
     brandModels,
     updateReparationLoading,
     saveReparationLoading,
+    createManualAppointment,
     manualAppointmentLoading,
   } = routerProps;
 
@@ -112,6 +115,7 @@ const ShopAppointment = (routerProps) => {
   const [initDate, setInitDate] = useState(0);
   const [manual, setManual] = useState(false);
   const [shop, setShop] = useState(null);
+  const [saveSuccess, setSaveSuccess] = useState(true);
 
   const router = useRouter();
 
@@ -130,6 +134,7 @@ const ShopAppointment = (routerProps) => {
   }
 
   useEffect(() => {
+    // setSuccessShow(false);
     // getDevices();
     if (isLoadService === true) {
       if (modelServices.length > 0) {
@@ -148,17 +153,24 @@ const ShopAppointment = (routerProps) => {
       }
     }
     if (updateReparationLoading === true) {
+      setSaveSuccess(true);
       message.success("Reparation details updated successfully", [2.5]);
     }
     if (saveReparationLoading === true) {
+      setSaveSuccess(true);
       message.success("Reparation details saved successfully", [2.5]);
+    }
+    if (manualAppointmentLoading === true) {
+      setSaveSuccess(true);
+      setSuccessShow(true);
     }
     if (
       updateReparationLoading === "error" ||
       saveReparationLoading === "error" ||
       manualAppointmentLoading === "error"
     ) {
-      message.success("Something went wrong", [2.5]);
+      setSaveSuccess(false);
+      message.error("Something went wrong", [2.5]);
     }
   }, [
     isLoadService,
@@ -167,11 +179,17 @@ const ShopAppointment = (routerProps) => {
     setLoadService,
     updateReparationLoading,
     saveReparationLoading,
+    manualAppointmentLoading,
   ]);
 
   const handleClose = () => setShow(false);
   const handleSuccessClose = () => {
-    router.push("/");
+    if (manual === true) {
+      const shopName = account_profile.name.replaceAll(" ", "-");
+      router.push(`/dashboard/${shopName}`);
+    } else {
+      router.push("/");
+    }
     setSuccessShow(false);
   };
 
@@ -240,6 +258,7 @@ const ShopAppointment = (routerProps) => {
         address,
         `${dateTimeFormat} - ${appoint_time}`
       );
+      setSuccessShow(true);
     } else {
       const appointmentObj = {
         appointmentData: {
@@ -249,7 +268,7 @@ const ShopAppointment = (routerProps) => {
           client_name: cname,
           client_email: cemail,
           client_phone: cphone,
-          shop: shop,
+          shop: parseInt(shop),
           active: true,
         },
         repairSeviceData: {
@@ -257,18 +276,22 @@ const ShopAppointment = (routerProps) => {
           brand: manualBrand,
           model: manualModel,
           status: -1,
-          price: `€ ${manualPrice}`,
+          price: `€${manualPrice}`,
           guarantee: manualGuarantee,
           reparation: manualReparation,
         },
       };
+      createManualAppointment(appointmentObj);
+      setSuccessShow(true);
     }
 
     handleClose();
-    setSuccessShow(true);
+    // setSuccessShow(true);
   };
   const handleShowModal = () => {
-    if (manual === true) {
+    // setShow(true);
+
+    if (manual === true && saveSuccess) {
       if (
         app_date !== undefined &&
         appoint_time !== undefined &&
@@ -292,7 +315,9 @@ const ShopAppointment = (routerProps) => {
       ) {
         setShow(true);
       } else {
-        alert("Sommige verplichte velden zijn niet ingevuld");
+        message.error("Sommige verplichte velden zijn niet ingevuld", [2.5]);
+
+        // alert("Sommige verplichte velden zijn niet ingevuld");
       }
     }
   };
@@ -684,6 +709,7 @@ const ShopAppointment = (routerProps) => {
     setManualReparation(0);
     setShowSaveButton(null);
     setPhoneN(e.key);
+    setSaveSuccess(true);
   };
 
   const handleManualBrandChange = (value, e) => {
@@ -693,6 +719,7 @@ const ShopAppointment = (routerProps) => {
     setManualReparation(0);
     setShowSaveButton(null);
     setBrandN(e.key);
+    setSaveSuccess(true);
   };
 
   const handleManualModelChange = (value, e) => {
@@ -707,6 +734,7 @@ const ShopAppointment = (routerProps) => {
     });
     setModelN(e.key);
     setShowSaveButton(null);
+    setSaveSuccess(true);
   };
 
   const handleManualReparatiesChange = (value, e) => {
@@ -725,6 +753,10 @@ const ShopAppointment = (routerProps) => {
       if (res.data.length === 0) {
         setIsResponse(false);
         setShowSaveButton(true);
+        setManualPrice(0);
+        setManualActualPrice(0);
+        setManualGuarantee(0);
+        setManualActualGuarantee(0);
       } else {
         setIsResponse(true);
         setShowSaveButton(false);
@@ -737,15 +769,18 @@ const ShopAppointment = (routerProps) => {
       }
     });
     setManualShowSaveReparation(true);
+    setSaveSuccess(true);
   };
   const handlePriceChange = (e) => {
     setManualPrice(e.target.value);
     setShowSaveButton(true);
+    setSaveSuccess(true);
   };
 
   const handleGuaranteeChange = (e) => {
     setManualGuarantee(e.target.value);
     setShowSaveButton(true);
+    setSaveSuccess(true);
   };
   const saveReparationDetails = () => {
     setShowSaveButton(false);
@@ -776,7 +811,6 @@ const ShopAppointment = (routerProps) => {
         },
       };
       saveReparationData(reparationDetails);
-      setIsResponse(null);
     }
   };
 
@@ -1227,6 +1261,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateReparationData: (data, shop) => {
       updateReparationData(data, shop, dispatch);
+    },
+    createManualAppointment: (data) => {
+      createManualAppointment(data, dispatch);
     },
   };
 };

@@ -50,6 +50,7 @@ const appointmentReducer = (state = initial_state, action) => {
       };
     }
     case MANUAL_APPOINTMENT_STATUS: {
+      console.log("loading => ", action.payload);
       return {
         ...state,
         manualAppointmentLoading: action.payload,

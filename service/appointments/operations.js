@@ -182,7 +182,9 @@ export function CancelAppointment(id, shop_id, dispatch) {
     .catch((err) => {});
 }
 
-export function createManualAppointment(data, shop, dispatch) {
+export function createManualAppointment(data, dispatch) {
+  // dispatch(manualAppointmentStatus(false));
+
   axios
     .post(`${API_PATH.CREATEAPPOINTMENTMANUALLY}`, data, tokenConfig())
     .then((res) => {
