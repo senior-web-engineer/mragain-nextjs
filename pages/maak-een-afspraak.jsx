@@ -938,7 +938,7 @@ const ShopAppointment = (routerProps) => {
                       <Fragment>
                         <div className="shop-appointment-form-group">
                           <div className="shop-appointment-form-label">
-                            <Label>--Selecteer je device</Label>
+                            <Label>Selecteer je device</Label>
                           </div>
                           <div>
                             <Select
@@ -964,7 +964,7 @@ const ShopAppointment = (routerProps) => {
                         </div>
                         <div className="shop-appointment-form-group">
                           <div className="shop-appointment-form-label">
-                            <Label>--Selecteer je merk</Label>
+                            <Label>Selecteer je merk</Label>
                           </div>
                           <div>
                             <Select
@@ -990,7 +990,7 @@ const ShopAppointment = (routerProps) => {
                         </div>
                         <div className="shop-appointment-form-group">
                           <div className="shop-appointment-form-label">
-                            <Label>--Selecteer je model</Label>
+                            <Label>Selecteer je model</Label>
                           </div>
                           <div>
                             <Select
@@ -1017,7 +1017,7 @@ const ShopAppointment = (routerProps) => {
                         </div>
                         <div className="shop-appointment-form-group">
                           <div className="shop-appointment-form-label">
-                            <Label>--Type reparatie</Label>
+                            <Label>Type reparatie</Label>
                           </div>
                           <div>
                             <Select
@@ -1045,7 +1045,7 @@ const ShopAppointment = (routerProps) => {
                           <div className="row">
                             <div className="col-md-6">
                               <div className="shop-appointment-form-label">
-                                <Label>--Prijs</Label>
+                                <Label>Prijs</Label>
                               </div>
                               <div className="shop-appointment-form-input">
                                 <Input
@@ -1058,7 +1058,7 @@ const ShopAppointment = (routerProps) => {
                             </div>
                             <div className="col-md-6">
                               <div className="shop-appointment-form-label">
-                                <Label>--Guarantee</Label>
+                                <Label>Guarantee</Label>
                               </div>
                               <div className="shop-appointment-form-input">
                                 <Input
