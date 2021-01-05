@@ -467,7 +467,7 @@ const ShopDashboard = (routerProps) => {
       <Fragment>
         <div className="col-md-12">
           <Button className="add-reparation mr-5" onClick={addReparation}>
-            Add Reparation
+            Nieuwe afspraak
           </Button>
         </div>
       </Fragment>

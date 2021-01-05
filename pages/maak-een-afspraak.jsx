@@ -979,7 +979,7 @@ const ShopAppointment = (routerProps) => {
                               onChange={handleManualBrandChange}
                             >
                               <Option value={0} key={0}>
-                                Alle apparaten
+                                Alle merken
                               </Option>
                               {deviceBrands.map((element) => {
                                 return (
@@ -1006,7 +1006,7 @@ const ShopAppointment = (routerProps) => {
                               onChange={handleManualModelChange}
                             >
                               <Option value={0} key={0}>
-                                Alle apparaten
+                                Alle modellen
                               </Option>
                               {brandModels.map((element) => {
                                 return (
@@ -1032,7 +1032,7 @@ const ShopAppointment = (routerProps) => {
                               onChange={handleManualReparatiesChange}
                             >
                               <Option value={0} key={0}>
-                                Alle apparaten
+                                Alle reparaties
                               </Option>
                               {manualMreparaties.map((element) => {
                                 return (
