@@ -120,7 +120,7 @@ const MakeAppointment = (routerProps) => {
         className="reparation-change-modal"
       >
         <Modal.Header closeButton>
-          <Modal.Title> Add Reparation</Modal.Title>
+          <Modal.Title>Nieuwe afspraak</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {/* <div className="select-device-reparation"> */}
@@ -160,7 +160,7 @@ const MakeAppointment = (routerProps) => {
                     onChange={handleBrandChange}
                   >
                     <Option value={0} key={0}>
-                      Alle apparaten
+                      Alle merken
                     </Option>
                     {deviceBrands.map((element) => {
                       return (
@@ -183,7 +183,7 @@ const MakeAppointment = (routerProps) => {
                     onChange={handleModelChange}
                   >
                     <Option value={0} key={0}>
-                      Alle apparaten
+                      Alle modellen
                     </Option>
                     {brandModels.map((element) => {
                       return (
@@ -206,7 +206,7 @@ const MakeAppointment = (routerProps) => {
                     onChange={handleReparatiesChange}
                   >
                     <Option value={0} key={0}>
-                      Alle apparaten
+                      Alle reparaties
                     </Option>
                     {reparaties.map((element) => {
                       return (
@@ -236,7 +236,7 @@ const MakeAppointment = (routerProps) => {
                     </div>
                     <div className="col-md-6 pb-3">
                       <div className="shop-appointment-form-label">
-                        <Label>Guarantee</Label>
+                        <Label>Garantie (mnd)</Label>
                       </div>
                       <div>
                         <Input
@@ -254,7 +254,7 @@ const MakeAppointment = (routerProps) => {
                       className="save-button"
                       onClick={() => saveReparationDetails()}
                     >
-                      Save reparation details
+                      Update reparatie database
                     </Button>
                   </div>
                 </Fragment>
