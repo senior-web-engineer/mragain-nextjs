@@ -128,9 +128,9 @@ const ShopAppointment = (routerProps) => {
       setManual(true);
     } else {
       setManual(false);
+      getReparationGuarantee(shop_id);
+      getAccountProfile(shop_id, null);
     }
-    getReparationGuarantee(shop_id);
-    getAccountProfile(shop_id, null);
   }
 
   useEffect(() => {
@@ -508,9 +508,11 @@ const ShopAppointment = (routerProps) => {
     });
   }
 
-  if (isLoad === false) {
-    getSearchFilterField();
-    setLoad(true);
+  if (manual === false) {
+    if (isLoad === false) {
+      getSearchFilterField();
+      setLoad(true);
+    }
   }
 
   if (disabledDatesflg === false) {
