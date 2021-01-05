@@ -1064,7 +1064,7 @@ const ShopAppointment = (routerProps) => {
                             </div>
                             <div className="col-md-6">
                               <div className="shop-appointment-form-label">
-                                <Label>Guarantee</Label>
+                                <Label>Garantie (mnd)</Label>
                               </div>
                               <div className="shop-appointment-form-input">
                                 <Input
@@ -1084,7 +1084,7 @@ const ShopAppointment = (routerProps) => {
                               className="save-button"
                               onClick={(e) => saveReparationDetails(e)}
                             >
-                              Save reparation details
+                              Update reparatie database
                             </Button>
                           </div>
                         ) : null}
@@ -1141,7 +1141,7 @@ const ShopAppointment = (routerProps) => {
                           <Fragment>
                             <Label>Prijs: €{manualPrice}</Label>
                             <Divider />
-                            <Label>Guarantee: {manualGuarantee} Maanden</Label>
+                            <Label>Garantie: {manualGuarantee} Maanden</Label>
                           </Fragment>
                         ) : (
                           <Label>
@@ -1149,19 +1149,19 @@ const ShopAppointment = (routerProps) => {
                             {services[0] !== undefined && showReparationPrice()}
                           </Label>
                         )}
-                        <Label className="modal-sub-title">Jouw gegevens</Label>
+                        <Label className="modal-sub-title">Klant gegevens</Label>
                         <Input
                           placeholder="Je naam"
                           value={cname}
                           onChange={onChangeCName}
                         ></Input>
                         <Input
-                          placeholder="Je emailadres"
+                          placeholder="Emailadres"
                           value={cemail}
                           onChange={onChangeCEmail}
                         ></Input>
                         <Input
-                          placeholder="Je telefoonnummer"
+                          placeholder="Telefoonnummer"
                           value={cphone}
                           onChange={onChangeCPhone}
                         ></Input>
@@ -1171,7 +1171,7 @@ const ShopAppointment = (routerProps) => {
                           className="confirm-appointment-btn"
                           onClick={confirmAppointment}
                         >
-                          Bevestig je afspraak
+                          Bevestig de afspraak
                         </Button>
                       </Modal.Footer>
                     </Modal>
@@ -1182,9 +1182,9 @@ const ShopAppointment = (routerProps) => {
                     >
                       <Modal.Header closeButton></Modal.Header>
                       <Modal.Body>
-                        <p>Je afspraak is gemaakt</p>
+                        <p>De afspraak is gemaakt</p>
                         <p>
-                          We hebben een bevestigings email naar je verzonden
+                          We hebben een bevestigings email naar je klant verzonden
                         </p>
                       </Modal.Body>
                     </Modal>
