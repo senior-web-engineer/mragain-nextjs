@@ -1139,17 +1139,36 @@ const ShopAppointment = (routerProps) => {
                         <Divider />
                         {manual === true ? (
                           <Fragment>
-                            <Label>Prijs: €{manualPrice}</Label>
+                            <Label>
+                              Prijs:{" "}
+                              {manualPrice.toString().charAt(0) !== "€"
+                                ? "€"
+                                : null}
+                              {manualPrice}
+                            </Label>
                             <Divider />
                             <Label>Garantie: {manualGuarantee} Maanden</Label>
+                            <Label className="modal-sub-title">
+                              Klant gegevens
+                            </Label>
                           </Fragment>
                         ) : (
-                          <Label>
-                            Prijs: €
-                            {services[0] !== undefined && showReparationPrice()}
-                          </Label>
+                          <Fragment>
+                            {services[0] !== undefined && (
+                              <Label>
+                                Prijs:{" "}
+                                {services[0].price.charAt(0) !== "€"
+                                  ? "€"
+                                  : null}
+                                {showReparationPrice()}
+                              </Label>
+                            )}
+                            <Label className="modal-sub-title">
+                              Jouw gegevens
+                            </Label>
+                          </Fragment>
                         )}
-                        <Label className="modal-sub-title">Klant gegevens</Label>
+
                         <Input
                           placeholder="Je naam"
                           value={cname}
@@ -1182,10 +1201,25 @@ const ShopAppointment = (routerProps) => {
                     >
                       <Modal.Header closeButton></Modal.Header>
                       <Modal.Body>
-                        <p>De afspraak is gemaakt</p>
-                        <p>
-                          We hebben een bevestigings email naar je klant verzonden
-                        </p>
+                        {manual === true ? (
+                          <Fragment>
+                            <p>
+                              De afspraak is gemaakt en staat op je dashboard.
+                            </p>
+                            <p>
+                              Er is een bevestigingsemail verstuurd naar je
+                              klant.
+                            </p>
+                          </Fragment>
+                        ) : (
+                          <Fragment>
+                            <p>De afspraak is gemaakt</p>
+                            <p>
+                              We hebben een bevestigings email naar je klant
+                              verzonden
+                            </p>
+                          </Fragment>
+                        )}
                       </Modal.Body>
                     </Modal>
                   </div>
