@@ -680,10 +680,13 @@ const ShopDashboard = (routerProps) => {
                             return (
                               <tr key={el.id}>
                                 <td>
-                                  {formatDate(
-                                    el.appointment.date,
-                                    "DD-MM-YYYY"
-                                  )}
+                                  {
+                                    (formatDate(
+                                      el.appointment.date,
+                                      "dd-mm-yyyy"
+                                    ),
+                                    el.appointment.date)
+                                  }
                                 </td>
                                 <td>{el.appointment.time}</td>
                                 <td>{el.appointment.client_name}</td>
