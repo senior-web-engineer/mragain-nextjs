@@ -18,6 +18,8 @@ import {
   GET_REPARATION_DETAILS,
   UPDATE_REPARATION_LOADING,
   SAVE_REPARATION_LOADING,
+  GET_PAGES,
+  GET_PAGE_DETAILS,
 } from "./types";
 
 const initial_state = {
@@ -45,6 +47,8 @@ const initial_state = {
   shopDevices: [],
   updateReparationLoading: false,
   saveReparationLoading: false,
+  listOfPages: [],
+  pageDetails: [],
 };
 
 const searchReducer = (state = initial_state, action) => {
@@ -278,6 +282,19 @@ const searchReducer = (state = initial_state, action) => {
       return {
         ...state,
         saveReparationLoading: action.payload,
+      };
+    }
+    case GET_PAGES: {
+      return {
+        ...state,
+        listOfPages: action.payload,
+      };
+    }
+    case GET_PAGE_DETAILS: {
+      console.log(action.payload);
+      return {
+        ...state,
+        pageDetails: action.payload,
       };
     }
     default: {

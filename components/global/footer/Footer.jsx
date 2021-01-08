@@ -109,6 +109,9 @@ const FooterView = ({ location }) => {
                 <li>
                   <Link href="/veel-gestelde-vragen">FAQ</Link>
                 </li>
+                <li>
+                  <Link href="/blog">Blog</Link>
+                </li>
               </ul>
             </FooterSitemap>
             {/*<Servicing ClassName="custome-footer-servicing">

@@ -683,7 +683,7 @@ const ShopDashboard = (routerProps) => {
                                   {
                                     (formatDate(
                                       el.appointment.date,
-                                      "dd-mm-yyyy"
+                                      "DD-MM-YYYY"
                                     ),
                                     el.appointment.date)
                                   }

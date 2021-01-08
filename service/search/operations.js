@@ -20,6 +20,8 @@ import {
   setReparationDetails,
   updateReparationLoading,
   saveReparationStatus,
+  getPageList,
+  getDetailsOfPage,
 } from "./action";
 import axios from "axios";
 import { logoutA } from "../account/action";
@@ -275,4 +277,25 @@ export function updateReparationData(data, shop, dispatch) {
     });
 }
 
+export function getPages(pageType, dispatch) {
+  axios
+    .get(`${API_PATH.GETPAGES}/?t=${pageType}`)
+    .then((res) => {
+      dispatch(getPageList(res.data));
+    })
+    .catch((err) => {
+      return err;
+    });
+}
+
+export function getPageDetails(slugInfo, dispatch) {
+  axios
+    .get(`${API_PATH.GETPAGEDETAILS}/?slug=${slugInfo}`)
+    .then((res) => {
+      dispatch(getDetailsOfPage(res.data));
+    })
+    .catch((err) => {
+      return err;
+    });
+}
 export default { searchShopFilter };

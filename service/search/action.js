@@ -15,10 +15,10 @@ import {
   SET_DEVICES,
   SET_DEVICE_BRANDS,
   SET_BRAND_MODELS,
-  SET_REPARATIES,
-  GET_REPARATION_DETAILS,
   UPDATE_REPARATION_LOADING,
   SAVE_REPARATION_LOADING,
+  GET_PAGES,
+  GET_PAGE_DETAILS,
 } from "./types";
 
 export const setLoadFilter = (data) => ({
@@ -104,5 +104,13 @@ export const updateReparationLoading = (data) => ({
 });
 export const saveReparationStatus = (data) => ({
   type: SAVE_REPARATION_LOADING,
+  payload: data,
+});
+export const getPageList = (data) => ({
+  type: GET_PAGES,
+  payload: data,
+});
+export const getDetailsOfPage = (data) => ({
+  type: GET_PAGE_DETAILS,
   payload: data,
 });
