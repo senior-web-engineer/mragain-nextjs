@@ -34,9 +34,9 @@ const BlogTitle = (routerprops) => {
       <Main>
         <div className="blog-content">
           <Head>
-            <title>MrAgain-Blogs</title>
+            <title>{blog !== undefined && blog.title}</title>
             <meta name="Keywords" content="Blogs, Mr-Again" />
-            <meta name="description" content="MrAgain Blogs" />
+            <meta name="description" content={blog !== undefined && blog.seo_description} />
             <link rel="canonical" href={FRONT_END_URL + "/blog/" + blogTitle} />
             {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
             <meta property="og:type" content="website" />
