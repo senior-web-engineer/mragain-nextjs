@@ -188,7 +188,7 @@ const FooterView = ({ location }) => {
         message="We gebruiken cookies met als doel je een optimale gebruikerservaring te geven op onze website."
         necessaryOptionText="Ja, ik wil graag een optimale website"
         cookie="user-has-accepted-cookies"
-        declineButtonText="Decline"
+        declineButtonText="Negeer"
         acceptButtonText="Accepteer"
         // privacyPolicyLinkText="hhjghghkhjhjgj"
         showDeclineButton={true}

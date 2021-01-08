@@ -61,7 +61,7 @@ const BlogTitle = (routerprops) => {
             />
           </Head>
           <div className="row">
-            <div className="col-md-2 col-xs-2">Left content</div>
+            <div className="col-md-2 col-xs-2"></div>
             <div className="col-md-8 col-xs-8">
               <div className="blog-title">
                 {blog !== undefined && blog.title}
@@ -81,7 +81,7 @@ const BlogTitle = (routerprops) => {
                 {parse(blog !== undefined ? blog.content : "")}
               </div>
             </div>
-            <div className="col-md-2 col-xs-2">Right content</div>
+            <div className="col-md-2 col-xs-2"></div>
           </div>
         </div>
       </Main>

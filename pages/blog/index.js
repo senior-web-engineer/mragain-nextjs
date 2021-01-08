@@ -50,7 +50,7 @@ const Blog = (routerprops) => {
           <div className="row">
             <div className="col-md-1 col-xs-1" />
             <div className="col-md-10 col-xs-10">
-              <div className="blog-list-title">Our blogs</div>
+              <div className="blog-list-title">Onze blogs</div>
               {/* {parse(data)} */}
               <ol className="list-content">
                 {listOfPages.length > 0
