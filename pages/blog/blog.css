@@ -1,6 +1,7 @@
 /* Blog Listing Page */
 .blog-list {
-  height: fit-content;
+  /* height: fit-content; */
+  min-height: 450px;
   text-align: justify;
   justify-content: auto;
   margin: 40px 0px 20px 0px;
@@ -44,7 +45,8 @@ ol .list-title:hover {
   font-weight: 400;
 }
 .blog-content {
-  height: fit-content;
+  /* height: fit-content; */
+  min-height: 450px;
   text-align: justify;
   justify-content: auto;
   margin: 35px 20px 20px 20px;

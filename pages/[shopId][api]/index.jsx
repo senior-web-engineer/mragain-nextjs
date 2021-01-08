@@ -29,13 +29,11 @@ const ShopProfile = (routerProps) => {
   const router = useRouter();
   const shopId = router.query["shopId][api"];
   console.log("profiel page", router);
-
   useEffect(() => {
     if (shopId !== undefined) {
       getShopId(shopId);
     }
   }, [shopId]);
-
   async function getShopId(url_str) {
     // let shop = await getShopIdByInformation(url_str);
     let shop = await getShopProfileByInformation(url_str);

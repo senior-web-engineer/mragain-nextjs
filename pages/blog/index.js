@@ -34,7 +34,7 @@ const Blog = (routerprops) => {
             <link rel="canonical" href={FRONT_END_URL + "/blog"} />
             {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
             <meta property="og:type" content="website" />
-            <meta name="og_title" property="og:title" content="FAQ" />
+            <meta name="og_title" property="og:title" content="Blogs" />
             <meta
               property="og:description"
               content="Vind de beste reparateur bij jou in de buurt"
