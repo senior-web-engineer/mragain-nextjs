@@ -53,11 +53,11 @@ const BlogTitle = (routerprops) => {
               name="og:url"
               content={FRONT_END_URL + "/blog/" + blogTitle}
             />
-            <meta property="og:image" content="" />
+            <meta property="og:image" content={blog !== undefined && blog.post_image} />
             <meta
               name="og_site_name"
               property="og:site_name"
-              content="Mr Again"
+              content={blog !== undefined && blog.title}
             />
           </Head>
           <div className="row">
