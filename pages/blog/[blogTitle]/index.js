@@ -35,16 +35,18 @@ const BlogTitle = (routerprops) => {
         <div className="blog-content">
           <Head>
             <title>{blog !== undefined && blog.title}</title>
-            <meta name="Keywords" content="Blogs, Mr-Again" />
-            <meta name="description" content={blog !== undefined && blog.seo_description} />
+            <meta 
+	      name="Keywords" content="Blogs, Mr-Again" />
+            <meta 
+	      name="description" content={blog !== undefined && blog.seo_description} />
             <link rel="canonical" href={FRONT_END_URL + "/blog/" + blogTitle} />
             {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
             <meta property="og:type" content="website" />
-            <meta property="og_title" content={blog.title} />
-            <meta property="og:description" content={blog.seo_description} />
+            <meta property="og_title" content={blog !== undefined && blog.title} />
+            <meta property="og:description" content={blog !== undefined && blog.seo_description} />
             <meta property="og:url" content={FRONT_END_URL + "/blog/" + blogTitle} />
-            <meta property="og:image" content={blog.post_image} />
-            <meta property="og:site_name" content={blog.title} />
+            <meta property="og:image" content={blog !== undefined && blog.post_image} />
+            <meta property="og:site_name" content={blog !== undefined && blog.title} />
           </Head>
           <div className="row">
             <div className="col-md-2 col-xs-2"></div>
