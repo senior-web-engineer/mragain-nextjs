@@ -45,8 +45,8 @@ const BlogTitle = (routerprops) => {
             <meta property="og_title" content={blog !== undefined && blog.title} />
             <meta property="og:description" content={blog !== undefined && blog.seo_description} />
             <meta property="og:url" content={FRONT_END_URL + "/blog/" + blogTitle} />
-            <meta property="og:image" content={blog !== undefined && blog.post_image} />
-            <meta property="og:site_name" content={blog !== undefined && blog.title} />
+            <meta property="og:image" content={parse (blog !== undefined ? blog.post_image: "")} />
+            <meta property="og:site_name" content={parse (blog !== undefined ? blog.title: "")} />
           </Head>
           <div className="row">
             <div className="col-md-2 col-xs-2"></div>
