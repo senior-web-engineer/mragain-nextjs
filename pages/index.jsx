@@ -54,7 +54,7 @@ export default function Home() {
             <meta name="og:url" content={FRONT_END_URL} />
             <meta
               property="og:image"
-              content={`${FRONT_END_URL} + /contact_banner_image.jpg`}
+              content={FRONT_END_URL} + "/media/contact_banner_image.jpg"}
             />
             <meta
               name="og_site_name"
