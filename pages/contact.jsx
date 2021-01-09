@@ -4,6 +4,7 @@ import ContactBannerSection from "@/components/contact/ContactBannerSection/Cont
 import { TestmonialSection, Layout } from "@/components/global";
 import ContactMainSection from "@/components/contact/ContactMainSection/ContactMainSection";
 import Head from "next/head"
+import { FRONT_END_URL } from "../../constants.js";
 
 const Contact = () => {
     useEffect(() => {
@@ -13,7 +14,7 @@ const Contact = () => {
         <Layout>
             <Main>
             <Head>
-                <title>Mr Again - Contact</title>
+                <title>Contact mragain.nl</title>
                 <meta
                 name="description"
                 content="Neem contact op met MrAgain"
@@ -24,17 +25,17 @@ const Contact = () => {
                 />
                 <link
                 rel="canonical"
-                href="https://develop.mragain.nl/contact"
+                href={FRONT_END_URL}
                 />
                 {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
-                <meta name="og_title" property="og:title" content=" Contact" />
+                <meta name="og_title" property="og:title" content="Contact met MrAgain" />
                 <meta property="og:type" content="website" />
                 <meta
                 property="og:description"
-                content="Vind de beste reparateur bij jou in de buurt"
+                content="We horen graag van je, mail, bel of laat een berichtje achter."
                 />
-                <meta name="og:url" content="url" />
-                <meta property="og:image" content="" />
+                <meta name="og:url" content={FRONT_END_URL} />
+                <meta property="og:image" content={FRONT_END_URL + "media/contact_banner_image.jpg"} />
                 <meta name="og_site_name" property="og:site_name" content="Mr Again" />
                 <meta name="theme-color" content="#ffffff" />
             </Head>

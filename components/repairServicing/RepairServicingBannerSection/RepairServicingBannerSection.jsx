@@ -15,14 +15,14 @@ import { FRONT_END_URL } from "../../../constants.js";
 const RepairServicingBannerSection = () => (
   <RepairServicingSectionArea className="repair-servicing-banner-area">
     <Head>
-      <title> Reparatie & Service </title>
+      <title>Telefoon reparatie</title>
       <meta
         name="Keywords"
         content="Telefoon reparatie, service, garantie, telefoon maken, telefoon kapot, MrAgain"
       />
       <meta
         name="description"
-        content="Door een reparateur te zoeken bij MrAgain ben je altijd verzekerd van een snelle reparatie en top kwaliteit"
+        content="Bij MrAgain heb je vooraf duidelijkheid over de prijs en kwaliteit van je reparatie."
       />
       <link
         rel="canonical"
@@ -33,17 +33,17 @@ const RepairServicingBannerSection = () => (
       <meta
         name="og_title"
         property="og:title"
-        content=" Reparatie & Service"
+        content="Telefoon Reparatie"
       />{" "}
       <meta
         property="og:description"
-        content="Vind de beste reparateur bij jou in de buurt"
+        content="Bij MrAgain heb je vooraf duidelijkheid over de prijs en de kwaliteit van je reparatie."
       />
       <meta
         name="og:url"
         content={ FRONT_END_URL + '/reparatie-en-service'}
       />
-      <meta property="og:image" content="" />
+      <meta property="og:image" content={FRONT_END_URL + "/media/contact_banner_image.jpg"}  />
       <meta name="og_site_name" property="og:site_name" content="Mr Again" />
       <meta name="theme-color" content="#ffffff" />
     </Head>

@@ -17,10 +17,6 @@ const ContactBannerSection = () => (
       <ContactContainer className="about-banner-container">
         <AboutBreadcrumb>
           <AboutBannerTitle>Contact</AboutBannerTitle>
-	{/* <Breadcrumb className="about-bread-crumb">
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="/about" active>Contact</Breadcrumb.Item>
-          </Breadcrumb>*/}
         </AboutBreadcrumb>
       </ContactContainer>
     </ContactContainerWrap>
