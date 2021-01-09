@@ -4,7 +4,7 @@ import ContactBannerSection from "@/components/contact/ContactBannerSection/Cont
 import { TestmonialSection, Layout } from "@/components/global";
 import ContactMainSection from "@/components/contact/ContactMainSection/ContactMainSection";
 import Head from "next/head"
-import { FRONT_END_URL } from "../../constants.js";
+import { FRONT_END_URL } from "../constants.js";
 
 const Contact = () => {
     useEffect(() => {
