@@ -43,7 +43,7 @@ const BlogTitle = (routerprops) => {
             {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
             <meta property="og:type" content="website" />
             <meta property="og:title" content={blog !== undefined && blog.title} />
-            <meta property="og:description" content={blog.seo_description} />
+            <meta property="og:description" content={parse (blog.seo_description)} />
             <meta property="og:url" content={FRONT_END_URL + "/blog/" + blogTitle} />
             <meta property="og:image" content={parse (blog !== undefined ? blog.post_image: "")} />
             <meta property="og:site_name" content="MrAgain" />
