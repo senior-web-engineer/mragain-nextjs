@@ -7,7 +7,7 @@ import { FRONT_END_URL } from "../../../constants.js";
 const FindBannerSection = () => (
   <BannerSection>
     <Head>
-      <title>Mr Again - Meld je aan als reparateur</title>
+      <title>Meld je aan als reparateur - mragain.nl</title>
       <meta
         name="Keywords"
         content="Telefoon reparatie, Telefoon reparateurs, Scherm vervangen, Batterij vervangen, water schade, MrAgain, Tablet reparatie, Tablet reparateurs, telefoonscherm vervangen, scherm telefoon kapot, telefoonscherm kapot, waterschade telefoon, telefoon in water laten vallen, iphone 6 batterij vervangen, nieuwe batterij iphone 7, iphone reparateur, telefoon in wc gevallen, scherm reparatie, iphone glas vervangen, kapot scherm, iphone glas vervangen, scherm iphone 6, nieuw scherm iphone 6, iphone 6 glas vervangen, telefoonscherm reparatie, scherm ipad vervangen"
@@ -36,7 +36,7 @@ const FindBannerSection = () => (
         name="og:url"
         content={ FRONT_END_URL + '/meld-je-aan-als-reparateur'}
       />
-      <meta property="og:image" content="" />
+      <meta property="og:image" content={FRONT_END_URL + "/media/land_banner_image.jpg"} />
       <meta name="og_site_name" property="og:site_name" content="Mr Again" />
 
       <meta name="theme-color" content="#ffffff" />
