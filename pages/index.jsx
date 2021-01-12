@@ -38,7 +38,10 @@ export default function Home() {
               content="Telefoon kapot? Bij MrAgain vind je snel en gemakkelijk de beste telefoon reparateurs bij jou in de buurt."
             />
             <link rel="canonical" href={FRONT_END_URL} />
-
+            <script
+              src="https://kit.fontawesome.com/6cdc6e8865.js"
+              crossorigin="anonymous"
+            ></script>
             {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
             <meta property="og:type" content="website" />
             <meta
@@ -51,11 +54,7 @@ export default function Home() {
               property="og:description"
               content="Vind de beste reparateur bij jou in de buurt"
             />
-            <meta 
-	      name="og:url"
-              property="og:url"
-	      content={FRONT_END_URL}
-	    />
+            <meta name="og:url" property="og:url" content={FRONT_END_URL} />
             <meta
               property="og:image"
               content={FRONT_END_URL + "/media/contact_banner_image.jpg"}

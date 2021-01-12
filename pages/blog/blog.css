@@ -1,6 +1,7 @@
 /* Blog Listing Page */
 .blog-list {
   /* height: fit-content; */
+  padding: 0px 40px 0px 40px;
   min-height: 450px;
   text-align: justify;
   justify-content: auto;
@@ -54,4 +55,19 @@ ol .list-title:hover {
 .date-content {
   font-size: 13px;
   color: #aaa;
+}
+.ant-card-meta-title {
+  overflow: hidden;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  font-size: 28px;
+  /* white-space: nowrap; */
+  /* text-overflow: ellipsis; */
+}
+.read-more {
+  color: rgb(28, 36, 48);
+}
+.read-more :hover {
+  color: rgb(28, 36, 48) !important;
+  text-decoration: underline;
 }

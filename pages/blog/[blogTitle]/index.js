@@ -2,95 +2,88 @@ import React from "react";
 import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
 import Head from "next/head";
 import { Layout } from "components/global";
-import { FRONT_END_URL } from "../../../constants";
+import { API_PATH, FRONT_END_URL } from "../../../constants";
 import "../blog.css";
 import parse from "html-react-parser";
-import { useRouter } from "next/router";
-import { getPageDetails } from "@/service/search/operations";
-import { connect } from "react-redux";
-import { useEffect } from "react";
 import dateFormat from "dateformat";
+import { useEffect } from "react";
 
-const BlogTitle = (routerprops) => {
-  const { getPageDetails, pageDetails } = routerprops;
-
-  const router = useRouter();
-
-  const blogTitle = router.query.blogTitle;
-
+export default function BlogTitle({ blogDetails, blogTitle }) {
   useEffect(() => {
-    getPageDetails(blogTitle);
+    window.scrollTo(0, 0);
   }, []);
 
-  const blog = pageDetails[0];
+  let blog = null;
+  if (blogDetails !== undefined) {
+    blog = blogDetails[0];
+  }
 
-  // if (blog !== undefined) {
-  //   console.log(
-  //     dateFormat(blog.created_on, "dddd, dS mmmm, yyyy, h:MM TT").toUpperCase()
-  //   );
-  // }
   return (
     <Layout>
       <Main>
-        <div className="blog-content">
-          <Head>
-            <title>{blog !== undefined && blog.title}</title>
-            <meta 
-	      name="Keywords" content="Blogs, Mr-Again" />
-            <meta 
-	      name="description" content={blog !== undefined && blog.seo_description} />
-            <link rel="canonical" href={FRONT_END_URL + "/blog/" + blogTitle} />
-            {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
-            <meta property="og:type" content="website" />
-            <meta property="og:title" content={blog !== undefined && blog.title} />
-            <meta property="og:description" content={blog !== undefined && blog.seo_description} />
-            <meta property="og:url" content={FRONT_END_URL + "/blog/" + blogTitle} />
-            <meta property="og:image" content={blog !== undefined && blog.post_image} />
-            <meta property="og:site_name" content="MrAgain" />
-          </Head>
-          <div className="row">
-            <div className="col-md-2 col-xs-2"></div>
-            <div className="col-md-8 col-xs-8">
-              <div className="blog-title">
-                {blog !== undefined && blog.title}
-              </div>
-              <div className="date-content">
-                {dateFormat(
-                  blog !== undefined && blog.created_on.toUpperCase(),
-                  "mmmm dS, yyyy, h:MM TT"
-                )}
-              </div>
-              <img
-                className="blog-image"
-                src={blog !== undefined && blog.post_image}
-                alt=""
+        {blog !== null && (
+          <div className="blog-content">
+            <Head>
+              <title>{blog.title}</title>
+              <meta name="Keywords" content={blog.seo_keyword} />
+              <meta name="description" content={blog.seo_description} />
+              <link
+                rel="canonical"
+                href={`${FRONT_END_URL}/blog/${blogTitle}`}
               />
-              <div className="my-3">
-                {parse(blog !== undefined ? blog.content : "")}
+              <meta property="og:type" content="website" />
+              <meta property="og:title" content={blog.title} />
+              <meta property="og:description" content={blog.seo_description} />
+              <meta
+                property="og:url"
+                content={`${FRONT_END_URL}/blog/${blogTitle}`}
+              />
+              <meta property="og:image" content={blog.post_image} />
+              <meta property="og:site_name" content="MrAgain" />
+            </Head>
+            <div className="row">
+              <div className="col-md-2 col-xs-2"></div>
+              <div className="col-md-8 col-xs-8">
+                <div className="blog-title">{blog.title}</div>
+                <div className="date-content">
+                  {dateFormat(
+                    blog.created_on.toUpperCase(),
+                    "mmmm dS, yyyy, h:MM TT"
+                  )}
+                </div>
+                <img className="blog-image" src={blog.post_image} alt="" />
+                <div className="my-3">
+                  {parse(blog !== null ? blog.content : "")}
+                </div>
               </div>
+              <div className="col-md-2 col-xs-2"></div>
             </div>
-            <div className="col-md-2 col-xs-2"></div>
           </div>
-        </div>
+        )}
       </Main>
     </Layout>
   );
-};
+}
 
-const mapStateToProps = (state) => ({
-  //Maps state to redux store as props
-  pageDetails: state.search.pageDetails,
-});
-const mapDispatchToProps = (dispatch) => {
-  // Action
+export async function getStaticPaths() {
+  const res = await fetch(`${API_PATH.GETPAGES}/?t=b`);
+  const blogs = await res.json();
+  // console.log("🚀 => getStaticPaths => blogs", blogs);
+
+  const paths = blogs.map((blog) => `/blog/${blog.slug}`);
+  // console.log("🚀 => getStaticPaths => paths", paths);
+  return { paths, fallback: true };
+}
+export async function getStaticProps({ query, params }) {
+  const { blogTitle } = query || params;
+
+  const res = await fetch(API_PATH.GETPAGEDETAILS + "/?slug=" + blogTitle);
+  const blogDetails = await res.json();
+
   return {
-    getPages: (data) => {
-      getPages(data, dispatch);
-    },
-    getPageDetails: (data) => {
-      getPageDetails(data, dispatch);
+    props: {
+      blogDetails,
+      blogTitle,
     },
   };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(BlogTitle);
+}

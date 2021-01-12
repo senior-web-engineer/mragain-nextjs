@@ -2,24 +2,23 @@ import React from "react";
 import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
 import { Layout } from "components/global";
 import Head from "next/head";
-import { FRONT_END_URL } from "../../constants.js";
+import { API_PATH, FRONT_END_URL, GETPAGES } from "../../constants.js";
 import "./blog.css";
-import parse from "html-react-parser";
 import { getPages } from "@/service/search/operations.js";
-import { connect } from "react-redux";
-import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+import dateFormat from "dateformat";
 
-const Blog = (routerprops) => {
-  const { getPages, listOfPages } = routerprops;
+export default function Blog({ blogs }) {
   const router = useRouter();
 
   useEffect(() => {
-    getPages("b");
+    window.scrollTo(0, 0);
   }, []);
+  console.log("🚀 => Blog => blogs", blogs);
 
   const getBlogDetails = (blog) => {
-    console.log("🚀 => getBlogDetails => blog", blog);
+    console.log("🚀 => Blog => blogs", blogs);
     router.push(`/blog/${blog.slug}`);
   };
 
@@ -34,11 +33,12 @@ const Blog = (routerprops) => {
             <link rel="canonical" href={FRONT_END_URL + "/blog"} />
             {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
             <meta property="og:type" content="website" />
-            <meta name="og_title" property="og:title" content="Blogs" />
+            <meta name="og_title" property="og:title" content="Onze blogs" />
             <meta
               property="og:description"
               content="Vind de beste reparateur bij jou in de buurt"
             />
+
             <meta name="og:url" content={FRONT_END_URL + "/blog"} />
             <meta property="og:image" content="" />
             <meta
@@ -48,42 +48,55 @@ const Blog = (routerprops) => {
             />
           </Head>
           <div className="row">
-            <div className="col-md-1 col-xs-1" />
-            <div className="col-md-10 col-xs-10">
-              <div className="blog-list-title">Onze blogs</div>
-              {/* {parse(data)} */}
-              <ol className="list-content">
-                {listOfPages.length > 0
-                  ? listOfPages.map((blog) => (
-                      <li
-                        className="list-title"
-                        onClick={() => getBlogDetails(blog)}
-                      >
-                        {blog.title}
-                      </li>
-                    ))
-                  : null}
-              </ol>
-            </div>
-            <div className="col-md-1 col-xs-1" />
+            <div className="blog-list-title w-100">Onze blogs</div>
+
+            {blogs.length > 0
+              ? blogs.map((blog) => (
+                  <div className="col-md-3 col-xs-12">
+                    <div className="card shadow" style={{ width: "290px" }}>
+                      <img
+                        className="card-img-top w-100"
+                        src={blog.post_image_thumb}
+                        alt="Card image"
+                      />
+                      <div className="card-body">
+                        <h4 className="card-title text-left">{blog.title}</h4>
+                        <div className="w-100">
+                          <div className="date-content text-left d-inline ">
+                            {dateFormat(
+                              blog.created_on.toUpperCase(),
+                              "mmmm dS, yyyy"
+                            )}
+                          </div>
+                          <span className=" float-right ">
+                            <a
+                              className="read-more"
+                              onClick={() => getBlogDetails(blog)}
+                            >
+                              Read more...{" "}
+                            </a>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              : null}
           </div>
         </div>
       </Main>
     </Layout>
   );
-};
-const mapStateToProps = (state) => ({
-  //Maps state to redux store as props
-  listOfPages: state.search.listOfPages,
-});
+}
 
-const mapDispatchToProps = (dispatch) => {
-  // Action
+export async function getStaticProps() {
+  const res = await fetch(`${API_PATH.GETPAGES}/?t=b`);
+  const blogs = await res.json();
+  // console.log("🚀 => getStaticProps => blogs", blogs);
+
   return {
-    getPages: (data) => {
-      getPages(data, dispatch);
+    props: {
+      blogs,
     },
   };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Blog);
+}
