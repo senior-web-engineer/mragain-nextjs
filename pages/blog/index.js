@@ -64,7 +64,11 @@ export default function Blog({ blogs }) {
                             ? blog.post_image_thumb
                             : noImageFound
                         }
-                        alt="Card image"
+                        alt={
+                          blog.post_image_alt_text !== null
+                            ? blog.post_image_alt_text
+                            : "blog image"
+                        }
                         onClick={() => getBlogDetails(blog)}
                       />
                       <div className="card-body">

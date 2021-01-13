@@ -16,7 +16,7 @@ export default function BlogTitle({ blogDetails, blogTitle }) {
   let blog = null;
   if (blogDetails !== undefined) {
     blog = blogDetails[0];
-    console.log("🚀 => BlogTitle => blog", blog);
+    // console.log("🚀 => BlogTitle => blog", blog);
   }
 
   return (
@@ -52,7 +52,15 @@ export default function BlogTitle({ blogDetails, blogTitle }) {
                     "mmmm dS, yyyy, h:MM TT"
                   )}
                 </div>
-                <img className="blog-image" src={blog.post_image} alt="" />
+                <img
+                  className="blog-image"
+                  src={blog.post_image}
+                  alt={
+                    blog.post_image_alt_text !== null
+                      ? blog.post_image_alt_text
+                      : "blog image"
+                  }
+                />
                 <div className="my-3">
                   {parse(blog !== null ? blog.content : "")}
                 </div>

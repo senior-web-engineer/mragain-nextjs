@@ -28,7 +28,7 @@ import {
   getAppointmentTimeTable,
 } from "service/appointments/operations";
 import { setLoadedProfile } from "../service/account/action";
-
+import { Checkbox } from "antd";
 import { getAccountProfile } from "service/account/operations.js";
 import { getReparationGuarantee } from "service/appointments/operations.js";
 import { Fragment } from "react";
@@ -72,6 +72,7 @@ const ShopAppointment = (routerProps) => {
   );
   const [isResponse, setIsResponse] = useState(null);
   const [showSaveButton, setShowSaveButton] = useState(false);
+  const [isUpdateReparatie, setIsUpdateReparatie] = useState(false);
 
   const {
     match,
@@ -297,7 +298,7 @@ const ShopAppointment = (routerProps) => {
   const handleShowModal = () => {
     // setShow(true);
 
-    if (manual === true && saveSuccess) {
+    if (manual === true && isUpdateReparatie === true) {
       if (
         app_date !== undefined &&
         appoint_time !== undefined &&
@@ -306,9 +307,11 @@ const ShopAppointment = (routerProps) => {
         manualModel !== 0 &&
         manualReparation !== 0
       ) {
-        setShow(true);
+        saveReparationDetails();
+        if (saveSuccess === true) {
+          setShow(true);
+        }
       } else {
-        // alert("Manual Sommige verplichte velden zijn niet ingevuld");
         message.error("Sommige verplichte velden zijn niet ingevuld", [2.5]);
       }
     } else {
@@ -820,6 +823,11 @@ const ShopAppointment = (routerProps) => {
     }
   };
 
+  const onCheckboxChange = () => {
+    setIsUpdateReparatie(!isUpdateReparatie);
+  };
+
+  console.log("isUpdateReparatie", isUpdateReparatie);
   return (
     <Layout>
       <Main>
@@ -1078,20 +1086,26 @@ const ShopAppointment = (routerProps) => {
                           </div>
                         </div>
                         {showSaveButton === true ? (
-                          <div className="shop-appointment-form-group">
-                            <Button
+                          <div className="shop-appointment-form-group pt-4 pb-0">
+                            <Checkbox
+                              checked={isUpdateReparatie}
+                              onChange={onCheckboxChange}
+                            >
+                              Update reparatie database
+                            </Checkbox>
+                            {/* <Button
                               block
                               className="save-button"
                               onClick={(e) => saveReparationDetails(e)}
                             >
                               Update reparatie database
-                            </Button>
+                            </Button> */}
                           </div>
                         ) : null}
                       </Fragment>
                     )}
                     <Button
-                      className="make-appointment"
+                      className="make-appointment mt-3"
                       onClick={handleShowModal}
                     >
                       Maak afspraak
@@ -1215,7 +1229,8 @@ const ShopAppointment = (routerProps) => {
                           <Fragment>
                             <p>De afspraak is gemaakt</p>
                             <p>
-                              Bedankt voor het maken van een afspraak. We hebben je een bevestiging email gestuurd. 
+                              Bedankt voor het maken van een afspraak. We hebben
+                              je een bevestiging email gestuurd.
                             </p>
                           </Fragment>
                         )}
