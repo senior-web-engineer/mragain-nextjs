@@ -15,10 +15,11 @@ export default function Blog({ blogs }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  console.log("🚀 => Blog => blogs", blogs);
+
+  // console.log("🚀 => Blog => blogs", blogs);
 
   const getBlogDetails = (blog) => {
-    console.log("🚀 => Blog => blogs", blogs);
+    // console.log("🚀 => Blog => blogs", blogs);
     router.push(`/blog/${blog.slug}`);
   };
 
@@ -50,9 +51,12 @@ export default function Blog({ blogs }) {
           <div className="row">
             <div className="blog-list-title w-100 ">Onze blogs</div>
             {blogs.length > 0
-              ? blogs.map((blog) => (
-                  <div className="col-md-3 col-xs-12">
-                    <div className="card shadow" style={{ width: "290px" }}>
+              ? blogs.map((blog, i) => (
+                  <div className="col-md-3 col-xs-12" key={i}>
+                    <div
+                      className="card shadow mt-4"
+                      style={{ width: "290px" }}
+                    >
                       <img
                         className="card-img-top w-100"
                         src={
