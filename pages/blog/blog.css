@@ -5,7 +5,7 @@
   min-height: 450px;
   text-align: justify;
   justify-content: auto;
-  margin: 40px 0px 20px 0px;
+  margin: 20px 0px 20px 0px;
 }
 .blog-list-title {
   height: fit-content;
@@ -13,6 +13,7 @@
   letter-spacing: 1px;
   font-weight: bold;
   color: rgb(28, 36, 48);
+  padding: 0px 0px 20px 15px;
 }
 .blog-list ol {
   padding: 20px 0px 0px 0px;

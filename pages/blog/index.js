@@ -2,12 +2,12 @@ import React from "react";
 import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
 import { Layout } from "components/global";
 import Head from "next/head";
-import { API_PATH, FRONT_END_URL, GETPAGES } from "../../constants.js";
+import { API_PATH, FRONT_END_URL } from "../../constants.js";
 import "./blog.css";
-import { getPages } from "@/service/search/operations.js";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import dateFormat from "dateformat";
+import noImageFound from "../../assets/images/noBlogImage.png";
 
 export default function Blog({ blogs }) {
   const router = useRouter();
@@ -48,16 +48,20 @@ export default function Blog({ blogs }) {
             />
           </Head>
           <div className="row">
-            <div className="blog-list-title w-100">Onze blogs</div>
-
+            <div className="blog-list-title w-100 ">Onze blogs</div>
             {blogs.length > 0
               ? blogs.map((blog) => (
                   <div className="col-md-3 col-xs-12">
                     <div className="card shadow" style={{ width: "290px" }}>
                       <img
                         className="card-img-top w-100"
-                        src={blog.post_image_thumb}
+                        src={
+                          blog.post_image_thumb !== ""
+                            ? blog.post_image_thumb
+                            : noImageFound
+                        }
                         alt="Card image"
+                        onClick={() => getBlogDetails(blog)}
                       />
                       <div className="card-body">
                         <h4 className="card-title text-left">{blog.title}</h4>
@@ -89,10 +93,9 @@ export default function Blog({ blogs }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res = await fetch(`${API_PATH.GETPAGES}/?t=b`);
   const blogs = await res.json();
-  // console.log("🚀 => getStaticProps => blogs", blogs);
 
   return {
     props: {

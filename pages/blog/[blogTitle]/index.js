@@ -16,6 +16,7 @@ export default function BlogTitle({ blogDetails, blogTitle }) {
   let blog = null;
   if (blogDetails !== undefined) {
     blog = blogDetails[0];
+    console.log("🚀 => BlogTitle => blog", blog);
   }
 
   return (
