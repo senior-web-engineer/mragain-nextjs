@@ -54,7 +54,7 @@ export default function Blog({ blogs }) {
               ? blogs.map((blog, i) => (
                   <div className="col-md-3 col-xs-12" key={i}>
                     <div
-                      className="card shadow mt-4"
+                      className="card shadow mb-4"
                       style={{ width: "290px" }}
                     >
                       <img
