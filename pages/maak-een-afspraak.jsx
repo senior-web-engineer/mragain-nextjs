@@ -298,7 +298,7 @@ const ShopAppointment = (routerProps) => {
   const handleShowModal = () => {
     // setShow(true);
 
-    if (manual === true && isUpdateReparatie === true) {
+    if (manual === true) {
       if (
         app_date !== undefined &&
         appoint_time !== undefined &&
@@ -307,7 +307,9 @@ const ShopAppointment = (routerProps) => {
         manualModel !== 0 &&
         manualReparation !== 0
       ) {
-        saveReparationDetails();
+        if (isUpdateReparatie === true) {
+          saveReparationDetails();
+        }
         if (saveSuccess === true) {
           setShow(true);
         }
