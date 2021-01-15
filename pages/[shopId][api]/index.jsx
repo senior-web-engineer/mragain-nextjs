@@ -76,7 +76,7 @@ const ShopProfile = (routerProps) => {
             content="Profiel, MrAgain, Telefoon Reparateur"
           />
           <meta name="description" content={description} />
-          <link rel="canonical" href={FRONT_END_URL + "/profiel"} />
+          <link rel="canonical" href={FRONT_END_URL + router.asPath} />
           {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
           <meta property="og:type" content="website" />
           <meta name="og_title" property="og:title" content={title} />
