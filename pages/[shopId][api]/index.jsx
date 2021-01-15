@@ -15,6 +15,8 @@ import {
 import { getReparationGuarantee } from "service/appointments/operations.js";
 import Head from "next/head";
 import { FRONT_END_URL } from "@/constants";
+import withRedux from "next-redux-wrapper";
+import {getShopProfileByInformationServer} from "service/account/operations";
 
 const ShopProfile = (routerProps) => {
   const {
@@ -23,12 +25,13 @@ const ShopProfile = (routerProps) => {
     getShopProfileByInformation,
     getReparationGuarantee,
     shop_account_profile,
+    shopProfileServerInfo,
     shopDevices,
+    shop
   } = routerProps;
 
   const router = useRouter();
   const shopId = router.query["shopId][api"];
-  console.log("profiel page", router);
   useEffect(() => {
     if (shopId !== undefined) {
       getShopId(shopId);
@@ -36,6 +39,9 @@ const ShopProfile = (routerProps) => {
   }, [shopId]);
   async function getShopId(url_str) {
     // let shop = await getShopIdByInformation(url_str);
+
+    console.log("url_str=>", url_str);
+
     let shop = await getShopProfileByInformation(url_str);
 
     console.log("shop=>", shop);
@@ -54,8 +60,11 @@ const ShopProfile = (routerProps) => {
       : [];
   devices = devices.join(" & ");
 
-  let title = `${shop_account_profile.name} ${shop_account_profile.city} - ${devices} Reparatie - ${FRONT_END_URL}`;
-  let description = `${shop_account_profile.name}, ${shop_account_profile.street}, ${shop_account_profile.zipcode}, ${shop_account_profile.city}. Laat je telefoon repareren bij ${shop_account_profile.name} via mragain.nl. Transparant, betrouwbaar en snel!`;
+  let shopAccountProfile  = (shopProfileServerInfo && shopProfileServerInfo.id) ? shopProfileServerInfo :  shop_account_profile;
+
+
+  let title = `${shopAccountProfile.name} ${shopAccountProfile.city} - ${devices} Reparatie - ${FRONT_END_URL}`;
+  let description = `${shopAccountProfile.name}, ${shopAccountProfile.street}, ${shopAccountProfile.zipcode}, ${shopAccountProfile.city}. Laat je telefoon repareren bij ${shopAccountProfile.name} via mragain.nl. Transparant, betrouwbaar en snel!`;
 
   return (
     <Layout>
@@ -88,11 +97,35 @@ const ShopProfile = (routerProps) => {
   );
 };
 
+
+
+export async function getServerSideProps(ctx) {
+
+  console.log('ctx.query',ctx.query);
+  const shopId = ctx.query["shopId][api"];
+
+  console.log("shop1IDD=>", shopId);
+
+  const shopProfileServerInfo = await getShopProfileByInformationServer(shopId);
+
+  return {
+    props: {
+      shopProfileServerInfo:(shopProfileServerInfo && shopProfileServerInfo[0]) ? shopProfileServerInfo[0] : shopProfileServerInfo
+    },
+
+  }
+}
+
+
 const mapStateToProps = (state) => ({
   //Maps state to redux store as props
   shop_account_profile: state.account.shop_account_profile,
   shopDevices: state.search.shopDevices,
 });
+
+
+
+
 
 const mapDispatchToProps = (dispatch) => {
   // Action
@@ -110,4 +143,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShopProfile);
+export default (connect(mapStateToProps, mapDispatchToProps)(ShopProfile));

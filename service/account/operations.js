@@ -213,6 +213,21 @@ export function getShopIdByInformation(str, dispatch) {
     .catch((err) => {});
 }
 // for result search profiles
+export function getShopProfileByInformationServer(str) {
+  return axios
+    .get(`${API_PATH.GETSHOPIDBYINFORMATION}/`, { params: { shop_info: str } })
+    .then((res) => {
+      console.log("shop profile data", res.data);
+
+      return res.data;
+    })
+    .catch((err) => {
+        console.log(err)
+        return err;
+    });
+}
+
+// for result search profiles
 export function getShopProfileByInformation(str, dispatch) {
   return axios
     .get(`${API_PATH.GETSHOPIDBYINFORMATION}/`, { params: { shop_info: str } })
@@ -222,7 +237,10 @@ export function getShopProfileByInformation(str, dispatch) {
 
       return res.data;
     })
-    .catch((err) => {});
+    .catch((err) => {
+        console.log(err)
+        return err;
+    });
 }
 
 export function getShopBrandModel(data, dispatch) {
@@ -334,22 +352,22 @@ export function getSimpleAccountInformation(id, dispatch) {
     });
 }
 // to get searched shop information
-export function getShopAccountProfile(id, dispatch) {
+export async function getShopAccountProfile(id, dispatch) {
   let shopDevices;
   let validTime;
   let invalidTime;
   let reviews;
   dispatch(setLoadedProfile(false));
 
-  axios
+  return axios
     .get(`${API_PATH.GETVALIDOPENTIME}/${id}/`)
     .then((res) => {
       validTime = res.data;
-      axios
+        return axios
         .get(`${API_PATH.GETINVALIDOPENTIME}/${id}/`)
         .then((res) => {
           invalidTime = res.data;
-          axios
+            return axios
             .get(`${API_PATH.GETREVIEWS}/${id}/`)
             .then((res) => {
               reviews = res.data;
@@ -396,7 +414,9 @@ export function getAccountProfile(id, str, dispatch) {
                     reviews = [];
                   }
                   if (str === true) {
-                    dispatch(initShopAccountProfile(profile));
+                      console.log("profile data");
+
+                      dispatch(initShopAccountProfile(profile));
                     console.log("true string");
                   } else {
                     dispatch(initAccountProfile(profile));
@@ -406,6 +426,7 @@ export function getAccountProfile(id, str, dispatch) {
                   dispatch(initAccountInvalidTime(invalidTime));
                   dispatch(initAccountReviews(reviews));
                   dispatch(setLoadedProfile(true));
+                  return profile;
                 })
                 .catch((err) => {});
             })
