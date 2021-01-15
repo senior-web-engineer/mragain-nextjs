@@ -82,7 +82,7 @@ const ShopProfile = (routerProps) => {
           <meta name="og_title" property="og:title" content={title} />
           <meta property="og:description" content={description} />
           <meta name="og:url" content={FRONT_END_URL} />
-          <meta property="og:image" content="" />
+          <meta property="og:image" content={shopAccountProfile.bg_photo !== undefined && shopAccountProfile.bg_photo} />
           <meta
             name="og_site_name"
             property="og:site_name"
