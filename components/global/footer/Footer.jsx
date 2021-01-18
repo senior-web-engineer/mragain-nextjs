@@ -111,7 +111,10 @@ const FooterView = ({ location }) => {
                   <Link href="/veel-gestelde-vragen">FAQ</Link>
                 </li>
                 <li>
-                  <Link href="/blog">Blog</Link>
+                  <Link href="/blog">Blogs</Link>
+                </li>
+                <li>
+                  <Link href="/reparatie">Reparaties</Link>
                 </li>
               </ul>
             </FooterSitemap>

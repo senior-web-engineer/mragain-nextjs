@@ -3,10 +3,8 @@ import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
 import Head from "next/head";
 import { Layout } from "components/global";
 import { API_PATH, FRONT_END_URL } from "../../../constants";
-import "../blog.css";
-import parse from "html-react-parser";
-import dateFormat from "dateformat";
 import { useEffect } from "react";
+import PageDetails from "@/components/PageComponent/PageDetails";
 
 export default function BlogTitle({ blogDetails, blogTitle }) {
   useEffect(() => {
@@ -16,7 +14,6 @@ export default function BlogTitle({ blogDetails, blogTitle }) {
   let blog = null;
   if (blogDetails !== undefined) {
     blog = blogDetails[0];
-    // console.log("🚀 => BlogTitle => blog", blog);
   }
 
   return (
@@ -43,29 +40,7 @@ export default function BlogTitle({ blogDetails, blogTitle }) {
               <meta property="og:site_name" content="MrAgain" />
             </Head>
             <div className="row">
-              <div className="col-md-2 col-xs-2"></div>
-              <div className="col-md-8 col-xs-8">
-                <div className="blog-title">{blog.title}</div>
-                <div className="date-content">
-                  {dateFormat(
-                    blog.created_on.toUpperCase(),
-                    "mmmm dS, yyyy, h:MM TT"
-                  )}
-                </div>
-                <img
-                  className="blog-image"
-                  src={blog.post_image}
-                  alt={
-                    blog.post_image_alt_text !== null
-                      ? blog.post_image_alt_text
-                      : "blog image"
-                  }
-                />
-                <div className="my-3">
-                  {parse(blog !== null ? blog.content : "")}
-                </div>
-              </div>
-              <div className="col-md-2 col-xs-2"></div>
+              <PageDetails pageDetails={blog} />
             </div>
           </div>
         )}
@@ -77,10 +52,8 @@ export default function BlogTitle({ blogDetails, blogTitle }) {
 export async function getStaticPaths() {
   const res = await fetch(`${API_PATH.GETPAGES}/?t=b`);
   const blogs = await res.json();
-  // console.log("🚀 => getStaticPaths => blogs", blogs);
 
   const paths = blogs.map((blog) => `/blog/${blog.slug}`);
-  // console.log("🚀 => getStaticPaths => paths", paths);
   return { paths, fallback: true };
 }
 export async function getStaticProps({ query, params }) {

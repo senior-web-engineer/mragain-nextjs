@@ -16,7 +16,11 @@ const Privacy = () => (
         <link rel="canonical" href={FRONT_END_URL + "/algemene-voorwaarden"} />
         {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
         <meta property="og:type" content="website" />
-        <meta name="og_title" property="og:title" content="FAQ" />
+        <meta
+          name="og_title"
+          property="og:title"
+          content="Algemene-voorwaarden"
+        />
         <meta
           property="og:description"
           content="Vind de beste reparateur bij jou in de buurt"
