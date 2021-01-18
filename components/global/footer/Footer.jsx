@@ -23,6 +23,7 @@ import "./Footer.less";
 import logo from "@/assets/images/logo.png";
 import { CookieBanner } from "@palmabit/react-cookie-law";
 import Link from "next/link";
+import { FRONT_END_URL } from "../../../constants.js";
 
 // const IconFont = () => Icon.createFromIconfontCN({
 //   scriptUrl: "//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js",
@@ -187,7 +188,7 @@ const FooterView = ({ location }) => {
       <CookieBanner
         message="We gebruiken cookies met als doel je een optimale gebruikerservaring te geven op onze website."
         necessaryOptionText="Ja, ik wil graag een optimale website"
-        cookie="user-has-accepted-cookies"
+        // cookie="user-has-accepted-cookies"
         declineButtonText="Negeer"
         acceptButtonText="Accepteer"
         // privacyPolicyLinkText="hhjghghkhjhjgj"
@@ -195,6 +196,7 @@ const FooterView = ({ location }) => {
         showPreferencesOption={false}
         showStatisticsOption={false}
         showMarketingOption={false}
+        policyLink={FRONT_END_URL + "/algemene-voorwaarden"}
         // styles={{
         //   dialog: {
         //     position: "absolute",
