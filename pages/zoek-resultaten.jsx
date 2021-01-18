@@ -73,7 +73,7 @@ const MyMapComponent = compose(
   const goShopProfile = (shop_name, city, street) => {
     const shop = shop_name.replaceAll(" ", "-");
     const cityName = city.replaceAll(" ", "-");
-    const streetName = street.replaceAll(" ", "-");
+    // const streetName = street.replaceAll(" ", "-");
     // router.push(`/profiel/${shop}--${cityName}--${streetName}`);
     router.push(`/${shop}--${cityName}`);
   };
@@ -81,8 +81,9 @@ const MyMapComponent = compose(
   const [shopInfo, setshopInfo] = useState(null);
   return (
     <GoogleMap
-      defaultZoom={8}
-      defaultCenter={{ lat: 52.11346, lng: 5.1213965 }}
+      defaultZoom={7}
+      // defaultCenter={{ lat: 52.11346, lng: 5.1213965 }}
+      defaultCenter={{ lat: 51.363244, lng: 5.264762 }}
     >
       {props.isMarkerShown &&
         props.shoplist.map((shop) => {

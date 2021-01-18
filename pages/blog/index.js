@@ -48,14 +48,14 @@ export default function Blog({ blogs }) {
               content="Mr Again"
             />
           </Head>
-          <div className="row">
-            <div className="blog-list-title w-100 ">Onze blogs</div>
+          <div className="row px-0">
+            <div className="blog-list-title w-100 mt-4 ">Onze blogs</div>
             {blogs.length > 0
               ? blogs.map((blog, i) => (
-                  <div className="col-md-3 col-xs-12" key={i}>
+                  <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12" key={i}>
                     <div
-                      className="card shadow mb-4"
-                      style={{ width: "290px" }}
+                      className="card shadow mb-4 "
+                      style={{ width: "100%", height: "fit-content" }}
                     >
                       <img
                         className="card-img-top w-100"
