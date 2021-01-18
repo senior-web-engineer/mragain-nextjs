@@ -81,9 +81,9 @@ const MyMapComponent = compose(
   const [shopInfo, setshopInfo] = useState(null);
   return (
     <GoogleMap
-      defaultZoom={8}
-      defaultCenter={{ lat: 52.11346, lng: 5.1213965 }}
-      // defaultCenter={{ lat: 51.363244, lng: 5.264762 }}
+      defaultZoom={7}
+      // defaultCenter={{ lat: 52.11346, lng: 5.1213965 }}
+      defaultCenter={{ lat: 51.363244, lng: 5.264762 }}
     >
       {props.isMarkerShown &&
         props.shoplist.map((shop) => {
