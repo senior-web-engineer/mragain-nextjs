@@ -3,8 +3,10 @@ import { Fragment } from "react";
 import parse from "html-react-parser";
 import dateFormat from "dateformat";
 import "./pages.css";
+import { useEffect } from "react";
 
 export default function PageDetails({ pageDetails }) {
+  console.log("🚀 => PageDetails => pageDetails", pageDetails);
   return (
     <Fragment>
       <div className="col-md-2 col-xs-2"></div>

@@ -49,16 +49,15 @@ export default function BlogTitle({ blogDetails, blogTitle }) {
   );
 }
 
-export async function getStaticPaths() {
-  const res = await fetch(`${API_PATH.GETPAGES}/?t=b`);
-  const blogs = await res.json();
+// export async function getStaticPaths() {
+//   const res = await fetch(`${API_PATH.GETPAGES}/?t=b`);
+//   const blogs = await res.json();
 
-  const paths = blogs.map((blog) => `/blog/${blog.slug}`);
-  return { paths, fallback: true };
-}
-export async function getStaticProps({ query, params }) {
+//   const paths = blogs.map((blog) => `/blog/${blog.slug}`);
+//   return { paths, fallback: true };
+// }
+export async function getServerSideProps({ query, params }) {
   const { blogTitle } = query || params;
-
   const res = await fetch(API_PATH.GETPAGEDETAILS + "/?slug=" + blogTitle);
   const blogDetails = await res.json();
 
