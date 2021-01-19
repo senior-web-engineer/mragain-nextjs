@@ -52,16 +52,16 @@ export default function ReparatieTitle({ reparatieDetails, reparatieTitle }) {
   );
 }
 
-export async function getStaticPaths() {
-  const res = await fetch(`${API_PATH.GETPAGES}/?t=p`);
-  const reparaties = await res.json();
-  // console.log("🚀 => getStaticPaths => reparaties", reparaties);
+// export async function getStaticPaths() {
+//   const res = await fetch(`${API_PATH.GETPAGES}/?t=p`);
+//   const reparaties = await res.json();
+//   // console.log("🚀 => getStaticPaths => reparaties", reparaties);
 
-  const paths = reparaties.map((reparatie) => `/reparatie/${reparatie.slug}`);
-  // console.log("🚀 => getStaticPaths => paths", paths);
-  return { paths, fallback: true };
-}
-export async function getStaticProps({ query, params }) {
+//   const paths = reparaties.map((reparatie) => `/reparatie/${reparatie.slug}`);
+//   // console.log("🚀 => getStaticPaths => paths", paths);
+//   return { paths, fallback: true };
+// }
+export async function getServerSideProps({ query, params }) {
   const { reparatieTitle } = query || params;
 
   const res = await fetch(API_PATH.GETPAGEDETAILS + "/?slug=" + reparatieTitle);
