@@ -39,21 +39,28 @@ ol .list-title {
 ol .list-title:hover {
   background-color: #ddd9d973;
 }
-
 /* Blog details page */
 .blog-title {
   height: fit-content;
-  font-size: 35px;
+  font-size: 22pt;
   font-weight: 400;
 }
 .blog-content {
-  /* height: fit-content; */
   min-height: 450px;
-  text-align: justify;
-  justify-content: left;
   margin: 35px 20px 20px 20px;
 }
-
+.blog-description {
+  text-align: justify;
+  justify-content: left;
+}
+.blog-description h1,
+h2,
+h3,
+h4,
+h5 {
+  text-align: left;
+  /* justify-content: left; */
+}
 .date-content {
   font-size: 13px;
   color: #aaa;

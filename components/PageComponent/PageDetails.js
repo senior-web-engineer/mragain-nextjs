@@ -25,7 +25,7 @@ export default function PageDetails({ pageDetails }) {
               : "pageDetails image"
           }
         />
-        <div className="my-3">
+        <div className="my-3 blog-description">
           {parse(pageDetails !== null ? pageDetails.content : "")}
         </div>
       </div>
