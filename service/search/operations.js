@@ -183,11 +183,11 @@ export function searchShopFilter(data, dispatch) {
   axios
     .get(`${API_PATH.SEARCH}/`, { params: data })
     .then((res) => {
-      if (res.data.length > 0) {
-        dispatch(setFindOut(true));
-        dispatch(fetchShopFilterList(res.data));
-        return;
-      }
+      // if (res.data.length > 0) {
+      dispatch(setFindOut(true));
+      dispatch(fetchShopFilterList(res.data));
+      return;
+      // }
 
       // if (res.data.length > 0) {
       //   if (res.data[0].model_id === 0) {
