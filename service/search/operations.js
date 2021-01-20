@@ -184,14 +184,20 @@ export function searchShopFilter(data, dispatch) {
     .get(`${API_PATH.SEARCH}/`, { params: data })
     .then((res) => {
       if (res.data.length > 0) {
-        if (res.data[0].model_id === 0) {
-          dispatch(setFindOut(true));
-          dispatch(resetShopFilterList());
-          return;
-        }
+        dispatch(setFindOut(true));
+        dispatch(fetchShopFilterList(res.data));
+        return;
       }
-      dispatch(setFindOut(true));
-      dispatch(fetchShopFilterList(res.data));
+
+      // if (res.data.length > 0) {
+      //   if (res.data[0].model_id === 0) {
+      //     dispatch(setFindOut(true));
+      //     dispatch(resetShopFilterList());
+      //     return;
+      //   }
+      // }
+      // dispatch(setFindOut(true));
+      // dispatch(fetchShopFilterList(res.data));
     })
     .catch((err) => {
       dispatch(setFindOut(true));
