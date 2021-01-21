@@ -14,12 +14,22 @@ const ShopInfoCard = (routerProps) => {
   const { getAccountProfile, getReparationGuarantee } = routerProps;
   const router = useRouter();
   const onProfilePage = (shop_name, city, street) => {
-    const shop = shop_name.replaceAll(" ", "-");
-    const cityName = city.replaceAll(" ", "-");
-    const streetName = street.replaceAll(" ", "-");
+    let shop = shop_name;
+    let cityName = city;
+
+    let routerData = `/${shop}--${cityName}`;
+
+    shop = shop.replaceAll(" ", "-");
+
+    if (cityName === undefined) {
+      routerData = `/${shop}`;
+    } else {
+      cityName = cityName.replaceAll(" ", "-");
+      routerData = `/${shop}--${cityName}`;
+    }
 
     // router.push(`/profiel/${shop}--${cityName}--${streetName}`);
-    router.push(`/${shop}--${cityName}`);
+    router.push(routerData);
   };
 
   function onMakeAppointment(shop_id) {
