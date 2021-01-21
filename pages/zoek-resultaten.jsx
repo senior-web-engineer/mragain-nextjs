@@ -6,8 +6,7 @@ import filterIcon from "@/assets/images/filterIcon.png";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { ShopInfoCard, Layout } from "@/components/global";
-import lib from "@/assets/js/lib";
-import { FRONT_END_URL } from "../constants.js";
+import { FRONT_END_URL, BACK_END_URL } from "../constants.js";
 import {
   getSearchFilterFieldExt,
   searchShopFilter,
@@ -24,10 +23,12 @@ import {
 import { setFindOut } from "service/search/action.js";
 import "./zoek-resultaten.less";
 import Head from "next/head";
-import image1 from "@/assets/images/home_newest_image3.jpg";
 import { setSearchFilter, setLoadFilter } from "../service/search/action";
 import { Modal } from "react-bootstrap";
 import { getBrands, getDevices, getModels } from "service/search/operations";
+
+const defaultShopImage =
+  BACK_END_URL + "/static/media/home_newest_image3.8798cc16.jpg";
 
 const {
   MarkerWithLabel,
@@ -733,11 +734,11 @@ const SearchShop = (routerProps) => {
                               isShowPrice === true ? `${shop.gua_time} mnd` : -1
                             }
                             image={
-                              shop.logo_photo !== "" && shop.logo_photo !== null
+                              shop.logo_photo !== ""
                                 ? shop.logo_photo
-                                : shop.logo_photo === ""
+                                : shop.logo_photo === "" && shop.bg_photo !== ""
                                 ? shop.bg_photo
-                                : image1
+                                : defaultShopImage
                             }
                             key={shop.name}
                             type={pageType}
