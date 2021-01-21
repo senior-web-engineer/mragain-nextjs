@@ -120,12 +120,16 @@ const AccountSetting = (routerProps) => {
     data.auth = acc_settings.auth;
 
     let msg = await updateAccountSettings(id, data);
+
     if (msg === "error") {
-      message.error("Er gaat wat fout, kloppen je adres en postcode?", [2.5]);
-    } else if (msg === "error1") {
-      message.error("Er gaat wat fout, klopt je postcode?", [2.5]);
-    } else {
-      message.success(msg, [2.5]);
+      // message.error("Er gaat wat fout, kloppen je adres en postcode?", [2.5]);
+      message.error("Er gaat iets mis, probeer het later opnieuw!", [2.5]);
+    }
+    // else if (msg === "error1") {
+    //   message.error("Er gaat wat fout, klopt je postcode?", [2.5]);
+    // }
+    else {
+      message.success("Accountgegevens succesvol bijgewerkt", [2.5]);
       router.reload();
     }
   }

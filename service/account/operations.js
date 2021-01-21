@@ -222,8 +222,8 @@ export function getShopProfileByInformationServer(str) {
       return res.data;
     })
     .catch((err) => {
-        console.log(err)
-        return err;
+      console.log(err);
+      return err;
     });
 }
 
@@ -238,8 +238,8 @@ export function getShopProfileByInformation(str, dispatch) {
       return res.data;
     })
     .catch((err) => {
-        console.log(err)
-        return err;
+      console.log(err);
+      return err;
     });
 }
 
@@ -283,20 +283,23 @@ export async function updateAccountSettings(id, data, dispatch) {
       console.log("local Storage=>", user);
       localStorage.setItem("auth-user", JSON.stringify(user));
       dispatch(fetchAccountSettings(res.data));
-      data = filterObjectKeys(data, ["auth", "street", "zipcode", "city"]);
-      return axios
-        .put(`${API_PATH.UPDATEACCOUNTLOCATION}/${id}/`, data, tokenConfig())
-        .then((res) => {
-          if (res.data.city === "error") {
-            return "error";
-          }
-          return "Je account settings zijn gewijzigd";
-        })
-        .catch((err) => {
-          return "error1";
-        });
+
+      // data = filterObjectKeys(data, ["auth", "street", "zipcode", "city"]);
+      // return axios
+      //   .put(`${API_PATH.UPDATEACCOUNTLOCATION}/${id}/`, data, tokenConfig())
+      //   .then((res) => {
+      //     if (res.data.city === "error") {
+      //       return "error";
+      //     }
+      //     return "Je account settings zijn gewijzigd";
+      //   })
+      //   .catch((err) => {
+      //     return "error1";
+      //   });
     })
-    .catch((err) => {});
+    .catch((err) => {
+      return "error";
+    });
 }
 
 export function resetPasswordConfirm(data, dispatch) {
@@ -363,11 +366,11 @@ export async function getShopAccountProfile(id, dispatch) {
     .get(`${API_PATH.GETVALIDOPENTIME}/${id}/`)
     .then((res) => {
       validTime = res.data;
-        return axios
+      return axios
         .get(`${API_PATH.GETINVALIDOPENTIME}/${id}/`)
         .then((res) => {
           invalidTime = res.data;
-            return axios
+          return axios
             .get(`${API_PATH.GETREVIEWS}/${id}/`)
             .then((res) => {
               reviews = res.data;
@@ -414,9 +417,9 @@ export function getAccountProfile(id, str, dispatch) {
                     reviews = [];
                   }
                   if (str === true) {
-                      console.log("profile data");
+                    console.log("profile data");
 
-                      dispatch(initShopAccountProfile(profile));
+                    dispatch(initShopAccountProfile(profile));
                     console.log("true string");
                   } else {
                     dispatch(initAccountProfile(profile));
