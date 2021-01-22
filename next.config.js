@@ -16,6 +16,9 @@ module.exports = withLess(withSass(withCSS({
     javascriptEnabled: true,
     modifyVars: themeVariables, // make your antd custom effective
   },
+  images:{
+    domains: ['localhost','mragain.eu.pythonanywhere.com','develop.mragain.nl','mragain.nl'],
+  },
   webpack: (config, { isServer }) => {
     if (isServer) {
       if (!isServer) {

@@ -61,8 +61,10 @@ const SearchForm = (routerProps) => {
         <GreenText></GreenText>
       </div>
       <div className="form-group">
+        <label htmlFor={'search'}>
         <input
           type="input"
+          name={'search'}
           className="form-control"
           placeholder="Woonplaats of postcode"
           value={location}
@@ -72,7 +74,7 @@ const SearchForm = (routerProps) => {
           onKeyPress={(e) => {
             handleKeyPress(e);
           }}
-        />
+        /></label>
         <Button
           variant="light-green"
           type="submit"
