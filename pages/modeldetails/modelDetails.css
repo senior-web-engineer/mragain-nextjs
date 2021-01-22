@@ -1,0 +1,26 @@
+.up-down-arrow {
+  color: #181515 !important;
+  background-color: white;
+  /* border: 1px solid #06c987 !important; */
+  width: 100%;
+  text-align: center;
+}
+.slick-dots li button:before {
+  font-size: 35px;
+  line-height: 20px;
+  color: #181515;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.model-details {
+  padding: 23px 5px 0px 5px;
+}
+.model-details .brand {
+  color: #06c987;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+.model-details .sub-title {
+  color: #868686;
+  letter-spacing: 1.5px;
+}

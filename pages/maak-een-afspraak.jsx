@@ -130,6 +130,7 @@ const ShopAppointment = (routerProps) => {
     } else {
       setManual(false);
     }
+
     getReparationGuarantee(shop_id);
     getAccountProfile(shop_id, true);
   }

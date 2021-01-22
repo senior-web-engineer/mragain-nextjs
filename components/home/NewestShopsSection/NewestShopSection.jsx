@@ -27,7 +27,7 @@ const NewestShopSection = (routerProps) => {
     setSearchFilter,
     newestShopList,
     getNewestShopList,
-    getAccountProfile,
+    // getAccountProfile,
   } = routerProps;
   if (isload === false) {
     getNewestShopList(shopCount, null);
@@ -37,7 +37,7 @@ const NewestShopSection = (routerProps) => {
   const onProfilePage = (shop_name, city, street) => {
     const shop = shop_name.replaceAll(" ", "-");
     const cityName = city.replaceAll(" ", "-");
-    const streetName = street.replaceAll(" ", "-");
+    // const streetName = street.replaceAll(" ", "-");
     // router.push(`/profiel/${shop}--${cityName}--${streetName}`);
     router.push(`/${shop}--${cityName}`);
   };
@@ -133,9 +133,9 @@ const mapDispatchToProps = (dispatch) => {
     getNewestShopList: (count, city) => {
       getNewestShopList(count, city, dispatch);
     },
-    getAccountProfile: (id) => {
-      getAccountProfile(id, dispatch);
-    },
+    // getAccountProfile: (id) => {
+    //   getAccountProfile(id, dispatch);
+    // },
   };
 };
 

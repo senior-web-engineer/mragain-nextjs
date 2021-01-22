@@ -418,7 +418,6 @@ export function getAccountProfile(id, str, dispatch) {
                   }
                   if (str === true) {
                     console.log("profile data");
-
                     dispatch(initShopAccountProfile(profile));
                     console.log("true string");
                   } else {

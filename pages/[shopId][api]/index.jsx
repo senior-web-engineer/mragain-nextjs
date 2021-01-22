@@ -16,7 +16,7 @@ import { getReparationGuarantee } from "service/appointments/operations.js";
 import Head from "next/head";
 import { FRONT_END_URL } from "@/constants";
 import withRedux from "next-redux-wrapper";
-import {getShopProfileByInformationServer} from "service/account/operations";
+import { getShopProfileByInformationServer } from "service/account/operations";
 
 const ShopProfile = (routerProps) => {
   const {
@@ -27,7 +27,7 @@ const ShopProfile = (routerProps) => {
     shop_account_profile,
     shopProfileServerInfo,
     shopDevices,
-    shop
+    shop,
   } = routerProps;
 
   const router = useRouter();
@@ -40,13 +40,14 @@ const ShopProfile = (routerProps) => {
   async function getShopId(url_str) {
     // let shop = await getShopIdByInformation(url_str);
 
-    console.log("url_str=>", url_str);
+    // console.log("url_str=>", url_str);
 
     let shop = await getShopProfileByInformation(url_str);
 
-    console.log("shop=>", shop);
+    // console.log("shop=>", shop);
     if (shop !== undefined && shop.length > 0) {
-      let shop_id = shop[0].id;
+      let shop_id = parseInt(shop[0].id);
+      // console.log("🚀 => getShopId => shop_id", shop_id);
       getReparationGuarantee(shop_id);
       getShopAccountProfile(shop_id);
     } else {
@@ -60,8 +61,10 @@ const ShopProfile = (routerProps) => {
       : [];
   devices = devices.join(" & ");
 
-  let shopAccountProfile  = (shopProfileServerInfo && shopProfileServerInfo.id) ? shopProfileServerInfo :  shop_account_profile;
-
+  let shopAccountProfile =
+    shopProfileServerInfo && shopProfileServerInfo.id
+      ? shopProfileServerInfo
+      : shop_account_profile;
 
   let title = `${shopAccountProfile.name} ${shopAccountProfile.city} - ${devices} Reparatie - ${FRONT_END_URL}`;
   let description = `${shopAccountProfile.name}, ${shopAccountProfile.street}, ${shopAccountProfile.zipcode}, ${shopAccountProfile.city}. Laat je telefoon repareren bij ${shopAccountProfile.name} via mragain.nl. Transparant, betrouwbaar en snel!`;
@@ -82,7 +85,13 @@ const ShopProfile = (routerProps) => {
           <meta name="og_title" property="og:title" content={title} />
           <meta property="og:description" content={description} />
           <meta name="og:url" content={FRONT_END_URL} />
-          <meta property="og:image" content={shopAccountProfile.bg_photo !== undefined && shopAccountProfile.bg_photo} />
+          <meta
+            property="og:image"
+            content={
+              shopAccountProfile.bg_photo !== undefined &&
+              shopAccountProfile.bg_photo
+            }
+          />
           <meta
             name="og_site_name"
             property="og:site_name"
@@ -97,11 +106,8 @@ const ShopProfile = (routerProps) => {
   );
 };
 
-
-
 export async function getServerSideProps(ctx) {
-
-  console.log('ctx.query',ctx.query);
+  console.log("ctx.query", ctx.query);
   const shopId = ctx.query["shopId][api"];
 
   console.log("shop1IDD=>", shopId);
@@ -110,22 +116,19 @@ export async function getServerSideProps(ctx) {
 
   return {
     props: {
-      shopProfileServerInfo:(shopProfileServerInfo && shopProfileServerInfo[0]) ? shopProfileServerInfo[0] : shopProfileServerInfo
+      shopProfileServerInfo:
+        shopProfileServerInfo && shopProfileServerInfo[0]
+          ? shopProfileServerInfo[0]
+          : shopProfileServerInfo,
     },
-
-  }
+  };
 }
-
 
 const mapStateToProps = (state) => ({
   //Maps state to redux store as props
   shop_account_profile: state.account.shop_account_profile,
   shopDevices: state.search.shopDevices,
 });
-
-
-
-
 
 const mapDispatchToProps = (dispatch) => {
   // Action
@@ -143,4 +146,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default (connect(mapStateToProps, mapDispatchToProps)(ShopProfile));
+export default connect(mapStateToProps, mapDispatchToProps)(ShopProfile);

@@ -7,11 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "antd";
 import "./ShopInfoCard.style.less";
 import StarRatingInfo from "../StarRatingInfo/StarRatingInfo";
-import { getAccountProfile } from "service/account/operations.js";
-import { getReparationGuarantee } from "service/appointments/operations.js";
+// import { getAccountProfile } from "service/account/operations.js";
+// import { getReparationGuarantee } from "service/appointments/operations.js";
 
 const ShopInfoCard = (routerProps) => {
-  const { getAccountProfile, getReparationGuarantee } = routerProps;
+  const {
+    // getAccountProfile,
+    // getReparationGuarantee
+  } = routerProps;
   const router = useRouter();
   const onProfilePage = (shop_name, city, street) => {
     let shop = shop_name;
@@ -107,9 +110,9 @@ const mapDispatchToProps = (dispatch) => {
     // getAccountProfile: (id) => {
     //   getAccountProfile(id, dispatch);
     // },
-    getReparationGuarantee: (id) => {
-      getReparationGuarantee(id, dispatch);
-    },
+    // getReparationGuarantee: (id) => {
+    //   getReparationGuarantee(id, dispatch);
+    // },
   };
 };
 

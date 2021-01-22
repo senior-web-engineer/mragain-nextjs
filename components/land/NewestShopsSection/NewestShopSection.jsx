@@ -12,7 +12,7 @@ import {
 import "../component.style.less";
 import "./NewestShopSection.style.less";
 import { getNewestShopList } from "service/search/operations.js";
-import { getAccountProfile } from "service/account/operations.js";
+// import { getAccountProfile } from "service/account/operations.js";
 import { BACK_END_URL } from "../../../constants.js";
 
 const image3 = BACK_END_URL + "/static/media/home_newest_image3.8798cc16.jpg";
@@ -21,7 +21,11 @@ const NewestShopSection = (routerProps) => {
   const router = useRouter();
   const [shopCount] = useState(5);
   const [isload, setLoad] = useState(false);
-  const { newestShopList, getNewestShopList, getAccountProfile } = routerProps;
+  const {
+    newestShopList,
+    getNewestShopList,
+    //  getAccountProfile
+  } = routerProps;
   if (isload === false) {
     getNewestShopList(shopCount, null);
     setLoad(true);
@@ -30,7 +34,7 @@ const NewestShopSection = (routerProps) => {
   const onProfilePage = (shop_name, city, street) => {
     const shop = shop_name.replaceAll(" ", "-");
     const cityName = city.replaceAll(" ", "-");
-    const streetName = street.replaceAll(" ", "-");
+    // const streetName = street.replaceAll(" ", "-");
     // router.push(`/profiel/${shop}--${cityName}--${streetName}`);
     router.push(`/${shop}--${cityName}`);
   };
@@ -103,9 +107,9 @@ const mapDispatchToProps = (dispatch) => {
     getNewestShopList: (count, city) => {
       getNewestShopList(count, city, dispatch);
     },
-    getAccountProfile: (id) => {
-      getAccountProfile(id, dispatch);
-    },
+    // getAccountProfile: (id) => {
+    //   getAccountProfile(id, dispatch);
+    // },
   };
 };
 
