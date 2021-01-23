@@ -15,6 +15,8 @@ module.exports = withLess(withSass(withCSS({
   lessLoaderOptions: {
     javascriptEnabled: true,
     modifyVars: themeVariables, // make your antd custom effective
+    outputStyle: 'compressed',
+
   },
   images:{
     domains: ['localhost','mragain.eu.pythonanywhere.com','develop.mragain.nl','mragain.nl'],

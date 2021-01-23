@@ -18,7 +18,7 @@ const FindBannerSection = () => {
             sizes={[300,650,1000]}
             alt={'Banner'}
         />
-      <SearchForm className="banner-section"></SearchForm>
+      <SearchForm className="banner-section"/>
     </BannerSection>
   );
 };

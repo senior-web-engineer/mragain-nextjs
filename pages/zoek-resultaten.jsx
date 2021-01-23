@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
-import { Alert, Button, Input, Select, Spin, Icon } from "antd";
+import { Button, Input, Select, Spin, Icon } from "antd";
+
 import filterIcon from "@/assets/images/filterIcon.png";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -11,28 +12,27 @@ import {
   getSearchFilterFieldExt,
   searchShopFilter,
 } from "service/search/operations.js";
-import { compose, withProps, lifecycle } from "recompose";
-import {
-  google,
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-  InfoWindow,
-} from "react-google-maps";
+
 import { setFindOut } from "service/search/action.js";
 import "./zoek-resultaten.less";
 import Head from "next/head";
 import { setSearchFilter, setLoadFilter } from "../service/search/action";
-import { Modal } from "react-bootstrap";
 import { getBrands, getDevices, getModels } from "service/search/operations";
+import dynamic from "next/dynamic";
+import MyMapComponent from "@/components/zoekResultaten/MyMapComponent";
+const Alert = dynamic(() => import("antd").then((mod) => mod.Alert),{
+  ssr: false,
+});
+const Modal = dynamic(() => import("react-bootstrap").then((mod) => mod.Modal),{
+  ssr: false,
+});
 
 const defaultShopImage =
   BACK_END_URL + "/static/media/home_newest_image3.8798cc16.jpg";
 
-const {
-  MarkerWithLabel,
-} = require("react-google-maps/lib/components/addons/MarkerWithLabel");
+// const {
+//   MarkerWithLabel,
+// } = require("react-google-maps/lib/components/addons/MarkerWithLabel");
 
 const { Option } = Select;
 
@@ -42,87 +42,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const googleMapsApiKey = "AIzaSyBG_U7llCBV6Q-OdBP5Sa_VhyuGuyL6Fzk";
 
-const MyMapComponent = compose(
-  withProps({
-    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=geometry,drawing,places`,
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `700px` }} />,
-    mapElement: <div style={{ height: `100%` }} />,
-  }),
-  lifecycle({
-    componentWillMount() {
-      const refs = {};
 
-      this.setState({
-        position: null,
-        onMarkerMounted: (ref) => {
-          refs.marker = ref;
-        },
-
-        onPositionChanged: () => {
-          const position = refs.marker.getPosition();
-        },
-      });
-    },
-  }),
-  withScriptjs,
-  withGoogleMap
-)((props) => {
-  const router = useRouter();
-  const goShopProfile = (shop_name, city, street) => {
-    const shop = shop_name.replaceAll(" ", "-");
-    const cityName = city.replaceAll(" ", "-");
-    // const streetName = street.replaceAll(" ", "-");
-    // router.push(`/profiel/${shop}--${cityName}--${streetName}`);
-    router.push(`/${shop}--${cityName}`);
-  };
-
-  const [shopInfo, setshopInfo] = useState(null);
-  return (
-    <GoogleMap
-      defaultZoom={7}
-      // defaultCenter={{ lat: 52.11346, lng: 5.1213965 }}
-      defaultCenter={{ lat: 51.363244, lng: 5.264762 }}
-    >
-      {props.isMarkerShown &&
-        props.shoplist.map((shop) => {
-          return (
-            <Marker
-              key={shop.name}
-              position={{
-                lat: parseFloat(shop.geo_lat),
-                lng: parseFloat(shop.geo_long),
-              }}
-              draggable={shopInfo === shop.id ? true : false}
-              ref={props.onMarkerMounted}
-              onPositionChanged={props.onPositionChanged}
-              // label={shop.name}
-              className="map-marker"
-              onClick={() => {
-                goShopProfile(shop.name, shop.city, shop.street);
-              }}
-              onMouseOver={() => {
-                setshopInfo(shop.id);
-              }}
-              onMouseOut={() => {
-                setshopInfo(null);
-              }}
-            >
-              {shopInfo === shop.id ? (
-                <InfoWindow>
-                  <span className="text-dark font-weight-bold">
-                    {shop.name}
-                  </span>
-                </InfoWindow>
-              ) : null}
-            </Marker>
-          );
-        })}
-    </GoogleMap>
-  );
-});
 
 const SearchShop = (routerProps) => {
   const [spacing] = React.useState(2);
@@ -466,36 +387,6 @@ const SearchShop = (routerProps) => {
     return <Spin indicator={antIcon} />;
   }
 
-  // if (isLoad === false) {
-  //   setLoadFilter(false);
-  //   setLoad(true);
-
-  // let queryParams = routerProps.location.search;
-  // const params = queryString.parse(queryParams);
-
-  // setLocation(params.position);
-  // if (isSearchFilter === true) {
-  //   if (params.position !== "") {
-  //     setLocation(params.position);
-  //   }
-
-  //   if (params.device !== null && params.device !== 0) {
-  //     setPhone(params.device);
-  //     if (params.brand !== null && params.brand !== 0) {
-  //       setBrand(params.brand);
-  //       handleBrandChange(params.brand);
-  //       if (params.model !== null && params.model !== 0) {
-  //         setModel(params.model);
-  //         handleModelChange(params.model);
-  //         if (params.reparation !== null && params.reparation !== 0) {
-  //           setReparation(params.reparation);
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-  // }
-
   useEffect(() => {
     if (isSearch === true) {
       setFindOut(false);
@@ -587,18 +478,7 @@ const SearchShop = (routerProps) => {
                       Alle merken
                     </Option>
                     {initBrandSelect()}
-                    {/* {phoneflg && initBrandSelect()} */}
                   </Select>
-                  {/* <Select
-                    defaultValue="All Reparations"
-                    onChange={handleReparationChange}
-                    value={reparation === 0 ? "Alle reparaties" : reparation}
-                  >
-                    <Option value={0} key={0}>
-                      Alle reparaties
-                    </Option>
-                    {isShowExFilter && initReparationSelect()}
-                  </Select>*/}
                   <Select
                     defaultValue="All Model"
                     onChange={handleModelChange}
@@ -662,7 +542,16 @@ const SearchShop = (routerProps) => {
                 <div className="third-filter">
                   <div className="third-filter-wrap">
                     <div className="location-select-blog">
+                      <label htmlFor="zoek-resultaten-search-from"
+                             style={{
+                               opacity:0,
+                               width:0,
+                               height:0,
+                               position:'absolute'
+                             }}
+                      >Woonplaats of postcode</label>
                       <Input
+                          id={"zoek-resultaten-search-from"}
                         className="location-select"
                         placeholder="Woonplaats of postcode"
                         onChange={handleLocationChange}
@@ -753,16 +642,19 @@ const SearchShop = (routerProps) => {
             </div>
           </div>
         </div>
+        {!!showMaps &&
         <Modal
-          show={showMaps}
-          onHide={hideShopMaps}
-          className="search-shop-map"
+            show={showMaps}
+            onHide={hideShopMaps}
+            className="search-shop-map"
         >
-          <Modal.Header closeButton></Modal.Header>
+          <Modal.Header closeButton/>
           <Modal.Body>
             <MyMapComponent isMarkerShown={true} shoplist={shoplist} />
           </Modal.Body>
         </Modal>
+        }
+
       </div>
     </Layout>
   );

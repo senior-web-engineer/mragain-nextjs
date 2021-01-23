@@ -222,16 +222,17 @@ const FooterView = ({ location ,ua}) => {
       </FooterViewContainer>
       <FooterCopyright> Copyright @ 2020 MrAgain </FooterCopyright>
       {
-      //   (ua && ua.source && !ua.isBot && (
-      //     ua.source.indexOf('google')<0
-      //     &&
-      //     ua.source.indexOf('pagespeed')<0
-      //     ||
-      //     ua.source.indexOf('lighthouse')<0
-      // )
-        (
-            !!isBot()
-        )&&
+        (ua && ua.source && !ua.isBot && (
+          ua.source.indexOf('google')<0
+          &&
+          ua.source.indexOf('pagespeed')<0
+          ||
+          ua.source.indexOf('lighthouse')<0
+        ))
+      //   (
+      //       !!isBot()
+      //   )
+        &&
       <CookieBanner
           message="We gebruiken cookies met als doel je een optimale gebruikerservaring te geven op onze website."
           necessaryOptionText="Ja, ik wil graag een optimale website"
