@@ -11,7 +11,7 @@ export default class MyDocument extends Document {
 
 
     return (
-      <Html lang="en" className={true?'isBot' : 'noBot'}>
+      <Html lang="en" className={isBot ?'isBot' : 'noBot'}>
         <Head>
           <meta charSet="utf-8" />
           <meta name="msapplication-TileColor" content="#06c987" />
@@ -94,7 +94,7 @@ MyDocument.getInitialProps = async ctx => {
     // Check if in production
     const isProduction = process.env.NODE_ENV === 'production'
     const ua = useUserAgent(ctx.req.headers['user-agent']);
-    const source = ua.source.toLocaleLowerCase();
+    const source = ua.source ? ua.source.toLocaleLowerCase() : false;
     const isBot = (ua.source && (
         source.indexOf('google')!==-1
         ||

@@ -1,5 +1,5 @@
 
-module.exports = function showCookie() {
+module.exports = function isBot() {
 
     if(typeof document !=='undefined'){
         if(!document.documentElement.className

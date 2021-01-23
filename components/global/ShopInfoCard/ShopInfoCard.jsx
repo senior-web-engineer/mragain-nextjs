@@ -7,13 +7,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "antd";
 import "./ShopInfoCard.style.less";
 import StarRatingInfo from "../StarRatingInfo/StarRatingInfo";
-// import { getAccountProfile } from "service/account/operations.js";
-// import { getReparationGuarantee } from "service/appointments/operations.js";
+import Image from 'next/image';
 
 const ShopInfoCard = (routerProps) => {
   const {
-    // getAccountProfile,
-    // getReparationGuarantee
   } = routerProps;
   const router = useRouter();
   const onProfilePage = (shop_name, city, street) => {
@@ -72,8 +69,11 @@ const ShopInfoCard = (routerProps) => {
 
   return (
     <Card>
-      <Card.Img
-        variant="top"
+      <Image
+          width={240}
+          height={162}
+          className={'card-img-top'}
+          variant="top"
         src={routerProps.image}
         alt="Reparateur-profielfoto"
         onClick={() =>
