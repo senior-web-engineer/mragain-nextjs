@@ -7,7 +7,6 @@ import Image from 'next/image';
 const FindBannerSection = () => {
   return (
     <BannerSection>
-        <div className="image-overlay"/>
         <Image
             src={'/home_banner_image.jpg'}
             layout="fill"
