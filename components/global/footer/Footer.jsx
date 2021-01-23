@@ -118,26 +118,6 @@ const FooterView = ({ location ,ua}) => {
                 </li>
               </ul>
             </FooterSitemap>
-            {/*<Servicing ClassName="custome-footer-servicing">
-              <ServicingTitle>Servicing</ServicingTitle>
-              <ul>
-                <li>
-                  <a href="#more">Lorem Ipsum</a>
-                </li>
-                <li>
-                  <a href="#more">has been</a>
-                </li>
-                <li>
-                  <a href="#more">the industry's</a>
-                </li>
-                <li>
-                  <a href="#more">standard dummy</a>
-                </li>
-                <li>
-                  <a href="#more">text ever</a>
-                </li>
-              </ul>
-            </Servicing>*/}
             <FollowUs className="follow-us">
               <FollowUsTitle>Volg ons op</FollowUsTitle>
               <ul>

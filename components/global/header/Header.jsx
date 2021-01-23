@@ -26,21 +26,15 @@ const HeaderView = (routerProps) => {
     logout,
     user_login_change,
     initUserLoginChange,
-    location,
     getAccountSettings,
     getAccountProfile,
-    getDevices,
     getAuthUser,
-    getAppointments,
-    // account_profile,
-    getShopIdByInformation,
   } = routerProps;
   const [auth_user, setAuthUser] = useState({});
   const [admin_Id, setadmin_Id] = useState({});
   const [is_load, setLoad] = useState(true);
   const [adminName, setAdminName] = useState(null);
   const router = useRouter();
-  const [userData, setUserData] = useState({});
 
   // const usr = localStorage.getItem("auth-user");
   const headerClass = (() => {
@@ -57,32 +51,7 @@ const HeaderView = (routerProps) => {
     else if (router.pathname === "/contact") return `App-header home-page`;
     else return `App-header`;
   })();
-  // useEffect(() => {
-  //   let localData = JSON.parse(localStorage.getItem("auth-user"));
 
-  //   if (
-  //     router.pathname === "/account-gegevens/[shopId]" ||
-  //     router.pathname === "/dashboard/[shopId]"
-  //   ) {
-  //     getShopIdByInformation(
-  //       router.query.shopId === localData.name.replaceAll(" ", "-")
-  //         ? router.query.shopId
-  //         : localData.name.replaceAll(" ", "-")
-  //     );
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  // let localData = JSON.parse(localStorage.getItem("auth-user"));
-  // if (localData) {
-  //   if (account_profile.name !== localData.name) {
-  //     setUserData(localData);
-  //     setAdminName(localData.name.replace(" ", "-"));
-  //     setadmin_Id(localData.name.replace(" ", "-"));
-  //   }
-  // }
-  //   console.log("Header=>", account_profile);
-  // }, [account_profile]);
 
   useEffect(() => {
     if (is_load === true) {
@@ -264,10 +233,11 @@ const HeaderView = (routerProps) => {
 
   return (
     <Fragment>
-      <Header className={headerClass} id="Desktop-Header">
+      <Header className={headerClass} id="Mobile-Header">
         <div className="logo-blog">
           <a className="logo" href="/">
             <Image
+                quality={50}
                 loading="eager"
                 priority
                 width={120} height={46}
@@ -280,8 +250,8 @@ const HeaderView = (routerProps) => {
             />
           </a>
           <div className="logo-title">
-            <div className="top"></div>
-            <div className="bottom"></div>
+            <div className="top"/>
+            <div className="bottom"/>
           </div>
         </div>
         <Menu
@@ -309,49 +279,6 @@ const HeaderView = (routerProps) => {
         {initSignMenu()}
       </Header>
 
-      <Header className={headerClass} id="Mobile-Header">
-        <div className="logo-blog">
-          <a className="logo" href="/">
-            <Image  width={120}
-                    height={46}
-                    loading="eager"
-                    priority
-                    src={logo} alt="Logo Mr Again"
-                    style={{
-                      display: 'table-cell',
-                      verticalAlign: 'middle'
-                    }}
-            />
-          </a>
-          <div className="logo-title">
-            <div className="top"></div>
-            <div className="bottom"></div>
-          </div>
-        </div>
-        {initSignMenu()}
-        <Menu
-          mode="horizontal"
-          defaultSelectedKeys={["1"]}
-          style={{ lineHeight: "64px" }}
-        >
-          <Menu.Item key="/">
-            <Link prefetch={false} className="home-link" href="/">
-              Home
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/over-ons">
-            <Link prefetch={false} href="/over-ons">Over MrAgain</Link>
-          </Menu.Item>
-          <Menu.Item key="/reparatie-en-service">
-            <Link prefetch={false} href="/reparatie-en-service">Reparatie &amp; Service</Link>
-          </Menu.Item>
-          <Menu.Item key="/meld-je-aan-als-reparateur">
-            <Link prefetch={false} href="/meld-je-aan-als-reparateur">
-              Meld je aan als reparateur
-            </Link>
-          </Menu.Item>
-        </Menu>
-      </Header>
     </Fragment>
   );
 };
