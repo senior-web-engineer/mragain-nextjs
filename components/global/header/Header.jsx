@@ -268,7 +268,8 @@ const HeaderView = (routerProps) => {
         <div className="logo-blog">
           <a className="logo" href="/">
             <Image
-                loading={'eager'}
+                loading="eager"
+                priority
                 width={120} height={46}
                 src={logo}
                 alt="Logo Mr Again"
@@ -313,7 +314,8 @@ const HeaderView = (routerProps) => {
           <a className="logo" href="/">
             <Image  width={120}
                     height={46}
-                    loading={'eager'}
+                    loading="eager"
+                    priority
                     src={logo} alt="Logo Mr Again"
                     style={{
                       display: 'table-cell',

@@ -61,7 +61,13 @@ const SearchForm = (routerProps) => {
         <GreenText></GreenText>
       </div>
       <div className="form-group">
-        <label htmlFor="main-search-from" style={{display:'none'}}>Woonplaats of postcode</label>
+        <label htmlFor="main-search-from"
+               style={{
+                 opacity:0,
+                 width:0,
+                 height:0,
+               }}
+        >Woonplaats of postcode</label>
         <input
           type="input"
           id={'main-search-from'}
