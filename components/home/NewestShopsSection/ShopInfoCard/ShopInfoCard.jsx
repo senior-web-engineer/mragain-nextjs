@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./ShopInfoCard.style.less";
 import Image from 'next/image';
 
-// import StarRatingInfo from '../../StarRatingInfo/StarRatingInfo'
 
 const ShopInfoCard = (params) => (
   <Card className="shop-infor-card">

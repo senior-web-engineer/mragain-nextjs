@@ -1,5 +1,4 @@
 import React from "react";
-// import { Icon } from "antd";
 import { useRouter } from "next/router";
 import {
   FooterViewSection,
@@ -21,12 +20,17 @@ import {
 } from "./Footer.style";
 import "./Footer.less";
 import logo from "@/assets/images/logo.png";
-import { CookieBanner } from "@palmabit/react-cookie-law";
 import Link from "next/link";
 import { FRONT_END_URL } from "../../../constants.js";
+import dynamic from "next/dynamic";
+import {withUserAgent} from "next-useragent";
+const CookieBanner = dynamic(() => import("@palmabit/react-cookie-law").then((mod) => mod.CookieBanner),{
+  ssr: false,
+  loading: () => <p>...</p>
+});
+import isBot from "@/scripts/isBot";
 
-
-const FooterView = ({ location }) => {
+const FooterView = ({ location ,ua}) => {
   const router = useRouter();
   const splitUrl = "/" + router.pathname.split("/")[1];
   const visible =
@@ -49,6 +53,8 @@ const FooterView = ({ location }) => {
     splitUrl === "/bevestig-je-wachtwoord-reset"
       ? "flex"
       : "none";
+
+
 
 
   return (
@@ -215,49 +221,23 @@ const FooterView = ({ location }) => {
         </FooterViewContent>
       </FooterViewContainer>
       <FooterCopyright> Copyright @ 2020 MrAgain </FooterCopyright>
+      {!!isBot() &&
       <CookieBanner
-        message="We gebruiken cookies met als doel je een optimale gebruikerservaring te geven op onze website."
-        necessaryOptionText="Ja, ik wil graag een optimale website"
-        // cookie="user-has-accepted-cookies"
-        declineButtonText="Negeer"
-        acceptButtonText="Accepteer"
-        // privacyPolicyLinkText="hhjghghkhjhjgj"
-        showDeclineButton={true}
-        showPreferencesOption={false}
-        showStatisticsOption={false}
-        showMarketingOption={false}
-        policyLink={FRONT_END_URL + "/algemene-voorwaarden"}
-        // styles={{
-        //   dialog: {
-        //     position: "absolute",
-        //     top: "0px",
-        //     left: "0px",
-        //     right: "0px",
-        //     zIndex: "100000",
-        //     backgroundColor: "white",
-        //     padding: "20px",
-        //   },
-        //   container: { backgroundColor: "white", marginRight: "50px" },
-        //   // policy: { maxHeight: "20px" },
-        //   policy: {
-        //     fontSize: "10pt",
-        //     marginLeft: "10px",
-        //     color: "red",
-        //     maxHeight: "20px",
-        //     // overflow: "hidden",
-        //     textDecoration: "underline",
-        //   },
-        //   button: {
-        //     backgroundColor: "blue",
-        //     marginTop: "30px",
-        //     display: "inline",
-        //     alignItems: "center",
-        //     justifyContent: "center",
-        //   },
-        // }}
+          message="We gebruiken cookies met als doel je een optimale gebruikerservaring te geven op onze website."
+          necessaryOptionText="Ja, ik wil graag een optimale website"
+          declineButtonText="Negeer"
+          acceptButtonText="Accepteer"
+          showDeclineButton={true}
+          showPreferencesOption={false}
+          showStatisticsOption={false}
+          showMarketingOption={false}
+          policyLink={FRONT_END_URL + "/algemene-voorwaarden"}
+
       />
+      }
+
     </FooterViewSection>
   );
 };
 
-export default FooterView;
+export default withUserAgent(FooterView);

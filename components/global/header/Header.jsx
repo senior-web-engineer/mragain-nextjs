@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { connect } from "react-redux";
-import { Layout, Menu, Button, Dropdown, Icon, Avatar } from "antd";
+import { Layout, Menu, Button, Dropdown, Avatar } from "antd";
 import { useRouter } from "next/router";
 import logo from "@/assets/images/logo.png";
 import Link from "next/link";

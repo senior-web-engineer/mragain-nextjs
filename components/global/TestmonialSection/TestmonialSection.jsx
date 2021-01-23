@@ -6,10 +6,8 @@ import {
   AdvantageSectionTitle,
   SectionModel,
   DotDevider,
-  PhoneIcon
 } from "../component.style.jsx";
 import "./TestmonialSection.style.less";
-import phoneIcon from "@/assets/images/phone-icon2.png";
 
 const TestmonialSection = () => (
   <TestmonialSectionArea>
@@ -22,7 +20,6 @@ const TestmonialSection = () => (
        <Row>
 	<SectionModel>
           <DotDevider color={"#f8f8f8"} />
-	{/*<PhoneIcon bkImage={phoneIcon} bkColor={"#f8f8f8"} />*/}
         </SectionModel>
       </Row>
       <Row>
