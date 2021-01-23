@@ -15,7 +15,8 @@ const FindBannerSection = () => {
             loading={'eager'}
             priority={true}
             quality={50}
-            sizes={[300,650, 786, 1200, 2600, 3000]}
+            sizes={[300,650,1000]}
+            alt={'Banner'}
         />
       <SearchForm className="banner-section"></SearchForm>
     </BannerSection>

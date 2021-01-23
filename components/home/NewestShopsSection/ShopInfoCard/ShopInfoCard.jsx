@@ -18,6 +18,7 @@ const ShopInfoCard = (params) => (
       }}
       width={237}
       height={160}
+      quality={75}
       className={'card-img-top'}
     />
     <Card.Body>

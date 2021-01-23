@@ -16,7 +16,7 @@ import {
 } from "service/account/operations.js";
 import { getAppointments } from "service/appointments/operations.js";
 import { BACK_END_URL } from "constants.js";
-// import Image from 'next/image';
+import Image from 'next/image';
 
 const { Header } = Layout;
 
@@ -165,6 +165,7 @@ const HeaderView = (routerProps) => {
         )}
         <Menu.Item>
           <Link
+              prefetch={false}
             href={
               "/account-gegevens/" +
               (auth_user.account_id === undefined && adminName !== null
@@ -180,6 +181,7 @@ const HeaderView = (routerProps) => {
         </Menu.Item>
         <Menu.Item>
           <Link
+              prefetch={false}
             href={
               "/dashboard/" +
               (auth_user.account_id === undefined && adminName !== null
@@ -196,6 +198,7 @@ const HeaderView = (routerProps) => {
         </Menu.Item>
         <Menu.Item>
           <Link
+              prefetch={false}
             href={
               "/apparaten-beheer/" +
               (auth_user.account_id === undefined && adminName !== null
@@ -211,6 +214,7 @@ const HeaderView = (routerProps) => {
         </Menu.Item>
         <Menu.Item>
           <Link
+              prefetch={false}
             href={
               "/profiel-beheer/" +
               (auth_user.account_id === undefined && adminName !== null
@@ -263,7 +267,16 @@ const HeaderView = (routerProps) => {
       <Header className={headerClass} id="Desktop-Header">
         <div className="logo-blog">
           <a className="logo" href="/">
-            <img  src={logo} alt="Logo Mr Again" />
+            <Image
+                loading={'eager'}
+                width={120} height={46}
+                src={logo}
+                alt="Logo Mr Again"
+                style={{
+                      display: 'table-cell',
+                      verticalAlign: 'middle'
+                    }}
+            />
           </a>
           <div className="logo-title">
             <div className="top"></div>
@@ -298,7 +311,15 @@ const HeaderView = (routerProps) => {
       <Header className={headerClass} id="Mobile-Header">
         <div className="logo-blog">
           <a className="logo" href="/">
-            <img src={logo} alt="Logo Mr Again" />
+            <Image  width={120}
+                    height={46}
+                    loading={'eager'}
+                    src={logo} alt="Logo Mr Again"
+                    style={{
+                      display: 'table-cell',
+                      verticalAlign: 'middle'
+                    }}
+            />
           </a>
           <div className="logo-title">
             <div className="top"></div>
@@ -312,18 +333,18 @@ const HeaderView = (routerProps) => {
           style={{ lineHeight: "64px" }}
         >
           <Menu.Item key="/">
-            <Link className="home-link" href="/">
+            <Link prefetch={false} className="home-link" href="/">
               Home
             </Link>
           </Menu.Item>
           <Menu.Item key="/over-ons">
-            <Link href="/over-ons">Over MrAgain</Link>
+            <Link prefetch={false} href="/over-ons">Over MrAgain</Link>
           </Menu.Item>
           <Menu.Item key="/reparatie-en-service">
-            <Link href="/reparatie-en-service">Reparatie &amp; Service</Link>
+            <Link prefetch={false} href="/reparatie-en-service">Reparatie &amp; Service</Link>
           </Menu.Item>
           <Menu.Item key="/meld-je-aan-als-reparateur">
-            <Link href="/meld-je-aan-als-reparateur">
+            <Link prefetch={false} href="/meld-je-aan-als-reparateur">
               Meld je aan als reparateur
             </Link>
           </Menu.Item>
