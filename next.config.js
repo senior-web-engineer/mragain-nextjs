@@ -2,8 +2,8 @@ const withCSS = require('@zeit/next-css')
 const withSass = require('@zeit/next-sass')
 const withLess = require('@zeit/next-less')
 const lessToJS = require('less-vars-to-js')
-const fs = require('fs')
-const fs_extra = require('fs-extra')
+// const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
 
 // Where your antd-custom.less file lives
@@ -18,6 +18,10 @@ module.exports = withLess(withSass(withCSS({
   },
   images:{
     domains: ['localhost','mragain.eu.pythonanywhere.com','develop.mragain.nl','mragain.nl'],
+  },
+  productionBrowserSourceMaps: true,
+  sassLoaderOptions: {
+    outputStyle: 'compressed',
   },
   webpack: (config, { isServer }) => {
     if (isServer) {
@@ -72,6 +76,9 @@ module.exports = withLess(withSass(withCSS({
         }
       }
     })
+    config.node={
+        fs: "empty"
+    }
     return config
   },
 })))

@@ -61,7 +61,6 @@ const SearchForm = (routerProps) => {
         <GreenText></GreenText>
       </div>
       <div className="form-group">
-        <label htmlFor={'search'}>
         <input
           type="input"
           name={'search'}
@@ -74,7 +73,7 @@ const SearchForm = (routerProps) => {
           onKeyPress={(e) => {
             handleKeyPress(e);
           }}
-        /></label>
+        />
         <Button
           variant="light-green"
           type="submit"

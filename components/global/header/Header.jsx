@@ -16,8 +16,7 @@ import {
 } from "service/account/operations.js";
 import { getAppointments } from "service/appointments/operations.js";
 import { BACK_END_URL } from "constants.js";
-import { route } from "next/dist/next-server/server/router";
-import { localeData } from "moment-timezone";
+// import Image from 'next/image';
 
 const { Header } = Layout;
 
@@ -147,10 +146,10 @@ const HeaderView = (routerProps) => {
     if (authToken === null) {
       return (
         <div className="navbar-sign">
-          <Link href="/login">
+          <Link prefetch={false} href="/login">
             <Button type="login">Inloggen</Button>
           </Link>
-          <Link href="/meld-je-aan-als-reparateur">
+          <Link prefetch={false} href="/meld-je-aan-als-reparateur">
             <Button type="register">Registreer</Button>
           </Link>
         </div>
@@ -226,7 +225,7 @@ const HeaderView = (routerProps) => {
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <Link href={"/hoe-werkt-het"}>Hoe werkt het</Link>
+          <Link prefetch={false} href={"/hoe-werkt-het"}>Hoe werkt het</Link>
         </Menu.Item>
         <Menu.Item>
           <span
@@ -264,7 +263,7 @@ const HeaderView = (routerProps) => {
       <Header className={headerClass} id="Desktop-Header">
         <div className="logo-blog">
           <a className="logo" href="/">
-            <img src={logo} alt="Logo Mr Again" />
+            <img  src={logo} alt="Logo Mr Again" />
           </a>
           <div className="logo-title">
             <div className="top"></div>
@@ -277,18 +276,18 @@ const HeaderView = (routerProps) => {
           style={{ lineHeight: "64px" }}
         >
           <Menu.Item key="/">
-            <Link className="home-link" href="/">
+            <Link prefetch={false} className="home-link" href="/">
               Home
             </Link>
           </Menu.Item>
           <Menu.Item key="/over-ons">
-            <Link href="/over-ons">Over MrAgain</Link>
+            <Link prefetch={false} href="/over-ons">Over MrAgain</Link>
           </Menu.Item>
           <Menu.Item key="/reparatie-en-service">
-            <Link href="/reparatie-en-service">Reparatie &amp; Service</Link>
+            <Link prefetch={false} href="/reparatie-en-service">Reparatie &amp; Service</Link>
           </Menu.Item>
           <Menu.Item key="/meld-je-aan-als-reparateur">
-            <Link href="/meld-je-aan-als-reparateur">
+            <Link prefetch={false} href="/meld-je-aan-als-reparateur">
               Meld je aan als reparateur
             </Link>
           </Menu.Item>

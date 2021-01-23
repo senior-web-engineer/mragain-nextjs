@@ -1,6 +1,5 @@
 import React from "react";
 import App from "next/app";
-import Router from "next/router";
 
 import { ConnectedRouter } from "connected-next-router";
 import { wrapper } from "../configureStore";

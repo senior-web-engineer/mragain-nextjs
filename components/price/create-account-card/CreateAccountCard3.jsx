@@ -24,7 +24,7 @@ const CreateAccountCard3 = params => {
           <p>has been the</p>
           <p>Industry's standard</p>
           <p>dummy text ever since the</p>
-          <Link href="/maak-een-account-aan">
+          <Link prefetch={false} href="/maak-een-account-aan">
             <Button className={"price-page-btn bgcolor-" + params.color}>
               CREATE ACCOUNT
             </Button>

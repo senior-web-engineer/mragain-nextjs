@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import bannerImage from '@/assets/images/home_banner_image.jpg'
+// import bannerImage from '@/assets/images/home_banner_image.jpg'
 
 export const BannerSection = styled.div`
   width: 100%;
@@ -11,7 +11,7 @@ export const BannerSection = styled.div`
   justify-content: center;
   align-items: center;
   // background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/home_banner_image.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  // background-position: center;
+  // background-size: cover;
+  // background-repeat: no-repeat;
 `

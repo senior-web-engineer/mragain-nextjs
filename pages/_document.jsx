@@ -1,7 +1,7 @@
 import React from "react";
 import Document, { Head, Main, NextScript, Html } from "next/document";
 import { ServerStyleSheet } from "styled-components";
-import { GA_TRACKING_ID } from '../lib/gtag';
+// import { GA_TRACKING_ID } from '../lib/gtag';
 
 export default class MyDocument extends Document {
   render() {
@@ -40,7 +40,7 @@ export default class MyDocument extends Document {
           <link rel="manifest" href="/manifest.json" />
 
           {/* We only want to add the scripts if in production */}
-          
+
         </Head>
         <body>
           <Main/>
