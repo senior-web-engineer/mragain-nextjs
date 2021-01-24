@@ -61,7 +61,6 @@ const FooterView = ({ location ,ua}) => {
       &&
       ua.source.toLowerCase().indexOf('lighthouse')<0
   ));
-  console.log('notBot',notBot);
   return (
     <FooterViewSection>
       <FooterViewContainer show={visible}>

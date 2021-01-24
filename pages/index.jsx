@@ -4,7 +4,7 @@ import { Layout, TestmonialSection } from "../components/global";
 import { FRONT_END_URL } from "../constants.js";
 
 import { Main } from "@/styled-components/homepage.style";
-// import { getPublishProfies } from "../lib/getPublishProfiles";
+import { getPublishProfies } from "../lib/getPublishProfiles";
 import {
   FindBannerSection,
   AdvantageSection,
@@ -78,7 +78,7 @@ export default function Home() {
 }
 
 export async function getStaticProps() {
-  // await getPublishProfies();
+  await getPublishProfies();
   return {
     props: {
       data: "data",

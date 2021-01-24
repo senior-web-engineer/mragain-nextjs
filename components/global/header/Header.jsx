@@ -112,7 +112,7 @@ const HeaderView = (routerProps) => {
     useEffect(() => {
       setAuthToken(localStorage.getItem("auth-token"));
     });
-    if (authToken === null) {
+    if (!authToken) {
       return (
         <div className="navbar-sign">
           <Link prefetch={false} href="/login">

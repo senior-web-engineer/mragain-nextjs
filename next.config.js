@@ -18,14 +18,14 @@ module.exports = withLess(withSass(withCSS({
     outputStyle: 'compressed',
 
   },
+  sassLoaderOptions: {
+    outputStyle: 'compressed',
+  },
   images:{
     domains: ['localhost','mragain.eu.pythonanywhere.com','develop.mragain.nl','mragain.nl'],
   },
   productionBrowserSourceMaps: true,
-  sassLoaderOptions: {
-    outputStyle: 'compressed',
-  },
-  webpack: (config, { isServer }) => {
+  webpack: (config, { isServer,webpack }) => {
     if (isServer) {
       if (!isServer) {
         config.node = {
@@ -81,6 +81,8 @@ module.exports = withLess(withSass(withCSS({
     config.node={
         fs: "empty"
     }
+    config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/))
+
     return config
   },
 })))
