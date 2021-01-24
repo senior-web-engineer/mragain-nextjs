@@ -24,10 +24,10 @@ import Link from "next/link";
 import { FRONT_END_URL } from "../../../constants.js";
 import dynamic from "next/dynamic";
 import {withUserAgent} from "next-useragent";
-// const CookieBanner = dynamic(() => import("@palmabit/react-cookie-law").then((mod) => mod.CookieBanner),{
-//   ssr: false,
-//   loading: () => <p>...</p>
-// });
+const CookieBanner = dynamic(() => import("@palmabit/react-cookie-law").then((mod) => mod.CookieBanner),{
+  ssr: false,
+  loading: () => <p>...</p>
+});
 //import isBot from "@/scripts/isBot";
 
 const FooterView = ({ location ,ua}) => {
@@ -54,9 +54,14 @@ const FooterView = ({ location ,ua}) => {
       ? "flex"
       : "none";
 
-
-
-
+  let notBot = (ua && ua.source && !ua.isBot && (
+      ua.source.toLowerCase().indexOf('google')<0
+      &&
+      ua.source.toLowerCase().indexOf('pagespeed')<0
+      &&
+      ua.source.toLowerCase().indexOf('lighthouse')<0
+  ));
+  console.log('notBot',notBot);
   return (
     <FooterViewSection>
       <FooterViewContainer show={visible}>
@@ -201,31 +206,22 @@ const FooterView = ({ location ,ua}) => {
         </FooterViewContent>
       </FooterViewContainer>
       <FooterCopyright> Copyright @ 2020 MrAgain </FooterCopyright>
-      {/*{*/}
-      {/*  (ua && ua.source && !ua.isBot && (*/}
-      {/*    ua.source.indexOf('google')<0*/}
-      {/*    &&*/}
-      {/*    ua.source.indexOf('pagespeed')<0*/}
-      {/*    ||*/}
-      {/*    ua.source.indexOf('lighthouse')<0*/}
-      {/*  ))*/}
-      {/*//   (*/}
-      {/*//       !!isBot()*/}
-      {/*//   )*/}
-      {/*  &&*/}
-      {/*<CookieBanner*/}
-      {/*    message="We gebruiken cookies met als doel je een optimale gebruikerservaring te geven op onze website."*/}
-      {/*    necessaryOptionText="Ja, ik wil graag een optimale website"*/}
-      {/*    declineButtonText="Negeer"*/}
-      {/*    acceptButtonText="Accepteer"*/}
-      {/*    showDeclineButton={true}*/}
-      {/*    showPreferencesOption={false}*/}
-      {/*    showStatisticsOption={false}*/}
-      {/*    showMarketingOption={false}*/}
-      {/*    policyLink={FRONT_END_URL + "/algemene-voorwaarden"}*/}
+      {
+        !!notBot
+        &&
+      <CookieBanner
+          message="We gebruiken cookies met als doel je een optimale gebruikerservaring te geven op onze website."
+          necessaryOptionText="Ja, ik wil graag een optimale website"
+          declineButtonText="Negeer"
+          acceptButtonText="Accepteer"
+          showDeclineButton={true}
+          showPreferencesOption={false}
+          showStatisticsOption={false}
+          showMarketingOption={false}
+          policyLink={FRONT_END_URL + "/algemene-voorwaarden"}
 
-      {/*/>*/}
-      {/*}*/}
+      />
+      }
 
     </FooterViewSection>
   );

@@ -238,8 +238,8 @@ const HeaderView = (routerProps) => {
           <a className="logo" href="/">
             <Image
                 quality={50}
-                loading="eager"
-                priority
+                loading={'eager'}
+                priority={true}
                 width={120} height={46}
                 src={logo}
                 alt="Logo Mr Again"
