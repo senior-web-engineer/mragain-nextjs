@@ -10,6 +10,7 @@ export const BannerSection = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position:relative;
   // background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/home_banner_image.jpg');
   // background-position: center;
   // background-size: cover;
