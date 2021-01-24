@@ -11,7 +11,6 @@ const path = require('path')
 const themeVariables = lessToJS(
   fs.readFileSync(path.resolve(__dirname, './assets/antd-custom.less'), 'utf8')
 )
-getPublishProfies();
 module.exports = withLess(withSass(withCSS({
   lessLoaderOptions: {
     javascriptEnabled: true,

@@ -31,6 +31,7 @@ import "./index.less";
 import Head from "next/head";
 import { FRONT_END_URL } from "../../../constants.js";
 import { Layout } from "@/components/global";
+import { getPublishProfies } from "../../../lib/getPublishProfiles";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -1255,5 +1256,15 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
+
+export async function getServerSideProps() {
+  await getPublishProfies();
+  return {
+    props: {
+      data: "data",
+    },
+  };
+}
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileManage);
