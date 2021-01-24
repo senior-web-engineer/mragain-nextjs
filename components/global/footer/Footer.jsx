@@ -28,7 +28,6 @@ const CookieBanner = dynamic(() => import("@palmabit/react-cookie-law").then((mo
   ssr: false,
   loading: () => <p>...</p>
 });
-//import isBot from "@/scripts/isBot";
 
 const FooterView = ({ location ,ua}) => {
   const router = useRouter();

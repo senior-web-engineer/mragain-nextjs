@@ -2,17 +2,16 @@ import React from "react";
 import Document, { Head, Main, NextScript, Html } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 // import { GA_TRACKING_ID } from '../lib/gtag';
-import {  useUserAgent } from 'next-useragent'
-
+import HeadWithoutPreload from './HeadWithoutPreload'
 export default class MyDocument extends Document {
   render() {
-    const { isProduction,isBot } = this.props;
+    const { isProduction } = this.props;
 
 
 
     return (
-      <Html lang="en" className={isBot ?'isBot' : 'noBot'}>
-        <Head>
+      <Html lang="en" >
+        <HeadWithoutPreload>
           <meta charSet="utf-8" />
           <meta name="msapplication-TileColor" content="#06c987" />
           <meta name="theme-color" content="#ffffff" />
@@ -45,7 +44,7 @@ export default class MyDocument extends Document {
 
           {/* We only want to add the scripts if in production */}
 
-        </Head>
+        </HeadWithoutPreload>
         <body>
           <Main/>
           <NextScript />
@@ -93,18 +92,9 @@ MyDocument.getInitialProps = async ctx => {
     const initialProps = await Document.getInitialProps(ctx);
     // Check if in production
     const isProduction = process.env.NODE_ENV === 'production'
-    const ua = useUserAgent(ctx.req.headers['user-agent']);
-    const source = ua.source ? ua.source.toLocaleLowerCase() : false;
-    const isBot = (ua.source && (
-        source.indexOf('google')!==-1
-        ||
-        source.indexOf('pagespeed')!==-1
-        ||
-        source.indexOf('lighthouse')!==-1
-    )) || ua.isBot;
+
     return {
       ...initialProps,
-      isBot:isBot,
       isProduction,
       // Styles fragment is rendered after the app and page rendering finish.
       styles: (
