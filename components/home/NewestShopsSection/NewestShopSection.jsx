@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React  from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { Container, Row, Button } from "react-bootstrap";
@@ -12,25 +12,17 @@ import {
 } from "../component.style.jsx";
 import "../component.style.less";
 import "./NewestShopSection.style.less";
-import { getNewestShopList } from "service/search/operations.js";
 import { BACK_END_URL } from "../../../constants.js";
 
 const image3 = BACK_END_URL + "/static/media/home_newest_image3.8798cc16.jpg";
 const NewestShopSection = (routerProps) => {
   const router = useRouter();
-  const [shopCount] = useState(5);
-  const [isload, setLoad] = useState(false);
 
   const {
     setFindedLocation,
     setSearchFilter,
-    newestShopList,
-    getNewestShopList,
+    shopList,
   } = routerProps;
-  if (isload === false) {
-    getNewestShopList(shopCount, null);
-    setLoad(true);
-  }
 
   const onProfilePage = (shop_name, city, street) => {
     const shop = shop_name.replaceAll(" ", "-");
@@ -56,7 +48,6 @@ const NewestShopSection = (routerProps) => {
       `/zoek-resultaten?position=${loc}&device=${0}&brand=${0}&model=${0}&reparation=${0}`
     );
   };
-
   return (
     <NewestShopSectionArea>
       <Container className="newestshop-section-container" fluid={true}>
@@ -75,8 +66,8 @@ const NewestShopSection = (routerProps) => {
           </SectionModel>
         </Row>
         <Row className="newshop-card-blog">
-          {newestShopList !== undefined &&
-            newestShopList.map((el) => {
+          {shopList !== undefined &&
+          shopList.map((el) => {
               return (
                 <ShopInfoCard
                   title={el.name}
@@ -126,12 +117,6 @@ const mapDispatchToProps = (dispatch) => {
     setSearchFilter: (data) => {
       dispatch(setSearchFilter(data));
     },
-    getNewestShopList: (count, city) => {
-      getNewestShopList(count, city, dispatch);
-    },
-    // getAccountProfile: (id) => {
-    //   getAccountProfile(id, dispatch);
-    // },
   };
 };
 

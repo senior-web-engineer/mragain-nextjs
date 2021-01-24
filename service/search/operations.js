@@ -57,13 +57,17 @@ axios.create({
   },
   withCredentials: true,
 });
-export function getNewestShopList(count, city, dispatch) {
-  axios
+export async function getNewestShopList(count, city, dispatch) {
+  return axios
     .get(`${API_PATH.GETNEWESTSHOPS}/`, {
       params: { count: count, city: city },
     })
     .then((res) => {
-      dispatch(fetchNewestShopList(res.data));
+        if(dispatch){
+            dispatch(fetchNewestShopList(res.data));
+        }else{
+            return res.data;
+        }
     })
     .catch((err) => {});
 }

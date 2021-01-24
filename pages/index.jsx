@@ -13,8 +13,9 @@ import {
 
 import "./index.style.less";
 import { Fragment } from "react";
+import {getNewestShopList} from "@/service/search/operations";
 
-export default function Home() {
+export default function Home({shopList}) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -69,7 +70,7 @@ export default function Home() {
           </Head>
           <FindBannerSection />
           <AdvantageSection />
-          <NewestShopsSection />
+          <NewestShopsSection shopList={shopList} />
           <TestmonialSection />
         </Main>
       </Layout>
@@ -79,9 +80,14 @@ export default function Home() {
 
 export async function getStaticProps() {
   // await getPublishProfies();
+
+  const shopList = await getNewestShopList(5,null,false);
+
+
   return {
     props: {
       data: "data",
+      shopList:shopList
     },
   };
 }
