@@ -75,8 +75,9 @@ const ShopInfoCard = (routerProps) => {
           routerProps.city,
           routerProps.street
       )}
+            passHref={true}
             prefetch={false}
-      ><Image
+      ><a ><Image
           width={240}
           height={162}
           className={'card-img-top'}
@@ -90,7 +91,7 @@ const ShopInfoCard = (routerProps) => {
         //     routerProps.street
         //   )
         // }
-      /></Link>
+      /></a></Link>
       <Card.Body>
         <Card.Title>
           {routerProps.title}
