@@ -22,7 +22,7 @@ module.exports = withLess(withSass(withCSS({
     outputStyle: 'compressed',
   },
   images:{
-    domains: ['localhost','mragain.eu.pythonanywhere.com','develop.mragain.nl','mragain.nl'],
+    domains: ['localhost','mragain.eu.pythonanywhere.com', 'mragainproduction.eu.pythonanywhere.com', 'develop.mragain.nl','mragain.nl'],
   },
   productionBrowserSourceMaps: true,
   webpack: (config, { isServer,webpack }) => {
