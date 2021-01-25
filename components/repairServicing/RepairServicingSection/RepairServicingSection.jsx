@@ -13,7 +13,7 @@ import {
   RepairServicingArticleLink,
   CircleFontIcon,
 } from './RepairServicingSection.style.jsx';
-import RepairServicingImage from '@/assets/images/about-us-image.jpg';
+import RepairServicingImage from '@/assets/images/telefoon-reparatie-mragain.jpg';
 
 import './RepairServicingSection.style.less';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

@@ -28,8 +28,8 @@ const AboutBannerSection1 = () => (
         content="Vind de beste reparateur bij jou in de buurt"
       />
       <meta property="og:type" content="website" />
-      <meta name="og:url" content="url" />
-      <meta property="og:image" content="" />
+      <meta name="og:url" content={ FRONT_END_URL + '/over-ons'} />
+      <meta property="og:image" content="/electronica-reparatie.jpg" />
       <meta name="og_site_name" property="og:site_name" content="Mr Again" />
       <meta name="theme-color" content="#ffffff" />
     </Head>

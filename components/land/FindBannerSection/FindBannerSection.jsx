@@ -36,7 +36,7 @@ const FindBannerSection = () => (
         name="og:url"
         content={ FRONT_END_URL + '/meld-je-aan-als-reparateur'}
       />
-      <meta property="og:image" content={FRONT_END_URL + "/media/land_banner_image.jpg"} />
+      <meta property="og:image" content={FRONT_END_URL + "/meld-je-aan-als-telefoon-reparateur.jpg"} />
       <meta name="og_site_name" property="og:site_name" content="Mr Again" />
 
       <meta name="theme-color" content="#ffffff" />

@@ -53,7 +53,7 @@ const Pagelist = ({ pages }) => {
                         className="read-more"
                         onClick={() => getBlogDetails(blog)}
                       >
-                        Read more...{" "}
+                        Lees meer...{" "}
                       </a>
                     </span>
                   </div>

@@ -43,7 +43,7 @@ const RepairServicingBannerSection = () => (
         name="og:url"
         content={ FRONT_END_URL + '/reparatie-en-service'}
       />
-      <meta property="og:image" content={FRONT_END_URL + "/media/contact_banner_image.jpg"}  />
+      <meta property="og:image" content={FRONT_END_URL + "/telefoon-reparatie-mragain.jpg"}  />
       <meta name="og_site_name" property="og:site_name" content="Mr Again" />
       <meta name="theme-color" content="#ffffff" />
     </Head>

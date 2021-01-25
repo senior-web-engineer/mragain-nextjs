@@ -203,7 +203,7 @@ const FooterView = ({ location ,ua}) => {
           </FooterLinkArea>
         </FooterViewContent>
       </FooterViewContainer>
-      <FooterCopyright> Copyright @ 2020 MrAgain </FooterCopyright>
+      <FooterCopyright> Copyright @ 2021 MrAgain </FooterCopyright>
       {
         !!notBot
         &&
