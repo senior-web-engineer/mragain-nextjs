@@ -8,7 +8,7 @@ const FindBannerSection = () => {
   return (
     <BannerSection>
         <Image
-            src={'/home_banner_image.jpg'}
+            src={'/telefoon-reparatie.jpg'}
             layout="fill"
             objectFit="cover"
             loading={'eager'}
