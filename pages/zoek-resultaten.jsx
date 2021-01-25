@@ -18,14 +18,10 @@ import "./zoek-resultaten.less";
 import Head from "next/head";
 import { setSearchFilter, setLoadFilter } from "../service/search/action";
 import { getBrands, getDevices, getModels } from "service/search/operations";
-import dynamic from "next/dynamic";
 import MyMapComponent from "@/components/zoekResultaten/MyMapComponent";
-const Alert = dynamic(() => import("antd").then((mod) => mod.Alert),{
-  ssr: false,
-});
-const Modal = dynamic(() => import("react-bootstrap").then((mod) => mod.Modal),{
-  ssr: false,
-});
+import {Modal} from "react-bootstrap";
+import {Alert} from "antd";
+
 
 const defaultShopImage =
   BACK_END_URL + "/static/media/home_newest_image3.8798cc16.jpg";
