@@ -8,7 +8,7 @@ import { Button } from "antd";
 import "./ShopInfoCard.style.less";
 import StarRatingInfo from "../StarRatingInfo/StarRatingInfo";
 import Image from 'next/image';
-
+import Link from 'next/link'
 const ShopInfoCard = (routerProps) => {
   const {
   } = routerProps;
@@ -29,7 +29,8 @@ const ShopInfoCard = (routerProps) => {
     }
 
     // router.push(`/profiel/${shop}--${cityName}--${streetName}`);
-    router.push(routerData);
+    // router.push(routerData);
+      return routerData;
   };
 
   function onMakeAppointment(shop_id) {
@@ -69,21 +70,27 @@ const ShopInfoCard = (routerProps) => {
 
   return (
     <Card>
-      <Image
+      <Link href={onProfilePage(
+          routerProps.shop_name,
+          routerProps.city,
+          routerProps.street
+      )}
+            prefetch={false}
+      ><Image
           width={240}
           height={162}
           className={'card-img-top'}
           variant="top"
         src={routerProps.image}
         alt="Reparateur-profielfoto"
-        onClick={() =>
-          onProfilePage(
-            routerProps.shop_name,
-            routerProps.city,
-            routerProps.street
-          )
-        }
-      />
+        // onClick={() =>
+        //   onProfilePage(
+        //     routerProps.shop_name,
+        //     routerProps.city,
+        //     routerProps.street
+        //   )
+        // }
+      /></Link>
       <Card.Body>
         <Card.Title>
           {routerProps.title}
