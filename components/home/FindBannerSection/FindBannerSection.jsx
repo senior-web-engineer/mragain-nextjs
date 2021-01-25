@@ -8,7 +8,7 @@ const FindBannerSection = () => {
   return (
     <BannerSection>
         <Image
-            src={'/telefoon-reparatie.jpg'}
+            src={'/media/telefoon-reparatie.jpg'}
             layout="fill"
             objectFit="cover"
             loading={'eager'}
@@ -17,7 +17,7 @@ const FindBannerSection = () => {
 
             // sizes={[300,650,1000]}
             sizes="(max-width: 500px) 100px, (max-width: 1023px) 400px, 1000px"
-            alt={'Banner'}
+            alt={'Telefoon Reparatie'}
         />
       <SearchForm className="banner-section"/>
     </BannerSection>
