@@ -42,7 +42,7 @@ const FooterView = ({ location ,ua}) => {
     splitUrl === "/hoe-werkt-het" ||
     splitUrl === "/contact" ||
     splitUrl === "/prijs" ||
-    splitUrl === "/reparatie-en-service" ||
+    splitUrl === "/telefoon-reparatie" ||
     splitUrl === "/maak-een-account-aan" ||
     splitUrl === "/login" ||
     splitUrl === "/meld-je-aan-als-reparateur" ||
@@ -85,6 +85,9 @@ const FooterView = ({ location ,ua}) => {
               Wij geloven dat de wereld net een beetje mooier wordt als we er
               voor kunnen zorgen dat de levensduur van jouw device verlengd
               wordt.
+	      Van waterschade, vervangen van je scherm of ingewikkelde moederbord 
+	      reparaties, er is altijd een telefoon reparateur die je kan helpen met de reparatie van 
+	      jouw telefoon. 
               <br />
               {/* <a href="#more">More..</a> */}
             </FooterBrandContent>
@@ -100,7 +103,7 @@ const FooterView = ({ location ,ua}) => {
                   <Link prefetch={false} href="/over-ons">Over ons</Link>
                 </li>
                 <li>
-                  <Link prefetch={false} href="/reparatie-en-service">Reparatie & Service</Link>
+                  <Link prefetch={false} href="/telefoon-reparatie">Telefoon reparatie</Link>
                 </li>
                 <li>
                   <Link prefetch={false} href="/meld-je-aan-als-reparateur">
