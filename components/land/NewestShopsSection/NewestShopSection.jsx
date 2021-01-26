@@ -48,7 +48,7 @@ const NewestShopSection = (routerProps) => {
       <Container className="newestshop-section-container" fluid={true}>
         <Row>
           <AdvantageSectionTitle color={"#1c2430"}>
-            Deze reparateurs gingen je voor
+            Deze telefoon reparateurs gingen je voor
           </AdvantageSectionTitle>
         </Row>
         <Row>

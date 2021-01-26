@@ -27,7 +27,7 @@ const AdvantageSectionWrapper = () => (
         <div  className="dollar-icon col-md-3 col-sm-6 mt-5">
           <AdvantageFontAweSome
             icon={['fas', 'euro-sign']}
-            title={'Direct inzage in je reparatiekosten'}
+            title={'Direct inzage in je telefoon reparatiekosten'}
           />
         </div>
         <div className="tasks-icon col-md-3 col-sm-6 mt-5">
@@ -39,13 +39,13 @@ const AdvantageSectionWrapper = () => (
         <div className="cog-icon col-md-3 col-sm-6 mt-5">
           <AdvantageFontAweSome
             icon={['fas', 'tools']}
-            title={'Nooit meer onnodig wachten'}
+            title={'Nooit meer onnodig wachten, maar direct geholpen worden met jouw reparatie'}
           />
         </div>
         <div className="hourglass-icon col-md-3 col-sm-6 mt-5">
           <AdvantageFontAweSome
             icon={['fas', 'file-contract']}
-            title={'De langst mogelijke garantie op je reparatie'}
+            title={'De langst mogelijke garantie op je telefoon reparatie'}
           />
         </div>
       </Row>

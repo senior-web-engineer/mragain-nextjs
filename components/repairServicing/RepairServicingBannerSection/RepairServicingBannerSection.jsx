@@ -22,7 +22,7 @@ const RepairServicingBannerSection = () => (
       />
       <meta
         name="description"
-        content="Bij MrAgain heb je vooraf duidelijkheid over de prijs en kwaliteit van je reparatie."
+        content="Telefoon kapot? Bij MrAgain heb je vooraf inzage in de prijs en kwaliteit van je reparatie en vind je de beste telefoon reparateur bij jou in de buurt."
       />
       <link
         rel="canonical"
@@ -37,7 +37,7 @@ const RepairServicingBannerSection = () => (
       />{" "}
       <meta
         property="og:description"
-        content="Bij MrAgain heb je vooraf duidelijkheid over de prijs en de kwaliteit van je reparatie."
+        content="Bij MrAgain heb je vooraf duidelijkheid over de prijs en de kwaliteit van je telefoon reparatie."
       />
       <meta
         name="og:url"
@@ -50,7 +50,7 @@ const RepairServicingBannerSection = () => (
     <RepairServicingContainer className="repair-servicing-banner-container">
       <RepairServicingBreadcrumb>
         <RepairServicingBannerTitle>
-          Reparatie & Service
+          Telefoon reparatie
         </RepairServicingBannerTitle>
         {/* <Breadcrumb className="repair-servicing-bread-crumb">
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>

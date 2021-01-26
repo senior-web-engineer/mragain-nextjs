@@ -184,8 +184,8 @@ function AccountCreate2(routerProps) {
           </Form>
         </div>
         <div className="account-create-title2">
-          Lever jij ook de beste kwaliteit reparaties? <br></br>
-          Maak dan gratis een account aan!{" "}
+          Lever jij ook de beste kwaliteit telefoon reparaties? <br></br>
+          Maak dan gratis een account aan en zorg dat ook jij gevonden wordt als telefoon reparateur op MrAgain!{" "}
         </div>
       </div>
       <Modal
