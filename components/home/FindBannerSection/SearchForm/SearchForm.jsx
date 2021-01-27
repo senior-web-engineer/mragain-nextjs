@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Button } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { setFindedLocation, setSearchFilter } from "service/search/action.js";
-import { CommonText, GreenText } from "./SearchForm.style.jsx";
+import { h1, CommonText, GreenText } from "./SearchForm.style.jsx";
 import "./SearchForm.style.less";
 
 const SearchForm = (routerProps) => {

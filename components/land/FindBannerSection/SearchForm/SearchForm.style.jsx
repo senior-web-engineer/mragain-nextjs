@@ -16,3 +16,10 @@ export const CommonText = styled.div`
   font-weight: bold;
   text-align: center;
 `
+export const h1 = styled.div`
+  color: #fff;
+  margin-right: 10px;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+ `
