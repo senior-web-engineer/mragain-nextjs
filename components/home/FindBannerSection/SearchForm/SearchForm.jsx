@@ -55,9 +55,9 @@ const SearchForm = (routerProps) => {
       }}
     >
       <div className="form-title">
-        <Text h1>
+        <h1>
           Vind een betrouwbare telefoon reparateur bij jou in de buurt
-        </Text>
+        </h1>
         <GreenText/>
       </div>
       <div className="form-group">
