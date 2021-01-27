@@ -5,7 +5,6 @@ import { Button, Progress, Rate } from "antd";
 import moment from "moment";
 import StarRatingInfo from "@/components/global/StarRatingInfo/StarRatingInfo";
 import "./ReviewCheckOut.less";
-import { useRouter } from "next/router";
 
 const ReviewCheckOut = (routerProps) => {
   const [price_mark, setPriceMark] = useState(0);
@@ -27,52 +26,52 @@ const ReviewCheckOut = (routerProps) => {
     let wait = 0;
     let recom = 0;
     let aver_marks = [];
-      if (shopReviews.length > 0) {
-        shopReviews.map((el) => {
-          price += parseInt(el.price_mark);
-          quality += parseInt(el.quality_mark);
-          service += parseInt(el.service_mark);
-          wait += parseInt(el.wait_mark);
-          aver_marks.push(
-            (parseInt(el.price_mark) +
-              parseInt(el.quality_mark) +
-              parseInt(el.service_mark) +
-              parseInt(el.wait_mark)) /
-              4
-          );
-          if (parseInt(el.recommend) === 1) {
-            recom += 1;
-          }
-          return recom;
-        });
-        let count = shopReviews.length;
-        let aver_mk = aver_marks.reduce((a, b) => a + b, 0) / count;
+    if (shopReviews.length > 0) {
+      shopReviews.map((el) => {
+        price += parseInt(el.price_mark);
+        quality += parseInt(el.quality_mark);
+        service += parseInt(el.service_mark);
+        wait += parseInt(el.wait_mark);
+        aver_marks.push(
+          (parseInt(el.price_mark) +
+            parseInt(el.quality_mark) +
+            parseInt(el.service_mark) +
+            parseInt(el.wait_mark)) /
+            4
+        );
+        if (parseInt(el.recommend) === 1) {
+          recom += 1;
+        }
+        return recom;
+      });
+      let count = shopReviews.length;
+      let aver_mk = aver_marks.reduce((a, b) => a + b, 0) / count;
 
-        let tmp = (price / count).toFixed(1);
-        setPriceMark(tmp);
+      let tmp = (price / count).toFixed(1);
+      setPriceMark(tmp);
 
-        tmp = (quality / count).toFixed(1);
-        setQualityMark(tmp);
+      tmp = (quality / count).toFixed(1);
+      setQualityMark(tmp);
 
-        tmp = (service / count).toFixed(1);
-        setServiceMark(tmp);
+      tmp = (service / count).toFixed(1);
+      setServiceMark(tmp);
 
-        tmp = (wait / count).toFixed(1);
-        setWaitMark(tmp);
+      tmp = (wait / count).toFixed(1);
+      setWaitMark(tmp);
 
-        setAverMark(aver_mk.toFixed(1));
-        setRecommend(count);
-        setRecomPercent((recom / count).toFixed(2) * 100);
-        setIsInit(true);
-      }else {
-        setPriceMark(0);
-        setQualityMark(0);
-        setServiceMark(0);
-        setWaitMark(0);
-        setAverMark(0);
-        setRecommend(0);
-        setRecomPercent(0);
-      }
+      setAverMark(aver_mk.toFixed(1));
+      setRecommend(count);
+      setRecomPercent((recom / count).toFixed(2) * 100);
+      setIsInit(true);
+    } else {
+      setPriceMark(0);
+      setQualityMark(0);
+      setServiceMark(0);
+      setWaitMark(0);
+      setAverMark(0);
+      setRecommend(0);
+      setRecomPercent(0);
+    }
   }
 
   function handleCheckOutModal() {
@@ -86,14 +85,9 @@ const ReviewCheckOut = (routerProps) => {
     return <div>100%</div>;
   };
 
-
-
-  useEffect(()=>{
+  useEffect(() => {
     initMarks();
-  },[account_profile,shopReviews])
-
-
-
+  }, [account_profile, shopReviews]);
 
   return (
     <div className="review-check-out">

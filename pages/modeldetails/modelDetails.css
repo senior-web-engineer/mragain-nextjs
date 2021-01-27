@@ -18,9 +18,39 @@
 .model-details .brand {
   color: #06c987;
   letter-spacing: 1.5px;
+  font-size: 18px;
   font-weight: 600;
 }
 .model-details .sub-title {
   color: #868686;
   letter-spacing: 1.5px;
+}
+
+.top-5-content {
+  width: 100%;
+  /* margin: 30px 40px 0px 0px; */
+  /* background-color: #ece8e8; */
+}
+
+.list-title {
+  /* background-color: #ece8e8; */
+  margin: 50px 0px 0px 70px;
+  color: #06c987;
+  letter-spacing: 1.5px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.list-details {
+  padding: 20px 10px;
+  width: fit-content;
+  margin: 20px 10px 0px 15px;
+  float: left;
+  background-color: #f8f9fa;
+  border: 1px solid #bbb8b8;
+  border-radius: 5px;
+  font-size: 15px;
+}
+.list-image {
+  width: 25px;
+  margin: 0px 10px 0px 0px;
 }
