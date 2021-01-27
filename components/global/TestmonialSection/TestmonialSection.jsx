@@ -14,7 +14,7 @@ const TestmonialSection = () => (
     <Container className="testmonial-section-container" fluid={true}>
       <Row>
         <AdvantageSectionTitle className="testmonial-custme-title" color={"#1c2430"}>
-          Wat onze klanten zeggen
+          Wat onze bezoekers zeggen
         </AdvantageSectionTitle>
       </Row>
        <Row>

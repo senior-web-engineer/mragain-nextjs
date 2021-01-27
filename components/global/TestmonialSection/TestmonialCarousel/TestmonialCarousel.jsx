@@ -37,15 +37,15 @@ export default function TestimonialCarousel() {
         <div>
           <div>
             <p>
-	     Via MrAgain heb ik eenvoudig en snel een goede reparateur bij mij in 
+	     Via MrAgain heb ik snel een goede telefoon reparateur bij mij in 
 	     de buurt kunnen vinden. Een afspraak maken was zo gepiept. 
             </p>
             <p>
-	    Na de reparatie ontving ik een garantie bewijs in mijn email, 
-	    maar deze heb ik helemaal niet nodig, hij doet het perfect! 
+	    Na de scherm reparatie ontving ik een garantie bewijs in mijn email, 
+	    maar deze heb ik niet nodig gehad, hij doet het perfect! 
             </p>
             <p>
-	    Ik kan iedereen die een reparateur zoekt MrAgain van harte aanbevelen! 
+	    Ik kan iedereen die een telefoon reparateur zoekt MrAgain van harte aanbevelen! 
             </p>
           </div>
           <div className="testmonial-icon">
@@ -55,7 +55,7 @@ export default function TestimonialCarousel() {
             />
           </div>
           <div className="testmonial-footer">
-            <p>Janneke</p>
+            <p>Janneke - Iphone 6 scherm reparatie</p>
             <p>Utrecht</p>
           </div>
         </div>
@@ -63,11 +63,11 @@ export default function TestimonialCarousel() {
           <div>
             <p>
 	    Mijn telefoon was goed kapot doordat deze in een plas water was gevallen.
-	    Via MrAgain kon ik makkelijk zien wie mijn telefoon kon repareren.
+	    Via MrAgain kon ik makkelijk zien wie waar ze waterschade behandelingen uitvoeren.
             </p>
             <p>
-	    Na het inzien van enkele reviews en de prijzen en garanties,
-	    heb ik een afspraak gemaakt.
+	    Na het bekijken van enkele reviews heb ik een reparatie,
+	    gepland bij een telefoon reparateur bij mij in de buurt.
             </p>
             <p>
 	    De telefoon is perfect gerepareerd en de mensen waren erg vriendelijk,
@@ -82,7 +82,7 @@ export default function TestimonialCarousel() {
           </div>
           <div className="testmonial-footer">
             <p>Bram</p>
-            <p>Rotterdam</p>
+            <p>Rotterdam - Samsansung Galaxy A50 Waterschade</p>
           </div>
         </div>
       </Slider>

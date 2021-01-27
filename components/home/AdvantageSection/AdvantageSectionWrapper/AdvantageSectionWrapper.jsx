@@ -28,7 +28,7 @@ const AdvantageSectionWrapper = () => (
           <AdvantageFontAweSome
             icon={["fas", "search"]}
             title2={"1.   Zoeken"}
-            title={"Zoek naar reparateurs bij jou in de buurt"}
+            title={"Zoek naar telefoon reparateurs bij jou in de buurt"}
           />
         </div>
         <div className="tasks-icon col-md-3 col-sm-6 mt-5">
@@ -36,7 +36,7 @@ const AdvantageSectionWrapper = () => (
             icon={["fas", "filter"]}
             title2={"2.   Vergelijk"}
             title={
-              "Vergelijk op basis van garantie, prijs en de reviews van anderen"
+              "Vergelijk op basis van garantie, reparatie prijs en de reviews van anderen"
             }
           />
         </div>
@@ -44,14 +44,14 @@ const AdvantageSectionWrapper = () => (
           <AdvantageFontAweSome
             icon={["fas", "calendar-check"]}
             title2={"3.   Afspraak"}
-            title={"Maak direct een afspraak bij de reparateur van jouw keuze"}
+            title={"Maak direct een afspraak bij de telefoon reparateur van jouw keuze"}
           />
         </div>
         <div className="hourglass-icon col-md-3 col-sm-6 mt-5">
           <AdvantageFontAweSome
             icon={["fas", "sticky-note"]}
             title2={"4.   Garantie"}
-            title={"Ontvang na je reparatie direct je garantiebewijs per email"}
+            title={"Na je reparatie ontvang je direct een garantiebewijs voor jouw reparatie per email"}
           />
         </div>
       </Row>

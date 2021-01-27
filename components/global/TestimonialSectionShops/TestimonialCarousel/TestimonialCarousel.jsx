@@ -45,7 +45,7 @@ export default function TestimonialCarousel() {
             />
           </div>
           <div className="testimonial-footer mt-3">
-            <p>Test1</p>
+            <p>Jan</p>
             <p>Utrecht</p>
           </div>
         </div>
@@ -70,7 +70,7 @@ export default function TestimonialCarousel() {
             />
           </div>
           <div className="testimonial-footer mt-3">
-            <p>Test2</p>
+            <p>Marcel</p>
             <p>Den Haag</p>
           </div>
         </div>

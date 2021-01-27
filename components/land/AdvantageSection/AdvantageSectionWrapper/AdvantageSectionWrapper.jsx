@@ -15,7 +15,7 @@ const AdvantageSectionWrapper = () => (
   <AdvantageSectionArea>
     <div className="advantage-section-container">
       <Row>
-        <AdvantageSectionTitle>De voordelen voor reparateurs</AdvantageSectionTitle>
+        <AdvantageSectionTitle>De voordelen voor telefoon reparateurs</AdvantageSectionTitle>
       </Row>
       <Row>
         <SectionModel>
