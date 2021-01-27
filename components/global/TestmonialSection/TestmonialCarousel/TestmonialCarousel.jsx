@@ -81,8 +81,8 @@ export default function TestimonialCarousel() {
             />
           </div>
           <div className="testmonial-footer">
-            <p>Bram</p>
-            <p>Rotterdam - Samsansung Galaxy A50 Waterschade</p>
+            <p>Bram - Samsung Galaxy A50 waterschade</p>
+            <p>Rotterdam</p>
           </div>
         </div>
       </Slider>

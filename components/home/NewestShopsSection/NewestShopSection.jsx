@@ -56,7 +56,7 @@ const NewestShopSection = (routerProps) => {
             className="pro_sec_Cust_title"
             color={"#1c2430"}
           >
-            De nieuwste repair shops
+            De nieuwste telefoon reparateurs
           </AdvantageSectionTitle>
         </Row>
         <Row>
