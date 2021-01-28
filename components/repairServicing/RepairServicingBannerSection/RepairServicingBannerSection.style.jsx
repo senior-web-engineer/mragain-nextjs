@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const RepairServicingBreadcrumb = styled.div`
-  width: 218px;
+  width: 350px;
   height: 86px;
   display: flex;
   flex-direction: column;

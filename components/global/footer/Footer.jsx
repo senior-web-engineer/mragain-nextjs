@@ -50,6 +50,8 @@ const FooterView = ({ location ,ua}) => {
     splitUrl === "/checkout-review" ||
     splitUrl === "/reset-je-wachtwoord" ||
     splitUrl === "/bevestig-je-wachtwoord-reset"
+    splitUrl === "/reparatie"
+    splitUrl === "/blog"
       ? "flex"
       : "none";
 

@@ -16,18 +16,18 @@ export default function Blog({ blogs }) {
       <Main>
         <div className="blog-list">
           <Head>
-            <title>MrAgain-Blogs</title>
+            <title>Onze blogs - MrAgain</title>
             <meta name="Keywords" content="Blogs, Mr-Again" />
-            <meta name="description" content="MrAgain Blogs" />
+            <meta name="description" content="De blog van MrAgain" />
             <link rel="canonical" href={FRONT_END_URL + "/blog"} />
             <meta property="og:type" content="website" />
-            <meta name="og_title" property="og:title" content="Onze blogs" />
+            <meta name="og_title" property="og:title" content"De blog van MrAgain" />
             <meta
               property="og:description"
-              content="Vind de beste reparateur bij jou in de buurt"
+              content="De blogs van MrAgain"
             />
             <meta name="og:url" content={FRONT_END_URL + "/blog"} />
-            <meta property="og:image" content="" />
+            <meta property="og:image" content="/telefoon-reparatie-mragain.jpg" />
             <meta
               name="og_site_name"
               property="og:site_name"

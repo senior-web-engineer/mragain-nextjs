@@ -24,15 +24,15 @@ export default function Blog({ blogs }) {
             <meta
               name="og_title"
               property="og:title"
-              content="Onze reparaties"
+              content="Alles over telefoon reparaties"
             />
             <meta
               property="og:description"
-              content="Vind de beste reparateur bij jou in de buurt"
+              content="Alles over telefoon reparaties"
             />
 
             <meta name="og:url" content={FRONT_END_URL + "/reparatie"} />
-            <meta property="og:image" content="" />
+            <meta property="og:image" content="/telefoon-reparatie-mragain.jpg" />
             <meta
               name="og_site_name"
               property="og:site_name"
@@ -40,7 +40,7 @@ export default function Blog({ blogs }) {
             />
           </Head>
           <div className="row px-0">
-            <div className="blog-list-title w-100 mt-4 ">Onze reparaties</div>
+            <h1 className="blog-list-title w-100 mt-4 ">Alles over telefoon reparaties</h1>
             <Pagelist pages={blogs} />
           </div>
         </div>
