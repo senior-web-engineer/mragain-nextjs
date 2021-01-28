@@ -12,13 +12,24 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.slider-image {
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
 .model-details {
   padding: 23px 5px 0px 5px;
 }
+.image-preview {
+  /* background-color: #f8f9fa; */
+  padding: 30px;
+  background-color: #f5f5f5d3;
+  border-radius: 10px;
+}
+
 .model-details .brand {
   color: #06c987;
-  letter-spacing: 1.5px;
-  font-size: 18px;
+  letter-spacing: 1.2px;
+  font-size: 16px;
   font-weight: 600;
 }
 .model-details .sub-title {
@@ -35,18 +46,18 @@
 .list-title {
   /* background-color: #ece8e8; */
   margin: 50px 0px 0px 70px;
-  color: #06c987;
-  letter-spacing: 1.5px;
-  font-size: 18px;
-  font-weight: 600;
+  color: #3378b9;
+  /* letter-spacing: 1px; */
+  font-size: 16px;
+  font-weight: 700;
 }
 .list-details {
-  padding: 20px 10px;
+  padding: 10px 10px;
   width: fit-content;
   margin: 20px 10px 0px 15px;
   float: left;
-  background-color: #f8f9fa;
-  border: 1px solid #bbb8b8;
+  /* background-color: #f8f9fa; */
+  /* border: 1px solid #bbb8b8; */
   border-radius: 5px;
   font-size: 15px;
 }
