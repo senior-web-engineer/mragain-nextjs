@@ -21,7 +21,7 @@ export default function Blog({ blogs }) {
             <meta name="description" content="De blog van MrAgain" />
             <link rel="canonical" href={FRONT_END_URL + "/blog"} />
             <meta property="og:type" content="website" />
-            <meta name="og_title" property="og:title" content"De blog van MrAgain" />
+            <meta name="og_title" property="og:title" content="De blog van MrAgain" />
             <meta
               property="og:description"
               content="De blogs van MrAgain"
