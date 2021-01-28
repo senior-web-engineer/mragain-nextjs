@@ -14,10 +14,11 @@ import "../../components/global/StarRatingInfo/StarRatingInfo.less";
 export default function index() {
   const [modelImages, setmodelImages] = useState([
     "https://cdn-0.idownloadblog.com/wp-content/uploads/2019/09/iPhone-11-Pro-Max-Midnight-Green-Mockup-with-AR72014-iDownloadBlog-scaled.jpeg",
-    "https://venturebeat.com/wp-content/uploads/2019/09/iphone11pro.jpg?fit=1958%2C1102&strip=all",
-    "https://www.mysimplephones.com/skin/electronics_black/images/Apple_iPhone_11_Pro_description_2.jpg",
-    "https://folio.ng/folio_upload/2019/10/iPhone-11-Pro.jpg",
-    "https://www.deccanherald.com/sites/dh/files/articleimages/2020/10/12/aiphone11-pro-camera-cs-1-768244-1602497450.png",
+    "https://www.iphonehacks.com/wp-content/uploads/2019/10/iphone-11-pro-max-teardown.jpg",
+    "https://misterminit.co/wp-content/uploads/2016/10/iphone-screen-repair-sydney.jpg",
+    "https://i.pinimg.com/originals/8b/e4/c6/8be4c66bd3d94434e888de089226ad7f.jpg",
+    "https://o.aolcdn.com/images/dims?quality=95&image_uri=https%3A%2F%2Fs.yimg.com%2Fuu%2Fapi%2Fres%2F1.2%2FD8mu7GAVkdYxbaGbmbHyJA--%7EB%2FaD05NzI7dz0xNjAwO2FwcGlkPXl0YWNoeW9u%2Fhttps%3A%2F%2Fo.aolcdn.com%2Fhss%2Fstorage%2Fmidas%2Ff9cd12e8a31e295524b7ef4755ed488b%2F205342770%2FRTX27FN4-ed.jpg&client=amp-blogside-v2&signature=d4f55c01c8007e4f3d7dd48e8a7c1d7ff43a6fa3",
+    "https://www.restorecomputerrepair.com/images/services_images/iphone_repair_baltimore.jpg",
   ]);
 
   const [currentImage, setcurrentImage] = useState(modelImages[0]);
@@ -53,14 +54,14 @@ export default function index() {
   let settings = {
     dots: true,
     infinite: false,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 2,
     vertical: true,
     verticalSwiping: true,
     verticalArrows: true,
     swipeToSlide: true,
     currentSlide: 0,
-    // arrows: false,
+    arrows: false,
   };
 
   const onselectImage = (image) => {
@@ -73,7 +74,7 @@ export default function index() {
     <Layout>
       <Main>
         <Head>
-          <title>MrAgain-Blogs</title>
+          <title>MrAgain-Model Details</title>
           <meta name="Keywords" content="Blogs, Mr-Again" />
           <meta name="description" content="MrAgain ModelDetails" />
           <script
@@ -98,9 +99,9 @@ export default function index() {
 
         <div className="row ">
           {/* <div className="col-md-1" /> */}
-          <div className="col-md-12 col-xs-12 bg-light pt-3 pb-5">
+          <div className="col-md-12 col-xs-12  pt-3 ">
             <div className="row px-5 mt-sm-5 mt-md-2">
-              <div className="col-md-2 col-xs-2 col-sm-3 py-3 px-4 ">
+              <div className=" col-lg-1 col-md-2 col-xs-3 col-sm-3 ">
                 {/* <button
                   className="btn up-down-arrow btn-sm py-0 mb-1"
                   onClick={() => onSelectUpArrow()}
@@ -119,7 +120,7 @@ export default function index() {
                     //   >
                     <img
                       src={im}
-                      className="w-100"
+                      className="w-100 slider-image"
                       onClick={() => onselectImage(im)}
                     />
                   ))}
@@ -131,7 +132,7 @@ export default function index() {
                   <i class="fas fa-chevron-circle-down"></i>
                 </button> */}
               </div>
-              <div className="col-md-5 col-xs-5 col-sm-9 pt-3">
+              <div className="col-lg-6 col-md-5 col-xs-5 col-sm-9 image-preview ">
                 <SideBySideMagnifier
                   imageSrc={currentImage}
                   imageAlt="Example"
@@ -143,13 +144,20 @@ export default function index() {
                   fillGapBottom={80}
                 />
               </div>
-              <div className="col-md-5 col-xs-4 ">
+              <div className="col-md-5  col-xs-4 pl-5 ">
                 <div className="model-details">
-                  <p className="brand">SAMSUNG</p>
+                  <p className="brand py-0 my-1 ">SAMSUNG</p>
                   <h3 className="pb-0 mb-0">iphone 11 Pro</h3>
                   <div className="star-rate-info py-0 y-0">
                     <Rate value={parseInt(4)} className="star-rate" />
                   </div>
+                  <p className="mt-3">
+                    <img
+                      src="https://banner2.cleanpng.com/20180802/vgh/-5b738fa79d1605.37427684153430007164344456.jpg"
+                      style={{ width: "20px", marginRight: "5px" }}
+                    />
+                    Released 2020, August 21
+                  </p>
                 </div>
                 <hr />
                 <div className="text-justify">
@@ -168,7 +176,7 @@ export default function index() {
               </div>
             </div>
           </div>
-          <div className="w-100 5 mb-5">
+          <div className="w-100  mb-5 mx-5">
             {/* <hr /> */}
             <h4 className="list-title">TOP 5 COMMON ISSUES </h4>
             <div className="top-5-content">
