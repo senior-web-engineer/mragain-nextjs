@@ -49,9 +49,9 @@ const RepairServicingBannerSection = () => (
     </Head>
     <RepairServicingContainer className="repair-servicing-banner-container">
       <RepairServicingBreadcrumb>
-        <RepairServicingBannerTitle>
+        <h1 className="h1-title">
           Telefoon reparatie
-        </RepairServicingBannerTitle>
+        <h1>
         {/* <Breadcrumb className="repair-servicing-bread-crumb">
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item href="/repair" active>
