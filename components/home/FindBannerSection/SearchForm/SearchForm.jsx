@@ -55,7 +55,7 @@ const SearchForm = (routerProps) => {
       }}
     >
       <div className="form-title">
-        <h1 className="CommonText">
+        <h1 className="main-title">
           Vind een betrouwbare telefoon reparateur bij jou in de buurt
         </h1>
         <GreenText/>
