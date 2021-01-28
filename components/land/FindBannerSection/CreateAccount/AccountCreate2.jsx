@@ -183,10 +183,10 @@ function AccountCreate2(routerProps) {
             </Button>
           </Form>
         </div>
-        <div className="account-create-title2">
-          Lever jij ook de beste kwaliteit telefoon reparaties? <br></br>
-          Maak dan gratis een account aan en zorg dat ook jij gevonden wordt als telefoon reparateur op MrAgain!{" "}
-        </div>
+        <h1 className="account-create-title2">
+          Lever jij de beste kwaliteit telefoon reparatie en wil je online gevonden worden?<br></br>
+          Met een gratis account kun je binnen 5 minuten gevonden worden!{" "}
+        </h1>
       </div>
       <Modal
         show={showAgree}
