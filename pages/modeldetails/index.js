@@ -50,6 +50,25 @@ export default function index() {
       title: "Connectivity Issues",
     },
   ]);
+  <i class="fas fa-headphones-alt"></i>;
+  const [allServices, setAllServices] = useState([
+    { icon: "fas fa-bolt", serviceName: "Scherm vervangen" },
+    { icon: "fas fa-battery-quarter", serviceName: "Batterij vervangen" },
+    { icon: "fas fa-tint", serviceName: "Waterschade" },
+    { icon: "fas fa-camera", serviceName: "Front Camera" },
+    { icon: "fas fa-charging-station", serviceName: "Oplaadpunt" },
+    { icon: "fas fa-camera", serviceName: "Back camera" },
+    { icon: "fas fa-headphones-alt", serviceName: "Earspeaker" },
+    { icon: "fas fa-volume-up", serviceName: "Loudspeaker" },
+    { icon: "fas fa-home", serviceName: "Behuizing" },
+    { icon: "fab fa-usb", serviceName: "USB connector" },
+    { icon: "fas fa-mobile", serviceName: "Back cover" },
+    { icon: "fas fa-diagnoses", serviceName: "Diagnose" },
+    { icon: "fas fa-toggle-on", serviceName: "Aan-uit-knop" },
+    { icon: "fas fa-exchange-alt", serviceName: "Data overzetten" },
+    { icon: "fas fa-trash-restore-alt", serviceName: "Software reset" },
+    { icon: "fas fa-wrench", serviceName: "Software Update" },
+  ]);
 
   let settings = {
     dots: true,
@@ -81,6 +100,12 @@ export default function index() {
             src="https://kit.fontawesome.com/6cdc6e8865.js"
             crossorigin="anonymous"
           ></script>
+          <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+            integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+            crossorigin="anonymous"
+          ></link>
           {/* <link rel="canonical" href={FRONT_END_URL + "/blog"} /> */}
           <meta property="og:type" content="website" />
           <meta name="og_title" property="og:title" content="Onze blogs" />
@@ -110,14 +135,6 @@ export default function index() {
                 </button> */}
                 <Slider {...settings}>
                   {modelImages.map((im) => (
-                    //   <div
-                    //     style={{
-                    //       width: "100px",
-                    //       height: "100px",
-                    //       backgroundColor: "grey",
-                    //       margin: "10px 0px 10px 0px",
-                    //     }}
-                    //   >
                     <img
                       src={im}
                       className="w-100 slider-image"
@@ -144,7 +161,7 @@ export default function index() {
                   fillGapBottom={80}
                 />
               </div>
-              <div className="col-md-5  col-xs-4 pl-5 ">
+              <div className="col-md-5  col-xs-4 pl-2 pl-lg-5 ">
                 <div className="model-details">
                   <p className="brand py-0 my-1 ">SAMSUNG</p>
                   <h3 className="pb-0 mb-0">iphone 11 Pro</h3>
@@ -166,21 +183,19 @@ export default function index() {
                   The point of using Lorem Ipsum is that it has a more-or-less
                   normal distribution of letters, as opposed to using 'Content
                   here, content here', making it look like readable English.
-                  Many desktop publishing packages and web page editors now use
-                  Lorem Ipsum as their default model text, and a search for
-                  'lorem ipsum' will uncover many web sites still in their
-                  infancy. Various versions have evolved over the years,
-                  sometimes by accident, sometimes on purpose injected humour
-                  and the like.
                 </div>
+                <button className="btn book-repair">
+                  BOOK FOR A REPAIR{" "}
+                  <i className="fas fa-arrow-right book-repair-icon"></i>
+                </button>
               </div>
             </div>
           </div>
-          <div className="w-100  mb-5 mx-5">
+          <div className="w-100  mb-5 mx-md-5 mx-sm-3 mx-xs-3">
             {/* <hr /> */}
-            <h4 className="list-title">TOP 5 COMMON ISSUES </h4>
-            <div className="top-5-content">
-              <div className="row mx-2 px-5">
+            <div className="list-title">TOP 5 COMMON ISSUES </div>
+            <div className="top-5-content px-0  mx-0">
+              <div className="row mx-2 mx-sm-2 px-sm-2  mx-xs-1 px-xs-1 px-5">
                 {issueData.length > 0
                   ? issueData.map((issue, i) => (
                       <div className="list-details  d-inline">
@@ -189,8 +204,14 @@ export default function index() {
                 icon={faBolt}
                 className="text-success "
               ></FontAwesomeIcon> */}
-                        <img src={issue.image} alt="" className="list-image " />
-                        <span>{issue.title}</span>
+                        {/* <div className="d-inline" style={{ float: "left" }}> */}
+                        <img
+                          src={issue.image}
+                          alt=""
+                          className="list-image pt-1 "
+                        />
+                        {/* </div> */}
+                        <span className="">{issue.title}</span>
                         {/* </span> */}
                       </div>
                     ))
@@ -198,6 +219,25 @@ export default function index() {
               </div>
             </div>
           </div>
+          <section className="all-services">
+            <div className="row">
+              <div className="col-md-1 "></div>
+              <div className="col-md-10  ">
+                <h4 className="services-title w-100 ">
+                  ALL AVAILABLE SERVICES OFFERED
+                </h4>
+                {allServices.map((service, i) => (
+                  <div className="services-list" key={i}>
+                    <span className="service-icons">
+                      <i className={`${service.icon}`} />
+                    </span>
+                    <span className="ml-3">{service.serviceName}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="col-md-1"></div>
+            </div>
+          </section>
         </div>
       </Main>
     </Layout>
