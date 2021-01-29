@@ -36,12 +36,6 @@ const AboutBannerSection1 = () => (
     <AboutContainer className="about-banner1-container">
       <AboutBreadcrumb>
         <h1 className="about-banner-title">Over MrAgain</h1>
-        {/*<Breadcrumb className="about-bread-crumb">
-          <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-          <Breadcrumb.Item href="/about" active>
-            Over MrAgain
-          </Breadcrumb.Item>
-        </Breadcrumb>*/}
       </AboutBreadcrumb>
     </AboutContainer>
   </AboutSectionArea>
