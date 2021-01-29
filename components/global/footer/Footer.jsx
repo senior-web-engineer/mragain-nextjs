@@ -82,7 +82,7 @@ const FooterView = ({ location ,ua}) => {
                 <LogoBottomTitle></LogoBottomTitle>
               </FooterBrandTitle>
             </FooterBrandLogo>
-            <FooterBrandContent className="footer-brand-content">
+            <h4 className="footer-brand-content">
               De beste reparateurs voor jouw device, die vind je bij MrAgain.
               Wij geloven dat de wereld net een beetje mooier wordt als we er
               voor kunnen zorgen dat de levensduur van jouw device verlengd
@@ -92,7 +92,7 @@ const FooterView = ({ location ,ua}) => {
 	      jouw telefoon. 
               <br />
               {/* <a href="#more">More..</a> */}
-            </FooterBrandContent>
+            </h4>
           </FooterBrandArea>
           <FooterLinkArea className="footer-link-area">
             <FooterSitemap ClassName="custome-footer-sitename">

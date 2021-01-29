@@ -6,10 +6,8 @@ import {
   AdvantageSectionTitle,
   SectionModel,
   DotDevider,
-  // PhoneIcon,
 } from "../../component.style.jsx";
 import "./AdvantageSectionWrapper.style.less";
-// import phoneIcon from "@/assets/images/phone-icon1.png";
 
 const AdvantageSectionWrapper = () => (
   <AdvantageSectionArea>
@@ -20,7 +18,6 @@ const AdvantageSectionWrapper = () => (
       <Row>
         <SectionModel>
           <DotDevider color="#f8f8f8" />
-          {/*<PhoneIcon bkImage={phoneIcon} bkColor={"#06c987"}/>*/}
         </SectionModel>
       </Row>
       <Row>

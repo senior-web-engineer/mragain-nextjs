@@ -52,12 +52,12 @@ const NewestShopSection = (routerProps) => {
     <NewestShopSectionArea>
       <Container className="newestshop-section-container" fluid={true}>
         <Row>
-          <AdvantageSectionTitle
-            className="pro_sec_Cust_title"
+          <h2 
+            className="h2-title-advantage"
             color={"#1c2430"}
           >
             De nieuwste telefoon reparateurs
-          </AdvantageSectionTitle>
+          </h2>
         </Row>
         <Row>
           <SectionModel>
