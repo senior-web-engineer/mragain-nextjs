@@ -15,12 +15,11 @@ const AdvantageSectionWrapper = () => (
   <AdvantageSectionArea>
     <div className="advantage-section-container">
       <Row>
-        <AdvantageSectionTitle>Jouw voordelen bij MrAgain</AdvantageSectionTitle>
+        <h2 className="advantage-h2-title">Jouw voordelen bij MrAgain</h2>
       </Row>
       <Row>
         <SectionModel>
           <DotDevider color="#FFFFFF"/>
-	{/*<PhoneIcon bkImage={phoneIcon} bkColor={"#06c987"}/>*/} 
         </SectionModel>
       </Row>
       <Row>
