@@ -14,7 +14,7 @@ const AboutUs2Section = () => (
     <AboutContainer className="about-us-container2">
       <AboutUsContent>
         <AboutArticle>
-          <AboutArticleTitle>Ons platform</AboutArticleTitle>
+          <h2 className="about-us-h2-title">Ons platform</h2>
           <AboutArticleContent>
             <p>
               {" "}

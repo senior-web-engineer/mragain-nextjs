@@ -13,7 +13,7 @@ const AboutUs3Section = () => (
     <AboutContainer className="about-us-container3">
       <AboutUsContent>
         <AboutArticle>
-          <AboutArticleTitle>Onze missie</AboutArticleTitle>
+          <h2 className="about-us-h2-title">Onze missie</h2>
           <AboutArticleContent>
 	<p>
 	In Nederland produceren we per jaar zo'n 25 kilo(!) elektronisch afval per persoon per jaar. Een groot gedeelte hiervan betreft consumenten elektronica dat nog prima te gebruiken of te repareren is. 
@@ -21,20 +21,6 @@ const AboutUs3Section = () => (
 	</p>
             <br></br>
           </AboutArticleContent>
-          {/* <AboutArticleLink>
-            <FontAwesomeFigure className="font-awesone-figure">
-              <a href="#+41 6734 5590" to="/page">
-                <CircleFontIcon><FontAwesomeIcon className="about-line-icon" icon={['fas', 'phone-alt']}></FontAwesomeIcon></CircleFontIcon>
-                <span>+41 6734 5590</span>
-              </a>
-            </FontAwesomeFigure>
-            <FontAwesomeFigure className="font-awesone-figure">
-              <a href="#info@mragain.nl" to="/page">  
-                <CircleFontIcon><FontAwesomeIcon className="about-line-icon"icon={['fas', 'envelope']}></FontAwesomeIcon></CircleFontIcon>
-                <span>info@repairshop.com</span>
-              </a>
-            </FontAwesomeFigure>
-          </AboutArticleLink>*/}
         </AboutArticle>
       </AboutUsContent>
     </AboutContainer>

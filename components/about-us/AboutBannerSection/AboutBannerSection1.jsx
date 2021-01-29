@@ -22,10 +22,10 @@ const AboutBannerSection1 = () => (
         href={ FRONT_END_URL + '/over-ons'}
       />
       {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
-      <meta name="og_title" property="og:title" content="Over Mr Again" />
+      <meta name="og_title" property="og:title" content="Over MrAgain, het platform voor telefoon reparateurs | MrAgain" />
       <meta
         property="og:description"
-        content="Vind de beste reparateur bij jou in de buurt"
+        content="Over MrAgain, het platform voor telefoon reparateurs | MrAgain"
       />
       <meta property="og:type" content="website" />
       <meta name="og:url" content={ FRONT_END_URL + '/over-ons'} />
@@ -35,7 +35,7 @@ const AboutBannerSection1 = () => (
     </Head>
     <AboutContainer className="about-banner1-container">
       <AboutBreadcrumb>
-        <AboutBannerTitle>Wie wij zijn</AboutBannerTitle>
+        <h1 className="about-banner-title">Over MrAgain</h1>
         {/*<Breadcrumb className="about-bread-crumb">
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item href="/about" active>
