@@ -14,7 +14,7 @@ const Faq = () => {
         <Layout>
             <Main>
                 <Head>
-                    <title>Mr Again - Veel gestelde vragen</title>
+                    <title>Veel gestelde vragen | Mr Again</title>
                     <meta
                     name="Keywords"
                     content="Veel gestelde vragen, Mr Again, FAQ Mr Again, Telefoon reparaties, Telefoon reparateur, telefoonscherm, garantie, kwaliteit"

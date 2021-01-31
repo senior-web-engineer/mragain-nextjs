@@ -16,7 +16,7 @@ export default function Blog({ blogs }) {
       <Main>
         <div className="blog-list">
           <Head>
-            <title>Onze blogs - MrAgain</title>
+            <title>Onze blogs | MrAgain</title>
             <meta name="Keywords" content="Blogs, Mr-Again" />
             <meta name="description" content="De blog van MrAgain" />
             <link rel="canonical" href={FRONT_END_URL + "/blog"} />

@@ -28,7 +28,7 @@ export default function Home({shopList}) {
               name="viewport"
               content="width=device-width, initial-scale=1"
             />
-            <title>Mr Again | De beste telefoon reparateurs </title>
+            <title>De beste telefoon reparateur bij jou in de buurt | Mr Again </title>
 
             <meta
               name="Keywords"

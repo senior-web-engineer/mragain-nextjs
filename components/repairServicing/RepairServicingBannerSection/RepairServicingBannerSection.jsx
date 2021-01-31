@@ -15,7 +15,7 @@ import { FRONT_END_URL } from "../../../constants.js";
 const RepairServicingBannerSection = () => (
   <RepairServicingSectionArea className="repair-servicing-banner-area">
     <Head>
-      <title>Telefoon reparatie</title>
+      <title>Telefoon reparatie | Mr Again</title>
       <meta
         name="Keywords"
         content="Telefoon reparatie, service, garantie, telefoon maken, telefoon kapot, MrAgain"

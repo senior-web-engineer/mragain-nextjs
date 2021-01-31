@@ -14,7 +14,7 @@ const Contact = () => {
         <Layout>
             <Main>
             <Head>
-                <title>Contact mragain.nl</title>
+                <title>Contact met MrAgain | Mr Again</title>
                 <meta
                 name="description"
                 content="Neem contact op met MrAgain"

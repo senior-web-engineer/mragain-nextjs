@@ -16,7 +16,7 @@ export default function Blog({ blogs }) {
       <Main>
         <div className="blog-list">
           <Head>
-            <title>MrAgain-Reparaties</title>
+            <title>Telefoon Reparaties | Mr Again</title>
             <meta name="Keywords" content="Reparaties, Mr-Again" />
             <meta name="description" content="MrAgain Reparaties" />
             <link rel="canonical" href={FRONT_END_URL + "/reparatie"} />
