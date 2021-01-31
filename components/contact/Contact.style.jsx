@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import bannerImage from '@/assets/images/telefoon-reparatie-mragain.jpg'
+import bannerImage from '@/assets/images/telefoon-reparatie.jpg'
 export const Main = styled.div`
   width: 100%;
 `
