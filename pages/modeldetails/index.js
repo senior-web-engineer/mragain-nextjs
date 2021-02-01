@@ -52,22 +52,42 @@ export default function index() {
   ]);
   <i class="fas fa-headphones-alt"></i>;
   const [allServices, setAllServices] = useState([
-    { icon: "fas fa-bolt", serviceName: "Scherm vervangen" },
-    { icon: "fas fa-battery-quarter", serviceName: "Batterij vervangen" },
-    { icon: "fas fa-tint", serviceName: "Waterschade" },
-    { icon: "fas fa-camera", serviceName: "Front Camera" },
-    { icon: "fas fa-charging-station", serviceName: "Oplaadpunt" },
-    { icon: "fas fa-camera", serviceName: "Back camera" },
-    { icon: "fas fa-headphones-alt", serviceName: "Earspeaker" },
-    { icon: "fas fa-volume-up", serviceName: "Loudspeaker" },
-    { icon: "fas fa-home", serviceName: "Behuizing" },
-    { icon: "fab fa-usb", serviceName: "USB connector" },
-    { icon: "fas fa-mobile", serviceName: "Back cover" },
-    { icon: "fas fa-diagnoses", serviceName: "Diagnose" },
-    { icon: "fas fa-toggle-on", serviceName: "Aan-uit-knop" },
-    { icon: "fas fa-exchange-alt", serviceName: "Data overzetten" },
-    { icon: "fas fa-trash-restore-alt", serviceName: "Software reset" },
-    { icon: "fas fa-wrench", serviceName: "Software Update" },
+    { icon: "fas fa-bolt", serviceName: "Scherm vervangen", price: "49.33" },
+    {
+      icon: "fas fa-battery-quarter",
+      serviceName: "Batterij vervangen",
+      price: "25.50",
+    },
+    { icon: "fas fa-tint", serviceName: "Waterschade", price: "34.40" },
+    { icon: "fas fa-camera", serviceName: "Front Camera", price: "29.37" },
+    {
+      icon: "fas fa-charging-station",
+      serviceName: "Oplaadpunt",
+      price: "49.33",
+    },
+    { icon: "fas fa-camera", serviceName: "Back camera", price: "45.33" },
+    {
+      icon: "fas fa-headphones-alt",
+      serviceName: "Earspeaker",
+      price: "39.31",
+    },
+    { icon: "fas fa-volume-up", serviceName: "Loudspeaker", price: "42.19" },
+    { icon: "fas fa-home", serviceName: "Behuizing", price: "34.33" },
+    { icon: "fab fa-usb", serviceName: "USB connector", price: "32.33" },
+    { icon: "fas fa-mobile", serviceName: "Back cover", price: "38.74" },
+    { icon: "fas fa-diagnoses", serviceName: "Diagnose", price: "44.30" },
+    { icon: "fas fa-toggle-on", serviceName: "Aan-uit-knop", price: "36.13" },
+    {
+      icon: "fas fa-exchange-alt",
+      serviceName: "Data overzetten",
+      price: "25.58",
+    },
+    {
+      icon: "fas fa-trash-restore-alt",
+      serviceName: "Software reset",
+      price: "29.76",
+    },
+    { icon: "fas fa-wrench", serviceName: "Software Update", price: "32.68" },
   ]);
 
   let settings = {
@@ -85,7 +105,6 @@ export default function index() {
 
   const onselectImage = (image) => {
     // console.log("🚀 => onselectImage => image", image);
-
     setcurrentImage(image);
   };
 
@@ -98,13 +117,13 @@ export default function index() {
           <meta name="description" content="MrAgain ModelDetails" />
           <script
             src="https://kit.fontawesome.com/6cdc6e8865.js"
-            crossorigin="anonymous"
+            crossOrigin="anonymous"
           ></script>
           <link
             rel="stylesheet"
             href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
             integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
-            crossorigin="anonymous"
+            crossOrigin="anonymous"
           ></link>
           {/* <link rel="canonical" href={FRONT_END_URL + "/blog"} /> */}
           <meta property="og:type" content="website" />
@@ -121,18 +140,10 @@ export default function index() {
             content="Mr Again"
           />
         </Head>
-
         <div className="row ">
-          {/* <div className="col-md-1" /> */}
           <div className="col-md-12 col-xs-12  pt-3 ">
             <div className="row px-5 mt-sm-5 mt-md-2">
               <div className=" col-lg-1 col-md-2 col-xs-3 col-sm-3 ">
-                {/* <button
-                  className="btn up-down-arrow btn-sm py-0 mb-1"
-                  onClick={() => onSelectUpArrow()}
-                >
-                  <i class="fas fa-chevron-circle-up"></i>
-                </button> */}
                 <Slider {...settings}>
                   {modelImages.map((im) => (
                     <img
@@ -142,12 +153,6 @@ export default function index() {
                     />
                   ))}
                 </Slider>
-                {/* <button
-                  className="btn up-down-arrow btn-sm py-0 mt-1"
-                  onClick={() => onSelectDownArrow()}
-                >
-                  <i class="fas fa-chevron-circle-down"></i>
-                </button> */}
               </div>
               <div className="col-lg-6 col-md-5 col-xs-5 col-sm-9 image-preview ">
                 <SideBySideMagnifier
@@ -192,27 +197,18 @@ export default function index() {
             </div>
           </div>
           <div className="w-100  mb-5 mx-md-5 mx-sm-3 mx-xs-3">
-            {/* <hr /> */}
             <div className="list-title">TOP 5 COMMON ISSUES </div>
             <div className="top-5-content px-0  mx-0">
               <div className="row mx-2 mx-sm-2 px-sm-2  mx-xs-1 px-xs-1 px-5">
                 {issueData.length > 0
                   ? issueData.map((issue, i) => (
                       <div className="list-details  d-inline">
-                        {/* <span className=""> */}
-                        {/* <FontAwesomeIcon
-                icon={faBolt}
-                className="text-success "
-              ></FontAwesomeIcon> */}
-                        {/* <div className="d-inline" style={{ float: "left" }}> */}
                         <img
                           src={issue.image}
                           alt=""
                           className="list-image pt-1 "
                         />
-                        {/* </div> */}
                         <span className="">{issue.title}</span>
-                        {/* </span> */}
                       </div>
                     ))
                   : null}
@@ -223,15 +219,29 @@ export default function index() {
             <div className="row">
               <div className="col-md-1 "></div>
               <div className="col-md-10  ">
-                <h4 className="services-title w-100 ">
-                  ALL AVAILABLE SERVICES OFFERED
-                </h4>
+                <div className="services-title">
+                  <h4>ALL AVAILABLE SERVICES OFFERED</h4>
+                  <input type="text" className="" placeholder="SEARCH" />
+                </div>
                 {allServices.map((service, i) => (
                   <div className="services-list" key={i}>
-                    <span className="service-icons">
-                      <i className={`${service.icon}`} />
-                    </span>
-                    <span className="ml-3">{service.serviceName}</span>
+                    <div className="row">
+                      <div className="col-md-8 d-inline">
+                        <span className="service-icons">
+                          <i className={`${service.icon}`} />
+                        </span>
+                        <span className="ml-3">{service.serviceName}</span>
+                      </div>
+                      <div className="col-md-4  ">
+                        <div className="float-left text-center mr-4">
+                          <div className="start-at-label">Starts At</div>
+                          <div className=" price-label ">${service.price}</div>
+                        </div>
+                        <button className="btn browse-shops ">
+                          Browse Shops
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
