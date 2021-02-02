@@ -10,7 +10,12 @@ import Slider from "react-slick";
 import "./modelDetails.css";
 import { Rate } from "antd";
 import "../../components/global/StarRatingInfo/StarRatingInfo.less";
-
+import batteryIssue from "../../assets/icons/Problems - Battery.svg";
+import crackIssue from "../../assets/icons/Problems - Crack.svg";
+import signalIssue from "../../assets/icons/Problems - Signal.svg";
+import locationIssue from "../../assets/icons/Problems - Location.svg";
+import connectivityIssue from "../../assets/icons/Problems - Connectivity.svg";
+import releasedDate from "../../assets/icons/Specifications - Date.svg";
 export default function index() {
   const [modelImages, setmodelImages] = useState([
     "https://cdn-0.idownloadblog.com/wp-content/uploads/2019/09/iPhone-11-Pro-Max-Midnight-Green-Mockup-with-AR72014-iDownloadBlog-scaled.jpeg",
@@ -25,32 +30,27 @@ export default function index() {
 
   const [issueData, setissueData] = useState([
     {
-      image:
-        // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK25dsCxZd1lZU0g2XfUTnfJR4UaflhG5_gw&usqp=CAU",
-        "https://image.flaticon.com/icons/png/512/68/68736.png",
+      image: crackIssue,
       title: "Damaged Screen",
     },
     {
-      image:
-        "https://w7.pngwing.com/pngs/21/768/png-transparent-battery-charger-computer-icons-random-icons-electronics-logo-mobile-phones.png",
+      image: batteryIssue,
       title: "Battery Drain Issues",
     },
     {
-      image:
-        "https://icons-for-free.com/iconfiles/png/512/cellular+low+signal+icon-1320184993950493075.png",
+      image: signalIssue,
       title: "Weak Signal Reception",
     },
     {
-      image: "https://p7.hiclipart.com/preview/657/91/737/5bc0036b954d9.jpg",
+      image: locationIssue,
       title: "Inaccurate GPS Location",
     },
     {
-      image:
-        "https://www.pngfind.com/pngs/m/265-2656711_svg-png-icon-radio-transmitter-icon-png-transparent.png",
+      image: connectivityIssue,
       title: "Connectivity Issues",
     },
   ]);
-  <i class="fas fa-headphones-alt"></i>;
+
   const [allServices, setAllServices] = useState([
     { icon: "fas fa-bolt", serviceName: "Scherm vervangen", price: "49.33" },
     {
@@ -175,7 +175,7 @@ export default function index() {
                   </div>
                   <p className="mt-3">
                     <img
-                      src="https://banner2.cleanpng.com/20180802/vgh/-5b738fa79d1605.37427684153430007164344456.jpg"
+                      src={releasedDate}
                       style={{ width: "20px", marginRight: "5px" }}
                     />
                     Released 2020, August 21
