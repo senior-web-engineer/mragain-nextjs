@@ -1,6 +1,6 @@
 import React from "react";
 import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
-import { Layout } from "components/global";
+import { Layout } from "@/pages/modeldetails/node_modules/@/pages/telefoone-reparatie/node_modules/components/global";
 import Head from "next/head";
 import { API_PATH, FRONT_END_URL } from "../../constants.js";
 import { useEffect } from "react";
@@ -32,7 +32,10 @@ export default function Blog({ blogs }) {
             />
 
             <meta name="og:url" content={FRONT_END_URL + "/reparatie"} />
-            <meta property="og:image" content="/telefoon-reparatie-mragain.jpg" />
+            <meta
+              property="og:image"
+              content="/telefoon-reparatie-mragain.jpg"
+            />
             <meta
               name="og_site_name"
               property="og:site_name"
@@ -40,7 +43,9 @@ export default function Blog({ blogs }) {
             />
           </Head>
           <div className="row px-0">
-            <h1 className="blog-list-title w-100 mt-4 ">Alles over telefoon reparaties</h1>
+            <h1 className="blog-list-title w-100 mt-4 ">
+              Alles over telefoon reparaties
+            </h1>
             <Pagelist pages={blogs} />
           </div>
         </div>

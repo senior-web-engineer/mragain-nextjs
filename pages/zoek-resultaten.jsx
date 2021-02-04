@@ -19,9 +19,8 @@ import Head from "next/head";
 import { setSearchFilter, setLoadFilter } from "../service/search/action";
 import { getBrands, getDevices, getModels } from "service/search/operations";
 import MyMapComponent from "@/components/zoekResultaten/MyMapComponent";
-import {Modal} from "react-bootstrap";
-import {Alert} from "antd";
-
+import { Modal } from "react-bootstrap";
+import { Alert } from "antd";
 
 const defaultShopImage =
   BACK_END_URL + "/static/media/home_newest_image3.8798cc16.jpg";
@@ -37,9 +36,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }));
-
-
-
 
 const SearchShop = (routerProps) => {
   const [spacing] = React.useState(2);
@@ -538,16 +534,19 @@ const SearchShop = (routerProps) => {
                 <div className="third-filter">
                   <div className="third-filter-wrap">
                     <div className="location-select-blog">
-                      <label htmlFor="zoek-resultaten-search-from"
-                             style={{
-                               opacity:0,
-                               width:0,
-                               height:0,
-                               position:'absolute'
-                             }}
-                      >Woonplaats of postcode</label>
+                      <label
+                        htmlFor="zoek-resultaten-search-from"
+                        style={{
+                          opacity: 0,
+                          width: 0,
+                          height: 0,
+                          position: "absolute",
+                        }}
+                      >
+                        Woonplaats of postcode
+                      </label>
                       <Input
-                          id={"zoek-resultaten-search-from"}
+                        id={"zoek-resultaten-search-from"}
                         className="location-select"
                         placeholder="Woonplaats of postcode"
                         onChange={handleLocationChange}
@@ -638,19 +637,18 @@ const SearchShop = (routerProps) => {
             </div>
           </div>
         </div>
-        {!!showMaps &&
-        <Modal
+        {!!showMaps && (
+          <Modal
             show={showMaps}
             onHide={hideShopMaps}
             className="search-shop-map"
-        >
-          <Modal.Header closeButton/>
-          <Modal.Body>
-            <MyMapComponent isMarkerShown={true} shoplist={shoplist} />
-          </Modal.Body>
-        </Modal>
-        }
-
+          >
+            <Modal.Header closeButton />
+            <Modal.Body>
+              <MyMapComponent isMarkerShown={true} shoplist={shoplist} />
+            </Modal.Body>
+          </Modal>
+        )}
       </div>
     </Layout>
   );

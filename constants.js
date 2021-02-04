@@ -85,6 +85,7 @@ export const API_PATH = {
   CREATEAPPOINTMENTMANUALLY: `${API_URL}/shop-create-appointment`,
   GETPAGES: `${API_URL}/get-pages`,
   GETPAGEDETAILS: `${API_URL}/pagedetail`,
+  GETMODELDETAILS: `${API_URL}/get-model-detail`,
 };
 
 export default {

@@ -9,12 +9,12 @@ export const FooterViewContainer = styled.div`
   width: 100%;
   max-width: 1600px;
   background-color: #1c2430;
-  padding: 75px 135px 50px 135px;
-  ${props => `display: ${props.show};`}
+  padding: 75px 135px 20px 135px;
+  ${(props) => `display: ${props.show};`}
   align-items: center;
   margin: 0 auto;
 
-  @media (max-width:570px) {
+  @media (max-width: 570px) {
     padding: 75px 20px 50px 20px;
   }
 `;
@@ -22,7 +22,7 @@ export const FooterViewContainer = styled.div`
 export const FooterViewContent = styled.div`
   width: 100%;
   display: flex;
-  @media (max-width:1125px) {
+  @media (max-width: 1125px) {
     display: unset;
   }
 `;
@@ -30,7 +30,7 @@ export const FooterViewContent = styled.div`
 export const FooterCopyright = styled.div`
   width: 100%;
   height: 55px;
-  
+
   background: #181515;
   display: flex;
   align-items: center;
@@ -39,16 +39,16 @@ export const FooterCopyright = styled.div`
 
 export const FooterBrandArea = styled.div`
   width: 480px;
-  padding-right:50px;
-  @media (max-width:1125px) {
+  padding-right: 50px;
+  @media (max-width: 1125px) {
     width: 700px;
   }
-  @media (max-width:952px) {
+  @media (max-width: 952px) {
     width: 500px;
-    margin:0px auto;
-    display:table;
+    margin: 0px auto;
+    display: table;
   }
-  @media (max-width:570px) {
+  @media (max-width: 570px) {
     width: 320px;
   }
 `;
@@ -75,30 +75,28 @@ export const LogoBottomTitle = styled.div`
   line-height: 24px;
 `;
 
-export const FooterBrandContent = styled.div`
-
-`;
+export const FooterBrandContent = styled.div``;
 
 export const FooterLinkArea = styled.div`
   display: flex;
   width: 480px;
-  @media (max-width:1125px) {
+  @media (max-width: 1125px) {
     width: 700px;
-    padding-top:25px;
+    padding-top: 25px;
   }
-  @media (max-width:952px) {
+  @media (max-width: 952px) {
     width: 500px;
-    margin:0px auto;
-    display:table;
+    margin: 0px auto;
+    display: table;
   }
-  @media (max-width:570px) {
+  @media (max-width: 570px) {
     width: 320px;
   }
 `;
 
 export const FooterSitemap = styled.div`
   width: 50%;
-  @media (max-width:570px) {
+  @media (max-width: 570px) {
     width: 100%;
   }
 `;
@@ -110,7 +108,7 @@ export const FooterSitemapTitle = styled.div`
 
 export const Servicing = styled.div`
   width: 50%;
-   @media (max-width:570px) {
+  @media (max-width: 570px) {
     width: 100%;
   }
 `;
@@ -122,13 +120,26 @@ export const ServicingTitle = styled.div`
 
 export const FollowUs = styled.div`
   width: 50%;
-   @media (max-width:570px) {
+  @media (max-width: 570px) {
     width: 100%;
   }
-  `;
+`;
 
 export const FollowUsTitle = styled.div`
   margin-bottom: 18px;
   font-size: 20px;
 `;
 
+export const DevicesContainer = styled.div`
+  width: 100%;
+  max-width: 1600px;
+  background-color: #1c2430;
+  padding: 0px 135px 50px 135px;
+  ${(props) => `display: ${props.show};`}
+  align-items: center;
+  margin: 0 auto;
+
+  @media (max-width: 570px) {
+    padding: 75px 20px 50px 20px;
+  }
+`;
