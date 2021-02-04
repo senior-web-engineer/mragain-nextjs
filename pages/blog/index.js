@@ -1,6 +1,6 @@
 import React from "react";
 import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
-import { Layout } from "@/pages/modeldetails/node_modules/@/pages/telefoone-reparatie/node_modules/components/global";
+import { Layout } from "components/global";
 import Head from "next/head";
 import { API_PATH, FRONT_END_URL } from "../../constants.js";
 import { useEffect } from "react";

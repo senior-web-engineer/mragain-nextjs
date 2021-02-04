@@ -1,9 +1,9 @@
 import React from "react";
 import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
-import { TestmonialSection } from "@/pages/modeldetails/node_modules/@/pages/telefoone-reparatie/node_modules/components/global";
+import { TestmonialSection } from "components/global";
 import RepairServicingBannerSection from "components/repairServicing/RepairServicingBannerSection/RepairServicingBannerSection";
 import AdvantageSection from "components/repairServicing/AdvantageSection/AdvantageSection";
-import { Layout } from "@/pages/modeldetails/node_modules/@/pages/telefoone-reparatie/node_modules/components/global";
+import { Layout } from "components/global";
 
 const RepairServicing = () => (
   <Layout>
