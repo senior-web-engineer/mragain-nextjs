@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { Container, Row, Button } from "react-bootstrap";
@@ -18,11 +18,7 @@ const image3 = BACK_END_URL + "/static/media/home_newest_image3.8798cc16.jpg";
 const NewestShopSection = (routerProps) => {
   const router = useRouter();
 
-  const {
-    setFindedLocation,
-    setSearchFilter,
-    shopList,
-  } = routerProps;
+  const { setFindedLocation, setSearchFilter, shopList } = routerProps;
 
   const onProfilePage = (shop_name, city, street) => {
     const shop = shop_name.replaceAll(" ", "-");
@@ -52,10 +48,7 @@ const NewestShopSection = (routerProps) => {
     <NewestShopSectionArea>
       <Container className="newestshop-section-container" fluid={true}>
         <Row>
-          <h2 
-            className="h2-title-advantage"
-            color={"#1c2430"}
-          >
+          <h2 className="h2-title-advantage" color={"#1c2430"}>
             De nieuwste telefoon reparateurs
           </h2>
         </Row>
@@ -67,7 +60,7 @@ const NewestShopSection = (routerProps) => {
         </Row>
         <Row className="newshop-card-blog">
           {shopList !== undefined &&
-          shopList.map((el) => {
+            shopList.map((el) => {
               return (
                 <ShopInfoCard
                   title={el.name}

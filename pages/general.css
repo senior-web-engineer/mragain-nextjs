@@ -1,0 +1,14 @@
+.model-list {
+  margin: 15px 10px 0px 10px;
+}
+.model-list li {
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.no-data-found {
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  margin-top: 30px;
+}

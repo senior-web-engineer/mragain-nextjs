@@ -25,6 +25,8 @@ import Link from "next/link";
 import { FRONT_END_URL } from "../../../constants.js";
 import dynamic from "next/dynamic";
 import { withUserAgent } from "next-useragent";
+// import { connect } from "react-redux";
+// import { getDevices } from "@/service/search/operations";
 const CookieBanner = dynamic(
   () => import("@palmabit/react-cookie-law").then((mod) => mod.CookieBanner),
   {
@@ -33,7 +35,13 @@ const CookieBanner = dynamic(
   }
 );
 
-const FooterView = ({ location, ua }) => {
+// const FooterView = ({ location, ua, shopDevices, getDevices }) => {
+const FooterView = (routerProps) => {
+  const { location, ua, getDevices, shopDevices } = routerProps;
+  // useEffect(() => {
+  //   getDevices();
+  // }, []);
+
   const router = useRouter();
   const splitUrl = "/" + router.pathname.split("/")[1];
   const visible =
@@ -273,40 +281,47 @@ const FooterView = ({ location, ua }) => {
                   </Link>
                 </li>
                 <li>
-                  <Link prefetch={false} href="/over-ons">
+                  <Link prefetch={false} href="/tablet-reparatie">
                     Tablets
                   </Link>
                 </li>
                 <li>
-                  <Link prefetch={false} href="/telefoon-reparatie">
+                  <Link prefetch={false} href="/headphone-reparatie">
                     Headphones
                   </Link>
                 </li>
                 <li>
-                  <Link prefetch={false} href="/meld-je-aan-als-reparateur">
+                  <Link prefetch={false} href="/tv-reparatie">
                     TV
                   </Link>
                 </li>
                 <li>
-                  <Link prefetch={false} href="/contact">
-                    Laundry
+                  <Link prefetch={false} href="/laundry-machines-reparatie">
+                    Laundry machine
                   </Link>
                 </li>
                 <li>
-                  <Link prefetch={false} href="/veel-gestelde-vragen">
-                    machine
-                  </Link>
-                </li>
-                <li>
-                  <Link prefetch={false} href="/blog">
-                    Consoless
+                  <Link prefetch={false} href="/consoles-reparatie">
+                    Consoles
                   </Link>
                 </li>
               </ul>
             </FooterSitemap>
-          </FooterLinkArea>
+          </FooterLinkArea>{" "}
+          {/* <FooterLinkArea className="footer-link-area">
+            <FooterSitemap ClassName="custome-footer-sitename">
+              <FooterSitemapTitle>Devices</FooterSitemapTitle>
+              <ul>
+                <li>
+                  <Link prefetch={false} href="/telefoone-reparatie">
+                    Smartphones
+                  </Link>
+                </li>
+              </ul>
+            </FooterSitemap>
+          </FooterLinkArea> */}
         </FooterViewContent>
-      </DevicesContainer>
+      </DevicesContainer>{" "}
       <FooterCopyright> Copyright @ 2021 MrAgain </FooterCopyright>
       {!!notBot && (
         <CookieBanner
@@ -324,5 +339,17 @@ const FooterView = ({ location, ua }) => {
     </FooterViewSection>
   );
 };
-
 export default withUserAgent(FooterView);
+// const mapStateToProps = (state) => ({
+//   shopDevices: state.search.devices,
+// });
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     getDevices: (data) => {
+//       getDevices(dispatch);
+//     },
+//   };
+// };
+
+// const Footer = withUserAgent(FooterView);
+// export default connect(mapStateToProps, mapDispatchToProps)(FooterView);

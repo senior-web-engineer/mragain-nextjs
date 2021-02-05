@@ -18,8 +18,7 @@ const index = (routerProps) => {
     getBrands(deviceId);
   }, []);
 
-  const deviceId = 1;
-
+  const deviceId = 3;
   const onModelSelect = (model) => {
     const modelName = model.model_name.replaceAll(" ", "-");
     console.log(modelName);

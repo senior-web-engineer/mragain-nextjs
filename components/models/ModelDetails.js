@@ -12,21 +12,33 @@ import signalIssue from "../../assets/icons/Problems - Signal.svg";
 import locationIssue from "../../assets/icons/Problems - Location.svg";
 import connectivityIssue from "../../assets/icons/Problems - Connectivity.svg";
 import releasedDate from "../../assets/icons/Specifications - Date.svg";
+import { useEffect } from "react";
+import noPreview from "../../assets/images/no-preview-available.png";
+import { FRONT_END_URL } from "@/constants.js";
+import { Fragment } from "react";
+import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function ModelDetails(routerProps) {
   const { modelDetails } = routerProps;
-  const [modelImages, setmodelImages] = useState([
-    "https://cdn-0.idownloadblog.com/wp-content/uploads/2019/09/iPhone-11-Pro-Max-Midnight-Green-Mockup-with-AR72014-iDownloadBlog-scaled.jpeg",
-    "https://www.iphonehacks.com/wp-content/uploads/2019/10/iphone-11-pro-max-teardown.jpg",
-    "https://misterminit.co/wp-content/uploads/2016/10/iphone-screen-repair-sydney.jpg",
-    "https://i.pinimg.com/originals/8b/e4/c6/8be4c66bd3d94434e888de089226ad7f.jpg",
-    "https://o.aolcdn.com/images/dims?quality=95&image_uri=https%3A%2F%2Fs.yimg.com%2Fuu%2Fapi%2Fres%2F1.2%2FD8mu7GAVkdYxbaGbmbHyJA--%7EB%2FaD05NzI7dz0xNjAwO2FwcGlkPXl0YWNoeW9u%2Fhttps%3A%2F%2Fo.aolcdn.com%2Fhss%2Fstorage%2Fmidas%2Ff9cd12e8a31e295524b7ef4755ed488b%2F205342770%2FRTX27FN4-ed.jpg&client=amp-blogside-v2&signature=d4f55c01c8007e4f3d7dd48e8a7c1d7ff43a6fa3",
-    "https://www.restorecomputerrepair.com/images/services_images/iphone_repair_baltimore.jpg",
-  ]);
+  const router = useRouter();
 
-  const obj = modelDetails[0].model_photo;
+  const [modelImages, setmodelImages] = useState([]);
+  const [currentImage, setcurrentImage] = useState("");
+  const model = modelDetails[0];
 
-  const [currentImage, setcurrentImage] = useState(modelImages[0]);
+  useEffect(() => {
+    const images = model.model_photo;
+    if (images === null) {
+      setcurrentImage(null);
+      setmodelImages([noPreview]);
+    } else {
+      const removeSingleQuote = images.replace(/'/g, '"');
+      const convertToArray = JSON.parse(removeSingleQuote);
+      setcurrentImage(convertToArray[0]);
+      setmodelImages(convertToArray);
+    }
+  }, [modelDetails]);
 
   const [issueData, setissueData] = useState([
     {
@@ -108,115 +120,151 @@ export default function ModelDetails(routerProps) {
   };
 
   return (
-    <div className="row ">
-      <div className="col-md-12 col-xs-12  pt-3 ">
-        <div className="row px-5 mt-sm-5 mt-md-2">
-          <div className=" col-lg-1 col-md-2 col-xs-3 col-sm-3 ">
-            <Slider {...settings}>
-              {modelImages.map((im) => (
-                <img
-                  src={im}
-                  className="w-100 slider-image"
-                  onClick={() => onselectImage(im)}
+    <Fragment>
+      <Head>
+        <title>MrAgain - {model.model_name}</title>
+        <meta name="Keywords" content="Model Details, Mr-Again" />
+        <meta name="description" content="MrAgain Model Details" />
+        <script
+          src="https://kit.fontawesome.com/6cdc6e8865.js"
+          crossOrigin="anonymous"
+        ></script>
+        <link
+          rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+          integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+          crossOrigin="anonymous"
+        ></link>
+        <link rel="canonical" href={FRONT_END_URL + router.asPath} />
+        <meta property="og:type" content="website" />
+        <meta name="og_title" property="og:title" content="Model Details" />
+        <meta
+          property="og:description"
+          content="Vind de beste reparateur bij jou in de buurt"
+        />
+        <meta name="og:url" content={FRONT_END_URL + router.asPath} />
+        <meta property="og:image" content="" />
+        <meta name="og_site_name" property="og:site_name" content="Mr Again" />
+      </Head>
+      <div className="row ">
+        <div className="col-md-12 col-xs-12  pt-3 ">
+          <div className="row px-5 mt-sm-5 mt-md-2">
+            <div className=" col-lg-1 col-md-2 col-xs-3 col-sm-3 ">
+              <Slider {...settings}>
+                {modelImages.map((im) => (
+                  <img
+                    src={im}
+                    className="w-100 slider-image"
+                    onClick={() => onselectImage(im)}
+                  />
+                ))}
+              </Slider>
+            </div>
+            <div className="col-lg-6 col-md-5 col-xs-5 col-sm-9 image-preview ">
+              {currentImage === null ? (
+                <img src={noPreview} alt="" className="w-100 align-bottom" />
+              ) : (
+                <SideBySideMagnifier
+                  imageSrc={currentImage}
+                  imageAlt="Example"
+                  fillAvailableSpace="false"
+                  alwaysInPlace="true"
+                  fillGapLeft={10}
+                  fillGapRight={20}
+                  fillGapTop={120}
+                  fillGapBottom={80}
                 />
-              ))}
-            </Slider>
-          </div>
-          <div className="col-lg-6 col-md-5 col-xs-5 col-sm-9 image-preview ">
-            <SideBySideMagnifier
-              imageSrc={currentImage}
-              imageAlt="Example"
-              fillAvailableSpace="false"
-              alwaysInPlace="true"
-              fillGapLeft={10}
-              fillGapRight={20}
-              fillGapTop={120}
-              fillGapBottom={80}
-            />
-          </div>
-          <div className="col-md-5  col-xs-4 pl-2 pl-lg-5 ">
-            <div className="model-details">
-              <p className="brand py-0 my-1 ">
-                {modelDetails[0].brand.brand_name}
-              </p>
-              <h3 className="pb-0 mb-0">{modelDetails[0].model_name}</h3>
-              <div className="star-rate-info py-0 y-0">
-                <span className="series-number">
-                  {modelDetails[0].model_serie_number === "0" && "SJN-9857"}
-                </span>
-                <Rate value={parseInt(4)} className="star-rate" />
+              )}
+            </div>
+            <div className="col-md-5  col-xs-4 pl-2 pl-lg-5 ">
+              <div className="model-details">
+                <p className="brand py-0 my-1 ">
+                  {model.brand.brand_name.toUpperCase()}
+                </p>
+                <h3 className="pb-0 mb-1">{model.model_name}</h3>
+                <div className="star-rate-info ">
+                  <span className="series-number pt-5">
+                    {model.model_serie_number}
+                  </span>
+                  <Rate value={parseInt(4)} className="star-rate" />
+                </div>
+                <p className="mt-4 mb-4">
+                  <img
+                    src={releasedDate}
+                    style={{ width: "20px", marginRight: "5px" }}
+                  />
+                  Released{" "}
+                  {model.model_year === null
+                    ? " date not available"
+                    : model.model_year}
+                </p>
               </div>
-              <p className="mt-4 mb-4">
-                <img
-                  src={releasedDate}
-                  style={{ width: "20px", marginRight: "5px" }}
-                />
-                Released {modelDetails[0].model_year}
-              </p>
+              <hr />
+              <div className="text-justify">
+                {model.model_info !== null
+                  ? model.model_info
+                  : "No details available for this model"}
+              </div>
+              <button className="btn book-repair">
+                BOOK FOR A REPAIR{" "}
+                <i className="fas fa-arrow-right book-repair-icon"></i>
+              </button>
             </div>
-            <hr />
-            <div className="text-justify">
-              {modelDetails[0].model_info !== null
-                ? modelDetails[0].model_info
-                : "No details available for this model"}
-            </div>
-            <button className="btn book-repair">
-              BOOK FOR A REPAIR{" "}
-              <i className="fas fa-arrow-right book-repair-icon"></i>
-            </button>
           </div>
         </div>
-      </div>
-      <div className="w-100  mb-5 mx-md-5 mx-sm-3 mx-xs-3">
-        <div className="list-title">TOP 5 COMMON ISSUES </div>
-        <div className="top-5-content px-0  mx-0">
-          <div className="row mx-2 mx-sm-2 px-sm-2  mx-xs-1 px-xs-1 px-5">
-            {issueData.length > 0
-              ? issueData.map((issue, i) => (
-                  <div className="list-details  d-inline">
-                    <img
-                      src={issue.image}
-                      alt=""
-                      className="list-image pt-1 "
-                    />
-                    <span className="">{issue.title}</span>
-                  </div>
-                ))
-              : null}
-          </div>
-        </div>
-      </div>
-      <section className="all-services">
-        <div className="row">
-          <div className="col-md-1 "></div>
-          <div className="col-md-10  ">
-            <div className="services-title">
-              <h4>ALL AVAILABLE SERVICES OFFERED</h4>
-              <input type="text" className="" placeholder="SEARCH" />
-            </div>
-            {allServices.map((service, i) => (
-              <div className="services-list" key={i}>
-                <div className="row">
-                  <div className="col-md-8 d-inline">
-                    <span className="service-icons">
-                      <i className={`${service.icon}`} />
-                    </span>
-                    <span className="ml-3">{service.serviceName}</span>
-                  </div>
-                  <div className="col-md-4  ">
-                    <div className="float-left text-center mr-4">
-                      <div className="start-at-label">Starts At</div>
-                      <div className=" price-label ">${service.price}</div>
+        <div className="w-100  mb-5 mx-md-5 mx-sm-3 mx-xs-3">
+          <div className="list-title">TOP 5 COMMON ISSUES </div>
+          <div className="top-5-content px-0  mx-0">
+            <div className="row mx-2 mx-sm-2 px-sm-2  mx-xs-1 px-xs-1 px-5">
+              {issueData.length > 0
+                ? issueData.map((issue, i) => (
+                    <div className="list-details  d-inline">
+                      <img
+                        src={issue.image}
+                        alt=""
+                        className="list-image pt-1 "
+                      />
+                      <span className="">{issue.title}</span>
                     </div>
-                    <button className="btn browse-shops ">Browse Shops</button>
+                  ))
+                : null}
+            </div>
+          </div>
+        </div>
+        <section className="all-services">
+          <div className="row">
+            <div className="col-md-1 "></div>
+            <div className="col-md-10  ">
+              <div className="services-title">
+                <h4>ALL AVAILABLE SERVICES OFFERED</h4>
+                <input type="text" className="" placeholder="SEARCH" />
+              </div>
+              {allServices.map((service, i) => (
+                <div className="services-list" key={i}>
+                  <div className="row">
+                    <div className="col-md-8 d-inline">
+                      <span className="service-icons">
+                        <i className={`${service.icon}`} />
+                      </span>
+                      <span className="ml-3">{service.serviceName}</span>
+                    </div>
+                    <div className="col-md-4  ">
+                      <div className="float-left text-center mr-4">
+                        <div className="start-at-label">Starts At</div>
+                        <div className=" price-label ">${service.price}</div>
+                      </div>
+                      <button className="btn browse-shops ">
+                        Browse Shops
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <div className="col-md-1"></div>
           </div>
-          <div className="col-md-1"></div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </Fragment>
   );
 }

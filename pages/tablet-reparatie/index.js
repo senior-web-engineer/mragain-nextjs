@@ -12,20 +12,20 @@ import { useRouter } from "next/router";
 
 const index = (routerProps) => {
   const router = useRouter();
-  let { getBrands, brandModels } = routerProps;
+  const { getBrands, brandModels } = routerProps;
   useEffect(() => {
+    let data = brandModels;
+    data = [];
     window.scrollTo(0, 0);
     getBrands(deviceId);
   }, []);
 
-  const deviceId = 1;
+  const deviceId = 2;
 
   const onModelSelect = (model) => {
     const modelName = model.model_name.replaceAll(" ", "-");
-    console.log(modelName);
     router.push(`telefoone-reparatie/${modelName}`);
   };
-
   return (
     <Layout>
       <Main>
