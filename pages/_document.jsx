@@ -1,7 +1,7 @@
 import React from "react";
 import Document, { Head, Main, NextScript, Html } from "next/document";
 import { ServerStyleSheet } from "styled-components";
-// import { GA_TRACKING_ID } from '../lib/gtag';
+import { GA_TRACKING_ID } from '../lib/gtag';
 import HeadWithoutPreload from './HeadWithoutPreload'
 export default class MyDocument extends Document {
   render() {
