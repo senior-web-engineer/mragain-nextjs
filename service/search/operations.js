@@ -63,11 +63,11 @@ export async function getNewestShopList(count, city, dispatch) {
       params: { count: count, city: city },
     })
     .then((res) => {
-        if(dispatch){
-            dispatch(fetchNewestShopList(res.data));
-        }else{
-            return res.data;
-        }
+      if (dispatch) {
+        dispatch(fetchNewestShopList(res.data));
+      } else {
+        return res.data;
+      }
     })
     .catch((err) => {});
 }

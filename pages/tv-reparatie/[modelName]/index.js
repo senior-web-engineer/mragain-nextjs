@@ -4,9 +4,12 @@ import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
 import { API_PATH } from "../../../constants.js";
 import { Layout } from "@/components/global/index.jsx";
 import ModelDetails from "@/components/models/ModelDetails.js";
+import { useEffect } from "react";
 
 export default function index({ modelDetails }) {
-  window.scrollTo(0, 0);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Layout>

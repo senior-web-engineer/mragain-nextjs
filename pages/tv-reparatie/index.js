@@ -22,7 +22,7 @@ const index = (routerProps) => {
 
   const onModelSelect = (model) => {
     const modelName = model.model_name.replaceAll(" ", "-");
-    router.push(`telefoone-reparatie/${modelName}`);
+    router.push(`tv-reparatie/${modelName}`);
   };
   let data = brandModels;
   data = [];

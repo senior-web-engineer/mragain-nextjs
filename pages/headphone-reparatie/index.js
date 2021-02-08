@@ -22,7 +22,7 @@ const index = (routerProps) => {
   const onModelSelect = (model) => {
     const modelName = model.model_name.replaceAll(" ", "-");
     console.log(modelName);
-    router.push(`telefoone-reparatie/${modelName}`);
+    router.push(`headphone-reparatie/${modelName}`);
   };
 
   return (

@@ -86,6 +86,7 @@ export const API_PATH = {
   GETPAGES: `${API_URL}/get-pages`,
   GETPAGEDETAILS: `${API_URL}/pagedetail`,
   GETMODELDETAILS: `${API_URL}/get-model-detail`,
+  GETMODELREPARATIONS: `${API_URL}/get-model-repairs/`,
 };
 
 export default {

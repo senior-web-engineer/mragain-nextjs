@@ -148,14 +148,30 @@
   font-weight: 550;
 }
 
-.all-services .services-list i {
-  color: #06c987;
+.all-services .services-list .service-icons {
+  float: left;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+}
+.icon-img {
+  /* color: #06c987; */
+  color: black;
   background-color: #e1fff6c0;
-  padding: 12px 12px 12px 12px;
-  width: 40px;
-  height: 40px;
+  padding: 8px 8px 8px 8px;
+  width: 100%;
+  /* height: 40px; */
   font-size: 16px;
   border-radius: 10px;
+}
+
+.all-services .services-list .service-section-2 {
+  float: left;
+  text-align: center;
+  margin-right: 20px;
+  width: 33%;
+  /* float-left text-center mr-4 w-30 */
 }
 .browse-shops {
   color: #fff;

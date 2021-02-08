@@ -22,8 +22,7 @@ const index = (routerProps) => {
 
   const onModelSelect = (model) => {
     const modelName = model.model_name.replaceAll(" ", "-");
-    console.log(modelName);
-    router.push(`telefoone-reparatie/${modelName}`);
+    router.push(`consoles-reparatie/${modelName}`);
   };
 
   return (
@@ -74,7 +73,6 @@ const index = (routerProps) => {
 };
 
 const mapStateToProps = (state) => ({
-  deviceBrands: state.search.deviceBrands,
   brandModels: state.search.brandModels,
 });
 

@@ -20,10 +20,10 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 
 export default function ModelDetails(routerProps) {
-  const { modelDetails } = routerProps;
+  const { modelDetails, reparations } = routerProps;
   const router = useRouter();
 
-  const [modelImages, setmodelImages] = useState([]);
+  const [modelImages, setmodelImages] = useState(reparations);
   const [currentImage, setcurrentImage] = useState("");
   const model = modelDetails[0];
 
@@ -151,11 +151,12 @@ export default function ModelDetails(routerProps) {
           <div className="row px-5 mt-sm-5 mt-md-2">
             <div className=" col-lg-1 col-md-2 col-xs-3 col-sm-3 ">
               <Slider {...settings}>
-                {modelImages.map((im) => (
+                {modelImages.map((image, i) => (
                   <img
-                    src={im}
+                    src={image}
                     className="w-100 slider-image"
-                    onClick={() => onselectImage(im)}
+                    onClick={() => onselectImage(image)}
+                    key={i}
                   />
                 ))}
               </Slider>
@@ -167,8 +168,8 @@ export default function ModelDetails(routerProps) {
                 <SideBySideMagnifier
                   imageSrc={currentImage}
                   imageAlt="Example"
-                  fillAvailableSpace="false"
-                  alwaysInPlace="true"
+                  fillAvailableSpace={false}
+                  alwaysInPlace={true}
                   fillGapLeft={10}
                   fillGapRight={20}
                   fillGapTop={120}
@@ -218,7 +219,7 @@ export default function ModelDetails(routerProps) {
             <div className="row mx-2 mx-sm-2 px-sm-2  mx-xs-1 px-xs-1 px-5">
               {issueData.length > 0
                 ? issueData.map((issue, i) => (
-                    <div className="list-details  d-inline">
+                    <div className="list-details  d-inline" key={i}>
                       <img
                         src={issue.image}
                         alt=""
@@ -231,35 +232,58 @@ export default function ModelDetails(routerProps) {
             </div>
           </div>
         </div>
-        <section className="all-services">
+        <section className="all-services pb-5">
           <div className="row">
             <div className="col-md-1 "></div>
             <div className="col-md-10  ">
               <div className="services-title">
                 <h4>ALL AVAILABLE SERVICES OFFERED</h4>
-                <input type="text" className="" placeholder="SEARCH" />
+                {/* <input type="text" className="" placeholder="SEARCH" /> */}
               </div>
-              {allServices.map((service, i) => (
-                <div className="services-list" key={i}>
-                  <div className="row">
-                    <div className="col-md-8 d-inline">
-                      <span className="service-icons">
-                        <i className={`${service.icon}`} />
-                      </span>
-                      <span className="ml-3">{service.serviceName}</span>
-                    </div>
-                    <div className="col-md-4  ">
-                      <div className="float-left text-center mr-4">
-                        <div className="start-at-label">Starts At</div>
-                        <div className=" price-label ">${service.price}</div>
+              {reparations.length > 0 ? (
+                reparations.map((reparation, i) => (
+                  <div className="services-list" key={i}>
+                    <div className="row">
+                      <div className="col-md-8 d-inline">
+                        <div className="service-icons">
+                          {/* <i className={`${reparation.icon}`} /> */}
+                          {reparation.repair_image !== "" ? (
+                            <img
+                              src={reparation.repair_image}
+                              className="icon-img"
+                            />
+                          ) : (
+                            <div className="service-icons">
+                              <i className="far fa-images icon-img"></i>
+                            </div>
+                          )}
+                        </div>
+                        <span className="ml-3">
+                          {reparation.reparation_name}
+                        </span>
                       </div>
-                      <button className="btn browse-shops ">
-                        Browse Shops
-                      </button>
+                      <div className="col-md-4">
+                        <div className="service-section-2">
+                          <div className="start-at-label">Starts At</div>
+                          {reparation.price.length > 0 ? (
+                            <div className=" price-label ">
+                              ${Math.min(...reparation.price)} - $
+                              {Math.max(...reparation.price)}
+                            </div>
+                          ) : (
+                            <div className="price-label ">$0 - $0</div>
+                          )}
+                        </div>
+                        <button className="btn browse-shops ">
+                          Browse Shops
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <div className="services-list">No records found</div>
+              )}
             </div>
             <div className="col-md-1"></div>
           </div>
