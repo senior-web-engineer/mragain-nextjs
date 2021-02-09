@@ -13,9 +13,9 @@ import {
 
 import "./index.style.less";
 import { Fragment } from "react";
-import {getNewestShopList} from "@/service/search/operations";
+import { getNewestShopList } from "@/service/search/operations";
 
-export default function Home({shopList}) {
+export default function Home({ shopList }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -28,7 +28,9 @@ export default function Home({shopList}) {
               name="viewport"
               content="width=device-width, initial-scale=1"
             />
-            <title>De beste telefoon reparateur bij jou in de buurt | Mr Again </title>
+            <title>
+              De beste telefoon reparateur bij jou in de buurt | Mr Again{" "}
+            </title>
 
             <meta
               name="Keywords"
@@ -78,16 +80,15 @@ export default function Home({shopList}) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // await getPublishProfies();
 
-  const shopList = await getNewestShopList(5,null,false);
-
+  const shopList = await getNewestShopList(5, null, false);
 
   return {
     props: {
-      data: "data",
-      shopList:shopList
+      data: "data1",
+      shopList: shopList,
     },
   };
 }

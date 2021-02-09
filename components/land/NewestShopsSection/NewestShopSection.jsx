@@ -19,24 +19,27 @@ const image3 = BACK_END_URL + "/static/media/home_newest_image3.8798cc16.jpg";
 
 const NewestShopSection = (routerProps) => {
   const router = useRouter();
+  const { newestShopList, getNewestShopList } = routerProps;
+
   const [shopCount] = useState(5);
   const [isload, setLoad] = useState(false);
-  const {
-    newestShopList,
-    getNewestShopList,
-    //  getAccountProfile
-  } = routerProps;
-  if (isload === false) {
-    getNewestShopList(shopCount, null);
-    setLoad(true);
-  }
+
+  useEffect(() => {
+    if (isload === false) {
+      getNewestShopList(shopCount, null);
+      setLoad(true);
+    }
+  }, [isload]);
 
   const onProfilePage = (shop_name, city, street) => {
     const shop = shop_name.replaceAll(" ", "-");
     const cityName = city.replaceAll(" ", "-");
-    // const streetName = street.replaceAll(" ", "-");
-    // router.push(`/profiel/${shop}--${cityName}--${streetName}`);
-    router.push(`/${shop}--${cityName}`);
+
+    if (cityName === "") {
+      router.push(`/${shop}`);
+    } else {
+      router.push(`/${shop}--${cityName}`);
+    }
   };
 
   const scrollToTop = () => {
