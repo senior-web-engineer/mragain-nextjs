@@ -58,6 +58,8 @@ axios.create({
   withCredentials: true,
 });
 export async function getNewestShopList(count, city, dispatch) {
+  console.log("🚀 => getNewestShopList => count", count);
+  console.log("caling API");
   return axios
     .get(`${API_PATH.GETNEWESTSHOPS}/`, {
       params: { count: count, city: city },
@@ -192,7 +194,6 @@ export function searchShopFilter(data, dispatch) {
       dispatch(fetchShopFilterList(res.data));
       return;
       // }
-
       // if (res.data.length > 0) {
       //   if (res.data[0].model_id === 0) {
       //     dispatch(setFindOut(true));
@@ -282,7 +283,6 @@ export function updateReparationData(data, shop, dispatch) {
       setTimeout(() => {
         dispatch(updateReparationLoading(false));
       }, 1500);
-
       return err;
     });
 }
@@ -303,6 +303,34 @@ export function getPageDetails(slugInfo, dispatch) {
     .get(`${API_PATH.GETPAGEDETAILS}/?slug=${slugInfo}`)
     .then((res) => {
       dispatch(getDetailsOfPage(res.data));
+    })
+    .catch((err) => {
+      return err;
+    });
+}
+
+export function getModelDetails(model) {
+  return axios
+    .get(`${API_PATH.GETMODELDETAILS}/?model=${model}`)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      return err;
+    });
+}
+
+export function getModelReparations(data) {
+  const body = JSON.stringify(data),
+    config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+  return axios
+    .post(`${API_PATH.GETMODELREPARATIONS}/`, body, config)
+    .then((res) => {
+      return res.data;
     })
     .catch((err) => {
       return err;

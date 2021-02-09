@@ -82,7 +82,6 @@ export default function Home({ shopList }) {
 
 export async function getServerSideProps() {
   // await getPublishProfies();
-
   const shopList = await getNewestShopList(5, null, false);
 
   return {

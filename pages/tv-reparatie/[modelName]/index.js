@@ -5,8 +5,12 @@ import { API_PATH } from "../../../constants.js";
 import { Layout } from "@/components/global/index.jsx";
 import ModelDetails from "@/components/models/ModelDetails.js";
 import { useEffect } from "react";
+import {
+  getModelDetails,
+  getModelReparations,
+} from "@/service/search/operations.js";
 
-export default function index({ modelDetails }) {
+export default function index({ modelDetails, reparationRes }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -14,7 +18,7 @@ export default function index({ modelDetails }) {
   return (
     <Layout>
       <Main>
-        <ModelDetails modelDetails={modelDetails} />
+        <ModelDetails modelDetails={modelDetails} reparations={reparationRes} />
       </Main>
     </Layout>
   );
@@ -22,12 +26,15 @@ export default function index({ modelDetails }) {
 
 export async function getServerSideProps({ query, params }) {
   const { modelName } = query || params;
-  const res = await fetch(API_PATH.GETMODELDETAILS + `/?model=${modelName}`);
-  const modelDetails = await res.json();
+  const modelDetails = await getModelDetails(modelName);
+
+  const data = { model: modelName };
+  const reparationRes = await getModelReparations(data);
 
   return {
     props: {
       modelDetails,
+      reparationRes,
     },
   };
 }

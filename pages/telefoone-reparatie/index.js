@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 const index = (routerProps) => {
   const router = useRouter();
   let { getBrands, brandModels } = routerProps;
+
   useEffect(() => {
     window.scrollTo(0, 0);
     getBrands(deviceId);
@@ -22,7 +23,6 @@ const index = (routerProps) => {
 
   const onModelSelect = (model) => {
     const modelName = model.model_name.replaceAll(" ", "-");
-    console.log(modelName);
     router.push(`telefoone-reparatie/${modelName}`);
   };
 
@@ -79,12 +79,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => {
-  // Action
   return {
     getBrands: (id) => {
       getBrands(id, dispatch);
     },
   };
 };
-/* eslint-enable */
 export default connect(mapStateToProps, mapDispatchToProps)(index);

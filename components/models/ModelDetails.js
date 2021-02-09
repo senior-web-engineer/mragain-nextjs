@@ -29,6 +29,7 @@ export default function ModelDetails(routerProps) {
 
   useEffect(() => {
     const images = model.model_photo;
+    console.log("🚀 => useEffect => images", images);
     if (images === null) {
       setcurrentImage(null);
       setmodelImages([noPreview]);
@@ -63,45 +64,6 @@ export default function ModelDetails(routerProps) {
     },
   ]);
 
-  const [allServices, setAllServices] = useState([
-    { icon: "fas fa-bolt", serviceName: "Scherm vervangen", price: "49.33" },
-    {
-      icon: "fas fa-battery-quarter",
-      serviceName: "Batterij vervangen",
-      price: "25.50",
-    },
-    { icon: "fas fa-tint", serviceName: "Waterschade", price: "34.40" },
-    { icon: "fas fa-camera", serviceName: "Front Camera", price: "29.37" },
-    {
-      icon: "fas fa-charging-station",
-      serviceName: "Oplaadpunt",
-      price: "49.33",
-    },
-    { icon: "fas fa-camera", serviceName: "Back camera", price: "45.33" },
-    {
-      icon: "fas fa-headphones-alt",
-      serviceName: "Earspeaker",
-      price: "39.31",
-    },
-    { icon: "fas fa-volume-up", serviceName: "Loudspeaker", price: "42.19" },
-    { icon: "fas fa-home", serviceName: "Behuizing", price: "34.33" },
-    { icon: "fab fa-usb", serviceName: "USB connector", price: "32.33" },
-    { icon: "fas fa-mobile", serviceName: "Back cover", price: "38.74" },
-    { icon: "fas fa-diagnoses", serviceName: "Diagnose", price: "44.30" },
-    { icon: "fas fa-toggle-on", serviceName: "Aan-uit-knop", price: "36.13" },
-    {
-      icon: "fas fa-exchange-alt",
-      serviceName: "Data overzetten",
-      price: "25.58",
-    },
-    {
-      icon: "fas fa-trash-restore-alt",
-      serviceName: "Software reset",
-      price: "29.76",
-    },
-    { icon: "fas fa-wrench", serviceName: "Software Update", price: "32.68" },
-  ]);
-
   let settings = {
     dots: true,
     infinite: false,
@@ -119,6 +81,7 @@ export default function ModelDetails(routerProps) {
     setcurrentImage(image);
   };
 
+  console.log(modelImages);
   return (
     <Fragment>
       <Head>
@@ -151,14 +114,15 @@ export default function ModelDetails(routerProps) {
           <div className="row px-5 mt-sm-5 mt-md-2">
             <div className=" col-lg-1 col-md-2 col-xs-3 col-sm-3 ">
               <Slider {...settings}>
-                {modelImages.map((image, i) => (
-                  <img
-                    src={image}
-                    className="w-100 slider-image"
-                    onClick={() => onselectImage(image)}
-                    key={i}
-                  />
-                ))}
+                {modelImages !== undefined &&
+                  modelImages.map((image, i) => (
+                    <img
+                      src={image}
+                      className="w-100 slider-image"
+                      onClick={() => onselectImage(image)}
+                      key={i}
+                    />
+                  ))}
               </Slider>
             </div>
             <div className="col-lg-6 col-md-5 col-xs-5 col-sm-9 image-preview ">
@@ -240,13 +204,12 @@ export default function ModelDetails(routerProps) {
                 <h4>ALL AVAILABLE SERVICES OFFERED</h4>
                 {/* <input type="text" className="" placeholder="SEARCH" /> */}
               </div>
-              {reparations.length > 0 ? (
+              {reparations !== undefined && reparations.length > 0 ? (
                 reparations.map((reparation, i) => (
                   <div className="services-list" key={i}>
                     <div className="row">
                       <div className="col-md-8 d-inline">
                         <div className="service-icons">
-                          {/* <i className={`${reparation.icon}`} /> */}
                           {reparation.repair_image !== "" ? (
                             <img
                               src={reparation.repair_image}
@@ -267,11 +230,11 @@ export default function ModelDetails(routerProps) {
                           <div className="start-at-label">Starts At</div>
                           {reparation.price.length > 0 ? (
                             <div className=" price-label ">
-                              ${Math.min(...reparation.price)} - $
+                              €{Math.min(...reparation.price)} - €
                               {Math.max(...reparation.price)}
                             </div>
                           ) : (
-                            <div className="price-label ">$0 - $0</div>
+                            <div className="price-label ">€0 - €0</div>
                           )}
                         </div>
                         <button className="btn browse-shops ">
