@@ -4,26 +4,15 @@ import Head from "next/head";
 import { Layout } from "components/global";
 // import { API_PATH, FRONT_END_URL } from "../../../constants";
 import { useEffect } from "react";
-import { getBrands } from "@/service/search/operations";
-import { connect } from "react-redux";
+import { getAllBrandModels } from "@/service/search/operations";
 import BrandsComponent from "../../components/models/BrandsComponent";
 import "../general.css";
 import { useRouter } from "next/router";
 
-const index = (routerProps) => {
-  const router = useRouter();
-  let { getBrands, brandModels } = routerProps;
+export default function index({ brandModels, device }) {
   useEffect(() => {
     window.scrollTo(0, 0);
-    getBrands(deviceId);
   }, []);
-
-  const deviceId = 3;
-  const onModelSelect = (model) => {
-    const modelName = model.model_name.replaceAll(" ", "-");
-    console.log(modelName);
-    router.push(`headphone-reparatie/${modelName}`);
-  };
 
   return (
     <Layout>
@@ -48,42 +37,23 @@ const index = (routerProps) => {
         </Head>
         <div className="row ">
           <div className="col-md-12 mx-5 my-5 px-5">
-            <BrandsComponent deviceId={deviceId} />
-
-            {brandModels.length > 0 ? (
-              brandModels.map((model, i) => (
-                <ul className="model-list">
-                  <li
-                    className="model-name"
-                    className
-                    onClick={(e) => onModelSelect(model)}
-                  >
-                    {model.model_name}
-                  </li>
-                </ul>
-              ))
-            ) : (
-              <div className="no-data-found">No data found</div>
-            )}
+            <BrandsComponent data={brandModels} deviceId={device.device} />
           </div>
         </div>
       </Main>
     </Layout>
   );
-};
+}
 
-const mapStateToProps = (state) => ({
-  deviceBrands: state.search.deviceBrands,
-  brandModels: state.search.brandModels,
-});
-
-const mapDispatchToProps = (dispatch) => {
-  // Action
+export async function getServerSideProps() {
+  const device = {
+    device: 3,
+  };
+  const brandModels = await getAllBrandModels(device);
   return {
-    getBrands: (id) => {
-      getBrands(id, dispatch);
+    props: {
+      brandModels,
+      device,
     },
   };
-};
-/* eslint-enable */
-export default connect(mapStateToProps, mapDispatchToProps)(index);
+}

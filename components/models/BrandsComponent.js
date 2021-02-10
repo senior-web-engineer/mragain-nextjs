@@ -1,66 +1,53 @@
 import React from "react";
 import "./modelDetails.css";
-import { Select } from "antd";
 import { Fragment } from "react";
-import { connect } from "react-redux";
-import { useState } from "react";
-import { getModels } from "@/service/search/operations";
-const { Option } = Select;
+import { useRouter } from "next/router";
 
-const BrandsComponent = (routerProps) => {
-  const { deviceBrands, getModels, deviceId } = routerProps;
-  const [brand, setBrand] = useState(0);
+export default function BrandsComponent({ data, deviceId }) {
+  const router = useRouter();
 
-  function initBrandSelect() {
-    return (
-      deviceBrands !== undefined &&
-      deviceBrands.map((element) => {
-        return (
-          <Option value={element.id} key={element.id}>
-            {element.brand_name}
-          </Option>
-        );
-      })
-    );
-  }
+  const onModelSelect = (model) => {
+    const modelName = model.name.replaceAll(" ", "-");
+    let path = "";
 
-  function handleBrandChange(value) {
-    setBrand(value);
-    getModels(deviceId, value);
-  }
+    if (deviceId === 1) {
+      path = "telefoone-reparatie";
+    } else if (deviceId === 2) {
+      path = "tablet-reparatie";
+    } else if (deviceId === 3) {
+      path = "headphone-reparatie";
+    } else if (deviceId === 7) {
+      path = "tv-reparatie";
+    } else if (deviceId === 8) {
+      path = "laundry-machines-reparatie";
+    } else if (deviceId === 9) {
+      path = "consoles-reparatie";
+    }
+    router.push(`${path}/${modelName}`);
+  };
+
   return (
     <Fragment>
-      <div className="select-section">
-        <h6> Select Brand</h6>
-        <Select
-          className="w-100"
-          // defaultValue="Brand"
-          onChange={handleBrandChange}
-          value={brand}
-        >
-          <Option value={0} key={0}>
-            Alle merken
-          </Option>
-          {initBrandSelect()}
-        </Select>
-      </div>
+      {data.length > 0 ? (
+        data.map((model, i) => (
+          <div className="col-md-3 py-3 ">
+            <h5 className="brand-title">{model.name}</h5>
+            <div className="brand-list">
+              {model.model.length > 0 ? (
+                model.model.map((m, i) => (
+                  <div className="model-list" onClick={(e) => onModelSelect(m)}>
+                    {m.name}
+                  </div>
+                ))
+              ) : (
+                <div className="model-list">No record found</div>
+              )}
+            </div>
+          </div>
+        ))
+      ) : (
+        <div className="no-data-found">No record found</div>
+      )}
     </Fragment>
   );
-};
-const mapStateToProps = (state) => ({
-  deviceBrands: state.search.deviceBrands,
-});
-
-const mapDispatchToProps = (dispatch) => {
-  // Action
-  return {
-    // getBrands: (id) => {
-    //   getBrands(id, dispatch);
-    // },
-    getModels: (deviceId, brandId) => {
-      getModels(deviceId, brandId, dispatch);
-    },
-  };
-};
-/* eslint-enable */
-export default connect(mapStateToProps, mapDispatchToProps)(BrandsComponent);
+}

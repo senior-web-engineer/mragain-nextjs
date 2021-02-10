@@ -336,4 +336,22 @@ export function getModelReparations(data) {
       return err;
     });
 }
+
+export function getAllBrandModels(data) {
+  console.log("🚀 => getAllBrandModels => data", data);
+  const body = JSON.stringify(data),
+    config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+  return axios
+    .post(`${API_PATH.GETALLBRANDSMODELS}/`, body, config)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      return err;
+    });
+}
 export default { searchShopFilter };

@@ -2,30 +2,16 @@ import React from "react";
 import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
 import Head from "next/head";
 import { Layout } from "components/global";
-// import { API_PATH, FRONT_END_URL } from "../../../constants";
 import { useEffect } from "react";
-import { getBrands } from "@/service/search/operations";
-import { connect } from "react-redux";
+import { getAllBrandModels } from "@/service/search/operations";
 import BrandsComponent from "../../components/models/BrandsComponent";
 import "../general.css";
-import { useRouter } from "next/router";
 
-const index = (routerProps) => {
-  const router = useRouter();
-  const { getBrands, brandModels } = routerProps;
+export default function index({ brandModels, device }) {
   useEffect(() => {
-    let data = brandModels;
-    data = [];
     window.scrollTo(0, 0);
-    getBrands(deviceId);
   }, []);
 
-  const deviceId = 2;
-
-  const onModelSelect = (model) => {
-    const modelName = model.model_name.replaceAll(" ", "-");
-    router.push(`tablet-reparatie/${modelName}`);
-  };
   return (
     <Layout>
       <Main>
@@ -47,44 +33,25 @@ const index = (routerProps) => {
               <meta property="og:image" content={blog.post_image} /> */}
           <meta property="og:site_name" content="MrAgain" />
         </Head>
-        <div className="row ">
-          <div className="col-md-12 mx-5 my-5 px-5">
-            <BrandsComponent deviceId={deviceId} />
-
-            {brandModels.length > 0 ? (
-              brandModels.map((model, i) => (
-                <ul className="model-list">
-                  <li
-                    className="model-name"
-                    className
-                    onClick={(e) => onModelSelect(model)}
-                  >
-                    {model.model_name}
-                  </li>
-                </ul>
-              ))
-            ) : (
-              <div className="no-data-found">No data found</div>
-            )}
+        <div className="container px-0">
+          <div className="row">
+            <BrandsComponent data={brandModels} deviceId={device.device} />
           </div>
         </div>
       </Main>
     </Layout>
   );
-};
+}
 
-const mapStateToProps = (state) => ({
-  deviceBrands: state.search.deviceBrands,
-  brandModels: state.search.brandModels,
-});
-
-const mapDispatchToProps = (dispatch) => {
-  // Action
+export async function getServerSideProps() {
+  const device = {
+    device: 2,
+  };
+  const brandModels = await getAllBrandModels(device);
   return {
-    getBrands: (id) => {
-      getBrands(id, dispatch);
+    props: {
+      brandModels,
+      device,
     },
   };
-};
-/* eslint-enable */
-export default connect(mapStateToProps, mapDispatchToProps)(index);
+}
