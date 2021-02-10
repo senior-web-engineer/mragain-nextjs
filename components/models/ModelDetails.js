@@ -171,14 +171,14 @@ export default function ModelDetails(routerProps) {
                   : "No details available for this model"}
               </div>
               <button className="btn book-repair">
-                BOOK FOR A REPAIR{" "}
+                Zoek een reparateur{" "}
                 <i className="fas fa-arrow-right book-repair-icon"></i>
               </button>
             </div>
           </div>
         </div>
         <div className="w-100  mb-5 mx-md-5 mx-sm-3 mx-xs-3">
-          <div className="list-title">TOP 5 COMMON ISSUES </div>
+          <div className="list-title">De 5 meest voorkomende problemen</div>
           <div className="top-5-content px-0  mx-0">
             <div className="row mx-2 mx-sm-2 px-sm-2  mx-xs-1 px-xs-1 px-5">
               {issueData.length > 0
@@ -201,7 +201,7 @@ export default function ModelDetails(routerProps) {
             <div className="col-md-1 "></div>
             <div className="col-md-10  ">
               <div className="services-title">
-                <h4>ALL AVAILABLE SERVICES OFFERED</h4>
+                <h4>Alle {model.model_name} reparaties</h4>
                 {/* <input type="text" className="" placeholder="SEARCH" /> */}
               </div>
               {reparations !== undefined && reparations.length > 0 ? (
@@ -227,7 +227,7 @@ export default function ModelDetails(routerProps) {
                       </div>
                       <div className="col-md-4">
                         <div className="service-section-2">
-                          <div className="start-at-label">Starts At</div>
+                          <div className="start-at-label">Prijs range</div>
                           {reparation.price.length > 0 ? (
                             <div className=" price-label ">
                               €{Math.min(...reparation.price)} - €
@@ -238,7 +238,7 @@ export default function ModelDetails(routerProps) {
                           )}
                         </div>
                         <button className="btn browse-shops ">
-                          Browse Shops
+                          Toon reparateurs
                         </button>
                       </div>
                     </div>
