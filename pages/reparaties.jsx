@@ -374,7 +374,7 @@ const PhoneRepair = (routerProps) => {
         <div className="phone-repair-page">
           <Modal
             visible={showImportModal}
-            title="Import CSV"
+            title="Importeer een CSV file"
             onCancel={onToggleImportPopup}
             footer={[
               <Button
@@ -382,7 +382,7 @@ const PhoneRepair = (routerProps) => {
                 onClick={onToggleImportPopup}
                 loading={importBtnLoading}
               >
-                Return
+                Cancel
               </Button>,
               <Button
                 key="submit"
@@ -390,7 +390,7 @@ const PhoneRepair = (routerProps) => {
                 loading={importBtnLoading}
                 onClick={(e) => onImportCSVFile(e)}
               >
-                Submit
+                Uploaden
               </Button>,
             ]}
           >
@@ -528,10 +528,10 @@ const PhoneRepair = (routerProps) => {
                             <FontAwesomeIcon
                               icon={["fas", "download"]}
                             ></FontAwesomeIcon>
-                            <span className="pl-2"> Download Instructions</span>
+                            <span className="pl-2"> Download Instructies</span>
                           </Button>
                         </a>
-                        <p className="mt-3">Or</p>
+                        <p className="mt-3">Of</p>
                         <Button
                           key="submit"
                           type="primary"
