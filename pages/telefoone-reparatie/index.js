@@ -6,7 +6,6 @@ import { Layout } from "components/global";
 import { useEffect } from "react";
 import BrandsComponent from "../../components/models/BrandsComponent";
 import "../general.css";
-import { useRouter } from "next/router";
 import { getAllBrandModels } from "@/service/search/operations.js";
 
 export default function index({ brandModels, device }) {
@@ -36,7 +35,7 @@ export default function index({ brandModels, device }) {
 
           <meta property="og:site_name" content="MrAgain" />
         </Head>
-        <div className="container px-0">
+        <div className="main-section">
           <div className="row">
             <BrandsComponent data={brandModels} deviceId={device.device} />
           </div>

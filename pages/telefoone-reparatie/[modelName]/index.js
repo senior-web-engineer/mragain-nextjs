@@ -11,7 +11,6 @@ import {
 } from "@/service/search/operations.js";
 
 export default function index({ modelDetails, reparationRes }) {
-  console.log("🚀 => index => reparationRes =====>>>", reparationRes);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

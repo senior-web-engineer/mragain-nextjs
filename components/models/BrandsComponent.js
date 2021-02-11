@@ -8,8 +8,8 @@ export default function BrandsComponent({ data, deviceId }) {
 
   const onModelSelect = (model) => {
     const modelName = model.name.replaceAll(" ", "-");
-    let path = "";
 
+    let path = "";
     if (deviceId === 1) {
       path = "telefoone-reparatie";
     } else if (deviceId === 2) {
@@ -30,12 +30,16 @@ export default function BrandsComponent({ data, deviceId }) {
     <Fragment>
       {data.length > 0 ? (
         data.map((model, i) => (
-          <div className="col-md-3 py-3 ">
+          <div className="col-md-3  col-sm-4 col-xs-6  py-2" key={i}>
             <h5 className="brand-title">{model.name}</h5>
             <div className="brand-list">
               {model.model.length > 0 ? (
                 model.model.map((m, i) => (
-                  <div className="model-list" onClick={(e) => onModelSelect(m)}>
+                  <div
+                    className="model-list"
+                    key={i}
+                    onClick={(e) => onModelSelect(m)}
+                  >
                     {m.name}
                   </div>
                 ))

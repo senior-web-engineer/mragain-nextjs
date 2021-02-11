@@ -236,6 +236,15 @@
     width: 160px;
     margin: 20px 20px 10px 8px;
   }
+  .all-services .services-list .service-section-2 {
+    float: left;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+  .browse-shops {
+    margin-top: 10px;
+    float: right;
+  }
 }
 
 @media (max-width: 676px) {
@@ -248,9 +257,18 @@
     margin: 20px 20px 10px 15px;
     font-size: 14px;
   }
+  .all-services .services-list .service-section-2 {
+    float: left;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+  .browse-shops {
+    margin-top: 10px;
+    float: right;
+  }
 }
 
-@media (max-width: 561px) {
+@media (max-width: 576px) {
   .list-title {
     margin: 50px 0px 0px 55px;
   }
@@ -259,6 +277,18 @@
     width: 160px;
     margin: 20px 20px 10px 0px;
     font-size: 14px;
+  }
+  .image-preview {
+    padding: 15px;
+  }
+  .all-services .services-list .service-section-2 {
+    float: left;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+  .browse-shops {
+    margin-top: 10px;
+    float: right;
   }
 }
 

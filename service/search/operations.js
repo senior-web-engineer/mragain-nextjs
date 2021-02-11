@@ -338,7 +338,6 @@ export function getModelReparations(data) {
 }
 
 export function getAllBrandModels(data) {
-  console.log("🚀 => getAllBrandModels => data", data);
   const body = JSON.stringify(data),
     config = {
       headers: {

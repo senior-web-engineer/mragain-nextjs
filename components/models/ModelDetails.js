@@ -18,18 +18,35 @@ import { FRONT_END_URL } from "@/constants.js";
 import { Fragment } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import classnames from "classnames";
 
 export default function ModelDetails(routerProps) {
   const { modelDetails, reparations } = routerProps;
   const router = useRouter();
 
+  const updateDimensions = () => {
+    setState({
+      height: window.innerHeight,
+      width: window.innerWidth,
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateDimensions);
+    setState({
+      width: window.innerWidth,
+    });
+  }, []);
+
+  const [state, setState] = useState({
+    width: 0,
+  });
   const [modelImages, setmodelImages] = useState(reparations);
   const [currentImage, setcurrentImage] = useState("");
   const model = modelDetails[0];
 
   useEffect(() => {
     const images = model.model_photo;
-    console.log("🚀 => useEffect => images", images);
     if (images === null) {
       setcurrentImage(null);
       setmodelImages([noPreview]);
@@ -63,14 +80,19 @@ export default function ModelDetails(routerProps) {
       title: "Connectivity Issues",
     },
   ]);
-
+  let vertical = true;
+  let verticalSwiping = true;
+  if (state.width < 576) {
+    vertical = false;
+    verticalSwiping = false;
+  }
   let settings = {
     dots: true,
     infinite: false,
     slidesToShow: 4,
     slidesToScroll: 2,
-    vertical: true,
-    verticalSwiping: true,
+    vertical,
+    verticalSwiping,
     verticalArrows: true,
     swipeToSlide: true,
     currentSlide: 0,
@@ -81,7 +103,6 @@ export default function ModelDetails(routerProps) {
     setcurrentImage(image);
   };
 
-  console.log(modelImages);
   return (
     <Fragment>
       <Head>
@@ -111,8 +132,14 @@ export default function ModelDetails(routerProps) {
       </Head>
       <div className="row ">
         <div className="col-md-12 col-xs-12  pt-3 ">
-          <div className="row px-5 mt-sm-5 mt-md-2">
-            <div className=" col-lg-1 col-md-2 col-xs-3 col-sm-3 ">
+          <div className="row pl-4 pr-0 mt-sm-5 mt-md-2">
+            <div
+              //  className=" col-lg-1 col-md-2 col-xs-order-12 col-sm-2  float-right"
+              className={classnames(
+                " col-lg-1 col-md-2 col-sm-2  float-right",
+                { "order-12": state.width < 576 }
+              )}
+            >
               <Slider {...settings}>
                 {modelImages !== undefined &&
                   modelImages.map((image, i) => (
@@ -125,7 +152,13 @@ export default function ModelDetails(routerProps) {
                   ))}
               </Slider>
             </div>
-            <div className="col-lg-6 col-md-5 col-xs-5 col-sm-9 image-preview ">
+            <div
+              // className="col-lg-6 col-md-5 col-xs-order-1 col-sm-10 mt-3 image-preview "
+              className={classnames(
+                "col-lg-6 col-md-5 col-sm-10 mt-1 image-preview",
+                { "order-1": state.width < 576 }
+              )}
+            >
               {currentImage === null ? (
                 <img src={noPreview} alt="" className="w-100 align-bottom" />
               ) : (
@@ -141,7 +174,7 @@ export default function ModelDetails(routerProps) {
                 />
               )}
             </div>
-            <div className="col-md-5  col-xs-4 pl-2 pl-lg-5 ">
+            <div className="col-md-5  col-sm-12 pl-sm-5 pl-lg-5 ">
               <div className="model-details">
                 <p className="brand py-0 my-1 ">
                   {model.brand.brand_name.toUpperCase()}
@@ -208,7 +241,7 @@ export default function ModelDetails(routerProps) {
                 reparations.map((reparation, i) => (
                   <div className="services-list" key={i}>
                     <div className="row">
-                      <div className="col-md-8 d-inline">
+                      <div className="col-md-8 col-sm-6 d-inline">
                         <div className="service-icons">
                           {reparation.repair_image !== "" ? (
                             <img
@@ -225,8 +258,8 @@ export default function ModelDetails(routerProps) {
                           {reparation.reparation_name}
                         </span>
                       </div>
-                      <div className="col-md-4">
-                        <div className="service-section-2">
+                      <div className="col-md-4 col-sm-6">
+                        <div className="service-section-2 ">
                           <div className="start-at-label">Prijs range</div>
                           {reparation.price.length > 0 ? (
                             <div className=" price-label ">

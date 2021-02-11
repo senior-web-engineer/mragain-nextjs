@@ -33,7 +33,7 @@ export default function index({ brandModels, device }) {
               <meta property="og:image" content={blog.post_image} /> */}
           <meta property="og:site_name" content="MrAgain" />
         </Head>
-        <div className="container px-0">
+        <div className="main-section">
           <div className="row">
             <BrandsComponent data={brandModels} deviceId={device.device} />
           </div>
