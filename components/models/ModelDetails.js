@@ -45,6 +45,7 @@ export default function ModelDetails(routerProps) {
   const [currentImage, setcurrentImage] = useState("");
   const model = modelDetails[0];
 
+  const [availableDatas, setavailableDatas] = useState([]);
   useEffect(() => {
     const images = model.model_photo;
     if (images === null) {
@@ -80,6 +81,7 @@ export default function ModelDetails(routerProps) {
       title: "Connectivity Issues",
     },
   ]);
+
   let vertical = true;
   let verticalSwiping = true;
   if (state.width < 576) {
@@ -239,43 +241,47 @@ export default function ModelDetails(routerProps) {
               </div>
               {reparations !== undefined && reparations.length > 0 ? (
                 reparations.map((reparation, i) => (
-                  <div className="services-list" key={i}>
-                    <div className="row">
-                      <div className="col-md-8 col-sm-6 d-inline">
-                        <div className="service-icons">
-                          {reparation.repair_image !== "" ? (
-                            <img
-                              src={reparation.repair_image}
-                              className="icon-img"
-                            />
-                          ) : (
+                  <Fragment>
+                    {reparation.price.length > 0 && (
+                      <div className="services-list" key={i}>
+                        <div className="row">
+                          <div className="col-md-8 col-sm-6 d-inline">
                             <div className="service-icons">
-                              <i className="far fa-images icon-img"></i>
+                              {reparation.repair_image !== "" ? (
+                                <img
+                                  src={reparation.repair_image}
+                                  className="icon-img"
+                                />
+                              ) : (
+                                <div className="service-icons">
+                                  <i className="far fa-images icon-img"></i>
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        <span className="ml-3">
-                          {reparation.reparation_name}
-                        </span>
-                      </div>
-                      <div className="col-md-4 col-sm-6">
-                        <div className="service-section-2 ">
-                          <div className="start-at-label">Prijs range</div>
-                          {reparation.price.length > 0 ? (
-                            <div className=" price-label ">
-                              €{Math.min(...reparation.price)} - €
-                              {Math.max(...reparation.price)}
+                            <span className="ml-3">
+                              {reparation.reparation_name}
+                            </span>
+                          </div>
+                          <div className="col-md-4 col-sm-6">
+                            <div className="service-section-2 ">
+                              <div className="start-at-label">Prijs range</div>
+                              {reparation.price.length > 0 ? (
+                                <div className=" price-label ">
+                                  €{Math.min(...reparation.price)} - €
+                                  {Math.max(...reparation.price)}
+                                </div>
+                              ) : (
+                                <div className="price-label ">€0 - €0</div>
+                              )}
                             </div>
-                          ) : (
-                            <div className="price-label ">€0 - €0</div>
-                          )}
+                            <button className="btn browse-shops ">
+                              Toon reparateurs
+                            </button>
+                          </div>
                         </div>
-                        <button className="btn browse-shops ">
-                          Toon reparateurs
-                        </button>
                       </div>
-                    </div>
-                  </div>
+                    )}
+                  </Fragment>
                 ))
               ) : (
                 <div className="services-list">No records found</div>
