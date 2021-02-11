@@ -107,9 +107,9 @@ export default function ModelDetails(routerProps) {
   return (
     <Fragment>
       <Head>
-        <title>MrAgain - {model.model_name}</title>
+        <title>{model.model_name} reparatie | MrAgain</title>
         <meta name="Keywords" content="Model Details, Mr-Again" />
-        <meta name="description" content="MrAgain Model Details" />
+        <meta name="description" content="Alles over de meest voorkomende"+ {model.model_name} + "problemen en reparaties vind je hier" />
         <script
           src="https://kit.fontawesome.com/6cdc6e8865.js"
           crossOrigin="anonymous"
@@ -122,7 +122,7 @@ export default function ModelDetails(routerProps) {
         ></link>
         <link rel="canonical" href={FRONT_END_URL + router.asPath} />
         <meta property="og:type" content="website" />
-        <meta name="og_title" property="og:title" content="Model Details" />
+        <meta name="og_title" property="og:title" content={model.model_name} + "reparatie" />
         <meta
           property="og:description"
           content="Vind de beste reparateur bij jou in de buurt"
@@ -200,9 +200,10 @@ export default function ModelDetails(routerProps) {
               </div>
               <hr />
               <div className="text-justify">
-                {model.model_info !== null
-                  ? model.model_info
-                  : "No details available for this model"}
+                //{model.model_info !== null
+                //  ? model.model_info
+                //  : "No details available for this model"}
+	          Op deze pagina vind je alles over {model.model_name} reparaties en de meest voorkomende problemen. 
               </div>
               <button className="btn book-repair">
                 Zoek een reparateur{" "}
@@ -212,7 +213,7 @@ export default function ModelDetails(routerProps) {
           </div>
         </div>
         <div className="w-100  mb-5 mx-md-5 mx-sm-3 mx-xs-3">
-          <div className="list-title">De 5 meest voorkomende problemen</div>
+          <div className="list-title">De 5 meest voorkomende {model.model_name} problemen</div>
           <div className="top-5-content px-0  mx-0">
             <div className="row mx-2 mx-sm-2 px-sm-2  mx-xs-1 px-xs-1 px-5">
               {issueData.length > 0
