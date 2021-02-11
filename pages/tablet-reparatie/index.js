@@ -3,11 +3,15 @@ import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
 import Head from "next/head";
 import { Layout } from "components/global";
 import { useEffect } from "react";
+import { FRONT_END_URL } from "@/constants";
 import { getAllBrandModels } from "@/service/search/operations";
 import BrandsComponent from "../../components/models/BrandsComponent";
 import "../general.css";
+import { useRouter } from "next/router";
 
 export default function index({ brandModels, device }) {
+  const router = useRouter();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -16,22 +20,20 @@ export default function index({ brandModels, device }) {
     <Layout>
       <Main>
         <Head>
-          {/* <title>{blog.title}</title>
-              <meta name="Keywords" content={blog.seo_keyword} />
-              <meta name="description" content={blog.seo_description} />
-              <link
-                rel="canonical"
-                href={`${FRONT_END_URL}/blog/${blogTitle}`}
-              />
-              <meta property="og:type" content="website" />
-              <meta property="og:title" content={blog.title} />
-              <meta property="og:description" content={blog.seo_description} />
-              <meta
-                property="og:url"
-                content={`${FRONT_END_URL}/blog/${blogTitle}`}
-              />
-              <meta property="og:image" content={blog.post_image} /> */}
+          <title>Mr. Again Tablet Reparatie</title>
+          <link rel="canonical" href={`${FRONT_END_URL}` + router.asPath} />
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content="Mr. Again Tablet Reparatie" />
+          <meta
+            property="og:url"
+            content={`${FRONT_END_URL}` + router.asPath}
+          />
           <meta property="og:site_name" content="MrAgain" />
+          {/* <meta name="Keywords" content={blog.seo_keyword} />
+            <meta name="description" content={blog.seo_description} />
+            <meta property="og:description" content={blog.seo_description} />
+              <meta property="og:image" content={blog.post_image} />
+            */}
         </Head>
         <div className="main-section">
           <div className="row">

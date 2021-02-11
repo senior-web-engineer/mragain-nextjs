@@ -44,13 +44,13 @@ export default function BrandsComponent({ data, deviceId }) {
                   </div>
                 ))
               ) : (
-                <div className="model-list">No record found</div>
+                <div className="model-list">No models found</div>
               )}
             </div>
           </div>
         ))
       ) : (
-        <div className="no-data-found">No record found</div>
+        <div className="no-data-found">No brands found</div>
       )}
     </Fragment>
   );

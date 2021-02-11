@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-// import ReactImageMagnify from "react-image-magnify";
 import { SideBySideMagnifier } from "react-image-magnifiers";
 import Slider from "react-slick";
 import "./modelDetails.css";
@@ -26,7 +25,6 @@ export default function ModelDetails(routerProps) {
 
   const updateDimensions = () => {
     setState({
-      height: window.innerHeight,
       width: window.innerWidth,
     });
   };
@@ -41,6 +39,7 @@ export default function ModelDetails(routerProps) {
   const [state, setState] = useState({
     width: 0,
   });
+
   const [modelImages, setmodelImages] = useState(reparations);
   const [currentImage, setcurrentImage] = useState("");
   const model = modelDetails[0];
