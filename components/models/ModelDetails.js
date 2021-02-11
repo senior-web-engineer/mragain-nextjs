@@ -104,12 +104,15 @@ export default function ModelDetails(routerProps) {
     setcurrentImage(image);
   };
 
+let title = `${model.model_name} reparatie | MrAgain`	
+let description = `Alles over de meest voorkomende ${model.model_name} problemen en reparaties vind je hier`
+
   return (
     <Fragment>
       <Head>
-        <title>`${model.model_name} reparatie | MrAgain`</title>
+        <title>{title}</title>
         <meta name="Keywords" content="Model Details, Mr-Again" />
-        <meta name="description" content=`Alles over de meest voorkomende ${model.model_name} problemen en reparaties vind je hier` />
+        <meta name="description" content={description}/>
         <script
           src="https://kit.fontawesome.com/6cdc6e8865.js"
           crossOrigin="anonymous"
@@ -122,7 +125,7 @@ export default function ModelDetails(routerProps) {
         ></link>
         <link rel="canonical" href={FRONT_END_URL + router.asPath} />
         <meta property="og:type" content="website" />
-        <meta name="og_title" property="og:title" content=`${model.model_name} reparatie`/>
+        <meta name="og_title" property="og:title" content={description}/>
         <meta
           property="og:description"
           content="Vind de beste reparateur bij jou in de buurt"
