@@ -203,10 +203,9 @@ let description = `Alles over de meest voorkomende ${model.model_name} problemen
               </div>
               <hr />
               <div className="text-justify">
-                //{model.model_info !== null
-                //  ? model.model_info
-                //  : "No details available for this model"}
-	          Op deze pagina vind je alles over {model.model_name} reparaties en de meest voorkomende problemen. 
+                 {model.model_info !== null
+                 ? model.model_info
+                 : "No details available for this model"}
               </div>
               <button className="btn book-repair">
                 Zoek een reparateur{" "}
