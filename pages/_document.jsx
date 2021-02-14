@@ -1,16 +1,13 @@
 import React from "react";
 import Document, { Head, Main, NextScript, Html } from "next/document";
 import { ServerStyleSheet } from "styled-components";
-import { GA_TRACKING_ID } from '../lib/gtag';
-import HeadWithoutPreload from './HeadWithoutPreload'
+import HeadWithoutPreload from "./HeadWithoutPreload";
 export default class MyDocument extends Document {
   render() {
     const { isProduction } = this.props;
 
-
-
     return (
-      <Html lang="en" >
+      <Html lang="en">
         <HeadWithoutPreload>
           <meta charSet="utf-8" />
           <meta name="msapplication-TileColor" content="#06c987" />
@@ -35,26 +32,28 @@ export default class MyDocument extends Document {
             href="/favicon-16x16.png"
           />
           <link rel="manifest" href="/site.webmanifest" />
-          <link
-            rel="mask-icon"
-            href="/safari-pinned-tab.svg"
-            color="#06c987"
-          />
+          <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#06c987" />
           <link rel="manifest" href="/manifest.json" />
 
-          {/* We only want to add the scripts if in production */}
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
+            rel="stylesheet"
+          ></link>
+          <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap" rel="stylesheet"></link>
 
+          {/* We only want to add the scripts if in production */}
         </HeadWithoutPreload>
         <body>
-          <Main/>
+          <Main />
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
 
-MyDocument.getInitialProps = async ctx => {
+MyDocument.getInitialProps = async (ctx) => {
   // Resolution order
   //
   // On the server:
@@ -82,16 +81,16 @@ MyDocument.getInitialProps = async ctx => {
   const originalRenderPage = ctx.renderPage;
   try {
     ctx.renderPage = () =>
-    originalRenderPage({
-      // useful for wrapping the whole react tree
-      enhanceApp: (App) => props => sheet.collectStyles(<App {...props} />),
-      // useful for wrapping in a per-page basis
-      enhanceComponent: (Component) => Component,
-    });
+      originalRenderPage({
+        // useful for wrapping the whole react tree
+        enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+        // useful for wrapping in a per-page basis
+        enhanceComponent: (Component) => Component,
+      });
 
     const initialProps = await Document.getInitialProps(ctx);
     // Check if in production
-    const isProduction = process.env.NODE_ENV === 'production'
+    const isProduction = process.env.NODE_ENV === "production";
 
     return {
       ...initialProps,
@@ -103,7 +102,7 @@ MyDocument.getInitialProps = async ctx => {
           {sheet.getStyleElement()}
         </>
       ),
-    }
+    };
   } finally {
     sheet.seal();
   }
