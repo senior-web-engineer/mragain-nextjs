@@ -31,7 +31,7 @@ const ADVANTAGES = [
   {
     icon: faGem,
     title: "Je bent goed bezig!",
-    1: "Je bespaart geld
+    1: "Je bespaart geld",
     2: "Je helpt het milieu door duurzaam met je apparaat om te gaan",
   },
 ];
