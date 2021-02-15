@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { Container, Row, Button } from "react-bootstrap";
