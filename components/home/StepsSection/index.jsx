@@ -77,7 +77,7 @@ const STEPS = [
     title: "Vergelijk",
     description: `Vergelijk op 
     basis van prijs, garantie en
-    reviews van anderen`
+    reviews van anderen`,
     image: "/images/compare.png",
   },
   {
