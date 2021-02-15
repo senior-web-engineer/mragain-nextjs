@@ -217,15 +217,15 @@ function renderShop(shop) {
 export default function ShopsSection({shopList = []} = {}) {
   return (
     <>
-      <SubTitle>Recommended shops</SubTitle>
-      <H2>Weekly Featured</H2>
+      <SubTitle>Aangesloten reparateurs</SubTitle>
+      <H2>Nieuw</H2>
       <Toolbar>
         <div>
-          <a>All</a>
+          <a>Alles</a>
           <a>Featured</a>
-          <a>Popular</a>
-          <a>Best price</a>
-          <a>New</a>
+          <a>Populair</a>
+          <a>Beste prijs</a>
+          <a>Nieuw</a>
         </div>
         <div>
           <a className="view-all">

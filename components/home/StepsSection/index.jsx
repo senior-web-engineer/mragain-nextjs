@@ -67,31 +67,31 @@ const StepWrap = styled.div`
 
 const STEPS = [
   {
-    title: "Search",
-    description: `No need to travel far,
-    search for repairers
-    near you`,
+    title: "Zoek",
+    description: `Vul je locatie in en
+    ontdek direct reparateurs in
+    jouw buurt`,
     image: "/images/search.png",
   },
   {
-    title: "Compare",
-    description: `Compare based on
-    warranty, price and the
-    reviews of others`,
+    title: "Vergelijk",
+    description: `Vergelijk op 
+    basis van prijs, garantie en
+    reviews van anderen`
     image: "/images/compare.png",
   },
   {
-    title: "Appointment",
-    description: `Make an appointment
-    directly with the
-    repairer of your choice`,
+    title: "Afspraak",
+    description: `Maak direct een 
+    afspraak bij de reparateur
+    van jouw keuze`,
     image: "/images/appointment.png",
   },
   {
-    title: "Guarantee",
-    description: `Receive warranty
-    certificate by email
-    after your repair`,
+    title: "Garantie",
+    description: `Ontvang de 
+    beste garantie en het bewijs
+    in je email`,
     image: "/images/guarantee.png",
   },
 ];
@@ -116,8 +116,8 @@ function renderStep(step) {
 export default function StepsSection() {
   return (
     <>
-      <SubTitle>How MR Again works?</SubTitle>
-      <H2>In 4 Easy Steps!</H2>
+      <SubTitle>Zo werkt mragain.nl</SubTitle>
+      <H2>In 4 simpele stappen!</H2>
       <StepsWrap>
         <SliderOnMobile>{STEPS.map(renderStep)}</SliderOnMobile>
       </StepsWrap>

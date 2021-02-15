@@ -18,23 +18,21 @@ import { H2, SubTitle } from "@/components/styled/text";
 const ADVANTAGES = [
   {
     icon: faGift,
-    title: "Rewards",
-    1: "Enjoy many prizes with our member loyalty program",
-    2: "Receive stamps, promotions, discounts everytime you book an appointments with us",
+    title: "Jouw voordelen",
+    1: "Altijd direct geholpen doordat de reparateur weet dat je komt",
+    2: "Vooraf duidelijkheid over wat je gaat betalen en de garantie die je krijgt",
   },
   {
     icon: faCrown,
-    title: "Exclusive offers",
-    1: "Excelent service for free",
-    2: "Be the first to know the latest news and avail the member-only offers",
-    3: "Pay just as much as your appointments, as you would pay when visiting directly from the shop, or even less!",
+    title: "De beste garantie",
+    1: "Boeken via MrAgain levert je standaard 1 maand extra garantie op",
+    2: "Korting bij veel van onze aangesloten reparateurs als je direct online reserveert",
   },
   {
     icon: faGem,
-    title: "Perks & Benefits",
-    1: "1000+ partner shops to choose from",
-    2: "Flexible payment options",
-    3: "Book an appointment anytime, anywhere, on any device",
+    title: "Je bent goed bezig!",
+    1: "Je bespaart geld
+    2: "Je helpt het milieu door duurzaam met je apparaat om te gaan",
   },
 ];
 
@@ -120,8 +118,8 @@ export default function AdvantagesSection() {
 
   return (
     <>
-      <SubTitle>OUR ADVANTAGES</SubTitle>
-      <H2>Why choose MrAgain</H2>
+      <SubTitle>mragain.nl</SubTitle>
+      <H2>Waarom je voor MrAgain kiest</H2>
       <AdvantagesWrap>
         <SliderOnMobile>{ADVANTAGES.map(renderAdvantage)}</SliderOnMobile>
       </AdvantagesWrap>

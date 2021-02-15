@@ -237,14 +237,14 @@ export default function FindSection() {
   return (
     <FindWrap>
       <SearchWrap>
-        <h1>find a relieble repairer near you</h1>
+        <h1>Wat wil je laten repareren?</h1>
         <SearchBar>
           <div>
             <FontAwesomeIcon icon={faSearch} />
             <AutoComplete
               dataSource={searchOptions}
               onSearch={handleSearch}
-              placeholder="Search for model"
+              placeholder="Apparaat of model"
               dropdownStyle={{ minWidth: "320px" }}
             >
               <StyledInput />
@@ -252,7 +252,7 @@ export default function FindSection() {
           </div>
           <div>
             <FontAwesomeIcon icon={faMapMarkerAlt} />
-            <ZipCodeInput placeholder="Enter the ZIP code" />
+            <ZipCodeInput placeholder="Postcode of stad" />
           </div>
           <Button>
             <span>Search</span>
@@ -266,7 +266,7 @@ export default function FindSection() {
           width={671}
           height={603}
           src="/images/find-hero.png"
-          alt="woman on a chair"
+          alt="vrouw op een stoel"
         />
       </FindImage>
     </FindWrap>

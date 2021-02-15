@@ -156,11 +156,11 @@ function SignupButtons({ hiddenOnMobile }) {
       <Link href="/login">
         <TextButton as="a">
           <FontAwesomeIcon icon={faUser} />
-          Sign in
+          Log in
         </TextButton>
       </Link>
       <Link href="/meld-je-aan-als-reparateur">
-        <Button as="a">Register</Button>
+        <Button as="a">Registreer</Button>
       </Link>
       <Select value="en" options={LANG_OPTIONS} />
     </UserMenuWrap>

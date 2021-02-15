@@ -42,16 +42,16 @@ const ContentWrap = styled.div`
 
 const STATS = [
   {
-    count: "1,470",
-    label: "Total repairs",
+    count: "24",
+    label: "Aantal reparaties",
   },
   {
-    count: "1,247",
-    label: "Registered shops",
+    count: "65",
+    label: "Aangesloten reparateurs",
   },
   {
-    count: "107",
-    label: "Created brands",
+    count: "1,500",
+    label: "Aanbod aan reparaties",
   },
 ];
 
@@ -220,14 +220,14 @@ export default function TestimonialSection() {
 
   return (
     <MainWrap>
-      <SubTitle>Testimonials</SubTitle>
-      <H2>People's Reviews</H2>
+      <SubTitle>Over mragain.nl</SubTitle>
+      <H2>Wat klanten zeggen</H2>
       <ContentWrap>
         <div>
           <StatsWrap>{STATS.map(renderStat)}</StatsWrap>
           <Button>
             {" "}
-            <span>More reviews</span> <FontAwesomeIcon icon={faArrowRight} />
+            <span>Meer reviews</span> <FontAwesomeIcon icon={faArrowRight} />
           </Button>
         </div>
         <SliderWrap>
