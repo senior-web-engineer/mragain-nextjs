@@ -186,7 +186,7 @@ function renderShop(shop) {
               {shop.rating} <FontAwesomeIcon icon={faStar} />
             </rating>
           ) : null}
-          {shop.tag ? <tag>new</tag> : null}
+          {shop.tag ? <tag>{shop.tag}</tag> : null}
         </dd>
       </ShopImageWrap>
       <ShopDetails>

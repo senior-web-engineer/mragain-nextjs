@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { debounce } from "lodash";
+import styled from "styled-components";
 
 import DefaultLayout from "@/components/layouts/Homepage";
 import {
@@ -7,6 +8,7 @@ import {
   deviceFetcher,
   filtersFormModule,
   modelFetcher,
+  serviceFetcher,
   shopListModule,
 } from "@/components/search-results/modules";
 
@@ -16,23 +18,99 @@ import Form, { useFormContext } from "@/modules/forms";
 import List from "@/modules/list";
 import Select from "@/components/ui/Select";
 import { createSelectComponent } from "@/modules/dataFetcher";
-import { connect } from "react-redux";
+import { Radio, Rate, Slider } from "antd";
+import { MaxConstraints } from "@/components/styled/layout";
+import Image from "next/image";
 
 //
 
 const debouncedUpdateQuery = debounce(shopListModule.actions.updateQuery, 2000);
 
+const MainWrap = styled.div`
+  margin-bottom: -127px;
+  background: linear-gradient(to right, #fff 30%, #f3f3f3 30%);
+  > div {
+    display: flex;
+  }
+`;
+
+const Sidebar = styled.div`
+  width: 100%;
+  max-width: 330px;
+  padding: 30px 30px 30px 0;
+  background-color: #fff;
+`;
+
+const Content = styled.div`
+  background-color: #f3f3f3;
+  flex-grow: 1;
+  padding: 50px;
+
+  form {
+    display: flex;
+    align-items: center;
+    margin: 0 -20px;
+    > div {
+      width: 25%;
+      margin-top: 0 !important;
+      margin: 0 20px;
+    }
+  }
+`;
+
+const ShopWrap = styled.div`
+  height: 210px;
+  border-radius: 10px;
+  padding: 30px;
+  background-color: #fff;
+  margin-top: 10px;
+  display: flex;
+`;
+
+const ShopImageWrap = styled.div`
+  width: 150px;
+  height: 150px;
+  border-radius: 15px;
+  background-color: #f0f0f0;
+  position: relative;
+  overflow: hidden;
+`;
+
 function ExampleItem({ item }) {
-  return <div>{item.name}</div>;
+  return (
+    <ShopWrap>
+      <ShopImageWrap>
+        {item.shop.bg_photo ? (
+          <Image
+            loading="lazy"
+            src={item.shop.bg_photo}
+            layout="fill"
+            objectFit="cover"
+          />
+        ) : null}
+      </ShopImageWrap>
+      {item.shop.name}
+    </ShopWrap>
+  );
+}
+
+function parseOptions(arr, key) {
+  return [
+    {
+      id: 0,
+      [key]: "All",
+    },
+    ...arr,
+  ].map((item) => ({
+    value: `${item.id}`,
+    label: item[key],
+  }));
 }
 
 const DeviceSelector = createSelectComponent({
   dataFetcher: deviceFetcher,
   parseOptions(items = []) {
-    return items.map((item) => ({
-      value: item.id,
-      label: item.device_name,
-    }));
+    return parseOptions(items || [], "device_name");
   },
 });
 
@@ -46,11 +124,8 @@ function AppendIdentifier({ Component, name }) {
 const BrandSelector = AppendIdentifier({
   Component: createSelectComponent({
     dataFetcher: brandFetcher,
-    parseOptions(items, identifier) {
-      return (items || []).map((item) => ({
-        value: item.id,
-        label: item.brand_name,
-      }));
+    parseOptions(items = []) {
+      return parseOptions(items || [], "brand_name");
     },
   }),
   name: "device",
@@ -60,10 +135,7 @@ const ModelSelector = AppendIdentifier({
   Component: createSelectComponent({
     dataFetcher: modelFetcher,
     parseOptions(items = []) {
-      return items.map((item) => ({
-        value: item.id,
-        label: item.model_name,
-      }));
+      return parseOptions(items || [], "model_name");
     },
     Component: (props) => {
       const { state } = useFormContext();
@@ -73,12 +145,94 @@ const ModelSelector = AppendIdentifier({
   name: "brand",
 });
 
+const ServiceSelector = AppendIdentifier({
+  Component: createSelectComponent({
+    dataFetcher: serviceFetcher,
+    parseOptions(items = []) {
+      return parseOptions(items || [], "reparation_name");
+    },
+    Component: (props) => {
+      const { state } = useFormContext();
+      return <Field {...props} identifier={state?.values?.band} />;
+    },
+  }),
+  name: "brand",
+});
+
+const REPAIR_TYPES = [
+  {
+    label: "In-store",
+    value: "in-store",
+  },
+  {
+    label: "Home service",
+    value: "home-service",
+  },
+  {
+    label: "Delivery",
+    value: "delivery",
+  },
+];
+
+const WARRANTIES = [
+  {
+    label: "No warranty",
+    value: "0",
+  },
+  {
+    label: "7 days warranty",
+    value: "7",
+  },
+  {
+    label: "1 month warranty",
+    value: "30",
+  },
+  {
+    label: "6 month warranty",
+    value: "180",
+  },
+];
+
+const WORKING_TIME = [
+  {
+    label: "less than 30 minutes",
+    value: "30",
+  },
+  {
+    label: "less than 1 hour",
+    value: "60",
+  },
+  {
+    label: "less than 2 hours",
+    value: "120",
+  },
+  {
+    label: "within a day",
+    value: "180",
+  },
+  {
+    label: "in 3 days",
+    value: "180",
+  },
+];
+
 export default function SearchResults() {
   useEffect(() => {
     async function main() {
       await filtersFormModule.actions.initialize();
       shopListModule.actions.initialize();
       deviceFetcher.fetch();
+      const formValues = filtersFormModule.state.values
+      if (formValues.device) {
+        brandFetcher.key(formValues.device).fetch();
+      }
+      if (formValues.brand) {
+        modelFetcher.key(formValues.brand).fetch();
+      }
+
+      if (formValues.model) {
+        serviceFetcher.key(formValues.model).fetch();
+      }
     }
 
     main();
@@ -94,29 +248,76 @@ export default function SearchResults() {
     modelFetcher.key(`${value}`).fetch();
   });
 
+  const onModelChange = useCallback((value) => {
+    filtersFormModule.actions.onFieldChange({ name: "model", value });
+    serviceFetcher.key(`${value}`).fetch();
+  });
+
   return (
     <DefaultLayout>
-      <Form module={filtersFormModule}>
-        <DeviceSelector
-          name="device"
-          as={Select}
-          label="Device"
-          onChange={onDeviceChange}
-        />
-        <BrandSelector
-          name="brand"
-          as={Select}
-          label="Brand"
-          onChange={onBandChange}
-        />
-        <ModelSelector name="model" as={Select} label="Model" />
-        <Field name="services" as={Select} label="Services" />
-        <SyncFormValues onChange={debouncedUpdateQuery} />
-      </Form>
-      <List module={shopListModule}>
-        <Listing Item={ExampleItem} />
-        <LoadMore />
-      </List>
+      <MainWrap>
+        <MaxConstraints>
+          <Sidebar>
+            <Form module={filtersFormModule}>
+              <Field name="price" as={Slider} label="Price" />
+              <Field name="rating" as={Rate} label="Rating" />
+              <Field name="repairType" as={Radio.Group} label="Repair Type">
+                {REPAIR_TYPES.map((type) => (
+                  <Radio value={type.value}>{type.label}</Radio>
+                ))}
+              </Field>
+              <Field
+                name="warranty"
+                as={Select}
+                options={WARRANTIES}
+                label="Warranty"
+              />
+              <Field
+                name="time"
+                as={Select}
+                options={WORKING_TIME}
+                label="Working time"
+              />
+            </Form>
+          </Sidebar>
+          <Content>
+            <Form module={filtersFormModule}>
+              <DeviceSelector
+                name="device"
+                as={Select}
+                label="Device"
+                onChange={onDeviceChange}
+                dropdownStyle={{ minWidth: "200px" }}
+              />
+              <BrandSelector
+                name="brand"
+                as={Select}
+                label="Brand"
+                onChange={onBandChange}
+                dropdownStyle={{ minWidth: "200px" }}
+              />
+              <ModelSelector
+                name="model"
+                as={Select}
+                label="Model"
+                onChange={onModelChange}
+                dropdownStyle={{ minWidth: "200px" }}
+              />
+              <ServiceSelector
+                name="service"
+                as={Select}
+                label="Services"
+                dropdownStyle={{ minWidth: "320px" }}
+                popupPlacement="bottomRight"
+              />
+              <SyncFormValues onChange={debouncedUpdateQuery} />
+            </Form>
+            <List module={shopListModule}>
+              <Listing Item={ExampleItem} />
+            </List>
+          </Content>
+        </MaxConstraints>
+      </MainWrap>
     </DefaultLayout>
   );
 }

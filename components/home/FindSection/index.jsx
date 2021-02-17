@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useMemo} from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import Image from "next/image";
@@ -15,6 +15,10 @@ import Button from "@/components/ui/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AutoComplete } from "antd";
 import { API_PATH } from "@/constants";
+import { Field } from "@/modules/forms/Blocks";
+import Form, { useFormContext } from "@/modules/forms";
+import { searchForm } from "../modules";
+import Link from "next/link";
 
 //
 
@@ -115,9 +119,24 @@ const FindImage = styled.div`
   right: -90px;
 `;
 
+function SearchButton() {
+  const { state } = useFormContext();
+
+  const {zip, model} = (state.values || {});
+
+  const [deviceId, brandId, modelId] = model.split('~')
+
+  return (
+    <Link href={`/search-results?zip=${zip}&device=${deviceId}&brand=${brandId}&model=${modelId}`}>
+      <Button>
+        <span>Search</span>
+        <FontAwesomeIcon icon={faArrowRight} />
+      </Button>
+    </Link>
+  );
+}
 
 export default function FindSection() {
-
   const [searchData, updateSearchData] = useState({
     devices: [],
     models: [],
@@ -146,6 +165,7 @@ export default function FindSection() {
       });
     }
 
+    searchForm.actions.initialize();
     loadData();
   }, []);
 
@@ -154,7 +174,7 @@ export default function FindSection() {
       const item = {
         ...model,
         label: `${model.brand.brand_name} ${model.model_name}`,
-        value: `${model.id}`,
+        value: `${model.brand.device.id}~${model.brand.id}~${model.id}`,
       };
 
       const foundDevice = acc.find(
@@ -179,7 +199,7 @@ export default function FindSection() {
         acc.push({
           ...device,
           options: [
-            { label: `All ${device.device_name}`, value: `device_${device.id}` },
+            { label: `All ${device.device_name}`, value: `${device.id}` },
             ...device.options,
           ],
         });
@@ -223,9 +243,9 @@ export default function FindSection() {
 
   const searchOptions = useMemo(() => {
     return searchResults.map((result) => (
-      <AutoComplete.OptGroup label={result.label}>
+      <AutoComplete.OptGroup key={result.label} label={result.label}>
         {result.options.map((option) => (
-          <AutoComplete.Option value={option.value}>
+          <AutoComplete.Option key={option.value} value={option.value}>
             {option.label}
           </AutoComplete.Option>
         ))}
@@ -233,32 +253,32 @@ export default function FindSection() {
     ));
   }, [searchResults]);
 
-
   return (
     <FindWrap>
       <SearchWrap>
         <h1>Wat wil je laten repareren?</h1>
-        <SearchBar>
-          <div>
-            <FontAwesomeIcon icon={faSearch} />
-            <AutoComplete
-              dataSource={searchOptions}
-              onSearch={handleSearch}
-              placeholder="Apparaat of model"
-              dropdownStyle={{ minWidth: "320px" }}
-            >
-              <StyledInput />
-            </AutoComplete>
-          </div>
-          <div>
-            <FontAwesomeIcon icon={faMapMarkerAlt} />
-            <ZipCodeInput placeholder="Postcode of stad" />
-          </div>
-          <Button>
-            <span>Search</span>
-            <FontAwesomeIcon icon={faArrowRight} />
-          </Button>
-        </SearchBar>
+        <Form module={searchForm}>
+          <SearchBar>
+            <div>
+              <FontAwesomeIcon icon={faSearch} />
+              <Field
+                as={AutoComplete}
+                dataSource={searchOptions}
+                onSearch={handleSearch}
+                placeholder="Apparaat of model"
+                dropdownStyle={{ minWidth: "320px" }}
+                name="model"
+              >
+                <StyledInput />
+              </Field>
+            </div>
+            <div>
+              <FontAwesomeIcon icon={faMapMarkerAlt} />
+              <Field as={ZipCodeInput} placeholder="Postcode of stad" name="zip" />
+            </div>
+            <SearchButton />
+          </SearchBar>
+        </Form>
       </SearchWrap>
       <FindImage>
         <Image

@@ -48,7 +48,7 @@ export function createListModule({ fetchData, getInitialQuery, guid = uuid() } =
         store.ref.dispatch({
           type: "INITIALIZE_LIST",
           guid,
-          promise: fetchData(),
+          promise: fetchData(query),
           query,
         });
       },
