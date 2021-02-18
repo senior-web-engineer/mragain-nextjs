@@ -12,13 +12,18 @@ export const filtersFormModule = createFormModule({
 
     return {
       location: fromAddressBar.zip || "",
-      device: fromAddressBar.device || 0,
-      brand: fromAddressBar.brand || 0,
-      model: fromAddressBar.model || 0,
-      service: 0,
+      device: fromAddressBar.device || "0",
+      brand: fromAddressBar.brand || "0",
+      model: fromAddressBar.model || "0",
+      service: "0",
+      distance: "5",
       limit: 100,
     };
   },
+
+  submit(data) {
+    return shopListModule.actions.updateQuery(data)
+  }
 });
 
 export const shopListModule = createListModule({

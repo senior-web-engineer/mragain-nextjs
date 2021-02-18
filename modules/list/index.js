@@ -40,12 +40,16 @@ export function createListModule({ fetchData, getInitialQuery, guid = uuid() } =
 
   const debouncedFetchItems = debounce(fetchItems, 1000);
 
+  function dispatch(action) {
+    store.ref.dispatch(action);
+  }
+
   return {
     guid,
     actions: {
       initialize() {
         const query = getInitialQuery?.();
-        store.ref.dispatch({
+        dispatch({
           type: "INITIALIZE_LIST",
           guid,
           promise: fetchData(query),
@@ -53,16 +57,16 @@ export function createListModule({ fetchData, getInitialQuery, guid = uuid() } =
         });
       },
       nextPage() {
-        store.ref.dispatch({ type: "NEXT_PAGE", guid });
+        dispatch({ type: "NEXT_PAGE", guid });
         fetchItems();
       },
       updateQuery(filters) {
         const moduleState = getModuleState(store.ref.getState())
-        if (isEqual(filters, moduleState.filters)) {
+        if (isEqual(filters, moduleState?.filters)) {
           return;
         }
 
-        store.ref.dispatch({ type: "UPDATE_LIST_QUERY", guid, filters });
+        dispatch({ type: "UPDATE_LIST_QUERY", guid, filters });
         debouncedFetchItems();
       },
     },

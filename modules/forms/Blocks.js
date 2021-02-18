@@ -26,7 +26,7 @@ export function Field({
 }) {
   const { state, actions } = useFormContext();
   const { errors, values } = state;
-  const {validateField, onFieldChange} = actions;
+  const { validateField, onFieldChange } = actions;
 
   const error = get(errors, name);
   const value = get(values, name);
@@ -50,11 +50,19 @@ export function Field({
 
   return (
     <FieldWrap>
-      <label>
-        {label}
-        {optional ? "(Optional)" : ""}
-      </label>
-      <Component value={value} onChange={onChange} onBlur={onBlur} children={children} {...rest}/>
+      {label ? (
+        <label>
+          {label}
+          {optional ? "(Optional)" : ""}
+        </label>
+      ) : null}
+      <Component
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        children={children}
+        {...rest}
+      />
       {error ? <ErrorWrap>{error}</ErrorWrap> : null}
     </FieldWrap>
   );

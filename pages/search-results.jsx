@@ -13,7 +13,7 @@ import {
 } from "@/components/search-results/modules";
 
 import { Field, SyncFormValues } from "@/modules/forms/Blocks";
-import { Listing, LoadMore } from "@/modules/list/Blocks";
+import { Listing } from "@/modules/list/Blocks";
 import Form, { useFormContext } from "@/modules/forms";
 import List from "@/modules/list";
 import Select from "@/components/ui/Select";
@@ -21,10 +21,12 @@ import { createSelectComponent } from "@/modules/dataFetcher";
 import { Radio, Rate, Slider } from "antd";
 import { MaxConstraints } from "@/components/styled/layout";
 import Image from "next/image";
+import { StyledInput } from "@/components/ui/Input";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import Button from "@/components/ui/Button";
 
-// test
-
-const debouncedUpdateQuery = debounce(shopListModule.actions.updateQuery, 2000);
+//
 
 const MainWrap = styled.div`
   margin-bottom: -127px;
@@ -41,21 +43,41 @@ const Sidebar = styled.div`
   background-color: #fff;
 `;
 
+const ModelFields = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 19px -20px;
+  > div {
+    width: 25%;
+    margin-top: 0 !important;
+    margin: 0 20px;
+  }
+`;
+
+const ZipFields = styled.div`
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  background-color: #fff;
+  height: 118px;
+  padding: 0 30px;
+
+  > div {
+    margin-top: 0 !important;
+  }
+
+  hr {
+    height: 41px;
+    border: 0;
+    border-left: 1px solid #ddd;
+  }
+`;
+
+
 const Content = styled.div`
   background-color: #f3f3f3;
   flex-grow: 1;
   padding: 50px;
-
-  form {
-    display: flex;
-    align-items: center;
-    margin: 0 -20px;
-    > div {
-      width: 25%;
-      margin-top: 0 !important;
-      margin: 0 20px;
-    }
-  }
 `;
 
 const ShopWrap = styled.div`
@@ -97,7 +119,7 @@ function ExampleItem({ item }) {
 function parseOptions(arr, key) {
   return [
     {
-      id: 0,
+      id: "0",
       [key]: "All",
     },
     ...arr,
@@ -139,7 +161,7 @@ const ModelSelector = AppendIdentifier({
     },
     Component: (props) => {
       const { state } = useFormContext();
-      return <Field {...props} identifier={state?.values?.band} />;
+      return <Field {...props} identifier={state?.values?.brand} />;
     },
   }),
   name: "brand",
@@ -153,10 +175,10 @@ const ServiceSelector = AppendIdentifier({
     },
     Component: (props) => {
       const { state } = useFormContext();
-      return <Field {...props} identifier={state?.values?.band} />;
+      return <Field {...props} identifier={state?.values?.model} />;
     },
   }),
-  name: "brand",
+  name: "model",
 });
 
 const REPAIR_TYPES = [
@@ -171,6 +193,25 @@ const REPAIR_TYPES = [
   {
     label: "Delivery",
     value: "delivery",
+  },
+];
+
+const DISTANCES = [
+  {
+    label: "+5 km",
+    value: "5",
+  },
+  {
+    label: "+10 km",
+    value: "10",
+  },
+  {
+    label: "+15 km",
+    value: "15",
+  },
+  {
+    label: "+30 km",
+    value: "30",
   },
 ];
 
@@ -222,7 +263,7 @@ export default function SearchResults() {
       await filtersFormModule.actions.initialize();
       shopListModule.actions.initialize();
       deviceFetcher.fetch();
-      const formValues = filtersFormModule.state.values
+      const formValues = filtersFormModule.state.values;
       if (formValues.device) {
         brandFetcher.key(formValues.device).fetch();
       }
@@ -239,17 +280,35 @@ export default function SearchResults() {
   }, []);
 
   const onDeviceChange = useCallback((value) => {
-    filtersFormModule.actions.onFieldChange({ name: "device", value });
+    filtersFormModule.actions.batchChange({
+      updates: {
+        device: value,
+        brand: "0",
+        model: "0",
+        service: "0",
+      },
+    });
     brandFetcher.key(`${value}`).fetch();
   });
 
   const onBandChange = useCallback((value) => {
-    filtersFormModule.actions.onFieldChange({ name: "brand", value });
+    filtersFormModule.actions.batchChange({
+      updates: {
+        brand: value,
+        model: "0",
+        service: "0",
+      },
+    });
     modelFetcher.key(`${value}`).fetch();
   });
 
   const onModelChange = useCallback((value) => {
-    filtersFormModule.actions.onFieldChange({ name: "model", value });
+    filtersFormModule.actions.batchChange({
+      updates: {
+        model: value,
+        service: "0",
+      },
+    });
     serviceFetcher.key(`${value}`).fetch();
   });
 
@@ -282,35 +341,44 @@ export default function SearchResults() {
           </Sidebar>
           <Content>
             <Form module={filtersFormModule}>
-              <DeviceSelector
-                name="device"
-                as={Select}
-                label="Device"
-                onChange={onDeviceChange}
-                dropdownStyle={{ minWidth: "200px" }}
-              />
-              <BrandSelector
-                name="brand"
-                as={Select}
-                label="Brand"
-                onChange={onBandChange}
-                dropdownStyle={{ minWidth: "200px" }}
-              />
-              <ModelSelector
-                name="model"
-                as={Select}
-                label="Model"
-                onChange={onModelChange}
-                dropdownStyle={{ minWidth: "200px" }}
-              />
-              <ServiceSelector
-                name="service"
-                as={Select}
-                label="Services"
-                dropdownStyle={{ minWidth: "320px" }}
-                popupPlacement="bottomRight"
-              />
-              <SyncFormValues onChange={debouncedUpdateQuery} />
+              <ZipFields>
+                <FontAwesomeIcon icon={faMapMarkerAlt} />
+                <Field as={StyledInput} name="location" placeholder="Postcode of stad" />
+                <hr />
+                <Field as={Select} name="distance" options={DISTANCES} />
+                <Button>Search</Button>
+              </ZipFields>
+              <ModelFields>
+                <DeviceSelector
+                  name="device"
+                  as={Select}
+                  label="Device"
+                  onChange={onDeviceChange}
+                  dropdownStyle={{ minWidth: "200px" }}
+                />
+                <BrandSelector
+                  name="brand"
+                  as={Select}
+                  label="Brand"
+                  onChange={onBandChange}
+                  dropdownStyle={{ minWidth: "200px" }}
+                />
+                <ModelSelector
+                  name="model"
+                  as={Select}
+                  label="Model"
+                  onChange={onModelChange}
+                  dropdownStyle={{ minWidth: "200px" }}
+                />
+                <ServiceSelector
+                  name="service"
+                  as={Select}
+                  label="Services"
+                  dropdownStyle={{ minWidth: "200px" }}
+                  popupPlacement="bottomRight"
+                />
+              </ModelFields>
+              <SyncFormValues onChange={shopListModule.actions.updateQuery} />
             </Form>
             <List module={shopListModule}>
               <Listing Item={ExampleItem} />
