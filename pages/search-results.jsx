@@ -22,7 +22,7 @@ import { Radio, Rate, Slider } from "antd";
 import { MaxConstraints } from "@/components/styled/layout";
 import Image from "next/image";
 
-//
+// test
 
 const debouncedUpdateQuery = debounce(shopListModule.actions.updateQuery, 2000);
 
