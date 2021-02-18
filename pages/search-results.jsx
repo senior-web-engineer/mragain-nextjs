@@ -37,8 +37,7 @@ const MainWrap = styled.div`
 `;
 
 const Sidebar = styled.div`
-  width: 100%;
-  max-width: 330px;
+  flex-basis: 200px;
   padding: 30px 30px 30px 0;
   background-color: #fff;
 `;
@@ -51,6 +50,11 @@ const ModelFields = styled.div`
     width: 25%;
     margin-top: 0 !important;
     margin: 0 20px;
+    background-color: #fff;
+
+    > label {
+      margin: 11px 11px 2px 11px;
+    }
   }
 `;
 
