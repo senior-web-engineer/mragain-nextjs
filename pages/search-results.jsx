@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { debounce } from "lodash";
 import styled from "styled-components";
 
@@ -18,14 +18,17 @@ import Form, { useFormContext } from "@/modules/forms";
 import List from "@/modules/list";
 import Select from "@/components/ui/Select";
 import { createSelectComponent } from "@/modules/dataFetcher";
-import { Radio, Rate, Slider } from "antd";
+import { Radio, Rate, Slider, Switch } from "antd";
 import { MaxConstraints } from "@/components/styled/layout";
 import Image from "next/image";
 import { StyledInput } from "@/components/ui/Input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import Button from "@/components/ui/Button";
-
+import { FieldWrap } from "@/components/styled/Forms";
+import MyMapComponent from "@/components/zoekResultaten/MyMapComponent";
+import { store } from "@/configureStore";
+import Map from "@/components/search-results/Map";
 //
 
 const MainWrap = styled.div`
@@ -42,18 +45,34 @@ const Sidebar = styled.div`
   background-color: #fff;
 `;
 
+const MapTriggerWrap = styled(FieldWrap)`
+  > label {
+    margin-top: 0;
+  }
+`;
+
 const ModelFields = styled.div`
   display: flex;
   align-items: center;
-  margin: 19px -20px;
+  margin: 19px -5px;
+
   > div {
-    width: 25%;
+    flex-grow: 1;
     margin-top: 0 !important;
-    margin: 0 20px;
+    margin: 0 5px;
     background-color: #fff;
 
     > label {
       margin: 11px 11px 2px 11px;
+    }
+  }
+
+  > ${MapTriggerWrap} {
+    flex-grow: 0;
+    background-color: transparent;
+
+    > label {
+      margin-top: 0;
     }
   }
 `;
@@ -156,7 +175,7 @@ ShopDetails.Service = styled.div`
   line-height: 30px;
   border-radius: 5px;
   margin: 0 1px;
-`
+`;
 
 function ExampleItem({ item }) {
   const location = [item.shop.street || "", item.shop.city || ""]
@@ -178,9 +197,7 @@ function ExampleItem({ item }) {
             objectFit="cover"
           />
         ) : null}
-        <dd>
-          {item.shop.distance}
-        </dd>
+        <dd>{item.shop.distance}</dd>
       </ShopImageWrap>
       <ShopDetails>
         <div>{item.shop.tag ? <tag>{item.shop.tag}</tag> : null}</div>
@@ -195,20 +212,22 @@ function ExampleItem({ item }) {
             ) : null}
             <Rate disabled value={item.shop.mark} onChange={null} />
           </ShopDetails.NameWrap>
-          <div>
-            <label>Next available schedule</label>
-            <date>27 Jan, 10:00AM</date>
-          </div>
+          {item.nextApointment ? (
+            <div>
+              <label>Next available schedule</label>
+              <date>{new Date(item.nextApointment).toString()}</date>
+            </div>
+          ) : null}
           {item.price ? (
             <div>
-            <label>Starts at</label>
-            <price>&euro; {item.price}</price>
-          </div>
+              <label>Starts at</label>
+              <price>&euro; {item.price}</price>
+            </div>
           ) : null}
         </ShopDetails.SecondRow>
         {item.shop.services?.length ? (
           <ShopDetails.ThirdRow>
-            {(item.shop.services).map(renderService)}
+            {item.shop.services.map(renderService)}
           </ShopDetails.ThirdRow>
         ) : null}
       </ShopDetails>
@@ -354,6 +373,7 @@ const WORKING_TIME = [
 ];
 
 export default function SearchResults() {
+  const [showMap, updateShowMap] = useState();
   useEffect(() => {
     async function main() {
       await filtersFormModule.actions.initialize();
@@ -416,23 +436,27 @@ export default function SearchResults() {
             <Form module={filtersFormModule}>
               <Field name="price" as={Slider} label="Price" />
               {false && <Field name="rating" as={Rate} label="Rating" />}
-              {false && <Field name="repairType" as={Radio.Group} label="Repair Type">
-                {REPAIR_TYPES.map((type) => (
-                  <Radio value={type.value}>{type.label}</Radio>
-                ))}
-              </Field>}
+              {false && (
+                <Field name="repairType" as={Radio.Group} label="Repair Type">
+                  {REPAIR_TYPES.map((type) => (
+                    <Radio value={type.value}>{type.label}</Radio>
+                  ))}
+                </Field>
+              )}
               <Field
                 name="guarantee"
                 as={Select}
                 options={WARRANTIES}
                 label="Warranty"
               />
-              {false && <Field
-                name="time"
-                as={Select}
-                options={WORKING_TIME}
-                label="Working time"
-              />}
+              {false && (
+                <Field
+                  name="time"
+                  as={Select}
+                  options={WORKING_TIME}
+                  label="Working time"
+                />
+              )}
             </Form>
           </Sidebar>
           <Content>
@@ -477,6 +501,13 @@ export default function SearchResults() {
                   dropdownStyle={{ minWidth: "200px" }}
                   popupPlacement="bottomRight"
                 />
+                <MapTriggerWrap>
+                  <label>Map</label>
+                  <Switch
+                    value={showMap}
+                    onChange={(val) => updateShowMap(val)}
+                  />
+                </MapTriggerWrap>
               </ModelFields>
               <SyncFormValues onChange={shopListModule.actions.updateQuery} />
             </Form>
@@ -484,6 +515,7 @@ export default function SearchResults() {
               <Listing Item={ExampleItem} />
             </List>
           </Content>
+          <List module={shopListModule}>{showMap ? <Map /> : null}</List>
         </MaxConstraints>
       </MainWrap>
     </DefaultLayout>

@@ -12,6 +12,10 @@ export function createListModule({ fetchData, getInitialQuery, guid = uuid() } =
   }
 
   const getItems = createSelector(getModuleState, (moduleState) => {
+    if (!moduleState) {
+      return []
+    }
+
     const { pages, items } = moduleState;
 
     return pages.reduce((accumulator, page) => {
@@ -62,6 +66,9 @@ export function createListModule({ fetchData, getInitialQuery, guid = uuid() } =
       },
       updateQuery(filters) {
         const moduleState = getModuleState(store.ref.getState())
+        if (!moduleState) {
+          return;
+        }
         if (isEqual(filters, moduleState?.filters)) {
           return;
         }
