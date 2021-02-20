@@ -75,13 +75,17 @@ const ZipFields = styled.div`
     border: 0;
     border-left: 1px solid #ddd;
   }
-`;
 
+  .svg-inline--fa {
+    margin-right: 8px;
+  }
+`;
 
 const Content = styled.div`
   background-color: #f3f3f3;
   flex-grow: 1;
   padding: 50px;
+  margin-right: -50px;
 `;
 
 const ShopWrap = styled.div`
@@ -100,9 +104,69 @@ const ShopImageWrap = styled.div`
   background-color: #f0f0f0;
   position: relative;
   overflow: hidden;
+
+  dd {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    font-size: 10px;
+    line-height: 25px;
+    border-radius: 3px;
+    background-color: #fff;
+    padding: 0 8px;
+  }
 `;
 
+const ShopDetails = styled.div`
+  margin-left: 21px;
+  flex-grow: 1;
+`;
+
+ShopDetails.SecondRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  label {
+    display: block;
+  }
+`;
+
+ShopDetails.NameWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  .svg-inline--fa {
+    margin-right: 8px;
+  }
+`;
+
+ShopDetails.ThirdRow = styled.div`
+  margin-top: 14px;
+  border-top: 2px;
+  padding-top: 8px;
+  border-top: 2px solid #ddd;
+  display: flex;
+`;
+
+ShopDetails.Service = styled.div`
+  background-color: #f1fefa;
+  color: #06c987;
+  padding: 0 14px;
+  line-height: 30px;
+  border-radius: 5px;
+  margin: 0 1px;
+`
+
 function ExampleItem({ item }) {
+  const location = [item.shop.street || "", item.shop.city || ""]
+    .filter(Boolean)
+    .join(", ");
+
+  function renderService(service) {
+    return <ShopDetails.Service>{service}</ShopDetails.Service>;
+  }
+
   return (
     <ShopWrap>
       <ShopImageWrap>
@@ -114,8 +178,40 @@ function ExampleItem({ item }) {
             objectFit="cover"
           />
         ) : null}
+        <dd>
+          {item.shop.distance}
+        </dd>
       </ShopImageWrap>
-      {item.shop.name}
+      <ShopDetails>
+        <div>{item.shop.tag ? <tag>{item.shop.tag}</tag> : null}</div>
+        <ShopDetails.SecondRow>
+          <ShopDetails.NameWrap>
+            {item.shop.name}
+            {location ? (
+              <location>
+                <FontAwesomeIcon icon={faMapMarkerAlt} />
+                {location}
+              </location>
+            ) : null}
+            <Rate disabled value={item.shop.mark} onChange={null} />
+          </ShopDetails.NameWrap>
+          <div>
+            <label>Next available schedule</label>
+            <date>27 Jan, 10:00AM</date>
+          </div>
+          {item.price ? (
+            <div>
+            <label>Starts at</label>
+            <price>&euro; {item.price}</price>
+          </div>
+          ) : null}
+        </ShopDetails.SecondRow>
+        {item.shop.services?.length ? (
+          <ShopDetails.ThirdRow>
+            {(item.shop.services).map(renderService)}
+          </ShopDetails.ThirdRow>
+        ) : null}
+      </ShopDetails>
     </ShopWrap>
   );
 }
@@ -222,19 +318,15 @@ const DISTANCES = [
 const WARRANTIES = [
   {
     label: "No warranty",
-    value: "0",
-  },
-  {
-    label: "7 days warranty",
-    value: "7",
+    value: "-1",
   },
   {
     label: "1 month warranty",
-    value: "30",
+    value: "1",
   },
   {
     label: "6 month warranty",
-    value: "180",
+    value: "6",
   },
 ];
 
@@ -323,31 +415,35 @@ export default function SearchResults() {
           <Sidebar>
             <Form module={filtersFormModule}>
               <Field name="price" as={Slider} label="Price" />
-              <Field name="rating" as={Rate} label="Rating" />
-              <Field name="repairType" as={Radio.Group} label="Repair Type">
+              {false && <Field name="rating" as={Rate} label="Rating" />}
+              {false && <Field name="repairType" as={Radio.Group} label="Repair Type">
                 {REPAIR_TYPES.map((type) => (
                   <Radio value={type.value}>{type.label}</Radio>
                 ))}
-              </Field>
+              </Field>}
               <Field
-                name="warranty"
+                name="guarantee"
                 as={Select}
                 options={WARRANTIES}
                 label="Warranty"
               />
-              <Field
+              {false && <Field
                 name="time"
                 as={Select}
                 options={WORKING_TIME}
                 label="Working time"
-              />
+              />}
             </Form>
           </Sidebar>
           <Content>
             <Form module={filtersFormModule}>
               <ZipFields>
                 <FontAwesomeIcon icon={faMapMarkerAlt} />
-                <Field as={StyledInput} name="location" placeholder="Postcode of stad" />
+                <Field
+                  as={StyledInput}
+                  name="location"
+                  placeholder="Postcode of stad"
+                />
                 <hr />
                 <Field as={Select} name="distance" options={DISTANCES} />
                 <Button>Search</Button>

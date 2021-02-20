@@ -16,7 +16,9 @@ export const filtersFormModule = createFormModule({
       brand: fromAddressBar.brand || "0",
       model: fromAddressBar.model || "0",
       service: "0",
-      distance: "5",
+      distance: fromAddressBar.distance || "5",
+      guarantee: fromAddressBar.guarantee || "-1",
+      price: fromAddressBar.price || "-1",
       limit: 100,
     };
   },
@@ -33,9 +35,9 @@ export const shopListModule = createListModule({
       ...query,
       phone: query.device,
       reparation: query.service,
-      distance: 15,
-      price: -1,
-      guarantee: -1,
+      distance: query.distance,
+      price: query.price,
+      guarantee: query.guarantee,
       sort: 0,
     });
     return {

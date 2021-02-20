@@ -13,7 +13,7 @@ const ShopList = styled.div`
   margin: 0 -15px;
 `;
 
-const TAG_TO_COLOR = {
+export const TAG_TO_COLOR = {
   new: "#c90648",
   popular: "#ffd342",
   "best price": "#0076a3",
