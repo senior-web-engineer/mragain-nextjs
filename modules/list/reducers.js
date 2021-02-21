@@ -25,6 +25,10 @@ export function FETCH_LIST_DATA_REQUEST(nextState, { guid }) {
   nextState[guid].isLoading = true;
 }
 
+export function FETCH_LIST_DATA_FAILURE(nextState, { guid }) {
+  nextState[guid].isLoading = false;
+}
+
 export function FETCH_LIST_DATA_SUCCESS(...args) {
   processResult(...args);
 }

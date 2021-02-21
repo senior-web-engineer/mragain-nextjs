@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { debounce } from "lodash";
-import styled from "styled-components";
+import React, { useCallback, useEffect, useState } from "react";
+import styled, { css } from "styled-components";
+import isEqual from "fast-deep-equal";
 
 import DefaultLayout from "@/components/layouts/Homepage";
 import {
@@ -23,12 +23,14 @@ import { MaxConstraints } from "@/components/styled/layout";
 import Image from "next/image";
 import { StyledInput } from "@/components/ui/Input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import Button from "@/components/ui/Button";
 import { FieldWrap } from "@/components/styled/Forms";
-import MyMapComponent from "@/components/zoekResultaten/MyMapComponent";
-import { store } from "@/configureStore";
 import Map from "@/components/search-results/Map";
+import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
+import { SubTitle } from "@/components/styled/text";
+import { TextButton } from "@/components/ui/Button";
+import Link from "next/link";
 //
 
 const MainWrap = styled.div`
@@ -41,13 +43,33 @@ const MainWrap = styled.div`
 
 const Sidebar = styled.div`
   flex-basis: 200px;
-  padding: 30px 30px 30px 0;
+  padding: 0 30px 30px 0;
   background-color: #fff;
 `;
 
 const MapTriggerWrap = styled(FieldWrap)`
   > label {
     margin-top: 0;
+  }
+`;
+
+const SidebarHeader = styled.div`
+  display: flex;
+  height: 75px;
+  border-bottom: 1px solid #ddd;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 -30px 30px 0;
+
+  ${TextButton} {
+    font-size: 11px;
+    letter-spacing: 0px;
+    color: #ed1c24;
+    font-weight: 300;
+    margin-right: 37px;
+    text-transform: none;
+    height: auto;
+    line-height: 1em;
   }
 `;
 
@@ -114,6 +136,7 @@ const ShopWrap = styled.div`
   background-color: #fff;
   margin-top: 10px;
   display: flex;
+  align-items: center;
 `;
 
 const ShopImageWrap = styled.div`
@@ -139,24 +162,65 @@ const ShopImageWrap = styled.div`
 const ShopDetails = styled.div`
   margin-left: 21px;
   flex-grow: 1;
+
+  tag {
+    display: inline-block;
+    font-size: 8px;
+    height: 31px;
+    ${(props) =>
+      props.tagColor &&
+      css`
+        background-color: ${props.tagColor || "#ddd"};
+      `}
+    color: #fff;
+    line-height: 31px;
+    padding: 0 10px;
+    border-radius: 15px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
 `;
 
 ShopDetails.SecondRow = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 15px;
+  color: #303030;
+  font-weight: 400;
 
   label {
     display: block;
+    font-size: 10px;
+    color: #707070;
+    font-weight: 300;
+  }
+
+  ${Button} {
+    min-width: 51px;
   }
 `;
 
 ShopDetails.NameWrap = styled.div`
   display: flex;
   flex-direction: column;
+  font-size: 12px;
+  color: #707070;
+  font-weight: 300;
+
+  h3 {
+    font-size: 20px;
+    color: #0d3244;
+    font-weight: 500;
+    margin: 0;
+  }
 
   .svg-inline--fa {
     margin-right: 8px;
+  }
+
+  .ant-rate-star:not(:last-child) {
+    margin-right: 3px;
   }
 `;
 
@@ -175,9 +239,10 @@ ShopDetails.Service = styled.div`
   line-height: 30px;
   border-radius: 5px;
   margin: 0 1px;
+  font-size: 10px;
 `;
 
-function ExampleItem({ item }) {
+function ShopItem({ item }) {
   const location = [item.shop.street || "", item.shop.city || ""]
     .filter(Boolean)
     .join(", ");
@@ -185,6 +250,8 @@ function ExampleItem({ item }) {
   function renderService(service) {
     return <ShopDetails.Service>{service}</ShopDetails.Service>;
   }
+
+  const tag = item.shop.tag;
 
   return (
     <ShopWrap>
@@ -199,18 +266,23 @@ function ExampleItem({ item }) {
         ) : null}
         <dd>{item.shop.distance}</dd>
       </ShopImageWrap>
-      <ShopDetails>
-        <div>{item.shop.tag ? <tag>{item.shop.tag}</tag> : null}</div>
+      <ShopDetails tagColor={TAG_TO_COLOR[tag]}>
+        <div>{tag ? <tag>{tag}</tag> : null}</div>
         <ShopDetails.SecondRow>
           <ShopDetails.NameWrap>
-            {item.shop.name}
+            <h3>{item.shop.name}</h3>
             {location ? (
               <location>
                 <FontAwesomeIcon icon={faMapMarkerAlt} />
                 {location}
               </location>
             ) : null}
-            <Rate disabled value={item.shop.mark} onChange={null} />
+            <Rate
+              disabled
+              style={{ fontSize: "13px" }}
+              value={item.shop.mark}
+              onChange={null}
+            />
           </ShopDetails.NameWrap>
           {item.nextApointment ? (
             <div>
@@ -224,6 +296,11 @@ function ExampleItem({ item }) {
               <price>&euro; {item.price}</price>
             </div>
           ) : null}
+          <Link href={`/${item.shop.name}--${item.shop.city}`}>
+            <Button>
+              <FontAwesomeIcon icon={faArrowRight} />
+            </Button>
+          </Link>
         </ShopDetails.SecondRow>
         {item.shop.services?.length ? (
           <ShopDetails.ThirdRow>
@@ -334,6 +411,21 @@ const DISTANCES = [
   },
 ];
 
+const SORT_BY = [
+  {
+    label: "None",
+    value: "0",
+  },
+  {
+    label: "Price",
+    value: "1",
+  },
+  {
+    label: "Warranty",
+    value: "2",
+  },
+];
+
 const WARRANTIES = [
   {
     label: "No warranty",
@@ -371,6 +463,23 @@ const WORKING_TIME = [
     value: "180",
   },
 ];
+
+function ClearFilters() {
+  const { state, actions } = useFormContext();
+
+  const hasDiff = !isEqual(state.initialValues, state.values);
+  if (!hasDiff) {
+    return null;
+  }
+
+  return (
+    <TextButton
+      onClick={() => actions.batchChange({ updates: state.initialValues })}
+    >
+      Clear
+    </TextButton>
+  );
+}
 
 export default function SearchResults() {
   const [showMap, updateShowMap] = useState();
@@ -433,7 +542,19 @@ export default function SearchResults() {
       <MainWrap>
         <MaxConstraints>
           <Sidebar>
+            <SidebarHeader>
+              <SubTitle>Refine results</SubTitle>
+              <Form module={filtersFormModule}>
+                <ClearFilters />
+              </Form>
+            </SidebarHeader>
             <Form module={filtersFormModule}>
+            <Field
+                name="sort"
+                as={Select}
+                options={SORT_BY}
+                label="Sort by"
+              />
               <Field name="price" as={Slider} label="Price" />
               {false && <Field name="rating" as={Rate} label="Rating" />}
               {false && (
@@ -512,7 +633,7 @@ export default function SearchResults() {
               <SyncFormValues onChange={shopListModule.actions.updateQuery} />
             </Form>
             <List module={shopListModule}>
-              <Listing Item={ExampleItem} />
+              <Listing Item={ShopItem} />
             </List>
           </Content>
           <List module={shopListModule}>{showMap ? <Map /> : null}</List>

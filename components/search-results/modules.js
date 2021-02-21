@@ -2,6 +2,7 @@ import { API_PATH } from "@/constants";
 import dataFetcher, { keyedDataFetcher } from "@/modules/dataFetcher";
 import { createListModule } from "@/modules/list";
 import api from "@/utils/api";
+import { notification } from "antd";
 import router from "next/router";
 const { createFormModule } = require("@/modules/forms");
 
@@ -19,6 +20,7 @@ export const filtersFormModule = createFormModule({
       distance: fromAddressBar.distance || "5",
       guarantee: fromAddressBar.guarantee || "-1",
       price: fromAddressBar.price || "-1",
+      sort: fromAddressBar.sort || "0",
       limit: 100,
     };
   },
@@ -31,18 +33,26 @@ export const filtersFormModule = createFormModule({
 export const shopListModule = createListModule({
   guid: "shops",
   async fetchData(query = {}) {
-    const data = await api.get(`${API_PATH.SEARCH}/`, {
-      ...query,
-      phone: query.device,
-      reparation: query.service,
-      distance: query.distance,
-      price: query.price,
-      guarantee: query.guarantee,
-      sort: 0,
-    });
-    return {
-      items: data,
-    };
+    try {
+      const data = await api.get(`${API_PATH.SEARCH}/`, {
+        ...query,
+        phone: query.device,
+        reparation: query.service,
+        distance: query.distance,
+        price: query.price,
+        guarantee: query.guarantee,
+        sort: query.sort,
+      });
+      return {
+        items: data,
+      };
+    } catch(err) {
+      notification.error({
+        message: "Something went wrong while getting the list of shops"
+      });
+
+      return {items: []}
+    }
   },
   getInitialQuery() {
     return filtersFormModule.state?.values;
