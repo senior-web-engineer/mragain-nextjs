@@ -191,7 +191,7 @@ function renderShop(shop) {
       </ShopImageWrap>
       <ShopDetails>
         <div>
-          <Link href={`/shop/${shop.id}`}>
+          <Link href={`/${shop.name}--${shop.city}`}>
             <a>{shop.name}</a>
           </Link>
         </div>
@@ -205,7 +205,7 @@ function renderShop(shop) {
           {location}
         </location>
       ) : null}
-      <Link href={`/shop/${shop.id}`}>
+      <Link href={`/${shop.name}--${shop.city}`}>
         <Button as="a">
           <FontAwesomeIcon icon={faArrowRight} />
         </Button>

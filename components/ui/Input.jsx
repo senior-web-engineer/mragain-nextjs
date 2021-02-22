@@ -1,9 +1,23 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { Input as AntdInput } from "antd";
 
-export const StyledInput = styled.input`
-  border: 0;
-  padding: 0;
-`
+export const StyledInput = styled(AntdInput)`
+  .ant-input-prefix {
+    color: #ccc;
+  }
+
+  .ant-input.ant-input-lg {
+    font-size: 14px;
+  }
+
+  .ant-input {
+    ${(props) =>
+      props.noBorder &&
+      css`
+        border: 0;
+      `}
+  }
+`;
 
 function parseValue(ev) {
   if (ev?.target) {
@@ -13,6 +27,6 @@ function parseValue(ev) {
   return ev;
 }
 
-export default function Input({onChange = () => {}, ...rest}) {
-  return <StyledInput {...rest} onChange={(ev) => onChange(parseValue(ev))}/>
+export default function Input({ onChange = () => {}, ...rest }) {
+  return <StyledInput {...rest} onChange={(ev) => onChange(parseValue(ev))} />;
 }

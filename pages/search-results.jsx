@@ -23,7 +23,10 @@ import { MaxConstraints } from "@/components/styled/layout";
 import Image from "next/image";
 import { StyledInput } from "@/components/ui/Input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRight,
+  faMapMarkerAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import Button from "@/components/ui/Button";
 import { FieldWrap } from "@/components/styled/Forms";
 import Map from "@/components/search-results/Map";
@@ -549,7 +552,7 @@ export default function SearchResults() {
               </Form>
             </SidebarHeader>
             <Form module={filtersFormModule}>
-            <Field
+              <Field
                 name="sort"
                 as={Select}
                 options={SORT_BY}
@@ -583,8 +586,9 @@ export default function SearchResults() {
           <Content>
             <Form module={filtersFormModule}>
               <ZipFields>
-                <FontAwesomeIcon icon={faMapMarkerAlt} />
                 <Field
+                  prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
+                  noBorder
                   as={StyledInput}
                   name="location"
                   placeholder="Postcode of stad"

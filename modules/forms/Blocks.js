@@ -68,6 +68,8 @@ export function Field({
   );
 }
 
+Field.FieldWrap = FieldWrap;
+
 export function SyncFormValues({ onChange }) {
   const { state } = useFormContext();
   const values = state.values;

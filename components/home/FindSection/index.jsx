@@ -45,19 +45,25 @@ const FindWrap = styled.div`
 const SearchBar = styled.div`
   background-color: #fff;
   flex-grow: 1;
-  height: 99px;
   display: flex;
   flex-direction: column;
   justify-content: stretch;
   align-items: stretch;
-  padding: 0 30px;
+  padding: 10px 30px;
   border-radius: 10px;
   color: #868686;
 
   & > div {
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 20px;
+  }
+
+  & > div ${Field.FieldWrap} {
+    width: 100%;
+    > * {
+      width: 100%;
+    }
   }
 
   .svg-inline--fa {
@@ -65,6 +71,8 @@ const SearchBar = styled.div`
   }
 
   ${media.tablet`
+    height: 99px;
+    padding: 0 30px;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
@@ -85,7 +93,8 @@ const SearchWrap = styled.div`
   }
 
   ${Button} {
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 
     .svg-inline--fa {
       margin-right: 0;
@@ -110,7 +119,11 @@ const SearchWrap = styled.div`
 `;
 
 const ZipCodeInput = styled(StyledInput)`
-  max-width: 140px;
+  ${media.tablet`
+    max-width: 170px;
+    position: relative;
+    right: -20px;
+  `}
 `;
 
 const FindImage = styled.div`
@@ -122,12 +135,14 @@ const FindImage = styled.div`
 function SearchButton() {
   const { state } = useFormContext();
 
-  const {zip, model} = (state.values || {});
+  const { zip, model } = state.values || {};
 
-  const [deviceId, brandId, modelId] = model.split('~')
+  const [deviceId = "", brandId = "", modelId = ""] = model.split("~");
 
   return (
-    <Link href={`/search-results?zip=${zip}&device=${deviceId}&brand=${brandId}&model=${modelId}`}>
+    <Link
+      href={`/search-results?zip=${zip}&device=${deviceId}&brand=${brandId}&model=${modelId}`}
+    >
       <Button>
         <span>Search</span>
         <FontAwesomeIcon icon={faArrowRight} />
@@ -260,12 +275,16 @@ export default function FindSection() {
         <Form module={searchForm}>
           <SearchBar>
             <div>
-              <FontAwesomeIcon icon={faSearch} />
               <Field
                 as={AutoComplete}
                 dataSource={searchOptions}
                 onSearch={handleSearch}
-                placeholder="Apparaat of model"
+                size="large"
+                placeholder={
+                  <>
+                    <FontAwesomeIcon icon={faSearch} /> Apparaat of model
+                  </>
+                }
                 dropdownStyle={{ minWidth: "320px" }}
                 name="model"
               >
@@ -273,8 +292,13 @@ export default function FindSection() {
               </Field>
             </div>
             <div>
-              <FontAwesomeIcon icon={faMapMarkerAlt} />
-              <Field as={ZipCodeInput} placeholder="Postcode of stad" name="zip" />
+              <Field
+                as={ZipCodeInput}
+                size="large"
+                prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
+                placeholder={"Postcode of stad"}
+                name="zip"
+              />
             </div>
             <SearchButton />
           </SearchBar>
