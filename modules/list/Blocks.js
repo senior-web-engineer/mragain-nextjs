@@ -1,6 +1,10 @@
 import Loader from "@/components/common/Loader";
 import React, { useMemo } from "react";
 import { useListContext } from ".";
+import { Table as AntTable } from "antd";
+import styled from "styled-components";
+
+const StyledTable = styled(AntTable)``;
 
 export function Listing({ Item }) {
   const { state } = useListContext();
@@ -30,6 +34,18 @@ export function Listing({ Item }) {
       {renderLoader()}
     </>
   );
+}
+
+export function Table({ ...props }) {
+  const { state, actions } = useListContext();
+  const { items, pages, currentPage, isLoading } = state;
+  const derivedItems = useMemo(() => {
+    return pages.reduce((accumulator, page) => {
+      return accumulator.concat(items[page]);
+    }, []);
+  }, [items, pages]);
+
+  return <StyledTable pagination={false} {...props} dataSource={derivedItems} />;
 }
 
 export function LoadMore() {
