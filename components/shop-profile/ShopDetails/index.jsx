@@ -52,6 +52,7 @@ const MainWrap = styled.div`
     color: #707070;
     font-weight: 400;
     width: 50%;
+    margin-bottom: 20px;
   }
 
   .svg-inline--fa {
@@ -64,7 +65,7 @@ const MainWrap = styled.div`
 const LocationWrap = styled.div`
   margin: 4px 0;
   .svg-inline--fa {
-    font-size: 21px;
+    font-size: 15px;
     margin: 0 5px 0 0;
     color: #ddd;
   }
