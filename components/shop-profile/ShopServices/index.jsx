@@ -12,10 +12,14 @@ import Form, { useFormContext } from "@/modules/forms";
 import { Field, SyncFormValues } from "@/modules/forms/Blocks";
 import Select from "@/components/ui/Select";
 import List from "@/modules/list";
-import { Listing, Table } from "@/modules/list/Blocks";
+import { Table } from "@/modules/list/Blocks";
 import styled from "styled-components";
 import { MaxConstraints } from "@/components/styled/layout";
-import { Radio } from "antd";
+import { Checkbox, Radio } from "antd";
+import Link from "next/link";
+import Button from "@/components/ui/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const ServiceRowWrap = styled.div`
   display: flex;
@@ -38,11 +42,62 @@ const ModelFields = styled.div`
   }
 `;
 
+const ReparationCell = styled.div`
+  > div {
+    display: flex;
+  }
+  .ant-checkbox-wrapper,
+  .ant-radio-wrapper {
+    font-size: 15px;
+    color: #303030;
+    font-weight: 500;
+    text-transform: none;
+  }
+  .ant-radio,
+  .ant-checkbox {
+    margin-right: 36px;
+  }
+`;
+
+const NextStepWrap = styled.div`
+  margin: 49px 0 86px;
+`;
+
 const SERVICE_COLUMNS = [
   {
     title: "Name",
     key: "reparation_name",
-    render: (item) => <div><Field as={Radio} name={item.reparation_id}/> {item.reparation.reparation_name}</div>,
+    render: (item) => {
+      if (false) {
+        return (
+          <ReparationCell>
+            <Field
+              as={Checkbox}
+              name={`services.${item.id}`}
+              label={item.reparation.reparation_name}
+            />
+          </ReparationCell>
+        );
+      }
+
+      return (
+        <ReparationCell>
+          <Field
+            as={(props) => (
+              <Radio
+                {...props}
+                value={props.option}
+                checked={props.value === props.option}
+              >
+                {item.reparation.reparation_name}
+              </Radio>
+            )}
+            name="service"
+            option={item.id}
+          />
+        </ReparationCell>
+      );
+    },
   },
   {
     title: "Warranty",
@@ -114,6 +169,22 @@ const ModelSelector = AppendIdentifier({
   name: "brand",
 });
 
+function AppointmentButton() {
+  const {values} = useFormContext().state;
+  const formValues = filtersFormModule.state.values;
+  return (
+    <NextStepWrap>
+      <Link
+        href={`/appointment?device=${formValues.device}&brand=${formValues.brand}&model=${formValues.model}&shop=${formValues.shop}&service=${values.service}`}
+      >
+        <Button disabled={!values.service}>
+          Proceed to booking <FontAwesomeIcon icon={faArrowRight} />{" "}
+        </Button>
+      </Link>
+    </NextStepWrap>
+  );
+}
+
 export default function ShopServices({ shop }) {
   useEffect(() => {
     async function main() {
@@ -121,6 +192,13 @@ export default function ShopServices({ shop }) {
       shopServicesListModule.actions.initialize();
       serviceFormModule.actions.initialize();
       deviceFetcher.fetch();
+      const formValues = filtersFormModule.state.values;
+      if (formValues.device) {
+        brandFetcher.key(formValues.device).fetch();
+      }
+      if (formValues.brand) {
+        modelFetcher.key(formValues.brand).fetch();
+      }
     }
 
     main();
@@ -179,6 +257,11 @@ export default function ShopServices({ shop }) {
           <Table columns={SERVICE_COLUMNS} />
         </Form>
       </List>
+      <Form module={filtersFormModule}>
+        <Form module={serviceFormModule}>
+          <AppointmentButton />
+        </Form>
+      </Form>
     </MaxConstraints>
   );
 }

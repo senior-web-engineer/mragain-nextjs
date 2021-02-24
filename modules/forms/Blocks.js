@@ -8,8 +8,8 @@ function parseNativeEvent(ev) {
     return ev;
   }
 
-  if (ev.target.type === "checkbox") {
-    return ev.target.checked;
+  if (["checkbox", "radio"].includes(ev.target.type)) {
+    return typeof ev.target.value !== "undefined" ? ev.target.value : ev.target.checked;
   }
 
   return ev.target.value;
@@ -34,6 +34,7 @@ export function Field({
   const onChange = useCallback(
     (ev) => {
       const value = parseNativeEvent(ev);
+      console.log(value, name)
       onFieldChange({ name, value });
     },
     [name, onFieldChange]

@@ -50,6 +50,11 @@ const Sidebar = styled.div`
   background-color: #fff;
 `;
 
+const SidebarInnerWrap = styled.div`
+  position: sticky;
+  top: 0;
+`;
+
 const MapTriggerWrap = styled(FieldWrap)`
   > label {
     margin-top: 0;
@@ -255,6 +260,7 @@ function ShopItem({ item }) {
   }
 
   const tag = item.shop.tag;
+  const formState = filtersFormModule.state.values;
 
   return (
     <ShopWrap>
@@ -299,7 +305,9 @@ function ShopItem({ item }) {
               <price>&euro; {item.price}</price>
             </div>
           ) : null}
-          <Link href={`/${item.shop.name}--${item.shop.city}`}>
+          <Link
+            href={`/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`}
+          >
             <Button>
               <FontAwesomeIcon icon={faArrowRight} />
             </Button>
@@ -545,43 +553,45 @@ export default function SearchResults() {
       <MainWrap>
         <MaxConstraints>
           <Sidebar>
-            <SidebarHeader>
-              <SubTitle>Refine results</SubTitle>
+            <SidebarInnerWrap>
+              <SidebarHeader>
+                <SubTitle>Refine results</SubTitle>
+                <Form module={filtersFormModule}>
+                  <ClearFilters />
+                </Form>
+              </SidebarHeader>
               <Form module={filtersFormModule}>
-                <ClearFilters />
-              </Form>
-            </SidebarHeader>
-            <Form module={filtersFormModule}>
-              <Field
-                name="sort"
-                as={Select}
-                options={SORT_BY}
-                label="Sort by"
-              />
-              <Field name="price" as={Slider} label="Price" />
-              {false && <Field name="rating" as={Rate} label="Rating" />}
-              {false && (
-                <Field name="repairType" as={Radio.Group} label="Repair Type">
-                  {REPAIR_TYPES.map((type) => (
-                    <Radio value={type.value}>{type.label}</Radio>
-                  ))}
-                </Field>
-              )}
-              <Field
-                name="guarantee"
-                as={Select}
-                options={WARRANTIES}
-                label="Warranty"
-              />
-              {false && (
                 <Field
-                  name="time"
+                  name="sort"
                   as={Select}
-                  options={WORKING_TIME}
-                  label="Working time"
+                  options={SORT_BY}
+                  label="Sort by"
                 />
-              )}
-            </Form>
+                <Field name="price" as={Slider} label="Price" />
+                {false && <Field name="rating" as={Rate} label="Rating" />}
+                {false && (
+                  <Field name="repairType" as={Radio.Group} label="Repair Type">
+                    {REPAIR_TYPES.map((type) => (
+                      <Radio value={type.value}>{type.label}</Radio>
+                    ))}
+                  </Field>
+                )}
+                <Field
+                  name="guarantee"
+                  as={Select}
+                  options={WARRANTIES}
+                  label="Warranty"
+                />
+                {false && (
+                  <Field
+                    name="time"
+                    as={Select}
+                    options={WORKING_TIME}
+                    label="Working time"
+                  />
+                )}
+              </Form>
+            </SidebarInnerWrap>
           </Sidebar>
           <Content>
             <Form module={filtersFormModule}>

@@ -4,7 +4,29 @@ import { useListContext } from ".";
 import { Table as AntTable } from "antd";
 import styled from "styled-components";
 
-const StyledTable = styled(AntTable)``;
+const StyledTable = styled(AntTable)`
+  .ant-table-thead > tr > th {
+    font-size: 12px;
+    color: #c0c0c0;
+    font-weight: 400;
+    background-color: transparent;
+    border-bottom: 0;
+  }
+
+  .ant-table-tbody{
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    tr td{
+      border-bottom: 0;
+    }
+    tr:nth-child(2n) {
+      background-color: #f8f8f8;
+    }
+  }
+
+
+`;
 
 export function Listing({ Item }) {
   const { state } = useListContext();
@@ -45,7 +67,9 @@ export function Table({ ...props }) {
     }, []);
   }, [items, pages]);
 
-  return <StyledTable pagination={false} {...props} dataSource={derivedItems} />;
+  return (
+    <StyledTable pagination={false} {...props} dataSource={derivedItems} />
+  );
 }
 
 export function LoadMore() {
