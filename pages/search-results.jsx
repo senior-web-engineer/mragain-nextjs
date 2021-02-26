@@ -98,7 +98,7 @@ const ModelFields = styled.div`
   > div {
     flex-grow: 1;
     margin-top: 0 !important;
-    margin: 5px;
+    margin: 10px 5px;
     background-color: #fff;
 
     > label {
@@ -169,6 +169,7 @@ const ZipFields = styled.div`
 const Content = styled.div`
   background-color: #f3f3f3;
   flex-grow: 1;
+  padding: 50px 0;
 
   ${media.tablet`
     padding: 50px;
