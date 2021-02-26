@@ -34,20 +34,29 @@ import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
 import { SubTitle } from "@/components/styled/text";
 import { TextButton } from "@/components/ui/Button";
 import Link from "next/link";
+import media, { OnMobile, ScreenSizeProvider } from "@/utils/media";
 //
 
 const MainWrap = styled.div`
   margin-bottom: -127px;
-  background: linear-gradient(to right, #fff 30%, #f3f3f3 30%);
+  background: #f3f3f3;
   > div {
     display: flex;
   }
+
+  ${media.tablet`
+    background: linear-gradient(to right, #fff 30%, #f3f3f3 30%);
+  `}
 `;
 
 const Sidebar = styled.div`
   flex-basis: 200px;
   padding: 0 30px 30px 0;
   background-color: #fff;
+  display: none;
+  ${media.tablet`
+    display: block;
+  `}
 `;
 
 const SidebarInnerWrap = styled.div`
@@ -83,13 +92,13 @@ const SidebarHeader = styled.div`
 
 const ModelFields = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   margin: 19px -5px;
 
   > div {
     flex-grow: 1;
     margin-top: 0 !important;
-    margin: 0 5px;
+    margin: 5px;
     background-color: #fff;
 
     > label {
@@ -98,6 +107,7 @@ const ModelFields = styled.div`
   }
 
   > ${MapTriggerWrap} {
+    display: none;
     flex-grow: 0;
     background-color: transparent;
 
@@ -105,6 +115,19 @@ const ModelFields = styled.div`
       margin-top: 0;
     }
   }
+
+  ${media.tablet`
+    flex-direction: row;
+    align-items: center;
+
+
+  > div {
+    margin: 0 5px;
+
+    > ${MapTriggerWrap} {
+      display: block
+    }
+  `}
 `;
 
 const ZipFields = styled.div`
@@ -112,14 +135,16 @@ const ZipFields = styled.div`
   align-items: center;
   border-radius: 5px;
   background-color: #fff;
-  height: 118px;
-  padding: 0 30px;
+  height: 90px;
+  padding: 0 10px;
+  justify-content: space-between;
 
   > div {
     margin-top: 0 !important;
   }
 
   hr {
+    display: none;
     height: 41px;
     border: 0;
     border-left: 1px solid #ddd;
@@ -128,23 +153,37 @@ const ZipFields = styled.div`
   .svg-inline--fa {
     margin-right: 8px;
   }
+
+  ${FieldWrap} > label {
+    margin-left: 11px;
+  }
+
+  ${media.tablet`
+    padding: 0 20px;
+    hr {
+      display: block;
+    }
+  `}
 `;
 
 const Content = styled.div`
   background-color: #f3f3f3;
   flex-grow: 1;
-  padding: 50px;
-  margin-right: -50px;
+
+  ${media.tablet`
+    padding: 50px;
+    margin-right: -50px;
+  `}
 `;
 
 const ShopWrap = styled.div`
-  height: 210px;
+  height: 190px;
   border-radius: 10px;
-  padding: 30px;
   background-color: #fff;
   margin-top: 10px;
   display: flex;
   align-items: center;
+  padding: 20px;
 `;
 
 const ShopImageWrap = styled.div`
@@ -205,8 +244,15 @@ ShopDetails.SecondRow = styled.div`
   }
 
   ${Button} {
+    display: none;
     min-width: 51px;
   }
+
+  ${media.tablet`
+    ${Button} {
+      display: inline-block;
+    }
+  `}
 `;
 
 ShopDetails.NameWrap = styled.div`
@@ -230,6 +276,14 @@ ShopDetails.NameWrap = styled.div`
   .ant-rate-star:not(:last-child) {
     margin-right: 3px;
   }
+`;
+
+ShopDetails.PriceWrap = styled.div`
+  display: none;
+
+  ${media.tablet`
+    display: block;
+  `}
 `;
 
 ShopDetails.ThirdRow = styled.div`
@@ -300,10 +354,10 @@ function ShopItem({ item }) {
             </div>
           ) : null}
           {item.price ? (
-            <div>
+            <ShopDetails.PriceWrap>
               <label>Starts at</label>
               <price>&euro; {item.price}</price>
-            </div>
+            </ShopDetails.PriceWrap>
           ) : null}
           <Link
             href={`/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`}
@@ -549,110 +603,129 @@ export default function SearchResults() {
   });
 
   return (
-    <DefaultLayout>
-      <MainWrap>
-        <MaxConstraints>
-          <Sidebar>
-            <SidebarInnerWrap>
-              <SidebarHeader>
-                <SubTitle>Refine results</SubTitle>
+    <ScreenSizeProvider>
+      <DefaultLayout>
+        <MainWrap>
+          <MaxConstraints>
+            <Sidebar>
+              <SidebarInnerWrap>
+                <SidebarHeader>
+                  <SubTitle>Refine results</SubTitle>
+                  <Form module={filtersFormModule}>
+                    <ClearFilters />
+                  </Form>
+                </SidebarHeader>
                 <Form module={filtersFormModule}>
-                  <ClearFilters />
-                </Form>
-              </SidebarHeader>
-              <Form module={filtersFormModule}>
-                <Field
-                  name="sort"
-                  as={Select}
-                  options={SORT_BY}
-                  label="Sort by"
-                />
-                <Field name="price" as={Slider} label="Price" />
-                {false && <Field name="rating" as={Rate} label="Rating" />}
-                {false && (
-                  <Field name="repairType" as={Radio.Group} label="Repair Type">
-                    {REPAIR_TYPES.map((type) => (
-                      <Radio value={type.value}>{type.label}</Radio>
-                    ))}
-                  </Field>
-                )}
-                <Field
-                  name="guarantee"
-                  as={Select}
-                  options={WARRANTIES}
-                  label="Warranty"
-                />
-                {false && (
+                  <Field name="price" as={Slider} label="Price" />
+                  {false && <Field name="rating" as={Rate} label="Rating" />}
+                  {false && (
+                    <Field
+                      name="repairType"
+                      as={Radio.Group}
+                      label="Repair Type"
+                    >
+                      {REPAIR_TYPES.map((type) => (
+                        <Radio value={type.value}>{type.label}</Radio>
+                      ))}
+                    </Field>
+                  )}
                   <Field
-                    name="time"
+                    name="guarantee"
                     as={Select}
-                    options={WORKING_TIME}
-                    label="Working time"
+                    options={WARRANTIES}
+                    label="Warranty"
                   />
-                )}
+                  {false && (
+                    <Field
+                      name="time"
+                      as={Select}
+                      options={WORKING_TIME}
+                      label="Working time"
+                    />
+                  )}
+                </Form>
+              </SidebarInnerWrap>
+            </Sidebar>
+            <Content>
+              <Form module={filtersFormModule}>
+                <ZipFields>
+                  <Field
+                    prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
+                    noBorder
+                    as={StyledInput}
+                    name="location"
+                    placeholder="Postcode of stad"
+                  />
+                  <hr />
+                  <Field
+                    as={Select}
+                    name="distance"
+                    options={DISTANCES}
+                  />
+                  <OnMobile show={false}>
+                    <Field
+                      name="sort"
+                      as={Select}
+                      options={SORT_BY}
+                      label="Sort by"
+                    />
+                  </OnMobile>
+                </ZipFields>
+                <ModelFields>
+                  <OnMobile>
+                    <Field
+                      name="sort"
+                      as={Select}
+                      options={SORT_BY}
+                      label="Sort by"
+                    />
+                  </OnMobile>
+                  <DeviceSelector
+                    name="device"
+                    as={Select}
+                    label="Device"
+                    onChange={onDeviceChange}
+                    dropdownStyle={{ minWidth: "200px" }}
+                  />
+                  <BrandSelector
+                    name="brand"
+                    as={Select}
+                    label="Brand"
+                    onChange={onBandChange}
+                    dropdownStyle={{ minWidth: "200px" }}
+                  />
+                  <ModelSelector
+                    name="model"
+                    as={Select}
+                    label="Model"
+                    onChange={onModelChange}
+                    dropdownStyle={{ minWidth: "200px" }}
+                  />
+                  <ServiceSelector
+                    name="service"
+                    as={Select}
+                    label="Services"
+                    dropdownStyle={{ minWidth: "200px" }}
+                    popupPlacement="bottomRight"
+                  />
+                  <MapTriggerWrap>
+                    <label>Map</label>
+                    <Switch
+                      value={showMap}
+                      onChange={(val) => updateShowMap(val)}
+                    />
+                  </MapTriggerWrap>
+                </ModelFields>
+                <SyncFormValues onChange={shopListModule.actions.updateQuery} />
               </Form>
-            </SidebarInnerWrap>
-          </Sidebar>
-          <Content>
-            <Form module={filtersFormModule}>
-              <ZipFields>
-                <Field
-                  prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
-                  noBorder
-                  as={StyledInput}
-                  name="location"
-                  placeholder="Postcode of stad"
-                />
-                <hr />
-                <Field as={Select} name="distance" options={DISTANCES} />
-                <Button>Search</Button>
-              </ZipFields>
-              <ModelFields>
-                <DeviceSelector
-                  name="device"
-                  as={Select}
-                  label="Device"
-                  onChange={onDeviceChange}
-                  dropdownStyle={{ minWidth: "200px" }}
-                />
-                <BrandSelector
-                  name="brand"
-                  as={Select}
-                  label="Brand"
-                  onChange={onBandChange}
-                  dropdownStyle={{ minWidth: "200px" }}
-                />
-                <ModelSelector
-                  name="model"
-                  as={Select}
-                  label="Model"
-                  onChange={onModelChange}
-                  dropdownStyle={{ minWidth: "200px" }}
-                />
-                <ServiceSelector
-                  name="service"
-                  as={Select}
-                  label="Services"
-                  dropdownStyle={{ minWidth: "200px" }}
-                  popupPlacement="bottomRight"
-                />
-                <MapTriggerWrap>
-                  <label>Map</label>
-                  <Switch
-                    value={showMap}
-                    onChange={(val) => updateShowMap(val)}
-                  />
-                </MapTriggerWrap>
-              </ModelFields>
-              <SyncFormValues onChange={shopListModule.actions.updateQuery} />
-            </Form>
-            <List module={shopListModule}>
-              <Listing Item={ShopItem} />
-            </List>
-          </Content>
-          <List module={shopListModule}>{showMap ? <Map /> : null}</List>
-        </MaxConstraints>
-      </MainWrap>
-    </DefaultLayout>
+              <List module={shopListModule}>
+                <Listing Item={ShopItem} />
+              </List>
+            </Content>
+            <List module={shopListModule}>{showMap ? <Map /> : null}</List>
+          </MaxConstraints>
+        </MainWrap>
+      </DefaultLayout>
+    </ScreenSizeProvider>
   );
 }

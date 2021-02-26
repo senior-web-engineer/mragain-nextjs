@@ -15,7 +15,7 @@ export function getScreenSize() {
     (key1, key2) => sizes[key1] - sizes[key2]
   );
   const index = sizeAsArr.findIndex((key) => width < sizes[key]);
-  return sizeAsArr[index - 1] || 'mobile';
+  return sizeAsArr[index - 1] || "mobile";
 }
 
 export default Object.keys(sizes).reduce((acc, label) => {
@@ -47,4 +47,18 @@ export function ScreenSizeProvider({ children }) {
       {children}
     </ScreenSizeContext.Provider>
   );
+}
+
+export function OnMobile({ children, show = true }) {
+  const isMobile = useScreenSize().size === "mobile";
+
+  if (isMobile) {
+    if (show) {
+      return children;
+    }
+
+    return null;
+  }
+
+  return children;
 }
