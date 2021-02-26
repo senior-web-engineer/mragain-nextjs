@@ -119,13 +119,12 @@ const ModelFields = styled.div`
   ${media.tablet`
     flex-direction: row;
     align-items: center;
-
-
-  > div {
-    margin: 0 5px;
+    > div {
+      margin: 0 5px;
+    }
 
     > ${MapTriggerWrap} {
-      display: block
+      display: block;
     }
   `}
 `;
@@ -658,11 +657,7 @@ export default function SearchResults() {
                     placeholder="Postcode of stad"
                   />
                   <hr />
-                  <Field
-                    as={Select}
-                    name="distance"
-                    options={DISTANCES}
-                  />
+                  <Field as={Select} name="distance" options={DISTANCES} />
                   <OnMobile show={false}>
                     <Field
                       name="sort"
