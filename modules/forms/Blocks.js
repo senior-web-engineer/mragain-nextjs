@@ -3,7 +3,7 @@ import { FieldWrap, ErrorWrap } from "@/components/styled/Forms";
 import { useFormContext } from ".";
 import get from "lodash/get";
 
-function parseNativeEvent(ev) {
+export function parseNativeEvent(ev) {
   if (!ev?.target) {
     return ev;
   }
@@ -34,7 +34,6 @@ export function Field({
   const onChange = useCallback(
     (ev) => {
       const value = parseNativeEvent(ev);
-      console.log(value, name)
       onFieldChange({ name, value });
     },
     [name, onFieldChange]

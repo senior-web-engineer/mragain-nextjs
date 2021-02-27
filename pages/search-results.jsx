@@ -14,7 +14,7 @@ import {
   shopListModule,
 } from "@/components/search-results/modules";
 
-import { Field, SyncFormValues } from "@/modules/forms/Blocks";
+import { Field, parseNativeEvent, SyncFormValues } from "@/modules/forms/Blocks";
 import { Listing } from "@/modules/list/Blocks";
 import Form, { useFormContext } from "@/modules/forms";
 import List from "@/modules/list";
@@ -279,7 +279,7 @@ const MobileSearchWrap = styled.div`
       color: rgba(0, 0, 0, 0.65);
     }
   }
-`
+`;
 
 const Content = styled.div`
   background-color: #f3f3f3;
@@ -816,7 +816,8 @@ export default function SearchResults() {
     main();
   }, []);
 
-  const onDeviceChange = useCallback((value) => {
+  const onDeviceChange = useCallback((ev) => {
+    const value = parseNativeEvent(ev)
     filtersFormModule.actions.batchChange({
       updates: {
         device: value,
@@ -893,7 +894,7 @@ export default function SearchResults() {
                 </Form>
               </SidebarInnerWrap>
             </Sidebar>
-            <Content>
+            <Content ref={mobileSelectorsRef}>
               <Form module={filtersFormModule}>
                 <ZipFields>
                   <Field
@@ -921,8 +922,11 @@ export default function SearchResults() {
                 </ZipFields>
                 <ModelFields>
                   <OnMobile only>
-                    <MobileDeviceSelector name="device" />
-                    <ModelFieldsMobile ref={mobileSelectorsRef}>
+                    <MobileDeviceSelector
+                      name="device"
+                      onChange={onDeviceChange}
+                    />
+                    <ModelFieldsMobile>
                       <BrandSelector
                         name="brand"
                         as={Select}
@@ -936,15 +940,12 @@ export default function SearchResults() {
                         as={Select}
                         label="Model"
                         onChange={onModelChange}
-                        dropdownStyle={{ minWidth: "200px" }}
-                        getPopupContainer={() => mobileSelectorsRef.current}
                       />
                       <ServiceSelector
                         name="service"
                         as={Select}
                         label="Services"
                         dropdownStyle={{ minWidth: "200px" }}
-                        popupPlacement="bottomRight"
                       />
                       <Waypoint
                         onEnter={() => setShowMobileSearch(false)}
@@ -1034,7 +1035,7 @@ export default function SearchResults() {
                 <FontAwesomeIcon icon={faSortAmountDown} />
               </TextButton>
               <ToolbarButtonWrap>
-                <Button onClick={() => updateShowMap(state => !state)}>
+                <Button onClick={() => updateShowMap((state) => !state)}>
                   <FontAwesomeIcon icon={faMapMarkerAlt} />
                 </Button>
               </ToolbarButtonWrap>
