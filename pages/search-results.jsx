@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import isEqual from "fast-deep-equal";
-
+import Menu from "react-horizontal-scrolling-menu";
 import DefaultLayout from "@/components/layouts/Homepage";
 import {
   brandFetcher,
@@ -45,6 +45,7 @@ const MainWrap = styled.div`
   }
 
   ${media.tablet`
+    padding-bottom: 0px;
     background: linear-gradient(to right, #fff 30%, #f3f3f3 30%);
   `}
 `;
@@ -93,7 +94,9 @@ const SidebarHeader = styled.div`
 const ModelFields = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 19px -5px;
+  margin: 19px 0;
+  overflow: hidden;
+  width: 100%;
 
   > div {
     flex-grow: 1;
@@ -103,6 +106,27 @@ const ModelFields = styled.div`
 
     > label {
       margin: 11px 11px 2px 11px;
+    }
+  }
+
+  > div:first-child {
+    background-color: transparent;
+  }
+
+  .ant-radio-group {
+    max-width: 100%;
+  }
+
+  .ant-radio-button-wrapper {
+    background-color: transparent;
+    color: #fff;
+    border: 0;
+    padding: 0 11px;
+    border-radius: 10px !important;
+
+    &.ant-radio-button-wrapper-checked {
+      color: #000;
+      background-color: #fff;
     }
   }
 
@@ -119,8 +143,13 @@ const ModelFields = styled.div`
   ${media.tablet`
     flex-direction: row;
     align-items: center;
+    margin: 19px -5px;
     > div {
       margin: 0 5px;
+    }
+
+    > div:first-child {
+      background-color: #fff;
     }
 
     > ${MapTriggerWrap} {
@@ -134,9 +163,27 @@ const ZipFields = styled.div`
   align-items: center;
   border-radius: 5px;
   background-color: #fff;
-  height: 90px;
+  height: 55px;
   padding: 0 10px;
   justify-content: space-between;
+  background-color: #06b279;
+
+  input {
+    background-color: transparent;
+
+    ::placeholder {
+      color: #fff;
+    }
+  }
+
+  .ant-select-selection {
+    background-color: transparent;
+    color: #fff;
+  }
+
+  .ant-input-prefix {
+    color: #fff;
+  }
 
   > div {
     margin-top: 0 !important;
@@ -147,18 +194,55 @@ const ZipFields = styled.div`
     height: 41px;
     border: 0;
     border-left: 1px solid #ddd;
+    margin: 0 30px;
   }
 
   .svg-inline--fa {
     margin-right: 8px;
   }
 
-  ${FieldWrap} > label {
-    margin-left: 11px;
+  ${FieldWrap} {
+    display: flex;
+    align-items: center;
+    margin: 0;
+
+    > label {
+      display: none;
+      margin-bottom: 0;
+      margin-right: 10px;
+    }
   }
 
   ${media.tablet`
     padding: 0 20px;
+    border-radius: 27px;
+    border-radius: 5px;
+    background-color: #fff;
+    height: 70px;
+    justify-content: flex-start;
+
+    input {
+      ::placeholder {
+        color: rgba(0, 0, 0, 0.65);
+      }
+    }
+
+    .ant-select-selection {
+      color: rgba(0, 0, 0, 0.65);
+    }
+
+    .ant-input-prefix {
+      color: rgba(0, 0, 0, 0.65);
+    }
+
+    ${FieldWrap} {
+      margin: 0 20px;
+
+      > label {
+        display: block;
+      }
+    }
+
     hr {
       display: block;
     }
@@ -168,31 +252,101 @@ const ZipFields = styled.div`
 const Content = styled.div`
   background-color: #f3f3f3;
   flex-grow: 1;
-  padding: 50px 0;
+  padding: 0;
+  max-width: 100%;
+
+  form {
+    margin: 0 -20px;
+    padding: 30px 20px 0;
+    position: relative;
+    overflow: hidden;
+
+    > div {
+      position: relative;
+      z-index: 1;
+    }
+
+    &:after {
+      background-color: #06c987;
+      content: "";
+      width: 200%;
+      height: 100%;
+      position: absolute;
+      top: -20%;
+      left: -50%;
+      border-radius: 400%;
+    }
+  }
 
   ${media.tablet`
     padding: 50px;
     margin-right: -50px;
+
+    form:after {
+      display: none;
+    }
   `}
 `;
 
+const ModelFieldsMobile = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  background-color: #fff;
+  align-items: center;
+  border-radius: 15px;
+  justify-content: space-between;
+
+  .ant-select {
+    margin-left: -11px;
+  }
+
+  hr {
+    height: 41px;
+    border: 0;
+    border-left: 1px solid #ddd;
+    width: 0;
+    margin: 0 10px;
+  }
+
+  > div {
+    width: 100%;
+  }
+
+  > div:nth-child(1),
+  > div:nth-child(3) {
+    width: 40%;
+  }
+`;
+
 const ShopWrap = styled.div`
-  height: 190px;
+  height: 125px;
   border-radius: 10px;
   background-color: #fff;
   margin-top: 10px;
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
+
+  ${media.tablet`
+    height: 190px;
+    padding: 20px;
+  `}
 `;
 
 const ShopImageWrap = styled.div`
-  width: 150px;
-  height: 150px;
-  border-radius: 15px;
+  min-width: 105px;
+  height: 105px;
+  border-radius: 5px;
   background-color: #f0f0f0;
   position: relative;
   overflow: hidden;
+
+  ${media.tablet`
+    min-width: 150px;
+    height: 150px;
+    border-radius: 15px;
+  `}
 
   dd {
     position: absolute;
@@ -263,7 +417,7 @@ ShopDetails.NameWrap = styled.div`
   font-weight: 300;
 
   h3 {
-    font-size: 20px;
+    font-size: 15px;
     color: #0d3244;
     font-weight: 500;
     margin: 0;
@@ -276,6 +430,12 @@ ShopDetails.NameWrap = styled.div`
   .ant-rate-star:not(:last-child) {
     margin-right: 3px;
   }
+
+  ${media.tablet`
+    h3 {
+      font-size: 20px;
+    }
+  `}
 `;
 
 ShopDetails.PriceWrap = styled.div`
@@ -394,6 +554,24 @@ const DeviceSelector = createSelectComponent({
   dataFetcher: deviceFetcher,
   parseOptions(items = []) {
     return parseOptions(items || [], "device_name");
+  },
+});
+
+const MobileDeviceSelector = createSelectComponent({
+  dataFetcher: deviceFetcher,
+  parseOptions(items = []) {
+    return parseOptions(items || [], "device_name");
+  },
+  Component({ options, ...rest }) {
+    const menuData = options.map((option) => (
+      <Radio.Button value={option.value}>{option.label}</Radio.Button>
+    ));
+
+    return (
+      <Field as={Radio.Group} {...rest}>
+        <Menu data={menuData} hideArrows={true} />
+      </Field>
+    );
   },
 });
 
@@ -548,6 +726,7 @@ function ClearFilters() {
 
 export default function SearchResults() {
   const [showMap, updateShowMap] = useState();
+  const mobileSelectorsRef = useRef(null);
   useEffect(() => {
     async function main() {
       await filtersFormModule.actions.initialize();
@@ -657,7 +836,7 @@ export default function SearchResults() {
                     placeholder="Postcode of stad"
                   />
                   <hr />
-                  <Field as={Select} name="distance" options={DISTANCES} />
+                  <Field as={Select} label="Distance" name="distance" options={DISTANCES} />
                   <OnMobile show={false}>
                     <Field
                       name="sort"
@@ -668,42 +847,70 @@ export default function SearchResults() {
                   </OnMobile>
                 </ZipFields>
                 <ModelFields>
-                  <OnMobile>
-                    <Field
-                      name="sort"
+                  <OnMobile only>
+                    <MobileDeviceSelector name="device" />
+                    <ModelFieldsMobile ref={mobileSelectorsRef}>
+                      <BrandSelector
+                        name="brand"
+                        as={Select}
+                        label="Brand"
+                        onChange={onBandChange}
+                        dropdownStyle={{ minWidth: "200px" }}
+                      />
+                      <hr />
+                      <ModelSelector
+                        name="model"
+                        as={Select}
+                        label="Model"
+                        onChange={onModelChange}
+                        dropdownStyle={{ minWidth: "200px" }}
+                        getPopupContainer={() => mobileSelectorsRef.current}
+                      />
+                      <ServiceSelector
+                        name="service"
+                        as={Select}
+                        label="Services"
+                        dropdownStyle={{ minWidth: "200px" }}
+                        popupPlacement="bottomRight"
+                      />
+                      <Field
+                        name="sort"
+                        as={Select}
+                        options={SORT_BY}
+                        label="Sort by"
+                      />
+                    </ModelFieldsMobile>
+                  </OnMobile>
+                  <OnMobile show={false}>
+                    <DeviceSelector
+                      name="device"
                       as={Select}
-                      options={SORT_BY}
-                      label="Sort by"
+                      label="Device"
+                      onChange={onDeviceChange}
+                      dropdownStyle={{ minWidth: "200px" }}
+                    />
+                    <BrandSelector
+                      name="brand"
+                      as={Select}
+                      label="Brand"
+                      onChange={onBandChange}
+                      dropdownStyle={{ minWidth: "200px" }}
+                    />
+                    <ModelSelector
+                      name="model"
+                      as={Select}
+                      label="Model"
+                      onChange={onModelChange}
+                      dropdownStyle={{ minWidth: "200px" }}
+                    />
+                    <ServiceSelector
+                      name="service"
+                      as={Select}
+                      label="Services"
+                      dropdownStyle={{ minWidth: "200px" }}
+                      popupPlacement="bottomRight"
                     />
                   </OnMobile>
-                  <DeviceSelector
-                    name="device"
-                    as={Select}
-                    label="Device"
-                    onChange={onDeviceChange}
-                    dropdownStyle={{ minWidth: "200px" }}
-                  />
-                  <BrandSelector
-                    name="brand"
-                    as={Select}
-                    label="Brand"
-                    onChange={onBandChange}
-                    dropdownStyle={{ minWidth: "200px" }}
-                  />
-                  <ModelSelector
-                    name="model"
-                    as={Select}
-                    label="Model"
-                    onChange={onModelChange}
-                    dropdownStyle={{ minWidth: "200px" }}
-                  />
-                  <ServiceSelector
-                    name="service"
-                    as={Select}
-                    label="Services"
-                    dropdownStyle={{ minWidth: "200px" }}
-                    popupPlacement="bottomRight"
-                  />
                   <MapTriggerWrap>
                     <label>Map</label>
                     <Switch

@@ -49,7 +49,7 @@ export function ScreenSizeProvider({ children }) {
   );
 }
 
-export function OnMobile({ children, show = true }) {
+export function OnMobile({ children, show = true, only = false }) {
   const isMobile = useScreenSize().size === "mobile";
 
   if (isMobile) {
@@ -57,6 +57,10 @@ export function OnMobile({ children, show = true }) {
       return children;
     }
 
+    return null;
+  }
+
+  if (only) {
     return null;
   }
 
