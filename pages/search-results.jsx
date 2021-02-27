@@ -488,6 +488,12 @@ const MobileToolbar = styled.div`
   box-shadow: 0 0 27px rgba(0, 0, 0, 0.3);
   width: 100%;
   z-index: 11;
+  justify-content: space-between;
+  align-items: center;
+
+  ${TextButton} {
+    min-width: 40px;
+  }
 
   ${ToolbarButtonWrap} ${Button} {
     min-width: 51px;
