@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import isEqual from "fast-deep-equal";
 import Menu from "react-horizontal-scrolling-menu";
+import { Waypoint } from "react-waypoint";
+
 import DefaultLayout from "@/components/layouts/Homepage";
 import {
   brandFetcher,
@@ -26,6 +28,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
   faMapMarkerAlt,
+  faSortAmountDown,
 } from "@fortawesome/free-solid-svg-icons";
 import Button from "@/components/ui/Button";
 import { FieldWrap } from "@/components/styled/Forms";
@@ -40,6 +43,9 @@ import media, { OnMobile, ScreenSizeProvider } from "@/utils/media";
 const MainWrap = styled.div`
   margin-bottom: -127px;
   background: #f3f3f3;
+  padding-bottom: 30px;
+  position: relative;
+
   > div {
     display: flex;
   }
@@ -161,10 +167,9 @@ const ModelFields = styled.div`
 const ZipFields = styled.div`
   display: flex;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 27px;
   background-color: #fff;
   height: 55px;
-  padding: 0 10px;
   justify-content: space-between;
   background-color: #06b279;
 
@@ -214,12 +219,9 @@ const ZipFields = styled.div`
   }
 
   ${media.tablet`
-    padding: 0 20px;
-    border-radius: 27px;
     border-radius: 5px;
     background-color: #fff;
     height: 70px;
-    justify-content: flex-start;
 
     input {
       ::placeholder {
@@ -248,6 +250,36 @@ const ZipFields = styled.div`
     }
   `}
 `;
+
+const MobileSearchWrap = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px 20px;
+  background: linear-gradient(to bottom, #f3f3f3 90%, transparent 100%);
+
+  ${ZipFields} {
+    background-color: #fff;
+
+    input {
+      ::placeholder {
+        color: rgba(0, 0, 0, 0.65);
+      }
+    }
+
+    .ant-select-selection {
+      color: rgba(0, 0, 0, 0.65);
+    }
+
+    .ant-input-prefix {
+      color: rgba(0, 0, 0, 0.65);
+    }
+  }
+`
 
 const Content = styled.div`
   background-color: #f3f3f3;
@@ -438,6 +470,33 @@ ShopDetails.NameWrap = styled.div`
   `}
 `;
 
+const ToolbarButtonWrap = styled.div`
+  border-radius: 36px;
+  padding: 8px;
+  position: relative;
+  top: -20px;
+  background-color: #fff;
+  height: 67px;
+`;
+
+const MobileToolbar = styled.div`
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  height: 60px;
+  padding: 0 20px;
+  box-shadow: 0 0 27px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  z-index: 11;
+
+  ${ToolbarButtonWrap} ${Button} {
+    min-width: 51px;
+    border-radius: 34px;
+    font-size: 17px;
+    box-shadow: 0 0 8px #06c987;
+  }
+`;
+
 ShopDetails.PriceWrap = styled.div`
   display: none;
 
@@ -564,7 +623,9 @@ const MobileDeviceSelector = createSelectComponent({
   },
   Component({ options, ...rest }) {
     const menuData = options.map((option) => (
-      <Radio.Button value={option.value}>{option.label}</Radio.Button>
+      <Radio.Button key={option.value} value={option.value}>
+        {option.label}
+      </Radio.Button>
     ));
 
     return (
@@ -726,6 +787,7 @@ function ClearFilters() {
 
 export default function SearchResults() {
   const [showMap, updateShowMap] = useState();
+  const [showMobileSearch, setShowMobileSearch] = useState();
   const mobileSelectorsRef = useRef(null);
   useEffect(() => {
     async function main() {
@@ -836,7 +898,12 @@ export default function SearchResults() {
                     placeholder="Postcode of stad"
                   />
                   <hr />
-                  <Field as={Select} label="Distance" name="distance" options={DISTANCES} />
+                  <Field
+                    as={Select}
+                    label="Distance"
+                    name="distance"
+                    options={DISTANCES}
+                  />
                   <OnMobile show={false}>
                     <Field
                       name="sort"
@@ -872,6 +939,10 @@ export default function SearchResults() {
                         label="Services"
                         dropdownStyle={{ minWidth: "200px" }}
                         popupPlacement="bottomRight"
+                      />
+                      <Waypoint
+                        onEnter={() => setShowMobileSearch(false)}
+                        onLeave={() => setShowMobileSearch(true)}
                       />
                       <Field
                         name="sort"
@@ -927,6 +998,42 @@ export default function SearchResults() {
             </Content>
             <List module={shopListModule}>{showMap ? <Map /> : null}</List>
           </MaxConstraints>
+          <OnMobile>
+            {showMobileSearch || showMap ? (
+              <MobileSearchWrap>
+                <Form module={filtersFormModule}>
+                  <ZipFields>
+                    <Field
+                      prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
+                      noBorder
+                      as={StyledInput}
+                      name="location"
+                      placeholder="Postcode of stad"
+                    />
+                    <hr />
+                    <Field
+                      as={Select}
+                      label="Distance"
+                      name="distance"
+                      options={DISTANCES}
+                    />
+                  </ZipFields>
+                </Form>
+              </MobileSearchWrap>
+            ) : null}
+          </OnMobile>
+          <OnMobile>
+            <MobileToolbar>
+              <TextButton>
+                <FontAwesomeIcon icon={faSortAmountDown} />
+              </TextButton>
+              <ToolbarButtonWrap>
+                <Button onClick={() => updateShowMap(state => !state)}>
+                  <FontAwesomeIcon icon={faMapMarkerAlt} />
+                </Button>
+              </ToolbarButtonWrap>
+            </MobileToolbar>
+          </OnMobile>
         </MainWrap>
       </DefaultLayout>
     </ScreenSizeProvider>

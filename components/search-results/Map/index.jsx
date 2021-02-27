@@ -1,16 +1,26 @@
 import { useListContext } from "@/modules/list";
+import media from "@/utils/media.js";
 import React, { useMemo } from "react";
 import styled from "styled-components";
 import GoogleMap from "./GoogleMap.jsx";
 
 const MapWrap = styled.div`
-  min-width: 550px;
+  min-width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
 
   > div {
     position: sticky;
     top: 0;
     height: 100vh !important;
   }
+
+  ${media.tablet`
+    position: static;
+    min-width: 550px;
+  `}
 `;
 
 export default function Map() {
