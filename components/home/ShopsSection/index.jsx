@@ -164,13 +164,13 @@ const Toolbar = styled.div`
   }
 `;
 
-function renderShop(shop) {
-  const location = [shop.city || "", shop.country || ""]
+export function ShopCard({shop, onClick}) {
+  const location = [shop.street || "", shop.city || "", shop.country || ""]
     .filter(Boolean)
     .join(", ");
 
   return (
-    <ShopWrap key={shop.id}>
+    <ShopWrap key={shop.id} onClick={onClick}>
       <ShopImageWrap tagColor={TAG_TO_COLOR[shop.tag]}>
         {shop.bg_photo ? (
           <Image
@@ -212,6 +212,10 @@ function renderShop(shop) {
       </Link>
     </ShopWrap>
   );
+}
+
+function renderShop(shop) {
+  return <ShopCard shop={shop} />
 }
 
 export default function ShopsSection({shopList = []} = {}) {

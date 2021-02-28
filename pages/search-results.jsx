@@ -1074,7 +1074,7 @@ export default function SearchResults() {
             </Content>
             <List module={shopListModule}>{showMap ? <Map /> : null}</List>
           </MaxConstraints>
-          <OnMobile>
+          <OnMobile only>
             {showMobileSearch || showMap ? (
               <MobileSearchWrap>
                 <Form module={filtersFormModule}>
@@ -1098,7 +1098,7 @@ export default function SearchResults() {
               </MobileSearchWrap>
             ) : null}
           </OnMobile>
-          <OnMobile>
+          <OnMobile only>
             <MobileToolbar>
               <TextButton onClick={() => refineSearchModal.actions.open()}>
                 <FontAwesomeIcon icon={faSortAmountDown} />
