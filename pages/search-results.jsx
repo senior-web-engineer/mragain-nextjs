@@ -34,6 +34,7 @@ import {
   faArrowRight,
   faMapMarkerAlt,
   faSortAmountDown,
+  faStore,
 } from "@fortawesome/free-solid-svg-icons";
 import Button from "@/components/ui/Button";
 import { FieldWrap } from "@/components/styled/Forms";
@@ -665,7 +666,12 @@ const MobileDeviceSelector = createSelectComponent({
 
     return (
       <Field as={Radio.Group} {...rest}>
-        <Menu alignCenter={false} data={menuData} selected={rest.value} hideArrows={true} />
+        <Menu
+          alignCenter={false}
+          data={menuData}
+          selected={rest.value}
+          hideArrows={true}
+        />
       </Field>
     );
   },
@@ -1106,7 +1112,11 @@ export default function SearchResults() {
               </TextButton>
               <ToolbarButtonWrap>
                 <Button onClick={() => updateShowMap((state) => !state)}>
-                  <FontAwesomeIcon icon={faMapMarkerAlt} />
+                  {!showMap ? (
+                    <FontAwesomeIcon icon={faMapMarkerAlt} />
+                  ) : (
+                    <FontAwesomeIcon icon={faStore} />
+                  )}
                 </Button>
               </ToolbarButtonWrap>
             </MobileToolbar>

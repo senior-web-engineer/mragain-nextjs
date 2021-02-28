@@ -63,7 +63,7 @@ export default function Map() {
       <div>
         <ShopList>
           {selectedShopEntity ? (
-            <Menu data={menuData} selected={selectedShop} hideArrows={true} />
+            <Menu alignCenter={false} data={menuData} selected={selectedShop} hideArrows={true} />
           ) : null}
         </ShopList>
         <GoogleMap
