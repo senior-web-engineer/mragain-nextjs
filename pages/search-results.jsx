@@ -665,7 +665,7 @@ const MobileDeviceSelector = createSelectComponent({
 
     return (
       <Field as={Radio.Group} {...rest}>
-        <Menu data={menuData} selected={rest.value} hideArrows={true} />
+        <Menu alignCenter={false} data={menuData} selected={rest.value} hideArrows={true} />
       </Field>
     );
   },
