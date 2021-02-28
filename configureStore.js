@@ -9,6 +9,7 @@ import appointmentReducer from "./service/appointments";
 import * as listReducer from '@/modules/list/reducers'
 import * as formReducer from '@/modules/forms/reducers'
 import * as dataFetcher from '@/modules/dataFetcher/reducer'
+import * as modal from '@/modules/modal/reducers'
 import { format } from 'url'
 import {createReducer, apiMiddleware} from './utils/store';
 
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   list: createReducer(listReducer),
   forms: createReducer(formReducer),
   forms: createReducer(formReducer),
-  fetcher: createReducer(dataFetcher)
+  fetcher: createReducer(dataFetcher),
+  modal: createReducer(modal)
 });
 
 const composeEnhancers =

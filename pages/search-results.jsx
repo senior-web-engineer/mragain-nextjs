@@ -10,11 +10,16 @@ import {
   deviceFetcher,
   filtersFormModule,
   modelFetcher,
+  refineSearchModal,
   serviceFetcher,
   shopListModule,
 } from "@/components/search-results/modules";
 
-import { Field, parseNativeEvent, SyncFormValues } from "@/modules/forms/Blocks";
+import {
+  Field,
+  parseNativeEvent,
+  SyncFormValues,
+} from "@/modules/forms/Blocks";
 import { Listing } from "@/modules/list/Blocks";
 import Form, { useFormContext } from "@/modules/forms";
 import List from "@/modules/list";
@@ -38,6 +43,7 @@ import { SubTitle } from "@/components/styled/text";
 import { TextButton } from "@/components/ui/Button";
 import Link from "next/link";
 import media, { OnMobile, ScreenSizeProvider } from "@/utils/media";
+import Modal from "@/modules/modal";
 //
 
 const MainWrap = styled.div`
@@ -359,6 +365,7 @@ const ShopWrap = styled.div`
   display: flex;
   align-items: center;
   padding: 10px;
+  position: relative;
 
   ${media.tablet`
     height: 190px;
@@ -397,20 +404,33 @@ const ShopDetails = styled.div`
   flex-grow: 1;
 
   tag {
+    position: absolute;
+    top: 15px;
+    left: 0;
     display: inline-block;
     font-size: 8px;
-    height: 31px;
+    height: 26px;
     ${(props) =>
       props.tagColor &&
       css`
         background-color: ${props.tagColor || "#ddd"};
       `}
     color: #fff;
-    line-height: 31px;
+    line-height: 26px;
     padding: 0 10px;
     border-radius: 15px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
     text-transform: uppercase;
     margin-bottom: 14px;
+
+    ${media.tablet`
+      position: static;
+      height: 31px;
+      line-height: 31px;
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+    `}
   }
 `;
 
@@ -493,6 +513,13 @@ const MobileToolbar = styled.div`
 
   ${TextButton} {
     min-width: 40px;
+    text-transform: none;
+    font-size: 13px;
+    font-weight: normal;
+    .svg-inline--fa {
+      margin-right: 10px;
+      vertical-align: middle;
+    }
   }
 
   ${ToolbarButtonWrap} ${Button} {
@@ -572,25 +599,27 @@ function ShopItem({ item }) {
               onChange={null}
             />
           </ShopDetails.NameWrap>
-          {item.nextApointment ? (
-            <div>
-              <label>Next available schedule</label>
-              <date>{new Date(item.nextApointment).toString()}</date>
-            </div>
-          ) : null}
-          {item.price ? (
-            <ShopDetails.PriceWrap>
-              <label>Starts at</label>
-              <price>&euro; {item.price}</price>
-            </ShopDetails.PriceWrap>
-          ) : null}
-          <Link
-            href={`/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`}
-          >
-            <Button>
-              <FontAwesomeIcon icon={faArrowRight} />
-            </Button>
-          </Link>
+          <OnMobile show={false}>
+            {item.nextApointment ? (
+              <div>
+                <label>Next available schedule</label>
+                <date>{new Date(item.nextApointment).toString()}</date>
+              </div>
+            ) : null}
+            {item.price ? (
+              <ShopDetails.PriceWrap>
+                <label>Starts at</label>
+                <price>&euro; {item.price}</price>
+              </ShopDetails.PriceWrap>
+            ) : null}
+            <Link
+              href={`/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`}
+            >
+              <Button>
+                <FontAwesomeIcon icon={faArrowRight} />
+              </Button>
+            </Link>
+          </OnMobile>
         </ShopDetails.SecondRow>
         {item.shop.services?.length ? (
           <ShopDetails.ThirdRow>
@@ -636,7 +665,7 @@ const MobileDeviceSelector = createSelectComponent({
 
     return (
       <Field as={Radio.Group} {...rest}>
-        <Menu data={menuData} hideArrows={true} />
+        <Menu data={menuData} selected={rest.value} hideArrows={true} />
       </Field>
     );
   },
@@ -774,11 +803,36 @@ const WORKING_TIME = [
   },
 ];
 
-function ClearFilters() {
+const RefineModalWrap = styled.div`
+  ${SubTitle} {
+    margin-bottom: 21px;
+  }
+
+  .ant-select {
+    margin-left: -11px;
+  }
+
+  footer {
+    margin-top: 11px;
+    border-top: 1px solid #ddd;
+    padding-top: 30px;
+    text-align: center;
+
+    ${TextButton} {
+      text-transform: none;
+      font-weight: normal;
+      font-size: 12px;
+      color: #0076a3;
+      font-weight: 400;
+    }
+  }
+`;
+
+function ClearFilters({ label = "Clear", alwaysShow = false }) {
   const { state, actions } = useFormContext();
 
   const hasDiff = !isEqual(state.initialValues, state.values);
-  if (!hasDiff) {
+  if (!alwaysShow && !hasDiff) {
     return null;
   }
 
@@ -786,8 +840,51 @@ function ClearFilters() {
     <TextButton
       onClick={() => actions.batchChange({ updates: state.initialValues })}
     >
-      Clear
+      {label}
     </TextButton>
+  );
+}
+
+function RefineFooter() {
+  return (
+    <footer>
+      <Button onClick={() => refineSearchModal.actions.close()}>
+        See results
+      </Button>
+      <Form module={filtersFormModule}>
+        <ClearFilters label="Reset filters" alwaysShow />
+      </Form>
+    </footer>
+  );
+}
+
+function RefineSearchForm() {
+  return (
+    <Form module={filtersFormModule}>
+      <Field name="price" as={Slider} label="Price" />
+      {false && <Field name="rating" as={Rate} label="Rating" />}
+      {false && (
+        <Field name="repairType" as={Radio.Group} label="Repair Type">
+          {REPAIR_TYPES.map((type) => (
+            <Radio value={type.value}>{type.label}</Radio>
+          ))}
+        </Field>
+      )}
+      <Field
+        name="guarantee"
+        as={Select}
+        options={WARRANTIES}
+        label="Warranty"
+      />
+      {false && (
+        <Field
+          name="time"
+          as={Select}
+          options={WORKING_TIME}
+          label="Working time"
+        />
+      )}
+    </Form>
   );
 }
 
@@ -817,7 +914,7 @@ export default function SearchResults() {
   }, []);
 
   const onDeviceChange = useCallback((ev) => {
-    const value = parseNativeEvent(ev)
+    const value = parseNativeEvent(ev);
     filtersFormModule.actions.batchChange({
       updates: {
         device: value,
@@ -863,35 +960,7 @@ export default function SearchResults() {
                     <ClearFilters />
                   </Form>
                 </SidebarHeader>
-                <Form module={filtersFormModule}>
-                  <Field name="price" as={Slider} label="Price" />
-                  {false && <Field name="rating" as={Rate} label="Rating" />}
-                  {false && (
-                    <Field
-                      name="repairType"
-                      as={Radio.Group}
-                      label="Repair Type"
-                    >
-                      {REPAIR_TYPES.map((type) => (
-                        <Radio value={type.value}>{type.label}</Radio>
-                      ))}
-                    </Field>
-                  )}
-                  <Field
-                    name="guarantee"
-                    as={Select}
-                    options={WARRANTIES}
-                    label="Warranty"
-                  />
-                  {false && (
-                    <Field
-                      name="time"
-                      as={Select}
-                      options={WORKING_TIME}
-                      label="Working time"
-                    />
-                  )}
-                </Form>
+                <RefineSearchForm />
               </SidebarInnerWrap>
             </Sidebar>
             <Content ref={mobileSelectorsRef}>
@@ -992,7 +1061,7 @@ export default function SearchResults() {
                   <MapTriggerWrap>
                     <label>Map</label>
                     <Switch
-                      value={showMap}
+                      checked={showMap}
                       onChange={(val) => updateShowMap(val)}
                     />
                   </MapTriggerWrap>
@@ -1031,8 +1100,9 @@ export default function SearchResults() {
           </OnMobile>
           <OnMobile>
             <MobileToolbar>
-              <TextButton>
+              <TextButton onClick={() => refineSearchModal.actions.open()}>
                 <FontAwesomeIcon icon={faSortAmountDown} />
+                Refine search
               </TextButton>
               <ToolbarButtonWrap>
                 <Button onClick={() => updateShowMap((state) => !state)}>
@@ -1040,6 +1110,13 @@ export default function SearchResults() {
                 </Button>
               </ToolbarButtonWrap>
             </MobileToolbar>
+            <Modal module={refineSearchModal} footer={null}>
+              <RefineModalWrap>
+                <SubTitle>Refine results</SubTitle>
+                <RefineSearchForm />
+                <RefineFooter />
+              </RefineModalWrap>
+            </Modal>
           </OnMobile>
         </MainWrap>
       </DefaultLayout>

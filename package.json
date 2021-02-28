@@ -37,6 +37,7 @@
     "next-redux-wrapper": "^6.0.2",
     "next-useragent": "^2.4.0",
     "querystring": "^0.2.1",
+    "rc-dialog": "^8.5.1",
     "rc-tabs": "^11.7.3",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
