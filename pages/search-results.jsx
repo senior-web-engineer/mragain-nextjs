@@ -1,4 +1,12 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import styled, { css } from "styled-components";
 import isEqual from "fast-deep-equal";
 import Menu from "react-horizontal-scrolling-menu";
@@ -319,7 +327,7 @@ const Content = styled.div`
 
   ${media.tablet`
     padding: 50px;
-    margin-right: -50px;
+    margin-right: -43px;
 
     form:after {
       display: none;
@@ -367,6 +375,13 @@ const ShopWrap = styled.div`
   align-items: center;
   padding: 10px;
   position: relative;
+
+  ${(props) =>
+    props.isSelected &&
+    css`
+      box-shadow: 0 0 0 2px #06c987;
+      background-color: #e6f9f3;
+    `}
 
   ${media.tablet`
     height: 190px;
@@ -557,7 +572,11 @@ ShopDetails.Service = styled.div`
   font-size: 10px;
 `;
 
+const shopRefs = {};
+const SelectedShopContext = createContext();
+
 function ShopItem({ item }) {
+  const {selectedShop, updateSelectedShop} = useContext(SelectedShopContext)
   const location = [item.shop.street || "", item.shop.city || ""]
     .filter(Boolean)
     .join(", ");
@@ -570,7 +589,11 @@ function ShopItem({ item }) {
   const formState = filtersFormModule.state.values;
 
   return (
-    <ShopWrap>
+    <ShopWrap
+      ref={(node) => (shopRefs[item.shop.id] = node)}
+      isSelected={item.shop.id === selectedShop}
+      onClick={() => updateSelectedShop(item.shop.id)}
+    >
       <ShopImageWrap>
         {item.shop.bg_photo ? (
           <Image
@@ -897,6 +920,8 @@ function RefineSearchForm() {
 export default function SearchResults() {
   const [showMap, updateShowMap] = useState();
   const [showMobileSearch, setShowMobileSearch] = useState();
+  const [selectedShop, updateSelectedShop] = useState(null);
+
   const mobileSelectorsRef = useRef(null);
   useEffect(() => {
     async function main() {
@@ -918,6 +943,15 @@ export default function SearchResults() {
 
     main();
   }, []);
+
+  useEffect(() => {
+    if (shopRefs[selectedShop]) {
+      shopRefs[selectedShop].scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }
+  }, [selectedShop]);
 
   const onDeviceChange = useCallback((ev) => {
     const value = parseNativeEvent(ev);
@@ -955,134 +989,22 @@ export default function SearchResults() {
 
   return (
     <ScreenSizeProvider>
-      <DefaultLayout>
-        <MainWrap>
-          <MaxConstraints>
-            <Sidebar>
-              <SidebarInnerWrap>
-                <SidebarHeader>
-                  <SubTitle>Refine results</SubTitle>
-                  <Form module={filtersFormModule}>
-                    <ClearFilters />
-                  </Form>
-                </SidebarHeader>
-                <RefineSearchForm />
-              </SidebarInnerWrap>
-            </Sidebar>
-            <Content ref={mobileSelectorsRef}>
-              <Form module={filtersFormModule}>
-                <ZipFields>
-                  <Field
-                    prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
-                    noBorder
-                    as={StyledInput}
-                    name="location"
-                    placeholder="Postcode of stad"
-                  />
-                  <hr />
-                  <Field
-                    as={Select}
-                    label="Distance"
-                    name="distance"
-                    options={DISTANCES}
-                  />
-                  <OnMobile show={false}>
-                    <Field
-                      name="sort"
-                      as={Select}
-                      options={SORT_BY}
-                      label="Sort by"
-                    />
-                  </OnMobile>
-                </ZipFields>
-                <ModelFields>
-                  <OnMobile only>
-                    <MobileDeviceSelector
-                      name="device"
-                      onChange={onDeviceChange}
-                    />
-                    <ModelFieldsMobile>
-                      <BrandSelector
-                        name="brand"
-                        as={Select}
-                        label="Brand"
-                        onChange={onBandChange}
-                        dropdownStyle={{ minWidth: "200px" }}
-                      />
-                      <hr />
-                      <ModelSelector
-                        name="model"
-                        as={Select}
-                        label="Model"
-                        onChange={onModelChange}
-                      />
-                      <ServiceSelector
-                        name="service"
-                        as={Select}
-                        label="Services"
-                        dropdownStyle={{ minWidth: "200px" }}
-                      />
-                      <Waypoint
-                        onEnter={() => setShowMobileSearch(false)}
-                        onLeave={() => setShowMobileSearch(true)}
-                      />
-                      <Field
-                        name="sort"
-                        as={Select}
-                        options={SORT_BY}
-                        label="Sort by"
-                      />
-                    </ModelFieldsMobile>
-                  </OnMobile>
-                  <OnMobile show={false}>
-                    <DeviceSelector
-                      name="device"
-                      as={Select}
-                      label="Device"
-                      onChange={onDeviceChange}
-                      dropdownStyle={{ minWidth: "200px" }}
-                    />
-                    <BrandSelector
-                      name="brand"
-                      as={Select}
-                      label="Brand"
-                      onChange={onBandChange}
-                      dropdownStyle={{ minWidth: "200px" }}
-                    />
-                    <ModelSelector
-                      name="model"
-                      as={Select}
-                      label="Model"
-                      onChange={onModelChange}
-                      dropdownStyle={{ minWidth: "200px" }}
-                    />
-                    <ServiceSelector
-                      name="service"
-                      as={Select}
-                      label="Services"
-                      dropdownStyle={{ minWidth: "200px" }}
-                      popupPlacement="bottomRight"
-                    />
-                  </OnMobile>
-                  <MapTriggerWrap>
-                    <label>Map</label>
-                    <Switch
-                      checked={showMap}
-                      onChange={(val) => updateShowMap(val)}
-                    />
-                  </MapTriggerWrap>
-                </ModelFields>
-                <SyncFormValues onChange={shopListModule.actions.updateQuery} />
-              </Form>
-              <List module={shopListModule}>
-                <Listing Item={ShopItem} />
-              </List>
-            </Content>
-            <List module={shopListModule}>{showMap ? <Map /> : null}</List>
-          </MaxConstraints>
-          <OnMobile only>
-            {showMobileSearch || showMap ? (
-              <MobileSearchWrap>
+      <SelectedShopContext.Provider value={{selectedShop, updateSelectedShop}}>
+        <DefaultLayout>
+          <MainWrap>
+            <MaxConstraints>
+              <Sidebar>
+                <SidebarInnerWrap>
+                  <SidebarHeader>
+                    <SubTitle>Refine results</SubTitle>
+                    <Form module={filtersFormModule}>
+                      <ClearFilters />
+                    </Form>
+                  </SidebarHeader>
+                  <RefineSearchForm />
+                </SidebarInnerWrap>
+              </Sidebar>
+              <Content ref={mobileSelectorsRef}>
                 <Form module={filtersFormModule}>
                   <ZipFields>
                     <Field
@@ -1099,37 +1021,160 @@ export default function SearchResults() {
                       name="distance"
                       options={DISTANCES}
                     />
+                    <OnMobile show={false}>
+                      <Field
+                        name="sort"
+                        as={Select}
+                        options={SORT_BY}
+                        label="Sort by"
+                      />
+                    </OnMobile>
                   </ZipFields>
+                  <ModelFields>
+                    <OnMobile only>
+                      <MobileDeviceSelector
+                        name="device"
+                        onChange={onDeviceChange}
+                      />
+                      <ModelFieldsMobile>
+                        <BrandSelector
+                          name="brand"
+                          as={Select}
+                          label="Brand"
+                          onChange={onBandChange}
+                          dropdownStyle={{ minWidth: "200px" }}
+                        />
+                        <hr />
+                        <ModelSelector
+                          name="model"
+                          as={Select}
+                          label="Model"
+                          onChange={onModelChange}
+                        />
+                        <ServiceSelector
+                          name="service"
+                          as={Select}
+                          label="Services"
+                          dropdownStyle={{ minWidth: "200px" }}
+                        />
+                        <Waypoint
+                          onEnter={() => setShowMobileSearch(false)}
+                          onLeave={() => setShowMobileSearch(true)}
+                        />
+                        <Field
+                          name="sort"
+                          as={Select}
+                          options={SORT_BY}
+                          label="Sort by"
+                        />
+                      </ModelFieldsMobile>
+                    </OnMobile>
+                    <OnMobile show={false}>
+                      <DeviceSelector
+                        name="device"
+                        as={Select}
+                        label="Device"
+                        onChange={onDeviceChange}
+                        dropdownStyle={{ minWidth: "200px" }}
+                      />
+                      <BrandSelector
+                        name="brand"
+                        as={Select}
+                        label="Brand"
+                        onChange={onBandChange}
+                        dropdownStyle={{ minWidth: "200px" }}
+                      />
+                      <ModelSelector
+                        name="model"
+                        as={Select}
+                        label="Model"
+                        onChange={onModelChange}
+                        dropdownStyle={{ minWidth: "200px" }}
+                      />
+                      <ServiceSelector
+                        name="service"
+                        as={Select}
+                        label="Services"
+                        dropdownStyle={{ minWidth: "200px" }}
+                        popupPlacement="bottomRight"
+                      />
+                    </OnMobile>
+                    <MapTriggerWrap>
+                      <label>Map</label>
+                      <Switch
+                        checked={showMap}
+                        onChange={(val) => updateShowMap(val)}
+                      />
+                    </MapTriggerWrap>
+                  </ModelFields>
+                  <SyncFormValues
+                    onChange={shopListModule.actions.updateQuery}
+                  />
                 </Form>
-              </MobileSearchWrap>
-            ) : null}
-          </OnMobile>
-          <OnMobile only>
-            <MobileToolbar>
-              <TextButton onClick={() => refineSearchModal.actions.open()}>
-                <FontAwesomeIcon icon={faSortAmountDown} />
-                Refine search
-              </TextButton>
-              <ToolbarButtonWrap>
-                <Button onClick={() => updateShowMap((state) => !state)}>
-                  {!showMap ? (
-                    <FontAwesomeIcon icon={faMapMarkerAlt} />
-                  ) : (
-                    <FontAwesomeIcon icon={faStore} />
-                  )}
-                </Button>
-              </ToolbarButtonWrap>
-            </MobileToolbar>
-            <Modal module={refineSearchModal} footer={null}>
-              <RefineModalWrap>
-                <SubTitle>Refine results</SubTitle>
-                <RefineSearchForm />
-                <RefineFooter />
-              </RefineModalWrap>
-            </Modal>
-          </OnMobile>
-        </MainWrap>
-      </DefaultLayout>
+                <List module={shopListModule}>
+                  <Listing Item={ShopItem} />
+                </List>
+              </Content>
+              <List module={shopListModule}>
+                {showMap ? (
+                  <Map
+                    selectedShop={selectedShop}
+                    updateSelectedShop={updateSelectedShop}
+                  />
+                ) : null}
+              </List>
+            </MaxConstraints>
+            <OnMobile only>
+              {showMobileSearch || showMap ? (
+                <MobileSearchWrap>
+                  <Form module={filtersFormModule}>
+                    <ZipFields>
+                      <Field
+                        prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
+                        noBorder
+                        as={StyledInput}
+                        name="location"
+                        placeholder="Postcode of stad"
+                      />
+                      <hr />
+                      <Field
+                        as={Select}
+                        label="Distance"
+                        name="distance"
+                        options={DISTANCES}
+                      />
+                    </ZipFields>
+                  </Form>
+                </MobileSearchWrap>
+              ) : null}
+            </OnMobile>
+            <OnMobile only>
+              <MobileToolbar>
+                <TextButton onClick={() => refineSearchModal.actions.open()}>
+                  <FontAwesomeIcon icon={faSortAmountDown} />
+                  Refine search
+                </TextButton>
+                <ToolbarButtonWrap>
+                  <Button onClick={() => updateShowMap((state) => !state)}>
+                    {!showMap ? (
+                      <FontAwesomeIcon icon={faMapMarkerAlt} />
+                    ) : (
+                      <FontAwesomeIcon icon={faStore} />
+                    )}
+                  </Button>
+                </ToolbarButtonWrap>
+              </MobileToolbar>
+              <Modal module={refineSearchModal} footer={null}>
+                <RefineModalWrap>
+                  <SubTitle>Refine results</SubTitle>
+                  <RefineSearchForm />
+                  <RefineFooter />
+                </RefineModalWrap>
+              </Modal>
+            </OnMobile>
+          </MainWrap>
+        </DefaultLayout>
+      </SelectedShopContext.Provider>
     </ScreenSizeProvider>
   );
 }

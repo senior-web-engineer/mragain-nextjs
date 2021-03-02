@@ -1,6 +1,6 @@
 import { useListContext } from "@/modules/list";
 import media from "@/utils/media.js";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import GoogleMap from "./GoogleMap.jsx";
 import Menu from "react-horizontal-scrolling-menu";
@@ -33,11 +33,14 @@ const ShopList = styled.div`
   margin-bottom: 60px;
   z-index: 11;
   width: 100%;
+
+  ${media.tablet`
+    display: none;
+  `}
 `;
 
-export default function Map() {
+export default function Map({selectedShop, updateSelectedShop}) {
   const { state = {} } = useListContext();
-  const [selectedShop, updateSelectedShop] = useState(null);
   const { items, pages } = state;
 
   const shopList = useMemo(() => {
