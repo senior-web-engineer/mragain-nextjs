@@ -118,7 +118,6 @@ const SERVICE_COLUMNS = [
 ];
 
 function parseOptions(arr, key) {
-  console.log(arr);
   return [
     {
       id: "0",

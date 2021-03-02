@@ -70,7 +70,6 @@ export default function Map({selectedShop, updateSelectedShop}) {
           ) : null}
         </ShopList>
         <GoogleMap
-          isMarkerShown={true}
           shopList={shopList}
           selectedShopId={selectedShop}
           onClick={(shop) => {

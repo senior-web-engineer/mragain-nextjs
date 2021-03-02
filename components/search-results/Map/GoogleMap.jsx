@@ -32,7 +32,7 @@ function ShopMarker({selected, ...props}) {
   </ShopMarkerWrap>)
 }
 
-function MapComponent({ shopList, onClick, selectedShopId }) {
+function MapComponent({ shopList = [], onClick, selectedShopId, defaultCenter = { lat: 51.363244, lng: 5.264762 }, defaultZoom = 7 }) {
   const selectedShopEntity = useMemo(() => {
     return shopList.find((shop) => shop.id === selectedShopId);
   }, [shopList, selectedShopId]);
@@ -40,9 +40,9 @@ function MapComponent({ shopList, onClick, selectedShopId }) {
   return (
     <GoogleMapReact
       bootstrapURLKeys={{ key: googleMapsApiKey }}
-      defaultCenter={{ lat: 51.363244, lng: 5.264762 }}
+      defaultCenter={defaultCenter}
+      defaultZoom={defaultZoom}
       {...(selectedShopEntity ? {center: [selectedShopEntity.geo_lat, selectedShopEntity.geo_long]} : {})}
-      defaultZoom={7}
       options={{ styles: colors }}
     >
       {shopList.map((shop) => (

@@ -70,7 +70,7 @@ const ShopProfile = (routerProps) => {
         <ShopHeader shop={shopProfileServerInfo} />
         <ShopServices shop={shopProfileServerInfo}/>
         <ShopDetails />
-        <ShopMap />
+        <ShopMap shop={shopProfileServerInfo}/>
       </MainWrap>
     </DefaultLayout>
   );

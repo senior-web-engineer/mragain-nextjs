@@ -14,7 +14,6 @@ export default function dataFetcher({ selectors = [], fetchData }) {
       if (typeof selector === "string") {
         return join(selector);
       }
-
       const result = selector(state);
       return join(result);
     }, "");

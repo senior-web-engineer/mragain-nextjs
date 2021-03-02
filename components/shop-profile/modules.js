@@ -58,6 +58,13 @@ export const shopServicesListModule = createListModule({
   },
 });
 
+export const reviewsFetcher = keyedDataFetcher({
+  selectors: ["shops", "reviews"],
+  async fetchData([_1, _2, shopId]) {
+    return api.get(`${API_PATH.GETREVIEWS}/${shopId}/`);
+  },
+});
+
 export const deviceFetcher = dataFetcher({
   selectors: ["shops", "devices", () => filtersFormModule.state.values.shop],
   async fetchData([_1, _2, shopId]) {
