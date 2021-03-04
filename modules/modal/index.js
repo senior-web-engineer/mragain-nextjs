@@ -59,7 +59,7 @@ const Modal = connect((state, ownProps) => ({
   visible: ownProps.module.selectors.isVisible,
   onClose: ownProps.module.actions.close,
 }))(function ({ module, footer = DEFAULT_BUTTONS, ...rest }) {
-  return <Dialog {...rest} footer={footer?.({ module })} />;
+  return <Dialog className="custom-modal" {...rest} footer={footer?.({ module })} />;
 });
 
 export default Modal;

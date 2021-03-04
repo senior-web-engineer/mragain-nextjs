@@ -1,6 +1,7 @@
 import { API_PATH } from "@/constants";
 import dataFetcher, { keyedDataFetcher } from "@/modules/dataFetcher";
 import { createListModule } from "@/modules/list";
+import { createModalModule } from "@/modules/modal";
 import api from "@/utils/api";
 import { notification } from "antd";
 import router from "next/router";
@@ -100,3 +101,5 @@ export const modelFetcher = keyedDataFetcher({
     return data.map(({ model }) => model);
   },
 });
+
+export const reviewsModal = createModalModule()
