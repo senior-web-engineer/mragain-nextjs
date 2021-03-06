@@ -103,3 +103,4 @@ export const modelFetcher = keyedDataFetcher({
 });
 
 export const reviewsModal = createModalModule()
+export const shopInfo = createModalModule()

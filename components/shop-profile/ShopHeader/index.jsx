@@ -1,15 +1,33 @@
 import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
 import { MaxConstraints } from "@/components/styled/layout";
+import Button from "@/components/ui/Button";
 import {
+  faInfo,
   faLink,
   faMapMarkerAlt,
   faPhone,
+  faShare,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Rate } from "antd";
+import { Popover, Rate } from "antd";
 import Image from "next/image";
 import React from "react";
 import styled, { css } from "styled-components";
+import {shopInfo} from "@/components/shop-profile/modules"
+
+import {
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  PinterestShareButton,
+
+  FacebookIcon,
+  LinkedinIcon,
+  PinterestIcon,
+  TwitterIcon,
+} from "react-share";
+import Modal from "@/modules/modal";
+import { SubTitle } from "@/components/styled/text";
 
 const Wallpaper = styled.div`
   height: 500px;
@@ -36,10 +54,16 @@ const ContentWrap = styled.div`
 const ShopMeta = styled.div`
   margin-left: 50px;
   margin-top: 50px;
+  flex-grow: 1;
 `;
 
 ShopMeta.FirstRow = styled.div`
   display: flex;
+  justify-content: space-between;
+
+  >div {
+    display: flex;
+  }
 
   h1 {
     font-size: 30px;
@@ -53,8 +77,8 @@ ShopMeta.FirstRow = styled.div`
     display: inline-block;
     height: 31px;
     ${(props) =>
-      props.tagColor &&
-      css`
+    props.tagColor &&
+    css`
         background-color: ${props.tagColor || "#ddd"};
       `}
     color: #fff;
@@ -62,6 +86,11 @@ ShopMeta.FirstRow = styled.div`
     padding: 0 10px;
     border-radius: 15px;
     text-transform: uppercase;
+  }
+
+  ${Button} {
+    margin: 0 10px;
+    min-width: 51px;
   }
 `;
 
@@ -183,8 +212,29 @@ export default function ShopHeader({ shop }) {
           </ShopLogo>
           <ShopMeta>
             <ShopMeta.FirstRow tagColor={TAG_TO_COLOR[tag]}>
-              <h1>{shop.name}</h1>
-              {tag ? <tag>{tag}</tag> : null}
+              <div>
+                <h1>{shop.name}</h1>
+                {tag ? <tag>{tag}</tag> : null}
+              </div>
+              <div>
+                <Button onClick={shopInfo.actions.open}><FontAwesomeIcon icon={faInfo} /></Button>
+                <Popover overlayClassName="share-popover" content={<>
+                  <FacebookShareButton>
+                    <FacebookIcon size={40} round />
+                  </FacebookShareButton>
+                  <LinkedinShareButton>
+                    <LinkedinIcon size={40} round />
+                  </LinkedinShareButton>
+                  <PinterestShareButton>
+                    <PinterestIcon size={40} round />
+                  </PinterestShareButton>
+                  <TwitterShareButton>
+                    <TwitterIcon size={40} round />
+                  </TwitterShareButton>
+                </>}>
+                  <Button><FontAwesomeIcon icon={faShare} /></Button>
+                </Popover>
+              </div>
             </ShopMeta.FirstRow>
             <ShopMeta.SecondRow>
               <Rate
@@ -193,7 +243,7 @@ export default function ShopHeader({ shop }) {
                 value={shop.mark}
                 onChange={null}
               />
-              <span>{shop.reivews || 0} Reviews</span>
+              <span>{shop.reviews || 0} Reviews</span>
             </ShopMeta.SecondRow>
             <ShopMeta.ThirdRow>
               <dl>
@@ -226,6 +276,9 @@ export default function ShopHeader({ shop }) {
             <AdvantagesWrap>{ADVANTAGES.map(renderAdvantage)}</AdvantagesWrap>
           </ShopMeta>
         </ContentWrap>
+        <Modal module={shopInfo} footer={null} title={<SubTitle>About {shop.name}</SubTitle>}>
+          <p>{shop.about_us}</p>
+        </Modal>
       </MaxConstraints>
     </div>
   );
