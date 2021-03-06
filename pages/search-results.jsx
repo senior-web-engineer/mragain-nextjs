@@ -53,6 +53,7 @@ import { TextButton } from "@/components/ui/Button";
 import Link from "next/link";
 import media, { OnMobile, ScreenSizeProvider } from "@/utils/media";
 import Modal from "@/modules/modal";
+import { useRouter } from "next/router";
 //
 
 const MainWrap = styled.div`
@@ -576,6 +577,7 @@ const shopRefs = {};
 const SelectedShopContext = createContext();
 
 function ShopItem({ item }) {
+  const router  = useRouter();
   const {selectedShop, updateSelectedShop} = useContext(SelectedShopContext)
   const location = [item.shop.street || "", item.shop.city || ""]
     .filter(Boolean)
@@ -587,12 +589,22 @@ function ShopItem({ item }) {
 
   const tag = item.shop.tag;
   const formState = filtersFormModule.state.values;
+  const shopRoute = `/${item.shop.name}--${item.shop.city}`
+
+  function onClick() {
+    if (item.shop.id === selectedShop) {
+      router.push(shopRoute)
+      return;
+    }
+
+    updateSelectedShop(item.shop.id)
+  }
 
   return (
     <ShopWrap
       ref={(node) => (shopRefs[item.shop.id] = node)}
       isSelected={item.shop.id === selectedShop}
-      onClick={() => updateSelectedShop(item.shop.id)}
+      onClick={onClick}
     >
       <ShopImageWrap>
         {item.shop.bg_photo ? (
@@ -637,7 +649,7 @@ function ShopItem({ item }) {
               </ShopDetails.PriceWrap>
             ) : null}
             <Link
-              href={`/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`}
+              href={`/${shopRoute}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`}
             >
               <Button>
                 <FontAwesomeIcon icon={faArrowRight} />
@@ -1027,6 +1039,7 @@ export default function SearchResults() {
                         as={Select}
                         options={SORT_BY}
                         label="Sort by"
+                        dropdownStyle={{ minWidth: "150px" }}
                       />
                     </OnMobile>
                   </ZipFields>

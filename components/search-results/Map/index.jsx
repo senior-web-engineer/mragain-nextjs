@@ -72,8 +72,11 @@ export default function Map({selectedShop, updateSelectedShop}) {
         <GoogleMap
           shopList={shopList}
           selectedShopId={selectedShop}
-          onClick={(shop) => {
+          onMarkerClick={(shop) => {
             updateSelectedShop(shop.id);
+          }}
+          onClick={() => {
+            updateSelectedShop(null);
           }}
         ></GoogleMap>
       </div>
