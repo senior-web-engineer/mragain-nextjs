@@ -4,7 +4,7 @@ import { AutoComplete, Input } from "antd";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components"
 import PlacesAutocomplete from "react-places-autocomplete";
-const googleMapsApiKey = "AIzaSyAqukd6apAvTAYPCx6laTaXxiwjlNcoNz4";
+const googleMapsApiKey = "AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE";
 
 const MainWrap = styled.div`
   .ant-select-selection__placeholder {

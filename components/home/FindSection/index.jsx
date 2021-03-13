@@ -58,6 +58,14 @@ const SearchBar = styled.div`
     display: flex;
     align-items: center;
     margin-top: 20px;
+
+    ${media.tablet`
+      &:nth-child(2) {
+        position: relative;
+        max-width: 174px;
+        right: -20px;
+      }
+    `}
   }
 
   & > div ${Field.FieldWrap} {
@@ -65,6 +73,8 @@ const SearchBar = styled.div`
     > * {
       width: 100%;
     }
+
+
   }
 
   .svg-inline--fa {
@@ -116,14 +126,6 @@ const SearchWrap = styled.div`
         display: none;
       }
     }
-  `}
-`;
-
-const ZipCodeInput = styled(StyledInput)`
-  ${media.tablet`
-    max-width: 170px;
-    position: relative;
-    right: -20px;
   `}
 `;
 

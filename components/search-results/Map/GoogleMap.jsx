@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useMemo, useState } from "react";
 import GoogleMapReact from "google-map-react";
-const googleMapsApiKey = "AIzaSyBG_U7llCBV6Q-OdBP5Sa_VhyuGuyL6Fzk";
+const googleMapsApiKey = "AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE";
 import colors from "./map-colors.json";
 import styled, { css } from "styled-components";
 
