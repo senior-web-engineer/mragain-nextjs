@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useMemo} from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import Image from "next/image";
@@ -15,6 +15,10 @@ import Button from "@/components/ui/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AutoComplete } from "antd";
 import { API_PATH } from "@/constants";
+import { Field } from "@/modules/forms/Blocks";
+import Form, { useFormContext } from "@/modules/forms";
+import { searchForm } from "../modules";
+import Link from "next/link";
 
 //
 
@@ -41,19 +45,25 @@ const FindWrap = styled.div`
 const SearchBar = styled.div`
   background-color: #fff;
   flex-grow: 1;
-  height: 99px;
   display: flex;
   flex-direction: column;
   justify-content: stretch;
   align-items: stretch;
-  padding: 0 30px;
+  padding: 10px 30px;
   border-radius: 10px;
   color: #868686;
 
   & > div {
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 20px;
+  }
+
+  & > div ${Field.FieldWrap} {
+    width: 100%;
+    > * {
+      width: 100%;
+    }
   }
 
   .svg-inline--fa {
@@ -61,6 +71,8 @@ const SearchBar = styled.div`
   }
 
   ${media.tablet`
+    height: 99px;
+    padding: 0 30px;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
@@ -81,7 +93,8 @@ const SearchWrap = styled.div`
   }
 
   ${Button} {
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 
     .svg-inline--fa {
       margin-right: 0;
@@ -106,7 +119,11 @@ const SearchWrap = styled.div`
 `;
 
 const ZipCodeInput = styled(StyledInput)`
-  max-width: 140px;
+  ${media.tablet`
+    max-width: 170px;
+    position: relative;
+    right: -20px;
+  `}
 `;
 
 const FindImage = styled.div`
@@ -115,9 +132,26 @@ const FindImage = styled.div`
   right: -90px;
 `;
 
+function SearchButton() {
+  const { state } = useFormContext();
+
+  const { zip, model } = state.values || {};
+
+  const [deviceId = "", brandId = "", modelId = ""] = model.split("~");
+
+  return (
+    <Link
+      href={`/search-results?zip=${zip}&device=${deviceId}&brand=${brandId}&model=${modelId}`}
+    >
+      <Button>
+        <span>Search</span>
+        <FontAwesomeIcon icon={faArrowRight} />
+      </Button>
+    </Link>
+  );
+}
 
 export default function FindSection() {
-
   const [searchData, updateSearchData] = useState({
     devices: [],
     models: [],
@@ -146,6 +180,7 @@ export default function FindSection() {
       });
     }
 
+    searchForm.actions.initialize();
     loadData();
   }, []);
 
@@ -154,7 +189,7 @@ export default function FindSection() {
       const item = {
         ...model,
         label: `${model.brand.brand_name} ${model.model_name}`,
-        value: `${model.id}`,
+        value: `${model.brand.device.id}~${model.brand.id}~${model.id}`,
       };
 
       const foundDevice = acc.find(
@@ -179,7 +214,7 @@ export default function FindSection() {
         acc.push({
           ...device,
           options: [
-            { label: `All ${device.device_name}`, value: `device_${device.id}` },
+            { label: `All ${device.device_name}`, value: `${device.id}` },
             ...device.options,
           ],
         });
@@ -223,9 +258,9 @@ export default function FindSection() {
 
   const searchOptions = useMemo(() => {
     return searchResults.map((result) => (
-      <AutoComplete.OptGroup label={result.label}>
+      <AutoComplete.OptGroup key={result.label} label={result.label}>
         {result.options.map((option) => (
-          <AutoComplete.Option value={option.value}>
+          <AutoComplete.Option key={option.value} value={option.value}>
             {option.label}
           </AutoComplete.Option>
         ))}
@@ -233,32 +268,41 @@ export default function FindSection() {
     ));
   }, [searchResults]);
 
-
   return (
     <FindWrap>
       <SearchWrap>
         <h1>Wat wil je laten repareren?</h1>
-        <SearchBar>
-          <div>
-            <FontAwesomeIcon icon={faSearch} />
-            <AutoComplete
-              dataSource={searchOptions}
-              onSearch={handleSearch}
-              placeholder="Apparaat of model"
-              dropdownStyle={{ minWidth: "320px" }}
-            >
-              <StyledInput />
-            </AutoComplete>
-          </div>
-          <div>
-            <FontAwesomeIcon icon={faMapMarkerAlt} />
-            <ZipCodeInput placeholder="Postcode of stad" />
-          </div>
-          <Button>
-            <span>Search</span>
-            <FontAwesomeIcon icon={faArrowRight} />
-          </Button>
-        </SearchBar>
+        <Form module={searchForm}>
+          <SearchBar>
+            <div>
+              <Field
+                as={AutoComplete}
+                dataSource={searchOptions}
+                onSearch={handleSearch}
+                size="large"
+                placeholder={
+                  <>
+                    <FontAwesomeIcon icon={faSearch} /> Apparaat of model
+                  </>
+                }
+                dropdownStyle={{ minWidth: "320px" }}
+                name="model"
+              >
+                <StyledInput />
+              </Field>
+            </div>
+            <div>
+              <Field
+                as={ZipCodeInput}
+                size="large"
+                prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
+                placeholder={"Postcode of stad"}
+                name="zip"
+              />
+            </div>
+            <SearchButton />
+          </SearchBar>
+        </Form>
       </SearchWrap>
       <FindImage>
         <Image

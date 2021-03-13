@@ -4,6 +4,8 @@ import { Select as AntdSelect } from "antd";
 import styled from "styled-components";
 
 const StyledSelect = styled(AntdSelect)`
+  display: block;
+
   .ant-select-selection {
     border: 0;
   }

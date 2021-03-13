@@ -13,7 +13,7 @@ const ShopList = styled.div`
   margin: 0 -15px;
 `;
 
-const TAG_TO_COLOR = {
+export const TAG_TO_COLOR = {
   new: "#c90648",
   popular: "#ffd342",
   "best price": "#0076a3",
@@ -164,13 +164,13 @@ const Toolbar = styled.div`
   }
 `;
 
-function renderShop(shop) {
-  const location = [shop.city || "", shop.country || ""]
+export function ShopCard({shop, onClick}) {
+  const location = [shop.street || "", shop.city || "", shop.country || ""]
     .filter(Boolean)
     .join(", ");
 
   return (
-    <ShopWrap key={shop.id}>
+    <ShopWrap key={shop.id} onClick={onClick}>
       <ShopImageWrap tagColor={TAG_TO_COLOR[shop.tag]}>
         {shop.bg_photo ? (
           <Image
@@ -186,12 +186,12 @@ function renderShop(shop) {
               {shop.rating} <FontAwesomeIcon icon={faStar} />
             </rating>
           ) : null}
-          {shop.tag ? <tag>new</tag> : null}
+          {shop.tag ? <tag>{shop.tag}</tag> : null}
         </dd>
       </ShopImageWrap>
       <ShopDetails>
         <div>
-          <Link href={`/shop/${shop.id}`}>
+          <Link href={`/${shop.name}--${shop.city}`}>
             <a>{shop.name}</a>
           </Link>
         </div>
@@ -205,13 +205,17 @@ function renderShop(shop) {
           {location}
         </location>
       ) : null}
-      <Link href={`/shop/${shop.id}`}>
+      <Link href={`/${shop.name}--${shop.city}`}>
         <Button as="a">
           <FontAwesomeIcon icon={faArrowRight} />
         </Button>
       </Link>
     </ShopWrap>
   );
+}
+
+function renderShop(shop) {
+  return <ShopCard shop={shop} />
 }
 
 export default function ShopsSection({shopList = []} = {}) {
