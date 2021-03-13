@@ -102,5 +102,17 @@ export const modelFetcher = keyedDataFetcher({
   },
 });
 
+export const openTimeFetcher = dataFetcher({
+  selectors: ["shops", "open-time", () => filtersFormModule.state.values.shop],
+  async fetchData([_1, _2, shop]) {
+    const response = await api.get(`${API_PATH.GETVALIDOPENTIME}/${shop}/`);
+    try {
+      return JSON.parse(response?.[0]?.valid_day_time || "");
+    } catch(err) {
+      return null;
+    }
+  },
+})
+
 export const reviewsModal = createModalModule()
 export const shopInfo = createModalModule()

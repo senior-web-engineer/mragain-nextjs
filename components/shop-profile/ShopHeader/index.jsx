@@ -11,9 +11,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Popover, Rate } from "antd";
 import Image from "next/image";
-import React from "react";
+import React, { useCallback } from "react";
 import styled, { css } from "styled-components";
-import {shopInfo} from "@/components/shop-profile/modules"
+import {openTimeFetcher, shopInfo} from "@/components/shop-profile/modules"
 
 import {
   FacebookShareButton,
@@ -28,6 +28,7 @@ import {
 } from "react-share";
 import Modal from "@/modules/modal";
 import { SubTitle } from "@/components/styled/text";
+import DetailsModal from "./DetailsModal";
 
 const Wallpaper = styled.div`
   height: 500px;
@@ -196,6 +197,11 @@ export default function ShopHeader({ shop }) {
     );
   }
 
+  const shareText = `
+    I found the "${shop.name}" repairshop on mragain. Do you broken devices? MrAgain is the right place to find the repairshop you need
+  `
+  const shopURL = typeof window !== "undefined" ? window.location.href : "";
+
   return (
     <div>
       <Wallpaper>
@@ -217,18 +223,18 @@ export default function ShopHeader({ shop }) {
                 {tag ? <tag>{tag}</tag> : null}
               </div>
               <div>
-                <Button onClick={shopInfo.actions.open}><FontAwesomeIcon icon={faInfo} /></Button>
+                <DetailsModal shop={shop}/>
                 <Popover overlayClassName="share-popover" content={<>
-                  <FacebookShareButton>
+                  <FacebookShareButton url={shopURL} quote={shareText}>
                     <FacebookIcon size={40} round />
                   </FacebookShareButton>
-                  <LinkedinShareButton>
+                  <LinkedinShareButton url={shopURL} title={shop.name} summary={shareText}>
                     <LinkedinIcon size={40} round />
                   </LinkedinShareButton>
-                  <PinterestShareButton>
+                  <PinterestShareButton url={shopURL} media={shop.bg_photo} >
                     <PinterestIcon size={40} round />
                   </PinterestShareButton>
-                  <TwitterShareButton>
+                  <TwitterShareButton url={shopURL} title={shareText}>
                     <TwitterIcon size={40} round />
                   </TwitterShareButton>
                 </>}>
@@ -276,9 +282,6 @@ export default function ShopHeader({ shop }) {
             <AdvantagesWrap>{ADVANTAGES.map(renderAdvantage)}</AdvantagesWrap>
           </ShopMeta>
         </ContentWrap>
-        <Modal module={shopInfo} footer={null} title={<SubTitle>About {shop.name}</SubTitle>}>
-          <p>{shop.about_us}</p>
-        </Modal>
       </MaxConstraints>
     </div>
   );

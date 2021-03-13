@@ -86,6 +86,7 @@ export default function GooglePlaces({
               size={size}
               placeholder={placeholder}
               loading={loading}
+              dropdownStyle={{ minWidth: "320px" }}
               onSelect={(description) => {
                 setSearchTerm(description);
                 onChange(description);
