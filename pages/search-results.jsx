@@ -54,6 +54,13 @@ import Link from "next/link";
 import media, { OnMobile, ScreenSizeProvider } from "@/utils/media";
 import Modal from "@/modules/modal";
 import { useRouter } from "next/router";
+import GooglePlaces from "@/components/common/GooglePlaces";
+import {
+  geocodeByAddress,
+  geocodeByPlaceId,
+  getLatLng,
+} from "react-places-autocomplete";
+
 //
 
 const MainWrap = styled.div`
@@ -190,11 +197,12 @@ const ZipFields = styled.div`
   background-color: #06b279;
 
   input {
+    border: 0;
     background-color: transparent;
+  }
 
-    ::placeholder {
-      color: #fff;
-    }
+  .ant-select-selection__placeholder {
+    color: #fff;
   }
 
   .ant-select-selection {
@@ -282,9 +290,12 @@ const MobileSearchWrap = styled.div`
     background-color: #fff;
 
     input {
-      ::placeholder {
-        color: rgba(0, 0, 0, 0.65);
-      }
+      border: 0;
+      background-color: transparent;
+    }
+
+    .ant-select-selection__placeholder {
+      color: rgba(0, 0, 0, 0.65);
     }
 
     .ant-select-selection {
@@ -577,8 +588,8 @@ const shopRefs = {};
 const SelectedShopContext = createContext();
 
 function ShopItem({ item }) {
-  const router  = useRouter();
-  const {selectedShop, updateSelectedShop} = useContext(SelectedShopContext)
+  const router = useRouter();
+  const { selectedShop, updateSelectedShop } = useContext(SelectedShopContext);
   const location = [item.shop.street || "", item.shop.city || ""]
     .filter(Boolean)
     .join(", ");
@@ -589,15 +600,15 @@ function ShopItem({ item }) {
 
   const tag = item.shop.tag;
   const formState = filtersFormModule.state.values;
-  const shopRoute = `/${item.shop.name}--${item.shop.city}`
+  const shopRoute = `/${item.shop.name}--${item.shop.city}`;
 
   function onClick() {
     if (item.shop.id === selectedShop) {
-      router.push(shopRoute)
+      router.push(shopRoute);
       return;
     }
 
-    updateSelectedShop(item.shop.id)
+    updateSelectedShop(item.shop.id);
   }
 
   return (
@@ -999,9 +1010,20 @@ export default function SearchResults() {
     serviceFetcher.key(`${value}`).fetch();
   });
 
+  const locationField = (
+    <Field
+      prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
+      noBorder
+      as={GooglePlaces}
+      name="location"
+    />
+  );
+
   return (
     <ScreenSizeProvider>
-      <SelectedShopContext.Provider value={{selectedShop, updateSelectedShop}}>
+      <SelectedShopContext.Provider
+        value={{ selectedShop, updateSelectedShop }}
+      >
         <DefaultLayout>
           <MainWrap>
             <MaxConstraints>
@@ -1019,13 +1041,7 @@ export default function SearchResults() {
               <Content ref={mobileSelectorsRef}>
                 <Form module={filtersFormModule}>
                   <ZipFields>
-                    <Field
-                      prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
-                      noBorder
-                      as={StyledInput}
-                      name="location"
-                      placeholder="Postcode of stad"
-                    />
+                    {locationField}
                     <hr />
                     <Field
                       as={Select}
@@ -1121,7 +1137,21 @@ export default function SearchResults() {
                     </MapTriggerWrap>
                   </ModelFields>
                   <SyncFormValues
-                    onChange={shopListModule.actions.updateQuery}
+                    onChange={async (data) => {
+                      let parsedData = { ...data };
+                      try {
+                        const [result] = await geocodeByAddress(data.location);
+                        const { lng, lat } = await getLatLng(result);
+                        parsedData = {
+                          ...parsedData,
+                          lng,
+                          lat,
+                        };
+                      } catch (err) {
+                        console.log(err);
+                      }
+                      shopListModule.actions.updateQuery(parsedData);
+                    }}
                   />
                 </Form>
                 <List module={shopListModule}>
@@ -1142,13 +1172,7 @@ export default function SearchResults() {
                 <MobileSearchWrap>
                   <Form module={filtersFormModule}>
                     <ZipFields>
-                      <Field
-                        prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
-                        noBorder
-                        as={StyledInput}
-                        name="location"
-                        placeholder="Postcode of stad"
-                      />
+                      {locationField}
                       <hr />
                       <Field
                         as={Select}

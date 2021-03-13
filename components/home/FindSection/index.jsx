@@ -19,6 +19,7 @@ import { Field } from "@/modules/forms/Blocks";
 import Form, { useFormContext } from "@/modules/forms";
 import { searchForm } from "../modules";
 import Link from "next/link";
+import GooglePlaces from "@/components/common/GooglePlaces";
 
 //
 
@@ -293,7 +294,7 @@ export default function FindSection() {
             </div>
             <div>
               <Field
-                as={ZipCodeInput}
+                as={GooglePlaces}
                 size="large"
                 prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
                 placeholder={"Postcode of stad"}
