@@ -4,7 +4,8 @@ import { createListModule } from "@/modules/list";
 import api from "@/utils/api";
 import { notification } from "antd";
 import router from "next/router";
-const { createFormModule } = require("@/modules/forms");
+import { createFormModule } from "@/modules/forms";
+import { createModalModule } from "@/modules/modal";
 
 export const filtersFormModule = createFormModule({
   guid: "shops",
@@ -86,3 +87,5 @@ export const serviceFetcher = keyedDataFetcher({
     return api.get(`${API_PATH.GETREPARATIONS}/`, { device, model });
   },
 });
+
+export const refineSearchModal = createModalModule()

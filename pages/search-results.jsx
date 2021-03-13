@@ -1,6 +1,16 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import styled, { css } from "styled-components";
 import isEqual from "fast-deep-equal";
+import Menu from "react-horizontal-scrolling-menu";
+import { Waypoint } from "react-waypoint";
 
 import DefaultLayout from "@/components/layouts/Homepage";
 import {
@@ -8,11 +18,16 @@ import {
   deviceFetcher,
   filtersFormModule,
   modelFetcher,
+  refineSearchModal,
   serviceFetcher,
   shopListModule,
 } from "@/components/search-results/modules";
 
-import { Field, SyncFormValues } from "@/modules/forms/Blocks";
+import {
+  Field,
+  parseNativeEvent,
+  SyncFormValues,
+} from "@/modules/forms/Blocks";
 import { Listing } from "@/modules/list/Blocks";
 import Form, { useFormContext } from "@/modules/forms";
 import List from "@/modules/list";
@@ -23,7 +38,12 @@ import { MaxConstraints } from "@/components/styled/layout";
 import Image from "next/image";
 import { StyledInput } from "@/components/ui/Input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRight,
+  faMapMarkerAlt,
+  faSortAmountDown,
+  faStore,
+} from "@fortawesome/free-solid-svg-icons";
 import Button from "@/components/ui/Button";
 import { FieldWrap } from "@/components/styled/Forms";
 import Map from "@/components/search-results/Map";
@@ -31,20 +51,40 @@ import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
 import { SubTitle } from "@/components/styled/text";
 import { TextButton } from "@/components/ui/Button";
 import Link from "next/link";
+import media, { OnMobile, ScreenSizeProvider } from "@/utils/media";
+import Modal from "@/modules/modal";
+import { useRouter } from "next/router";
 //
 
 const MainWrap = styled.div`
   margin-bottom: -127px;
-  background: linear-gradient(to right, #fff 30%, #f3f3f3 30%);
+  background: #f3f3f3;
+  padding-bottom: 30px;
+  position: relative;
+
   > div {
     display: flex;
   }
+
+  ${media.tablet`
+    padding-bottom: 0px;
+    background: linear-gradient(to right, #fff 30%, #f3f3f3 30%);
+  `}
 `;
 
 const Sidebar = styled.div`
   flex-basis: 200px;
   padding: 0 30px 30px 0;
   background-color: #fff;
+  display: none;
+  ${media.tablet`
+    display: block;
+  `}
+`;
+
+const SidebarInnerWrap = styled.div`
+  position: sticky;
+  top: 0;
 `;
 
 const MapTriggerWrap = styled(FieldWrap)`
@@ -75,13 +115,15 @@ const SidebarHeader = styled.div`
 
 const ModelFields = styled.div`
   display: flex;
-  align-items: center;
-  margin: 19px -5px;
+  flex-direction: column;
+  margin: 19px 0;
+  overflow: hidden;
+  width: 100%;
 
   > div {
     flex-grow: 1;
     margin-top: 0 !important;
-    margin: 0 5px;
+    margin: 10px 5px;
     background-color: #fff;
 
     > label {
@@ -89,7 +131,29 @@ const ModelFields = styled.div`
     }
   }
 
+  > div:first-child {
+    background-color: transparent;
+  }
+
+  .ant-radio-group {
+    max-width: 100%;
+  }
+
+  .ant-radio-button-wrapper {
+    background-color: transparent;
+    color: #fff;
+    border: 0;
+    padding: 0 11px;
+    border-radius: 10px !important;
+
+    &.ant-radio-button-wrapper-checked {
+      color: #000;
+      background-color: #fff;
+    }
+  }
+
   > ${MapTriggerWrap} {
+    display: none;
     flex-grow: 0;
     background-color: transparent;
 
@@ -97,55 +161,248 @@ const ModelFields = styled.div`
       margin-top: 0;
     }
   }
+
+  ${media.tablet`
+    flex-direction: row;
+    align-items: center;
+    margin: 19px -5px;
+    > div {
+      margin: 0 5px;
+    }
+
+    > div:first-child {
+      background-color: #fff;
+    }
+
+    > ${MapTriggerWrap} {
+      display: block;
+    }
+  `}
 `;
 
 const ZipFields = styled.div`
   display: flex;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 27px;
   background-color: #fff;
-  height: 118px;
-  padding: 0 30px;
+  height: 55px;
+  justify-content: space-between;
+  background-color: #06b279;
+
+  input {
+    background-color: transparent;
+
+    ::placeholder {
+      color: #fff;
+    }
+  }
+
+  .ant-select-selection {
+    background-color: transparent;
+    color: #fff;
+  }
+
+  .ant-input-prefix {
+    color: #fff;
+  }
 
   > div {
     margin-top: 0 !important;
   }
 
   hr {
+    display: none;
     height: 41px;
     border: 0;
     border-left: 1px solid #ddd;
+    margin: 0 30px;
   }
 
   .svg-inline--fa {
     margin-right: 8px;
+  }
+
+  ${FieldWrap} {
+    display: flex;
+    align-items: center;
+    margin: 0;
+
+    > label {
+      display: none;
+      margin-bottom: 0;
+      margin-right: 10px;
+    }
+  }
+
+  ${media.tablet`
+    border-radius: 5px;
+    background-color: #fff;
+    height: 70px;
+
+    input {
+      ::placeholder {
+        color: rgba(0, 0, 0, 0.65);
+      }
+    }
+
+    .ant-select-selection {
+      color: rgba(0, 0, 0, 0.65);
+    }
+
+    .ant-input-prefix {
+      color: rgba(0, 0, 0, 0.65);
+    }
+
+    ${FieldWrap} {
+      margin: 0 20px;
+
+      > label {
+        display: block;
+      }
+    }
+
+    hr {
+      display: block;
+    }
+  `}
+`;
+
+const MobileSearchWrap = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px 20px;
+  background: linear-gradient(to bottom, #f3f3f3 90%, transparent 100%);
+
+  ${ZipFields} {
+    background-color: #fff;
+
+    input {
+      ::placeholder {
+        color: rgba(0, 0, 0, 0.65);
+      }
+    }
+
+    .ant-select-selection {
+      color: rgba(0, 0, 0, 0.65);
+    }
+
+    .ant-input-prefix {
+      color: rgba(0, 0, 0, 0.65);
+    }
   }
 `;
 
 const Content = styled.div`
   background-color: #f3f3f3;
   flex-grow: 1;
-  padding: 50px;
-  margin-right: -50px;
+  padding: 0;
+  max-width: 100%;
+
+  form {
+    margin: 0 -20px;
+    padding: 30px 20px 0;
+    position: relative;
+    overflow: hidden;
+
+    > div {
+      position: relative;
+      z-index: 1;
+    }
+
+    &:after {
+      background-color: #06c987;
+      content: "";
+      width: 200%;
+      height: 100%;
+      position: absolute;
+      top: -20%;
+      left: -50%;
+      border-radius: 400%;
+    }
+  }
+
+  ${media.tablet`
+    padding: 50px;
+    margin-right: -43px;
+
+    form:after {
+      display: none;
+    }
+  `}
+`;
+
+const ModelFieldsMobile = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  background-color: #fff;
+  align-items: center;
+  border-radius: 15px;
+  justify-content: space-between;
+
+  .ant-select {
+    margin-left: -11px;
+  }
+
+  hr {
+    height: 41px;
+    border: 0;
+    border-left: 1px solid #ddd;
+    width: 0;
+    margin: 0 10px;
+  }
+
+  > div {
+    width: 100%;
+  }
+
+  > div:nth-child(1),
+  > div:nth-child(3) {
+    width: 40%;
+  }
 `;
 
 const ShopWrap = styled.div`
-  height: 210px;
+  height: 125px;
   border-radius: 10px;
-  padding: 30px;
   background-color: #fff;
   margin-top: 10px;
   display: flex;
   align-items: center;
+  padding: 10px;
+  position: relative;
+
+  ${(props) =>
+    props.isSelected &&
+    css`
+      box-shadow: 0 0 0 2px #06c987;
+      background-color: #e6f9f3;
+    `}
+
+  ${media.tablet`
+    height: 190px;
+    padding: 20px;
+  `}
 `;
 
 const ShopImageWrap = styled.div`
-  width: 150px;
-  height: 150px;
-  border-radius: 15px;
+  min-width: 105px;
+  height: 105px;
+  border-radius: 5px;
   background-color: #f0f0f0;
   position: relative;
   overflow: hidden;
+
+  ${media.tablet`
+    min-width: 150px;
+    height: 150px;
+    border-radius: 15px;
+  `}
 
   dd {
     position: absolute;
@@ -164,20 +421,33 @@ const ShopDetails = styled.div`
   flex-grow: 1;
 
   tag {
+    position: absolute;
+    top: 15px;
+    left: 0;
     display: inline-block;
     font-size: 8px;
-    height: 31px;
+    height: 26px;
     ${(props) =>
       props.tagColor &&
       css`
         background-color: ${props.tagColor || "#ddd"};
       `}
     color: #fff;
-    line-height: 31px;
+    line-height: 26px;
     padding: 0 10px;
     border-radius: 15px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
     text-transform: uppercase;
     margin-bottom: 14px;
+
+    ${media.tablet`
+      position: static;
+      height: 31px;
+      line-height: 31px;
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+    `}
   }
 `;
 
@@ -197,8 +467,15 @@ ShopDetails.SecondRow = styled.div`
   }
 
   ${Button} {
+    display: none;
     min-width: 51px;
   }
+
+  ${media.tablet`
+    ${Button} {
+      display: inline-block;
+    }
+  `}
 `;
 
 ShopDetails.NameWrap = styled.div`
@@ -209,7 +486,7 @@ ShopDetails.NameWrap = styled.div`
   font-weight: 300;
 
   h3 {
-    font-size: 20px;
+    font-size: 15px;
     color: #0d3244;
     font-weight: 500;
     margin: 0;
@@ -222,6 +499,60 @@ ShopDetails.NameWrap = styled.div`
   .ant-rate-star:not(:last-child) {
     margin-right: 3px;
   }
+
+  ${media.tablet`
+    h3 {
+      font-size: 20px;
+    }
+  `}
+`;
+
+const ToolbarButtonWrap = styled.div`
+  border-radius: 36px;
+  padding: 8px;
+  position: relative;
+  top: -20px;
+  background-color: #fff;
+  height: 67px;
+`;
+
+const MobileToolbar = styled.div`
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  height: 60px;
+  padding: 0 20px;
+  box-shadow: 0 0 27px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  z-index: 11;
+  justify-content: space-between;
+  align-items: center;
+
+  ${TextButton} {
+    min-width: 40px;
+    text-transform: none;
+    font-size: 13px;
+    font-weight: normal;
+    .svg-inline--fa {
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+  }
+
+  ${ToolbarButtonWrap} ${Button} {
+    min-width: 51px;
+    border-radius: 34px;
+    font-size: 17px;
+    box-shadow: 0 0 8px #06c987;
+  }
+`;
+
+ShopDetails.PriceWrap = styled.div`
+  display: none;
+
+  ${media.tablet`
+    display: block;
+  `}
 `;
 
 ShopDetails.ThirdRow = styled.div`
@@ -242,7 +573,12 @@ ShopDetails.Service = styled.div`
   font-size: 10px;
 `;
 
+const shopRefs = {};
+const SelectedShopContext = createContext();
+
 function ShopItem({ item }) {
+  const router  = useRouter();
+  const {selectedShop, updateSelectedShop} = useContext(SelectedShopContext)
   const location = [item.shop.street || "", item.shop.city || ""]
     .filter(Boolean)
     .join(", ");
@@ -252,9 +588,24 @@ function ShopItem({ item }) {
   }
 
   const tag = item.shop.tag;
+  const formState = filtersFormModule.state.values;
+  const shopRoute = `/${item.shop.name}--${item.shop.city}`
+
+  function onClick() {
+    if (item.shop.id === selectedShop) {
+      router.push(shopRoute)
+      return;
+    }
+
+    updateSelectedShop(item.shop.id)
+  }
 
   return (
-    <ShopWrap>
+    <ShopWrap
+      ref={(node) => (shopRefs[item.shop.id] = node)}
+      isSelected={item.shop.id === selectedShop}
+      onClick={onClick}
+    >
       <ShopImageWrap>
         {item.shop.bg_photo ? (
           <Image
@@ -284,23 +635,27 @@ function ShopItem({ item }) {
               onChange={null}
             />
           </ShopDetails.NameWrap>
-          {item.nextApointment ? (
-            <div>
-              <label>Next available schedule</label>
-              <date>{new Date(item.nextApointment).toString()}</date>
-            </div>
-          ) : null}
-          {item.price ? (
-            <div>
-              <label>Starts at</label>
-              <price>&euro; {item.price}</price>
-            </div>
-          ) : null}
-          <Link href={`/${item.shop.name}--${item.shop.city}`}>
-            <Button>
-              <FontAwesomeIcon icon={faArrowRight} />
-            </Button>
-          </Link>
+          <OnMobile show={false}>
+            {item.nextApointment ? (
+              <div>
+                <label>Next available schedule</label>
+                <date>{new Date(item.nextApointment).toString()}</date>
+              </div>
+            ) : null}
+            {item.price ? (
+              <ShopDetails.PriceWrap>
+                <label>Starts at</label>
+                <price>&euro; {item.price}</price>
+              </ShopDetails.PriceWrap>
+            ) : null}
+            <Link
+              href={`/${shopRoute}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`}
+            >
+              <Button>
+                <FontAwesomeIcon icon={faArrowRight} />
+              </Button>
+            </Link>
+          </OnMobile>
         </ShopDetails.SecondRow>
         {item.shop.services?.length ? (
           <ShopDetails.ThirdRow>
@@ -329,6 +684,31 @@ const DeviceSelector = createSelectComponent({
   dataFetcher: deviceFetcher,
   parseOptions(items = []) {
     return parseOptions(items || [], "device_name");
+  },
+});
+
+const MobileDeviceSelector = createSelectComponent({
+  dataFetcher: deviceFetcher,
+  parseOptions(items = []) {
+    return parseOptions(items || [], "device_name");
+  },
+  Component({ options, ...rest }) {
+    const menuData = options.map((option) => (
+      <Radio.Button key={option.value} value={option.value}>
+        {option.label}
+      </Radio.Button>
+    ));
+
+    return (
+      <Field as={Radio.Group} {...rest}>
+        <Menu
+          alignCenter={false}
+          data={menuData}
+          selected={rest.value}
+          hideArrows={true}
+        />
+      </Field>
+    );
   },
 });
 
@@ -464,11 +844,36 @@ const WORKING_TIME = [
   },
 ];
 
-function ClearFilters() {
+const RefineModalWrap = styled.div`
+  ${SubTitle} {
+    margin-bottom: 21px;
+  }
+
+  .ant-select {
+    margin-left: -11px;
+  }
+
+  footer {
+    margin-top: 11px;
+    border-top: 1px solid #ddd;
+    padding-top: 30px;
+    text-align: center;
+
+    ${TextButton} {
+      text-transform: none;
+      font-weight: normal;
+      font-size: 12px;
+      color: #0076a3;
+      font-weight: 400;
+    }
+  }
+`;
+
+function ClearFilters({ label = "Clear", alwaysShow = false }) {
   const { state, actions } = useFormContext();
 
   const hasDiff = !isEqual(state.initialValues, state.values);
-  if (!hasDiff) {
+  if (!alwaysShow && !hasDiff) {
     return null;
   }
 
@@ -476,13 +881,60 @@ function ClearFilters() {
     <TextButton
       onClick={() => actions.batchChange({ updates: state.initialValues })}
     >
-      Clear
+      {label}
     </TextButton>
+  );
+}
+
+function RefineFooter() {
+  return (
+    <footer>
+      <Button onClick={() => refineSearchModal.actions.close()}>
+        See results
+      </Button>
+      <Form module={filtersFormModule}>
+        <ClearFilters label="Reset filters" alwaysShow />
+      </Form>
+    </footer>
+  );
+}
+
+function RefineSearchForm() {
+  return (
+    <Form module={filtersFormModule}>
+      <Field name="price" as={Slider} label="Price" />
+      {false && <Field name="rating" as={Rate} label="Rating" />}
+      {false && (
+        <Field name="repairType" as={Radio.Group} label="Repair Type">
+          {REPAIR_TYPES.map((type) => (
+            <Radio value={type.value}>{type.label}</Radio>
+          ))}
+        </Field>
+      )}
+      <Field
+        name="guarantee"
+        as={Select}
+        options={WARRANTIES}
+        label="Warranty"
+      />
+      {false && (
+        <Field
+          name="time"
+          as={Select}
+          options={WORKING_TIME}
+          label="Working time"
+        />
+      )}
+    </Form>
   );
 }
 
 export default function SearchResults() {
   const [showMap, updateShowMap] = useState();
+  const [showMobileSearch, setShowMobileSearch] = useState();
+  const [selectedShop, updateSelectedShop] = useState(null);
+
+  const mobileSelectorsRef = useRef(null);
   useEffect(() => {
     async function main() {
       await filtersFormModule.actions.initialize();
@@ -504,7 +956,17 @@ export default function SearchResults() {
     main();
   }, []);
 
-  const onDeviceChange = useCallback((value) => {
+  useEffect(() => {
+    if (shopRefs[selectedShop]) {
+      shopRefs[selectedShop].scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }
+  }, [selectedShop]);
+
+  const onDeviceChange = useCallback((ev) => {
+    const value = parseNativeEvent(ev);
     filtersFormModule.actions.batchChange({
       updates: {
         device: value,
@@ -538,107 +1000,194 @@ export default function SearchResults() {
   });
 
   return (
-    <DefaultLayout>
-      <MainWrap>
-        <MaxConstraints>
-          <Sidebar>
-            <SidebarHeader>
-              <SubTitle>Refine results</SubTitle>
-              <Form module={filtersFormModule}>
-                <ClearFilters />
-              </Form>
-            </SidebarHeader>
-            <Form module={filtersFormModule}>
-            <Field
-                name="sort"
-                as={Select}
-                options={SORT_BY}
-                label="Sort by"
-              />
-              <Field name="price" as={Slider} label="Price" />
-              {false && <Field name="rating" as={Rate} label="Rating" />}
-              {false && (
-                <Field name="repairType" as={Radio.Group} label="Repair Type">
-                  {REPAIR_TYPES.map((type) => (
-                    <Radio value={type.value}>{type.label}</Radio>
-                  ))}
-                </Field>
-              )}
-              <Field
-                name="guarantee"
-                as={Select}
-                options={WARRANTIES}
-                label="Warranty"
-              />
-              {false && (
-                <Field
-                  name="time"
-                  as={Select}
-                  options={WORKING_TIME}
-                  label="Working time"
-                />
-              )}
-            </Form>
-          </Sidebar>
-          <Content>
-            <Form module={filtersFormModule}>
-              <ZipFields>
-                <FontAwesomeIcon icon={faMapMarkerAlt} />
-                <Field
-                  as={StyledInput}
-                  name="location"
-                  placeholder="Postcode of stad"
-                />
-                <hr />
-                <Field as={Select} name="distance" options={DISTANCES} />
-                <Button>Search</Button>
-              </ZipFields>
-              <ModelFields>
-                <DeviceSelector
-                  name="device"
-                  as={Select}
-                  label="Device"
-                  onChange={onDeviceChange}
-                  dropdownStyle={{ minWidth: "200px" }}
-                />
-                <BrandSelector
-                  name="brand"
-                  as={Select}
-                  label="Brand"
-                  onChange={onBandChange}
-                  dropdownStyle={{ minWidth: "200px" }}
-                />
-                <ModelSelector
-                  name="model"
-                  as={Select}
-                  label="Model"
-                  onChange={onModelChange}
-                  dropdownStyle={{ minWidth: "200px" }}
-                />
-                <ServiceSelector
-                  name="service"
-                  as={Select}
-                  label="Services"
-                  dropdownStyle={{ minWidth: "200px" }}
-                  popupPlacement="bottomRight"
-                />
-                <MapTriggerWrap>
-                  <label>Map</label>
-                  <Switch
-                    value={showMap}
-                    onChange={(val) => updateShowMap(val)}
+    <ScreenSizeProvider>
+      <SelectedShopContext.Provider value={{selectedShop, updateSelectedShop}}>
+        <DefaultLayout>
+          <MainWrap>
+            <MaxConstraints>
+              <Sidebar>
+                <SidebarInnerWrap>
+                  <SidebarHeader>
+                    <SubTitle>Refine results</SubTitle>
+                    <Form module={filtersFormModule}>
+                      <ClearFilters />
+                    </Form>
+                  </SidebarHeader>
+                  <RefineSearchForm />
+                </SidebarInnerWrap>
+              </Sidebar>
+              <Content ref={mobileSelectorsRef}>
+                <Form module={filtersFormModule}>
+                  <ZipFields>
+                    <Field
+                      prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
+                      noBorder
+                      as={StyledInput}
+                      name="location"
+                      placeholder="Postcode of stad"
+                    />
+                    <hr />
+                    <Field
+                      as={Select}
+                      label="Distance"
+                      name="distance"
+                      options={DISTANCES}
+                    />
+                    <OnMobile show={false}>
+                      <Field
+                        name="sort"
+                        as={Select}
+                        options={SORT_BY}
+                        label="Sort by"
+                        dropdownStyle={{ minWidth: "150px" }}
+                      />
+                    </OnMobile>
+                  </ZipFields>
+                  <ModelFields>
+                    <OnMobile only>
+                      <MobileDeviceSelector
+                        name="device"
+                        onChange={onDeviceChange}
+                      />
+                      <ModelFieldsMobile>
+                        <BrandSelector
+                          name="brand"
+                          as={Select}
+                          label="Brand"
+                          onChange={onBandChange}
+                          dropdownStyle={{ minWidth: "200px" }}
+                        />
+                        <hr />
+                        <ModelSelector
+                          name="model"
+                          as={Select}
+                          label="Model"
+                          onChange={onModelChange}
+                        />
+                        <ServiceSelector
+                          name="service"
+                          as={Select}
+                          label="Services"
+                          dropdownStyle={{ minWidth: "200px" }}
+                        />
+                        <Waypoint
+                          onEnter={() => setShowMobileSearch(false)}
+                          onLeave={() => setShowMobileSearch(true)}
+                        />
+                        <Field
+                          name="sort"
+                          as={Select}
+                          options={SORT_BY}
+                          label="Sort by"
+                        />
+                      </ModelFieldsMobile>
+                    </OnMobile>
+                    <OnMobile show={false}>
+                      <DeviceSelector
+                        name="device"
+                        as={Select}
+                        label="Device"
+                        onChange={onDeviceChange}
+                        dropdownStyle={{ minWidth: "200px" }}
+                      />
+                      <BrandSelector
+                        name="brand"
+                        as={Select}
+                        label="Brand"
+                        onChange={onBandChange}
+                        dropdownStyle={{ minWidth: "200px" }}
+                      />
+                      <ModelSelector
+                        name="model"
+                        as={Select}
+                        label="Model"
+                        onChange={onModelChange}
+                        dropdownStyle={{ minWidth: "200px" }}
+                      />
+                      <ServiceSelector
+                        name="service"
+                        as={Select}
+                        label="Services"
+                        dropdownStyle={{ minWidth: "200px" }}
+                        popupPlacement="bottomRight"
+                      />
+                    </OnMobile>
+                    <MapTriggerWrap>
+                      <label>Map</label>
+                      <Switch
+                        checked={showMap}
+                        onChange={(val) => updateShowMap(val)}
+                      />
+                    </MapTriggerWrap>
+                  </ModelFields>
+                  <SyncFormValues
+                    onChange={shopListModule.actions.updateQuery}
                   />
-                </MapTriggerWrap>
-              </ModelFields>
-              <SyncFormValues onChange={shopListModule.actions.updateQuery} />
-            </Form>
-            <List module={shopListModule}>
-              <Listing Item={ShopItem} />
-            </List>
-          </Content>
-          <List module={shopListModule}>{showMap ? <Map /> : null}</List>
-        </MaxConstraints>
-      </MainWrap>
-    </DefaultLayout>
+                </Form>
+                <List module={shopListModule}>
+                  <Listing Item={ShopItem} />
+                </List>
+              </Content>
+              <List module={shopListModule}>
+                {showMap ? (
+                  <Map
+                    selectedShop={selectedShop}
+                    updateSelectedShop={updateSelectedShop}
+                  />
+                ) : null}
+              </List>
+            </MaxConstraints>
+            <OnMobile only>
+              {showMobileSearch || showMap ? (
+                <MobileSearchWrap>
+                  <Form module={filtersFormModule}>
+                    <ZipFields>
+                      <Field
+                        prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
+                        noBorder
+                        as={StyledInput}
+                        name="location"
+                        placeholder="Postcode of stad"
+                      />
+                      <hr />
+                      <Field
+                        as={Select}
+                        label="Distance"
+                        name="distance"
+                        options={DISTANCES}
+                      />
+                    </ZipFields>
+                  </Form>
+                </MobileSearchWrap>
+              ) : null}
+            </OnMobile>
+            <OnMobile only>
+              <MobileToolbar>
+                <TextButton onClick={() => refineSearchModal.actions.open()}>
+                  <FontAwesomeIcon icon={faSortAmountDown} />
+                  Refine search
+                </TextButton>
+                <ToolbarButtonWrap>
+                  <Button onClick={() => updateShowMap((state) => !state)}>
+                    {!showMap ? (
+                      <FontAwesomeIcon icon={faMapMarkerAlt} />
+                    ) : (
+                      <FontAwesomeIcon icon={faStore} />
+                    )}
+                  </Button>
+                </ToolbarButtonWrap>
+              </MobileToolbar>
+              <Modal module={refineSearchModal} footer={null}>
+                <RefineModalWrap>
+                  <SubTitle>Refine results</SubTitle>
+                  <RefineSearchForm />
+                  <RefineFooter />
+                </RefineModalWrap>
+              </Modal>
+            </OnMobile>
+          </MainWrap>
+        </DefaultLayout>
+      </SelectedShopContext.Provider>
+    </ScreenSizeProvider>
   );
 }

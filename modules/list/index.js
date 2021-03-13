@@ -92,14 +92,17 @@ export function useListContext() {
 
 const List = connect((state, ownProps) => ({
   moduleState: state.list?.[ownProps.module.guid],
-}))(function ({ moduleState, module, children }) {
+  ...(state.list?.[ownProps.module.guid] ? {
+    items: ownProps.module.selectors.getItems(state)
+  } : {})
+}))(function ({ moduleState, module, children, items }) {
   if (!moduleState) {
     return null;
   }
 
   return (
     <ListContext.Provider
-      value={{ state: moduleState, actions: module.actions }}
+      value={{ state: moduleState, actions: module.actions, items }}
     >
       {children}
     </ListContext.Provider>

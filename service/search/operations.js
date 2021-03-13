@@ -58,8 +58,6 @@ axios.create({
   withCredentials: true,
 });
 export async function getNewestShopList(count, city, dispatch) {
-  console.log("🚀 => getNewestShopList => count", count);
-  console.log("caling API");
   return axios
     .get(`${API_PATH.GETNEWESTSHOPS}/`, {
       params: { count: count, city: city },

@@ -1,41 +1,43 @@
-export function INITIALIZE_FORM_REQUEST(nextState, {guid}) {
+import set from "lodash/set";
+
+export function INITIALIZE_FORM_REQUEST(nextState, { guid }) {
   nextState[guid] = {
     initialValues: null,
     values: null,
     isLoading: true,
-    errors: {}
-  }
+    errors: {},
+  };
 }
 
-export function INITIALIZE_FORM_SUCCESS(nextState, {guid, result}) {
+export function INITIALIZE_FORM_SUCCESS(nextState, { guid, result }) {
   nextState[guid].initialValues = result;
   nextState[guid].values = result;
-  nextState[guid].isLoading = false
+  nextState[guid].isLoading = false;
 }
 
-export function FORM_FIELD_CHANGE(nextState, {guid, name, value}) {
-  nextState[guid].values[name] = value
+export function FORM_FIELD_CHANGE(nextState, { guid, name, value }) {
+  set(nextState[guid].values, name, value);
 }
 
-export function FORM_BATCH_CHANGE(nextState, {guid, updates}, state) {
+export function FORM_BATCH_CHANGE(nextState, { guid, updates }, state) {
   nextState[guid].values = {
     ...state[guid].values,
-    ...updates
-  }
+    ...updates,
+  };
 }
 
-export function UPDATE_FORM_ERRORS(nextState, {guid, errors}) {
+export function UPDATE_FORM_ERRORS(nextState, { guid, errors }) {
   nextState[guid].errors = errors;
 }
 
-export function SUBMIT_FORM_REQUEST(nextState, {guid, name, value}) {
-  nextState[guid].isSubmitting = true
+export function SUBMIT_FORM_REQUEST(nextState, { guid, name, value }) {
+  nextState[guid].isSubmitting = true;
 }
 
-export function SUBMIT_FORM_SUCCESS(nextState, {guid, name, value}) {
-  nextState[guid].isSubmitting = false
+export function SUBMIT_FORM_SUCCESS(nextState, { guid, name, value }) {
+  nextState[guid].isSubmitting = false;
 }
 
-export function SUBMIT_FORM_FAILURE(nextState, {guid}) {
-  nextState[guid].isSubmitting = false
+export function SUBMIT_FORM_FAILURE(nextState, { guid }) {
+  nextState[guid].isSubmitting = false;
 }

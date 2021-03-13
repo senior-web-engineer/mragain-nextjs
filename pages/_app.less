@@ -1,4 +1,5 @@
-@import '../assets/styles/variables.less';
+@import "../assets/styles/variables.less";
+
 .App {
   width: 100%;
 
@@ -7,6 +8,45 @@
     background-color: #fff;
   }
   a:hover {
-      text-decoration: underline;
+    text-decoration: underline;
+  }
+}
+
+.custom-modal {
+  height: calc(100% - 60px);
+}
+
+.custom-modal .rc-dialog-content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: 100%;
+}
+.custom-modal .rc-dialog-body {
+  overflow-y: auto;
+}
+
+.custom-modal .rc-dialog-title h4 {
+  margin: 0;
+}
+
+
+.share-popover {
+  .ant-popover-arrow {
+    display: none;
+  }
+
+  .ant-popover-inner {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  .ant-popover-inner-content {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+
+  }
+  .react-share__ShareButton {
+    margin: 4px 0;
   }
 }

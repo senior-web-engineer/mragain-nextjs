@@ -3,13 +3,13 @@ import { FieldWrap, ErrorWrap } from "@/components/styled/Forms";
 import { useFormContext } from ".";
 import get from "lodash/get";
 
-function parseNativeEvent(ev) {
+export function parseNativeEvent(ev) {
   if (!ev?.target) {
     return ev;
   }
 
-  if (ev.target.type === "checkbox") {
-    return ev.target.checked;
+  if (["checkbox", "radio"].includes(ev.target.type)) {
+    return typeof ev.target.value !== "undefined" ? ev.target.value : ev.target.checked;
   }
 
   return ev.target.value;
@@ -67,6 +67,8 @@ export function Field({
     </FieldWrap>
   );
 }
+
+Field.FieldWrap = FieldWrap;
 
 export function SyncFormValues({ onChange }) {
   const { state } = useFormContext();

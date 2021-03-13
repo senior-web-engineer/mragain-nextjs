@@ -95,12 +95,12 @@ export default class FormActions {
     this._dispatch({ type: "UPDATE_FORM_ERRORS", errors });
   };
 
-  initialize() {
+  initialize(...args) {
     if (!this.initFn) {
       return;
     }
 
-    const promise = this.initFn();
+    const promise = this.initFn(...args);
     this._dispatch({ type: "INITIALIZE_FORM", promise });
 
     return promise;
