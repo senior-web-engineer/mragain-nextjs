@@ -10,29 +10,44 @@ const ShopMarkerWrap = styled.div`
   top: -12px;
   left: -14px;
 
-  ${props => props.selected && css`
-    top: -40px;
-    left: -40px;
-  `}
-`
+  ${(props) =>
+    props.selected &&
+    css`
+      top: -40px;
+      left: -40px;
+    `}
+`;
 
 function ShopMarker({ selected, ...props }) {
   let imageProps = {
-    src: "/images/map/marker.png", width: "23px", height: "27px"
-  }
+    src: "/images/map/marker.png",
+    width: "23px",
+    height: "27px",
+  };
 
   if (selected) {
     imageProps = {
-      src: "/images/map/marker-selected.png", width: "80px", height: "80px"
-    }
+      src: "/images/map/marker-selected.png",
+      width: "80px",
+      height: "80px",
+    };
   }
 
-  return (<ShopMarkerWrap {...props} selected={selected}>
-    <img {...imageProps} />
-  </ShopMarkerWrap>)
+  return (
+    <ShopMarkerWrap {...props} selected={selected}>
+      <img {...imageProps} />
+    </ShopMarkerWrap>
+  );
 }
 
-function MapComponent({ shopList = [], onMarkerClick, onClick, selectedShopId, defaultCenter = { lat: 51.363244, lng: 5.264762 }, defaultZoom = 7 }) {
+function MapComponent({
+  shopList = [],
+  onMarkerClick,
+  onClick,
+  selectedShopId,
+  defaultCenter = { lat: 51.363244, lng: 5.264762 },
+  defaultZoom = 7,
+}) {
   const selectedShopEntity = useMemo(() => {
     return shopList.find((shop) => shop.id === selectedShopId);
   }, [shopList, selectedShopId]);
@@ -43,11 +58,19 @@ function MapComponent({ shopList = [], onMarkerClick, onClick, selectedShopId, d
       defaultCenter={defaultCenter}
       defaultZoom={defaultZoom}
       onClick={onClick}
-      {...(selectedShopEntity ? { center: [selectedShopEntity.geo_lat, selectedShopEntity.geo_long] } : {})}
+      {...(selectedShopEntity
+        ? { center: [selectedShopEntity.geo_lat, selectedShopEntity.geo_long] }
+        : {})}
       options={{ styles: colors }}
     >
       {shopList.map((shop) => (
-        <ShopMarker selected={shop.id === selectedShopId} lat={shop.geo_lat} lng={shop.geo_long} {...shop} onClick={onMarkerClick.bind(null, shop)} />
+        <ShopMarker
+          selected={shop.id === selectedShopId}
+          lat={shop.geo_lat}
+          lng={shop.geo_long}
+          {...shop}
+          onClick={onMarkerClick && onMarkerClick.bind(null, shop)}
+        />
       ))}
     </GoogleMapReact>
   );

@@ -344,12 +344,14 @@ export default function ShopMap({ shop }) {
     reviewsFetcher.key(`${shop.id}`).fetch();
   }, [shop.id]);
 
+  console.log(shop)
+
   return (
     <MainWrap>
       <MaxConstraints>
         <CustomerReview identifier={shop.id} />
       </MaxConstraints>
-      <GoogleMap defaultZoom={11} />
+      <GoogleMap defaultZoom={11} defaultCenter={{ lat: shop.geo_lat, lng: shop.geo_long }} shopList={[shop]} />
     </MainWrap>
   );
 }
