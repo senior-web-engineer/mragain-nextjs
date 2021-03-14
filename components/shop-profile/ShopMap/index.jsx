@@ -15,18 +15,9 @@ import Button from "@/components/ui/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import Modal from "@/modules/modal";
+import media from "@/utils/media";
 
 //
-
-const MainWrap = styled.div`
-  position: relative;
-  width: 100%;
-  height: 500px;
-
-  ${MaxConstraints} {
-    position: relative;
-  }
-`;
 
 const REVIEW_MARKS = [
   "price_mark",
@@ -43,17 +34,15 @@ const REVIEW_MARK_TO_LABEL = {
 };
 
 const ReviewsWrap = styled.div`
-  position: absolute;
-  top: 20px;
-  left: 0;
   background-color: #fff;
-  width: 320px;
   border-radius: 15px;
   padding: 0 43px 48px 43px;
   font-size: 11px;
   color: #0d3244;
   font-weight: 500;
   z-index: 100;
+  margin: 20px 20px 40px 20px;
+  position: relative;
 
   ${SubTitle} {
     padding: 0 43px;
@@ -67,9 +56,45 @@ const ReviewsWrap = styled.div`
   ${Button} {
     position: absolute;
     bottom: -25px;
-    left: 43px;
+    right: 43px;
     min-width: 51px;
+    margin: 0;
   }
+
+  ${media.tablet`
+    position: absolute;
+    width: 320px;
+    top: 20px;
+    left: 0;
+
+
+    ${Button} {
+      position: absolute;
+      left: 43px;
+      right: auto;
+    }
+  `}
+`;
+
+
+const MainWrap = styled.div`
+  position: relative;
+  width: 100%;
+  height: 500px;
+
+  ${MaxConstraints} {
+    position: relative;
+  }
+
+  ${ReviewsWrap} {
+    display: none;
+  }
+
+  ${media.tablet`
+    ${ReviewsWrap} {
+      display: block;
+    }
+  `}
 `;
 
 const ReviewWrap = styled.div`
@@ -194,7 +219,7 @@ function Reviews({ options, ...rest }) {
     );
 
     const scores = REVIEW_MARKS.reduce((accumulator, key) => {
-      accumulator[key] = totals[key] / options?.length;
+      accumulator[key] = totals[key] / options?.length || 0;
       return accumulator;
     }, {});
 
@@ -308,7 +333,7 @@ function Reviews({ options, ...rest }) {
   );
 }
 
-const CustomerReview = createSelectComponent({
+export const CustomerReview = createSelectComponent({
   dataFetcher: reviewsFetcher,
   Component: Reviews,
 });

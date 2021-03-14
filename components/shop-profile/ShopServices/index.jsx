@@ -154,22 +154,24 @@ ServiceMobileItemWrap.FirstColumn = styled.div`
   > dd {
     margin-left: 34px;
   }
-`
+`;
 
 function MobileServiceItem({ item }) {
   const firstColumn = SERVICE_COLUMNS[0].render(item);
-  return <ServiceMobileItemWrap>
-    <ServiceMobileItemWrap.FirstColumn>
-      {firstColumn}
-      <dd>
-        {item.guarantee_time} months warranty <br />
-        ~ {item.reparation_time} reparation time
-      </dd>
-    </ServiceMobileItemWrap.FirstColumn>
-    <price>
-      <span>&euro;{item.price}</span>
-    </price>
-  </ServiceMobileItemWrap>;
+  return (
+    <ServiceMobileItemWrap>
+      <ServiceMobileItemWrap.FirstColumn>
+        {firstColumn}
+        <dd>
+          {item.guarantee_time} months warranty <br />~ {item.reparation_time}{" "}
+          reparation time
+        </dd>
+      </ServiceMobileItemWrap.FirstColumn>
+      <price>
+        <span>&euro;{item.price}</span>
+      </price>
+    </ServiceMobileItemWrap>
+  );
 }
 
 function parseOptions(arr, key) {
@@ -333,6 +335,13 @@ export default function ShopServices({ shop }) {
   });
 
   const screenSize = useScreenSize().size;
+  const apointmentButton = (
+    <Form module={filtersFormModule}>
+      <Form module={serviceFormModule}>
+        <AppointmentButton />
+      </Form>
+    </Form>
+  );
 
   return (
     <MaxConstraints>
@@ -368,13 +377,18 @@ export default function ShopServices({ shop }) {
               : { dropdownStyle: { minWidth: "200px" } })}
           />
         </ModelFields>
-        <SyncFormValues onChange={(data) => {
-          shopServicesListModule.actions.updateQuery(data);
-          if (!serviceFormModule.state){
-            return;
-          }
-          serviceFormModule.actions.onFieldChange({name: "service", value: null})
-        }} />
+        <SyncFormValues
+          onChange={(data) => {
+            shopServicesListModule.actions.updateQuery(data);
+            if (!serviceFormModule.state) {
+              return;
+            }
+            serviceFormModule.actions.onFieldChange({
+              name: "service",
+              value: null,
+            });
+          }}
+        />
       </Form>
       <List module={shopServicesListModule}>
         <Form module={serviceFormModule}>
@@ -388,11 +402,7 @@ export default function ShopServices({ shop }) {
           </OnMobile>
         </Form>
       </List>
-      <Form module={filtersFormModule}>
-        <Form module={serviceFormModule}>
-          <AppointmentButton />
-        </Form>
-      </Form>
+      <OnMobile show={false}>{apointmentButton}</OnMobile>
     </MaxConstraints>
   );
 }
