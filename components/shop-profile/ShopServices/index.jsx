@@ -9,10 +9,14 @@ import {
   serviceFormModule,
 } from "../modules";
 import Form, { useFormContext } from "@/modules/forms";
-import { Field, SyncFormValues } from "@/modules/forms/Blocks";
+import {
+  Field,
+  parseNativeEvent,
+  SyncFormValues,
+} from "@/modules/forms/Blocks";
 import Select from "@/components/ui/Select";
 import List from "@/modules/list";
-import { Table } from "@/modules/list/Blocks";
+import { Listing, Table } from "@/modules/list/Blocks";
 import styled from "styled-components";
 import { MaxConstraints } from "@/components/styled/layout";
 import { Checkbox, Radio } from "antd";
@@ -20,10 +24,8 @@ import Link from "next/link";
 import Button from "@/components/ui/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-
-const ServiceRowWrap = styled.div`
-  display: flex;
-`;
+import Menu from "react-horizontal-scrolling-menu";
+import { OnMobile, useScreenSize } from "@/utils/media";
 
 const ModelFields = styled.div`
   display: flex;
@@ -117,6 +119,59 @@ const SERVICE_COLUMNS = [
   },
 ];
 
+const ServiceMobileListing = styled.div`
+  background-color: #fafafa;
+  margin: 0 -20px;
+  padding: 0 20px;
+`;
+
+const ServiceMobileItemWrap = styled.div`
+  padding: 26px 0;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+
+  .ant-radio,
+  .ant-checkbox {
+    margin-right: 10px;
+  }
+
+  span {
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #0d3244;
+    font-weight: 600;
+  }
+
+  &:last-child {
+    border: 0;
+  }
+`;
+
+ServiceMobileItemWrap.FirstColumn = styled.div`
+  color: #a0a0a0;
+  font-size: 11px;
+  > dd {
+    margin-left: 34px;
+  }
+`
+
+function MobileServiceItem({ item }) {
+  const firstColumn = SERVICE_COLUMNS[0].render(item);
+  return <ServiceMobileItemWrap>
+    <ServiceMobileItemWrap.FirstColumn>
+      {firstColumn}
+      <dd>
+        {item.guarantee_time} months warranty <br />
+        ~ {item.reparation_time} reparation time
+      </dd>
+    </ServiceMobileItemWrap.FirstColumn>
+    <price>
+      <span>&euro;{item.price}</span>
+    </price>
+  </ServiceMobileItemWrap>;
+}
+
 function parseOptions(arr, key) {
   return [
     {
@@ -136,6 +191,58 @@ const DeviceSelector = createSelectComponent({
     return parseOptions(items || [], "device_name");
   },
 });
+
+const MobileDeviceSelector = createSelectComponent({
+  dataFetcher: deviceFetcher,
+  parseOptions(items = []) {
+    return parseOptions(items || [], "device_name");
+  },
+  Component({ options, ...rest }) {
+    const menuData = options.map((option) => (
+      <Radio.Button key={option.value} value={option.value}>
+        {option.label}
+      </Radio.Button>
+    ));
+
+    return (
+      <Field as={Radio.Group} {...rest}>
+        <Menu
+          alignCenter={false}
+          data={menuData}
+          selected={rest.value}
+          hideArrows={true}
+        />
+      </Field>
+    );
+  },
+});
+
+const MobileDeviceSelectorWrap = styled.div`
+  background-color: #fff;
+  margin: 5px -20px;
+  padding: 5px 20px;
+
+  .ant-radio-group {
+    width: 100%;
+  }
+
+  .menu-wrapper {
+    min-width: 100%;
+  }
+
+  .ant-radio-button-wrapper {
+    background-color: transparent;
+    color: #c0c0c0;
+    border: 0;
+    padding: 0 11px;
+    border-radius: 7px !important;
+
+    &.ant-radio-button-wrapper-checked {
+      color: #fff;
+      background-color: #06c987;
+    }
+  }
+`;
 
 function AppendIdentifier({ Component, name }) {
   return function (props) {
@@ -169,7 +276,7 @@ const ModelSelector = AppendIdentifier({
 });
 
 function AppointmentButton() {
-  const {values} = useFormContext().state;
+  const { values } = useFormContext().state;
   const formValues = filtersFormModule.state.values;
   return (
     <NextStepWrap>
@@ -203,7 +310,8 @@ export default function ShopServices({ shop }) {
     main();
   }, [shop.id]);
 
-  const onDeviceChange = useCallback((value) => {
+  const onDeviceChange = useCallback((ev) => {
+    const value = parseNativeEvent(ev);
     filtersFormModule.actions.batchChange({
       updates: {
         device: value,
@@ -224,17 +332,26 @@ export default function ShopServices({ shop }) {
     modelFetcher.key(`${value}`).fetch();
   });
 
+  const screenSize = useScreenSize().size;
+
   return (
     <MaxConstraints>
       <Form module={filtersFormModule}>
+        <OnMobile only>
+          <MobileDeviceSelectorWrap>
+            <MobileDeviceSelector name="device" onChange={onDeviceChange} />
+          </MobileDeviceSelectorWrap>
+        </OnMobile>
         <ModelFields>
-          <DeviceSelector
-            name="device"
-            as={Select}
-            label="Device"
-            onChange={onDeviceChange}
-            dropdownStyle={{ minWidth: "200px" }}
-          />
+          <OnMobile show={false}>
+            <DeviceSelector
+              name="device"
+              as={Select}
+              label="Device"
+              onChange={onDeviceChange}
+              dropdownStyle={{ minWidth: "200px" }}
+            />
+          </OnMobile>
           <BrandSelector
             name="brand"
             as={Select}
@@ -246,14 +363,29 @@ export default function ShopServices({ shop }) {
             name="model"
             as={Select}
             label="Model"
-            dropdownStyle={{ minWidth: "200px" }}
+            {...(screenSize === "mobile"
+              ? {}
+              : { dropdownStyle: { minWidth: "200px" } })}
           />
         </ModelFields>
-        <SyncFormValues onChange={shopServicesListModule.actions.updateQuery} />
+        <SyncFormValues onChange={(data) => {
+          shopServicesListModule.actions.updateQuery(data);
+          if (!serviceFormModule.state){
+            return;
+          }
+          serviceFormModule.actions.onFieldChange({name: "service", value: null})
+        }} />
       </Form>
       <List module={shopServicesListModule}>
         <Form module={serviceFormModule}>
-          <Table columns={SERVICE_COLUMNS} />
+          <OnMobile show={false}>
+            <Table columns={SERVICE_COLUMNS} />
+          </OnMobile>
+          <OnMobile only>
+            <ServiceMobileListing>
+              <Listing Item={MobileServiceItem} />
+            </ServiceMobileListing>
+          </OnMobile>
         </Form>
       </List>
       <Form module={filtersFormModule}>

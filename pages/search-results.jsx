@@ -55,11 +55,7 @@ import media, { OnMobile, ScreenSizeProvider } from "@/utils/media";
 import Modal from "@/modules/modal";
 import { useRouter } from "next/router";
 import GooglePlaces from "@/components/common/GooglePlaces";
-import {
-  geocodeByAddress,
-  geocodeByPlaceId,
-  getLatLng,
-} from "react-places-autocomplete";
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
 //
 
@@ -600,7 +596,7 @@ function ShopItem({ item }) {
 
   const tag = item.shop.tag;
   const formState = filtersFormModule.state.values;
-  const shopRoute = `/${item.shop.name}--${item.shop.city}`;
+  const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
 
   function onClick() {
     if (item.shop.id === selectedShop) {
@@ -659,9 +655,7 @@ function ShopItem({ item }) {
                 <price>&euro; {item.price}</price>
               </ShopDetails.PriceWrap>
             ) : null}
-            <Link
-              href={`/${shopRoute}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`}
-            >
+            <Link href={shopRoute}>
               <Button>
                 <FontAwesomeIcon icon={faArrowRight} />
               </Button>

@@ -21,6 +21,7 @@ const HeaderWrap = styled.div`
   background-color: #fff;
   z-index: 1;
   align-items: center;
+  padding-top: 1px;
 
   ${media.tablet`
     height: 99px;
