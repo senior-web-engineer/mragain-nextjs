@@ -16,11 +16,15 @@ import { useEffect } from "react";
 
 const HeaderWrap = styled.div`
   display: flex;
-  height: 99px;
+  height: 71px;
   border-bottom: 2px solid #f0f0f0;
   background-color: #fff;
   z-index: 1;
   align-items: center;
+
+  ${media.tablet`
+    height: 99px;
+  `}
 `;
 
 const MainMenuWrap = styled.div`

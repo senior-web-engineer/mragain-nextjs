@@ -2,6 +2,7 @@ import { MaxConstraints } from "@/components/styled/layout";
 import { store } from "@/configureStore";
 import Form, { useFormContext } from "@/modules/forms";
 import List, { useListContext } from "@/modules/list";
+import media from "@/utils/media";
 import {
   faCcMastercard,
   faCcVisa,
@@ -79,6 +80,12 @@ const ReparationImageWrap = styled.div`
   border-radius: 10px;
   position: relative;
   top: -20px;
+  display: none;
+
+
+  ${media.tablet`
+    display: block;
+  `}
 `;
 
 function ReparationImage() {

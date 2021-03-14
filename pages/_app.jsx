@@ -5,15 +5,16 @@ import { ConnectedRouter } from "connected-next-router";
 import { wrapper } from "../configureStore";
 import { connect } from "react-redux";
 import "./_app.less";
-import 'rc-dialog/assets/index.css';
+import "rc-dialog/assets/index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import '@fortawesome/fontawesome-svg-core/styles.css';
+import "@fortawesome/fontawesome-svg-core/styles.css";
 
 // fontawesome icons
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
+import { ScreenSizeProvider } from "@/utils/media";
 
 library.add(fas, fab, far);
 
@@ -44,17 +45,19 @@ class MyApp extends App {
     const { Component, pageProps, isLoggedIn, getAuthUser } = this.props;
 
     return (
-      <React.Fragment>
-        <ConnectedRouter>
-          <Component
-            {...pageProps}
-            isLoggedIn={isLoggedIn}
-            getAuthUser={getAuthUser}
-            setSelectedIndex={this.setSelectedIndex}
-            setValue={this.setValue}
-          />
-        </ConnectedRouter>
-      </React.Fragment>
+      <ScreenSizeProvider>
+        <React.Fragment>
+          <ConnectedRouter>
+            <Component
+              {...pageProps}
+              isLoggedIn={isLoggedIn}
+              getAuthUser={getAuthUser}
+              setSelectedIndex={this.setSelectedIndex}
+              setValue={this.setValue}
+            />
+          </ConnectedRouter>
+        </React.Fragment>
+      </ScreenSizeProvider>
     );
   }
 }
