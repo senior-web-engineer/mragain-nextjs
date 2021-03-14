@@ -16,7 +16,6 @@ import { CustomerReview } from "@/components/shop-profile/ShopMap";
 const MainWrap = styled.div`
   background-color: #f3f3f3;
   margin-bottom: -127px;
-
   max-width: 100%;
   overflow-x: hidden;
 `;

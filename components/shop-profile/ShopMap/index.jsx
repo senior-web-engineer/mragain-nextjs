@@ -66,6 +66,7 @@ const ReviewsWrap = styled.div`
     width: 320px;
     top: 20px;
     left: 0;
+    margin: 0;
 
 
     ${Button} {

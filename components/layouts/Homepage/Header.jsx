@@ -35,7 +35,6 @@ const MainMenuWrap = styled.div`
   position: relative;
   background-color: #fff;
   z-index: 1;
-  margin-bottom: 15px;
   margin-left: -13px;
 
   ${media.desktop`

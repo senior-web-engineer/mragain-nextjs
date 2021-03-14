@@ -65,6 +65,38 @@ const NextStepWrap = styled.div`
   margin: 49px 0 86px;
 `;
 
+const MobileToolbar = styled.div`
+  position: fixed;
+  display: flex;
+  bottom: 0;
+  background-color: #fff;
+  height: 60px;
+  padding: 0 20px;
+  box-shadow: 0 0 27px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  z-index: 110;
+  left: 0;
+  justify-content: flex-end;
+  align-items: center;
+
+  ${NextStepWrap} {
+    text-align: right;
+    margin: 0;
+  }
+
+  ${Button} {
+    padding: 7px 22px;
+    height: 37px;
+    line-height: 23px;
+    box-shadow: 0 0 8px #06c987;
+
+    &[disabled] {
+      box-shadow: 0 0 8px #a0a0a0;
+    }
+  }
+`;
+
+
 const SERVICE_COLUMNS = [
   {
     title: "Name",
@@ -403,6 +435,11 @@ export default function ShopServices({ shop }) {
         </Form>
       </List>
       <OnMobile show={false}>{apointmentButton}</OnMobile>
+      <OnMobile only>
+        <MobileToolbar>
+          {apointmentButton}
+        </MobileToolbar>
+      </OnMobile>
     </MaxConstraints>
   );
 }

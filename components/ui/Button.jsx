@@ -15,6 +15,10 @@ const Button = styled.button`
   font-weight: 600;
   letter-spacing: 1px;
 
+  &[disabled] {
+    background-color: #a0a0a0;
+  }
+
   &:hover {
     color: #fff;
   }

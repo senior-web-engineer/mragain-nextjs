@@ -77,6 +77,7 @@ const ShopMeta = styled.div`
   ${media.tablet`
     margin-left: 50px;
     margin-top: 50px;
+    align-items: stretch;
   `}
 `;
 

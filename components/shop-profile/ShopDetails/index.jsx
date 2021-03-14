@@ -25,50 +25,75 @@ import styled from "styled-components";
 import { serviceFormModule, shopServicesListModule } from "../modules";
 
 const MainWrap = styled.div`
-  background-color: #fff;
-  height: 570px;
-
-  > div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+  background-color: #f3f3f3;
 
   dl {
     display: flex;
     flex-wrap: wrap;
-    width: 620px;
+    margin: 0 -20px;
   }
 
   dt {
+    width: 100%;
+    padding: 10px 20px 0;
+    background-color: #fff;
     font-size: 13px;
     color: #303030;
     font-weight: 500;
-    width: 50%;
     line-height: 27px;
   }
 
   dd {
+    width: 100%;
+    padding: 5px 20px 10px;
+    background-color: #fff;
     font-size: 10px;
     color: #707070;
     font-weight: 400;
-    width: 50%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   .svg-inline--fa {
     font-size: 21px;
     margin: 0 5px;
-    color: #ddd;
+    color: #06c987;
   }
+
+  ${media.tablet`
+    height: 570px;
+    background-color: #fff;
+
+    > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    dl {
+      width: 620px;
+      margin: 0;
+    }
+
+    dd, dt {
+      padding: 0;
+      width: 50%;
+    }
+
+    dd {
+      margin-bottom: 5px;
+      line-height: 27px;
+    }
+
+  `}
 `;
 
 const LocationWrap = styled.div`
   margin: 4px 0;
+  line-height: 1;
   .svg-inline--fa {
     font-size: 15px;
     margin: 0 5px 0 0;
-    color: #ddd;
+    color: #06c987;
   }
 `;
 
