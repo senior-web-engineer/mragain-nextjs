@@ -50,6 +50,7 @@
     "react-image-magnifiers": "^1.4.0",
     "react-image-picker": "^1.1.1",
     "react-loading-overlay": "^1.0.1",
+    "react-places-autocomplete": "^7.3.0",
     "react-redux": "^7.2.2",
     "react-share": "^4.4.0",
     "react-slick": "^0.27.14",

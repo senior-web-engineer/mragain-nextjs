@@ -118,6 +118,28 @@ export function createSelectComponent({
   )(Component);
 }
 
+export function withData({
+  Component,
+  dataFetcher,
+}) {
+  const createFetcherSelector = (identifier) =>
+    createSelector(dataFetcher.selector, (fetchStatus) => {
+      return {
+        data: identifier
+          ? fetchStatus[identifier]?.result
+          : fetchStatus.result,
+        isLoading: identifier
+          ? fetchStatus[identifier]?.isLoading
+          : fetchStatus.isLoading,
+      };
+    });
+
+  return connect((state, ownProps) => {
+    return createFetcherSelector(ownProps.identifier)(state)
+  }
+  )(Component);
+}
+
 export function isDataLoading(...fetchers) {
   return createSelector(
     fetchers.map((fetcher) => fetcher.selector),

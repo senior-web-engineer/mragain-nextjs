@@ -16,11 +16,16 @@ import { useEffect } from "react";
 
 const HeaderWrap = styled.div`
   display: flex;
-  height: 99px;
+  height: 71px;
   border-bottom: 2px solid #f0f0f0;
   background-color: #fff;
   z-index: 1;
   align-items: center;
+  padding-top: 1px;
+
+  ${media.tablet`
+    height: 99px;
+  `}
 `;
 
 const MainMenuWrap = styled.div`
@@ -30,7 +35,6 @@ const MainMenuWrap = styled.div`
   position: relative;
   background-color: #fff;
   z-index: 1;
-  margin-bottom: 15px;
   margin-left: -13px;
 
   ${media.desktop`

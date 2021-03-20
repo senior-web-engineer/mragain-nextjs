@@ -11,57 +11,81 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Popover, Rate } from "antd";
 import Image from "next/image";
-import React from "react";
+import React, { useCallback } from "react";
 import styled, { css } from "styled-components";
-import {shopInfo} from "@/components/shop-profile/modules"
+import { openTimeFetcher, shopInfo } from "@/components/shop-profile/modules";
 
 import {
   FacebookShareButton,
   LinkedinShareButton,
   TwitterShareButton,
   PinterestShareButton,
-
   FacebookIcon,
   LinkedinIcon,
   PinterestIcon,
   TwitterIcon,
 } from "react-share";
-import Modal from "@/modules/modal";
-import { SubTitle } from "@/components/styled/text";
+import DetailsModal from "./DetailsModal";
+import media, { OnMobile } from "@/utils/media";
 
 const Wallpaper = styled.div`
-  height: 500px;
+  height: 260px;
   width: 100%;
   overflow: hidden;
   position: relative;
   background-color: #e0e0e0;
+
+  ${media.tablet`
+    height: 500px;
+  `}
 `;
 
 const ShopLogo = styled.div`
-  width: 210px;
-  height: 210px;
+  width: 100px;
+  height: 100px;
   background-color: #fff;
   border-radius: 10px;
   position: relative;
-  top: -105px;
+  top: -55px;
   overflow: hidden;
+
+  ${media.tablet`
+    top: -105px;
+    width: 210px;
+    height: 210px;
+  `}
 `;
 
 const ContentWrap = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  ${media.tablet`
+    flex-direction: row;
+    align-items: flex-start;
+  `}
 `;
 
 const ShopMeta = styled.div`
-  margin-left: 50px;
-  margin-top: 50px;
   flex-grow: 1;
+  margin-top: -40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  ${media.tablet`
+    margin-left: 50px;
+    margin-top: 50px;
+    align-items: stretch;
+  `}
 `;
 
 ShopMeta.FirstRow = styled.div`
   display: flex;
   justify-content: space-between;
 
-  >div {
+  > div {
     display: flex;
   }
 
@@ -70,6 +94,7 @@ ShopMeta.FirstRow = styled.div`
     color: #0d3244;
     font-weight: 500;
     margin-bottom: 0;
+    text-align: center;
   }
 
   tag {
@@ -77,8 +102,8 @@ ShopMeta.FirstRow = styled.div`
     display: inline-block;
     height: 31px;
     ${(props) =>
-    props.tagColor &&
-    css`
+      props.tagColor &&
+      css`
         background-color: ${props.tagColor || "#ddd"};
       `}
     color: #fff;
@@ -88,10 +113,11 @@ ShopMeta.FirstRow = styled.div`
     text-transform: uppercase;
   }
 
-  ${Button} {
-    margin: 0 10px;
-    min-width: 51px;
-  }
+  ${media.tablet`
+    h1 {
+      text-align: left;
+    }
+  `}
 `;
 
 ShopMeta.SecondRow = styled.div`
@@ -108,7 +134,6 @@ ShopMeta.SecondRow = styled.div`
 `;
 
 ShopMeta.ThirdRow = styled.div`
-  display: flex;
   font-size: 11px;
   color: #303030;
   font-weight: 400;
@@ -127,14 +152,18 @@ ShopMeta.ThirdRow = styled.div`
       margin-right: 5px;
     }
   }
+
+  ${media.tablet`
+    display: flex;
+  `}
 `;
 
 const AdvantagesWrap = styled.div`
-  display: flex;
   font-size: 11px;
   color: #707070;
   font-weight: 400;
   margin-top: 40px;
+  display: none;
 
   h4 {
     font-size: 12px;
@@ -151,6 +180,35 @@ const AdvantagesWrap = styled.div`
     display: flex;
     max-width: 160px;
   }
+
+  ${media.tablet`
+    display: flex;
+  `}
+`;
+
+const DetailButtonsWrap = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 0;
+  z-index: 100;
+  ${Button} {
+    margin: 0 10px;
+    height: 35px;
+    line-height: 11px;
+    min-width: 35px;
+    border-radius: 35px;
+  }
+
+  ${media.tablet`
+    position: static;
+
+    ${Button} {
+      height: 51px;
+      line-height: 37px;
+      min-width: 51px;
+      border-radius: 51px;
+    }
+  `}
 `;
 
 const ADVANTAGES = [
@@ -196,12 +254,50 @@ export default function ShopHeader({ shop }) {
     );
   }
 
+  const shareText = `
+    I found the "${shop.name}" repairshop on mragain. Do you broken devices? MrAgain is the right place to find the repairshop you need
+  `;
+  const shopURL = typeof window !== "undefined" ? window.location.href : "";
+  const detailButtons = (
+    <DetailButtonsWrap>
+      <DetailsModal shop={shop} />
+      <Popover
+        overlayClassName="share-popover"
+        content={
+          <>
+            <FacebookShareButton url={shopURL} quote={shareText}>
+              <FacebookIcon size={40} round />
+            </FacebookShareButton>
+            <LinkedinShareButton
+              url={shopURL}
+              title={shop.name}
+              summary={shareText}
+            >
+              <LinkedinIcon size={40} round />
+            </LinkedinShareButton>
+            <PinterestShareButton url={shopURL} media={shop.bg_photo}>
+              <PinterestIcon size={40} round />
+            </PinterestShareButton>
+            <TwitterShareButton url={shopURL} title={shareText}>
+              <TwitterIcon size={40} round />
+            </TwitterShareButton>
+          </>
+        }
+      >
+        <Button>
+          <FontAwesomeIcon icon={faShare} />
+        </Button>
+      </Popover>
+    </DetailButtonsWrap>
+  );
+
   return (
     <div>
       <Wallpaper>
         {shop?.bg_photo ? (
           <Image layout="fill" objectFit="cover" src={shop.bg_photo} />
         ) : null}
+        <OnMobile only>{detailButtons}</OnMobile>
       </Wallpaper>
       <MaxConstraints>
         <ContentWrap>
@@ -214,27 +310,11 @@ export default function ShopHeader({ shop }) {
             <ShopMeta.FirstRow tagColor={TAG_TO_COLOR[tag]}>
               <div>
                 <h1>{shop.name}</h1>
-                {tag ? <tag>{tag}</tag> : null}
+                <OnMobile show={false}>
+                  {tag ? <tag>{tag}</tag> : null}
+                </OnMobile>
               </div>
-              <div>
-                <Button onClick={shopInfo.actions.open}><FontAwesomeIcon icon={faInfo} /></Button>
-                <Popover overlayClassName="share-popover" content={<>
-                  <FacebookShareButton>
-                    <FacebookIcon size={40} round />
-                  </FacebookShareButton>
-                  <LinkedinShareButton>
-                    <LinkedinIcon size={40} round />
-                  </LinkedinShareButton>
-                  <PinterestShareButton>
-                    <PinterestIcon size={40} round />
-                  </PinterestShareButton>
-                  <TwitterShareButton>
-                    <TwitterIcon size={40} round />
-                  </TwitterShareButton>
-                </>}>
-                  <Button><FontAwesomeIcon icon={faShare} /></Button>
-                </Popover>
-              </div>
+              <OnMobile show={false}>{detailButtons}</OnMobile>
             </ShopMeta.FirstRow>
             <ShopMeta.SecondRow>
               <Rate
@@ -247,22 +327,24 @@ export default function ShopHeader({ shop }) {
             </ShopMeta.SecondRow>
             <ShopMeta.ThirdRow>
               <dl>
-                {shop.phone_number ? (
-                  <>
-                    <dt>
-                      <FontAwesomeIcon title="phone" icon={faPhone} />
-                    </dt>
-                    <dd>{shop.phone_number}</dd>
-                  </>
-                ) : null}
-                {shop.site_url ? (
-                  <>
-                    <dt>
-                      <FontAwesomeIcon title="website" icon={faLink} />
-                    </dt>
-                    <dd>{shop.site_url}</dd>
-                  </>
-                ) : null}
+                <OnMobile show={false}>
+                  {shop.phone_number ? (
+                    <>
+                      <dt>
+                        <FontAwesomeIcon title="phone" icon={faPhone} />
+                      </dt>
+                      <dd>{shop.phone_number}</dd>
+                    </>
+                  ) : null}
+                  {shop.site_url ? (
+                    <>
+                      <dt>
+                        <FontAwesomeIcon title="website" icon={faLink} />
+                      </dt>
+                      <dd>{shop.site_url}</dd>
+                    </>
+                  ) : null}
+                </OnMobile>
                 {location ? (
                   <>
                     <dt>
@@ -276,9 +358,6 @@ export default function ShopHeader({ shop }) {
             <AdvantagesWrap>{ADVANTAGES.map(renderAdvantage)}</AdvantagesWrap>
           </ShopMeta>
         </ContentWrap>
-        <Modal module={shopInfo} footer={null} title={<SubTitle>About {shop.name}</SubTitle>}>
-          <p>{shop.about_us}</p>
-        </Modal>
       </MaxConstraints>
     </div>
   );

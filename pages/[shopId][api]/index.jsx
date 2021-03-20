@@ -1,12 +1,7 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import {
-  getShopAccountProfile,
-  getShopProfileByInformation,
-} from "service/account/operations.js";
-import { getReparationGuarantee } from "service/appointments/operations.js";
+
 import Head from "next/head";
 import { FRONT_END_URL } from "@/constants";
 import { getShopProfileByInformationServer } from "service/account/operations";
@@ -15,10 +10,14 @@ import ShopHeader from "@/components/shop-profile/ShopHeader";
 import ShopServices from "@/components/shop-profile/ShopServices";
 import ShopDetails from "@/components/shop-profile/ShopDetails";
 import ShopMap from "@/components/shop-profile/ShopMap";
+import { OnMobile } from "@/utils/media";
+import { CustomerReview } from "@/components/shop-profile/ShopMap";
 
 const MainWrap = styled.div`
   background-color: #f3f3f3;
   margin-bottom: -127px;
+  max-width: 100%;
+  overflow-x: hidden;
 `;
 
 const ShopProfile = (routerProps) => {
@@ -69,6 +68,9 @@ const ShopProfile = (routerProps) => {
       <MainWrap>
         <ShopHeader shop={shopProfileServerInfo} />
         <ShopServices shop={shopProfileServerInfo}/>
+        <OnMobile only>
+          <CustomerReview identitifer={shopProfileServerInfo.id}/>
+        </OnMobile>
         <ShopDetails />
         <ShopMap shop={shopProfileServerInfo}/>
       </MainWrap>

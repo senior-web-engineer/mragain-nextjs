@@ -8,7 +8,7 @@ import {
     Marker,
     InfoWindow,
 } from "react-google-maps";
-const googleMapsApiKey = "AIzaSyBG_U7llCBV6Q-OdBP5Sa_VhyuGuyL6Fzk";
+const googleMapsApiKey = "AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE";
 
 const MyMapComponent = compose(
     withProps({
