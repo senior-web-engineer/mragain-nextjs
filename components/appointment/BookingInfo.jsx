@@ -71,7 +71,7 @@ const ServiceInfo = withData({
     return (
       <div>
         <item>{data?.reparation?.reparation_name}</item>
-        <price>&euro;{data.price}</price>
+        <price>&euro;{data?.price}</price>
       </div>
     );
   },
