@@ -1,6 +1,6 @@
 import DefaultLayout from "@/components/layouts/Homepage";
 import { MaxConstraints } from "@/components/styled/layout";
-import { appointmentForm, brandFetcher, deviceFetcher, modelFetcher } from "@/components/appointment/modules";
+import { appointmentForm, brandFetcher, deviceFetcher, modelFetcher, serviceFetcher } from "@/components/appointment/modules";
 import { getShopProfileByInformationServer } from "@/service/account/operations";
 import React, { useEffect } from "react";
 import BookingInfo from "@/components/appointment/BookingInfo";
@@ -17,6 +17,7 @@ export default function AppointmentPage({ shop }) {
       deviceFetcher.fetch()
       brandFetcher.fetch()
       modelFetcher.fetch()
+      serviceFetcher.fetch()
     }
 
     loadData()

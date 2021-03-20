@@ -2,7 +2,7 @@ import { withData } from "@/modules/dataFetcher";
 import React from "react";
 import styled from "styled-components";
 import { SubTitle } from "../styled/text";
-import { brandFetcher, deviceFetcher, modelFetcher } from "./modules";
+import { brandFetcher, deviceFetcher, modelFetcher, serviceFetcher } from "./modules";
 
 //
 
@@ -44,18 +44,38 @@ const ShopDetails = styled.section`
   }
 `;
 
-const DeviceName = withData({dataFetcher: deviceFetcher, Component({data}) {
-  return data?.device_name || null;
-}})
+const DeviceName = withData({
+  dataFetcher: deviceFetcher,
+  Component({ data }) {
+    return data?.device_name || null;
+  },
+});
 
-const BrandName = withData({dataFetcher: brandFetcher, Component({data}) {
-  return data?.brand_name || null;
-}})
+const BrandName = withData({
+  dataFetcher: brandFetcher,
+  Component({ data }) {
+    return data?.brand_name || null;
+  },
+});
 
-const ModelName = withData({dataFetcher: modelFetcher, Component({data}) {
-  return data?.model_name || null;
-}})
+const ModelName = withData({
+  dataFetcher: modelFetcher,
+  Component({ data }) {
+    return data?.model_name || null;
+  },
+});
 
+const ServiceInfo = withData({
+  dataFetcher: serviceFetcher,
+  Component({ data }) {
+    return (
+      <div>
+        <item>{data?.reparation?.reparation_name}</item>
+        <price>&euro;{data.price}</price>
+      </div>
+    );
+  },
+});
 
 export default function BookingInfo({ shop }) {
   const location = [shop.street || "", shop.city || ""]
@@ -73,20 +93,19 @@ export default function BookingInfo({ shop }) {
       </ShopDetails>
       <ShopDetails>
         <label>Type</label>
-        <strong><DeviceName/></strong>
+        <strong>
+          <DeviceName />
+        </strong>
         <label>Device brand</label>
-        <strong><BrandName /></strong>
+        <strong>
+          <BrandName />
+        </strong>
         <label>Model</label>
-        <strong><ModelName /></strong>
+        <strong>
+          <ModelName />
+        </strong>
       </ShopDetails>
-      <div>
-        <item>
-
-        </item>
-        <price>
-          &euro;32
-        </price>
-      </div>
+      <ServiceInfo />
     </MainWrap>
   );
 }

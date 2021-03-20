@@ -70,3 +70,24 @@ export const modelFetcher = dataFetcher({
     return data.map(({ model }) => model).find((model) => `${model.id}` === modelId);;
   },
 });
+
+export const serviceFetcher = dataFetcher({
+  selectors: [
+    "appoitment",
+    "service",
+    () => appointmentForm.state?.values.shop,
+    () => appointmentForm.state?.values.device,
+    () => appointmentForm.state?.values.brand,
+    () => appointmentForm.state?.values.model,
+    () => appointmentForm.state?.values.service,
+  ],
+  async fetchData([_1, _2, shop, deviceId, brandId, modelId, serviceId]) {
+    const data = await api.get(`${API_PATH.GETSHOPREPARATIONDETAILS}/`, {
+      device: deviceId,
+      shop,
+      brand: brandId,
+      model: modelId
+    });
+    return data.find(service => `${service.id}` === serviceId);;
+  },
+});
