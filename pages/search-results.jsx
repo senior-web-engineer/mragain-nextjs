@@ -383,6 +383,7 @@ const ShopWrap = styled.div`
   align-items: center;
   padding: 10px;
   position: relative;
+  cursor: pointer;
 
   ${(props) =>
     props.isSelected &&
@@ -581,16 +582,12 @@ ShopDetails.Service = styled.div`
 `;
 
 const shopRefs = {};
-const SelectedShopContext = createContext();
-function useMapContext() {
-  const [showMap, updateShowMap] = useState();
-  return { showMap, updateShowMap };
-}
+const ShopBridgeContext = createContext();
+
 
 function ShopItem({ item }) {
   const router = useRouter();
-  const { selectedShop, updateSelectedShop } = useContext(SelectedShopContext);
-  const { showMap } = useMapContext();
+  const { selectedShop, updateSelectedShop, showMap } = useContext(ShopBridgeContext);
   const location = [item.shop.street || "", item.shop.city || ""]
     .filter(Boolean)
     .join(", ");
@@ -666,11 +663,6 @@ function ShopItem({ item }) {
                 <price>&euro; {item.price}</price>
               </ShopDetails.PriceWrap>
             ) : null}
-            <Link href={shopRoute}>
-              <Button>
-                <FontAwesomeIcon icon={faArrowRight} />
-              </Button>
-            </Link>
           </OnMobile>
         </ShopDetails.SecondRow>
         {item.shop.services?.length ? (
@@ -948,8 +940,7 @@ function RefineSearchForm() {
 export default function SearchResults() {
   const [showMobileSearch, setShowMobileSearch] = useState();
   const [selectedShop, updateSelectedShop] = useState(null);
-
-  const { showMap, updateShowMap } = useMapContext();
+  const [showMap, updateShowMap] = useState(false);
 
   const mobileSelectorsRef = useRef(null);
   useEffect(() => {
@@ -1027,8 +1018,8 @@ export default function SearchResults() {
 
   return (
     <ScreenSizeProvider>
-      <SelectedShopContext.Provider
-        value={{ selectedShop, updateSelectedShop }}
+      <ShopBridgeContext.Provider
+        value={{ selectedShop, updateSelectedShop, showMap }}
       >
         <DefaultLayout>
           <MainWrap>
@@ -1222,7 +1213,7 @@ export default function SearchResults() {
             </OnMobile>
           </MainWrap>
         </DefaultLayout>
-      </SelectedShopContext.Provider>
+      </ShopBridgeContext.Provider>
     </ScreenSizeProvider>
   );
 }
