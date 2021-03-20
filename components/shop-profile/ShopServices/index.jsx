@@ -26,6 +26,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import Menu from "react-horizontal-scrolling-menu";
 import { OnMobile, useScreenSize } from "@/utils/media";
+import { useRouter } from "next/router";
 
 const ModelFields = styled.div`
   display: flex;
@@ -311,11 +312,13 @@ const ModelSelector = AppendIdentifier({
 
 function AppointmentButton() {
   const { values } = useFormContext().state;
+  const router = useRouter();
   const formValues = filtersFormModule.state.values;
+  console.log(router)
   return (
     <NextStepWrap>
       <Link
-        href={`/appointment?device=${formValues.device}&brand=${formValues.brand}&model=${formValues.model}&shop=${formValues.shop}&service=${values.service}`}
+        href={`/${router.query["shopId][api"]}/appointment?device=${formValues.device}&brand=${formValues.brand}&model=${formValues.model}&service=${values.service}`}
       >
         <Button disabled={!values.service}>
           Proceed to booking <FontAwesomeIcon icon={faArrowRight} />{" "}
