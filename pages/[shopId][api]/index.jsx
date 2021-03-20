@@ -81,7 +81,6 @@ const ShopProfile = (routerProps) => {
 export async function getServerSideProps(ctx) {
   const shopId = ctx.query["shopId][api"];
   const shopProfileServerInfo = await getShopProfileByInformationServer(shopId);
-
   return {
     props: {
       shopProfileServerInfo:

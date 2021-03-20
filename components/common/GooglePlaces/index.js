@@ -2,7 +2,7 @@ import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AutoComplete, Input } from "antd";
 import React, { useEffect, useState } from "react";
-import styled from "styled-components"
+import styled from "styled-components";
 import PlacesAutocomplete from "react-places-autocomplete";
 const googleMapsApiKey = "AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE";
 
@@ -49,6 +49,11 @@ export default function GooglePlaces({
   onChange,
   size,
   placeholder = "Postcode or address",
+  searchOptions = {
+    componentRestrictions: {
+      country: ["nl", "be"],
+    },
+  },
 }) {
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -73,7 +78,11 @@ export default function GooglePlaces({
 
   return (
     <MainWrap>
-      <PlacesAutocomplete value={searchTerm} onChange={setSearchTerm}>
+      <PlacesAutocomplete
+        value={searchTerm}
+        onChange={setSearchTerm}
+        searchOptions={searchOptions}
+      >
         {({ getInputProps, suggestions, loading }) => {
           const { onChange: onSearch } = getInputProps();
           return (

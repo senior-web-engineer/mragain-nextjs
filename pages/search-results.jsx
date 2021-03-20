@@ -582,10 +582,15 @@ ShopDetails.Service = styled.div`
 
 const shopRefs = {};
 const SelectedShopContext = createContext();
+function useMapContext() {
+  const [showMap, updateShowMap] = useState();
+  return { showMap, updateShowMap };
+}
 
 function ShopItem({ item }) {
   const router = useRouter();
   const { selectedShop, updateSelectedShop } = useContext(SelectedShopContext);
+  const { showMap } = useMapContext();
   const location = [item.shop.street || "", item.shop.city || ""]
     .filter(Boolean)
     .join(", ");
@@ -596,9 +601,15 @@ function ShopItem({ item }) {
 
   const tag = item.shop.tag;
   const formState = filtersFormModule.state.values;
-  const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
+  // API changed does not include the city any longer?
+  // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
+  const shopRoute = `/${item.shop.name}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
 
   function onClick() {
+    if(!showMap) {
+      router.push(shopRoute);
+      return;
+    }
     if (item.shop.id === selectedShop) {
       router.push(shopRoute);
       return;
@@ -935,9 +946,10 @@ function RefineSearchForm() {
 }
 
 export default function SearchResults() {
-  const [showMap, updateShowMap] = useState();
   const [showMobileSearch, setShowMobileSearch] = useState();
   const [selectedShop, updateSelectedShop] = useState(null);
+
+  const { showMap, updateShowMap } = useMapContext();
 
   const mobileSelectorsRef = useRef(null);
   useEffect(() => {
@@ -1134,6 +1146,11 @@ export default function SearchResults() {
                     onChange={async (data) => {
                       let parsedData = { ...data };
                       try {
+                        if (!data.location) {
+                          shopListModule.actions.updateQuery(parsedData);
+                          return;
+                        }
+
                         const [result] = await geocodeByAddress(data.location);
                         const { lng, lat } = await getLatLng(result);
                         parsedData = {

@@ -62,7 +62,7 @@ const SearchBar = styled.div`
     ${media.tablet`
       &:nth-child(2) {
         position: relative;
-        max-width: 174px;
+        max-width: 250px;
         right: -20px;
       }
     `}
@@ -95,7 +95,7 @@ const SearchBar = styled.div`
 
 const SearchWrap = styled.div`
   flex-grow: 1;
-  max-width: 501px;
+  max-width: 600px;
   position: relative;
   z-index: 2;
 
