@@ -383,6 +383,7 @@ const ShopWrap = styled.div`
   align-items: center;
   padding: 10px;
   position: relative;
+  cursor: pointer;
 
   ${(props) =>
     props.isSelected &&
@@ -581,11 +582,12 @@ ShopDetails.Service = styled.div`
 `;
 
 const shopRefs = {};
-const SelectedShopContext = createContext();
+const ShopBridgeContext = createContext();
+
 
 function ShopItem({ item }) {
   const router = useRouter();
-  const { selectedShop, updateSelectedShop } = useContext(SelectedShopContext);
+  const { selectedShop, updateSelectedShop, showMap } = useContext(ShopBridgeContext);
   const location = [item.shop.street || "", item.shop.city || ""]
     .filter(Boolean)
     .join(", ");
@@ -596,9 +598,15 @@ function ShopItem({ item }) {
 
   const tag = item.shop.tag;
   const formState = filtersFormModule.state.values;
-  const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
+  // API changed does not include the city any longer?
+  // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
+  const shopRoute = `/${item.shop.name}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
 
   function onClick() {
+    if(!showMap) {
+      router.push(shopRoute);
+      return;
+    }
     if (item.shop.id === selectedShop) {
       router.push(shopRoute);
       return;
@@ -655,11 +663,6 @@ function ShopItem({ item }) {
                 <price>&euro; {item.price}</price>
               </ShopDetails.PriceWrap>
             ) : null}
-            <Link href={shopRoute}>
-              <Button>
-                <FontAwesomeIcon icon={faArrowRight} />
-              </Button>
-            </Link>
           </OnMobile>
         </ShopDetails.SecondRow>
         {item.shop.services?.length ? (
@@ -935,9 +938,9 @@ function RefineSearchForm() {
 }
 
 export default function SearchResults() {
-  const [showMap, updateShowMap] = useState();
   const [showMobileSearch, setShowMobileSearch] = useState();
   const [selectedShop, updateSelectedShop] = useState(null);
+  const [showMap, updateShowMap] = useState(false);
 
   const mobileSelectorsRef = useRef(null);
   useEffect(() => {
@@ -1015,8 +1018,8 @@ export default function SearchResults() {
 
   return (
     <ScreenSizeProvider>
-      <SelectedShopContext.Provider
-        value={{ selectedShop, updateSelectedShop }}
+      <ShopBridgeContext.Provider
+        value={{ selectedShop, updateSelectedShop, showMap }}
       >
         <DefaultLayout>
           <MainWrap>
@@ -1132,14 +1135,16 @@ export default function SearchResults() {
                   </ModelFields>
                   <SyncFormValues
                     onChange={async (data) => {
-                      let parsedData = { ...data };
+                      let parsedData = { ...data, lat: 0, long: 0 };
                       try {
                         const [result] = await geocodeByAddress(data.location);
                         const { lng, lat } = await getLatLng(result);
+
                         parsedData = {
                           ...parsedData,
-                          lng,
+                          long: lng,
                           lat,
+                          location: ""
                         };
                       } catch (err) {
                         console.log(err);
@@ -1205,7 +1210,7 @@ export default function SearchResults() {
             </OnMobile>
           </MainWrap>
         </DefaultLayout>
-      </SelectedShopContext.Provider>
+      </ShopBridgeContext.Provider>
     </ScreenSizeProvider>
   );
 }

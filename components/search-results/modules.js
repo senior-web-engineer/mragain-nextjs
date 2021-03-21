@@ -22,6 +22,8 @@ export const filtersFormModule = createFormModule({
       guarantee: fromAddressBar.guarantee || "-1",
       price: fromAddressBar.price || "-1",
       sort: fromAddressBar.sort || "0",
+      long: 0,
+      lat: 0,
       limit: 100,
     };
   },
@@ -35,14 +37,17 @@ export const shopListModule = createListModule({
   guid: "shops",
   async fetchData(query = {}) {
     try {
-      const data = await api.get(`${API_PATH.SEARCH}/`, {
+      const data = await api.post(`${API_PATH.SEARCH}/`, {
         ...query,
-        phone: query.device,
-        reparation: query.service,
-        distance: query.distance,
-        price: query.price,
-        guarantee: query.guarantee,
-        sort: query.sort,
+        brand: parseInt(query.brand),
+        service: parseInt(query.service),
+        model: parseInt(query.model),
+        phone: parseInt(query.device),
+        reparation: parseInt(query.service),
+        distance: parseInt(query.distance),
+        price: parseInt(query.price),
+        guarantee: parseInt(query.guarantee),
+        sort: parseInt(query.sort),
       });
       return {
         items: data,
