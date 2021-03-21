@@ -12,6 +12,9 @@ export const appointmentForm = createFormModule({
     return {
       shop: shop.id,
       ...fromAddressBar,
+      location: "in-store",
+      date: (new Date()).toString(),
+      time: "4:20",
     };
   },
 });
