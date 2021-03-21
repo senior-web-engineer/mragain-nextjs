@@ -1135,19 +1135,16 @@ export default function SearchResults() {
                   </ModelFields>
                   <SyncFormValues
                     onChange={async (data) => {
-                      let parsedData = { ...data };
+                      let parsedData = { ...data, lat: 0, long: 0 };
                       try {
-                        if (!data.location) {
-                          shopListModule.actions.updateQuery(parsedData);
-                          return;
-                        }
-
                         const [result] = await geocodeByAddress(data.location);
                         const { lng, lat } = await getLatLng(result);
+
                         parsedData = {
                           ...parsedData,
-                          lng,
+                          long: lng,
                           lat,
+                          location: ""
                         };
                       } catch (err) {
                         console.log(err);
