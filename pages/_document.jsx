@@ -3,6 +3,17 @@ import Document, { Head, Main, NextScript, Html } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 import HeadWithoutPreload from "./HeadWithoutPreload";
 
+
+const hotJarScript = `
+(function(h,o,t,j,a,r){
+  h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+  h._hjSettings={hjid:2312904,hjsv:6};
+  a=o.getElementsByTagName('head')[0];
+  r=o.createElement('script');r.async=1;
+  r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+  a.appendChild(r);
+})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+`
 export default class MyDocument extends Document {
   render() {
     const { isProduction } = this.props;
@@ -44,6 +55,7 @@ export default class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap" rel="stylesheet"></link>
 
           {/* We only want to add the scripts if in production */}
+          <script dangerouslySetInnerHTML={{__html: hotJarScript}}/>
         </HeadWithoutPreload>
         <body>
           <Main />

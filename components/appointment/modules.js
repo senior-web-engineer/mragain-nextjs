@@ -91,6 +91,31 @@ export const serviceFetcher = dataFetcher({
       brand: brandId,
       model: modelId
     });
-    return data.find(service => `${service.id}` === serviceId);;
+    return data.find(service => `${service.id}` === serviceId);
+  },
+});
+
+export const openTimeFetcher = dataFetcher({
+  selectors: ["appoitment", "open-time", () => appointmentForm.state.values.shop],
+  async fetchData([_1, _2, shop]) {
+    const response = await api.get(`${API_PATH.GETVALIDOPENTIME}/${shop}/`);
+    try {
+      return JSON.parse(response?.[0]?.valid_day_time || "");
+    } catch(err) {
+      return null;
+    }
+  },
+})
+
+
+export const invalidTimeFetcher = dataFetcher({
+  selectors: [
+    "appoitment",
+    "invalid-time",
+    () => appointmentForm.state?.values.shop,
+  ],
+  async fetchData([_1, _2, shop]) {
+    const data = await api.get(`${API_PATH.GETINVALIDOPENTIME}/${shop}/`);
+    return JSON.parse(data?.[0]?.invalid_day_time || "[]");
   },
 });

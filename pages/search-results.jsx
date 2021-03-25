@@ -801,15 +801,15 @@ const DISTANCES = [
 
 const SORT_BY = [
   {
-    label: "None",
+    label: "Rating Hoog-Laag",
     value: "0",
   },
   {
-    label: "Price",
+    label: "Hoog-Laag",
     value: "1",
   },
   {
-    label: "Warranty",
+    label: "Laag-Hoog",
     value: "2",
   },
 ];
