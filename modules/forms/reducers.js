@@ -2,8 +2,8 @@ import set from "lodash/set";
 
 export function INITIALIZE_FORM_REQUEST(nextState, { guid }) {
   nextState[guid] = {
-    initialValues: null,
-    values: null,
+    initialValues: {},
+    values: {},
     isLoading: true,
     errors: {},
   };

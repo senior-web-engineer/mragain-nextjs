@@ -10,17 +10,21 @@ import {
   serviceFetcher,
 } from "@/components/appointment/modules";
 import { getShopProfileByInformationServer } from "@/service/account/operations";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import BookingInfo from "@/components/appointment/BookingInfo";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { SubTitle } from "@/components/styled/text";
 import { Field } from "@/modules/forms/Blocks";
 import LocationSelector from "@/components/appointment/LocationSelector";
+import PaymentSelector from "@/components/appointment/PaymentSelector";
 import Form from "@/modules/forms";
-import { Calendar, Tooltip } from "antd";
-import moment from "moment-timezone";
-import { useFetcher, withData } from "@/modules/dataFetcher";
-import { DAYS_OF_WEEK } from "@/utils/date";
+import DateAndTime from "@/components/appointment/DateAndTime";
+import Steps from "@/components/appointment/Steps";
+import Switch from "@/components/common/Switch";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { TextButton } from "@/components/ui/Button";
+import { FieldWrap } from "@/components/styled/Forms";
 
 const MainWrap = styled.div`
   padding-top: 1px;
@@ -32,171 +36,69 @@ const MainWrap = styled.div`
 `;
 
 const FormWrap = styled.div`
-  width: 690px;
+  max-width: 690px;
+  width: 100%;
 `;
 
-const ShortDayWrap = styled.div`
-  background-color: #a0a0a0;
-  width: 6px;
-  height: 6px;
-  position: absolute;
-  top: 3px;
-  left: 50%;
-  margin-left: -3px;
-  z-index: 100;
-  border-radius: 3px;
+const LocationFieldWrap = styled.div`
+  ${SubTitle} {
+    margin: 52px 0 32px;
+  }
 `;
 
-const DatePickerWrap = styled.div`
-  padding: 0 41px;
+const DetailsForm = styled.div`
+  padding: 0 41px 30px;
   background-color: #fff;
   border-radius: 10px;
-  margin-top: 40px;
+  margin-top: 52px;
+  width: 100%;
+  border: 1px solid #ddd;
 
   header {
     height: 71px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid #ddd;
-    margin: 0 -41px 20px;
+    margin: 0 -41px 30px;
     padding: 0 41px;
   }
 
-  .ant-radio-group {
-    display: none;
-  }
+  ${FieldWrap} {
+    border: 2px solid #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 5px;
 
-  .ant-fullcalendar-date {
-    position: relative;
-  }
-
-  .ant-fullcalendar-selected-day {
-    ${ShortDayWrap} {
-      background-color: #fff;
-    }
-  }
-
-  .ant-fullcalendar-content {
-    position: static;
-  }
-
-  .ant-fullcalendar-value {
-    width: 45px;
-    height: 45px;
-    border-radius: 27px;
-    line-height: 45px;
-  }
-
-  .ant-fullcalendar {
-    border: none;
-
-    th {
-      line-height: 33px;
-      border-top: 1px solid #ddd;
+    input {
+      border: 0;
       border-bottom: 1px solid #ddd;
-      color: #a0a0a0;
-      font-size: 13px;
+      border-radius: 2px;
+      width: 100%;
     }
   }
 `;
 
-function CalendarField({ value, onChange }) {
-  const invalidTimes = useFetcher({ dataFetcher: invalidTimeFetcher });
-  const openedTimes = useFetcher({ dataFetcher: openTimeFetcher });
+const InlineFields = styled.div`
+  display: flex;
+  justify-content: space-between;
 
-  const shortDays = useMemo(() => {
-    if (!invalidTimes.data) {
-      return [];
-    }
-    return invalidTimes.data.map((time) => ({
-      date: moment(time.checkDay),
-      scheduele: time.open_close_time,
-      reason: time.reason,
-    }));
-  }, [invalidTimes.data]);
+  > div:nth-child(1) {
+    flex-grow: 1;
+  }
 
-  return (
-    <Calendar
-      fullscreen={false}
-      value={moment(value)}
-      disabledDate={(date) => {
-        const day = date.isoWeekday();
-        const isOpened = !openedTimes?.data?.[DAYS_OF_WEEK[day - 1]];
+  > div + div {
+    margin-left: 20px;
+  }
+`;
 
-        return isOpened;
-      }}
-      onSelect={(value) => onChange(moment(value).toString())}
-      onPanelChange={(value) => onChange(moment(value).toString())}
-      dateCellRender={(date) => {
-        const short = shortDays.find((shortDay) =>
-          date.isSame(shortDay.date, "day")
-        );
-        if (!short) {
-          return null;
-        }
-        return (
-          <Tooltip title={short.reason}>
-            <ShortDayWrap />
-          </Tooltip>
-        );
-      }}
-    />
-  );
-}
-
-function TimePicker({ value, onChange }) {
-  const invalidTimes = useFetcher({ dataFetcher: invalidTimeFetcher });
-  const openedTimes = useFetcher({ dataFetcher: openTimeFetcher });
-  const selectedDate = moment(appointmentForm.state.values.date);
-
-  const shortDays = useMemo(() => {
-    if (!invalidTimes.data) {
-      return [];
-    }
-    return invalidTimes.data.map((time) => ({
-      date: moment(time.checkDay),
-      scheduele: time.open_close_time,
-      reason: time.reason,
-    }));
-  }, [invalidTimes.data]);
-
-  const shortDayHours = useMemo(() => {
-    const dayMeta = shortDays.find((shortDay) => selectedDate.isSame(shortDay.date, "day"));
-    return dayMeta?.scheduele;
-  }, [selectedDate]);
-
-  const regularHours = useMemo(() => {
-    const day = selectedDate.isoWeekday();
-    return openedTimes?.data?.[DAYS_OF_WEEK[day - 1]];
-  })
-  const openedInterval = shortDayHours ? shortDayHours : regularHours;
-  const [min, max] = openedInterval?.split("-") || [];
-
-
-
-  const hours = useMemo(() => {
-    if (!min || !max) {
-      return [];
-    }
-
-    return Array.from({length: 24}).map((_, index) => `${index < 10 ? `0${index}` : index}:00`).filter(time => {
-      let [h] = time.split(':');
-      let [hMin] = min.split(':');
-      let [hMax] = max.split(':');
-
-      [h, hMin, hMax] = [h, hMin, hMax].map(hour => parseInt(hour, 10))
-
-
-      return h >= hMin && h <= hMax;
-    });
-
-  }, [min, max])
-
-
-  return <div>{hours.map(hour => hour)}</div>;
-}
+const AddressSection = styled.div`
+  border-top: 3px solid #fafafa;
+  margin-top: 23px;
+  padding-top: 17px;
+`;
 
 export default function AppointmentPage({ shop }) {
+  const [step, updateStep] = useState(0);
+
   useEffect(() => {
     async function loadData() {
       await appointmentForm.actions.initialize(shop);
@@ -211,24 +113,70 @@ export default function AppointmentPage({ shop }) {
     loadData();
   }, []);
 
+  function renderAddressFields() {
+    if (appointmentForm.state?.values?.location === "in-store") {
+      return null;
+    }
+    return (
+      <AddressSection>
+        <Field name="address" label="Street Address" autoComplete="street-address" />
+        <InlineFields>
+          <Field name="city" label="City" />
+          <Field name="state" label="State" />
+          <Field name="zip" label="Zip" autoComplete="postal-code"/>
+        </InlineFields>
+      </AddressSection>
+    );
+  }
+
   return (
     <DefaultLayout>
       <MainWrap>
         <MaxConstraints>
           <FormWrap>
+            <Steps currentStep={step} updateStep={updateStep} />
             <Form module={appointmentForm}>
-              <SubTitle>Repair location</SubTitle>
-              <Field name="location" as={LocationSelector} />
-              <DatePickerWrap>
-                <header>
-                  <SubTitle>Scheduele an appointment</SubTitle>
-                </header>
-                <Field name="date" as={CalendarField} />
-                <Field name="time" as={TimePicker} />
-              </DatePickerWrap>
+              <Switch value={step}>
+                <Switch.Case value={0}>
+                  <LocationFieldWrap>
+                    <SubTitle>Repair location</SubTitle>
+                    <Field name="location" as={LocationSelector} />
+                  </LocationFieldWrap>
+                  <DateAndTime />
+                </Switch.Case>
+                <Switch.Case value={1}>
+                  <DetailsForm>
+                    <header>
+                      <SubTitle>Personal Details</SubTitle>
+                    </header>
+                    <Field name="name" label="Name" />
+                    <InlineFields>
+                      <Field name="email" label="E-mail Address" autoComplete="email" />
+                      <Field name="tel" label="Contact Number" autoComplete="tel"/>
+                    </InlineFields>
+                    {renderAddressFields()}
+                  </DetailsForm>
+                </Switch.Case>
+                <Switch.Case value={2}>
+                  <Field name="paymentType" as={PaymentSelector} />
+                </Switch.Case>
+              </Switch>
             </Form>
+            {step > 0 ? (
+              <TextButton onClick={() => updateStep((state) => state - 1)}>
+                <FontAwesomeIcon icon={faArrowLeft} /> Back to previous step
+              </TextButton>
+            ) : null}
           </FormWrap>
-          <BookingInfo shop={shop} />
+          <BookingInfo
+            shop={shop}
+            nextStep={() => {
+              if (step === 2) {
+                return;
+              }
+              updateStep((state) => state + 1);
+            }}
+          />
         </MaxConstraints>
       </MainWrap>
     </DefaultLayout>

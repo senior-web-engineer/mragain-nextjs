@@ -1,8 +1,20 @@
-import { withData } from "@/modules/dataFetcher";
+import { useFetcher, withData } from "@/modules/dataFetcher";
+import Form from "@/modules/forms";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
 import { SubTitle } from "../styled/text";
-import { brandFetcher, deviceFetcher, modelFetcher, serviceFetcher } from "./modules";
+import Button from "../ui/Button";
+import {
+  appointmentForm,
+  brandFetcher,
+  deviceFetcher,
+  modelFetcher,
+  serviceFetcher,
+} from "./modules";
+import UserInfo from "./UserInfo";
 
 //
 
@@ -12,7 +24,11 @@ const MainWrap = styled.div`
   padding: 0 41px;
   background-color: #fff;
   border-radius: 10px;
-  margin-top: 40px;
+  margin-top: 52px;
+  align-self: flex-start;
+  border: 1px solid #ddd;
+  position: relative;
+
   header {
     height: 71px;
     display: flex;
@@ -24,23 +40,102 @@ const MainWrap = styled.div`
 
   label {
     display: block;
-    font-size: 10px;
+    font-size: 12px;
     color: #707070;
     font-weight: 300;
-    font-family: "Montserrat";
+    margin-bottom: 14px;
+  }
+
+  ${Button} {
+    min-width: 51px;
+    position: absolute;
+    bottom: -25px;
+    left: 41px;
   }
 `;
 
 const ShopDetails = styled.section`
-  font-size: 10px;
+  font-size: 12px;
   color: #707070;
   font-weight: 400;
-  font-family: "Montserrat";
+  padding-bottom: 22px;
+  border-bottom: 3px solid #fafafa;
+  margin-bottom: 17px;
+
   h3 {
     font-size: 15px;
     color: #303030;
     font-weight: 500;
-    font-family: "Montserrat";
+    margin: 0;
+  }
+`;
+
+const ServiceDetails = styled.section`
+  strong {
+    font-size: 12px;
+    color: #303030;
+    font-weight: 500;
+    margin-left: 4px;
+  }
+
+  label {
+    margin: 0;
+  }
+
+  > div {
+    display: flex;
+  }
+`;
+
+const ServiceCostWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  letter-spacing: 0px;
+  color: #303030;
+  font-weight: 300;
+`;
+
+const ServiceDetailsWrap = styled.div`
+  display: flex;
+  padding-bottom: 22px;
+  border-bottom: 3px solid #fafafa;
+  margin-bottom: 17px;
+`;
+
+const ServiceImage = styled.div`
+  width: 51px;
+  height: 51px;
+  border-radius: 3px;
+  padding: 4px;
+  border-radius: 4px;
+  background-color: #ddd;
+  margin-right: 13px;
+  position: relative;
+`;
+
+const TotalWrap = styled.div`
+  background-color: #f0f0f0;
+  display: flex;
+  height: 101px;
+  margin: 20px -41px 0;
+  padding: 0 41px 30px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  label {
+    font-size: 14px;
+    color: #303030;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  price {
+    font-size: 17px;
+    color: #000000;
+    font-weight: 500;
   }
 `;
 
@@ -65,22 +160,13 @@ const ModelName = withData({
   },
 });
 
-const ServiceInfo = withData({
-  dataFetcher: serviceFetcher,
-  Component({ data }) {
-    return (
-      <div>
-        <item>{data?.reparation?.reparation_name}</item>
-        <price>&euro;{data?.price}</price>
-      </div>
-    );
-  },
-});
-
-export default function BookingInfo({ shop }) {
+export default function BookingInfo({ shop, nextStep }) {
   const location = [shop.street || "", shop.city || ""]
     .filter(Boolean)
     .join(", ");
+
+  const { data: service } = useFetcher({ dataFetcher: serviceFetcher });
+
   return (
     <MainWrap>
       <header>
@@ -91,21 +177,51 @@ export default function BookingInfo({ shop }) {
         <h3>{shop.name}</h3>
         <location>{location}</location>
       </ShopDetails>
-      <ShopDetails>
-        <label>Type</label>
-        <strong>
-          <DeviceName />
-        </strong>
-        <label>Device brand</label>
-        <strong>
-          <BrandName />
-        </strong>
-        <label>Model</label>
-        <strong>
-          <ModelName />
-        </strong>
-      </ShopDetails>
-      <ServiceInfo />
+      <ServiceDetailsWrap>
+        <ServiceImage>
+          {service?.reparation?.repair_image ? (
+            <Image
+              layout="fill"
+              objectFit="contain"
+              src={service.reparation.repair_image}
+            />
+          ) : null}
+        </ServiceImage>
+        <ServiceDetails>
+          <div>
+            <label>Type:</label>
+            <strong>
+              <DeviceName />
+            </strong>
+          </div>
+          <div>
+            <label>Device brand:</label>
+            <strong>
+              <BrandName />
+            </strong>
+          </div>
+          <div>
+            <label>Model:</label>
+            <strong>
+              <ModelName />
+            </strong>
+          </div>
+        </ServiceDetails>
+      </ServiceDetailsWrap>
+      <Form module={appointmentForm}>
+        <UserInfo />
+      </Form>
+      <ServiceCostWrap>
+        <item>{service?.reparation?.reparation_name}</item>
+        <price>&euro;{service?.price}</price>
+      </ServiceCostWrap>
+      <TotalWrap>
+        <label>Total amount</label>
+        <price>&euro;{service?.price}</price>
+      </TotalWrap>
+      <Button onClick={nextStep}>
+        <FontAwesomeIcon icon={faArrowRight} />
+      </Button>
     </MainWrap>
   );
 }

@@ -1,9 +1,7 @@
 import styled from "styled-components";
 
 export const FieldWrap = styled.div`
-  & + & {
-    margin-top: 14px;
-  }
+  margin: 7px 0;
 
   > label {
     display: block;

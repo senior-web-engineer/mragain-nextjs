@@ -27,8 +27,6 @@ export function useFormContext() {
 const Form = connect((state, ownProps) => ({
   moduleState: state.forms?.[ownProps.module.guid],
 }))(function ({ moduleState, module, children }) {
-  const formikRef = useRef(null);
-
   useEffect(() => {
     if (!moduleState || !module) {
       return;
@@ -38,9 +36,6 @@ const Form = connect((state, ownProps) => ({
       return;
     }
 
-    if (formikRef.current) {
-      module.formik = formikRef.current;
-    }
   }, [moduleState, module]);
 
   if (!moduleState || !module) {

@@ -13,8 +13,16 @@ export const appointmentForm = createFormModule({
       shop: shop.id,
       ...fromAddressBar,
       location: "in-store",
+      paymentType: "cash",
       date: (new Date()).toString(),
       time: "4:20",
+      name: "",
+      email: "",
+      tel: "",
+      address: "",
+      city: "",
+      zip: "",
+      state: "",
     };
   },
 });
