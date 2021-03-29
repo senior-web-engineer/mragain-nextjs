@@ -44,9 +44,9 @@ const STEPS_META = [
   {
     title: "Information",
   },
-  {
-    title: "Payment",
-  },
+  // {
+  //   title: "Payment",
+  // },
 ];
 
 export default function Steps({ currentStep, updateStep }) {

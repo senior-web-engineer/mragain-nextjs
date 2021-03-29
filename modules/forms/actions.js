@@ -5,11 +5,15 @@ function yupToFormErrors(yupError) {
   let errors = {};
   if (yupError.inner) {
     if (yupError.inner.length === 0) {
-      return set(errors, yupError.path, yupError.message);
+      if (yupError.path) {
+        return set(errors, yupError.path, yupError.message);
+      }
     }
     yupError.inner.forEach((err) => {
       if (!get(errors, err.path)) {
-        errors = set(errors, err.path, err.message);
+        if(err.path) {
+          errors = set(errors, err.path, err.message);
+        }
       }
     });
   }
@@ -33,7 +37,9 @@ export default class FormActions {
 
   _runValidation = async (fields) => {
     const state = this.moduleState;
-
+    if (!fields) {
+      fields = Object.keys(state.values);
+    }
     if (!this.validator) {
       return;
     }

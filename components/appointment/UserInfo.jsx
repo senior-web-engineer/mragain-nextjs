@@ -22,15 +22,6 @@ const ServiceDetails = styled.section`
   }
 `;
 
-const ServiceCostWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  letter-spacing: 0px;
-  color: #303030;
-  font-weight: 300;
-`;
-
 const ServiceDetailsWrap = styled.div`
   display: flex;
   padding-bottom: 22px;
@@ -68,8 +59,11 @@ export default function UserInfo() {
   }
 
   return (
-    <ServiceDetailsWrap>
-      <ServiceDetails>{FIELDS.map(renderField)}</ServiceDetails>
-    </ServiceDetailsWrap>
+    <>
+      <h5>Your details</h5>
+      <ServiceDetailsWrap>
+        <ServiceDetails>{FIELDS.map(renderField)}</ServiceDetails>
+      </ServiceDetailsWrap>
+    </>
   );
 }

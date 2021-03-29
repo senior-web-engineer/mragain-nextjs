@@ -5,6 +5,9 @@ yup.addMethod(
   yup.string,
   "required",
   function required(msg = () => "Required field") {
+    if (typeof msg !== "function") {
+      return requiredRule();
+    }
     return requiredRule(msg());
   }
 );

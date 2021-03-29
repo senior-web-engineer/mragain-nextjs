@@ -29,6 +29,13 @@ const MainWrap = styled.div`
   border: 1px solid #ddd;
   position: relative;
 
+  h5 {
+    font-size: 12px;
+    color: #707070;
+    font-weight: 300;
+    margin-bottom: 14px;
+  }
+
   header {
     height: 71px;
     display: flex;

@@ -1,6 +1,7 @@
 import DefaultLayout from "@/components/layouts/Homepage";
 import { MaxConstraints } from "@/components/styled/layout";
 import {
+  appointmentConfirmation,
   appointmentForm,
   brandFetcher,
   deviceFetcher,
@@ -25,6 +26,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { TextButton } from "@/components/ui/Button";
 import { FieldWrap } from "@/components/styled/Forms";
+import ConfirmationModal from "@/components/common/ConfirmationModal";
 
 const MainWrap = styled.div`
   padding-top: 1px;
@@ -119,11 +121,15 @@ export default function AppointmentPage({ shop }) {
     }
     return (
       <AddressSection>
-        <Field name="address" label="Street Address" autoComplete="street-address" />
+        <Field
+          name="address"
+          label="Street Address"
+          autoComplete="street-address"
+        />
         <InlineFields>
           <Field name="city" label="City" />
           <Field name="state" label="State" />
-          <Field name="zip" label="Zip" autoComplete="postal-code"/>
+          <Field name="zip" label="Zip" autoComplete="postal-code" />
         </InlineFields>
       </AddressSection>
     );
@@ -151,8 +157,16 @@ export default function AppointmentPage({ shop }) {
                     </header>
                     <Field name="name" label="Name" />
                     <InlineFields>
-                      <Field name="email" label="E-mail Address" autoComplete="email" />
-                      <Field name="tel" label="Contact Number" autoComplete="tel"/>
+                      <Field
+                        name="email"
+                        label="E-mail Address"
+                        autoComplete="email"
+                      />
+                      <Field
+                        name="tel"
+                        label="Contact Number"
+                        autoComplete="tel"
+                      />
                     </InlineFields>
                     {renderAddressFields()}
                   </DetailsForm>
@@ -170,13 +184,32 @@ export default function AppointmentPage({ shop }) {
           </FormWrap>
           <BookingInfo
             shop={shop}
-            nextStep={() => {
-              if (step === 2) {
-                return;
+            nextStep={async () => {
+              if (step === 1) {
+                try {
+                  await appointmentForm.actions.submit();
+                  appointmentConfirmation.actions.open({
+                    type: "success",
+                    message: "Successfully booked",
+                    description:
+                      "Check your email inbox for booking confirmation and details",
+                    buttonLabel: "View booking information"
+                  });
+                } catch (err) {
+                  appointmentConfirmation.actions.open({
+                    type: "error",
+                    message: "Oops!",
+                    description:
+                      "Something went wrong",
+                    buttonLabel: "Try again"
+                  });
+                }
+                return
               }
               updateStep((state) => state + 1);
             }}
           />
+          <ConfirmationModal module={appointmentConfirmation} />
         </MaxConstraints>
       </MainWrap>
     </DefaultLayout>
