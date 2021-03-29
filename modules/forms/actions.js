@@ -11,7 +11,7 @@ function yupToFormErrors(yupError) {
     }
     yupError.inner.forEach((err) => {
       if (!get(errors, err.path)) {
-        if(err.path) {
+        if (err.path) {
           errors = set(errors, err.path, err.message);
         }
       }
@@ -119,7 +119,12 @@ export default class FormActions {
 
       const errors = state.errors || {};
       if (Object.keys(errors).length) {
-        return Promise.reject(errors);
+        return Promise.reject({
+          ...errors,
+          get validationErrors() {
+            return true;
+          },
+        });
       }
 
       return this.submitFn(state.values);

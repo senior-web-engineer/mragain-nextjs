@@ -22,6 +22,7 @@ const MainWrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 
   h3 {
     font-size: 25px;

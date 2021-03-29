@@ -1,6 +1,7 @@
 import { useFetcher } from "@/modules/dataFetcher";
 import { Field } from "@/modules/forms/Blocks";
 import { DAYS_OF_WEEK } from "@/utils/date";
+import media from "@/utils/media";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Calendar } from "antd";
@@ -24,18 +25,21 @@ const ShortDayWrap = styled.div`
 `;
 
 const DatePickerWrap = styled.div`
-  padding: 1px 41px;
   background-color: #fff;
-  border-radius: 10px;
-  margin-top: 40px;
+  margin: 0 -20px;
+  padding: 1px 20px;
 
   header {
     height: 71px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid #ddd;
-    margin: 0 -41px 20px;
-    padding: 0 41px;
+    margin: 0 -20px 10px;
+    padding: 0 20px;
+  }
+
+  h4 {
+    margin-bottom: 0;
   }
 
   .ant-radio-group {
@@ -57,10 +61,11 @@ const DatePickerWrap = styled.div`
   }
 
   .ant-fullcalendar-value {
-    width: 45px;
-    height: 45px;
-    border-radius: 27px;
-    line-height: 45px;
+    width: 35px;
+    height: 35px;
+    border-radius: 18px;
+    line-height: 35px;
+    font-size: 13px;
   }
 
   .ant-fullcalendar {
@@ -71,9 +76,27 @@ const DatePickerWrap = styled.div`
       border-top: 1px solid #ddd;
       border-bottom: 1px solid #ddd;
       color: #a0a0a0;
-      font-size: 13px;
+      font-size: 11px;
     }
   }
+
+  ${media.tablet`
+    margin: 40px 0 0 0;
+    border-radius: 10px;
+    padding: 1px 41px;
+
+    header {
+      margin: 0 -41px 20px;
+    }
+
+    .ant-fullcalendar-value {
+      width: 45px;
+      height: 45px;
+      border-radius: 27px;
+      line-height: 45px;
+      font-size: 13px;
+    }
+  `}
 `;
 
 function CalendarField({ value, onChange }) {
@@ -125,15 +148,20 @@ const TimeOption = styled.div`
   letter-spacing: 1px;
   color: #303030;
   font-weight: 500;
-  width: 115px;
   height: 45px;
   text-align: center;
   border-radius: 4px;
   box-shadow: 0 0 0 1px #ddd;
   line-height: 43px;
   cursor: pointer;
-  margin: 12px 10px;
+  margin: 6px 10px;
+  width: 90px;
   position: relative;
+
+  ${media.tablet`
+    margin: 6px 10px;
+    width: 115px;
+  `}
 
   .fa-check-circle {
     font-size: 20px;
@@ -170,26 +198,49 @@ const TimeOption = styled.div`
 `;
 
 const TimeFrames = styled.div`
-  max-height: 100%;
-  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -7px;
+
+  ${media.tablet`
+    overflow-y: auto;
+    max-height: 100%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin: 0;
+  `}
 `;
 
 const SchedueleContentWrap = styled.div`
   display: flex;
   align-items: flex-start;
   overflow: hidden;
-  height: 380px;
+  flex-direction: column;
   margin-bottom: 20px;
 
-  > div:first-child {
-    flex-grow: 1;
-    margin-right: 30px;
-  }
+  > div:nth-child(1) {
+    width: 100%;
+    }
 
-  > div + div:nth-child(2) {
-    height: 100%;
-    margin: 0;
-  }
+
+  ${media.tablet`
+    height: 380px;
+    flex-direction: row;
+
+    > div:nth-child(1) {
+      width: auto;
+      flex-grow: 1;
+      margin-right: 30px;
+    }
+
+    > div:nth-child(2) {
+      height: 100%;
+      margin: 0;
+    }
+  `}
+
+
+
 `;
 
 function TimePicker({ value, onChange }) {

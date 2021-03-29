@@ -11,7 +11,7 @@ import {
   serviceFetcher,
 } from "@/components/appointment/modules";
 import { getShopProfileByInformationServer } from "@/service/account/operations";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import BookingInfo from "@/components/appointment/BookingInfo";
 import styled, { css } from "styled-components";
 import { SubTitle } from "@/components/styled/text";
@@ -23,46 +23,75 @@ import DateAndTime from "@/components/appointment/DateAndTime";
 import Steps from "@/components/appointment/Steps";
 import Switch from "@/components/common/Switch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { TextButton } from "@/components/ui/Button";
 import { FieldWrap } from "@/components/styled/Forms";
 import ConfirmationModal from "@/components/common/ConfirmationModal";
+import media, { OnMobile } from "@/utils/media";
+import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
+import Button from "@/components/ui/Button";
 
 const MainWrap = styled.div`
   padding-top: 1px;
+  margin-bottom: -127px;
 
-  > ${MaxConstraints} {
-    display: flex;
-    justify-content: space-between;
-  }
+  ${media.tablet`
+    > ${MaxConstraints} {
+      display: flex;
+      justify-content: space-between;
+    }
+  `}
 `;
 
 const FormWrap = styled.div`
   max-width: 690px;
   width: 100%;
+
+  form.fullwidth {
+    margin: 0 -20px;
+  }
 `;
 
 const LocationFieldWrap = styled.div`
   ${SubTitle} {
+    display: none;
     margin: 52px 0 32px;
+  }
+
+  ${media.tablet`
+    ${SubTitle} {
+      display: block;
+    }
+  `}
+`;
+
+const CTAButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+  > button {
+    font-size: 10px;
+    text-transform: none;
   }
 `;
 
 const DetailsForm = styled.div`
-  padding: 0 41px 30px;
   background-color: #fff;
-  border-radius: 10px;
-  margin-top: 52px;
-  width: 100%;
-  border: 1px solid #ddd;
+  width: calc(100% + 40px);
+  margin: 11px -20px 0;
+  padding: 0 20px 30px;
+
 
   header {
     height: 71px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid #ddd;
-    margin: 0 -41px 30px;
-    padding: 0 41px;
+    margin: 0 -20px 30px;
+    padding: 0 20px;
+  }
+  h4 {
+    margin-bottom: 0;
   }
 
   ${FieldWrap} {
@@ -77,19 +106,39 @@ const DetailsForm = styled.div`
       width: 100%;
     }
   }
+
+
+  ${media.tablet`
+    padding: 0 41px 30px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin: 52px 0 0 0;
+    width: 100%;
+
+
+    header {
+      margin: 0 -41px 30px;
+      padding: 0 41px;
+    }
+  `}
+
 `;
 
 const InlineFields = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
 
-  > div:nth-child(1) {
-    flex-grow: 1;
-  }
+  ${media.tablet`
+    flex-direction: row;
+    > div:nth-child(1) {
+      flex-grow: 1;
+    }
 
-  > div + div {
-    margin-left: 20px;
-  }
+    > div + div {
+      margin-left: 20px;
+    }
+  `}
 `;
 
 const AddressSection = styled.div`
@@ -115,6 +164,39 @@ export default function AppointmentPage({ shop }) {
     loadData();
   }, []);
 
+  const onNext = useCallback(async () => {
+    if (step === 1) {
+      try {
+        await appointmentForm.actions.submit();
+        appointmentConfirmation.actions.open({
+          type: "success",
+          message: "Successfully booked",
+          description:
+            "Check your email inbox for booking confirmation and details",
+          buttonLabel: "View booking information",
+        });
+      } catch (err) {
+        if (err.validationErrors) {
+          appointmentConfirmation.actions.open({
+            type: "warning",
+            message: "On no! Incomplete information",
+            description: "Please complete all necessary information to process your booking",
+            buttonLabel: "Try again",
+          });
+          return;
+        }
+        appointmentConfirmation.actions.open({
+          type: "error",
+          message: "Oops!",
+          description: "Something went wrong",
+          buttonLabel: "Try again",
+        });
+      }
+      return;
+    }
+    updateStep((state) => state + 1);
+  });
+
   function renderAddressFields() {
     if (appointmentForm.state?.values?.location === "in-store") {
       return null;
@@ -139,6 +221,9 @@ export default function AppointmentPage({ shop }) {
     <DefaultLayout>
       <MainWrap>
         <MaxConstraints>
+          <OnMobile only>
+            <BookingInfoMobile shop={shop} />
+          </OnMobile>
           <FormWrap>
             <Steps currentStep={step} updateStep={updateStep} />
             <Form module={appointmentForm}>
@@ -176,39 +261,24 @@ export default function AppointmentPage({ shop }) {
                 </Switch.Case>
               </Switch>
             </Form>
-            {step > 0 ? (
-              <TextButton onClick={() => updateStep((state) => state - 1)}>
-                <FontAwesomeIcon icon={faArrowLeft} /> Back to previous step
-              </TextButton>
-            ) : null}
+            <CTAButtons>
+              {step > 0 ? (
+                <TextButton onClick={() => updateStep((state) => state - 1)}>
+                  <FontAwesomeIcon icon={faArrowLeft} /> Back to previous step
+                </TextButton>
+              ) : (
+                <span />
+              )}
+              <OnMobile only>
+                <Button onClick={onNext}>
+                  Next step <FontAwesomeIcon icon={faArrowRight} />
+                </Button>
+              </OnMobile>
+            </CTAButtons>
           </FormWrap>
-          <BookingInfo
-            shop={shop}
-            nextStep={async () => {
-              if (step === 1) {
-                try {
-                  await appointmentForm.actions.submit();
-                  appointmentConfirmation.actions.open({
-                    type: "success",
-                    message: "Successfully booked",
-                    description:
-                      "Check your email inbox for booking confirmation and details",
-                    buttonLabel: "View booking information"
-                  });
-                } catch (err) {
-                  appointmentConfirmation.actions.open({
-                    type: "error",
-                    message: "Oops!",
-                    description:
-                      "Something went wrong",
-                    buttonLabel: "Try again"
-                  });
-                }
-                return
-              }
-              updateStep((state) => state + 1);
-            }}
-          />
+          <OnMobile show={false}>
+            <BookingInfo shop={shop} nextStep={onNext} />
+          </OnMobile>
           <ConfirmationModal module={appointmentConfirmation} />
         </MaxConstraints>
       </MainWrap>

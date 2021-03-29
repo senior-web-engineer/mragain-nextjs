@@ -1,8 +1,6 @@
+import media, { useScreenSize } from "@/utils/media";
 import {
-  faBox,
   faCheckCircle,
-  faHome,
-  faStore,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
@@ -14,13 +12,18 @@ const MainWrap = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0 -10px;
+  flex-direction: column;
+
+  ${media.tablet`
+    flex-direction: row;
+  `}
 `;
 const OptionWrap = styled.div`
-  margin: 0 10px;
-  padding: 20px;
+  margin: 10px;
+  padding: 10px;
   background-color: #fff;
   border-radius: 6px;
-  width: 219px;
+
   cursor: pointer;
   position: relative;
 
@@ -28,7 +31,11 @@ const OptionWrap = styled.div`
   letter-spacing: 0px;
   color: #303030;
   font-weight: 500;
-  font-family: "Montserrat";
+
+  ${media.tablet`
+    width: 219px;
+    margin: 0 10px;
+  `}
 
   &:after {
     position: absolute;
@@ -78,31 +85,9 @@ const OptionWrap = styled.div`
   }
 `;
 
-const DEFAULT_OPTIONS = [
-  {
-    label: "In-store service",
-    description: "Create an apointment to visit our store",
-    icon: faStore,
-    value: "in-store",
-  },
-  {
-    label: "Home service",
-    description: "Coming soon",
-    icon: faHome,
-    disabled: true,
-    value: "home",
-  },
-  {
-    label: "Delivery",
-    description: "Coming soon",
-    icon: faBox,
-    disabled: true,
-    value: "delivery",
-  },
-];
 
 export default function InlineSelector({
-  options = DEFAULT_OPTIONS,
+  options = [],
   onChange,
   value,
 }) {
