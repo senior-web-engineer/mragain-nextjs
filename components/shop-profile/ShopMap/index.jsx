@@ -77,7 +77,6 @@ const ReviewsWrap = styled.div`
   `}
 `;
 
-
 const MainWrap = styled.div`
   position: relative;
   width: 100%;
@@ -162,26 +161,31 @@ function formatNumber(no) {
   });
 }
 
-
 const ModalReviewWrap = styled.div`
   background-color: #fafafa;
   padding: 20px;
   border-radius: 5px;
-  display: flex;
   margin: 10px 0;
-  justify-content: space-between;
   font-size: 13px;
   color: #0d3244;
 
+  ${media.tablet`
+    display: flex;
+    justify-content: space-between;
+
+    ${ReviewWrap} {
+      display: flex;
+      justify-content: flex-end;
+
+      .ant-rate {
+       margin-left: 10px;
+      }
+    }
+  `}
+
   ${ReviewWrap} {
     margin-top: 4px;
-    display: flex;
-    justify-content: flex-end;
     font-size: 11px;
-
-    .ant-rate {
-      margin-left: 10px;
-    }
   }
 
   h4 {
@@ -198,9 +202,7 @@ const ModalReviewWrap = styled.div`
   p {
     color: #707070;
   }
-
-
-`
+`;
 
 function Reviews({ options, ...rest }) {
   const scores = useMemo(() => {
@@ -308,7 +310,11 @@ function Reviews({ options, ...rest }) {
       <Button onClick={reviewsModal.actions.open}>
         <FontAwesomeIcon icon={faArrowRight} />
       </Button>
-      <Modal module={reviewsModal} footer={null} title={<SubTitle>Our reviews</SubTitle>}>
+      <Modal
+        module={reviewsModal}
+        footer={null}
+        title={<SubTitle>Our reviews</SubTitle>}
+      >
         <OverallWrap>
           <h2>Overall average score</h2>
           <OverallContent>
@@ -344,14 +350,16 @@ export default function ShopMap({ shop }) {
     reviewsFetcher.key(`${shop.id}`).fetch();
   }, [shop.id]);
 
-  console.log(shop)
-
   return (
     <MainWrap>
       <MaxConstraints>
         <CustomerReview identifier={shop.id} />
       </MaxConstraints>
-      <GoogleMap defaultZoom={11} defaultCenter={{ lat: shop.geo_lat, lng: shop.geo_long }} shopList={[shop]} />
+      <GoogleMap
+        defaultZoom={11}
+        defaultCenter={{ lat: shop.geo_lat, lng: shop.geo_long }}
+        shopList={[shop]}
+      />
     </MainWrap>
   );
 }

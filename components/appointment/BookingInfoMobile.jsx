@@ -1,7 +1,8 @@
 import { useFetcher, withData } from "@/modules/dataFetcher";
 import Form from "@/modules/forms";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Popover } from "antd";
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
@@ -25,6 +26,7 @@ const MainWrap = styled.div`
   background-color: #f7f7f7;
   height: 117px;
   align-items: center;
+  justify-content: space-between;
 
   h5 {
     font-size: 12px;
@@ -70,7 +72,7 @@ const ShopImageWrap = styled.div`
 
 const ShopWrap = styled.div`
   display: flex;
-`
+`;
 
 const ShopDetails = styled.section`
   font-size: 12px;
@@ -129,7 +131,18 @@ const ServiceImage = styled.div`
   position: relative;
 `;
 
-const TotalWrap = styled.div``;
+const TotalWrap = styled.div`
+  position: relative;
+  padding-right: 15px;
+
+  .svg-inline--fa {
+    font-size: 16px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    color: #06c987;
+  }
+`;
 
 const DeviceName = withData({
   dataFetcher: deviceFetcher,
@@ -159,30 +172,9 @@ export default function BookingInfoMobile({ shop, nextStep }) {
 
   const { data: service } = useFetcher({ dataFetcher: serviceFetcher });
 
-  return (
-    <MainWrap>
-      <ShopWrap>
-        <ShopImageWrap>
-          {shop.bg_photo ? (
-            <Image
-              loading="lazy"
-              src={shop.bg_photo}
-              layout="fill"
-              objectFit="cover"
-            />
-          ) : null}
-        </ShopImageWrap>
-        <ShopDetails>
-          <h3>{shop.name}</h3>
-          <location>{location}</location>
-        </ShopDetails>
-      </ShopWrap>
-
-      <TotalWrap>
-        <label>Total amount</label>
-        <price>&euro;{service?.price}</price>
-      </TotalWrap>
-      {/* <ServiceDetailsWrap>
+  const content = (
+    <>
+      <ServiceDetailsWrap>
         <ServiceImage>
           {service?.reparation?.repair_image ? (
             <Image
@@ -219,7 +211,41 @@ export default function BookingInfoMobile({ shop, nextStep }) {
       <ServiceCostWrap>
         <item>{service?.reparation?.reparation_name}</item>
         <price>&euro;{service?.price}</price>
-      </ServiceCostWrap> */}
-    </MainWrap>
+      </ServiceCostWrap>
+    </>
+  );
+
+  return (
+    <Popover
+      content={content}
+      trigger="click"
+      placement="bottomLeft"
+      overlayClassName="booking-info-mobile-content"
+    >
+      <MainWrap>
+        <ShopWrap>
+          <ShopImageWrap>
+            {shop.bg_photo ? (
+              <Image
+                loading="lazy"
+                src={shop.bg_photo}
+                layout="fill"
+                objectFit="cover"
+              />
+            ) : null}
+          </ShopImageWrap>
+          <ShopDetails>
+            <h3>{shop.name}</h3>
+            <location>{location}</location>
+          </ShopDetails>
+        </ShopWrap>
+
+        <TotalWrap>
+          <label>Total amount</label>
+          <price>&euro;{service?.price}</price>
+          <FontAwesomeIcon icon={faChevronDown} />
+        </TotalWrap>
+      </MainWrap>
+    </Popover>
   );
 }

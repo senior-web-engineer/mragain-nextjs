@@ -120,9 +120,9 @@ function CalendarField({ value, onChange }) {
       value={moment(value)}
       disabledDate={(date) => {
         const day = date.isoWeekday();
-        const isOpened = !openedTimes?.data?.[DAYS_OF_WEEK[day - 1]];
+        const isClosed = !openedTimes?.data?.[DAYS_OF_WEEK[day - 1]] || openedTimes?.data?.[DAYS_OF_WEEK[day - 1]] === "Gesloten";
 
-        return isOpened;
+        return isClosed;
       }}
       onSelect={(value) => onChange(moment(value).toString())}
       onPanelChange={(value) => onChange(moment(value).toString())}
