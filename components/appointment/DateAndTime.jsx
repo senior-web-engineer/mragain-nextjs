@@ -68,6 +68,10 @@ const DatePickerWrap = styled.div`
     font-size: 13px;
   }
 
+  .ant-fullcalendar-next-month-btn-day .ant-fullcalendar-value {
+    color: rgba(0, 0, 0, 0.65);
+  }
+
   .ant-fullcalendar {
     border: none;
 
@@ -119,9 +123,13 @@ function CalendarField({ value, onChange }) {
       fullscreen={false}
       value={moment(value)}
       disabledDate={(date) => {
+        const now = moment();
+        const isBefore = date.isBefore(now);
+        if (isBefore) {
+          return true;
+        }
         const day = date.isoWeekday();
         const isClosed = !openedTimes?.data?.[DAYS_OF_WEEK[day - 1]] || openedTimes?.data?.[DAYS_OF_WEEK[day - 1]] === "Gesloten";
-
         return isClosed;
       }}
       onSelect={(value) => onChange(moment(value).toString())}
