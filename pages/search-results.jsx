@@ -920,10 +920,10 @@ function RefineFooter() {
 function RefineSearchForm() {
   return (
     <Form module={filtersFormModule}>
-      <Field name="price" as={Slider} label="Price" />
+      <Field name="price" as={Slider} label="Prijs" />
       {false && <Field name="rating" as={Rate} label="Rating" />}
       {false && (
-        <Field name="repairType" as={Radio.Group} label="Repair Type">
+        <Field name="repairType" as={Radio.Group} label="Reparatie Type">
           {REPAIR_TYPES.map((type) => (
             <Radio value={type.value}>{type.label}</Radio>
           ))}
@@ -933,14 +933,14 @@ function RefineSearchForm() {
         name="guarantee"
         as={Select}
         options={WARRANTIES}
-        label="Warranty"
+        label="Garantie"
       />
       {false && (
         <Field
           name="time"
           as={Select}
           options={WORKING_TIME}
-          label="Working time"
+          label="Reparatietijd"
         />
       )}
     </Form>
