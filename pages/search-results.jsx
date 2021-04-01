@@ -56,6 +56,7 @@ import Modal from "@/modules/modal";
 import { useRouter } from "next/router";
 import GooglePlaces from "@/components/common/GooglePlaces";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import moment from "moment";
 
 //
 
@@ -557,6 +558,7 @@ const MobileToolbar = styled.div`
 
 ShopDetails.PriceWrap = styled.div`
   display: none;
+  margin-left: 40px;
 
   ${media.tablet`
     display: block;
@@ -581,13 +583,19 @@ ShopDetails.Service = styled.div`
   font-size: 10px;
 `;
 
+ShopDetails.AppointmentInfo = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const shopRefs = {};
 const ShopBridgeContext = createContext();
 
-
 function ShopItem({ item }) {
   const router = useRouter();
-  const { selectedShop, updateSelectedShop, showMap } = useContext(ShopBridgeContext);
+  const { selectedShop, updateSelectedShop, showMap } = useContext(
+    ShopBridgeContext
+  );
   const location = [item.shop.street || "", item.shop.city || ""]
     .filter(Boolean)
     .join(", ");
@@ -603,7 +611,7 @@ function ShopItem({ item }) {
   const shopRoute = `/${item.shop.name}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
 
   function onClick() {
-    if(!showMap) {
+    if (!showMap) {
       router.push(shopRoute);
       return;
     }
@@ -651,18 +659,20 @@ function ShopItem({ item }) {
             />
           </ShopDetails.NameWrap>
           <OnMobile show={false}>
-            {item.nextApointment ? (
-              <div>
-                <label>Next available schedule</label>
-                <date>{new Date(item.nextApointment).toString()}</date>
-              </div>
-            ) : null}
-            {item.price ? (
-              <ShopDetails.PriceWrap>
-                <label>Starts at</label>
-                <price>&euro; {item.price}</price>
-              </ShopDetails.PriceWrap>
-            ) : null}
+            <ShopDetails.AppointmentInfo>
+              {moment(item.next_slot).isValid() ? (
+                <div>
+                  <label>Next available schedule</label>
+                  <date>{moment(item.next_slot).format("DD MMM, hh:mm")}</date>
+                </div>
+              ) : null}
+              {item.price ? (
+                <ShopDetails.PriceWrap>
+                  <label>Starts at</label>
+                  <price>&euro; {item.price}</price>
+                </ShopDetails.PriceWrap>
+              ) : null}
+            </ShopDetails.AppointmentInfo>
           </OnMobile>
         </ShopDetails.SecondRow>
         {item.shop.services?.length ? (
@@ -1144,7 +1154,7 @@ export default function SearchResults() {
                           ...parsedData,
                           long: lng,
                           lat,
-                          location: ""
+                          location: "",
                         };
                       } catch (err) {
                         console.log(err);
