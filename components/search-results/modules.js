@@ -47,7 +47,7 @@ export const shopListModule = createListModule({
         distance: parseInt(query.distance),
         price: parseInt(query.price),
         guarantee: parseInt(query.guarantee),
-        sort: parseInt(query.sort),
+        sort: query.sort,
       });
       return {
         items: data,

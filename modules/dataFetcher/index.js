@@ -1,7 +1,8 @@
 import { createSelector } from "reselect";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { Field } from "@/modules/forms/Blocks";
 import { store } from "@/configureStore";
+import { useMemo } from "react";
 
 const SEPARATOR = "~";
 
@@ -116,6 +117,23 @@ export function createSelectComponent({
     return createFetcherSelector(ownProps.identifier)(state)
   }
   )(Component);
+}
+
+export function useFetcher({identifier, dataFetcher}) {
+  const selector = useMemo(() => {
+    return createSelector(dataFetcher.selector, (fetchStatus) => {
+      return {
+        data: identifier
+          ? fetchStatus[identifier]?.result
+          : fetchStatus.result,
+        isLoading: identifier
+          ? fetchStatus[identifier]?.isLoading
+          : fetchStatus.isLoading,
+      };
+    });
+  }, [identifier])
+
+  return useSelector(selector)
 }
 
 export function withData({

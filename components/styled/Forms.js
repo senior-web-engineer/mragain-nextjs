@@ -1,9 +1,7 @@
 import styled from "styled-components";
 
 export const FieldWrap = styled.div`
-  & + & {
-    margin-top: 14px;
-  }
+  margin: 7px 0;
 
   > label {
     display: block;
@@ -15,7 +13,7 @@ export const FieldWrap = styled.div`
   }
 `;
 export const ErrorWrap = styled.div`
-  color: red;
-  margin-top: 7px;
-  font-size: 12px;
+  color: #ce2029;
+  margin-top: 5.5px;
+  font-size: 11px;
 `;

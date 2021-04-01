@@ -215,15 +215,15 @@ const ShopAppointment = (routerProps) => {
     let m = moment(app_date);
     let date = m.format("MM-DD-YYYY");
 
-    if (ValidateEmail(cemail) === false) {
-      alert("Klopt je emailadres?");
-      return;
-    }
+    // if (ValidateEmail(cemail) === false) {
+    //   alert("Klopt je emailadres?");
+    //   return;
+    // }
 
-    if (ValidatePhoneNumber(cphone) === false) {
-      alert("Klopt je telefoonnummer?");
-      return;
-    }
+    // if (ValidatePhoneNumber(cphone) === false) {
+    //   alert("Klopt je telefoonnummer?");
+    //   return;
+    // }
 
     if (manual === false) {
       let appointmentM = {

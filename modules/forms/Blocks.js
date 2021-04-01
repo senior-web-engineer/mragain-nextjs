@@ -79,3 +79,11 @@ export function SyncFormValues({ onChange }) {
 
   return null;
 }
+
+export function ReadValue({name}) {
+  const { state } = useFormContext();
+  const { values } = state;
+  const value = get(values, name);
+
+  return value
+}

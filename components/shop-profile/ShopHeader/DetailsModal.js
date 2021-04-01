@@ -8,16 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback } from "react";
 import { openTimeFetcher, shopInfo } from "../modules";
 import styled from "styled-components"
-const DAYS_OF_WEEK = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-const DAY_TO_FULL_NAME = {
-  Mon: "Monday",
-  Tue: "Monday",
-  Wed: "Wednesday",
-  Thu: "Thursday",
-  Fri: "Friday",
-  Sat: "Saturday",
-  Sun: "Sunday",
-};
+import { DAYS_OF_WEEK, DAY_TO_FULL_NAME } from "@/utils/date";
 
 const ScheduleSection = styled.section`
   margin-top:40px;

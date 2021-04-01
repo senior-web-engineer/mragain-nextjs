@@ -1,7 +1,8 @@
 import { useFetcher, withData } from "@/modules/dataFetcher";
 import Form from "@/modules/forms";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Popover } from "antd";
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
@@ -19,15 +20,13 @@ import UserInfo from "./UserInfo";
 //
 
 const MainWrap = styled.div`
-  max-width: 364px;
-  width: 100%;
-  padding: 0 41px;
-  background-color: #fff;
-  border-radius: 10px;
-  margin-top: 52px;
-  align-self: flex-start;
-  border: 1px solid #ddd;
-  position: relative;
+  display: flex;
+  margin: 0 -20px;
+  padding: 0 20px;
+  background-color: #f7f7f7;
+  height: 117px;
+  align-items: center;
+  justify-content: space-between;
 
   h5 {
     font-size: 12px;
@@ -50,7 +49,7 @@ const MainWrap = styled.div`
     font-size: 12px;
     color: #707070;
     font-weight: 300;
-    margin-bottom: 14px;
+    margin: 0;
   }
 
   ${Button} {
@@ -61,19 +60,30 @@ const MainWrap = styled.div`
   }
 `;
 
+const ShopImageWrap = styled.div`
+  min-width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  position: relative;
+  overflow: hidden;
+  margin-right: 10px;
+`;
+
+const ShopWrap = styled.div`
+  display: flex;
+`;
+
 const ShopDetails = styled.section`
   font-size: 12px;
   color: #707070;
   font-weight: 400;
-  padding-bottom: 22px;
-  border-bottom: 3px solid #fafafa;
-  margin-bottom: 17px;
 
   h3 {
     font-size: 15px;
-    color: #303030;
-    font-weight: 500;
-    margin: 0;
+    letter-spacing: 0px;
+    color: #0d3244;
+    font-weight: 600;
   }
 `;
 
@@ -122,27 +132,15 @@ const ServiceImage = styled.div`
 `;
 
 const TotalWrap = styled.div`
-  background-color: #f0f0f0;
-  display: flex;
-  height: 101px;
-  margin: 20px -41px 0;
-  padding: 0 41px 30px;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  position: relative;
+  padding-right: 15px;
 
-  label {
-    font-size: 14px;
-    color: #303030;
-    font-weight: 500;
-    margin: 0;
-  }
-
-  price {
-    font-size: 17px;
-    color: #000000;
-    font-weight: 500;
+  .svg-inline--fa {
+    font-size: 16px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    color: #06c987;
   }
 `;
 
@@ -167,23 +165,15 @@ const ModelName = withData({
   },
 });
 
-export default function BookingInfo({ shop, nextStep }) {
+export default function BookingInfoMobile({ shop, nextStep }) {
   const location = [shop.street || "", shop.city || ""]
     .filter(Boolean)
     .join(", ");
 
   const { data: service } = useFetcher({ dataFetcher: serviceFetcher });
 
-  return (
-    <MainWrap>
-      <header>
-        <SubTitle>Booking details</SubTitle>
-      </header>
-      <label>Shop information</label>
-      <ShopDetails>
-        <h3>{shop.name}</h3>
-        <location>{location}</location>
-      </ShopDetails>
+  const content = (
+    <>
       <ServiceDetailsWrap>
         <ServiceImage>
           {service?.reparation?.repair_image ? (
@@ -222,13 +212,40 @@ export default function BookingInfo({ shop, nextStep }) {
         <item>{service?.reparation?.reparation_name}</item>
         <price>&euro;{service?.price}</price>
       </ServiceCostWrap>
-      <TotalWrap>
-        <label>Total amount</label>
-        <price>&euro;{service?.price}</price>
-      </TotalWrap>
-      <Button onClick={nextStep}>
-        <FontAwesomeIcon icon={faArrowRight} />
-      </Button>
-    </MainWrap>
+    </>
+  );
+
+  return (
+    <Popover
+      content={content}
+      trigger="click"
+      placement="bottomLeft"
+      overlayClassName="booking-info-mobile-content"
+    >
+      <MainWrap>
+        <ShopWrap>
+          <ShopImageWrap>
+            {shop.bg_photo ? (
+              <Image
+                loading="lazy"
+                src={shop.bg_photo}
+                layout="fill"
+                objectFit="cover"
+              />
+            ) : null}
+          </ShopImageWrap>
+          <ShopDetails>
+            <h3>{shop.name}</h3>
+            <location>{location}</location>
+          </ShopDetails>
+        </ShopWrap>
+
+        <TotalWrap>
+          <label>Total amount</label>
+          <price>&euro;{service?.price}</price>
+          <FontAwesomeIcon icon={faChevronDown} />
+        </TotalWrap>
+      </MainWrap>
+    </Popover>
   );
 }

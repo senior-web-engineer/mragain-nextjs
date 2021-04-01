@@ -166,7 +166,7 @@ function SignupButtons({ hiddenOnMobile }) {
       <Link href="/meld-je-aan-als-reparateur">
         <Button as="a">Registreer</Button>
       </Link>
-      <Select value="en" options={LANG_OPTIONS} />
+      <Select value="nl" options={LANG_OPTIONS} />
     </UserMenuWrap>
   );
 }
