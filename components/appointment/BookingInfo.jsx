@@ -223,7 +223,7 @@ export default function BookingInfo({ shop, nextStep }) {
         <price>&euro;{service?.price}</price>
       </ServiceCostWrap>
       <TotalWrap>
-        <label>Total amount</label>
+        <label>Totaal bedrag</label>
         <price>&euro;{service?.price}</price>
       </TotalWrap>
       <Button onClick={nextStep}>

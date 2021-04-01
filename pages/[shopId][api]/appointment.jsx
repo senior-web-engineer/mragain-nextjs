@@ -230,7 +230,7 @@ export default function AppointmentPage({ shop }) {
               <Switch value={step}>
                 <Switch.Case value={0}>
                   <LocationFieldWrap>
-                    <SubTitle>Repair location</SubTitle>
+                    <SubTitle>Maak je keuze</SubTitle>
                     <Field name="location" as={LocationSelector} />
                   </LocationFieldWrap>
                   <DateAndTime />
@@ -238,18 +238,18 @@ export default function AppointmentPage({ shop }) {
                 <Switch.Case value={1}>
                   <DetailsForm>
                     <header>
-                      <SubTitle>Personal Details</SubTitle>
+                      <SubTitle>Jouw gegevens</SubTitle>
                     </header>
-                    <Field name="name" label="Name" />
+                    <Field name="name" label="Naam" />
                     <InlineFields>
                       <Field
                         name="email"
-                        label="E-mail Address"
+                        label="E-mail adres"
                         autoComplete="email"
                       />
                       <Field
                         name="tel"
-                        label="Contact Number"
+                        label="Telefoon nummer"
                         autoComplete="tel"
                       />
                     </InlineFields>
@@ -264,7 +264,7 @@ export default function AppointmentPage({ shop }) {
             <CTAButtons>
               {step > 0 ? (
                 <TextButton onClick={() => updateStep((state) => state - 1)}>
-                  <FontAwesomeIcon icon={faArrowLeft} /> Back to previous step
+                  <FontAwesomeIcon icon={faArrowLeft} /> Terug naar vorige stap
                 </TextButton>
               ) : (
                 <span />
