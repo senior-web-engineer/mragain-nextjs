@@ -213,29 +213,29 @@ const DetailButtonsWrap = styled.div`
 
 const ADVANTAGES = [
   {
-    title: "No fix, no fee",
+    title: "Klaar terwijl u wacht",
     logo: "/images/shop/wallet.png",
-    description: "Insert description here. Should be 2",
+    description: "De meeste reparaties zijn binnen 30 minuten klaar",
   },
   {
-    title: "30 Days Warranty",
+    title: "De beste garantie",
     logo: "/images/shop/star.png",
-    description: "Insert description here. Should be 2",
+    description: "Per reparatie zie je onze garantievoorwaarden",
   },
   {
-    title: "Expert",
+    title: "Kwaliteit staat voorop",
     logo: "/images/shop/profile.png",
-    description: "Insert description here. Should be 2",
+    description: "Wij werken uitsluitend met onderdelen van de hoogste kwaliteit",
   },
   {
-    title: "We are fast",
+    title: "Wordt snel geholpen",
     logo: "/images/shop/gauge.png",
-    description: "Insert description here. Should be 2",
+    description: "Door een afspraak te maken weten we dat je komt",
   },
 ];
 
 export default function ShopHeader({ shop }) {
-  const tag = shop.tag || "popular";
+  const tag = shop.tag || "populair";
   const location = [shop.street, shop.city, shop.zipcode]
     .filter(Boolean)
     .join(", ");
@@ -255,7 +255,7 @@ export default function ShopHeader({ shop }) {
   }
 
   const shareText = `
-    I found the "${shop.name}" repairshop on mragain. Do you broken devices? MrAgain is the right place to find the repairshop you need
+    Ik heb  "${shop.name}" gevonden via MrAgain. Heb je een kapot apparaat? Bij MrAgain vind je de beste reparateur bij jou in de buurt
   `;
   const shopURL = typeof window !== "undefined" ? window.location.href : "";
   const detailButtons = (
@@ -266,7 +266,7 @@ export default function ShopHeader({ shop }) {
         content={
           <>
             <FacebookShareButton url={shopURL} quote={shareText}>
-              <FacebookIcon size={40} round />
+              <FacebookIcon size={40} round />:
             </FacebookShareButton>
             <LinkedinShareButton
               url={shopURL}

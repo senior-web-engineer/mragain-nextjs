@@ -100,7 +100,7 @@ const MobileToolbar = styled.div`
 
 const SERVICE_COLUMNS = [
   {
-    title: "Name",
+    title: "Reparatie",
     key: "reparation_name",
     render: (item) => {
       if (false) {
@@ -135,17 +135,17 @@ const SERVICE_COLUMNS = [
     },
   },
   {
-    title: "Warranty",
+    title: "Garantie",
     dataIndex: "guarantee_time",
     key: "guarantee_time",
   },
   {
-    title: "Working time",
+    title: "Reparatie tijd",
     dataIndex: "reparation_time",
     key: "reparation_time",
   },
   {
-    title: "Price",
+    title: "Prijs",
     dataIndex: "price",
     key: "price",
     render: (text) => <span>&euro;{text}</span>,
@@ -196,7 +196,7 @@ function MobileServiceItem({ item }) {
       <ServiceMobileItemWrap.FirstColumn>
         {firstColumn}
         <dd>
-          {item.guarantee_time} months warranty <br />~ {item.reparation_time}{" "}
+          {item.guarantee_time} maanden garantie <br />~ {item.reparation_time}{" "}
           reparation time
         </dd>
       </ServiceMobileItemWrap.FirstColumn>
@@ -321,7 +321,7 @@ function AppointmentButton() {
         href={`/${router.query["shopId][api"]}/appointment?device=${formValues.device}&brand=${formValues.brand}&model=${formValues.model}&service=${values.service}`}
       >
         <Button disabled={!values.service}>
-          Proceed to booking <FontAwesomeIcon icon={faArrowRight} />{" "}
+          Afspraak maken <FontAwesomeIcon icon={faArrowRight} />{" "}
         </Button>
       </Link>
     </NextStepWrap>
@@ -391,7 +391,7 @@ export default function ShopServices({ shop }) {
             <DeviceSelector
               name="device"
               as={Select}
-              label="Device"
+              label="Apparaat"
               onChange={onDeviceChange}
               dropdownStyle={{ minWidth: "200px" }}
             />
@@ -399,7 +399,7 @@ export default function ShopServices({ shop }) {
           <BrandSelector
             name="brand"
             as={Select}
-            label="Brand"
+            label="Merk"
             onChange={onBandChange}
             dropdownStyle={{ minWidth: "200px" }}
           />

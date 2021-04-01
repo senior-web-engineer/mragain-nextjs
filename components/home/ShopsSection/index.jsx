@@ -233,7 +233,7 @@ export default function ShopsSection({shopList = []} = {}) {
         </div>
         <div>
           <a className="view-all">
-            View more <FontAwesomeIcon icon={faArrowRight} />
+            Laad meer <FontAwesomeIcon icon={faArrowRight} />
           </a>
         </div>
       </Toolbar>

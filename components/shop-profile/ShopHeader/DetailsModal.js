@@ -32,7 +32,7 @@ const Schedule = withData({
 
     return (
       <ScheduleSection>
-        <SubTitle>Shop scheduele</SubTitle>
+        <SubTitle>Onze openingstijden</SubTitle>
         {DAYS_OF_WEEK.map((day) => (
           <DayWrap>
             <span>{DAY_TO_FULL_NAME[day]}</span>
@@ -58,7 +58,7 @@ export default function DetailsModal({ shop }) {
       <Modal
         module={shopInfo}
         footer={null}
-        title={<SubTitle>About {shop.name}</SubTitle>}
+        title={<SubTitle>Over {shop.name}</SubTitle>}
       >
         <p>{shop.about_us}</p>
         <Schedule />

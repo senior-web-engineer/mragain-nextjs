@@ -170,26 +170,26 @@ export default function AppointmentPage({ shop }) {
         await appointmentForm.actions.submit();
         appointmentConfirmation.actions.open({
           type: "success",
-          message: "Successfully booked",
+          message: "Afspraak succesvol gemaakt! ",
           description:
-            "Check your email inbox for booking confirmation and details",
+            "We hebben een bevestiging email naar je verzonden (kan in je spam zitten!)",
           buttonLabel: "View booking information",
         });
       } catch (err) {
         if (err.validationErrors) {
           appointmentConfirmation.actions.open({
-            type: "warning",
-            message: "On no! Incomplete information",
-            description: "Please complete all necessary information to process your booking",
-            buttonLabel: "Try again",
+            type: "waarschuwing",
+            message: "Je lijkt niet alle informatie te hebben ingevuld, even checken? ",
+            description: "We hebben al je informatie nodig om een afspraak te maken",
+            buttonLabel: "Probeer het nog een keer",
           });
           return;
         }
         appointmentConfirmation.actions.open({
           type: "error",
           message: "Oops!",
-          description: "Something went wrong",
-          buttonLabel: "Try again",
+          description: "Er is iets fout gegaan",
+          buttonLabel: "Probeer het nog eens",
         });
       }
       return;

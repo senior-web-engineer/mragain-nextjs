@@ -59,10 +59,10 @@ const StepWrap = styled.div`
 
 const STEPS_META = [
   {
-    title: "Appointment",
+    title: "Afspraak",
   },
   {
-    title: "Information",
+    title: "Informatie",
   },
   // {
   //   title: "Payment",

@@ -139,38 +139,38 @@ export default function ShopDetails() {
     <MainWrap>
       <MaxConstraints>
         <dl>
-          <dt>Devices</dt>
+          <dt>Apparaten</dt>
           <dd>
             <FontAwesomeIcon icon={faMobile} />{" "}
             <FontAwesomeIcon icon={faLaptop} />
             <FontAwesomeIcon icon={faTablet} /> <FontAwesomeIcon icon={faTv} />{" "}
             <FontAwesomeIcon icon={faHeadphones} />
           </dd>
-          <dt>Payment Methods</dt>
+          <dt>Betaal methoden</dt>
           <dd>
             <FontAwesomeIcon icon={faCcVisa} />
             <FontAwesomeIcon icon={faCcMastercard} />
             <FontAwesomeIcon icon={faPaypal} />
           </dd>
-          <dt>Location options</dt>
+          <dt>Reparatie opties</dt>
           <dd>
             <LocationWrap>
-              <FontAwesomeIcon icon={faHome} /> Home service
+              <FontAwesomeIcon icon={faHome} /> Reparatie op locatie
             </LocationWrap>
             <LocationWrap>
-              <FontAwesomeIcon icon={faStore} /> Home service
+              <FontAwesomeIcon icon={faStore} /> Reparatie in winkel
             </LocationWrap>
             <LocationWrap>
-              <FontAwesomeIcon icon={faBox} /> Home service
+              <FontAwesomeIcon icon={faBox} /> Opsturen
             </LocationWrap>
           </dd>
-          <dt>Store Availability</dt>
+          <dt>Services</dt>
           <dd>Mobile Accessories, Storage Devices, Computer Accessories,</dd>
-          <dt>Temporary Replacement</dt>
-          <dd>For selected device only.</dd>
-          <dt>Waiting Area</dt>
-          <dd>Not available</dd>
-          <dt>Devices</dt>
+          <dt>Vervangend toestel</dt>
+          <dd>Voor specifieke toestellen</dd>
+          <dt>Wachtruimte</dt>
+          <dd>Niet beschikbaar</dd>
+          <dt>Merken</dt>
           <dd>Apple, Acer, Asus, Dell, Hewlett-Packard, Huawei, HTC,</dd>
         </dl>
         <Form module={serviceFormModule}>

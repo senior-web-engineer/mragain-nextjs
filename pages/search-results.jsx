@@ -662,13 +662,13 @@ function ShopItem({ item }) {
             <ShopDetails.AppointmentInfo>
               {moment(item.next_slot).isValid() ? (
                 <div>
-                  <label>Next available schedule</label>
+                  <label>Eerst mogelijke afspraak</label>
                   <date>{moment(item.next_slot).format("DD MMM, hh:mm")}</date>
                 </div>
               ) : null}
               {item.price ? (
                 <ShopDetails.PriceWrap>
-                  <label>Starts at</label>
+                  <label>Vanaf</label>
                   <price>&euro; {item.price}</price>
                 </ShopDetails.PriceWrap>
               ) : null}
@@ -826,38 +826,38 @@ const SORT_BY = [
 
 const WARRANTIES = [
   {
-    label: "No warranty",
+    label: "Geen garantie",
     value: "-1",
   },
   {
-    label: "1 month warranty",
+    label: "1 maand garantie",
     value: "1",
   },
   {
-    label: "6 month warranty",
+    label: "6 maanden garantie",
     value: "6",
   },
 ];
 
 const WORKING_TIME = [
   {
-    label: "less than 30 minutes",
+    label: "minder dan 30 minuten",
     value: "30",
   },
   {
-    label: "less than 1 hour",
+    label: "minder dan 1 uur",
     value: "60",
   },
   {
-    label: "less than 2 hours",
+    label: "minder dan 2 uur",
     value: "120",
   },
   {
-    label: "within a day",
+    label: "binnen een dag",
     value: "180",
   },
   {
-    label: "in 3 days",
+    label: "binnen 3 dagen",
     value: "180",
   },
 ];
@@ -1037,7 +1037,7 @@ export default function SearchResults() {
               <Sidebar>
                 <SidebarInnerWrap>
                   <SidebarHeader>
-                    <SubTitle>Refine results</SubTitle>
+                    <SubTitle>Filter resultaten</SubTitle>
                     <Form module={filtersFormModule}>
                       <ClearFilters />
                     </Form>
@@ -1052,7 +1052,7 @@ export default function SearchResults() {
                     <hr />
                     <Field
                       as={Select}
-                      label="Distance"
+                      label="Afstand"
                       name="distance"
                       options={DISTANCES}
                     />
@@ -1061,7 +1061,7 @@ export default function SearchResults() {
                         name="sort"
                         as={Select}
                         options={SORT_BY}
-                        label="Sort by"
+                        label="Sorteer op"
                         dropdownStyle={{ minWidth: "150px" }}
                       />
                     </OnMobile>
@@ -1069,14 +1069,14 @@ export default function SearchResults() {
                   <ModelFields>
                     <OnMobile only>
                       <MobileDeviceSelector
-                        name="device"
+                        name="Apparaat"
                         onChange={onDeviceChange}
                       />
                       <ModelFieldsMobile>
                         <BrandSelector
                           name="brand"
                           as={Select}
-                          label="Brand"
+                          label="Merk"
                           onChange={onBandChange}
                           dropdownStyle={{ minWidth: "200px" }}
                         />
@@ -1090,7 +1090,7 @@ export default function SearchResults() {
                         <ServiceSelector
                           name="service"
                           as={Select}
-                          label="Services"
+                          label="Reparatie"
                           dropdownStyle={{ minWidth: "200px" }}
                         />
                         <Waypoint
@@ -1101,7 +1101,7 @@ export default function SearchResults() {
                           name="sort"
                           as={Select}
                           options={SORT_BY}
-                          label="Sort by"
+                          label="Sorteer op"
                         />
                       </ModelFieldsMobile>
                     </OnMobile>
@@ -1109,14 +1109,14 @@ export default function SearchResults() {
                       <DeviceSelector
                         name="device"
                         as={Select}
-                        label="Device"
+                        label="Apparaat"
                         onChange={onDeviceChange}
                         dropdownStyle={{ minWidth: "200px" }}
                       />
                       <BrandSelector
                         name="brand"
                         as={Select}
-                        label="Brand"
+                        label="Merk"
                         onChange={onBandChange}
                         dropdownStyle={{ minWidth: "200px" }}
                       />
@@ -1130,13 +1130,13 @@ export default function SearchResults() {
                       <ServiceSelector
                         name="service"
                         as={Select}
-                        label="Services"
+                        label="Reparatie"
                         dropdownStyle={{ minWidth: "200px" }}
                         popupPlacement="bottomRight"
                       />
                     </OnMobile>
                     <MapTriggerWrap>
-                      <label>Map</label>
+                      <label>Kaart</label>
                       <Switch
                         checked={showMap}
                         onChange={(val) => updateShowMap(val)}
@@ -1185,7 +1185,7 @@ export default function SearchResults() {
                       <hr />
                       <Field
                         as={Select}
-                        label="Distance"
+                        label="Afstand"
                         name="distance"
                         options={DISTANCES}
                       />
@@ -1198,7 +1198,7 @@ export default function SearchResults() {
               <MobileToolbar>
                 <TextButton onClick={() => refineSearchModal.actions.open()}>
                   <FontAwesomeIcon icon={faSortAmountDown} />
-                  Refine search
+                  Resultaten filteren
                 </TextButton>
                 <ToolbarButtonWrap>
                   <Button onClick={() => updateShowMap((state) => !state)}>
@@ -1212,7 +1212,7 @@ export default function SearchResults() {
               </MobileToolbar>
               <Modal module={refineSearchModal} footer={null}>
                 <RefineModalWrap>
-                  <SubTitle>Refine results</SubTitle>
+                  <SubTitle>Resultaten filteren</SubTitle>
                   <RefineSearchForm />
                   <RefineFooter />
                 </RefineModalWrap>

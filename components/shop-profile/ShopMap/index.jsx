@@ -27,10 +27,10 @@ const REVIEW_MARKS = [
 ];
 
 const REVIEW_MARK_TO_LABEL = {
-  price_mark: "Pricing",
-  quality_mark: "Quality of Work",
-  service_mark: "Friendliness of Personel",
-  wait_mark: "Waiting times",
+  price_mark: "Prijs",
+  quality_mark: "Kwaliteit",
+  service_mark: "Personeel",
+  wait_mark: "Wachttijd",
 };
 
 const ReviewsWrap = styled.div`
@@ -275,7 +275,7 @@ function Reviews({ options, ...rest }) {
     <ReviewsWrap>
       <SubTitle>Reviews</SubTitle>
       <ReviewWrap>
-        <strong>Overall score</strong>
+        <strong>Gemiddelde rating</strong>
         <div>
           <Rate
             disabled
@@ -301,7 +301,7 @@ function Reviews({ options, ...rest }) {
         </ReviewWrap>
       ))}
       <ReviewWrap>
-        <strong>Recomandation Procentage</strong>
+        <strong>Aanbevelingspercentage</strong>
         <div>
           <Slider readOnly value={(recomandations / optionsCount) * 100} />{" "}
         </div>
@@ -313,14 +313,14 @@ function Reviews({ options, ...rest }) {
       <Modal
         module={reviewsModal}
         footer={null}
-        title={<SubTitle>Our reviews</SubTitle>}
+        title={<SubTitle>Onze reviews</SubTitle>}
       >
         <OverallWrap>
-          <h2>Overall average score</h2>
+          <h2>Gemiddelde rating</h2>
           <OverallContent>
             <dl>
               <dt>{formatNumber(scores.overall)}</dt>
-              <dd>out of 5 start</dd>
+              <dd>van 5 sterren</dd>
             </dl>
             <hr />
             <div>
@@ -330,7 +330,7 @@ function Reviews({ options, ...rest }) {
                 value={scores.overall}
                 onChange={null}
               />
-              <div>from {optionsCount} reviews</div>
+              <div>van {optionsCount} reviews</div>
             </div>
           </OverallContent>
         </OverallWrap>

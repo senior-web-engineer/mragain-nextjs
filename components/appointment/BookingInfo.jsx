@@ -177,9 +177,9 @@ export default function BookingInfo({ shop, nextStep }) {
   return (
     <MainWrap>
       <header>
-        <SubTitle>Booking details</SubTitle>
+        <SubTitle>Afspraak gegevens</SubTitle>
       </header>
-      <label>Shop information</label>
+      <label>Reparateur informatie</label>
       <ShopDetails>
         <h3>{shop.name}</h3>
         <location>{location}</location>
@@ -196,13 +196,13 @@ export default function BookingInfo({ shop, nextStep }) {
         </ServiceImage>
         <ServiceDetails>
           <div>
-            <label>Type:</label>
+            <label>Apparaat:</label>
             <strong>
               <DeviceName />
             </strong>
           </div>
           <div>
-            <label>Device brand:</label>
+            <label>Merk:</label>
             <strong>
               <BrandName />
             </strong>

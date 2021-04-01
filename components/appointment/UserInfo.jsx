@@ -33,10 +33,10 @@ const ServiceDetailsWrap = styled.div`
 const USER_FIELDS = ["name", "email", "tel"];
 const DATE_FIELDS = ["date"];
 const FIELDS_LABELS = {
-  name: "Name",
+  name: "Naam",
   email: "Email",
-  tel: "Contact number",
-  date: "Date & Time",
+  tel: "Telefoon nummer",
+  date: "Datum & tijdstip",
 };
 
 function Section({ fields, showTitle }) {
@@ -75,7 +75,7 @@ function Section({ fields, showTitle }) {
 
   return (
     <>
-      {showTitle ? <h5>Your details</h5> : null}
+      {showTitle ? <h5>Jouw gegevens</h5> : null}
       <ServiceDetailsWrap>
         <ServiceDetails>{fields.map(renderField)}</ServiceDetails>
       </ServiceDetailsWrap>

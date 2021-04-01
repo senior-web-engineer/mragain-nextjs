@@ -6,20 +6,20 @@ import InlineSelector from "./InlineSelector";
 
 const DEFAULT_OPTIONS = [
   {
-    label: "In-store service",
-    description: "Create an apointment to visit our store",
+    label: "Reparatie in de winkel",
+    description: "Maak een afspraak en kom bij ons langs",
     icon: faStore,
     value: "in-store",
   },
   {
-    label: "Home service",
+    label: "Reparatie op locatie",
     description: "Coming soon",
     icon: faHome,
     disabled: true,
     value: "home",
   },
   {
-    label: "Delivery",
+    label: "Opsturen",
     description: "Coming soon",
     icon: faBox,
     disabled: true,

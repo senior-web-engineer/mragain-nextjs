@@ -324,7 +324,7 @@ export default function DateAndTime() {
   return (
     <DatePickerWrap>
       <header>
-        <SubTitle>Scheduele an appointment</SubTitle>
+        <SubTitle>Kies de datum die jou uitkomt</SubTitle>
       </header>
       <SchedueleContentWrap>
         <Field name="date" as={CalendarField} onChange={(value) => {

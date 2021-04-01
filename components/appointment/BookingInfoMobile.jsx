@@ -186,13 +186,13 @@ export default function BookingInfoMobile({ shop, nextStep }) {
         </ServiceImage>
         <ServiceDetails>
           <div>
-            <label>Type:</label>
+            <label>Apparaat:</label>
             <strong>
               <DeviceName />
             </strong>
           </div>
           <div>
-            <label>Device brand:</label>
+            <label>Merk:</label>
             <strong>
               <BrandName />
             </strong>
@@ -241,7 +241,7 @@ export default function BookingInfoMobile({ shop, nextStep }) {
         </ShopWrap>
 
         <TotalWrap>
-          <label>Total amount</label>
+          <label>Totale bedrag</label>
           <price>&euro;{service?.price}</price>
           <FontAwesomeIcon icon={faChevronDown} />
         </TotalWrap>
