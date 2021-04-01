@@ -13,7 +13,7 @@ export const FieldWrap = styled.div`
   }
 `;
 export const ErrorWrap = styled.div`
-  color: red;
-  margin-top: 7px;
-  font-size: 12px;
+  color: #ce2029;
+  margin-top: 5.5px;
+  font-size: 11px;
 `;

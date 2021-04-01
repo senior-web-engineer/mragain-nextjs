@@ -1,4 +1,5 @@
 import { useFormContext } from "@/modules/forms";
+import moment from "moment";
 import React from "react";
 import styled from "styled-components";
 
@@ -24,22 +25,24 @@ const ServiceDetails = styled.section`
 
 const ServiceDetailsWrap = styled.div`
   display: flex;
-  padding-bottom: 22px;
+  padding-bottom: 7px;
   border-bottom: 3px solid #fafafa;
   margin-bottom: 17px;
 `;
 
-const FIELDS = ["name", "email", "tel"];
+const USER_FIELDS = ["name", "email", "tel"];
+const DATE_FIELDS = ["date"];
 const FIELDS_LABELS = {
   name: "Name",
   email: "Email",
   tel: "Contact number",
+  date: "Date & Time",
 };
 
-export default function UserInfo() {
+function Section({ fields, showTitle }) {
   const { values } = useFormContext().state;
 
-  const shouldRender = FIELDS.some((field) => values[field]);
+  const shouldRender = fields.some((field) => values[field]);
 
   if (!shouldRender) {
     return null;
@@ -50,20 +53,41 @@ export default function UserInfo() {
       return null;
     }
 
+    function formatValue() {
+      if (name === "date") {
+        return `${values.time ? values.time : ""} ${moment(values.date).format(
+          "dddd, DD MMMM YYYY"
+        )}`
+      }
+
+      return values?.[name]
+    }
+
     return (
       <div>
         <label>{FIELDS_LABELS[name]}: </label>
-        <strong>{values?.[name]}</strong>
+        <strong>
+          {formatValue()}
+        </strong>
       </div>
     );
   }
 
   return (
     <>
-      <h5>Your details</h5>
+      {showTitle ? <h5>Your details</h5> : null}
       <ServiceDetailsWrap>
-        <ServiceDetails>{FIELDS.map(renderField)}</ServiceDetails>
+        <ServiceDetails>{fields.map(renderField)}</ServiceDetails>
       </ServiceDetailsWrap>
+    </>
+  );
+}
+
+export default function UserInfo() {
+  return (
+    <>
+      <Section fields={USER_FIELDS} showTitle />
+      <Section fields={DATE_FIELDS} />
     </>
   );
 }

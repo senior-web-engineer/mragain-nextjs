@@ -35,7 +35,7 @@ export const appointmentForm = createFormModule({
       location: "in-store",
       paymentType: "cash",
       date: new Date().toString(),
-      time: "4:20",
+      time: "",
       name: "",
       email: "",
       tel: "",

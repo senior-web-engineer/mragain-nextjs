@@ -33,7 +33,7 @@ import Button from "@/components/ui/Button";
 
 const MainWrap = styled.div`
   padding-top: 1px;
-  margin-bottom: -127px;
+  margin-bottom: -87px;
 
   ${media.tablet`
     > ${MaxConstraints} {

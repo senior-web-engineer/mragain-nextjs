@@ -9,7 +9,11 @@ import moment from "moment";
 import React, { useMemo } from "react";
 import styled, { css } from "styled-components";
 import { SubTitle } from "../styled/text";
-import { appointmentForm, invalidTimeFetcher, openTimeFetcher } from "./modules";
+import {
+  appointmentForm,
+  invalidTimeFetcher,
+  openTimeFetcher,
+} from "./modules";
 
 const ShortDayWrap = styled.div`
   background-color: #a0a0a0;
@@ -68,7 +72,7 @@ const DatePickerWrap = styled.div`
     font-size: 13px;
   }
 
-  .ant-fullcalendar-next-month-btn-day .ant-fullcalendar-value {
+  .ant-fullcalendar-next-month-btn-day:not(.ant-fullcalendar-disabled-cell) .ant-fullcalendar-value {
     color: rgba(0, 0, 0, 0.65);
   }
 
@@ -129,7 +133,12 @@ function CalendarField({ value, onChange }) {
           return true;
         }
         const day = date.isoWeekday();
-        const isClosed = !openedTimes?.data?.[DAYS_OF_WEEK[day - 1]] || openedTimes?.data?.[DAYS_OF_WEEK[day - 1]] === "Gesloten";
+        console.log(openedTimes?.data?.[DAYS_OF_WEEK[day - 1]]);
+        const isClosed =
+          !openedTimes?.data?.[DAYS_OF_WEEK[day - 1]] ||
+          ["gesloten", "closed"].includes(
+            openedTimes?.data?.[DAYS_OF_WEEK[day - 1]]?.toLowerCase()
+          );
         return isClosed;
       }}
       onSelect={(value) => onChange(moment(value).toString())}
@@ -216,6 +225,7 @@ const TimeFrames = styled.div`
     flex-direction: column;
     flex-wrap: nowrap;
     margin: 0;
+    padding: 10px 0;
   `}
 `;
 
@@ -228,8 +238,7 @@ const SchedueleContentWrap = styled.div`
 
   > div:nth-child(1) {
     width: 100%;
-    }
-
+  }
 
   ${media.tablet`
     height: 380px;
@@ -246,14 +255,11 @@ const SchedueleContentWrap = styled.div`
       margin: 0;
     }
   `}
-
-
-
 `;
 
 function TimePicker({ value, onChange }) {
   const invalidTimes = useFetcher({ dataFetcher: invalidTimeFetcher });
-  const openedTimes = useFetcher({ dataFetcher: openTimeFetcher});
+  const openedTimes = useFetcher({ dataFetcher: openTimeFetcher });
   const selectedDate = moment(appointmentForm.state.values.date);
 
   const shortDays = useMemo(() => {
@@ -302,12 +308,9 @@ function TimePicker({ value, onChange }) {
   return (
     <TimeFrames>
       {hours.map((hour) => {
-        const isSelected = value === hour
+        const isSelected = value === hour;
         return (
-          <TimeOption
-            isSelected={isSelected}
-            onClick={() => onChange(hour)}
-          >
+          <TimeOption isSelected={isSelected} onClick={() => onChange(hour)}>
             {hour}
             {isSelected ? <FontAwesomeIcon icon={faCheckCircle} /> : null}
           </TimeOption>
@@ -317,7 +320,6 @@ function TimePicker({ value, onChange }) {
   );
 }
 
-
 export default function DateAndTime() {
   return (
     <DatePickerWrap>
@@ -325,7 +327,10 @@ export default function DateAndTime() {
         <SubTitle>Scheduele an appointment</SubTitle>
       </header>
       <SchedueleContentWrap>
-        <Field name="date" as={CalendarField} />
+        <Field name="date" as={CalendarField} onChange={(value) => {
+          appointmentForm.actions.onFieldChange({name: "date", value})
+          appointmentForm.actions.onFieldChange({name: "time", value: ""})
+        }}/>
         <Field name="time" as={TimePicker} />
       </SchedueleContentWrap>
     </DatePickerWrap>
