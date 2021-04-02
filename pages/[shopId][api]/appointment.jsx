@@ -173,7 +173,7 @@ export default function AppointmentPage({ shop }) {
           message: "Afspraak succesvol gemaakt! ",
           description:
             "We hebben een bevestiging email naar je verzonden (kan in je spam zitten!)",
-          buttonLabel: "View booking information",
+          buttonLabel: "Bekijk afspraak gegevens",
         });
       } catch (err) {
         if (err.validationErrors) {

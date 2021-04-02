@@ -2,7 +2,23 @@ import React from "react";
 import Document, { Head, Main, NextScript, Html } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 import HeadWithoutPreload from "./HeadWithoutPreload";
+import { GA_TRACKING_ID } from "../lib/gtag";
 
+// https://developers.google.com/analytics/devguides/collection/gtagjs/pages
+export const pageview = (url) => {
+  window.gtag('config', GA_TRACKING_ID, {
+    page_path: url,
+  })
+}
+
+// https://developers.google.com/analytics/devguides/collection/gtagjs/events
+export const event = ({ action, category, label, value }) => {
+  window.gtag('event', action, {
+    event_category: category,
+    event_label: label,
+    value: value,
+  })
+}
 
 const hotJarScript = `
 (function(h,o,t,j,a,r){
