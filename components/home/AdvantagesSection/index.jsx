@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import {
   faReceipt,
-  faTachometer,
+  faClock,
   faTree,
   faCheck,
 } from "@fortawesome/free-solid-svg-icons";
@@ -17,7 +17,7 @@ import { H2, SubTitle } from "@/components/styled/text";
 
 const ADVANTAGES = [
   {
-    icon: faTachometer,
+    icon: faClock,
     title: "Snelheid & Gemak",
     1: "Altijd direct geholpen doordat de reparateur weet dat je komt",
     2: "Snellere reparatie doordat de reparateur weet met welk toestel je komt",
