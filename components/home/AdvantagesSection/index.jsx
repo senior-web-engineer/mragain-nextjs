@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 import {
-  faCrown,
-  faGift,
+  faReceipt,
+  faTachometer-alt,
   faTree,
   faCheck,
 } from "@fortawesome/free-solid-svg-icons";
@@ -17,13 +17,13 @@ import { H2, SubTitle } from "@/components/styled/text";
 
 const ADVANTAGES = [
   {
-    icon: faGift,
+    icon: faTachometer-alt,
     title: "Snelheid & Gemak",
     1: "Altijd direct geholpen doordat de reparateur weet dat je komt",
     2: "Snellere reparatie doordat de reparateur weet met welk toestel je komt",
   },
   {
-    icon: faCrown,
+    icon: faReceipt,
     title: "Vooraf duidelijkheid",
     1: "Vooraf duidelijkheid over wat je gaat betalen en de garantie die je krijgt",
     2: "Afspraak bevestiging & garantie bewijs in je email",
