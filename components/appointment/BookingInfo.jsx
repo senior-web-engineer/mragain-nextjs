@@ -223,7 +223,7 @@ export default function BookingInfo({ shop, nextStep }) {
         <price>&euro;{service?.price}</price>
       </ServiceCostWrap>
       <TotalWrap>
-        <label>Totaal bedrag</label>
+        <label>Te betalen bij reparateur</label>
         <price>&euro;{service?.price}</price>
       </TotalWrap>
       <Button onClick={nextStep}>
