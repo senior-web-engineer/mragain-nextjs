@@ -197,7 +197,7 @@ function MobileServiceItem({ item }) {
         {firstColumn}
         <dd>
           {item.guarantee_time} maanden garantie <br />~ {item.reparation_time}{" "}
-          reparation time
+          reparatie tijd
         </dd>
       </ServiceMobileItemWrap.FirstColumn>
       <price>

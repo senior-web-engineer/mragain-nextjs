@@ -241,7 +241,7 @@ export default function BookingInfoMobile({ shop, nextStep }) {
         </ShopWrap>
 
         <TotalWrap>
-          <label>Totale bedrag</label>
+          <label>Te betalen bij reparateur</label>
           <price>&euro;{service?.price}</price>
           <FontAwesomeIcon icon={faChevronDown} />
         </TotalWrap>

@@ -271,7 +271,7 @@ export default function AppointmentPage({ shop }) {
               )}
               <OnMobile only>
                 <Button onClick={onNext}>
-                  Next step <FontAwesomeIcon icon={faArrowRight} />
+                  Volgende <FontAwesomeIcon icon={faArrowRight} />
                 </Button>
               </OnMobile>
             </CTAButtons>
