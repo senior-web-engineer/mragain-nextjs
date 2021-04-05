@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {
   faCrown,
   faGift,
-  faGem,
+  faTree,
   faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,18 +18,18 @@ import { H2, SubTitle } from "@/components/styled/text";
 const ADVANTAGES = [
   {
     icon: faGift,
-    title: "Jouw voordelen",
+    title: "Snelheid & Gemak",
     1: "Altijd direct geholpen doordat de reparateur weet dat je komt",
-    2: "Vooraf duidelijkheid over wat je gaat betalen en de garantie die je krijgt",
+    2: "Snellere reparatie doordat de reparateur weet met welk toestel je komt",
   },
   {
     icon: faCrown,
-    title: "De beste garantie",
-    1: "Boeken via MrAgain levert je standaard 1 maand extra garantie op",
-    2: "Korting bij veel van onze aangesloten reparateurs als je direct online reserveert",
+    title: "Vooraf duidelijkheid",
+    1: "Vooraf duidelijkheid over wat je gaat betalen en de garantie die je krijgt",
+    2: "Afspraak bevestiging & garantie bewijs in je email",
   },
   {
-    icon: faGem,
+    icon: faTree,
     title: "Je bent goed bezig!",
     1: "Je bespaart geld",
     2: "Je helpt het milieu door duurzaam met je apparaat om te gaan",
@@ -119,7 +119,7 @@ export default function AdvantagesSection() {
   return (
     <>
       <SubTitle>mragain.nl</SubTitle>
-      <H2>Waarom je voor MrAgain kiest</H2>
+      <H2>Waarom je een afspraak maakt via  MrAgain</H2>
       <AdvantagesWrap>
         <SliderOnMobile>{ADVANTAGES.map(renderAdvantage)}</SliderOnMobile>
       </AdvantagesWrap>

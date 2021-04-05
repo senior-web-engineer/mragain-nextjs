@@ -147,7 +147,7 @@ function SearchButton() {
       href={`/search-results?zip=${zip}&device=${deviceId}&brand=${brandId}&model=${modelId}`}
     >
       <Button>
-        <span>Search</span>
+        <span>Zoek</span>
         <FontAwesomeIcon icon={faArrowRight} />
       </Button>
     </Link>

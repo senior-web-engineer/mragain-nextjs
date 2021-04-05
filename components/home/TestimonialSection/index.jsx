@@ -42,43 +42,38 @@ const ContentWrap = styled.div`
 
 const STATS = [
   {
-    count: "24",
-    label: "Aantal reparaties",
+    count: "267",
+    label: "Aantal telefoon modellen",
   },
   {
     count: "65",
     label: "Aangesloten reparateurs",
   },
   {
-    count: "1,500",
+    count: "1,489",
     label: "Aanbod aan reparaties",
   },
 ];
 
 const TESTIMONIAL_DATA = [
   {
-    author: "Jan",
+    author: "Vera",
     location: "Utrecht",
     review: (
-      <>
-        Door de samenwerking met MrAgain hoeven we ons minder zorgen te maken om
-        onze marketing. Klanten maken afspraken bij ons doordat ze de goede
-        reviews en voorwaarden zien. Hierdoor kunnen wij ons focussen op waar we
-        echt goed in zijn.
-        <p>Dat is het repareren van jouw device!</p>
+      <>Via MrAgain heb ik eenvoudig en snel een reparateur gevonden bij mij in de buurt.
+	Vooral het vergelijken van de reviews en het online maken van een afspraak vond ik handig, hierdoor wisten
+	Ze dat ik zou komen en kon ik direct worden geholpen.
+        <p>Binnen een dag was mijn smartphone gefixed!</p>
       </>
     ),
   },
   {
-    author: "Marcel",
+    author: "Quincy",
     location: "Den Haag",
     review: (
-      <>
-        Sinds we op MrAgain staan hebben we veel meer online afspraken dan
-        daarvoor. Dit helpt ons doordat we vantevoren weten wie er langs komt in
-        de zaak. We hebben alle materialen dan op voorhand, en mocht dat niet zo
-        zijn dan regelen we het snel.
-        <p>Voor ons is MrAgain tot nu toe een echte verademing!</p>
+      <> Mijn telefoon deed het niet meer en ik wist niet wat er aan de hand was. Gelukkig zag ik dat je bij 
+	    veel reparateurs een diagnose afspraak met no cure no pay kan maken. Dat heb ik gedaan en op die manier ben ik toen snel geholpen. 
+        <p>Super handig dat je kunt zien welke reparateur ook jouw toestel repareert!</p>
       </>
     ),
   },

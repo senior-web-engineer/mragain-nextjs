@@ -689,7 +689,7 @@ function parseOptions(arr, key) {
   return [
     {
       id: "0",
-      [key]: "All",
+      [key]: "Alle",
     },
     ...arr,
   ].map((item) => ({

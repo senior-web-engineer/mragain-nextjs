@@ -218,9 +218,9 @@ const ADVANTAGES = [
     description: "De meeste reparaties zijn binnen 30 minuten klaar",
   },
   {
-    title: "De beste garantie",
+    title: "Altijd de beste garantie",
     logo: "/images/shop/star.png",
-    description: "Per reparatie zie je onze garantievoorwaarden",
+    description: "Per reparatie zie je hoeveel maanden garantie je krijgt",
   },
   {
     title: "Kwaliteit staat voorop",
