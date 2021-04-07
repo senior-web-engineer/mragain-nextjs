@@ -816,16 +816,27 @@ const DISTANCES = [
 
 const SORT_BY = [
   {
-    label: "Rating Hoog-Laag",
-    value: "0",
+    label: "Default",
+    value: 0,
   },
   {
-    label: "Hoog-Laag",
-    value: "1",
+    label: "Rating",
+    value: 1,
   },
   {
-    label: "Laag-Hoog",
-    value: "2",
+
+    label: "Price",
+    value: 4,
+  },
+  {
+
+    label: "Guarantee",
+    value: 5,
+  },
+  {
+
+    label: "Distance",
+    value: 8,
   },
 ];
 
@@ -926,7 +937,7 @@ function RefineSearchForm() {
   return (
     <Form module={filtersFormModule}>
       <Field name="price" as={Slider} label="Prijs" />
-      {false && <Field name="rating" as={Rate} label="Rating" />}
+      <Field name="rate" as={Rate} label="Rating" />
       {false && (
         <Field name="repairType" as={Radio.Group} label="Reparatie Type">
           {REPAIR_TYPES.map((type) => (
