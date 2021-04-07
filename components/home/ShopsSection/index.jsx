@@ -232,9 +232,11 @@ export default function ShopsSection({shopList = []} = {}) {
           <a>Nieuw</a>
         </div>
         <div>
-          <a className="view-all">
-            Laad meer <FontAwesomeIcon icon={faArrowRight} />
-          </a>
+          <Link href="/search-results">
+            <a className="view-all">
+              Laad meer <FontAwesomeIcon icon={faArrowRight} />
+            </a>
+          </Link>
         </div>
       </Toolbar>
       <ShopList>
