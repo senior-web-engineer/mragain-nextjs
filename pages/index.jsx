@@ -37,7 +37,7 @@ const TestimonialSectionWrap = styled.div`
 export default function Home({ shopList }) {
   return (
     <ScreenSizeProvider>
-      <DefaultLayout>
+      <DefaultLayout showSignup>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title>

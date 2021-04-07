@@ -141,7 +141,7 @@ const MobileMenuLinks = styled.div`
     padding: 10px 20px;
     border-bottom: 1px solid #ddd;
   }
-`
+`;
 
 const LANG_OPTIONS = [
   {
@@ -154,18 +154,28 @@ const LANG_OPTIONS = [
   },
 ];
 
-function SignupButtons({ hiddenOnMobile }) {
+function SignupButtons({ hiddenOnMobile, showSignup }) {
+  function renderButtons() {
+    if (!showSignup) {
+      return null;
+    }
+    return (
+      <>
+        <Link href="/login">
+          <TextButton as="a">
+            <FontAwesomeIcon icon={faUser} />
+            Log in
+          </TextButton>
+        </Link>
+        <Link href="/meld-je-aan-als-reparateur">
+          <Button as="a">Registreer</Button>
+        </Link>
+      </>
+    );
+  }
   return (
     <UserMenuWrap hiddenOnMobile={hiddenOnMobile}>
-      <Link href="/login">
-        <TextButton as="a">
-          <FontAwesomeIcon icon={faUser} />
-          Log in
-        </TextButton>
-      </Link>
-      <Link href="/meld-je-aan-als-reparateur">
-        <Button as="a">Registreer</Button>
-      </Link>
+      {renderButtons()}
       <Select value="nl" options={LANG_OPTIONS} />
     </UserMenuWrap>
   );
@@ -186,7 +196,7 @@ function HeaderLinks() {
   );
 }
 
-const HeaderView = () => {
+const HeaderView = ({ showSignup }) => {
   const [isMenuVisible, updateMenuVisibility] = useState(false);
 
   useEffect(() => {
@@ -209,7 +219,7 @@ const HeaderView = () => {
                 alt="Logo Mr Again"
               />
             </a>
-            <SignupButtons hiddenOnMobile />
+            <SignupButtons hiddenOnMobile showSignup={showSignup} />
             <HamburgerWrap>
               <FontAwesomeIcon
                 icon={faBars}

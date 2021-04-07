@@ -8,10 +8,10 @@ const ContentWrap = styled.div`
   padding-bottom: 127px;
 `;
 
-export default function DefaultLayout({ children }) {
+export default function DefaultLayout({ children, showSignup = false }) {
   return (
     <>
-      <Header />
+      <Header showSignup={showSignup} />
       <ContentWrap>{children}</ContentWrap>
       <Footer />
     </>
