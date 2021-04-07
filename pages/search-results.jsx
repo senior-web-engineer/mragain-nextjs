@@ -606,7 +606,7 @@ function ShopItem({ item }) {
     .join(", ");
 
   function renderService(service) {
-    return <ShopDetails.Service>{service}</ShopDetails.Service>;
+    return <ShopDetails.Service>{service.device_name}</ShopDetails.Service>;
   }
 
   const tag = item.shop.tag;
@@ -665,10 +665,10 @@ function ShopItem({ item }) {
           </ShopDetails.NameWrap>
           <OnMobile show={false}>
             <ShopDetails.AppointmentInfo>
-              {moment(item.next_slot).isValid() ? (
+              {item.next_slot ? (
                 <div>
                   <label>Eerst mogelijke afspraak</label>
-                  <date>{moment(item.next_slot).format("DD MMM, hh:mm")}</date>
+                  <date>{moment(item.next_slot).isValid() ? moment(item.next_slot).format("DD MMM, hh:mm") : item.next_slot}</date>
                 </div>
               ) : null}
               {item.price ? (
@@ -680,9 +680,9 @@ function ShopItem({ item }) {
             </ShopDetails.AppointmentInfo>
           </OnMobile>
         </ShopDetails.SecondRow>
-        {item.shop.services?.length ? (
+        {item.devices?.length ? (
           <ShopDetails.ThirdRow>
-            {item.shop.services.map(renderService)}
+            {item.devices.map(renderService)}
           </ShopDetails.ThirdRow>
         ) : null}
       </ShopDetails>
