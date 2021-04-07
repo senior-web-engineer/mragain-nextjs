@@ -375,6 +375,11 @@ const ModelFieldsMobile = styled.div`
   }
 `;
 
+const selectedMixin = css`
+  box-shadow: 0 0 0 2px #06c987;
+  background-color: #e6f9f3;
+`;
+
 const ShopWrap = styled.div`
   height: 125px;
   border-radius: 10px;
@@ -386,12 +391,12 @@ const ShopWrap = styled.div`
   position: relative;
   cursor: pointer;
 
+  &:hover {
+    ${selectedMixin}
+  }
+
   ${(props) =>
-    props.isSelected &&
-    css`
-      box-shadow: 0 0 0 2px #06c987;
-      background-color: #e6f9f3;
-    `}
+    props.isSelected && selectedMixin}
 
   ${media.tablet`
     height: 190px;
