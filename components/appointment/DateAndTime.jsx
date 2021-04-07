@@ -133,7 +133,7 @@ function CalendarField({ value, onChange }) {
           return true;
         }
         const day = date.isoWeekday();
-        console.log(openedTimes?.data?.[DAYS_OF_WEEK[day - 1]]);
+
         const isClosed =
           !openedTimes?.data?.[DAYS_OF_WEEK[day - 1]] ||
           ["gesloten", "closed"].includes(
