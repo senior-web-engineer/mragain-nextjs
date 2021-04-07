@@ -314,7 +314,7 @@ function AppointmentButton() {
   const { values } = useFormContext().state;
   const router = useRouter();
   const formValues = filtersFormModule.state.values;
-  console.log(router)
+
   return (
     <NextStepWrap>
       <Link
