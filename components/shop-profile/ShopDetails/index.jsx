@@ -1,4 +1,5 @@
 import { MaxConstraints } from "@/components/styled/layout";
+import { SubTitle } from "@/components/styled/text";
 import { store } from "@/configureStore";
 import Form, { useFormContext } from "@/modules/forms";
 import List, { useListContext } from "@/modules/list";
@@ -51,6 +52,10 @@ const MainWrap = styled.div`
     color: #707070;
     font-weight: 400;
     margin-bottom: 10px;
+  }
+
+  ${SubTitle} {
+    margin-bottom: 30px;
   }
 
   .svg-inline--fa {
@@ -107,7 +112,6 @@ const ReparationImageWrap = styled.div`
   top: -20px;
   display: none;
 
-
   ${media.tablet`
     display: block;
   `}
@@ -134,45 +138,49 @@ function ReparationImage() {
   );
 }
 
-export default function ShopDetails() {
+export default function ShopDetails({ shop }) {
   return (
     <MainWrap>
       <MaxConstraints>
-        <dl>
-          <dt>Apparaten</dt>
-          <dd>
-            <FontAwesomeIcon icon={faMobile} />{" "}
-            <FontAwesomeIcon icon={faLaptop} />
-            <FontAwesomeIcon icon={faTablet} /> <FontAwesomeIcon icon={faTv} />{" "}
-            <FontAwesomeIcon icon={faHeadphones} />
-          </dd>
-          <dt>Betaal methoden</dt>
-          <dd>
-            <FontAwesomeIcon icon={faCcVisa} />
-            <FontAwesomeIcon icon={faCcMastercard} />
-            <FontAwesomeIcon icon={faPaypal} />
-          </dd>
-          <dt>Reparatie opties</dt>
-          <dd>
-            <LocationWrap>
-              <FontAwesomeIcon icon={faHome} /> Reparatie op locatie
-            </LocationWrap>
-            <LocationWrap>
-              <FontAwesomeIcon icon={faStore} /> Reparatie in winkel
-            </LocationWrap>
-            <LocationWrap>
-              <FontAwesomeIcon icon={faBox} /> Opsturen
-            </LocationWrap>
-          </dd>
-          <dt>Services</dt>
-          <dd>Mobile Accessories, Storage Devices, Computer Accessories,</dd>
-          <dt>Vervangend toestel</dt>
-          <dd>Voor specifieke toestellen</dd>
-          <dt>Wachtruimte</dt>
-          <dd>Niet beschikbaar</dd>
-          <dt>Merken</dt>
-          <dd>Apple, Acer, Asus, Dell, Hewlett-Packard, Huawei, HTC,</dd>
-        </dl>
+        <div>
+          <SubTitle as="h2">Shopinformation {shop.name}</SubTitle>
+          <dl>
+            <dt>Apparaten</dt>
+            <dd>
+              <FontAwesomeIcon icon={faMobile} />{" "}
+              <FontAwesomeIcon icon={faLaptop} />
+              <FontAwesomeIcon icon={faTablet} />{" "}
+              <FontAwesomeIcon icon={faTv} />{" "}
+              <FontAwesomeIcon icon={faHeadphones} />
+            </dd>
+            <dt>Betaal methoden</dt>
+            <dd>
+              <FontAwesomeIcon icon={faCcVisa} />
+              <FontAwesomeIcon icon={faCcMastercard} />
+              <FontAwesomeIcon icon={faPaypal} />
+            </dd>
+            <dt>Reparatie opties</dt>
+            <dd>
+              <LocationWrap>
+                <FontAwesomeIcon icon={faHome} /> Reparatie op locatie
+              </LocationWrap>
+              <LocationWrap>
+                <FontAwesomeIcon icon={faStore} /> Reparatie in winkel
+              </LocationWrap>
+              <LocationWrap>
+                <FontAwesomeIcon icon={faBox} /> Opsturen
+              </LocationWrap>
+            </dd>
+            <dt>Services</dt>
+            <dd>Mobile Accessories, Storage Devices, Computer Accessories,</dd>
+            <dt>Vervangend toestel</dt>
+            <dd>Voor specifieke toestellen</dd>
+            <dt>Wachtruimte</dt>
+            <dd>Niet beschikbaar</dd>
+            <dt>Merken</dt>
+            <dd>Apple, Acer, Asus, Dell, Hewlett-Packard, Huawei, HTC,</dd>
+          </dl>
+        </div>
         <Form module={serviceFormModule}>
           <List module={shopServicesListModule}>
             <ReparationImage />

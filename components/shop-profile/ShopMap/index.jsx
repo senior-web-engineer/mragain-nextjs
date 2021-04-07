@@ -7,7 +7,7 @@ import {
   reviewsModal,
 } from "@/components/shop-profile/modules";
 import GoogleMap from "@/components/search-results/Map/GoogleMap.jsx";
-import { createSelectComponent } from "@/modules/dataFetcher";
+import { createSelectComponent, useFetcher } from "@/modules/dataFetcher";
 import { SubTitle } from "@/components/styled/text";
 import { Rate, Slider } from "antd";
 import { MaxConstraints } from "@/components/styled/layout";
@@ -204,7 +204,11 @@ const ModalReviewWrap = styled.div`
   }
 `;
 
-function Reviews({ options, ...rest }) {
+export function Reviews({ shop }) {
+  const { data: options } = useFetcher({
+    dataFetcher: reviewsFetcher,
+    identifier: shop.id,
+  });
   const scores = useMemo(() => {
     const totals = (options || []).reduce(
       (accumulator, review) => {
@@ -273,7 +277,7 @@ function Reviews({ options, ...rest }) {
 
   return (
     <ReviewsWrap>
-      <SubTitle>Reviews</SubTitle>
+      <SubTitle as="h2">Reviews {shop?.name}</SubTitle>
       <ReviewWrap>
         <strong>Gemiddelde rating</strong>
         <div>
@@ -340,11 +344,6 @@ function Reviews({ options, ...rest }) {
   );
 }
 
-export const CustomerReview = createSelectComponent({
-  dataFetcher: reviewsFetcher,
-  Component: Reviews,
-});
-
 export default function ShopMap({ shop }) {
   useEffect(() => {
     reviewsFetcher.key(`${shop.id}`).fetch();
@@ -353,7 +352,7 @@ export default function ShopMap({ shop }) {
   return (
     <MainWrap>
       <MaxConstraints>
-        <CustomerReview identifier={shop.id} />
+        <Reviews shop={shop} />
       </MaxConstraints>
       <GoogleMap
         defaultZoom={11}
