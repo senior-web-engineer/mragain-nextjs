@@ -15,9 +15,10 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { ScreenSizeProvider } from "@/utils/media";
-
+import moment from "moment";
+import 'moment/locale/nl'
 library.add(fas, fab, far);
-
+moment.locale('nl');
 class MyApp extends App {
   constructor(props) {
     super(props);
