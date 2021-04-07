@@ -19,10 +19,10 @@ import {
   FacebookShareButton,
   LinkedinShareButton,
   TwitterShareButton,
-  PinterestShareButton,
+  WhatsappShareButton,
   FacebookIcon,
   LinkedinIcon,
-  PinterestIcon,
+  WhatsappIcon,
   TwitterIcon,
 } from "react-share";
 import DetailsModal from "./DetailsModal";
@@ -260,7 +260,7 @@ export default function ShopHeader({ shop }) {
 
   const shareText = `
     Ik heb  "${shop.name}" gevonden via MrAgain. Heb je een kapot apparaat? Bij MrAgain vind je de beste reparateur bij jou in de buurt
-  `;
+  `.trim();
   const shopURL = typeof window !== "undefined" ? window.location.href : "";
   const detailButtons = (
     <DetailButtonsWrap>
@@ -279,9 +279,9 @@ export default function ShopHeader({ shop }) {
             >
               <LinkedinIcon size={40} round />
             </LinkedinShareButton>
-            <PinterestShareButton url={shopURL} media={shop.bg_photo}>
-              <PinterestIcon size={40} round />
-            </PinterestShareButton>
+            <WhatsappShareButton url={shopURL} title={shareText}>
+              <WhatsappIcon size={40} round />
+            </WhatsappShareButton>
             <TwitterShareButton url={shopURL} title={shareText}>
               <TwitterIcon size={40} round />
             </TwitterShareButton>

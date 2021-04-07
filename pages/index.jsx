@@ -35,8 +35,6 @@ const TestimonialSectionWrap = styled.div`
 `;
 
 export default function Home({ shopList }) {
-
-
   return (
     <ScreenSizeProvider>
       <DefaultLayout>
