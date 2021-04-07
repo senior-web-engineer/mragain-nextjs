@@ -193,6 +193,21 @@ export default function AppointmentPage({ shop }) {
   }, []);
 
   const onNext = useCallback(async () => {
+    if (step === 0) {
+      await appointmentForm.actions.validateField({ name: "time" });
+      const { errors } = appointmentForm.state;
+      if (Object.keys(errors).length) {
+        appointmentConfirmation.actions.open({
+          type: "warning",
+          message:
+            "Je lijkt niet alle informatie te hebben ingevuld, even checken? ",
+          description:
+            "We hebben al je informatie nodig om een afspraak te maken",
+          buttonLabel: "Probeer het nog een keer",
+        });
+        return;
+      }
+    }
     if (step === 1) {
       try {
         await appointmentForm.actions.submit();
@@ -206,7 +221,7 @@ export default function AppointmentPage({ shop }) {
       } catch (err) {
         if (err.validationErrors) {
           appointmentConfirmation.actions.open({
-            type: "waarschuwing",
+            type: "warning",
             message:
               "Je lijkt niet alle informatie te hebben ingevuld, even checken? ",
             description:
@@ -308,9 +323,7 @@ export default function AppointmentPage({ shop }) {
                 </Switch.Case>
               </Switch>
             </Form>
-            <OnMobile show={false}>
-              {ctaButtons}
-            </OnMobile>
+            <OnMobile show={false}>{ctaButtons}</OnMobile>
             <OnMobile only>
               <MobileToolbar>{ctaButtons}</MobileToolbar>
             </OnMobile>

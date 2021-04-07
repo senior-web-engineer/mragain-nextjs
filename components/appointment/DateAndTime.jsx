@@ -253,6 +253,8 @@ const SchedueleContentWrap = styled.div`
     > div:nth-child(2) {
       height: 100%;
       margin: 0;
+      display: flex;
+      flex-direction: column;
     }
   `}
 `;
