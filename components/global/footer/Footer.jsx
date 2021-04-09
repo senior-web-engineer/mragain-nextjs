@@ -25,6 +25,7 @@ import Link from "next/link";
 import { FRONT_END_URL } from "../../../constants.js";
 import dynamic from "next/dynamic";
 import { withUserAgent } from "next-useragent";
+import Image from "next/image";
 // import { connect } from "react-redux";
 // import { getDevices } from "@/service/search/operations";
 const CookieBanner = dynamic(
@@ -79,12 +80,14 @@ const FooterView = (routerProps) => {
           <FooterBrandArea ClassName="custm-footer-brandarea">
             <FooterBrandLogo>
               <FooterLogoIcon>
-                <img
-                  src={logo}
-                  width="120"
-                  height="46"
-                  className="d-inline-block align-top"
-                  alt="Logo"
+                <Image
+                  quality={100}
+                  loading={"eager"}
+                  priority={true}
+                  width={104}
+                  height={40}
+                  src="/images/mragainlogo_0.png"
+                  alt="Logo Mr Again"
                 />
               </FooterLogoIcon>
               <FooterBrandTitle>

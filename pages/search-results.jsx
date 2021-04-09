@@ -1086,6 +1086,7 @@ export default function SearchResults() {
                     <OnMobile only>
                       <MobileDeviceSelector
                         name="Apparaat"
+                        aria-input-field-name="device"
                         onChange={onDeviceChange}
                       />
                       <ModelFieldsMobile>
@@ -1093,6 +1094,7 @@ export default function SearchResults() {
                           name="brand"
                           as={Select}
                           label="Merk"
+                          aria-input-field-name="brand"
                           onChange={onBandChange}
                           dropdownStyle={{ minWidth: "200px" }}
                         />
@@ -1101,12 +1103,14 @@ export default function SearchResults() {
                           name="model"
                           as={Select}
                           label="Model"
+                          aria-input-field-name="model"
                           onChange={onModelChange}
                         />
                         <ServiceSelector
                           name="service"
                           as={Select}
                           label="Reparatie"
+                          aria-input-field-name="service"
                           dropdownStyle={{ minWidth: "200px" }}
                         />
                         <Waypoint
@@ -1126,6 +1130,7 @@ export default function SearchResults() {
                         name="device"
                         as={Select}
                         label="Apparaat"
+                        aria-input-field-name="device"
                         onChange={onDeviceChange}
                         dropdownStyle={{ minWidth: "200px" }}
                       />
@@ -1133,6 +1138,7 @@ export default function SearchResults() {
                         name="brand"
                         as={Select}
                         label="Merk"
+                        aria-input-field-name="brand"
                         onChange={onBandChange}
                         dropdownStyle={{ minWidth: "200px" }}
                       />
@@ -1140,6 +1146,7 @@ export default function SearchResults() {
                         name="model"
                         as={Select}
                         label="Model"
+                        aria-input-field-name="model"
                         onChange={onModelChange}
                         dropdownStyle={{ minWidth: "200px" }}
                       />
@@ -1147,6 +1154,7 @@ export default function SearchResults() {
                         name="service"
                         as={Select}
                         label="Reparatie"
+                        aria-input-field-name="service"
                         dropdownStyle={{ minWidth: "200px" }}
                         popupPlacement="bottomRight"
                       />
@@ -1203,6 +1211,7 @@ export default function SearchResults() {
                         as={Select}
                         label="Afstand"
                         name="distance"
+                        aria-input-field-name="distance"
                         options={DISTANCES}
                       />
                     </ZipFields>

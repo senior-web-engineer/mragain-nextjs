@@ -392,6 +392,7 @@ export default function ShopServices({ shop }) {
               name="device"
               as={Select}
               label="Apparaat"
+              aria-input-field-name="device"
               onChange={onDeviceChange}
               dropdownStyle={{ minWidth: "200px" }}
             />
@@ -400,6 +401,7 @@ export default function ShopServices({ shop }) {
             name="brand"
             as={Select}
             label="Merk"
+            aria-input-field-name="brand"
             onChange={onBandChange}
             dropdownStyle={{ minWidth: "200px" }}
           />
@@ -407,6 +409,7 @@ export default function ShopServices({ shop }) {
             name="model"
             as={Select}
             label="Model"
+            aria-input-field-name="model"
             {...(screenSize === "mobile"
               ? {}
               : { dropdownStyle: { minWidth: "200px" } })}
