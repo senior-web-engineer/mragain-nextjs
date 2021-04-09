@@ -816,7 +816,7 @@ const DISTANCES = [
 
 const SORT_BY = [
   {
-    label: "Default",
+    label: "Standaard",
     value: 0,
   },
   {
@@ -825,17 +825,17 @@ const SORT_BY = [
   },
   {
 
-    label: "Price",
+    label: "Prijs",
     value: 4,
   },
   {
 
-    label: "Guarantee",
+    label: "Garantie",
     value: 5,
   },
   {
 
-    label: "Distance",
+    label: "Afstand",
     value: 8,
   },
 ];
@@ -936,8 +936,8 @@ function RefineFooter() {
 function RefineSearchForm() {
   return (
     <Form module={filtersFormModule}>
-      <Field name="price" as={Slider} label="Prijs" />
-      <Field name="rate" as={Rate} label="Rating" />
+      <Field name="price" as={Slider} label="Maximum prijs" />
+      <Field name="rate" as={Rate} label="Minimale rating" />
       {false && (
         <Field name="repairType" as={Radio.Group} label="Reparatie Type">
           {REPAIR_TYPES.map((type) => (
