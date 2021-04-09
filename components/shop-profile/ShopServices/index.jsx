@@ -320,7 +320,7 @@ function AppointmentButton() {
       <Link
         href={`/${router.query["shopId][api"]}/appointment?device=${formValues.device}&brand=${formValues.brand}&model=${formValues.model}&service=${values.service}`}
       >
-        <Button disabled={!values.service}>
+        <Button disabled={!values.service} aria-label="Book service">
           Afspraak maken <FontAwesomeIcon icon={faArrowRight} />{" "}
         </Button>
       </Link>

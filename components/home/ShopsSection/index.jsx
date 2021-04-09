@@ -206,7 +206,7 @@ export function ShopCard({shop, onClick}) {
         </location>
       ) : null}
       <Link href={`/${shop.name}--${shop.city}`}>
-        <Button as="a">
+        <Button as="a" aria-label={`Visit ${shop.name}`}>
           <FontAwesomeIcon icon={faArrowRight} />
         </Button>
       </Link>

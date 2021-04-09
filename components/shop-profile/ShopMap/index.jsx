@@ -63,7 +63,7 @@ const ReviewsWrap = styled.div`
 
   ${media.tablet`
     position: absolute;
-    width: 320px;
+    min-width: 320px;
     top: 20px;
     left: 0;
     margin: 0;
@@ -311,7 +311,7 @@ export function Reviews({ shop }) {
         </div>
       </ReviewWrap>
 
-      <Button onClick={reviewsModal.actions.open}>
+      <Button onClick={reviewsModal.actions.open} aria-label="Meer reviews">
         <FontAwesomeIcon icon={faArrowRight} />
       </Button>
       <Modal

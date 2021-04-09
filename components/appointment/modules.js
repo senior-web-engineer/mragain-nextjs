@@ -11,6 +11,7 @@ import * as yup from "yup";
 //
 
 export const appointmentConfirmation = createModalModule()
+export const appointmentReview = createModalModule()
 
 // NOTE: when adding address validation
 // use the when method (https://github.com/jquense/yup#mixedwhenkeys-string--arraystring-builder-object--value-schema-schema-schema)

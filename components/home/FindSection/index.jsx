@@ -146,7 +146,7 @@ function SearchButton() {
     <Link
       href={`/search-results?zip=${zip}&device=${deviceId}&brand=${brandId}&model=${modelId}`}
     >
-      <Button>
+      <Button aria-label="Zoek">
         <span>Zoek</span>
         <FontAwesomeIcon icon={faArrowRight} />
       </Button>
@@ -291,7 +291,7 @@ export default function FindSection() {
                 dropdownStyle={{ minWidth: "320px" }}
                 name="model"
               >
-                <StyledInput />
+                <StyledInput  aria-label="Apparaat of model"/>
               </Field>
             </div>
             <div>

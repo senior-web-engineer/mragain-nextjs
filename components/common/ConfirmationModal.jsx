@@ -15,7 +15,7 @@ const TYPE_TO_COLOR = {
   error: "#ce2029",
   warning: "#ffd300",
   success: "#06c987",
-}
+};
 
 const MainWrap = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ const MainWrap = styled.div`
 
   h3 {
     font-size: 25px;
-    color: ${props => TYPE_TO_COLOR[props.modalType] || "#555"};
+    color: ${(props) => TYPE_TO_COLOR[props.modalType] || "#555"};
     font-weight: 500;
     margin: 35px 0 25px;
   }
@@ -38,7 +38,7 @@ const MainWrap = styled.div`
   }
 `;
 
-function ConfirmationModal({ module, moduleData, ...rest }) {
+function ConfirmationModal({ module, moduleData, resolve, ...rest }) {
   const { type, message, description, buttonLabel } = moduleData;
   function renderConfirmationType() {
     if (!type) {
@@ -60,12 +60,20 @@ function ConfirmationModal({ module, moduleData, ...rest }) {
         {renderConfirmationType()}
         <h3>{message}</h3>
         <p>{description}</p>
-        {buttonLabel ? <Button onClick={() =>module.actions.close()}>{buttonLabel}</Button> : null}
+        {buttonLabel ? <Button onClick={resolve}>{buttonLabel}</Button> : null}
       </MainWrap>
     </Modal>
   );
 }
 
-export default connect((state, ownProps) => ({
-  moduleData: ownProps.module.selectors.data || {}
-}))(ConfirmationModal)
+export default connect(
+  (state, ownProps) => ({
+    moduleData: ownProps.module.selectors.data || {},
+  }),
+  (_, ownProps) => ({
+    resolve: () => {
+      ownProps.module.actions.resolve();
+      ownProps.module.actions.close();
+    },
+  })
+)(ConfirmationModal);
