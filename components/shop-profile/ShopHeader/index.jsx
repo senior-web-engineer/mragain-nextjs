@@ -140,12 +140,12 @@ ShopMeta.ThirdRow = styled.div`
   font-weight: 400;
   margin-top: 13px;
 
-  dl {
+  d-list {
     display: flex;
     margin: 0 -10px;
   }
 
-  dt {
+  d-term {
     margin-left: 10px;
     color: #ccc;
 
@@ -237,7 +237,7 @@ const ADVANTAGES = [
 ];
 
 export default function ShopHeader({ shop }) {
-  const tag = shop.tag || "populair";
+  const tag = shop.tag;
   const location = [shop.street, shop.city, shop.zipcode]
     .filter(Boolean)
     .join(", ");
@@ -270,7 +270,7 @@ export default function ShopHeader({ shop }) {
         content={
           <>
             <FacebookShareButton url={shopURL} quote={shareText}>
-              <FacebookIcon size={40} round />:
+              <FacebookIcon size={40} round />
             </FacebookShareButton>
             <LinkedinShareButton
               url={shopURL}
@@ -330,34 +330,34 @@ export default function ShopHeader({ shop }) {
               <span>{reviews?.length || 0} Reviews</span>
             </ShopMeta.SecondRow>
             <ShopMeta.ThirdRow>
-              <dl>
+              <d-list>
                 <OnMobile show={false}>
                   {shop.phone_number ? (
                     <>
-                      <dt>
+                      <d-term>
                         <FontAwesomeIcon title="phone" icon={faPhone} />
-                      </dt>
-                      <dd>{shop.phone_number}</dd>
+                      </d-term>
+                      <d-def>{shop.phone_number}</d-def>
                     </>
                   ) : null}
                   {shop.site_url ? (
                     <>
-                      <dt>
+                      <d-term>
                         <FontAwesomeIcon title="website" icon={faLink} />
-                      </dt>
-                      <dd>{shop.site_url}</dd>
+                      </d-term>
+                      <d-def>{shop.site_url}</d-def>
                     </>
                   ) : null}
                 </OnMobile>
                 {location ? (
                   <>
-                    <dt>
+                    <d-term>
                       <FontAwesomeIcon title="location" icon={faMapMarkerAlt} />
-                    </dt>
-                    <dd>{location}</dd>
+                    </d-term>
+                    <d-def>{location}</d-def>
                   </>
                 ) : null}
-              </dl>
+              </d-list>
             </ShopMeta.ThirdRow>
             <AdvantagesWrap>{ADVANTAGES.map(renderAdvantage)}</AdvantagesWrap>
           </ShopMeta>

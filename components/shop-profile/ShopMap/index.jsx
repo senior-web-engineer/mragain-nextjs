@@ -116,13 +116,13 @@ const OverallWrap = styled.div`
     font-size: 17px;
   }
 
-  dl {
+  d-list {
     font-size: 30px;
     display: flex;
     align-items: center;
     margin: 0;
 
-    dd {
+    d-def {
       margin: 0;
       font-size: 11px;
       width: 40px;
@@ -322,10 +322,10 @@ export function Reviews({ shop }) {
         <OverallWrap>
           <h2>Gemiddelde rating</h2>
           <OverallContent>
-            <dl>
-              <dt>{formatNumber(scores.overall)}</dt>
-              <dd>van 5 sterren</dd>
-            </dl>
+            <d-list>
+              <d-term>{formatNumber(scores.overall)}</d-term>
+              <d-def>van 5 sterren</d-def>
+            </d-list>
             <hr />
             <div>
               <Rate
