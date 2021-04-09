@@ -20,20 +20,6 @@ import 'moment/locale/nl'
 library.add(fas, fab, far);
 moment.locale('nl');
 class MyApp extends App {
-  constructor(props) {
-    super(props);
-
-    this.state = { value: 0, selectedIndex: 0 };
-  }
-
-  setValue = (index) => {
-    this.setState({ value: index });
-  };
-
-  setSelectedIndex = (index) => {
-    this.setState({ selectedIndex: index });
-  };
-
   componentDidMount() {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
@@ -53,8 +39,6 @@ class MyApp extends App {
               {...pageProps}
               isLoggedIn={isLoggedIn}
               getAuthUser={getAuthUser}
-              setSelectedIndex={this.setSelectedIndex}
-              setValue={this.setValue}
             />
           </ConnectedRouter>
         </React.Fragment>

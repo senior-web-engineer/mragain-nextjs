@@ -7,7 +7,7 @@ import {
   reviewsModal,
 } from "@/components/shop-profile/modules";
 import GoogleMap from "@/components/search-results/Map/GoogleMap.jsx";
-import { createSelectComponent, useFetcher } from "@/modules/dataFetcher";
+import { useFetcher } from "@/modules/dataFetcher";
 import { SubTitle } from "@/components/styled/text";
 import { Rate, Slider } from "antd";
 import { MaxConstraints } from "@/components/styled/layout";
