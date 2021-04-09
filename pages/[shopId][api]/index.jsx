@@ -11,7 +11,7 @@ import ShopServices from "@/components/shop-profile/ShopServices";
 import ShopDetails from "@/components/shop-profile/ShopDetails";
 import ShopMap from "@/components/shop-profile/ShopMap";
 import { OnMobile } from "@/utils/media";
-import { CustomerReview } from "@/components/shop-profile/ShopMap";
+import { Reviews } from "@/components/shop-profile/ShopMap";
 
 const MainWrap = styled.div`
   background-color: #f3f3f3;
@@ -67,12 +67,12 @@ const ShopProfile = (routerProps) => {
       </Head>
       <MainWrap>
         <ShopHeader shop={shopProfileServerInfo} />
-        <ShopServices shop={shopProfileServerInfo}/>
+        <ShopServices shop={shopProfileServerInfo} />
         <OnMobile only>
-          <CustomerReview identitifer={shopProfileServerInfo.id}/>
+          <Reviews shop={shopProfileServerInfo} />
         </OnMobile>
-        <ShopDetails />
-        <ShopMap shop={shopProfileServerInfo}/>
+        <ShopDetails shop={shopProfileServerInfo} />
+        <ShopMap shop={shopProfileServerInfo} />
       </MainWrap>
     </DefaultLayout>
   );
@@ -91,4 +91,4 @@ export async function getServerSideProps(ctx) {
   };
 }
 
-export default ShopProfile
+export default ShopProfile;

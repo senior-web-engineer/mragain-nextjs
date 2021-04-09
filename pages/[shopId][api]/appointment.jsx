@@ -81,7 +81,6 @@ const DetailsForm = styled.div`
   margin: 11px -20px 0;
   padding: 0 20px 30px;
 
-
   header {
     height: 71px;
     display: flex;
@@ -107,7 +106,6 @@ const DetailsForm = styled.div`
     }
   }
 
-
   ${media.tablet`
     padding: 0 41px 30px;
     border-radius: 10px;
@@ -121,7 +119,6 @@ const DetailsForm = styled.div`
       padding: 0 41px;
     }
   `}
-
 `;
 
 const InlineFields = styled.div`
@@ -139,6 +136,37 @@ const InlineFields = styled.div`
       margin-left: 20px;
     }
   `}
+`;
+
+const MobileToolbar = styled.div`
+  position: fixed;
+  display: flex;
+  bottom: 0;
+  background-color: #fff;
+  height: 60px;
+  padding: 0 20px;
+  box-shadow: 0 0 27px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  z-index: 110;
+  left: 0;
+  justify-content: flex-end;
+  align-items: center;
+
+  ${CTAButtons} {
+    width: 100%;
+    align-items: center;
+  }
+
+  ${Button}:not(${TextButton}) {
+    padding: 7px 22px;
+    height: 37px;
+    line-height: 23px;
+    box-shadow: 0 0 8px #06c987;
+
+    &[disabled] {
+      box-shadow: 0 0 8px #a0a0a0;
+    }
+  }
 `;
 
 const AddressSection = styled.div`
@@ -165,6 +193,21 @@ export default function AppointmentPage({ shop }) {
   }, []);
 
   const onNext = useCallback(async () => {
+    if (step === 0) {
+      await appointmentForm.actions.validateField({ name: "time" });
+      const { errors } = appointmentForm.state;
+      if (Object.keys(errors).length) {
+        appointmentConfirmation.actions.open({
+          type: "warning",
+          message:
+            "Je lijkt niet alle informatie te hebben ingevuld, even checken? ",
+          description:
+            "We hebben al je informatie nodig om een afspraak te maken",
+          buttonLabel: "Probeer het nog een keer",
+        });
+        return;
+      }
+    }
     if (step === 1) {
       try {
         await appointmentForm.actions.submit();
@@ -178,9 +221,11 @@ export default function AppointmentPage({ shop }) {
       } catch (err) {
         if (err.validationErrors) {
           appointmentConfirmation.actions.open({
-            type: "waarschuwing",
-            message: "Je lijkt niet alle informatie te hebben ingevuld, even checken? ",
-            description: "We hebben al je informatie nodig om een afspraak te maken",
+            type: "warning",
+            message:
+              "Je lijkt niet alle informatie te hebben ingevuld, even checken? ",
+            description:
+              "We hebben al je informatie nodig om een afspraak te maken",
             buttonLabel: "Probeer het nog een keer",
           });
           return;
@@ -216,6 +261,23 @@ export default function AppointmentPage({ shop }) {
       </AddressSection>
     );
   }
+
+  const ctaButtons = (
+    <CTAButtons>
+      {step > 0 ? (
+        <TextButton onClick={() => updateStep((state) => state - 1)}>
+          <FontAwesomeIcon icon={faArrowLeft} /> Terug naar vorige stap
+        </TextButton>
+      ) : (
+        <span />
+      )}
+      <OnMobile only>
+        <Button onClick={onNext}>
+          Volgende <FontAwesomeIcon icon={faArrowRight} />
+        </Button>
+      </OnMobile>
+    </CTAButtons>
+  );
 
   return (
     <DefaultLayout>
@@ -261,20 +323,10 @@ export default function AppointmentPage({ shop }) {
                 </Switch.Case>
               </Switch>
             </Form>
-            <CTAButtons>
-              {step > 0 ? (
-                <TextButton onClick={() => updateStep((state) => state - 1)}>
-                  <FontAwesomeIcon icon={faArrowLeft} /> Terug naar vorige stap
-                </TextButton>
-              ) : (
-                <span />
-              )}
-              <OnMobile only>
-                <Button onClick={onNext}>
-                  Volgende <FontAwesomeIcon icon={faArrowRight} />
-                </Button>
-              </OnMobile>
-            </CTAButtons>
+            <OnMobile show={false}>{ctaButtons}</OnMobile>
+            <OnMobile only>
+              <MobileToolbar>{ctaButtons}</MobileToolbar>
+            </OnMobile>
           </FormWrap>
           <OnMobile show={false}>
             <BookingInfo shop={shop} nextStep={onNext} />

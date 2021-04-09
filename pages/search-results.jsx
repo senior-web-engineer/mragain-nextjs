@@ -375,6 +375,11 @@ const ModelFieldsMobile = styled.div`
   }
 `;
 
+const selectedMixin = css`
+  box-shadow: 0 0 0 2px #06c987;
+  background-color: #e6f9f3;
+`;
+
 const ShopWrap = styled.div`
   height: 125px;
   border-radius: 10px;
@@ -386,12 +391,12 @@ const ShopWrap = styled.div`
   position: relative;
   cursor: pointer;
 
+  &:hover {
+    ${selectedMixin}
+  }
+
   ${(props) =>
-    props.isSelected &&
-    css`
-      box-shadow: 0 0 0 2px #06c987;
-      background-color: #e6f9f3;
-    `}
+    props.isSelected && selectedMixin}
 
   ${media.tablet`
     height: 190px;
@@ -601,7 +606,7 @@ function ShopItem({ item }) {
     .join(", ");
 
   function renderService(service) {
-    return <ShopDetails.Service>{service}</ShopDetails.Service>;
+    return <ShopDetails.Service>{service.device_name}</ShopDetails.Service>;
   }
 
   const tag = item.shop.tag;
@@ -660,10 +665,10 @@ function ShopItem({ item }) {
           </ShopDetails.NameWrap>
           <OnMobile show={false}>
             <ShopDetails.AppointmentInfo>
-              {moment(item.next_slot).isValid() ? (
+              {item.next_slot ? (
                 <div>
                   <label>Eerst mogelijke afspraak</label>
-                  <date>{moment(item.next_slot).format("DD MMM, hh:mm")}</date>
+                  <date>{moment(item.next_slot).isValid() ? moment(item.next_slot).format("DD MMM, hh:mm") : item.next_slot}</date>
                 </div>
               ) : null}
               {item.price ? (
@@ -675,9 +680,9 @@ function ShopItem({ item }) {
             </ShopDetails.AppointmentInfo>
           </OnMobile>
         </ShopDetails.SecondRow>
-        {item.shop.services?.length ? (
+        {item.devices?.length ? (
           <ShopDetails.ThirdRow>
-            {item.shop.services.map(renderService)}
+            {item.devices.map(renderService)}
           </ShopDetails.ThirdRow>
         ) : null}
       </ShopDetails>
@@ -811,16 +816,27 @@ const DISTANCES = [
 
 const SORT_BY = [
   {
-    label: "Rating Hoog-Laag",
-    value: "0",
+    label: "Default",
+    value: 0,
   },
   {
-    label: "Hoog-Laag",
-    value: "1",
+    label: "Rating",
+    value: 1,
   },
   {
-    label: "Laag-Hoog",
-    value: "2",
+
+    label: "Price",
+    value: 4,
+  },
+  {
+
+    label: "Guarantee",
+    value: 5,
+  },
+  {
+
+    label: "Distance",
+    value: 8,
   },
 ];
 
@@ -921,7 +937,7 @@ function RefineSearchForm() {
   return (
     <Form module={filtersFormModule}>
       <Field name="price" as={Slider} label="Prijs" />
-      {false && <Field name="rating" as={Rate} label="Rating" />}
+      <Field name="rate" as={Rate} label="Rating" />
       {false && (
         <Field name="repairType" as={Radio.Group} label="Reparatie Type">
           {REPAIR_TYPES.map((type) => (

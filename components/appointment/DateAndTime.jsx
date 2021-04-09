@@ -133,7 +133,7 @@ function CalendarField({ value, onChange }) {
           return true;
         }
         const day = date.isoWeekday();
-        console.log(openedTimes?.data?.[DAYS_OF_WEEK[day - 1]]);
+
         const isClosed =
           !openedTimes?.data?.[DAYS_OF_WEEK[day - 1]] ||
           ["gesloten", "closed"].includes(
@@ -253,6 +253,8 @@ const SchedueleContentWrap = styled.div`
     > div:nth-child(2) {
       height: 100%;
       margin: 0;
+      display: flex;
+      flex-direction: column;
     }
   `}
 `;

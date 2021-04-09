@@ -11,22 +11,23 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Popover, Rate } from "antd";
 import Image from "next/image";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import styled, { css } from "styled-components";
-import { openTimeFetcher, shopInfo } from "@/components/shop-profile/modules";
+import { openTimeFetcher, reviewsFetcher, shopInfo } from "@/components/shop-profile/modules";
 
 import {
   FacebookShareButton,
   LinkedinShareButton,
   TwitterShareButton,
-  PinterestShareButton,
+  WhatsappShareButton,
   FacebookIcon,
   LinkedinIcon,
-  PinterestIcon,
+  WhatsappIcon,
   TwitterIcon,
 } from "react-share";
 import DetailsModal from "./DetailsModal";
 import media, { OnMobile } from "@/utils/media";
+import { useFetcher } from "@/modules/dataFetcher";
 
 const Wallpaper = styled.div`
   height: 260px;
@@ -225,7 +226,8 @@ const ADVANTAGES = [
   {
     title: "Kwaliteit staat voorop",
     logo: "/images/shop/profile.png",
-    description: "Wij werken uitsluitend met onderdelen van de hoogste kwaliteit",
+    description:
+      "Wij werken uitsluitend met onderdelen van de hoogste kwaliteit",
   },
   {
     title: "Wordt snel geholpen",
@@ -239,6 +241,8 @@ export default function ShopHeader({ shop }) {
   const location = [shop.street, shop.city, shop.zipcode]
     .filter(Boolean)
     .join(", ");
+
+  const { data: reviews } = useFetcher({dataFetcher: reviewsFetcher, identifier: shop.id});
 
   function renderAdvantage(advantage) {
     return (
@@ -256,7 +260,7 @@ export default function ShopHeader({ shop }) {
 
   const shareText = `
     Ik heb  "${shop.name}" gevonden via MrAgain. Heb je een kapot apparaat? Bij MrAgain vind je de beste reparateur bij jou in de buurt
-  `;
+  `.trim();
   const shopURL = typeof window !== "undefined" ? window.location.href : "";
   const detailButtons = (
     <DetailButtonsWrap>
@@ -275,9 +279,9 @@ export default function ShopHeader({ shop }) {
             >
               <LinkedinIcon size={40} round />
             </LinkedinShareButton>
-            <PinterestShareButton url={shopURL} media={shop.bg_photo}>
-              <PinterestIcon size={40} round />
-            </PinterestShareButton>
+            <WhatsappShareButton url={shopURL} title={shareText}>
+              <WhatsappIcon size={40} round />
+            </WhatsappShareButton>
             <TwitterShareButton url={shopURL} title={shareText}>
               <TwitterIcon size={40} round />
             </TwitterShareButton>
@@ -323,7 +327,7 @@ export default function ShopHeader({ shop }) {
                 value={shop.mark}
                 onChange={null}
               />
-              <span>{shop.reviews || 0} Reviews</span>
+              <span>{reviews?.length || 0} Reviews</span>
             </ShopMeta.SecondRow>
             <ShopMeta.ThirdRow>
               <dl>

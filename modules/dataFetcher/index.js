@@ -114,38 +114,30 @@ export function createSelectComponent({
     });
 
   return connect((state, ownProps) => {
-    return createFetcherSelector(ownProps.identifier)(state)
-  }
-  )(Component);
+    return createFetcherSelector(ownProps.identifier)(state);
+  })(Component);
 }
 
-export function useFetcher({identifier, dataFetcher}) {
+export function useFetcher({ identifier, dataFetcher }) {
   const selector = useMemo(() => {
     return createSelector(dataFetcher.selector, (fetchStatus) => {
       return {
-        data: identifier
-          ? fetchStatus[identifier]?.result
-          : fetchStatus.result,
+        data: identifier ? fetchStatus[identifier]?.result : fetchStatus.result,
         isLoading: identifier
           ? fetchStatus[identifier]?.isLoading
           : fetchStatus.isLoading,
       };
     });
-  }, [identifier])
+  }, [identifier]);
 
-  return useSelector(selector)
+  return useSelector(selector);
 }
 
-export function withData({
-  Component,
-  dataFetcher,
-}) {
+export function withData({ Component, dataFetcher }) {
   const createFetcherSelector = (identifier) =>
     createSelector(dataFetcher.selector, (fetchStatus) => {
       return {
-        data: identifier
-          ? fetchStatus[identifier]?.result
-          : fetchStatus.result,
+        data: identifier ? fetchStatus[identifier]?.result : fetchStatus.result,
         isLoading: identifier
           ? fetchStatus[identifier]?.isLoading
           : fetchStatus.isLoading,
@@ -153,9 +145,8 @@ export function withData({
     });
 
   return connect((state, ownProps) => {
-    return createFetcherSelector(ownProps.identifier)(state)
-  }
-  )(Component);
+    return createFetcherSelector(ownProps.identifier)(state);
+  })(Component);
 }
 
 export function isDataLoading(...fetchers) {
