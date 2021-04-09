@@ -44,6 +44,10 @@ const ContentWrap = styled.div`
 const AppointmentReviewModalContent = connect(() => ({
   modalData: appointmentReview.selectors.data,
 }))(({ modalData }) => {
+  if (!modalData) {
+    return null;
+  }
+
   return (
     <ContentWrap>
       <Image
@@ -90,9 +94,6 @@ const AppointmentReviewModalContent = connect(() => ({
 });
 
 export default function OrderReview() {
-  useEffect(() => {
-    appointmentReview.actions.open();
-  }, []);
   return (
     <Modal module={appointmentReview} footer={null}>
       <AppointmentReviewModalContent />

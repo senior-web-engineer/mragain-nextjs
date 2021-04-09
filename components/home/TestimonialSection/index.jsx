@@ -71,8 +71,8 @@ const TESTIMONIAL_DATA = [
     author: "Quincy",
     location: "Den Haag",
     review: (
-      <> Mijn telefoon deed het niet meer en ik wist niet wat er aan de hand was. Gelukkig zag ik dat je bij 
-	    veel reparateurs een diagnose afspraak met no cure no pay kan maken. Dat heb ik gedaan en op die manier ben ik toen snel geholpen. 
+      <> Mijn telefoon deed het niet meer en ik wist niet wat er aan de hand was. Gelukkig zag ik dat je bij
+	    veel reparateurs een diagnose afspraak met no cure no pay kan maken. Dat heb ik gedaan en op die manier ben ik toen snel geholpen.
         <p>Super handig dat je kunt zien welke reparateur ook jouw toestel repareert!</p>
       </>
     ),
@@ -220,7 +220,7 @@ export default function TestimonialSection() {
       <ContentWrap>
         <div>
           <StatsWrap>{STATS.map(renderStat)}</StatsWrap>
-          <Button>
+          <Button aria-label="Meer reviews">
             {" "}
             <span>Meer reviews</span> <FontAwesomeIcon icon={faArrowRight} />
           </Button>

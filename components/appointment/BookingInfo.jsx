@@ -226,7 +226,7 @@ export default function BookingInfo({ shop, nextStep }) {
         <label>Te betalen bij reparateur</label>
         <price>&euro;{service?.price}</price>
       </TotalWrap>
-      <Button onClick={nextStep}>
+      <Button onClick={nextStep} aria-label="Next step">
         <FontAwesomeIcon icon={faArrowRight} />
       </Button>
     </MainWrap>

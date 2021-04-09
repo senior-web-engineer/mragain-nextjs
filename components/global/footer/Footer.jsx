@@ -92,7 +92,7 @@ const FooterView = (routerProps) => {
                 <LogoBottomTitle></LogoBottomTitle>
               </FooterBrandTitle>
             </FooterBrandLogo>
-            <h4 className="footer-brand-content">
+            <p className="footer-brand-content">
               De beste reparateurs voor jouw device, die vind je bij MrAgain.
               Wij geloven dat de wereld net een beetje mooier wordt als we er
               voor kunnen zorgen dat de levensduur van jouw device verlengd
@@ -101,7 +101,7 @@ const FooterView = (routerProps) => {
               kan helpen met de reparatie van jouw telefoon.
               <br />
               {/* <a href="#more">More..</a> */}
-            </h4>
+            </p>
           </FooterBrandArea>
           <FooterLinkArea className="footer-link-area">
             <FooterSitemap ClassName="custome-footer-sitename">

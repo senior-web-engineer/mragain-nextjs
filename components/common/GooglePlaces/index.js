@@ -102,7 +102,10 @@ export default function GooglePlaces({
               }}
               onSearch={(value) => onSearch({ target: { value } })}
             >
-              <Input prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />} />
+              <Input
+                prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
+                aria-label={"Postcode of stad"}
+              />
             </AutoComplete>
           );
         }}

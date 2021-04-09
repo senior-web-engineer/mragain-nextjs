@@ -107,11 +107,13 @@ export default function AdvantagesSection() {
       <AdvantageWrap key={title}>
         <FontAwesomeIcon icon={icon} />
         <h3>{title}</h3>
-        {Object.keys(rest).map((perk, index) => (
-          <dd key={index}>
-            <FontAwesomeIcon icon={faCheck} /> {rest[perk]}
-          </dd>
-        ))}
+        <dl>
+          {Object.keys(rest).map((perk, index) => (
+            <dd key={index}>
+              <FontAwesomeIcon icon={faCheck} /> {rest[perk]}
+            </dd>
+          ))}
+        </dl>
       </AdvantageWrap>
     );
   }
@@ -119,7 +121,7 @@ export default function AdvantagesSection() {
   return (
     <>
       <SubTitle>mragain.nl</SubTitle>
-      <H2>Waarom je een afspraak maakt via  MrAgain</H2>
+      <H2>Waarom je een afspraak maakt via MrAgain</H2>
       <AdvantagesWrap>
         <SliderOnMobile>{ADVANTAGES.map(renderAdvantage)}</SliderOnMobile>
       </AdvantagesWrap>

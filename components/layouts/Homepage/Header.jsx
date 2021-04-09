@@ -176,7 +176,7 @@ function SignupButtons({ hiddenOnMobile, showSignup }) {
   return (
     <UserMenuWrap hiddenOnMobile={hiddenOnMobile}>
       {renderButtons()}
-      <Select value="nl" options={LANG_OPTIONS} />
+      <Select value="nl"  aria-label="Language" options={LANG_OPTIONS} />
     </UserMenuWrap>
   );
 }

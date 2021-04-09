@@ -283,14 +283,14 @@ export default function AppointmentPage({ shop }) {
   const ctaButtons = (
     <CTAButtons>
       {step > 0 ? (
-        <TextButton onClick={() => updateStep((state) => state - 1)}>
+        <TextButton aria-label="Terug naar vorige stap" onClick={() => updateStep((state) => state - 1)}>
           <FontAwesomeIcon icon={faArrowLeft} /> Terug naar vorige stap
         </TextButton>
       ) : (
         <span />
       )}
       <OnMobile only>
-        <Button onClick={onNext}>
+        <Button onClick={onNext} aria-label="Volgende">
           Volgende <FontAwesomeIcon icon={faArrowRight} />
         </Button>
       </OnMobile>

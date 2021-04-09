@@ -311,7 +311,7 @@ export function Reviews({ shop }) {
         </div>
       </ReviewWrap>
 
-      <Button onClick={reviewsModal.actions.open}>
+      <Button onClick={reviewsModal.actions.open} aria-label="Meer reviews">
         <FontAwesomeIcon icon={faArrowRight} />
       </Button>
       <Modal
