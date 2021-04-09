@@ -3,6 +3,7 @@ import { MaxConstraints } from "@/components/styled/layout";
 import {
   appointmentConfirmation,
   appointmentForm,
+  appointmentReview,
   brandFetcher,
   deviceFetcher,
   invalidTimeFetcher,
@@ -30,6 +31,9 @@ import ConfirmationModal from "@/components/common/ConfirmationModal";
 import media, { OnMobile } from "@/utils/media";
 import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
 import Button from "@/components/ui/Button";
+import router from "next/router";
+import { useFetcher } from "@/modules/dataFetcher";
+import { store } from "@/configureStore";
 
 const MainWrap = styled.div`
   padding-top: 1px;
@@ -209,15 +213,29 @@ export default function AppointmentPage({ shop }) {
       }
     }
     if (step === 1) {
+      const reviewData = {
+        form: appointmentForm.state.values,
+        shop,
+        service: serviceFetcher.selector(store.ref.getState()).result,
+        brand: brandFetcher.selector(store.ref.getState()).result,
+        device: deviceFetcher.selector(store.ref.getState()).result,
+        model: modelFetcher.selector(store.ref.getState()).result,
+      };
+
       try {
         await appointmentForm.actions.submit();
-        appointmentConfirmation.actions.open({
-          type: "success",
-          message: "Afspraak succesvol gemaakt! ",
-          description:
-            "We hebben een bevestiging email naar je verzonden (kan in je spam zitten!)",
-          buttonLabel: "Bekijk afspraak gegevens",
-        });
+        appointmentConfirmation.actions
+          .open({
+            type: "success",
+            message: "Afspraak succesvol gemaakt! ",
+            description:
+              "We hebben een bevestiging email naar je verzonden (kan in je spam zitten!)",
+            buttonLabel: "Bekijk afspraak gegevens",
+          })
+          .then(() => {
+            appointmentReview.actions.open(reviewData);
+            router.router.push("/");
+          });
       } catch (err) {
         if (err.validationErrors) {
           appointmentConfirmation.actions.open({

@@ -63,7 +63,7 @@ const ReviewsWrap = styled.div`
 
   ${media.tablet`
     position: absolute;
-    width: 320px;
+    min-width: 320px;
     top: 20px;
     left: 0;
     margin: 0;
