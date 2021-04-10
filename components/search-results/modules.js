@@ -21,7 +21,7 @@ export const filtersFormModule = createFormModule({
       distance: fromAddressBar.distance || "5",
       guarantee: fromAddressBar.guarantee || "-1",
       price: fromAddressBar.price || "-1",
-      sort: fromAddressBar.sort || "0",
+      sort: fromAddressBar.sort || 0,
       long: 0,
       lat: 0,
       limit: 100,

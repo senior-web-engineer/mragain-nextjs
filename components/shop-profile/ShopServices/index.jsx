@@ -184,7 +184,7 @@ const ServiceMobileItemWrap = styled.div`
 ServiceMobileItemWrap.FirstColumn = styled.div`
   color: #a0a0a0;
   font-size: 11px;
-  > dd {
+  > d-def {
     margin-left: 34px;
   }
 `;
@@ -195,10 +195,10 @@ function MobileServiceItem({ item }) {
     <ServiceMobileItemWrap>
       <ServiceMobileItemWrap.FirstColumn>
         {firstColumn}
-        <dd>
+        <d-def>
           {item.guarantee_time} maanden garantie <br />~ {item.reparation_time}{" "}
           reparatie tijd
-        </dd>
+        </d-def>
       </ServiceMobileItemWrap.FirstColumn>
       <price>
         <span>&euro;{item.price}</span>

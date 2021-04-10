@@ -148,12 +148,11 @@ const ModelFields = styled.div`
     color: #fff;
     border: 0;
     padding: 0 11px;
-    border-radius: 10px !important;
-
-    &.ant-radio-button-wrapper-checked {
-      color: #000;
-      background-color: #fff;
-    }
+    border-radius: 6px !important;
+  }
+  .menu-item-wrapper.active .ant-radio-button-wrapper {
+    color: #000;
+    background-color: #fff;
   }
 
   > ${MapTriggerWrap} {
@@ -390,13 +389,13 @@ const ShopWrap = styled.div`
   padding: 10px;
   position: relative;
   cursor: pointer;
+  overflow: hidden;
 
   &:hover {
     ${selectedMixin}
   }
 
-  ${(props) =>
-    props.isSelected && selectedMixin}
+  ${(props) => props.isSelected && selectedMixin}
 
   ${media.tablet`
     height: 190px;
@@ -468,10 +467,10 @@ const ShopDetails = styled.div`
 ShopDetails.SecondRow = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
   font-size: 15px;
   color: #303030;
   font-weight: 400;
+  flex-direction: column;
 
   label {
     display: block;
@@ -486,6 +485,9 @@ ShopDetails.SecondRow = styled.div`
   }
 
   ${media.tablet`
+    flex-direction: row;
+    align-items: center;
+
     ${Button} {
       display: inline-block;
     }
@@ -575,7 +577,11 @@ ShopDetails.ThirdRow = styled.div`
   border-top: 2px;
   padding-top: 8px;
   border-top: 2px solid #ddd;
-  display: flex;
+  display: none;
+
+  ${media.tablet`
+    display: flex;
+  `}
 `;
 
 ShopDetails.Service = styled.div`
@@ -589,8 +595,30 @@ ShopDetails.Service = styled.div`
 `;
 
 ShopDetails.AppointmentInfo = styled.div`
-  display: flex;
-  align-items: center;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 2px solid #ddd;
+  label {
+    margin-bottom: 0;
+  }
+  date {
+    font-size: 13px;
+  }
+  ${media.tablet`
+    padding-top: 0;
+    border-top: none;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+
+    label {
+      margin-bottom: 5px;
+    }
+
+    date {
+      font-size: 15px;
+    }
+  `}
 `;
 
 const shopRefs = {};
@@ -643,7 +671,7 @@ function ShopItem({ item }) {
             objectFit="cover"
           />
         ) : null}
-        <dd>{item.shop.distance}</dd>
+        <d-def>{item.shop.distance}</d-def>
       </ShopImageWrap>
       <ShopDetails tagColor={TAG_TO_COLOR[tag]}>
         <div>{tag ? <tag>{tag}</tag> : null}</div>
@@ -663,22 +691,24 @@ function ShopItem({ item }) {
               onChange={null}
             />
           </ShopDetails.NameWrap>
-          <OnMobile show={false}>
-            <ShopDetails.AppointmentInfo>
-              {item.next_slot ? (
-                <div>
-                  <label>Eerst mogelijke afspraak</label>
-                  <date>{moment(item.next_slot).isValid() ? moment(item.next_slot).format("DD MMM, hh:mm") : item.next_slot}</date>
-                </div>
-              ) : null}
-              {item.price ? (
-                <ShopDetails.PriceWrap>
-                  <label>Vanaf</label>
-                  <price>&euro; {item.price}</price>
-                </ShopDetails.PriceWrap>
-              ) : null}
-            </ShopDetails.AppointmentInfo>
-          </OnMobile>
+          <ShopDetails.AppointmentInfo>
+            {item.next_slot ? (
+              <div>
+                <label>Eerst mogelijke afspraak</label>
+                <date>
+                  {moment(item.next_slot).isValid()
+                    ? moment(item.next_slot).format("DD MMM, hh:mm")
+                    : item.next_slot}
+                </date>
+              </div>
+            ) : null}
+            {item.price ? (
+              <ShopDetails.PriceWrap>
+                <label>Vanaf</label>
+                <price>&euro; {item.price}</price>
+              </ShopDetails.PriceWrap>
+            ) : null}
+          </ShopDetails.AppointmentInfo>
         </ShopDetails.SecondRow>
         {item.devices?.length ? (
           <ShopDetails.ThirdRow>
@@ -824,17 +854,14 @@ const SORT_BY = [
     value: 1,
   },
   {
-
     label: "Prijs",
     value: 4,
   },
   {
-
     label: "Garantie",
     value: 5,
   },
   {
-
     label: "Afstand",
     value: 8,
   },

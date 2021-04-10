@@ -97,7 +97,7 @@ const ShopImageWrap = styled.div`
   overflow: hidden;
   margin: 0 -15px;
 
-  dd {
+  d-def {
     position: absolute;
     bottom: 6px;
     left: 6px;
@@ -181,14 +181,14 @@ export function ShopCard({shop, onClick}) {
             objectFit="cover"
           />
         ) : null}
-        <dd>
+        <d-def>
           {shop.rating !== undefined ? (
             <rating>
               {shop.rating} <FontAwesomeIcon icon={faStar} />
             </rating>
           ) : null}
           {shop.tag ? <tag>{shop.tag}</tag> : null}
-        </dd>
+        </d-def>
       </ShopImageWrap>
       <ShopDetails>
         <div>
