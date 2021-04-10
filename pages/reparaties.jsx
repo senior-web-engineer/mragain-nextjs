@@ -1,14 +1,12 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
-import Link from "next/link";
-import { Row, Col, Button, Result, Modal } from "antd";
+import { Row, Col, Button, Modal } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import BrandModelCard from "@/components/phone-repair/brand-model-card/BrandModelCard";
 import "./reparaties.less";
 import "./reparaties_css.less";
 import classnames from "classnames";
-import swal from "sweetalert";
 import {
   setGuaranteeDevice,
   setLoadPBM,
@@ -26,9 +24,14 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Head from "next/head";
 import { FRONT_END_URL } from "../constants.js";
 import LoadingOverlay from "react-loading-overlay";
-import axios, { CancelToken } from "axios";
 import { useRef } from "react";
 import { Layout } from "../components/global";
+
+function showNotification(...args) {
+  return import("sweetalert").then((module) => {
+    module.default(...args);
+  });
+}
 
 const PhoneRepair = (routerProps) => {
   const [isload, setIsLoad] = useState(true);
@@ -75,7 +78,7 @@ const PhoneRepair = (routerProps) => {
       saveModalsLoading === true
       // isDeletedGuarantee === true
     ) {
-      swal("Gelukt!", "Je modellen zijn opgeslagen", "success");
+      showNotification("Gelukt!", "Je modellen zijn opgeslagen", "success");
     }
   }, [isSaveModalsLoading, saveModalsLoading, isDeletedGuarantee]);
 
@@ -311,7 +314,7 @@ const PhoneRepair = (routerProps) => {
         setImportBtnLoading(false);
         setCSVFile(null);
 
-        swal(
+        showNotification(
           "Gelukt!",
           "Je reparaties zijn succesvol opgeslagen",
           "success"
@@ -322,8 +325,8 @@ const PhoneRepair = (routerProps) => {
       .catch((err) => {
         console.log(err.response);
 
-        // swal("Error!", "Error occurred, Please try again later", "error").then(
-        swal("Error!", err.response.data.error, "error").then((value) => {
+        // showNotification("Error!", "Error occurred, Please try again later", "error").then(
+        showNotification("Error!", err.response.data.error, "error").then((value) => {
           setShowImportModal(false);
           setImportBtnLoading(false);
         });
