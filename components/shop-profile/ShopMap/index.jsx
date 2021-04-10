@@ -176,10 +176,6 @@ const ModalReviewWrap = styled.div`
     display: flex;
     justify-content: space-between;
 
-    > div:nth-child(2) {
-      flex-grow: 1;
-    }
-
     ${ReviewWrap} {
       display: flex;
       justify-content: flex-end;

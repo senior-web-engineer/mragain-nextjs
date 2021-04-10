@@ -41,7 +41,6 @@ const ShopProfile = (routerProps) => {
     shop_account_profile,
     shopProfileServerInfo,
     shopDevices,
-    isSSR,
   } = routerProps;
 
   const router = useRouter();
