@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { Modal } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, DatePicker, Input, Select, Divider } from "antd";
 import { Label } from "semantic-ui-react";
 import {

@@ -1,8 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { message } from "antd";
 import { Modal } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import {
   MainContactUsBlog,
   MainContactUsContent,

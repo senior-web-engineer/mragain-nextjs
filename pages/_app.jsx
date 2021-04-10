@@ -6,7 +6,6 @@ import { wrapper } from "../configureStore";
 import { connect } from "react-redux";
 import "./_app.less";
 import "rc-dialog/assets/index.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config, library } from "@fortawesome/fontawesome-svg-core";
 

@@ -70,8 +70,9 @@ export default class MyDocument extends Document {
           ></link>
           <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap" rel="stylesheet"></link>
 
-          {/* We only want to add the scripts if in production */}
-          <script dangerouslySetInnerHTML={{__html: hotJarScript}}/>
+          {isProduction ? (
+            <script dangerouslySetInnerHTML={{__html: hotJarScript}}/>
+          ) : null}
         </HeadWithoutPreload>
         <body>
           <Main />

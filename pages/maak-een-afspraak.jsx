@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { Button, DatePicker, Input, Select, Divider, message } from "antd";
 import { Modal } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Label } from "semantic-ui-react";
 import moment from "moment";
 import "./maak-een-afspraak.less";

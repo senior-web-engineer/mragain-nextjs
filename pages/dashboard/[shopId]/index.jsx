@@ -13,6 +13,7 @@ import {
 } from "antd";
 import { Label } from "semantic-ui-react";
 import { Table, Modal } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
 import { Layout } from "@/components/global";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

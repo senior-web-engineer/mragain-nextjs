@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { TestmonialSectionArea } from "./TestmonialSection.style";
 import TestmonialCarousel from "./TestmonialCarousel/TestmonialCarousel.jsx";
 import {

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { message } from "antd";
 import "./index.less";
 import { resetPasswordConfirmEmail } from "service/account/operations.js";

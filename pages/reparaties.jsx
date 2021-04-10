@@ -21,6 +21,7 @@ import {
 } from "service/account/operations";
 import { getSearchFilterField } from "service/search/operations.js";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Head from "next/head";
 import { FRONT_END_URL } from "../constants.js";
 import LoadingOverlay from "react-loading-overlay";
