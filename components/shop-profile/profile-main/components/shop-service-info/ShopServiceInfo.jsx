@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Table } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./ShopServiceInfo.less";
 import shopimage from "@/assets/images/shop-map.png";

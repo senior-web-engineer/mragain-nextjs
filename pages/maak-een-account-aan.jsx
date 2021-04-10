@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { message } from "antd";
 import { useRouter } from "next/router";
 import "./maak-een-account-aan.less";

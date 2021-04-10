@@ -13,6 +13,7 @@ import {
   Input,
 } from "antd";
 import { Table } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";

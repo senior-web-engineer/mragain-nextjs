@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { message } from "antd";
 import { useRouter } from "next/router";
 import { Modal } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./AccountCreate2.less";
 
 import { registerUser } from "service/account/operations.js";

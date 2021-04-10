@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Button, input, Modal } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useRouter } from "next/router";
 import { searchShopFilter } from "service/search/operations.js";
 import { setFindedLocation, setSearchFilter } from "service/search/action.js";

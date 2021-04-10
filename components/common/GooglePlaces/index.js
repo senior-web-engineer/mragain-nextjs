@@ -57,14 +57,6 @@ export default function GooglePlaces({
 }) {
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  useEffect(() => {
-    loadScript(
-      `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places,geocode`,
-      () => {
-        setScriptLoaded(true);
-      }
-    );
-  }, []);
 
   useEffect(() => {
     if (value !== searchTerm) {
@@ -73,7 +65,24 @@ export default function GooglePlaces({
   }, [value]);
 
   if (!scriptLoaded) {
-    return null;
+    return (
+      <MainWrap>
+        <AutoComplete size={size} placeholder={placeholder}>
+          <Input
+            prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
+            aria-label={"Postcode of stad"}
+            onFocus={() => {
+              loadScript(
+                `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places,geocode`,
+                () => {
+                  setScriptLoaded(true);
+                }
+              );
+            }}
+          />
+        </AutoComplete>
+      </MainWrap>
+    );
   }
 
   return (
@@ -93,6 +102,7 @@ export default function GooglePlaces({
               }))}
               value={searchTerm}
               size={size}
+              autoFocus
               placeholder={placeholder}
               loading={loading}
               dropdownStyle={{ minWidth: "320px" }}

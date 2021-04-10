@@ -9,19 +9,24 @@ import DefaultLayout from "@/components/layouts/Homepage";
 import ShopHeader from "@/components/shop-profile/ShopHeader";
 import ShopServices from "@/components/shop-profile/ShopServices";
 import ShopDetails from "@/components/shop-profile/ShopDetails";
-import ShopMap from "@/components/shop-profile/ShopMap";
 import { OnMobile } from "@/utils/media";
 import Loader from "@/components/common/Loader";
-import Loadable from 'react-loadable';
+import dynamic from "next/dynamic";
 
-const LoadableReviews = Loadable({
-  loader: () => import('@/components/shop-profile/ShopMap').then(module => module.Reviews),
-  loading: Loader,
-});
+const LoadableReviews = dynamic(
+  () =>
+    import("@/components/shop-profile/ShopMap").then(
+      (module) => module.Reviews
+    ),
+  {
+    loading: Loader,
+    ssr: false,
+  }
+);
 
-const LoadableMap = Loadable({
-  loader: () => import('@/components/shop-profile/ShopMap'),
+const LoadableMap = dynamic(() => import("@/components/shop-profile/ShopMap"), {
   loading: Loader,
+  ssr: false,
 });
 
 const MainWrap = styled.div`

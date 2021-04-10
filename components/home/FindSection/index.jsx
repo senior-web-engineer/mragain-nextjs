@@ -299,7 +299,6 @@ export default function FindSection() {
                 as={GooglePlaces}
                 size="large"
                 prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
-                placeholder={"Postcode of stad"}
                 name="zip"
               />
             </div>
