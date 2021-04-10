@@ -27,12 +27,6 @@ module.exports = withLess(withSass(withCSS({
   productionBrowserSourceMaps: true,
   webpack: (config, { isServer,webpack }) => {
     if (isServer) {
-      if (!isServer) {
-        config.node = {
-          fs: 'empty',
-          fs_extra: 'empty'
-        }
-      }
       const antStyles = /antd\/.*?\/style.*?/
       const origExternals = [...config.externals]
       config.externals = [

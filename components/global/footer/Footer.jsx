@@ -11,7 +11,6 @@ import {
   FooterBrandTitle,
   LogoTopTitle,
   LogoBottomTitle,
-  FooterBrandContent,
   FooterLinkArea,
   FooterSitemap,
   FooterSitemapTitle,
@@ -20,14 +19,11 @@ import {
   DevicesContainer,
 } from "./Footer.style";
 import "./Footer.less";
-import logo from "@/assets/images/logo.png";
 import Link from "next/link";
 import { FRONT_END_URL } from "../../../constants.js";
 import dynamic from "next/dynamic";
 import { withUserAgent } from "next-useragent";
 import Image from "next/image";
-// import { connect } from "react-redux";
-// import { getDevices } from "@/service/search/operations";
 const CookieBanner = dynamic(
   () => import("@palmabit/react-cookie-law").then((mod) => mod.CookieBanner),
   {
@@ -36,12 +32,8 @@ const CookieBanner = dynamic(
   }
 );
 
-// const FooterView = ({ location, ua, shopDevices, getDevices }) => {
 const FooterView = (routerProps) => {
   const { location, ua, getDevices, shopDevices } = routerProps;
-  // useEffect(() => {
-  //   getDevices();
-  // }, []);
 
   const router = useRouter();
   const splitUrl = "/" + router.pathname.split("/")[1];
@@ -343,16 +335,3 @@ const FooterView = (routerProps) => {
   );
 };
 export default withUserAgent(FooterView);
-// const mapStateToProps = (state) => ({
-//   shopDevices: state.search.devices,
-// });
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     getDevices: (data) => {
-//       getDevices(dispatch);
-//     },
-//   };
-// };
-
-// const Footer = withUserAgent(FooterView);
-// export default connect(mapStateToProps, mapDispatchToProps)(FooterView);
