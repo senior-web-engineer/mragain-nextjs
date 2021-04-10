@@ -8,7 +8,6 @@ import React, {
 } from "react";
 import styled, { css } from "styled-components";
 import isEqual from "fast-deep-equal";
-import Menu from "react-horizontal-scrolling-menu";
 import { Waypoint } from "react-waypoint";
 
 import DefaultLayout from "@/components/layouts/Homepage";
@@ -53,6 +52,15 @@ import { useRouter } from "next/router";
 import GooglePlaces from "@/components/common/GooglePlaces";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import moment from "moment";
+
+import Loadable from "react-loadable";
+import Loader from "@/components/common/Loader";
+
+const Menu = Loadable({
+  loader: () => import("react-horizontal-scrolling-menu"),
+  loading: Loader,
+});
+
 
 //
 

@@ -24,9 +24,16 @@ import Link from "next/link";
 import Button from "@/components/ui/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import Menu from "react-horizontal-scrolling-menu";
 import { OnMobile, useScreenSize } from "@/utils/media";
 import { useRouter } from "next/router";
+import Loadable from "react-loadable";
+import Loader from "@/components/common/Loader";
+
+const Menu = Loadable({
+  loader: () => import("react-horizontal-scrolling-menu"),
+  loading: Loader,
+});
+
 
 const ModelFields = styled.div`
   display: flex;
