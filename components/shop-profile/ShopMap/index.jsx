@@ -169,9 +169,15 @@ const ModalReviewWrap = styled.div`
   font-size: 13px;
   color: #0d3244;
 
+
+
   ${media.tablet`
     display: flex;
     justify-content: space-between;
+
+    > div:nth-child(2) {
+      flex-grow: 1;
+    }
 
     ${ReviewWrap} {
       display: flex;
