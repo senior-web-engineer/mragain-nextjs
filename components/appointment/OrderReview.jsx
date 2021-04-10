@@ -15,7 +15,7 @@ const ContentWrap = styled.div`
     margin: 25px 0;
   }
 
-  dl {
+  d-list {
     width: 450px;
     display: flex;
     flex-wrap: wrap;
@@ -23,14 +23,14 @@ const ContentWrap = styled.div`
     margin: 50px auto 10px;
   }
 
-  dt {
+  d-term {
     width: 50%;
     color: #303030;
     font-weight: 500;
     margin-bottom: 10px;
   }
 
-  dd {
+  d-def {
     width: 50%;
     color: #707070;
     font-weight: 300;
@@ -57,38 +57,38 @@ const AppointmentReviewModalContent = connect(() => ({
         src="/images/notifications/appointment.png"
       />
       <h3>Appointment set</h3>
-      <dl>
-        <dd>Shop</dd>
-        <dt>
+      <d-list>
+        <d-def>Shop</d-def>
+        <d-term>
           {modalData.form.shopName} <br /> {modalData.form.shopAddress}
-        </dt>
-        <dd>Date & Time</dd>
-        <dt>
+        </d-term>
+        <d-def>Date & Time</d-def>
+        <d-term>
           {modalData.form.time}{" "}
           {moment(modalData.form.date).format("dddd, DD MMMM YYYY")}
-        </dt>
+        </d-term>
         <hr />
-        <dd>Your details</dd>
-        <dt>
+        <d-def>Your details</d-def>
+        <d-term>
           {modalData.form.name} <br />
           {modalData.form.email} <br />
           {modalData.form.tel}
-        </dt>
+        </d-term>
         <hr />
-        <dd>Device details</dd>
-        <dt>
+        <d-def>Device details</d-def>
+        <d-term>
           {modalData.device.device_name} <br />
           {modalData.brand.brand_name} <br />
           {modalData.model.model_name}
-        </dt>
+        </d-term>
         <hr />
-        <dd>Services</dd>
-        <dt>
+        <d-def>Services</d-def>
+        <d-term>
           {modalData.service.reparation.reparation_name}
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&euro;
           {modalData.service.price}
-        </dt>
-      </dl>
+        </d-term>
+      </d-list>
     </ContentWrap>
   );
 });

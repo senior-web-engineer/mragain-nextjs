@@ -11,7 +11,18 @@ import ShopServices from "@/components/shop-profile/ShopServices";
 import ShopDetails from "@/components/shop-profile/ShopDetails";
 import ShopMap from "@/components/shop-profile/ShopMap";
 import { OnMobile } from "@/utils/media";
-import { Reviews } from "@/components/shop-profile/ShopMap";
+import Loader from "@/components/common/Loader";
+import Loadable from 'react-loadable';
+
+const LoadableReviews = Loadable({
+  loader: () => import('@/components/shop-profile/ShopMap').then(module => module.Reviews),
+  loading: Loader,
+});
+
+const LoadableMap = Loadable({
+  loader: () => import('@/components/shop-profile/ShopMap'),
+  loading: Loader,
+});
 
 const MainWrap = styled.div`
   background-color: #f3f3f3;
@@ -69,10 +80,10 @@ const ShopProfile = (routerProps) => {
         <ShopHeader shop={shopProfileServerInfo} />
         <ShopServices shop={shopProfileServerInfo} />
         <OnMobile only>
-          <Reviews shop={shopProfileServerInfo} />
+          <LoadableReviews shop={shopProfileServerInfo} />
         </OnMobile>
         <ShopDetails shop={shopProfileServerInfo} />
-        <ShopMap shop={shopProfileServerInfo} />
+        <LoadableMap shop={shopProfileServerInfo} />
       </MainWrap>
     </DefaultLayout>
   );

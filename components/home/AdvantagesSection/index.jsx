@@ -77,10 +77,11 @@ const AdvantageWrap = styled.div`
     margin-top: 3px;
   }
 
-  dd {
+  d-item {
     padding-left: 30px;
     margin: 6px 0;
     position: relative;
+    display: block;
 
     .svg-inline--fa {
       font-size: 11px;
@@ -107,13 +108,11 @@ export default function AdvantagesSection() {
       <AdvantageWrap key={title}>
         <FontAwesomeIcon icon={icon} />
         <h3>{title}</h3>
-        <dl>
           {Object.keys(rest).map((perk, index) => (
-            <dd key={index}>
+            <d-item key={index}>
               <FontAwesomeIcon icon={faCheck} /> {rest[perk]}
-            </dd>
+            </d-item>
           ))}
-        </dl>
       </AdvantageWrap>
     );
   }

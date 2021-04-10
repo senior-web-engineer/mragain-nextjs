@@ -97,7 +97,7 @@ const ShopImageWrap = styled.div`
   overflow: hidden;
   margin: 0 -15px;
 
-  dd {
+  d-def {
     position: absolute;
     bottom: 6px;
     left: 6px;
@@ -147,12 +147,13 @@ const Toolbar = styled.div`
     display: flex;
   `}
 
-  a {
+  filter-by {
     font-size: 13px;
     /* color: #303030; */
     color: #a0a0a0;
     font-weight: 400;
     margin: 0 17px;
+    cursor: pointer;
   }
   .view-all {
     color: #06c987;
@@ -180,19 +181,19 @@ export function ShopCard({shop, onClick}) {
             objectFit="cover"
           />
         ) : null}
-        <dd>
+        <d-def>
           {shop.rating !== undefined ? (
             <rating>
               {shop.rating} <FontAwesomeIcon icon={faStar} />
             </rating>
           ) : null}
           {shop.tag ? <tag>{shop.tag}</tag> : null}
-        </dd>
+        </d-def>
       </ShopImageWrap>
       <ShopDetails>
         <div>
           <Link href={`/${shop.name}--${shop.city}`}>
-            <a>{shop.name}</a>
+            <filter-by>{shop.name}</filter-by>
           </Link>
         </div>
         <div>
@@ -225,11 +226,11 @@ export default function ShopsSection({shopList = []} = {}) {
       <H2>Nieuw</H2>
       <Toolbar>
         <div>
-          <a>Alles</a>
-          <a>Featured</a>
-          <a>Populair</a>
-          <a>Beste prijs</a>
-          <a>Nieuw</a>
+          <filter-by>Alles</filter-by>
+          <filter-by>Featured</filter-by>
+          <filter-by>Populair</filter-by>
+          <filter-by>Beste prijs</filter-by>
+          <filter-by>Nieuw</filter-by>
         </div>
         <div>
           <Link href="/search-results">

@@ -28,13 +28,13 @@ import { serviceFormModule, shopServicesListModule } from "../modules";
 const MainWrap = styled.div`
   background-color: #f3f3f3;
 
-  dl {
+  d-list {
     display: flex;
     flex-wrap: wrap;
     margin: 0 -20px;
   }
 
-  dt {
+  d-term {
     width: 100%;
     padding: 10px 20px 0;
     background-color: #fff;
@@ -44,7 +44,7 @@ const MainWrap = styled.div`
     line-height: 27px;
   }
 
-  dd {
+  d-def {
     width: 100%;
     padding: 5px 20px 10px;
     background-color: #fff;
@@ -74,21 +74,20 @@ const MainWrap = styled.div`
       justify-content: space-between;
     }
 
-    dl {
+    d-list {
       width: 620px;
       margin: 0;
     }
 
-    dd, dt {
+    d-def, d-term {
       padding: 0;
       width: 50%;
     }
 
-    dd {
+    d-def {
       margin-bottom: 5px;
       line-height: 27px;
     }
-
   `}
 `;
 
@@ -144,23 +143,23 @@ export default function ShopDetails({ shop }) {
       <MaxConstraints>
         <div>
           <SubTitle as="h2">Shopinformation {shop.name}</SubTitle>
-          <dl>
-            <dt>Apparaten</dt>
-            <dd>
+          <d-list>
+            <d-term>Apparaten</d-term>
+            <d-def>
               <FontAwesomeIcon icon={faMobile} />{" "}
               <FontAwesomeIcon icon={faLaptop} />
               <FontAwesomeIcon icon={faTablet} />{" "}
               <FontAwesomeIcon icon={faTv} />{" "}
               <FontAwesomeIcon icon={faHeadphones} />
-            </dd>
-            <dt>Betaal methoden</dt>
-            <dd>
+            </d-def>
+            <d-term>Betaal methoden</d-term>
+            <d-def>
               <FontAwesomeIcon icon={faCcVisa} />
               <FontAwesomeIcon icon={faCcMastercard} />
               <FontAwesomeIcon icon={faPaypal} />
-            </dd>
-            <dt>Reparatie opties</dt>
-            <dd>
+            </d-def>
+            <d-term>Reparatie opties</d-term>
+            <d-def>
               <LocationWrap>
                 <FontAwesomeIcon icon={faHome} /> Reparatie op locatie
               </LocationWrap>
@@ -170,16 +169,16 @@ export default function ShopDetails({ shop }) {
               <LocationWrap>
                 <FontAwesomeIcon icon={faBox} /> Opsturen
               </LocationWrap>
-            </dd>
-            <dt>Services</dt>
-            <dd>Mobile Accessories, Storage Devices, Computer Accessories,</dd>
-            <dt>Vervangend toestel</dt>
-            <dd>Voor specifieke toestellen</dd>
-            <dt>Wachtruimte</dt>
-            <dd>Niet beschikbaar</dd>
-            <dt>Merken</dt>
-            <dd>Apple, Acer, Asus, Dell, Hewlett-Packard, Huawei, HTC,</dd>
-          </dl>
+            </d-def>
+            <d-term>Services</d-term>
+            <d-def>Mobile Accessories, Storage Devices, Computer Accessories,</d-def>
+            <d-term>Vervangend toestel</d-term>
+            <d-def>Voor specifieke toestellen</d-def>
+            <d-term>Wachtruimte</d-term>
+            <d-def>Niet beschikbaar</d-def>
+            <d-term>Merken</d-term>
+            <d-def>Apple, Acer, Asus, Dell, Hewlett-Packard, Huawei, HTC,</d-def>
+          </d-list>
         </div>
         <Form module={serviceFormModule}>
           <List module={shopServicesListModule}>

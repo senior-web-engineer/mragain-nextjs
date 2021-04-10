@@ -52,6 +52,10 @@ function MapComponent({
     return shopList.find((shop) => shop.id === selectedShopId);
   }, [shopList, selectedShopId]);
 
+  if (typeof window === "undefined") {
+    return null;
+  }
+
   return (
     <GoogleMapReact
       bootstrapURLKeys={{ key: googleMapsApiKey }}

@@ -184,7 +184,7 @@ const ServiceMobileItemWrap = styled.div`
 ServiceMobileItemWrap.FirstColumn = styled.div`
   color: #a0a0a0;
   font-size: 11px;
-  > dd {
+  > d-def {
     margin-left: 34px;
   }
 `;
@@ -195,10 +195,10 @@ function MobileServiceItem({ item }) {
     <ServiceMobileItemWrap>
       <ServiceMobileItemWrap.FirstColumn>
         {firstColumn}
-        <dd>
+        <d-def>
           {item.guarantee_time} maanden garantie <br />~ {item.reparation_time}{" "}
           reparatie tijd
-        </dd>
+        </d-def>
       </ServiceMobileItemWrap.FirstColumn>
       <price>
         <span>&euro;{item.price}</span>
@@ -392,6 +392,7 @@ export default function ShopServices({ shop }) {
               name="device"
               as={Select}
               label="Apparaat"
+              aria-input-field-name="device"
               onChange={onDeviceChange}
               dropdownStyle={{ minWidth: "200px" }}
             />
@@ -400,6 +401,7 @@ export default function ShopServices({ shop }) {
             name="brand"
             as={Select}
             label="Merk"
+            aria-input-field-name="brand"
             onChange={onBandChange}
             dropdownStyle={{ minWidth: "200px" }}
           />
@@ -407,6 +409,7 @@ export default function ShopServices({ shop }) {
             name="model"
             as={Select}
             label="Model"
+            aria-input-field-name="model"
             {...(screenSize === "mobile"
               ? {}
               : { dropdownStyle: { minWidth: "200px" } })}
