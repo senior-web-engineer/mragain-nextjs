@@ -193,7 +193,7 @@ export function ShopCard({shop, onClick}) {
       <ShopDetails>
         <div>
           <Link href={`/${shop.name}--${shop.city}`}>
-            <filter-by>{shop.name}</filter-by>
+            <a>{shop.name}</a>
           </Link>
         </div>
         <div>
