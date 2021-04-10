@@ -36,10 +36,8 @@ import { createSelectComponent } from "@/modules/dataFetcher";
 import { Radio, Rate, Slider, Switch } from "antd";
 import { MaxConstraints } from "@/components/styled/layout";
 import Image from "next/image";
-import { StyledInput } from "@/components/ui/Input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faArrowRight,
   faMapMarkerAlt,
   faSortAmountDown,
   faStore,
@@ -50,7 +48,6 @@ import Map from "@/components/search-results/Map";
 import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
 import { SubTitle } from "@/components/styled/text";
 import { TextButton } from "@/components/ui/Button";
-import Link from "next/link";
 import media, { OnMobile, ScreenSizeProvider } from "@/utils/media";
 import Modal from "@/modules/modal";
 import { useRouter } from "next/router";
@@ -641,7 +638,7 @@ function ShopItem({ item }) {
   const formState = filtersFormModule.state.values;
   // API changed does not include the city any longer?
   // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
-  const shopRoute = `/${item.shop.name}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
+  const shopRoute = `/shops/${item.shop.name}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
 
   function onClick() {
     if (!showMap) {

@@ -192,7 +192,7 @@ export function ShopCard({shop, onClick}) {
       </ShopImageWrap>
       <ShopDetails>
         <div>
-          <Link href={`/${shop.name}--${shop.city}`}>
+          <Link href={`/shops/${shop.name}--${shop.city}`}>
             <a>{shop.name}</a>
           </Link>
         </div>
@@ -206,7 +206,7 @@ export function ShopCard({shop, onClick}) {
           {location}
         </location>
       ) : null}
-      <Link href={`/${shop.name}--${shop.city}`}>
+      <Link href={`/shops/${shop.name}--${shop.city}`}>
         <Button as="a" aria-label={`Visit ${shop.name}`}>
           <FontAwesomeIcon icon={faArrowRight} />
         </Button>

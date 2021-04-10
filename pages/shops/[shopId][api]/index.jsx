@@ -9,7 +9,6 @@ import DefaultLayout from "@/components/layouts/Homepage";
 import ShopHeader from "@/components/shop-profile/ShopHeader";
 import ShopServices from "@/components/shop-profile/ShopServices";
 import ShopDetails from "@/components/shop-profile/ShopDetails";
-import ShopMap from "@/components/shop-profile/ShopMap";
 import { OnMobile } from "@/utils/media";
 import Loader from "@/components/common/Loader";
 import Loadable from 'react-loadable';
@@ -90,8 +89,10 @@ const ShopProfile = (routerProps) => {
 };
 
 export async function getServerSideProps(ctx) {
+  console.log("getServerSideProps", new Date())
   const shopId = ctx.query["shopId][api"];
   const shopProfileServerInfo = await getShopProfileByInformationServer(shopId);
+  console.log("getServerSideProps-end", new Date())
   return {
     props: {
       shopProfileServerInfo:

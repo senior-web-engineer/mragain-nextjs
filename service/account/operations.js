@@ -217,8 +217,6 @@ export function getShopProfileByInformationServer(str) {
   return axios
     .get(`${API_PATH.GETSHOPIDBYINFORMATION}/`, { params: { shop_info: str } })
     .then((res) => {
-      console.log("shop profile data", res.data);
-
       return res.data;
     })
     .catch((err) => {
