@@ -10,8 +10,9 @@
     [
       "babel-plugin-styled-components", {
         "ssr": true,
-        "displayName": true
-        }
+        "displayName": true,
+        "minify": true
+      }
     ]
   ]
 }
