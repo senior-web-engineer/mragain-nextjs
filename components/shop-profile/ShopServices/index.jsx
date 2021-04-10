@@ -34,11 +34,14 @@ const ModelFields = styled.div`
   margin: 19px -5px;
 
   > div {
-    flex-grow: 1;
+    width: 100%;
     margin-top: 0 !important;
     margin: 0 5px;
     background-color: #fff;
 
+    .ant-select {
+      width: 100%;
+    }
     > label {
       margin: 11px 11px 2px 11px;
     }
@@ -268,12 +271,12 @@ const MobileDeviceSelectorWrap = styled.div`
   .ant-radio-button-wrapper {
     background-color: transparent;
     color: #c0c0c0;
-    border: 0;
+    border: 0!important;
     padding: 0 11px;
     border-radius: 7px !important;
 
     &.ant-radio-button-wrapper-checked {
-      color: #fff;
+      color: #fff!important;
       background-color: #06c987;
     }
   }

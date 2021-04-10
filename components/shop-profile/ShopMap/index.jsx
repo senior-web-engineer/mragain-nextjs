@@ -99,6 +99,7 @@ const MainWrap = styled.div`
 
 const ReviewWrap = styled.div`
   margin-top: 13px;
+  white-space: nowrap;
 
   .ant-rate {
     margin-right: 10px;
