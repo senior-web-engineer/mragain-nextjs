@@ -21,14 +21,6 @@ config.autoAddCss = false;
 library.add(fas, fab, far);
 moment.locale('nl');
 class MyApp extends App {
-  componentDidMount() {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector("#jss-server-side");
-    if (jssStyles) {
-      jssStyles.parentElement.removeChild(jssStyles);
-    }
-  }
-
   render() {
     const { Component, pageProps, isLoggedIn, getAuthUser } = this.props;
 

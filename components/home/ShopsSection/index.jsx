@@ -170,7 +170,7 @@ export function ShopCard({shop, onClick}) {
     .filter(Boolean)
     .join(", ");
 
-  const shopUrl = `/shops/${shop.name}--${shop.city}`
+  const shopUrl = `/${shop.name}--${shop.city}`
 
   return (
     <ShopWrap key={shop.id} onClick={onClick}>

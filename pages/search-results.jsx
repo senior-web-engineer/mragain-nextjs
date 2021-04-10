@@ -645,7 +645,7 @@ function ShopItem({ item }) {
   const formState = filtersFormModule.state.values;
   // API changed does not include the city any longer?
   // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
-  const shopRoute = `/shops/${item.shop.name}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
+  const shopRoute = `/${item.shop.name}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
 
   function onClick() {
     if (!showMap) {

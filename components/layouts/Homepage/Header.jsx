@@ -249,7 +249,7 @@ const HeaderView = ({ showSignup }) => {
                 </MobileMenuHeader>
                 <SignupButtons />
                 <MobileMenuLinks>
-                  {/* <HeaderLinks /> */}
+                  <HeaderLinks />
                 </MobileMenuLinks>
               </MobileMenuWrapper>
             </HamburgerWrap>
@@ -258,7 +258,7 @@ const HeaderView = ({ showSignup }) => {
       </HeaderWrap>
       <MainMenuWrap>
         <MaxConstraints>
-          {/* <HeaderLinks /> */}
+          <HeaderLinks />
         </MaxConstraints>
       </MainMenuWrap>
     </>
