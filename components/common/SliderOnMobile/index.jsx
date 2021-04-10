@@ -9,12 +9,12 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-import Loadable from 'react-loadable';
+import dynamic from "next/dynamic";
 import Loader from "../Loader";
 
-const Slider = Loadable({
-  loader: () => import('react-slick'),
+const Slider = dynamic(() => import("react-slick"), {
   loading: Loader,
+  ssr: false,
 });
 
 const settings = {

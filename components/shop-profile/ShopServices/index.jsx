@@ -26,14 +26,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { OnMobile, useScreenSize } from "@/utils/media";
 import { useRouter } from "next/router";
-import Loadable from "react-loadable";
+import dynamic from "next/dynamic";
 import Loader from "@/components/common/Loader";
 
-const Menu = Loadable({
-  loader: () => import("react-horizontal-scrolling-menu"),
+const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
   loading: Loader,
+  ssr: false,
 });
-
 
 const ModelFields = styled.div`
   display: flex;
@@ -106,7 +105,6 @@ const MobileToolbar = styled.div`
     }
   }
 `;
-
 
 const SERVICE_COLUMNS = [
   {
@@ -278,12 +276,12 @@ const MobileDeviceSelectorWrap = styled.div`
   .ant-radio-button-wrapper {
     background-color: transparent;
     color: #c0c0c0;
-    border: 0!important;
+    border: 0 !important;
     padding: 0 11px;
     border-radius: 7px !important;
 
     &.ant-radio-button-wrapper-checked {
-      color: #fff!important;
+      color: #fff !important;
       background-color: #06c987;
     }
   }
@@ -452,9 +450,7 @@ export default function ShopServices({ shop }) {
       </List>
       <OnMobile show={false}>{apointmentButton}</OnMobile>
       <OnMobile only>
-        <MobileToolbar>
-          {apointmentButton}
-        </MobileToolbar>
+        <MobileToolbar>{apointmentButton}</MobileToolbar>
       </OnMobile>
     </MaxConstraints>
   );

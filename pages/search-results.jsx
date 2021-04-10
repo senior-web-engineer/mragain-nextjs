@@ -53,14 +53,13 @@ import GooglePlaces from "@/components/common/GooglePlaces";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import moment from "moment";
 
-import Loadable from "react-loadable";
+import dynamic from "next/dynamic";
 import Loader from "@/components/common/Loader";
 
-const Menu = Loadable({
-  loader: () => import("react-horizontal-scrolling-menu"),
+const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
   loading: Loader,
+  ssr: false,
 });
-
 
 //
 
