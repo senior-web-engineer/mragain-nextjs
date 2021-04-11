@@ -35,6 +35,7 @@ const MainWrap = styled.div`
   }
 
   d-term {
+    display: block;
     width: 100%;
     padding: 10px 20px 0;
     background-color: #fff;
@@ -45,6 +46,7 @@ const MainWrap = styled.div`
   }
 
   d-def {
+    display: block;
     width: 100%;
     padding: 5px 20px 10px;
     background-color: #fff;

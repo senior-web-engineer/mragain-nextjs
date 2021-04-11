@@ -16,6 +16,7 @@ const ContentWrap = styled.div`
   }
 
   d-list {
+    display: block;
     width: 450px;
     display: flex;
     flex-wrap: wrap;
@@ -24,6 +25,7 @@ const ContentWrap = styled.div`
   }
 
   d-term {
+    display: block;
     width: 50%;
     color: #303030;
     font-weight: 500;
@@ -31,6 +33,7 @@ const ContentWrap = styled.div`
   }
 
   d-def {
+    display: block;
     width: 50%;
     color: #707070;
     font-weight: 300;

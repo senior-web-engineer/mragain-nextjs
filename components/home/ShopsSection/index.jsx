@@ -102,6 +102,7 @@ const ShopImageWrap = styled.div`
   margin: 0 -15px;
 
   d-def {
+    display: block;
     position: absolute;
     bottom: 6px;
     left: 6px;
