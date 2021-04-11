@@ -10,12 +10,17 @@ export const sizes = {
 };
 
 export function getScreenSize() {
-  const width = typeof window !== "undefined" ? window.innerWidth : 1366;
   const sizeAsArr = Object.keys(sizes).sort(
     (key1, key2) => sizes[key1] - sizes[key2]
   );
-  const index = sizeAsArr.findIndex((key) => width < sizes[key]);
-  return sizeAsArr[index - 1] || "mobile";
+  const index = sizeAsArr.findIndex((key) => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+    return window.matchMedia(`(max-width: ${sizes[key]}px)`).matches
+  });
+
+  return sizeAsArr[index] || "uhd"
 }
 
 export default Object.keys(sizes).reduce((acc, label) => {
@@ -38,8 +43,12 @@ export function ScreenSizeProvider({ children }) {
   useEffect(() => {
     updateSize(getScreenSize());
     setInterval(() => {
-      updateSize(getScreenSize());
-    }, 200);
+      const newSize = getScreenSize();
+      if (newSize === size) {
+        return;
+      }
+      updateSize(newSize);
+    }, 400);
   }, []);
 
   return (

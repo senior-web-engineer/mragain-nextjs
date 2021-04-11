@@ -9,12 +9,11 @@ import styled from "styled-components";
 import { MaxConstraints } from "@/components/styled/layout";
 
 import TestimonialSection from "@/components/home/TestimonialSection";
-import media, { ScreenSizeProvider } from "@/utils/media.js";
+import media from "@/utils/media.js";
 import FindSection from "@/components/home/FindSection/index.jsx";
 import AdvantagesSection from "@/components/home/AdvantagesSection/index.jsx";
 import StepsSection from "@/components/home/StepsSection/index.jsx";
 import ShopsSection from "@/components/home/ShopsSection/index.jsx";
-import { appointmentReview } from "@/components/appointment/modules.js";
 import OrderReview from "@/components/appointment/OrderReview.jsx";
 
 const HeroWrap = styled.div`
@@ -38,7 +37,6 @@ const TestimonialSectionWrap = styled.div`
 
 export default function Home({ shopList }) {
   return (
-    <ScreenSizeProvider>
       <DefaultLayout showSignup>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -106,7 +104,6 @@ export default function Home({ shopList }) {
         </Section>
         <OrderReview />
       </DefaultLayout>
-    </ScreenSizeProvider>
   );
 }
 

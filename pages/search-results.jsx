@@ -50,8 +50,7 @@ import Map from "@/components/search-results/Map";
 import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
 import { SubTitle } from "@/components/styled/text";
 import { TextButton } from "@/components/ui/Button";
-import Link from "next/link";
-import media, { OnMobile, ScreenSizeProvider } from "@/utils/media";
+import media, { OnMobile } from "@/utils/media";
 import Modal from "@/modules/modal";
 import { useRouter } from "next/router";
 import GooglePlaces from "@/components/common/GooglePlaces";
@@ -1070,97 +1069,52 @@ export default function SearchResults() {
   );
 
   return (
-    <ScreenSizeProvider>
-      <ShopBridgeContext.Provider
-        value={{ selectedShop, updateSelectedShop, showMap }}
-      >
-        <DefaultLayout>
-          <MainWrap>
-            <MaxConstraints>
-              <Sidebar>
-                <SidebarInnerWrap>
-                  <SidebarHeader>
-                    <SubTitle>Filter resultaten</SubTitle>
-                    <Form module={filtersFormModule}>
-                      <ClearFilters />
-                    </Form>
-                  </SidebarHeader>
-                  <RefineSearchForm />
-                </SidebarInnerWrap>
-              </Sidebar>
-              <Content ref={mobileSelectorsRef}>
-                <Form module={filtersFormModule}>
-                  <ZipFields>
-                    {locationField}
-                    <hr />
+    <ShopBridgeContext.Provider
+      value={{ selectedShop, updateSelectedShop, showMap }}
+    >
+      <DefaultLayout>
+        <MainWrap>
+          <MaxConstraints>
+            <Sidebar>
+              <SidebarInnerWrap>
+                <SidebarHeader>
+                  <SubTitle>Filter resultaten</SubTitle>
+                  <Form module={filtersFormModule}>
+                    <ClearFilters />
+                  </Form>
+                </SidebarHeader>
+                <RefineSearchForm />
+              </SidebarInnerWrap>
+            </Sidebar>
+            <Content ref={mobileSelectorsRef}>
+              <Form module={filtersFormModule}>
+                <ZipFields>
+                  {locationField}
+                  <hr />
+                  <Field
+                    as={Select}
+                    label="Afstand"
+                    name="distance"
+                    options={DISTANCES}
+                  />
+                  <OnMobile show={false}>
                     <Field
+                      name="sort"
                       as={Select}
-                      label="Afstand"
-                      name="distance"
-                      options={DISTANCES}
+                      options={SORT_BY}
+                      label="Sorteer op"
+                      dropdownStyle={{ minWidth: "150px" }}
                     />
-                    <OnMobile show={false}>
-                      <Field
-                        name="sort"
-                        as={Select}
-                        options={SORT_BY}
-                        label="Sorteer op"
-                        dropdownStyle={{ minWidth: "150px" }}
-                      />
-                    </OnMobile>
-                  </ZipFields>
-                  <ModelFields>
-                    <OnMobile only>
-                      <MobileDeviceSelector
-                        name="Apparaat"
-                        aria-input-field-name="device"
-                        onChange={onDeviceChange}
-                      />
-                      <ModelFieldsMobile>
-                        <BrandSelector
-                          name="brand"
-                          as={Select}
-                          label="Merk"
-                          aria-input-field-name="brand"
-                          onChange={onBandChange}
-                          dropdownStyle={{ minWidth: "200px" }}
-                        />
-                        <hr />
-                        <ModelSelector
-                          name="model"
-                          as={Select}
-                          label="Model"
-                          aria-input-field-name="model"
-                          onChange={onModelChange}
-                        />
-                        <ServiceSelector
-                          name="service"
-                          as={Select}
-                          label="Reparatie"
-                          aria-input-field-name="service"
-                          dropdownStyle={{ minWidth: "200px" }}
-                        />
-                        <Waypoint
-                          onEnter={() => setShowMobileSearch(false)}
-                          onLeave={() => setShowMobileSearch(true)}
-                        />
-                        <Field
-                          name="sort"
-                          as={Select}
-                          options={SORT_BY}
-                          label="Sorteer op"
-                        />
-                      </ModelFieldsMobile>
-                    </OnMobile>
-                    <OnMobile show={false}>
-                      <DeviceSelector
-                        name="device"
-                        as={Select}
-                        label="Apparaat"
-                        aria-input-field-name="device"
-                        onChange={onDeviceChange}
-                        dropdownStyle={{ minWidth: "200px" }}
-                      />
+                  </OnMobile>
+                </ZipFields>
+                <ModelFields>
+                  <OnMobile only>
+                    <MobileDeviceSelector
+                      name="Apparaat"
+                      aria-input-field-name="device"
+                      onChange={onDeviceChange}
+                    />
+                    <ModelFieldsMobile>
                       <BrandSelector
                         name="brand"
                         as={Select}
@@ -1169,13 +1123,13 @@ export default function SearchResults() {
                         onChange={onBandChange}
                         dropdownStyle={{ minWidth: "200px" }}
                       />
+                      <hr />
                       <ModelSelector
                         name="model"
                         as={Select}
                         label="Model"
                         aria-input-field-name="model"
                         onChange={onModelChange}
-                        dropdownStyle={{ minWidth: "200px" }}
                       />
                       <ServiceSelector
                         name="service"
@@ -1183,96 +1137,139 @@ export default function SearchResults() {
                         label="Reparatie"
                         aria-input-field-name="service"
                         dropdownStyle={{ minWidth: "200px" }}
-                        popupPlacement="bottomRight"
                       />
-                    </OnMobile>
-                    <MapTriggerWrap>
-                      <label>Kaart</label>
-                      <Switch
-                        checked={showMap}
-                        onChange={(val) => updateShowMap(val)}
+                      <Waypoint
+                        onEnter={() => setShowMobileSearch(false)}
+                        onLeave={() => setShowMobileSearch(true)}
                       />
-                    </MapTriggerWrap>
-                  </ModelFields>
-                  <SyncFormValues
-                    onChange={async (data) => {
-                      let parsedData = { ...data, lat: 0, long: 0 };
-                      try {
-                        const [result] = await geocodeByAddress(data.location);
-                        const { lng, lat } = await getLatLng(result);
-
-                        parsedData = {
-                          ...parsedData,
-                          long: lng,
-                          lat,
-                          location: "",
-                        };
-                      } catch (err) {
-                        console.log(err);
-                      }
-                      shopListModule.actions.updateQuery(parsedData);
-                    }}
-                  />
-                </Form>
-                <List module={shopListModule}>
-                  <Listing Item={ShopItem} />
-                </List>
-              </Content>
-              <List module={shopListModule}>
-                {showMap ? (
-                  <Map
-                    selectedShop={selectedShop}
-                    updateSelectedShop={updateSelectedShop}
-                  />
-                ) : null}
-              </List>
-            </MaxConstraints>
-            <OnMobile only>
-              {showMobileSearch || showMap ? (
-                <MobileSearchWrap>
-                  <Form module={filtersFormModule}>
-                    <ZipFields>
-                      {locationField}
-                      <hr />
                       <Field
+                        name="sort"
                         as={Select}
-                        label="Afstand"
-                        name="distance"
-                        aria-input-field-name="distance"
-                        options={DISTANCES}
+                        options={SORT_BY}
+                        label="Sorteer op"
                       />
-                    </ZipFields>
-                  </Form>
-                </MobileSearchWrap>
+                    </ModelFieldsMobile>
+                  </OnMobile>
+                  <OnMobile show={false}>
+                    <DeviceSelector
+                      name="device"
+                      as={Select}
+                      label="Apparaat"
+                      aria-input-field-name="device"
+                      onChange={onDeviceChange}
+                      dropdownStyle={{ minWidth: "200px" }}
+                    />
+                    <BrandSelector
+                      name="brand"
+                      as={Select}
+                      label="Merk"
+                      aria-input-field-name="brand"
+                      onChange={onBandChange}
+                      dropdownStyle={{ minWidth: "200px" }}
+                    />
+                    <ModelSelector
+                      name="model"
+                      as={Select}
+                      label="Model"
+                      aria-input-field-name="model"
+                      onChange={onModelChange}
+                      dropdownStyle={{ minWidth: "200px" }}
+                    />
+                    <ServiceSelector
+                      name="service"
+                      as={Select}
+                      label="Reparatie"
+                      aria-input-field-name="service"
+                      dropdownStyle={{ minWidth: "200px" }}
+                      popupPlacement="bottomRight"
+                    />
+                  </OnMobile>
+                  <MapTriggerWrap>
+                    <label>Kaart</label>
+                    <Switch
+                      checked={showMap}
+                      onChange={(val) => updateShowMap(val)}
+                    />
+                  </MapTriggerWrap>
+                </ModelFields>
+                <SyncFormValues
+                  onChange={async (data) => {
+                    let parsedData = { ...data, lat: 0, long: 0 };
+                    try {
+                      const [result] = await geocodeByAddress(data.location);
+                      const { lng, lat } = await getLatLng(result);
+
+                      parsedData = {
+                        ...parsedData,
+                        long: lng,
+                        lat,
+                        location: "",
+                      };
+                    } catch (err) {
+                      console.log(err);
+                    }
+                    shopListModule.actions.updateQuery(parsedData);
+                  }}
+                />
+              </Form>
+              <List module={shopListModule}>
+                <Listing Item={ShopItem} />
+              </List>
+            </Content>
+            <List module={shopListModule}>
+              {showMap ? (
+                <Map
+                  selectedShop={selectedShop}
+                  updateSelectedShop={updateSelectedShop}
+                />
               ) : null}
-            </OnMobile>
-            <OnMobile only>
-              <MobileToolbar>
-                <TextButton onClick={() => refineSearchModal.actions.open()}>
-                  <FontAwesomeIcon icon={faSortAmountDown} />
-                  Resultaten filteren
-                </TextButton>
-                <ToolbarButtonWrap>
-                  <Button onClick={() => updateShowMap((state) => !state)}>
-                    {!showMap ? (
-                      <FontAwesomeIcon icon={faMapMarkerAlt} />
-                    ) : (
-                      <FontAwesomeIcon icon={faStore} />
-                    )}
-                  </Button>
-                </ToolbarButtonWrap>
-              </MobileToolbar>
-              <Modal module={refineSearchModal} footer={null}>
-                <RefineModalWrap>
-                  <SubTitle>Resultaten filteren</SubTitle>
-                  <RefineSearchForm />
-                  <RefineFooter />
-                </RefineModalWrap>
-              </Modal>
-            </OnMobile>
-          </MainWrap>
-        </DefaultLayout>
-      </ShopBridgeContext.Provider>
-    </ScreenSizeProvider>
+            </List>
+          </MaxConstraints>
+          <OnMobile only>
+            {showMobileSearch || showMap ? (
+              <MobileSearchWrap>
+                <Form module={filtersFormModule}>
+                  <ZipFields>
+                    {locationField}
+                    <hr />
+                    <Field
+                      as={Select}
+                      label="Afstand"
+                      name="distance"
+                      aria-input-field-name="distance"
+                      options={DISTANCES}
+                    />
+                  </ZipFields>
+                </Form>
+              </MobileSearchWrap>
+            ) : null}
+          </OnMobile>
+          <OnMobile only>
+            <MobileToolbar>
+              <TextButton onClick={() => refineSearchModal.actions.open()}>
+                <FontAwesomeIcon icon={faSortAmountDown} />
+                Resultaten filteren
+              </TextButton>
+              <ToolbarButtonWrap>
+                <Button onClick={() => updateShowMap((state) => !state)}>
+                  {!showMap ? (
+                    <FontAwesomeIcon icon={faMapMarkerAlt} />
+                  ) : (
+                    <FontAwesomeIcon icon={faStore} />
+                  )}
+                </Button>
+              </ToolbarButtonWrap>
+            </MobileToolbar>
+            <Modal module={refineSearchModal} footer={null}>
+              <RefineModalWrap>
+                <SubTitle>Resultaten filteren</SubTitle>
+                <RefineSearchForm />
+                <RefineFooter />
+              </RefineModalWrap>
+            </Modal>
+          </OnMobile>
+        </MainWrap>
+      </DefaultLayout>
+    </ShopBridgeContext.Provider>
   );
 }

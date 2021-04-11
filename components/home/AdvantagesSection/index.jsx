@@ -95,7 +95,7 @@ const AdvantageWrap = styled.div`
 
 const AdvantagesWrap = styled.div`
   margin: 0 -15px;
-  ${media.tablet`
+  ${media.desktop`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -122,7 +122,7 @@ export default function AdvantagesSection() {
       <SubTitle>mragain.nl</SubTitle>
       <H2>Waarom je een afspraak maakt via MrAgain</H2>
       <AdvantagesWrap>
-        <SliderOnMobile>{ADVANTAGES.map(renderAdvantage)}</SliderOnMobile>
+        <SliderOnMobile tabletConfig={{slidesToShow: 2,  centerMode: true, centerPadding: "40px",}}>{ADVANTAGES.map(renderAdvantage)}</SliderOnMobile>
       </AdvantagesWrap>
     </>
   );

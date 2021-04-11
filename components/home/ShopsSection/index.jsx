@@ -2,7 +2,11 @@ import SliderOnMobile from "@/components/common/SliderOnMobile";
 import { H2, SubTitle } from "@/components/styled/text";
 import Button from "@/components/ui/Button";
 import media from "@/utils/media";
-import { faArrowRight, faMapMarkerAlt, faStar } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRight,
+  faMapMarkerAlt,
+  faStar,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
@@ -165,7 +169,7 @@ const Toolbar = styled.div`
   }
 `;
 
-export function ShopCard({shop, onClick}) {
+export function ShopCard({ shop, onClick }) {
   const location = [shop.street || "", shop.city || "", shop.country || ""]
     .filter(Boolean)
     .join(", ");
@@ -216,21 +220,21 @@ export function ShopCard({shop, onClick}) {
 }
 
 function renderShop(shop) {
-  return <ShopCard shop={shop} />
+  return <ShopCard shop={shop} />;
 }
 
-export default function ShopsSection({shopList = []} = {}) {
+export default function ShopsSection({ shopList = [] } = {}) {
   return (
     <>
       <SubTitle>Aangesloten reparateurs</SubTitle>
       <H2>Nieuw</H2>
       <Toolbar>
         <div>
-          <filter-by>Alles</filter-by>
-          <filter-by>Featured</filter-by>
-          <filter-by>Populair</filter-by>
-          <filter-by>Beste prijs</filter-by>
-          <filter-by>Nieuw</filter-by>
+          <filter-by hidden>Alles</filter-by>
+          <filter-by hidden>Featured</filter-by>
+          <filter-by hidden>Populair</filter-by>
+          <filter-by hidden>Beste prijs</filter-by>
+          <filter-by hidden>Nieuw</filter-by>
         </div>
         <div>
           <Link href="/search-results">
@@ -241,7 +245,11 @@ export default function ShopsSection({shopList = []} = {}) {
         </div>
       </Toolbar>
       <ShopList>
-        <SliderOnMobile>{shopList.map(renderShop)}</SliderOnMobile>
+        <SliderOnMobile
+          tabletConfig={{ rows: 2, slidesPerRow: 3 }}
+        >
+          {shopList.map(renderShop)}
+        </SliderOnMobile>
       </ShopList>
     </>
   );
