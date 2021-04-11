@@ -69,6 +69,7 @@ const SliderWrap = styled.div`
 export default function SliderOnMobile({ children, tabletConfig }) {
   const { size } = useScreenSize();
   let settings = defaultSettings;
+
   if (size === "tablet" && tabletConfig) {
     settings = {
       ...defaultSettings,
@@ -76,7 +77,7 @@ export default function SliderOnMobile({ children, tabletConfig }) {
     };
   }
 
-  if (size !== "mobile" && size === "tablet" && !tabletConfig) {
+  if (size !== "mobile" && !(size === "tablet" && tabletConfig)) {
     return children;
   }
 
