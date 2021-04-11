@@ -20,28 +20,32 @@ const MainWrap = styled.div`
   }
 `;
 
-const loadScript = (url, callback) => {
-  let script = document.createElement("script");
-  script.type = "text/javascript";
-  script.id = "google-places";
-
+export const loadScript = (callback) => {
+  const url = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places,geocode`
   if (document.getElementById("google-places")) {
-    return callback();
+    return Promise.resolve();
   }
 
-  if (script.readyState) {
-    script.onreadystatechange = function () {
-      if (script.readyState === "loaded" || script.readyState === "complete") {
-        script.onreadystatechange = null;
-        callback();
-      }
-    };
-  } else {
-    script.onload = () => callback();
-  }
+  return new Promise((resolve) => {
+    let script = document.createElement("script");
+    script.type = "text/javascript";
+    script.id = "google-places";
 
-  script.src = url;
-  document.getElementsByTagName("head")[0].appendChild(script);
+
+    if (script.readyState) {
+      script.onreadystatechange = function () {
+        if (script.readyState === "loaded" || script.readyState === "complete") {
+          script.onreadystatechange = null;
+          resolve();
+        }
+      };
+    } else {
+      script.onload = () => resolve();
+    }
+
+    script.src = url;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })
 };
 
 export default function GooglePlaces({
@@ -71,13 +75,9 @@ export default function GooglePlaces({
           <Input
             prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
             aria-label={"Postcode of stad"}
-            onFocus={() => {
-              loadScript(
-                `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places,geocode`,
-                () => {
-                  setScriptLoaded(true);
-                }
-              );
+            onFocus={async () => {
+              await loadScript();
+              setScriptLoaded(true);
             }}
           />
         </AutoComplete>

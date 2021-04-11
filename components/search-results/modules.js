@@ -6,7 +6,7 @@ import { notification } from "antd";
 import router from "next/router";
 import { createFormModule } from "@/modules/forms";
 import { createModalModule } from "@/modules/modal";
-
+import querystring from "querystring";
 export const filtersFormModule = createFormModule({
   guid: "shops",
   async init() {
@@ -29,13 +29,15 @@ export const filtersFormModule = createFormModule({
   },
 
   submit(data) {
-    return shopListModule.actions.updateQuery(data)
-  }
+    return shopListModule.actions.updateQuery(data);
+  },
 });
 
 export const shopListModule = createListModule({
   guid: "shops",
   async fetchData(query = {}) {
+    const nextURL = `${router.pathname}?${querystring.stringify(query)}`;
+    router.router.replace(nextURL, nextURL, { shallow: true });
     try {
       const data = await api.post(`${API_PATH.SEARCH}/`, {
         ...query,
@@ -52,12 +54,12 @@ export const shopListModule = createListModule({
       return {
         items: data,
       };
-    } catch(err) {
+    } catch (err) {
       notification.error({
-        message: "Something went wrong while getting the list of shops"
+        message: "Something went wrong while getting the list of shops",
       });
 
-      return {items: []}
+      return { items: [] };
     }
   },
   getInitialQuery() {
@@ -93,4 +95,4 @@ export const serviceFetcher = keyedDataFetcher({
   },
 });
 
-export const refineSearchModal = createModalModule()
+export const refineSearchModal = createModalModule();

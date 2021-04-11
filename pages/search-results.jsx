@@ -49,7 +49,7 @@ import { TextButton } from "@/components/ui/Button";
 import media, { OnMobile } from "@/utils/media";
 import Modal from "@/modules/modal";
 import { useRouter } from "next/router";
-import GooglePlaces from "@/components/common/GooglePlaces";
+import GooglePlaces, { loadScript } from "@/components/common/GooglePlaces";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import moment from "moment";
 
@@ -108,6 +108,10 @@ const SidebarHeader = styled.div`
   justify-content: space-between;
   margin: 0 -30px 30px 0;
 
+  ${SubTitle} {
+    margin-bottom: 0;
+  }
+
   ${TextButton} {
     font-size: 11px;
     letter-spacing: 0px;
@@ -129,6 +133,7 @@ const ModelFields = styled.div`
 
   > div {
     flex-grow: 1;
+    width: 100%;
     margin-top: 0 !important;
     margin: 10px 5px;
     background-color: #fff;
@@ -162,6 +167,7 @@ const ModelFields = styled.div`
     display: none;
     flex-grow: 0;
     background-color: transparent;
+    width: auto;
 
     > label {
       margin-top: 0;
@@ -627,6 +633,20 @@ ShopDetails.AppointmentInfo = styled.div`
 const shopRefs = {};
 const ShopBridgeContext = createContext();
 
+function ShopPrice({ item }) {
+  const { values } = useFormContext().state;
+  if (!item.price || values.service === "0") {
+    return null;
+  }
+
+  return (
+    <ShopDetails.PriceWrap>
+      <label>Vanaf</label>
+      <price>&euro; {item.price}</price>
+    </ShopDetails.PriceWrap>
+  );
+}
+
 function ShopItem({ item }) {
   const router = useRouter();
   const { selectedShop, updateSelectedShop, showMap } = useContext(
@@ -705,12 +725,9 @@ function ShopItem({ item }) {
                 </date>
               </div>
             ) : null}
-            {item.price ? (
-              <ShopDetails.PriceWrap>
-                <label>Vanaf</label>
-                <price>&euro; {item.price}</price>
-              </ShopDetails.PriceWrap>
-            ) : null}
+            <Form module={filtersFormModule}>
+              <ShopPrice item={item} />
+            </Form>
           </ShopDetails.AppointmentInfo>
         </ShopDetails.SecondRow>
         {item.devices?.length ? (
@@ -997,10 +1014,11 @@ export default function SearchResults() {
   const [showMobileSearch, setShowMobileSearch] = useState();
   const [selectedShop, updateSelectedShop] = useState(null);
   const [showMap, updateShowMap] = useState(false);
-
+  const router = useRouter();
   const mobileSelectorsRef = useRef(null);
   useEffect(() => {
     async function main() {
+      await loadScript();
       await filtersFormModule.actions.initialize();
       shopListModule.actions.initialize();
       deviceFetcher.fetch();

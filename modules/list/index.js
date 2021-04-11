@@ -69,6 +69,7 @@ export function createListModule({ fetchData, getInitialQuery, guid = uuid() } =
         if (!moduleState) {
           return;
         }
+
         if (isEqual(filters, moduleState?.filters)) {
           return;
         }
