@@ -319,7 +319,7 @@ const Content = styled.div`
   padding: 0;
   max-width: 100%;
 
-  form {
+  > form {
     margin: 0 -20px;
     padding: 30px 20px 0;
     position: relative;
