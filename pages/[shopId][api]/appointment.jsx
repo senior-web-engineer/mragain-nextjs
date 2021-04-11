@@ -197,6 +197,10 @@ export default function AppointmentPage({ shop }) {
   }, []);
 
   const onNext = useCallback(async () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     if (step === 0) {
       await appointmentForm.actions.validateField({ name: "time" });
       const { errors } = appointmentForm.state;
@@ -283,7 +287,10 @@ export default function AppointmentPage({ shop }) {
   const ctaButtons = (
     <CTAButtons>
       {step > 0 ? (
-        <TextButton aria-label="Terug naar vorige stap" onClick={() => updateStep((state) => state - 1)}>
+        <TextButton
+          aria-label="Terug naar vorige stap"
+          onClick={() => updateStep((state) => state - 1)}
+        >
           <FontAwesomeIcon icon={faArrowLeft} /> Terug naar vorige stap
         </TextButton>
       ) : (

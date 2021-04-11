@@ -17,7 +17,7 @@ const Slider = dynamic(() => import("react-slick"), {
   ssr: false,
 });
 
-const settings = {
+const defaultSettings = {
   dots: false,
   infinite: true,
   speed: 500,
@@ -66,10 +66,17 @@ const SliderWrap = styled.div`
   }
 `;
 
-export default function SliderOnMobile({ children }) {
+export default function SliderOnMobile({ children, tabletConfig }) {
   const { size } = useScreenSize();
+  let settings = defaultSettings;
+  if (size === "tablet" && tabletConfig) {
+    settings = {
+      ...defaultSettings,
+      ...tabletConfig,
+    };
+  }
 
-  if (size !== "mobile") {
+  if (size !== "mobile" && size === "tablet" && !tabletConfig) {
     return children;
   }
 

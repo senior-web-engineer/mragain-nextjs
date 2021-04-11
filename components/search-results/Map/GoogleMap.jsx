@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import React, { useMemo, useState } from "react";
 import GoogleMapReact from "google-map-react";
 const googleMapsApiKey = "AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE";
