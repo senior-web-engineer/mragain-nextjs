@@ -3,13 +3,11 @@ import React, {
   useCallback,
   useContext,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from "react";
 import styled, { css } from "styled-components";
 import isEqual from "fast-deep-equal";
-import Menu from "react-horizontal-scrolling-menu";
 import { Waypoint } from "react-waypoint";
 
 import DefaultLayout from "@/components/layouts/Homepage";
@@ -36,10 +34,8 @@ import { createSelectComponent } from "@/modules/dataFetcher";
 import { Radio, Rate, Slider, Switch } from "antd";
 import { MaxConstraints } from "@/components/styled/layout";
 import Image from "next/image";
-import { StyledInput } from "@/components/ui/Input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faArrowRight,
   faMapMarkerAlt,
   faSortAmountDown,
   faStore,
@@ -56,6 +52,14 @@ import { useRouter } from "next/router";
 import GooglePlaces from "@/components/common/GooglePlaces";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import moment from "moment";
+
+import dynamic from "next/dynamic";
+import Loader from "@/components/common/Loader";
+
+const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
+  loading: Loader,
+  ssr: false,
+});
 
 //
 

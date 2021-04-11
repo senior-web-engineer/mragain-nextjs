@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import Link from "next/link"
 import { useRouter } from "next/router";
 import { Table } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Input, Button } from "antd";
 import Switch from "react-switch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -132,7 +134,7 @@ const DetailPerPhone = (routerProps) => {
         setGuaranteeList(res.data);
       });
       setload(true);
-    } 
+    }
     // else {
     //   if (selectedShopGuarantee.length > 0) {
     //     init();

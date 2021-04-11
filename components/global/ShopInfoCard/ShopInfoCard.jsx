@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { Card } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { CardInfo } from "./ShopInfoCard.style.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "antd";

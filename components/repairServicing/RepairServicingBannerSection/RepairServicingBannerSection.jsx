@@ -1,5 +1,6 @@
 import React from "react";
 import { Breadcrumb } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import {
   RepairServicingSectionArea,
   RepairServicingContainer,

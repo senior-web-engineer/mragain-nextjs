@@ -63,15 +63,16 @@ export default class MyDocument extends Document {
           <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#06c987" />
           <link rel="manifest" href="/manifest.json" />
 
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
             rel="stylesheet"
           ></link>
           <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap" rel="stylesheet"></link>
 
-          {/* We only want to add the scripts if in production */}
-          <script dangerouslySetInnerHTML={{__html: hotJarScript}}/>
+          {isProduction ? (
+            <script dangerouslySetInnerHTML={{__html: hotJarScript}}/>
+          ) : null}
         </HeadWithoutPreload>
         <body>
           <Main />

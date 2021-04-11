@@ -99,6 +99,7 @@ const MainWrap = styled.div`
 
 const ReviewWrap = styled.div`
   margin-top: 13px;
+  white-space: nowrap;
 
   .ant-rate {
     margin-right: 10px;
@@ -168,6 +169,8 @@ const ModalReviewWrap = styled.div`
   margin: 10px 0;
   font-size: 13px;
   color: #0d3244;
+
+
 
   ${media.tablet`
     display: flex;

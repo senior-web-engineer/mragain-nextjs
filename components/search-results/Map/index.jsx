@@ -1,11 +1,16 @@
-import { useListContext } from "@/modules/list";
-import media from "@/utils/media.js";
 import React, { useMemo } from "react";
 import styled from "styled-components";
-import GoogleMap from "./GoogleMap.jsx";
-import Menu from "react-horizontal-scrolling-menu";
+import dynamic from "next/dynamic";
+import media, { OnMobile } from "@/utils/media.js";
+import { useListContext } from "@/modules/list";
 
 import { ShopCard } from "@/components/home/ShopsSection";
+import Loader from "@/components/common/Loader/index.js";
+import GoogleMap from "./GoogleMap.jsx";
+
+const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
+  loading: Loader, ssr: false
+});
 
 const MapWrap = styled.div`
   min-width: 100%;
@@ -39,7 +44,7 @@ const ShopList = styled.div`
   `}
 `;
 
-export default function Map({selectedShop, updateSelectedShop}) {
+export default function Map({ selectedShop, updateSelectedShop }) {
   const { state = {} } = useListContext();
   const { items, pages } = state;
 
@@ -58,17 +63,26 @@ export default function Map({selectedShop, updateSelectedShop}) {
   }, [shopList, selectedShop]);
 
   const menuData = useMemo(() => {
-    return shopList.map(shop => <ShopCard shop={shop} onClick={() => updateSelectedShop(shop.id)}/>);
+    return shopList.map((shop) => (
+      <ShopCard shop={shop} onClick={() => updateSelectedShop(shop.id)} />
+    ));
   }, [shopList]);
 
   return (
     <MapWrap>
       <div>
-        <ShopList>
-          {selectedShopEntity ? (
-            <Menu alignCenter={false} data={menuData} selected={selectedShop} hideArrows={true} />
-          ) : null}
-        </ShopList>
+        <OnMobile only>
+          <ShopList>
+            {selectedShopEntity ? (
+              <Menu
+                alignCenter={false}
+                data={menuData}
+                selected={selectedShop}
+                hideArrows={true}
+              />
+            ) : null}
+          </ShopList>
+        </OnMobile>
         <GoogleMap
           shopList={shopList}
           selectedShopId={selectedShop}

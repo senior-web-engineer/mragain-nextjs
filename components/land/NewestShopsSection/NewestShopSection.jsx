@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { Container, Row, Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { NewestShopSectionArea } from "./NewestShopSection.style";
 import ShopInfoCard from "./ShopInfoCard/ShopInfoCard";
 import {

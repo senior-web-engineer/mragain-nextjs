@@ -174,6 +174,8 @@ export function ShopCard({ shop, onClick }) {
     .filter(Boolean)
     .join(", ");
 
+  const shopUrl = `/${shop.name}--${shop.city}`
+
   return (
     <ShopWrap key={shop.id} onClick={onClick}>
       <ShopImageWrap tagColor={TAG_TO_COLOR[shop.tag]}>
@@ -196,8 +198,8 @@ export function ShopCard({ shop, onClick }) {
       </ShopImageWrap>
       <ShopDetails>
         <div>
-          <Link href={`/${shop.name}--${shop.city}`}>
-            <filter-by>{shop.name}</filter-by>
+          <Link href={shopUrl}>
+            <a>{shop.name}</a>
           </Link>
         </div>
         <div>
@@ -210,7 +212,7 @@ export function ShopCard({ shop, onClick }) {
           {location}
         </location>
       ) : null}
-      <Link href={`/${shop.name}--${shop.city}`}>
+      <Link href={shopUrl}>
         <Button as="a" aria-label={`Visit ${shop.name}`}>
           <FontAwesomeIcon icon={faArrowRight} />
         </Button>

@@ -299,7 +299,7 @@ export default function ShopHeader({ shop }) {
     <div>
       <Wallpaper>
         {shop?.bg_photo ? (
-          <Image layout="fill" objectFit="cover" src={shop.bg_photo} />
+          <Image loading="lazy" layout="fill" objectFit="cover" src={shop.bg_photo} />
         ) : null}
         <OnMobile only>{detailButtons}</OnMobile>
       </Wallpaper>
@@ -307,7 +307,7 @@ export default function ShopHeader({ shop }) {
         <ContentWrap>
           <ShopLogo>
             {shop?.logo_photo ? (
-              <Image layout="fill" objectFit="cover" src={shop.logo_photo} />
+              <Image loading="lazy" layout="fill" objectFit="cover" src={shop.logo_photo} />
             ) : null}
           </ShopLogo>
           <ShopMeta>
