@@ -59,6 +59,26 @@ const ShopProfile = (routerProps) => {
   let title = `${shopAccountProfile.name} ${shopAccountProfile.city} - ${devices} Reparatie - ${FRONT_END_URL}`;
   let description = `${shopAccountProfile.name}, ${shopAccountProfile.street}, ${shopAccountProfile.zipcode}, ${shopAccountProfile.city}. Laat je telefoon repareren bij ${shopAccountProfile.name} via mragain.nl. Transparant, betrouwbaar en snel!`;
 
+  const shopSchema = `
+    {
+      "@context": "https://schema.org",
+      "@type": "Shop",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "${shopAccountProfile.city}",
+        "postalCode": "${shopAccountProfile.zipcode}",
+        "streetAddress": "${shopAccountProfile.street}"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "${shopAccountProfile.mark}",
+      },
+      "name": "${shopAccountProfile.name}",
+      "telephone": "${shopAccountProfile.phone_number}",
+      "url": "${shopAccountProfile.site_url}"
+    }
+  `.split(`\n`).join('');
+
   return (
     <DefaultLayout>
       <Head>
@@ -77,6 +97,10 @@ const ShopProfile = (routerProps) => {
             shopAccountProfile.bg_photo !== undefined &&
             shopAccountProfile.bg_photo
           }
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: shopSchema }}
         />
         <meta name="og_site_name" property="og:site_name" content="Mr Again" />
         <meta name="theme-color" content="#ffffff" />

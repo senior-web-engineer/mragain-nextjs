@@ -146,11 +146,13 @@ const SERVICE_COLUMNS = [
     title: "Garantie",
     dataIndex: "guarantee_time",
     key: "guarantee_time",
+    render:(data) => `${data} months`
   },
   {
     title: "Reparatie tijd",
     dataIndex: "reparation_time",
     key: "reparation_time",
+    render:(data) => `${data} minutes`
   },
   {
     title: "Prijs",

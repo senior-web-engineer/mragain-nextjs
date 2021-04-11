@@ -613,12 +613,22 @@ ShopDetails.AppointmentInfo = styled.div`
   date {
     font-size: 13px;
   }
+
+  form {
+    display: none;
+  }
+
   ${media.tablet`
     padding-top: 0;
     border-top: none;
     margin-top: 0;
     display: flex;
     align-items: center;
+
+    form {
+      display: block;
+    }
+
 
     label {
       margin-bottom: 5px;
