@@ -118,12 +118,14 @@ const OverallWrap = styled.div`
   }
 
   d-list {
+    display: block;
     font-size: 30px;
     display: flex;
     align-items: center;
     margin: 0;
 
     d-def {
+      display: block;
       margin: 0;
       font-size: 11px;
       width: 40px;

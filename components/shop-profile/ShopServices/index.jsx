@@ -195,6 +195,7 @@ ServiceMobileItemWrap.FirstColumn = styled.div`
   color: #a0a0a0;
   font-size: 11px;
   > d-def {
+    display: block;
     margin-left: 34px;
   }
 `;

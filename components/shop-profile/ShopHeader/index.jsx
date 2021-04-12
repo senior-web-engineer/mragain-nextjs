@@ -146,6 +146,7 @@ ShopMeta.ThirdRow = styled.div`
   }
 
   d-term {
+    display: block;
     margin-left: 10px;
     color: #ccc;
 
