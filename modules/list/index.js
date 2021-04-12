@@ -70,11 +70,11 @@ export function createListModule({ fetchData, getInitialQuery, guid = uuid() } =
           return;
         }
 
+        dispatch({ type: "UPDATE_LIST_QUERY", guid, filters });
         if (isEqual(filters, moduleState?.filters)) {
           return;
         }
 
-        dispatch({ type: "UPDATE_LIST_QUERY", guid, filters });
         debouncedFetchItems();
       },
     },
