@@ -1,7 +1,6 @@
 import React from "react";
 
 import { RegisterSectionArea } from './RegisterSection.style';
-import './RegisterSection.style.less';
 
 import Quote from './Quote/Quote';
 import RegisterForm from './RegisterForm/RegisterForm';

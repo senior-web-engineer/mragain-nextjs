@@ -4,6 +4,7 @@ import logo from "@/assets/images/logo.png";
 import Image from 'next/image';
 import { Form, Button } from "react-bootstrap";
 import { useRouter } from "next/router";
+import { notification } from "antd";
 
 import { RegisterFormArea } from './RegisterForm.style';
 import './RegisterForm.style.less';
@@ -33,14 +34,18 @@ const RegisterForm = (routerProps) => {
       setValidated(true);
     } else {
       setValidated(false);
-      message.error("Bevestig de algemene voorwaarden!", [2.5]);
+      notification.warning({
+        message: 'Bevestig de algemene voorwaarden!',
+      });
       return;
     }
 
     if (form.checkValidity() === true) {
       const data = new FormData(event.target);
       if (ValidateEmail(data.get("email")) === false) {
-        message.error("Heb je een geldig emailadres gebruikt?", [2.5]);
+        notification.warning({
+          message: 'Heb je een geldig emailadres gebruikt?',
+        });
         return;
       }
 
@@ -48,7 +53,9 @@ const RegisterForm = (routerProps) => {
         setValidated(true);
       } else {
         setValidated(false);
-        message.error("Je wachtwoorden moeten hetzelfde zijn!", [2.5]);
+        notification.warning({
+          message: 'Je wachtwoorden moeten hetzelfde zijn!',
+        });
         return;
       }
 
@@ -96,17 +103,18 @@ const RegisterForm = (routerProps) => {
 
   useEffect(() => {
     if (isSignUp === true) {
-      message.success(
-        "Bedankt voor je aanmelding bij MrAgain. We voeren nu enkele checks uit waarna je een email van ons ontvangt om je account te activeren. Let op: deze email kan in je spam terecht komen!",
-        [2.5]
-      );
+      notification.success({
+        message: 'Bedankt voor je aanmelding bij MrAgain. We voeren nu enkele checks uit waarna je een email van ons ontvangt om je account te activeren. Let op: deze email kan in je spam terecht komen!',
+      });
       setTimeout(() => {
         signupSuccessDelete();
         formRef.current.reset();
         router.push("/");
       }, 3000);
     } else if (isAuth_Error === true) {
-      message.error(auth_error, [2.5]);
+      notification.error({
+        message: auth_error,
+      });
       resetAuthError(false);
     }
   });
