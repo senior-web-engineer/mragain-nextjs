@@ -198,7 +198,7 @@ const RegisterForm = (routerProps) => {
                     required
                   />
                   <div className="account-create-input2-name">
-                    Confirm Password
+                    Bevestig je wachtwoord
                   </div>
                 </div>
 
