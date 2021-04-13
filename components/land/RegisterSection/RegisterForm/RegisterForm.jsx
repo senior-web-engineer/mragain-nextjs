@@ -131,7 +131,7 @@ const RegisterForm = (routerProps) => {
         Let's get started!
       </div>
       <div className="row account-subTitle">
-        Create your free repairer account
+        Registreer nu je gratis account!
       </div>
       <div className="row">
         <div className="account-create-container2">
