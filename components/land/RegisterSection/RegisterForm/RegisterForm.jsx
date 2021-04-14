@@ -2,12 +2,23 @@ import React, { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 import logo from "@/assets/images/logo.png";
 import Image from 'next/image';
-import { Form, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import Form from "@/modules/forms";
+import { registerFormModule } from "./modules";
 import { useRouter } from "next/router";
-import { notification } from "antd";
+import { notification, Checkbox } from "antd";
 
-import { RegisterFormArea, AccountTitle, AccountSubTitle } from './RegisterForm.style';
+import { 
+  RegisterFormArea, 
+  AccountTitle, 
+  AccountSubTitle, 
+  FormWrap, 
+  ChamberInput,
+  InputWrap,
+  CheckboxWrap
+ } from './RegisterForm.style';
 import './RegisterForm.style.less';
+import { Field, parseNativeEvent } from "@/modules/forms/Blocks";
 
 const RegisterForm = (routerProps) => {
   const [validated, setValidated] = useState(false);
@@ -101,6 +112,14 @@ const RegisterForm = (routerProps) => {
     return false;
   }
 
+  const onChangeTerm = (event) => {
+    const value = parseNativeEvent(event);
+  }
+
+  const handleChangeChamber = (event) => {
+    console.log(event.target.value)
+  }
+
   useEffect(() => {
     if (isSignUp === true) {
       notification.success({
@@ -118,6 +137,33 @@ const RegisterForm = (routerProps) => {
       resetAuthError(false);
     }
   });
+
+  useEffect(() => {
+    async function loadData() {
+      await registerFormModule.actions.initialize();
+    }
+    
+    loadData();
+  }, [])
+
+  const chamberInput = () => {
+    return (
+      <ChamberInput>
+        <div>
+          NL - KVK -
+        </div>
+        <input onChange={handleChangeChamber}/>
+      </ChamberInput>
+    )
+  }
+
+  const TermCheckbox = () => {
+    return <Checkbox onChange={onChangeTerm} />
+  }
+
+  // const TermCheckbox = ({value, onChange}) => {
+  //   return <Checkbox onChange={(ev)=> {const value = parseNativeEvent(ev);onChange(ev)} checked={value} />
+  // }
 
   return (
     <RegisterFormArea>
@@ -144,8 +190,8 @@ const RegisterForm = (routerProps) => {
       <div className="row">
         <div className="account-create-container2">
           <div className="account-create-container2-wrap">
-            <div className="account-create-form2">
-              <Form
+            <FormWrap>
+              {/* <Form
                 noValidate
                 validated={validated}
                 onSubmit={handleSubmit}
@@ -235,19 +281,48 @@ const RegisterForm = (routerProps) => {
                     Create an account
                   </Button>
                 </div>
+              </Form> */}
+              <Form module={registerFormModule}>
+                <InputWrap>
+                  <Field className="inputForm" name="companyName" label="Company Name" />
+                </InputWrap>
+                <InputWrap>
+                  <Field className="inputForm" name="chamber" label="Chamber of Commerce #" as={chamberInput}/>
+                </InputWrap>
+                <InputWrap>
+                  <Field className="inputForm" name="email" label="Email Address" autoComplete="email"/>
+                </InputWrap>
+                <InputWrap>
+                  <Field className="inputForm" name="password" label="Password" type="password"/>
+                </InputWrap>
+                <InputWrap>
+                  <Field className="inputForm" name="confirmPassword" label="Bevestig je wachtwoord" type="password"/>
+                </InputWrap>
+                <div className="agree-button-group">
+                  <CheckboxWrap>
+                    <Field name="terms" as={TermCheckbox}/>
+                  </CheckboxWrap>
+                  <div>
+                    By signing up, I agree to the{" "}
+                    <a
+                      onClick={() => {
+                        showAgreePopup();
+                      }}
+                      className="agree-description"
+                    >
+                      Terms of Service and Privacy Policy
+                    </a>
+                  </div>
+                </div>
+                <div className="account-button-container">
+                  <Button className="account-create-btn2" type="submit">
+                    Create an account
+                  </Button>
+                </div>
               </Form>
-            </div>
+            </FormWrap>
           </div>
         </div>
-      </div>
-      <div className="row">
-        
-      </div>
-      <div className="row">
-
-      </div>
-      <div className="row">
-
       </div>
     </RegisterFormArea>
   );
