@@ -112,14 +112,6 @@ const RegisterForm = (routerProps) => {
     return false;
   }
 
-  const onChangeTerm = (event) => {
-    const value = parseNativeEvent(event);
-  }
-
-  const handleChangeChamber = (event) => {
-    console.log(event.target.value)
-  }
-
   useEffect(() => {
     if (isSignUp === true) {
       notification.success({
@@ -146,24 +138,20 @@ const RegisterForm = (routerProps) => {
     loadData();
   }, [])
 
-  const chamberInput = () => {
+  const chamberInput = ({value, onChange}) => {
     return (
       <ChamberInput>
         <div>
           NL - KVK -
         </div>
-        <input onChange={handleChangeChamber}/>
+        <input onChange={(value) => { const ev = parseNativeEvent(value); onChange(ev)}} value={value}/>
       </ChamberInput>
     )
   }
 
-  const TermCheckbox = () => {
-    return <Checkbox onChange={onChangeTerm} />
-  }
-
-  // const TermCheckbox = ({value, onChange}) => {
-  //   return <Checkbox onChange={(ev)=> {const value = parseNativeEvent(ev);onChange(ev)} checked={value} />
-  // }
+  const TermCheckbox = ({value, onChange}) => {
+    return <Checkbox onChange={(value)=> {const ev = parseNativeEvent(value);onChange(ev)}} checked={value} />
+ }
 
   return (
     <RegisterFormArea>
@@ -191,97 +179,6 @@ const RegisterForm = (routerProps) => {
         <div className="account-create-container2">
           <div className="account-create-container2-wrap">
             <FormWrap>
-              {/* <Form
-                noValidate
-                validated={validated}
-                onSubmit={handleSubmit}
-                ref={formRef}
-              >
-                <div className="account-create-input2-container">
-                  <Form.Control
-                    className="account-create-input2"
-                    type="text"
-                    name="name"
-                    required
-                  />
-                  <div className="account-create-input2-name">
-                    Company Name
-                  </div>
-                </div>
-                <div className="account-create-input2-container">
-                  <Form.Control
-                    className="account-create-input3"
-                    name="kvkNumber"
-                    type="text"
-                    required
-                  />
-                  <div className="account-create-input2-name">
-                    Chamber of Commerce #
-                  </div>
-                  <div className="account-create-input2-name-2">
-                    NL - KVK -
-                  </div>
-                </div>
-                <div className="account-create-input2-container">
-                  <Form.Control
-                    className="account-create-input2"
-                    type="text"
-                    name="email"
-                    required
-                  />
-                  <div className="account-create-input2-name">
-                    Email Address
-                  </div>
-                </div>
-                <div className="account-create-input2-container">
-                  <Form.Control
-                    className="account-create-input2"
-                    name="password"
-                    type="password"
-                    required
-                  />
-                  <div className="account-create-input2-name">
-                    Password
-                  </div>
-                </div>
-                <div className="account-create-input2-container">
-                  <Form.Control
-                    className="account-create-input2"
-                    name="confirmP"
-                    type="password"
-                    required
-                  />
-                  <div className="account-create-input2-name">
-                    Bevestig je wachtwoord
-                  </div>
-                </div>
-
-                <div className="agree-button-group">
-                  <Form.Check
-                    className="account-create-check2"
-                    type="checkbox"
-                    name={"terms"}
-                    label=""
-                    required
-                  />
-                  <div>
-                    By signing up, I agree to the{" "}
-                    <a
-                      onClick={() => {
-                        showAgreePopup();
-                      }}
-                      className="agree-description"
-                    >
-                      Terms of Service and Privacy Policy
-                    </a>
-                  </div>
-                </div>
-                <div className="account-button-container">
-                  <Button className="account-create-btn2" type="submit">
-                    Create an account
-                  </Button>
-                </div>
-              </Form> */}
               <Form module={registerFormModule}>
                 <InputWrap>
                   <Field className="inputForm" name="companyName" label="Company Name" />
