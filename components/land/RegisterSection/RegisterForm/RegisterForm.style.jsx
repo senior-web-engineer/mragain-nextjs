@@ -5,3 +5,11 @@ export const RegisterFormArea = styled.div`
   width: 100%;
   padding: 30px 60px;
 `;
+
+export const AccountTitle = styled.div`
+  font-size: 32px;
+`;
+
+export const AccountSubTitle = styled.div`
+  margin-bottom: 24px;
+`;

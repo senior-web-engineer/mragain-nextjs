@@ -6,7 +6,7 @@ import { Form, Button } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { notification } from "antd";
 
-import { RegisterFormArea } from './RegisterForm.style';
+import { RegisterFormArea, AccountTitle, AccountSubTitle } from './RegisterForm.style';
 import './RegisterForm.style.less';
 
 const RegisterForm = (routerProps) => {
@@ -135,12 +135,12 @@ const RegisterForm = (routerProps) => {
               }}
         />
       </div>
-      <div className="row account-title">
+      <AccountTitle className="row">
         Let's get started!
-      </div>
-      <div className="row account-subTitle">
+      </AccountTitle>
+      <AccountSubTitle className="row">
         Registreer nu je gratis account!
-      </div>
+      </AccountSubTitle>
       <div className="row">
         <div className="account-create-container2">
           <div className="account-create-container2-wrap">
