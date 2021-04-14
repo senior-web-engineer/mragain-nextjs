@@ -28,6 +28,9 @@ import {
 } from "./action";
 import Axios from "axios";
 import filterObjectKeys from "@/scripts/filterObjectKeys";
+import { registerFormModule } from "@/components/land/RegisterSection/RegisterForm/modules";
+import { notification } from "antd";
+import router from "next/router";
 
 export const tokenConfig = () => {
   const token = localStorage.getItem("auth-token");
@@ -77,17 +80,32 @@ export const tokenConfigGet = (data) => {
   return config;
 };
 
-export function registerUser(data, dispatch) {
-  axios
-    .post(`${API_PATH.REGISTERUSER}/`, data)
-    .then((res) => {
-      dispatch(signupSuccess());
-    })
-    .catch((err) => {
-      if (err.response.data.error !== "") {
-        dispatch(signupFail(err.response.data.error));
+export function registerUser() {
+  return async function thunk() {
+    try {
+      await registerFormModule.actions.submit();
+
+      notification.success({
+        description:  "Bedankt voor je aanmelding bij MrAgain. We voeren nu enkele checks uit waarna je een email van ons ontvangt om je account te activeren. Let op: deze email kan in je spam terecht komen!",
+        duration: 2.5
+      });
+
+      setTimeout(() => {
+        router.router.push("/");
+      }, 3000);
+
+    } catch (error) {
+      const { errors } = registerFormModule.state;
+      if (Object.keys(errors).length) {
+        return;
       }
-    });
+      if (error !== "") {
+        notification.error({
+          message: error,
+        });
+      }
+    }
+  };
 }
 
 export function getAuthUser(dispatch) {

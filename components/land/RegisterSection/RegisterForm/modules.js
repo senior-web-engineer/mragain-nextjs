@@ -1,23 +1,26 @@
+import { API_PATH } from "@/constants";
 import { createFormModule } from "@/modules/forms";
-import { notification } from "antd";
-import { connect } from "react-redux";
-import { registerUser } from "service/account/operations.js";
+import { createModalModule } from "@/modules/modal";
+import api from "@/utils/api";
 import * as yup from "yup";
 
 const validator = yup.object({
-    companyName: yup.string().required(),
-    chamber: yup.string().required(),
-    email: yup.string().required().email(),
-    password: yup.string().required(),
-    confirmPassword: yup.string().required()
-})
-
-function ValidateEmail(mail) {
-  if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,8})+$/.test(mail)) {
-    return true;
-  }
-  return false;
-}
+  companyName: yup.string().required(),
+  chamber: yup.string().required(),
+  email: yup
+    .string()
+    .required()
+    .email("Heb je een geldig emailadres gebruikt?"),
+  password: yup.string().required(),
+  confirmPassword: yup
+    .string()
+    .required()
+    .oneOf(
+      [yup.ref("password"), null],
+      "Je wachtwoorden moeten hetzelfde zijn!"
+    ),
+  terms: yup.boolean().isTrue("Bevestig de algemene voorwaarden!"),
+});
 
 export const registerFormModule = createFormModule({
   validator,
@@ -33,27 +36,6 @@ export const registerFormModule = createFormModule({
   },
 
   async submit(data) {
-    if (!data.terms) {
-      notification.warning({
-        message: 'Bevestig de algemene voorwaarden!',
-      });
-      return;
-    }
-
-    if(ValidateEmail(data.email) ===  false) {
-      notification.warning({
-        message: 'Heb je een geldig emailadres gebruikt?',
-      });
-      return;
-    }
-
-    if (data.password !== data.confirmPassword) {
-      notification.warning({
-        message: 'Je wachtwoorden moeten hetzelfde zijn!',
-      });
-      return;
-    }
-
     const user = {
       name: data.companyName,
       email: data.email,
@@ -77,7 +59,10 @@ export const registerFormModule = createFormModule({
       geo_lat: 0,
       geo_long: 0,
       ptype: 0,
-    }
-    registerUser(user);
+    };
+    return api.post(`${API_PATH.REGISTERUSER}/`, user);
   },
 });
+
+
+export const agrementModal = createModalModule()

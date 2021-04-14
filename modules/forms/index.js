@@ -6,15 +6,19 @@ import "./rules";
 import FormActions from "./actions";
 import { store } from "@/configureStore";
 
-
-export function createFormModule({ init, submit, validator, guid = uuid() } = {}) {
+export function createFormModule({
+  init,
+  submit,
+  validator,
+  guid = uuid(),
+} = {}) {
   return {
     validator,
     guid,
-    actions: new FormActions({init, submit, validator, guid}),
+    actions: new FormActions({ init, submit, validator, guid }),
     get state() {
-      return store.ref.getState().forms?.[guid]
-    }
+      return store.ref.getState().forms?.[guid];
+    },
   };
 }
 
@@ -26,7 +30,15 @@ export function useFormContext() {
 
 const Form = connect((state, ownProps) => ({
   moduleState: state.forms?.[ownProps.module.guid],
-}))(function ({ moduleState, module, children }) {
+}))(function ({
+  moduleState,
+  module,
+  children,
+  onSubmit = (ev) => {
+    ev.preventDefault();
+    module.actions.submit();
+  },
+}) {
   useEffect(() => {
     if (!moduleState || !module) {
       return;
@@ -35,7 +47,6 @@ const Form = connect((state, ownProps) => ({
     if (moduleState.isLoading) {
       return;
     }
-
   }, [moduleState, module]);
 
   if (!moduleState || !module) {
@@ -50,13 +61,7 @@ const Form = connect((state, ownProps) => ({
     <FormContext.Provider
       value={{ state: moduleState, actions: module.actions }}
     >
-      <form
-        action="#"
-        onSubmit={(ev) => {
-          ev.preventDefault();
-          module.actions.submit();
-        }}
-      >
+      <form action="#" onSubmit={onSubmit}>
         {children}
       </form>
     </FormContext.Provider>

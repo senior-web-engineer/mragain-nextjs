@@ -17,10 +17,9 @@ export const AccountSubTitle = styled.div`
 export const FormWrap = styled.div`
   max-width: 690px;
   width: 100%;
-}
 `;
 
-export const ChamberInput = styled.div`
+export const ChamberInputWrap = styled.div`
   display: flex;
   align-items: center;
   div {
