@@ -83,7 +83,7 @@ async function registerUser() {
     }
     if (error !== "") {
       notification.error({
-        message: error,
+        message: error.error,
       });
     }
   }
