@@ -11,7 +11,6 @@ export const BannerSection = styled.div`
   justify-content: center;
   align-items: center;
   background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/meld-je-aan-als-telefoon-reparateur.jpg');
- {/* background: url(${bannerImage});*/}
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
