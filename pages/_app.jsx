@@ -15,13 +15,13 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { ScreenSizeProvider } from "@/utils/media";
 import moment from "moment";
-import 'moment/locale/nl';
+import "moment/locale/nl";
 import router from "next/router";
-import * as gtag from "@/lib/gtag"
+import * as gtag from "@/lib/gtag";
 
 const isProduction = process.env.NODE_ENV === "production";
-const handleRouteChange = (url) => {
-  if (!isProduction) {
+const handleRouteChange = (url, { shallow }) => {
+  if (!isProduction || shallow) {
     return;
   }
   gtag.pageview(url);
@@ -29,8 +29,7 @@ const handleRouteChange = (url) => {
 
 config.autoAddCss = false;
 library.add(fas, fab, far);
-moment.locale('nl');
-
+moment.locale("nl");
 
 class MyApp extends App {
   componentDidMount() {
