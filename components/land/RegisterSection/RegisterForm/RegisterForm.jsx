@@ -24,7 +24,7 @@ import { SubTitle } from "@/components/styled/text";
 const ChamberInput = ({ value, onChange }) => {
   return (
     <ChamberInputWrap>
-      <div>NL - KVK -</div>
+      <div>KVK -</div>
       <input
         onChange={(value) => {
           const ev = parseNativeEvent(value);
