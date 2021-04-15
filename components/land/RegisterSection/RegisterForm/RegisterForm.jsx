@@ -49,14 +49,14 @@ const TermCheckbox = ({ value, onChange }) => {
         />
       </CheckboxWrap>
       <div>
-        By signing up, I agree to the{" "}
+        Door een account aan te maken ga ik akkoord met{" "}
         <a
           onClick={() => {
             agrementModal.actions.open();
           }}
           className="agree-description"
         >
-          Terms of Service and Privacy Policy
+          De voorwaarden
         </a>
       </div>
     </div>
@@ -115,9 +115,9 @@ const RegisterForm = () => {
           }}
         />
       </div>
-      <AccountTitle className="row">Let's get started!</AccountTitle>
+      <AccountTitle className="row">Laten we beginnen!</AccountTitle>
       <AccountSubTitle className="row">
-        Registreer nu je gratis account!
+        Registreer nu je gratis account
       </AccountSubTitle>
       <div className="row">
         <div className="account-create-container2">
@@ -134,14 +134,14 @@ const RegisterForm = () => {
                   <Field
                     className="inputForm"
                     name="companyName"
-                    label="Company Name"
+                    label="Bedrijfsnaam"
                   />
                 </InputWrap>
                 <InputWrap>
                   <Field
                     className="inputForm"
                     name="chamber"
-                    label="Chamber of Commerce #"
+                    label="kvk nummer"
                     as={ChamberInput}
                   />
                 </InputWrap>
@@ -149,7 +149,7 @@ const RegisterForm = () => {
                   <Field
                     className="inputForm"
                     name="email"
-                    label="Email Address"
+                    label="Emailadres"
                     autoComplete="email"
                   />
                 </InputWrap>
@@ -157,7 +157,7 @@ const RegisterForm = () => {
                   <Field
                     className="inputForm"
                     name="password"
-                    label="Password"
+                    label="Wachtwoord"
                     type="password"
                   />
                 </InputWrap>
@@ -172,7 +172,7 @@ const RegisterForm = () => {
                 <Field name="terms" as={TermCheckbox} />
                 <div className="account-button-container">
                   <Button className="account-create-btn2" type="submit">
-                    Create an account
+                    Registreer
                   </Button>
                 </div>
               </Form>

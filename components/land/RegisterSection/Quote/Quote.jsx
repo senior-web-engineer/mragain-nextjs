@@ -21,13 +21,13 @@ const Quote = () => {
     <QuoteArea>
       <QuoteTitleArea>
         <QuoteTitle>
-          Being found online is just a few minutes away!
+          Beter online gevonden worden is dichter bij dan je denkt!
         </QuoteTitle>
       </QuoteTitleArea>
-      <QuoteContent text={'Better found in your area'}/>
-      <QuoteContent text={'Automatically receive appointments in your calendar'}/>
-      <QuoteContent text={'Receive reviews from all your customers'}/>
-      <QuoteContent text={'Always an overview of your completed repairs'}/>
+      <QuoteContent text={'Word beter gevonden bij jou in de buurt'}/>
+      <QuoteContent text={'Ontvang automatisch afspraken bij jou in de agenda'}/>
+      <QuoteContent text={'Krijg online reviews van al je klanten'}/>
+      <QuoteContent text={'Overzicht op al je afgeronde reparaties'}/>
     </QuoteArea>
   );
 };
