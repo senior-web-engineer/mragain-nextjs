@@ -16,11 +16,26 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 import { ScreenSizeProvider } from "@/utils/media";
 import moment from "moment";
 import 'moment/locale/nl';
+import router from "next/router";
+import * as gtag from "@/lib/gtag"
+
+const isProduction = process.env.NODE_ENV === "production";
+const handleRouteChange = (url) => {
+  if (!isProduction) {
+    return;
+  }
+  gtag.pageview(url);
+};
 
 config.autoAddCss = false;
 library.add(fas, fab, far);
 moment.locale('nl');
+
+
 class MyApp extends App {
+  componentDidMount() {
+    router.router.events.on("routeChangeComplete", handleRouteChange);
+  }
   render() {
     const { Component, pageProps, isLoggedIn, getAuthUser } = this.props;
 

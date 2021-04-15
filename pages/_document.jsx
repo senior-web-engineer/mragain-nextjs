@@ -4,21 +4,6 @@ import { ServerStyleSheet } from "styled-components";
 import HeadWithoutPreload from "./HeadWithoutPreload";
 import { GA_TRACKING_ID } from "../lib/gtag";
 
-// https://developers.google.com/analytics/devguides/collection/gtagjs/pages
-export const pageview = (url) => {
-  window.gtag('config', GA_TRACKING_ID, {
-    page_path: url,
-  })
-}
-
-// https://developers.google.com/analytics/devguides/collection/gtagjs/events
-export const event = ({ action, category, label, value }) => {
-  window.gtag('event', action, {
-    event_category: category,
-    event_label: label,
-    value: value,
-  })
-}
 
 const hotJarScript = `
 (function(h,o,t,j,a,r){
@@ -29,7 +14,17 @@ const hotJarScript = `
   r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
   a.appendChild(r);
 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-`
+`;
+
+const gaScript = `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_TRACKING_ID}', {
+  page_path: window.location.pathname,
+});
+`;
+
 export default class MyDocument extends Document {
   render() {
     const { isProduction } = this.props;
@@ -68,10 +63,19 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
             rel="stylesheet"
           ></link>
-          <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap" rel="stylesheet"></link>
-
+          <link
+            href="https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap"
+            rel="stylesheet"
+          ></link>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+          ></script>
+          <script dangerouslySetInnerHTML={{ __html: gaScript }} />
           {isProduction ? (
-            <script dangerouslySetInnerHTML={{__html: hotJarScript}}/>
+            <>
+              <script dangerouslySetInnerHTML={{ __html: hotJarScript }} />
+            </>
           ) : null}
         </HeadWithoutPreload>
         <body>
