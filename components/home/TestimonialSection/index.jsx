@@ -43,7 +43,7 @@ const ContentWrap = styled.div`
 const STATS = [
   {
     count: "267",
-    label: "Aantal telefoon modellen",
+    label: "Aantal apparaten",
   },
   {
     count: "65",
