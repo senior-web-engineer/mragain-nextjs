@@ -9,12 +9,14 @@ const RegisterSection = () => {
 
   return (
     <RegisterSectionArea>
-      <div className="row">
-        <div className="col-md-7">
-          <Quote />
-        </div>
-        <div className="col-md-5 col-sm-12">
-          <RegisterForm />
+      <div class="container">
+        <div className="row">
+          <div className="col-md-7 col-sm-12">
+            <Quote />
+          </div>
+          <div className="col-md-5 col-sm-12">
+            <RegisterForm />
+          </div>
         </div>
       </div>
     </RegisterSectionArea>

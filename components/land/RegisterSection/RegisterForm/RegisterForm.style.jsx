@@ -19,6 +19,18 @@ export const FormWrap = styled.div`
   width: 100%;
 `;
 
+
+export const InputWrap = styled.div`
+border: 1px solid #f4f4f4;
+padding: 12px;
+border-radius: 5px;
+margin-bottom: 16px;
+input {
+  border: none;
+  width: 100%;
+}
+`;
+
 export const ChamberInputWrap = styled.div`
   display: flex;
   align-items: center;
@@ -30,17 +42,6 @@ export const ChamberInputWrap = styled.div`
     border: none;
   }
 `;
-
-export const InputWrap = styled.div`
-  border: 1px solid #f4f4f4;
-  padding: 12px;
-  border-radius: 5px;
-  margin-bottom: 16px;
-  input {
-    border: none;
-  }
-`;
-
 export const CheckboxWrap = styled.div`
   margin-right: 5px;
 `;
