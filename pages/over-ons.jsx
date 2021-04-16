@@ -1,24 +1,20 @@
 import React from "react";
 import { Main } from "@/styled-components/over-ons.style.jsx";
-import AboutUsSection from "@/components/about-us/AboutUsSection/AboutUsSection"
+import AboutUsSection from "@/components/about-us/AboutUsSection/AboutUsSection";
+import PlatformSection from "@/components/about-us/PlatformSection/PlatformSection";
+import MissionSection from "@/components/about-us/MissionSection/MissionSection";
 import AboutBannerSection1 from "@/components/about-us/AboutBannerSection/AboutBannerSection1";
-import Banner2Section from "@/components/about-us/Banner2/Banner2";
-import AboutUs2Section from "@/components/about-us/Aboutus2/AboutUs2Section";
-import Banner3 from "@/components/about-us/banner3/Banner3";
-import AboutUs3Section from "@/components/about-us/Aboutus3/Aboutus3";
-import { Layout } from "@/components/global"
+import DefaultLayout from "@/components/layouts/Homepage";
 
 const AboutUs = () => (
-  <Layout>  
+  <DefaultLayout showSignup>
     <Main>
       <AboutBannerSection1 />
       <AboutUsSection />
-      <Banner2Section />
-      <AboutUs2Section />
-      <Banner3 />
-      <AboutUs3Section />
+      <PlatformSection />
+      <MissionSection />
     </Main>
-  </Layout>
+  </DefaultLayout>
 );
 
 export default AboutUs;

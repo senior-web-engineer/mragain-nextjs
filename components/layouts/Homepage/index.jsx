@@ -12,7 +12,7 @@ export default function DefaultLayout({ children, showSignup = false }) {
   return (
     <>
       <Header showSignup={showSignup} />
-      <ContentWrap>{children}</ContentWrap>
+        <ContentWrap>{children}</ContentWrap>
       <Footer />
     </>
   );

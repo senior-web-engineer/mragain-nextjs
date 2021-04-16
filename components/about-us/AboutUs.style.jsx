@@ -10,14 +10,12 @@ export const AboutSectionArea = styled.div`
   width : 100%;
 `
 export const AboutContainer = styled.div`
-  max-width: 1600px;
-  width: 1600px;
-  padding-left: 135px;
-  padding-right: 135px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  padding: 20px;
+  max-width: 1133px;
+  margin: auto;
   @media (max-width:768px) {
    padding:0px 0px;
   }
