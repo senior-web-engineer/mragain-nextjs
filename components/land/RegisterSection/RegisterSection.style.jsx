@@ -3,7 +3,9 @@ import styled from "styled-components";
 export const RegisterSectionArea = styled.div`
   color: #000;
   width: 100%;
-  padding: 30px;
+  padding: 20px;
+  max-width: 1133px;
+  margin: auto;
   @media (max-width:768px) {
     padding: 0px;
   }

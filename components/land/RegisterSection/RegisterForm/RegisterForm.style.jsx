@@ -3,7 +3,10 @@ import styled from "styled-components";
 export const RegisterFormArea = styled.div`
   color: #000;
   width: 100%;
-  padding: 30px 60px;
+  padding: 30px 0px 30px 60px;
+  @media (max-width:768px) {
+    padding: 30px 20px;
+  }
 `;
 
 export const AccountTitle = styled.div`
@@ -15,7 +18,6 @@ export const AccountSubTitle = styled.div`
 `;
 
 export const FormWrap = styled.div`
-  max-width: 690px;
   width: 100%;
 `;
 
