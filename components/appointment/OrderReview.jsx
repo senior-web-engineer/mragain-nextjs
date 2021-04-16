@@ -59,33 +59,33 @@ const AppointmentReviewModalContent = connect(() => ({
         height={200}
         src="/images/notifications/appointment.png"
       />
-      <h3>Appointment set</h3>
+      <h3>Afspraak details</h3>
       <d-list>
-        <d-def>Shop</d-def>
+        <d-def>Reparateur & locatie</d-def>
         <d-term>
           {modalData.form.shopName} <br /> {modalData.form.shopAddress}
         </d-term>
-        <d-def>Date & Time</d-def>
+        <d-def>Datum & tijd</d-def>
         <d-term>
           {modalData.form.time}{" "}
           {moment(modalData.form.date).format("dddd, DD MMMM YYYY")}
         </d-term>
         <hr />
-        <d-def>Your details</d-def>
+        <d-def>Jouw gegevens</d-def>
         <d-term>
           {modalData.form.name} <br />
           {modalData.form.email} <br />
           {modalData.form.tel}
         </d-term>
         <hr />
-        <d-def>Device details</d-def>
+        <d-def>Jouw apparaat</d-def>
         <d-term>
           {modalData.device.device_name} <br />
           {modalData.brand.brand_name} <br />
           {modalData.model.model_name}
         </d-term>
         <hr />
-        <d-def>Services</d-def>
+        <d-def>Reparatie & prijs</d-def>
         <d-term>
           {modalData.service.reparation.reparation_name}
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&euro;
