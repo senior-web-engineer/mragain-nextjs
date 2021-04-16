@@ -52,7 +52,7 @@ export default function GooglePlaces({
   value,
   onChange,
   size,
-  placeholder = "Postcode or address",
+  placeholder = "Postcode of stad",
   searchOptions = {
     componentRestrictions: {
       country: ["nl", "be"],

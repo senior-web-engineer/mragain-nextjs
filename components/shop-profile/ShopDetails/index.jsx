@@ -144,7 +144,7 @@ export default function ShopDetails({ shop }) {
     <MainWrap>
       <MaxConstraints>
         <div>
-          <SubTitle as="h2">Shopinformation {shop.name}</SubTitle>
+          <SubTitle as="h2">Algemene informatie {shop.name}</SubTitle>
           <d-list>
             <d-term>Apparaten</d-term>
             <d-def>

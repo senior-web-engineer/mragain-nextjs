@@ -129,7 +129,7 @@ const FooterView = (routerProps) => {
                 </li>
                 <li>
                   <Link prefetch={false} href="/veel-gestelde-vragen">
-                    FAQ
+                    Veel gestelde vragen
                   </Link>
                 </li>
                 <li>
@@ -268,7 +268,7 @@ const FooterView = (routerProps) => {
         <FooterViewContent>
           <FooterLinkArea className="footer-link-area">
             <FooterSitemap ClassName="custome-footer-sitename">
-              <FooterSitemapTitle>Devices</FooterSitemapTitle>
+              <FooterSitemapTitle>Apparaten</FooterSitemapTitle>
               <ul>
                 <li>
                   <Link prefetch={false} href="/telefoone-reparatie">

@@ -62,7 +62,7 @@ const TESTIMONIAL_DATA = [
     review: (
       <>Via MrAgain heb ik eenvoudig en snel een reparateur gevonden bij mij in de buurt.
 	Vooral het vergelijken van de reviews en het online maken van een afspraak vond ik handig, hierdoor wisten
-	Ze dat ik zou komen en kon ik direct worden geholpen.
+	ze dat ik zou komen en kon ik direct worden geholpen.
         <p>Binnen een dag was mijn smartphone gefixed!</p>
       </>
     ),
