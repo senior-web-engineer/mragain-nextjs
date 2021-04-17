@@ -20,10 +20,10 @@ const MissionSection = () => (
     <MissionSectionContentArea>
       <MissionSectionContent>
         <MissionSectionContentTitle>
-          WHY MRAGAIN
+          WAAROM MRAGAIN
         </MissionSectionContentTitle>
         <MissionSectionContentSubtitle>
-          Our mission
+          Onze missie
         </MissionSectionContentSubtitle>
         <MissionSectionContentDescription>
           {MISSION_SECTION_DESCRIPTION}
