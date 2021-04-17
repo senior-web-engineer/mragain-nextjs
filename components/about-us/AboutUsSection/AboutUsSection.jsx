@@ -9,8 +9,6 @@ import {
   AboutSectionContentDescription
 } from "./AboutUsSection.style.jsx";
 
-import "./AboutUsSection.style.less";
-
 const AboutUsSection = () => (
   <AboutSectionArea>
     <AboutSectionQuote>
