@@ -7,13 +7,15 @@ export const PlatformSectionArea = styled.div`
 `;
 
 export const PlatformSectionImage = styled.div`
-    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/smartphone-reparatie.jpg);
+    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/smartphone-reparatie.jp);
     height: 561px;
-    width: 521px;
+    max-width: 521px;
     background-size: cover;
     position: absolute;
     left: calc(50% + 45px);
-    top: 68px;
+    top: 50%;
+    width: calc(50% - 65px);
+    transform: translate(0%, -50%);
 `;
 
 export const PlatformSectionContentBackground = styled.div`
