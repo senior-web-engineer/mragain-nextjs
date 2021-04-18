@@ -364,7 +364,7 @@ function AppointmentButton() {
 function NextSlot({ id }) {
   const { data } = useFetcher({ identifier: id, dataFetcher: nextSlotFetcher });
 
-  if (!data.next_slot) {
+  if (!data?.next_slot) {
     return null;
   }
 

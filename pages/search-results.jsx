@@ -700,7 +700,7 @@ function ShopItem({ item }) {
         {item.shop.bg_photo ? (
           <Image
             loading="lazy"
-            src={`${BACK_END_URL}${item.shop.bg_photo}`}
+            src={`${item.shop.bg_photo}`}
             layout="fill"
             objectFit="cover"
           />
