@@ -22,7 +22,7 @@ export const AboutSectionQuote = styled.div`
     margin: 0px;
     padding: 20px;
     background-image: linear-gradient(to right, #fafafa, #ffffff);
-    font-size: 15px;
+    font-size: 20px;
   }
     
 `;
@@ -39,7 +39,7 @@ export const AboutSectionContentTitle = styled.div`
   color: #0076a3;
   font-size: 13px;
   @media (max-width:768px) {
-    font-size: 12px
+    font-size: 15px
   }
 `;
 
@@ -47,13 +47,13 @@ export const AboutSectionContentSubTitle = styled.div`
   font-size: 30px;
   padding-bottom: 22px;
   @media (max-width:768px) {
-    font-size: 15px
+    font-size: 20px
   }
 `;
 
 export const AboutSectionContentDescription = styled.div`
   font-size: 15px;
   @media (max-width:768px) {
-    font-size: 10px
+    font-size: 15px
   }
 `;

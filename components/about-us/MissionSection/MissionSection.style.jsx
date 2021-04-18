@@ -39,7 +39,7 @@ export const MissionSectionContentTitle = styled.div`
     color: #0076a3;
     font-size: 13px;
     @media (max-width: 768px){
-        font-size: 12px;
+        font-size: 15px;
     }
 `;
 
@@ -47,13 +47,13 @@ export const MissionSectionContentSubtitle = styled.div`
     font-size: 30px;
     padding-bottom: 22px;
     @media (max-width: 768px){
-        font-size: 15px;
+        font-size: 20px;
     }
 `;
 
 export const MissionSectionContentDescription = styled.div`
     font-size: 15px;
     @media (max-width: 768px){
-        font-size: 10px;
+        font-size: 15px;
     }
 `;
