@@ -92,7 +92,7 @@ const SliderWrap = styled.div`
     height: 489px;
 
     .slick-dots {
-      display: block;
+      display: block !important;
     }
   `}
 `;
