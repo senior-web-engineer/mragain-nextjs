@@ -148,9 +148,9 @@ const BlogWrap = styled.div`
     position: relative;
     height: 140px;
     display: block;
-    border-radius: 4px;
+    border-radius: 5px;
     overflow: hidden;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
   }
 
   date {
@@ -203,6 +203,8 @@ const BlogsList = styled.div`
 
 const FeaturedBlog = styled.div`
   min-width: 320px;
+  border-radius: 5px;
+  overflow: hidden;
 
   ${SliderBlogWrap} {
     width: 100%;
