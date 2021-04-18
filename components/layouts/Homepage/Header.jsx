@@ -139,6 +139,7 @@ const MobileMenuLinks = styled.div`
   a {
     display: block;
     padding: 10px 20px;
+    color: #555;
     border-bottom: 1px solid #ddd;
   }
 `;
@@ -247,7 +248,7 @@ const HeaderView = ({ showSignup }) => {
                     onClick={() => updateMenuVisibility(false)}
                   />
                 </MobileMenuHeader>
-                <SignupButtons />
+                <SignupButtons showSignup={showSignup}/>
                 <MobileMenuLinks>
                   <HeaderLinks />
                 </MobileMenuLinks>
