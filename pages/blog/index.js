@@ -202,11 +202,12 @@ const BlogsList = styled.div`
 `;
 
 const FeaturedBlog = styled.div`
-  width: 320px;
+  min-width: 320px;
 
   ${SliderBlogWrap} {
     width: 100%;
     height: 100%;
+    max-height: 600px;
 
     content {
       width: auto;
