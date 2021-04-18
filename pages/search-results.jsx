@@ -55,6 +55,7 @@ import moment from "moment";
 
 import dynamic from "next/dynamic";
 import Loader from "@/components/common/Loader";
+import { API_URL, BACK_END_URL } from "@/constants";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
   loading: Loader,
@@ -699,7 +700,7 @@ function ShopItem({ item }) {
         {item.shop.bg_photo ? (
           <Image
             loading="lazy"
-            src={item.shop.bg_photo}
+            src={`${item.shop.bg_photo}`}
             layout="fill"
             objectFit="cover"
           />
@@ -1091,6 +1092,22 @@ export default function SearchResults() {
     serviceFetcher.key(`${value}`).fetch();
   });
 
+  const syncListFilters = useCallback(async (data) => {
+    let parsedData = { ...data, lat: 0, long: 0 };
+    try {
+      const [result] = await geocodeByAddress(data.location);
+      const { lng, lat } = await getLatLng(result);
+
+      parsedData = {
+        ...parsedData,
+        long: lng,
+        lat,
+        location: "",
+      };
+    } catch (err) {}
+    shopListModule.actions.updateQuery(parsedData);
+  });
+
   const locationField = (
     <Field
       prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
@@ -1224,25 +1241,7 @@ export default function SearchResults() {
                     />
                   </MapTriggerWrap>
                 </ModelFields>
-                <SyncFormValues
-                  onChange={async (data) => {
-                    let parsedData = { ...data, lat: 0, long: 0 };
-                    try {
-                      const [result] = await geocodeByAddress(data.location);
-                      const { lng, lat } = await getLatLng(result);
-
-                      parsedData = {
-                        ...parsedData,
-                        long: lng,
-                        lat,
-                        location: "",
-                      };
-                    } catch (err) {
-                      console.log(err);
-                    }
-                    shopListModule.actions.updateQuery(parsedData);
-                  }}
-                />
+                <SyncFormValues onChange={syncListFilters} />
               </Form>
               <List module={shopListModule}>
                 <Listing Item={ShopItem} />

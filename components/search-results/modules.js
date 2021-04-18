@@ -7,6 +7,7 @@ import router from "next/router";
 import { createFormModule } from "@/modules/forms";
 import { createModalModule } from "@/modules/modal";
 import querystring from "querystring";
+import { store } from "@/configureStore";
 export const filtersFormModule = createFormModule({
   guid: "shops",
   async init() {
@@ -39,7 +40,7 @@ export const shopListModule = createListModule({
     const nextURL = `${router.pathname}?${querystring.stringify(query)}`;
     router.router.replace(nextURL, nextURL, { shallow: true });
     try {
-      const data = await api.post(`${API_PATH.SEARCH}/`, {
+      const data = await api.get(`${API_PATH.SEARCH}/`, {
         ...query,
         brand: parseInt(query.brand),
         service: parseInt(query.service),
@@ -51,6 +52,31 @@ export const shopListModule = createListModule({
         guarantee: parseInt(query.guarantee),
         sort: query.sort,
       });
+
+      api
+        .post(`${API_PATH.NEXT_SLOTS}/`, {
+          shops: data.map((item) => item.shop.id).join(","),
+        })
+        .then((slots) => {
+          const items = shopListModule.state.items;
+          const refreshed = Object.keys(items).reduce((accumulator, key) => {
+            accumulator[key] = items[key].map(item => {
+              const slot = slots.find(s => `${s.shop_id}` === `${item.shop.id}`)
+              if (slot) {
+                return {
+                  ...item,
+                  ...slot
+                }
+              }
+
+              return item;
+            })
+            return accumulator;
+          }, {});
+
+          shopListModule.actions.refreshItems(refreshed)
+        });
+
       return {
         items: data,
       };

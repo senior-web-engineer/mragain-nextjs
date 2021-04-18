@@ -33,12 +33,14 @@ export function FETCH_LIST_DATA_SUCCESS(...args) {
   processResult(...args);
 }
 
-export function UPDATE_LIST_QUERY(nextState, {guid, filters}) {
-  nextState[guid] = {
-    items: {},
-    pages: [],
-    isLoading: true,
-    currentPage: 0,
-    filters,
-  };
+export function UPDATE_LIST_QUERY(nextState, { guid, filters }) {
+  nextState[guid].items = {};
+  nextState[guid].pages = [];
+  nextState[guid].currentPage = 0;
+  nextState[guid].filters = filters;
+  nextState[guid].isLoading = true;
+}
+
+export function REFRESH_ITEMS(nextState, {guid, items}) {
+  nextState[guid].items = items
 }

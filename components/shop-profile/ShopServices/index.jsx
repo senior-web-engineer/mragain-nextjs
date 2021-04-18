@@ -1,4 +1,4 @@
-import { createSelectComponent } from "@/modules/dataFetcher";
+import { createSelectComponent, useFetcher } from "@/modules/dataFetcher";
 import React, { useCallback, useEffect } from "react";
 import {
   brandFetcher,
@@ -7,6 +7,7 @@ import {
   shopServicesListModule,
   modelFetcher,
   serviceFormModule,
+  nextSlotFetcher,
 } from "../modules";
 import Form, { useFormContext } from "@/modules/forms";
 import {
@@ -17,7 +18,7 @@ import {
 import Select from "@/components/ui/Select";
 import List from "@/modules/list";
 import { Listing, Table } from "@/modules/list/Blocks";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { MaxConstraints } from "@/components/styled/layout";
 import { Checkbox, Radio } from "antd";
 import Link from "next/link";
@@ -28,11 +29,27 @@ import { OnMobile, useScreenSize } from "@/utils/media";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import Loader from "@/components/common/Loader";
+import moment from "moment";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
   loading: Loader,
   ssr: false,
 });
+
+const nextSlotCss = css`
+  next-slot {
+    display: block;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 500;
+    margin-right: 10px;
+
+    label {
+      color: #c0c0c0;
+      display: block;
+    }
+  }
+`
 
 const ModelFields = styled.div`
   display: flex;
@@ -52,6 +69,8 @@ const ModelFields = styled.div`
       margin: 11px 11px 2px 11px;
     }
   }
+
+  ${nextSlotCss}
 `;
 
 const ReparationCell = styled.div`
@@ -92,6 +111,7 @@ const MobileToolbar = styled.div`
   ${NextStepWrap} {
     text-align: right;
     margin: 0;
+    white-space: nowrap;
   }
 
   ${Button} {
@@ -104,6 +124,8 @@ const MobileToolbar = styled.div`
       box-shadow: 0 0 8px #a0a0a0;
     }
   }
+
+  ${nextSlotCss}
 `;
 
 const SERVICE_COLUMNS = [
@@ -146,13 +168,13 @@ const SERVICE_COLUMNS = [
     title: "Garantie",
     dataIndex: "guarantee_time",
     key: "guarantee_time",
-    render:(data) => `${data} maanden`
+    render: (data) => `${data} maanden`,
   },
   {
     title: "Reparatie tijd",
     dataIndex: "reparation_time",
     key: "reparation_time",
-    render:(data) => `${data} minuten`
+    render: (data) => `${data} minuten`,
   },
   {
     title: "Prijs",
@@ -339,11 +361,31 @@ function AppointmentButton() {
   );
 }
 
+function NextSlot({ id }) {
+  const { data } = useFetcher({ identifier: id, dataFetcher: nextSlotFetcher });
+
+  if (!data?.next_slot) {
+    return null;
+  }
+
+  return (
+    <next-slot>
+      <label>Eerst mogelijke afspraak</label>
+      <date>
+        {moment(data.next_slot).isValid()
+          ? moment(data.next_slot).format("DD MMM, hh:mm")
+          : data.next_slot}
+      </date>
+    </next-slot>
+  );
+}
+
 export default function ShopServices({ shop }) {
   useEffect(() => {
     async function main() {
       await filtersFormModule.actions.initialize(shop.id);
       shopServicesListModule.actions.initialize();
+      nextSlotFetcher.key(`${shop.id}`).fetch();
       serviceFormModule.actions.initialize();
       deviceFetcher.fetch();
       const formValues = filtersFormModule.state.values;
@@ -399,6 +441,7 @@ export default function ShopServices({ shop }) {
         </OnMobile>
         <ModelFields>
           <OnMobile show={false}>
+            <NextSlot id={shop.id} />
             <DeviceSelector
               name="device"
               as={Select}
@@ -453,7 +496,10 @@ export default function ShopServices({ shop }) {
       </List>
       <OnMobile show={false}>{apointmentButton}</OnMobile>
       <OnMobile only>
-        <MobileToolbar>{apointmentButton}</MobileToolbar>
+        <MobileToolbar>
+          <NextSlot id={shop.id} />
+          {apointmentButton}
+        </MobileToolbar>
       </OnMobile>
     </MaxConstraints>
   );
