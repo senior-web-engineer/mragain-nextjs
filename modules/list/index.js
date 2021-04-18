@@ -6,14 +6,18 @@ import isEqual from "fast-deep-equal";
 import { createSelector } from "reselect";
 import { store } from "@/configureStore";
 
-export function createListModule({ fetchData, getInitialQuery, guid = uuid() } = {}) {
+export function createListModule({
+  fetchData,
+  getInitialQuery,
+  guid = uuid(),
+} = {}) {
   function getModuleState(state) {
     return state.list?.[guid];
   }
 
   const getItems = createSelector(getModuleState, (moduleState) => {
     if (!moduleState) {
-      return []
+      return [];
     }
 
     const { pages, items } = moduleState;
@@ -64,19 +68,26 @@ export function createListModule({ fetchData, getInitialQuery, guid = uuid() } =
         dispatch({ type: "NEXT_PAGE", guid });
         fetchItems();
       },
+      refreshItems(items) {
+        dispatch({ type: "REFRESH_ITEMS", items, guid });
+      },
       updateQuery(filters) {
-        const moduleState = getModuleState(store.ref.getState())
+        const moduleState = getModuleState(store.ref.getState());
         if (!moduleState) {
+          return;
+        }
+        const existingFilters = moduleState.filters;
+
+        if (isEqual(filters, existingFilters) || moduleState.isLoading) {
           return;
         }
 
         dispatch({ type: "UPDATE_LIST_QUERY", guid, filters });
-        if (isEqual(filters, moduleState?.filters)) {
-          return;
-        }
-
         debouncedFetchItems();
       },
+    },
+    get state() {
+      return store.ref.getState().list?.[guid]
     },
     selectors: {
       getItems,
@@ -93,9 +104,11 @@ export function useListContext() {
 
 const List = connect((state, ownProps) => ({
   moduleState: state.list?.[ownProps.module.guid],
-  ...(state.list?.[ownProps.module.guid] ? {
-    items: ownProps.module.selectors.getItems(state)
-  } : {})
+  ...(state.list?.[ownProps.module.guid]
+    ? {
+        items: ownProps.module.selectors.getItems(state),
+      }
+    : {}),
 }))(function ({ moduleState, module, children, items }) {
   if (!moduleState) {
     return null;

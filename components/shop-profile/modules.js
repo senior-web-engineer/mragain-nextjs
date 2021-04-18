@@ -59,6 +59,13 @@ export const shopServicesListModule = createListModule({
   },
 });
 
+export const nextSlotFetcher = keyedDataFetcher({
+  selectors: ["shops", "nextSlot"],
+  async fetchData([_1, _2, shopId]) {
+    return api.post(`${API_PATH.NEXT_SLOTS}/`, {shops: shopId}).then(data => data[0]);
+  },
+});
+
 export const reviewsFetcher = keyedDataFetcher({
   selectors: ["shops", "reviews"],
   async fetchData([_1, _2, shopId]) {
