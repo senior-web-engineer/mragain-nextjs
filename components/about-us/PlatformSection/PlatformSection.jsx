@@ -1,9 +1,6 @@
 import React from "react";
 
 import {
-  PLATFORM_SECTION_DESCRIPTION
-} from "@/constants";
-import {
   PlatformSectionArea,
   PlatformSectionImage,
   PlatformSectionContentBackground,

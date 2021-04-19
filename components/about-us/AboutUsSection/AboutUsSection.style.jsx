@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+import media from "@/utils/media";
 
 export const AboutSectionArea = styled.div`
   display: flex;
@@ -6,54 +7,53 @@ export const AboutSectionArea = styled.div`
   width : 100%;
   max-width: 1133px;
   margin: auto;
-  padding: 107px 20px;
-  @media (max-width:768px) {
-    flex-direction: column;
-    padding: 0px;
-  }
+  padding: 0px;
+  flex-direction: column;
+  ${media.tablet`
+    padding: 107px 20px;
+    flex-direction: row;
+  `}
 `;
 
 export const AboutSectionQuote = styled.div`
   width: 100%;
   margin-right: 100px;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: bold;
-  @media (max-width:768px) {
-    margin: 0px;
-    padding: 20px;
-    background-image: linear-gradient(to right, #fafafa, #ffffff);
-    font-size: 20px;
-  }
-    
+  margin: 0px;
+  padding: 20px;
+  background-image: linear-gradient(to right, #fafafa, #ffffff);
+  ${media.tablet`
+    font-size: 25px;
+    margin-right: 100px;
+    padding: unset;
+    background-image: unset;
+  `}
 `;
 
 export const AboutSectionContent = styled.div`
   width: 100%;
-  @media (max-width:768px) {
-    padding: 20px;
-    background-color: white;
-  }
+  padding: 20px;
+  background-color: white;
+  ${media.tablet`
+    padding: unset;
+    background-color: unset;
+  `}
 `;
 
 export const AboutSectionContentTitle = styled.div`
   color: #0076a3;
-  font-size: 13px;
-  @media (max-width:768px) {
-    font-size: 15px
-  }
+  font-size: 15px;
 `;
 
 export const AboutSectionContentSubTitle = styled.div`
-  font-size: 30px;
+  font-size: 20px;
   padding-bottom: 22px;
-  @media (max-width:768px) {
-    font-size: 20px
-  }
+  ${media.tablet`
+    font-size: 30px;
+  `}
 `;
 
 export const AboutSectionContentDescription = styled.div`
   font-size: 15px;
-  @media (max-width:768px) {
-    font-size: 15px
-  }
 `;
