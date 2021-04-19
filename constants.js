@@ -97,40 +97,6 @@ export default {
   BACK_END_URL,
 };
 
-export const ABOUT_SECTION_TITLE = `
-  We believe that the world will be just 
-  a little more beautiful if we can 
-  ensure that the life of your device is 
-  extended
-`
-
-export const ABOUT_SECTION_CONTENT_DESCRIPTION = `
-  MrAgain is a start-up from Utrecht. We are entrepreneurs, dreamers and 
-  idealists with a healthy dose of optimism. We started MrAgain from the 
-  realization that repairing electronic devices should be the norm. We 
-  promote the repair of electronic equipment - and therefore reuse - by 
-  making this market transparent and well-organized. Above all, that is good 
-  for the environment, but of course also for your wallet.
-`;
-
-export const PLATFORM_SECTION_DESCRIPTION = `
-  MrAgain is a platform where consumers and repairers of 
-  electronic devices are brought together. This makes it easy 
-  for you to find a repairer and you have transparent and 
-  reliable information about the quality, price and warranty. By 
-  making an appointment via our platform you are assured of 
-  benefits, for example because you will always receive 
-  immediate help.
-`;
-
-export const MISSION_SECTION_DESCRIPTION = `
-  In the Netherlands, we produce about 25 kilos (!) Of electronic waste per person per year. A large 
-  this concerns consumer electronics that can still be easily used or repaired. We believe that this 
-  should be done differently. With our platform, we focus ourselves first on extending the lifespan oF these 
-  devices and we are fully committed to reusing electronics.
-
-`;
-
 export const AGREEMENT_TEXT = `
 Algemene voorwaarden van: Mr Again V.O.F. Faustdreef 153 3561 LD
 UTRECHT Inschrijfnummer K.v.K.: 77500350 Artikel 1: Toepasselijkheid,

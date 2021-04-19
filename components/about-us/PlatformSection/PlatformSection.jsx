@@ -28,7 +28,13 @@ const PlatformSection = () => (
             Our Platform
           </PlatformSectionContentSubTitle>
           <PlatformSectionContentDescription>
-            {PLATFORM_SECTION_DESCRIPTION}
+            MrAgain is a platform where consumers and repairers of 
+            electronic devices are brought together. This makes it easy 
+            for you to find a repairer and you have transparent and 
+            reliable information about the quality, price and warranty. By 
+            making an appointment via our platform you are assured of 
+            benefits, for example because you will always receive 
+            immediate help.
           </PlatformSectionContentDescription>
         </PlatformSectionContent>
       </PlatformSectionContentArea>

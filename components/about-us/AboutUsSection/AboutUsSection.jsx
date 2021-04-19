@@ -1,5 +1,4 @@
 import React from "react";
-import { ABOUT_SECTION_TITLE, ABOUT_SECTION_CONTENT_DESCRIPTION } from "@/constants";
 import {
   AboutSectionArea,
   AboutSectionQuote,
@@ -12,7 +11,10 @@ import {
 const AboutUsSection = () => (
   <AboutSectionArea>
     <AboutSectionQuote>
-      {ABOUT_SECTION_TITLE}
+      We believe that the world will be just 
+      a little more beautiful if we can 
+      ensure that the life of your device is 
+      extended
     </AboutSectionQuote>
     <AboutSectionContent>
       <AboutSectionContentTitle>
@@ -22,7 +24,12 @@ const AboutUsSection = () => (
         The team and our dreams
       </AboutSectionContentSubTitle>
       <AboutSectionContentDescription>
-        {ABOUT_SECTION_CONTENT_DESCRIPTION}
+        MrAgain is a start-up from Utrecht. We are entrepreneurs, dreamers and 
+        idealists with a healthy dose of optimism. We started MrAgain from the 
+        realization that repairing electronic devices should be the norm. We 
+        promote the repair of electronic equipment - and therefore reuse - by 
+        making this market transparent and well-organized. Above all, that is good 
+        for the environment, but of course also for your wallet.
       </AboutSectionContentDescription>
     </AboutSectionContent>
   </AboutSectionArea>

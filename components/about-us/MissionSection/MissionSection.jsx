@@ -1,9 +1,6 @@
 import React from "react";
 
 import {
-  MISSION_SECTION_DESCRIPTION
-} from "@/constants";
-import {
   MissionSectionArea,
   MissionSectionImage,
   MissionSectionContentArea,
@@ -26,7 +23,10 @@ const MissionSection = () => (
           Onze missie
         </MissionSectionContentSubtitle>
         <MissionSectionContentDescription>
-          {MISSION_SECTION_DESCRIPTION}
+          In the Netherlands, we produce about 25 kilos (!) Of electronic waste per person per year. A large 
+          this concerns consumer electronics that can still be easily used or repaired. We believe that this 
+          should be done differently. With our platform, we focus ourselves first on extending the lifespan oF these 
+          devices and we are fully committed to reusing electronics.
         </MissionSectionContentDescription>
       </MissionSectionContent>
     </MissionSectionContentArea>
