@@ -1,11 +1,10 @@
 import React from "react";
-import { AboutSectionArea } from "../AboutUs.style.jsx";
-import "./AboutBannerSection1.style.less";
+import { AboutSectionArea } from "./AboutBannerSection.style";
 import Head from "next/head"
 import { FRONT_END_URL } from "../../../constants.js";
 
-const AboutBannerSection1 = () => (
-  <AboutSectionArea className="about-banner1-area">
+const AboutBannerSection = () => (
+  <AboutSectionArea>
     <Head>
       <title>Over Mr Again</title>
       <meta
@@ -32,4 +31,4 @@ const AboutBannerSection1 = () => (
   </AboutSectionArea>     
 );
 
-export default AboutBannerSection1;
+export default AboutBannerSection;

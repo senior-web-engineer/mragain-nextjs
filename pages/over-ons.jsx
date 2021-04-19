@@ -4,14 +4,14 @@ import {
   AboutUsSection,
   PlatformSection,
   MissionSection,
-  AboutBannerSection1
+  AboutBannerSection
 } from "@/components/about-us";
 import DefaultLayout from "@/components/layouts/Homepage";
 
 const AboutUs = () => (
   <DefaultLayout showSignup>
     <Main>
-      <AboutBannerSection1 />
+      <AboutBannerSection />
       <AboutUsSection />
       <PlatformSection />
       <MissionSection />
