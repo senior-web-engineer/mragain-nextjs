@@ -339,12 +339,12 @@ export default function Blog({ blogs }) {
             <HeroWrap>
               <RightSide>
                 <div>
-                  <SubTitle>News & Posts</SubTitle>
+                  <SubTitle>Nieuws & Posts</SubTitle>
                   <h1>Blogs</h1>
                 </div>
                 <div>
-                  <p>Not yet subscribed to our newsletter?</p>
-                  <Button>Subscribe now</Button>
+                  <p>Nog niet aangemeld voor onze nieuwsbrief?</p>
+                  <Button>Schrijf in</Button>
                 </div>
               </RightSide>
               <SliderWrap>
@@ -354,7 +354,7 @@ export default function Blog({ blogs }) {
               </SliderWrap>
             </HeroWrap>
             <BlogsSectionWrap>
-              <SectionTitle as="h2">Latest blogs</SectionTitle>
+              <SectionTitle as="h2">Laatste blogs</SectionTitle>
               <BlogsSection>
                 <BlogsList>
                   <OnMobile only>{renderBlog(restOfBlogs.featured)}</OnMobile>

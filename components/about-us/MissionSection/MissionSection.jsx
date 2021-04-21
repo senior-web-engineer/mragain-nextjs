@@ -20,13 +20,15 @@ const MissionSection = () => (
           WAAROM MRAGAIN
         </MissionSectionContentTitle>
         <MissionSectionContentSubtitle>
-          Onze missie
+          Onze Missie
         </MissionSectionContentSubtitle>
         <MissionSectionContentDescription>
-          In the Netherlands, we produce about 25 kilos (!) Of electronic waste per person per year. A large 
-          this concerns consumer electronics that can still be easily used or repaired. We believe that this 
-          should be done differently. With our platform, we focus ourselves first on extending the lifespan oF these 
-          devices and we are fully committed to reusing electronics.
+	In Nederland produceren we per jaar zo'n 25 kilo(!) elektronisch afval per
+	persoon per jaar. Een groot gedeelte daarvan betreft consumenten
+	elektronica dat nog prima te gebruiken of te repareren is. Wij vinden dat dit
+	anders kan en moet. Met ons platform focussen we onszelf eerst op het
+	verlengen van de levensduur van deze apparaten en zetten we maximaal in
+	op hergebruik van electronica.
         </MissionSectionContentDescription>
       </MissionSectionContent>
     </MissionSectionContentArea>
