@@ -3,7 +3,10 @@ import styled from "styled-components";
 export const RegisterFormArea = styled.div`
   color: #000;
   width: 100%;
-  padding: 30px 60px;
+  padding: 30px 0px 30px 60px;
+  @media (max-width:768px) {
+    padding: 30px 20px;
+  }
 `;
 
 export const AccountTitle = styled.div`
@@ -15,8 +18,19 @@ export const AccountSubTitle = styled.div`
 `;
 
 export const FormWrap = styled.div`
-  max-width: 690px;
   width: 100%;
+`;
+
+
+export const InputWrap = styled.div`
+border: 1px solid #f4f4f4;
+padding: 12px;
+border-radius: 5px;
+margin-bottom: 16px;
+input {
+  border: none;
+  width: 100%;
+}
 `;
 
 export const ChamberInputWrap = styled.div`
@@ -30,17 +44,6 @@ export const ChamberInputWrap = styled.div`
     border: none;
   }
 `;
-
-export const InputWrap = styled.div`
-  border: 1px solid #f4f4f4;
-  padding: 12px;
-  border-radius: 5px;
-  margin-bottom: 16px;
-  input {
-    border: none;
-  }
-`;
-
 export const CheckboxWrap = styled.div`
   margin-right: 5px;
 `;

@@ -1,29 +1,37 @@
 import React from "react";
-import { AboutSectionArea, AboutContainer } from "../AboutUs.style";
 import {
-  AboutUsContent,
-  AboutArticle,
-  AboutArticleTitle,
-  AboutArticleContent,
+  AboutSectionArea,
+  AboutSectionQuote,
+  AboutSectionContent,
+  AboutSectionContentTitle,
+  AboutSectionContentSubTitle,
+  AboutSectionContentDescription
 } from "./AboutUsSection.style.jsx";
 
-import "./AboutUsSection.style.less";
-
 const AboutUsSection = () => (
-  <AboutSectionArea className="about-us-area1">
-    <AboutContainer className="about-us-container1">
-      <AboutUsContent>
-        <AboutArticle>
-          <h2 className="about-us-h2-title">Het team en onze dromen</h2>
-          <AboutArticleContent>
-            <p>MrAgain is een start-up uit Utrecht. We zijn ondernemers, dromers en idealisten met een gezonde dosis optimisme. We zijn MrAgain gestart vanuit het besef dat het repareren van elektronische apparaten de norm moet zijn. We promoten reparatie van elektronische apparatuur - en dus hergebruik - door deze market transparant en overzichtelijk te maken.   
-	Dat is bovenal goed voor het milieu, maar natuurlijk ook voor je portemonnee. 
-            </p>
-            <br></br>
-          </AboutArticleContent>
-        </AboutArticle>
-      </AboutUsContent>
-    </AboutContainer>
+  <AboutSectionArea>
+    <AboutSectionQuote>
+      We believe that the world will be just 
+      a little more beautiful if we can 
+      ensure that the life of your device is 
+      extended
+    </AboutSectionQuote>
+    <AboutSectionContent>
+      <AboutSectionContentTitle>
+        ABOUT MRAGAIN
+      </AboutSectionContentTitle>
+      <AboutSectionContentSubTitle>
+        The team and our dreams
+      </AboutSectionContentSubTitle>
+      <AboutSectionContentDescription>
+        MrAgain is a start-up from Utrecht. We are entrepreneurs, dreamers and 
+        idealists with a healthy dose of optimism. We started MrAgain from the 
+        realization that repairing electronic devices should be the norm. We 
+        promote the repair of electronic equipment - and therefore reuse - by 
+        making this market transparent and well-organized. Above all, that is good 
+        for the environment, but of course also for your wallet.
+      </AboutSectionContentDescription>
+    </AboutSectionContent>
   </AboutSectionArea>
 );
 
