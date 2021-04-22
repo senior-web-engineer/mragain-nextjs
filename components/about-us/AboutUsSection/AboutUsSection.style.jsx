@@ -20,7 +20,7 @@ export const AboutSectionQuote = styled.div`
   margin-right: 100px;
   font-size: 20px;
   font-weight: bold;
-  margin: 0px;
+  margin: 20px;
   padding: 20px;
   background-image: linear-gradient(to right, #fafafa, #ffffff);
   ${media.tablet`
