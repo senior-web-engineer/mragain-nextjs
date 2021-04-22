@@ -697,10 +697,10 @@ function ShopItem({ item }) {
       onClick={onClick}
     >
       <ShopImageWrap>
-        {item.shop.logo_image ? (
+        {item.shop.bg_photo ? (
           <Image
             loading="lazy"
-            src={`${item.shop.logo_image}`}
+            src={`${item.shop.logo_photo}`}
             layout="fill"
             objectFit="cover"
           />
