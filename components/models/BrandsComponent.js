@@ -11,7 +11,7 @@ export default function BrandsComponent({ data, deviceId }) {
 
     let path = "";
     if (deviceId === 1) {
-      path = "telefoone-reparatie";
+      path = "telefoon-reparatie";
     } else if (deviceId === 2) {
       path = "tablet-reparatie";
     } else if (deviceId === 3) {
