@@ -700,7 +700,7 @@ function ShopItem({ item }) {
         {item.shop.bg_photo ? (
           <Image
             loading="lazy"
-            src={`${item.shop.logo_photo}`}
+            src={`${item.shop.logo_image}`}
             layout="fill"
             objectFit="cover"
           />
