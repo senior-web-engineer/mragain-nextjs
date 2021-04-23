@@ -138,7 +138,7 @@ const FooterView = (routerProps) => {
                   </Link>
                 </li>
                 <li>
-                  <Link prefetch={false} href="/reparatie">
+                  <Link prefetch={false} href="/over-reparaties">
                     Reparaties
                   </Link>
                 </li>
@@ -271,7 +271,7 @@ const FooterView = (routerProps) => {
               <FooterSitemapTitle>Apparaten</FooterSitemapTitle>
               <ul>
                 <li>
-                  <Link prefetch={false} href="/reparatie">
+                  <Link prefetch={false} href="/telefoon-reparatie">
                     Smartphones
                   </Link>
                 </li>
