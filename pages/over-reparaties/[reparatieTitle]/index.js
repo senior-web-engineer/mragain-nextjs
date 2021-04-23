@@ -27,7 +27,7 @@ export default function ReparatieTitle({ reparatieDetails, reparatieTitle }) {
               <meta name="description" content={reparatie.seo_description} />
               <link
                 rel="canonical"
-                href={`${FRONT_END_URL}/reparatie/${reparatieTitle}`}
+                href={`${FRONT_END_URL}/over-reparaties/${reparatieTitle}`}
               />
               <meta property="og:type" content="website" />
               <meta property="og:title" content={reparatie.title} />
@@ -37,7 +37,7 @@ export default function ReparatieTitle({ reparatieDetails, reparatieTitle }) {
               />
               <meta
                 property="og:url"
-                content={`${FRONT_END_URL}/reparatie/${reparatieTitle}`}
+                content={`${FRONT_END_URL}/over-reparaties/${reparatieTitle}`}
               />
               <meta property="og:image" content={reparatie.post_image} />
               <meta property="og:site_name" content="MrAgain" />

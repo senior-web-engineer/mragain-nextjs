@@ -19,19 +19,19 @@ export default function Blog({ blogs }) {
             <title>Telefoon Reparaties | Mr Again</title>
             <meta name="Keywords" content="Reparaties, Mr-Again" />
             <meta name="description" content="MrAgain Reparaties" />
-            <link rel="canonical" href={FRONT_END_URL + "/reparatie"} />
+            <link rel="canonical" href={FRONT_END_URL + "/over-reparaties"} />
             <meta property="og:type" content="website" />
             <meta
               name="og_title"
               property="og:title"
-              content="Alles over telefoon reparaties"
+              content="Alles over electronica reparaties"
             />
             <meta
               property="og:description"
-              content="Alles over telefoon reparaties"
+              content="Alles over electronica reparaties"
             />
 
-            <meta name="og:url" content={FRONT_END_URL + "/reparatie"} />
+            <meta name="og:url" content={FRONT_END_URL + "/over-reparaties"} />
             <meta
               property="og:image"
               content="/telefoon-reparatie-mragain.jpg"
@@ -44,7 +44,7 @@ export default function Blog({ blogs }) {
           </Head>
           <div className="row px-0">
             <h1 className="blog-list-title w-100 mt-4 ">
-              Alles over telefoon reparaties
+              Alles over electronica reparaties
             </h1>
             <Pagelist pages={blogs} />
           </div>

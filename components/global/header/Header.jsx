@@ -42,7 +42,7 @@ const HeaderView = (routerProps) => {
     else if (router.pathname === "/over-ons") return `App-header home-page`;
     else if (router.pathname === "/meld-je-aan-als-reparateur")
       return `App-header home-page`;
-    else if (router.pathname === "/telefoon-reparatie")
+    else if (router.pathname === "/reparatie")
       return `App-header home-page`;
     else if (router.pathname === "/veel-gestelde-vragen")
       return `App-header home-page`;
@@ -267,8 +267,8 @@ const HeaderView = (routerProps) => {
           <Menu.Item key="/over-ons">
             <Link prefetch={false} href="/over-ons">Over MrAgain</Link>
           </Menu.Item>
-          <Menu.Item key="/telefoon-reparatie">
-            <Link prefetch={false} href="/telefoon-reparatie">Telefoon reparatie</Link>
+          <Menu.Item key="/reparatie">
+            <Link prefetch={false} href="/reparatie">Reparatie</Link>
           </Menu.Item>
           <Menu.Item key="/meld-je-aan-als-reparateur">
             <Link prefetch={false} href="/meld-je-aan-als-reparateur">

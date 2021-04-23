@@ -27,7 +27,7 @@ const RepairServicingBannerSection = () => (
       />
       <link
         rel="canonical"
-        href={FRONT_END_URL + '/telefoon-reparatie'}
+        href={FRONT_END_URL + '/reparatie'}
       />
       {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
       <meta property="og:type" content="website" />
@@ -42,7 +42,7 @@ const RepairServicingBannerSection = () => (
       />
       <meta
         name="og:url"
-        content={ FRONT_END_URL + '/telefoon-reparatie'}
+        content={ FRONT_END_URL + '/reparatie'}
       />
       <meta property="og:image" content={FRONT_END_URL + "/telefoon-reparatie-mragain.jpg"}  />
       <meta name="og_site_name" property="og:site_name" content="Mr Again" />

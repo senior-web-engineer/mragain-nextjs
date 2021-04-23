@@ -47,7 +47,7 @@ const FooterView = (routerProps) => {
     splitUrl === "/hoe-werkt-het" ||
     splitUrl === "/contact" ||
     splitUrl === "/prijs" ||
-    splitUrl === "/telefoon-reparatie" ||
+    splitUrl === "/reparatie" ||
     splitUrl === "/maak-een-account-aan" ||
     splitUrl === "/login" ||
     splitUrl === "/meld-je-aan-als-reparateur" ||
@@ -55,7 +55,7 @@ const FooterView = (routerProps) => {
     splitUrl === "/checkout-review" ||
     splitUrl === "/reset-je-wachtwoord" ||
     splitUrl === "/bevestig-je-wachtwoord-reset";
-  splitUrl === "/reparatie";
+  splitUrl === "/over-reparaties";
   splitUrl === "/blog" ? "flex" : "none";
 
   let notBot =
@@ -113,7 +113,7 @@ const FooterView = (routerProps) => {
                   </Link>
                 </li>
                 <li>
-                  <Link prefetch={false} href="/telefoon-reparatie">
+                  <Link prefetch={false} href="/reparatie">
                     Telefoon reparatie
                   </Link>
                 </li>
@@ -271,7 +271,7 @@ const FooterView = (routerProps) => {
               <FooterSitemapTitle>Apparaten</FooterSitemapTitle>
               <ul>
                 <li>
-                  <Link prefetch={false} href="/telefoone-reparatie">
+                  <Link prefetch={false} href="/reparatie">
                     Smartphones
                   </Link>
                 </li>
@@ -308,7 +308,7 @@ const FooterView = (routerProps) => {
               <FooterSitemapTitle>Devices</FooterSitemapTitle>
               <ul>
                 <li>
-                  <Link prefetch={false} href="/telefoone-reparatie">
+                  <Link prefetch={false} href="/reparatie">
                     Smartphones
                   </Link>
                 </li>
