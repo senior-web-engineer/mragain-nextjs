@@ -14,6 +14,7 @@ import {
   invalidTimeFetcher,
   openTimeFetcher,
 } from "./modules";
+import {Tooltip} from "react-bootstrap";
 
 const ShortDayWrap = styled.div`
   background-color: #a0a0a0;

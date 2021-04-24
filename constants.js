@@ -21,7 +21,7 @@ export const FRONT_END_URL = process.env.NEXT_PUBLIC_FRONT_END_URL;
 console.log("API_URL", API_URL);
 export const API_PATH = {
   SEARCH: `${API_URL}/searchshop`,
-  NEXT_SLOTS: `${API_URL}/searchShopNextslots`,
+  NEXT_SLOTS: `${API_URL}/searchShopDevices`,
   CONTACTUS: `${API_URL}/contact-us`,
   GETFILTERFIELDS: `${API_URL}/getfilterfields`,
   GETFILTERFIELDEXT: `${API_URL}/getfilterfieldext`,
