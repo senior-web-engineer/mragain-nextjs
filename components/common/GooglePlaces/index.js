@@ -68,6 +68,20 @@ export default function GooglePlaces({
     }
   }, [value]);
 
+
+  useEffect(() => {
+    if (!scriptLoaded) {
+      loadScriptAction();
+    }
+  }, []);
+
+
+   const loadScriptAction=async()=>{
+     await loadScript();
+     setScriptLoaded(true);
+  };
+
+
   if (!scriptLoaded) {
     return (
       <MainWrap>
