@@ -1102,7 +1102,7 @@ export default function SearchResults() {
         ...parsedData,
         long: lng,
         lat,
-        location: "",
+        location: data.location,
       };
     } catch (err) {}
     shopListModule.actions.updateQuery(parsedData);
