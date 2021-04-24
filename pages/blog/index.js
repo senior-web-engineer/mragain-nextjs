@@ -244,7 +244,10 @@ function NullRenderer() {
 
 export default function Blog({ blogs }) {
   function renderSliderBlog(blog) {
-    return (
+   if (!blog) {
+     return null;
+   }
+   return (
       <SliderBlogWrap>
         <background>
           {blog.post_image_thumb ? (
