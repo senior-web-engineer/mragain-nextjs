@@ -67,11 +67,6 @@ export const shopListModule = createListModule({
         return item;
       });
 
-
-
-      console.log('shopDevices',shopDevices);
-      console.log('data',data);
-
       api
         .post(`${API_PATH.NEXT_SLOTS}/`, {
           shops: data.map((item) => item.shop.id).join(","),

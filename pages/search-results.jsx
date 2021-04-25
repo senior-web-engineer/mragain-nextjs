@@ -700,7 +700,7 @@ function ShopItem({ item }) {
         {(item?.shop?.logo_photo || item?.shop?.bg_photo ) ? (
           <Image
             loading="lazy"
-            src={`${item?.shop?.logo_photo || item?.shop?.bg_photo || ''}`}
+            src={`https://mragain.eu.pythonanywhere.com/${item?.shop?.logo_photo || item?.shop?.bg_photo || ''}`}
             layout="fill"
             objectFit="cover"
           />

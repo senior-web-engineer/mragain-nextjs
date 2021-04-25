@@ -71,7 +71,7 @@ module.exports = withLess(withSass(withCSS({
           name: '[name].[ext]'
         }
       }
-    })
+    });
     config.node={
         fs: "empty"
     }
