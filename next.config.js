@@ -24,6 +24,9 @@ module.exports = withLess(withSass(withCSS({
   images:{
     domains: ['localhost','mragain.eu.pythonanywhere.com', 'mragainproduction.eu.pythonanywhere.com', 'develop.mragain.nl','mragain.nl'],
   },
+  env:{
+    NEXT_PUBLIC_IMAGES_URL: "https://mragain.eu.pythonanywhere.com"
+  },
   productionBrowserSourceMaps: true,
   webpack: (config, { isServer,webpack }) => {
     if (isServer) {

@@ -700,8 +700,10 @@ function ShopItem({ item }) {
         {(item?.shop?.logo_photo || item?.shop?.bg_photo ) ? (
           <Image
             loading="lazy"
-            src={`https://mragain.eu.pythonanywhere.com/${item?.shop?.logo_photo || item?.shop?.bg_photo || ''}`}
-            layout="fill"
+            src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/${item?.shop?.logo_photo || item?.shop?.bg_photo || ''}`}
+            layout="responsive"
+            width={150}
+            height={150}
             objectFit="cover"
           />
         ) : null}
