@@ -287,12 +287,12 @@ const FooterView = (routerProps) => {
                 </li>
                 <li>
                   <Link prefetch={false} href="/tv-reparatie">
-                    TV
+                    Televisies
                   </Link>
                 </li>
                 <li>
                   <Link prefetch={false} href="/laundry-machines-reparatie">
-                    Laundry machine
+                    Wasmachines
                   </Link>
                 </li>
                 <li>
