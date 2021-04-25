@@ -14,7 +14,7 @@ export const filtersFormModule = createFormModule({
     const fromAddressBar = router.router.query;
 
     return {
-      location: fromAddressBar.zip || "",
+      location: fromAddressBar.zip || fromAddressBar.location ||  "",
       device: fromAddressBar.device || "0",
       brand: fromAddressBar.brand || "0",
       model: fromAddressBar.model || "0",
