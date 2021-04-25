@@ -51,7 +51,7 @@ const STATS = [
   },
   {
     count: "1,489",
-    label: "Aanbod aan reparaties",
+    label: "Aantal reparaties",
   },
 ];
 
