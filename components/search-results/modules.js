@@ -40,7 +40,7 @@ export const shopListModule = createListModule({
     const nextURL = `${router.pathname}?${querystring.stringify(query)}`;
     router.router.replace(nextURL, nextURL, { shallow: true });
     try {
-      const data = await api.get(`${API_PATH.SEARCH}/`, {
+      let data = await api.get(`${API_PATH.SEARCH}/`, {
         ...query,
         brand: parseInt(query.brand),
         service: parseInt(query.service),
@@ -52,6 +52,25 @@ export const shopListModule = createListModule({
         guarantee: parseInt(query.guarantee),
         sort: query.sort,
       });
+
+      let shopDevices =  await api
+          .post(`${API_PATH.SHOP_DEVICES}/`, {
+            shops: data.map((item) => item.shop.id).join(","),
+          });
+      data = data.map(item=>{
+        item.devices = [];
+        for(let device of shopDevices){
+          if(device.shop_id===item.shop.id){
+            item.devices.push(device);
+          }
+        }
+        return item;
+      });
+
+
+
+      console.log('shopDevices',shopDevices);
+      console.log('data',data);
 
       api
         .post(`${API_PATH.NEXT_SLOTS}/`, {
@@ -70,7 +89,7 @@ export const shopListModule = createListModule({
               }
 
               return item;
-            })
+            });
             return accumulator;
           }, {});
 
