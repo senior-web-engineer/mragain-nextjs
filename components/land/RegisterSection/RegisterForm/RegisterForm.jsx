@@ -20,6 +20,7 @@ import Button from "@/components/ui/Button";
 import Modal from "@/modules/modal";
 import { AGREEMENT_TEXT } from "@/constants";
 import { SubTitle } from "@/components/styled/text";
+import styled from "styled-components";
 
 const ChamberInput = ({ value, onChange }) => {
   return (
@@ -36,9 +37,13 @@ const ChamberInput = ({ value, onChange }) => {
   );
 };
 
+const AgreeSection = styled.div`
+  display: flex;
+`
+
 const TermCheckbox = ({ value, onChange }) => {
   return (
-    <div className="agree-button-group">
+    <AgreeSection>
       <CheckboxWrap>
         <Checkbox
           onChange={(value) => {
@@ -59,7 +64,7 @@ const TermCheckbox = ({ value, onChange }) => {
           De voorwaarden
         </a>
       </div>
-    </div>
+    </AgreeSection>
   );
 };
 
@@ -100,23 +105,8 @@ const RegisterForm = () => {
 
   return (
     <RegisterFormArea>
-      <div className="row account-image">
-        <Image
-          quality={50}
-          loading={"eager"}
-          priority={true}
-          width={80}
-          height={30}
-          src={logo}
-          alt="Logo Mr Again"
-          style={{
-            display: "table-cell",
-            verticalAlign: "middle",
-          }}
-        />
-      </div>
       <AccountTitle className="row">Laten we beginnen!</AccountTitle>
-      <AccountSubTitle className="row">
+      <AccountSubTitle>
         Registreer nu je gratis account
       </AccountSubTitle>
       <div className="row">

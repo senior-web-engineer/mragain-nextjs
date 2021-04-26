@@ -2,7 +2,7 @@ export function INITIALIZE_LIST_REQUEST(nextState, { guid, query }) {
   nextState[guid] = {
     items: {},
     pages: [],
-    isLoading: false,
+    isLoading: true,
     currentPage: 0,
     filters: query || {},
   };

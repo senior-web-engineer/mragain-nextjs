@@ -9,12 +9,13 @@ export const RegisterFormArea = styled.div`
   }
 `;
 
-export const AccountTitle = styled.div`
+export const AccountTitle = styled.h3`
   font-size: 32px;
 `;
 
-export const AccountSubTitle = styled.div`
+export const AccountSubTitle = styled.h5`
   margin-bottom: 24px;
+  font-size: 14px;
 `;
 
 export const FormWrap = styled.div`
@@ -45,5 +46,5 @@ export const ChamberInputWrap = styled.div`
   }
 `;
 export const CheckboxWrap = styled.div`
-  margin-right: 5px;
+  margin-right: 10px;
 `;
