@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
 export const FaqContent = styled.div`
-  display: flex;    
+  display: flex;
 `
-export const FaqArticle = styled.div` 
+export const FaqArticle = styled.div`
   width: 705px;
   @media (max-width:768px) {
     width: 520px;

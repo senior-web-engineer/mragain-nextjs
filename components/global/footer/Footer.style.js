@@ -49,7 +49,8 @@ export const FooterBrandArea = styled.div`
     display: table;
   }
   @media (max-width: 570px) {
-    width: 320px;
+    width: auto;
+    padding: 0;
   }
 `;
 
@@ -90,7 +91,8 @@ export const FooterLinkArea = styled.div`
     display: table;
   }
   @media (max-width: 570px) {
-    width: 320px;
+    width: auto;
+    margin: 0;
   }
 `;
 

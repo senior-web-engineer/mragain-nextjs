@@ -21,7 +21,7 @@ const MainWrap = styled.div`
 `;
 
 export const loadScript = (callback) => {
-  const url = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places,geocode`
+  const url = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places,geocode`;
   if (document.getElementById("google-places")) {
     return Promise.resolve();
   }
@@ -31,10 +31,12 @@ export const loadScript = (callback) => {
     script.type = "text/javascript";
     script.id = "google-places";
 
-
     if (script.readyState) {
       script.onreadystatechange = function () {
-        if (script.readyState === "loaded" || script.readyState === "complete") {
+        if (
+          script.readyState === "loaded" ||
+          script.readyState === "complete"
+        ) {
           script.onreadystatechange = null;
           resolve();
         }
@@ -45,7 +47,7 @@ export const loadScript = (callback) => {
 
     script.src = url;
     document.getElementsByTagName("head")[0].appendChild(script);
-  })
+  });
 };
 
 export default function GooglePlaces({
@@ -68,18 +70,16 @@ export default function GooglePlaces({
     }
   }, [value]);
 
-
   useEffect(() => {
+    const loadScriptAction = async () => {
+      await loadScript();
+      setScriptLoaded(true);
+    };
+
     if (!scriptLoaded) {
       loadScriptAction();
     }
   }, []);
-
-
-   const loadScriptAction=async()=>{
-     await loadScript();
-     setScriptLoaded(true);
-  };
 
 
   if (!scriptLoaded) {
@@ -116,7 +116,6 @@ export default function GooglePlaces({
               }))}
               value={searchTerm}
               size={size}
-              autoFocus
               placeholder={placeholder}
               loading={loading}
               dropdownStyle={{ minWidth: "320px" }}

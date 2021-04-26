@@ -82,6 +82,7 @@ const TESTIMONIAL_DATA = [
 const StatsWrap = styled.div`
   flex-grow: 1;
   display: flex;
+  flex-direction: column;
 
   ${media.desktop`
     margin-right: 50px;
@@ -89,20 +90,18 @@ const StatsWrap = styled.div`
 `;
 
 const StatWrap = styled.div`
-  width: 131px;
-  height: 150px;
-  padding: 20px;
+  padding: 10px 20px;
   border-radius: 10px;
   background-color: #fff;
   display: inline-flex;
   justify-content: flex-end;
   align-items: flex-start;
   flex-direction: column;
-  margin: 0 4px;
+  margin: 4px;
+  align-items: center;
 
   h6 {
     font-size: 22px;
-    line-height: 8px;
     color: #06c987;
     font-weight: 500;
   }
@@ -112,7 +111,13 @@ const StatWrap = styled.div`
     line-height: 15px;
     color: #303030;
     font-weight: 500;
+    margin: 0;
   }
+
+  ${media.tablet`
+    width: 131px;
+    height: 150px;
+  `}
 `;
 
 const Testimonial = styled.div`

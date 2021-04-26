@@ -4,7 +4,7 @@ import { DAYS_OF_WEEK } from "@/utils/date";
 import media from "@/utils/media";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Calendar } from "antd";
+import { Calendar, Tooltip } from "antd";
 import moment from "moment";
 import React, { useMemo } from "react";
 import styled, { css } from "styled-components";
@@ -14,7 +14,6 @@ import {
   invalidTimeFetcher,
   openTimeFetcher,
 } from "./modules";
-import {Tooltip} from "react-bootstrap";
 
 const ShortDayWrap = styled.div`
   background-color: #a0a0a0;
