@@ -244,10 +244,11 @@ function NullRenderer() {
 
 export default function Blog({ blogs }) {
   function renderSliderBlog(blog) {
-   if (!blog) {
-     return null;
-   }
-   return (
+    if (!blog) {
+      return null;
+    }
+
+    return (
       <SliderBlogWrap>
         <background>
           {blog.post_image_thumb ? (
@@ -269,6 +270,10 @@ export default function Blog({ blogs }) {
   }
 
   function renderBlog(blog) {
+    if (!blog) {
+      return null;
+    }
+
     return (
       <BlogWrap>
         <background>
@@ -356,20 +361,22 @@ export default function Blog({ blogs }) {
                 </Slider>
               </SliderWrap>
             </HeroWrap>
-            <BlogsSectionWrap>
-              <SectionTitle as="h2">Laatste blogs</SectionTitle>
-              <BlogsSection>
-                <BlogsList>
-                  <OnMobile only>{renderBlog(restOfBlogs.featured)}</OnMobile>
-                  {restOfBlogs.rest.map(renderBlog)}
-                </BlogsList>
-                <OnMobile show={false}>
-                  <FeaturedBlog>
-                    {renderSliderBlog(restOfBlogs.featured)}
-                  </FeaturedBlog>
-                </OnMobile>
-              </BlogsSection>
-            </BlogsSectionWrap>
+            {restOfBlogs.length ? (
+              <BlogsSectionWrap>
+                <SectionTitle as="h2">Laatste blogs</SectionTitle>
+                <BlogsSection>
+                  <BlogsList>
+                    <OnMobile only>{renderBlog(restOfBlogs.featured)}</OnMobile>
+                    {restOfBlogs.rest.map(renderBlog)}
+                  </BlogsList>
+                  <OnMobile show={false}>
+                    <FeaturedBlog>
+                      {renderSliderBlog(restOfBlogs.featured)}
+                    </FeaturedBlog>
+                  </OnMobile>
+                </BlogsSection>
+              </BlogsSectionWrap>
+            ) : null}
           </MaxConstraints>
         </div>
       </Main>
