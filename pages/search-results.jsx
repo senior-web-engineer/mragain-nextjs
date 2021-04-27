@@ -28,7 +28,7 @@ import {
 } from "@/modules/forms/Blocks";
 import { Listing } from "@/modules/list/Blocks";
 import Form, { useFormContext } from "@/modules/forms";
-import List from "@/modules/list";
+import List, { useListContext } from "@/modules/list";
 import Select from "@/components/ui/Select";
 import { createSelectComponent } from "@/modules/dataFetcher";
 import { Radio, Rate, Slider, Switch } from "antd";
@@ -93,6 +93,14 @@ const Sidebar = styled.div`
 const SidebarInnerWrap = styled.div`
   position: sticky;
   top: 0;
+
+  .ant-slider-mark {
+    font-size: 10px;
+  }
+
+  .ant-slider-mark-text {
+    width: 70px;
+  }
 `;
 
 const MapTriggerWrap = styled(FieldWrap)`
@@ -427,7 +435,7 @@ const ShopImageWrap = styled.div`
     border-radius: 15px;
   `}
 
-  dd {
+  d-def {
     position: absolute;
     bottom: 6px;
     right: 6px;
@@ -697,17 +705,19 @@ function ShopItem({ item }) {
       onClick={onClick}
     >
       <ShopImageWrap>
-        {(item?.shop?.logo_photo || item?.shop?.bg_photo ) ? (
+        {item?.shop?.logo_photo || item?.shop?.bg_photo ? (
           <Image
             loading="lazy"
-            src={`${process.env.NEXT_PUBLIC_BACK_END_URL}/${item?.shop?.logo_photo || item?.shop?.bg_photo || ''}`}
+            src={`${process.env.NEXT_PUBLIC_BACK_END_URL}/${
+              item?.shop?.logo_photo || item?.shop?.bg_photo || ""
+            }`}
             layout="responsive"
             width={150}
             height={150}
             objectFit="cover"
           />
         ) : null}
-        <d-def>{item.shop.distance}</d-def>
+        <d-def>{item.shop.distance} km</d-def>
       </ShopImageWrap>
       <ShopDetails tagColor={TAG_TO_COLOR[tag]}>
         <div>{tag ? <tag>{tag}</tag> : null}</div>
@@ -900,20 +910,22 @@ const SORT_BY = [
   },
 ];
 
-const WARRANTIES = [
-  {
-    label: "Geen garantie",
-    value: "-1",
-  },
-  {
-    label: "1 maand garantie",
-    value: "1",
-  },
-  {
-    label: "6 maanden garantie",
-    value: "6",
-  },
-];
+const WARRANTIES = {
+  "0":  "Gleen",
+  "1": "",
+  "3": "",
+  "6": "6 maanden",
+}
+
+function warrantyLabel(value) {
+  const mapping = {
+    "1": "1 maand garantie",
+    "3": "3 maand garantie",
+    "6": "6 maanden garantie",
+  }
+
+  return mapping[value] || "Gleen garantie"
+}
 
 const WORKING_TIME = [
   {
@@ -1007,9 +1019,13 @@ function RefineSearchForm() {
       )}
       <Field
         name="guarantee"
-        as={Select}
-        options={WARRANTIES}
+        as={Slider}
+        marks={WARRANTIES}
         label="Garantie"
+        tipFormatter={warrantyLabel}
+        min={0}
+        max={6}
+        step={null}
       />
       {false && (
         <Field
@@ -1021,6 +1037,15 @@ function RefineSearchForm() {
       )}
     </Form>
   );
+}
+
+function ResultCount() {
+  const context = useListContext();
+  if (!context.items || context.state.isLoading) {
+    return null;
+  }
+
+  return ` (${context.items.length} shops)`;
 }
 
 export default function SearchResults() {
@@ -1129,7 +1154,12 @@ export default function SearchResults() {
             <Sidebar>
               <SidebarInnerWrap>
                 <SidebarHeader>
-                  <SubTitle>Filter resultaten</SubTitle>
+                  <SubTitle>
+                    Filter resultaten
+                    <List module={shopListModule}>
+                      <ResultCount />
+                    </List>
+                  </SubTitle>
                   <Form module={filtersFormModule}>
                     <ClearFilters />
                   </Form>
@@ -1295,7 +1325,12 @@ export default function SearchResults() {
             </MobileToolbar>
             <Modal module={refineSearchModal} footer={null}>
               <RefineModalWrap>
-                <SubTitle>Resultaten filteren</SubTitle>
+                <SubTitle>
+                  Resultaten filteren
+                  <List module={shopListModule}>
+                    <ResultCount />
+                  </List>
+                </SubTitle>
                 <RefineSearchForm />
                 <RefineFooter />
               </RefineModalWrap>

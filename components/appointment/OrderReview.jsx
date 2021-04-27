@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import Modal from "@/modules/modal";
 import styled from "styled-components";
 import moment from "moment";
+import media from "@/utils/media";
 
 const ContentWrap = styled.div`
   text-align: center;
@@ -16,12 +17,11 @@ const ContentWrap = styled.div`
   }
 
   d-list {
-    display: block;
-    width: 450px;
     display: flex;
     flex-wrap: wrap;
     text-align: left;
     margin: 50px auto 10px;
+    font-size: 13px;
   }
 
   d-term {
@@ -42,6 +42,12 @@ const ContentWrap = styled.div`
   hr {
     width: 100%;
   }
+
+  ${media.tablet`
+    d-list {
+      width: 450px;
+    }
+  `}
 `;
 
 const AppointmentReviewModalContent = connect(() => ({

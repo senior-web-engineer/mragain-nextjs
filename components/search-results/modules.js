@@ -14,7 +14,7 @@ export const filtersFormModule = createFormModule({
     const fromAddressBar = router.router.query;
 
     return {
-      location: fromAddressBar.zip || fromAddressBar.location ||  "",
+      location: fromAddressBar.zip || fromAddressBar.location || "",
       device: fromAddressBar.device || "0",
       brand: fromAddressBar.brand || "0",
       model: fromAddressBar.model || "0",
@@ -53,14 +53,13 @@ export const shopListModule = createListModule({
         sort: query.sort,
       });
 
-      let shopDevices =  await api
-          .post(`${API_PATH.SHOP_DEVICES}/`, {
-            shops: data.map((item) => item.shop.id).join(","),
-          });
-      data = data.map(item=>{
+      let shopDevices = await api.post(`${API_PATH.SHOP_DEVICES}/`, {
+        shops: data.map((item) => item.shop.id).join(","),
+      });
+      data = data.map((item) => {
         item.devices = [];
-        for(let device of shopDevices){
-          if(device.shop_id===item.shop.id){
+        for (let device of shopDevices) {
+          if (device.shop_id === item.shop.id) {
             item.devices.push(device);
           }
         }
@@ -74,13 +73,15 @@ export const shopListModule = createListModule({
         .then((slots) => {
           const items = shopListModule.state.items;
           const refreshed = Object.keys(items).reduce((accumulator, key) => {
-            accumulator[key] = items[key].map(item => {
-              const slot = slots.find(s => `${s.shop_id}` === `${item.shop.id}`)
+            accumulator[key] = items[key].map((item) => {
+              const slot = slots.find(
+                (s) => `${s.shop_id}` === `${item.shop.id}`
+              );
               if (slot) {
                 return {
                   ...item,
-                  ...slot
-                }
+                  ...slot,
+                };
               }
 
               return item;
@@ -88,7 +89,7 @@ export const shopListModule = createListModule({
             return accumulator;
           }, {});
 
-          shopListModule.actions.refreshItems(refreshed)
+          shopListModule.actions.refreshItems(refreshed);
         });
 
       return {

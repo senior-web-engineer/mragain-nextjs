@@ -1,7 +1,7 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
 import Head from "next/head";
-import { API_PATH, FRONT_END_URL } from "../../constants.js";
+import { API_PATH, API_URL, FRONT_END_URL } from "../../constants.js";
 import DefaultLayout from "@/components/layouts/Homepage/index.jsx";
 import { MaxConstraints } from "@/components/styled/layout.jsx";
 import styled from "styled-components";
@@ -12,6 +12,11 @@ import Image from "next/image";
 import Link from "next/link";
 import moment from "moment";
 import media, { OnMobile } from "@/utils/media.js";
+import Form, { createFormModule } from "@/modules/forms/index.js";
+import { Field } from "@/modules/forms/Blocks.js";
+import Input from "@/components/ui/Input.jsx";
+import api from "@/utils/api/index.js";
+import * as yup from "yup"
 
 const HeroWrap = styled.div`
   display: flex;
@@ -38,6 +43,7 @@ const RightSide = styled.div`
   padding: 30px 0;
 
   ${media.tablet`
+    min-width: 300px;
     padding: 80px 0;
   `}
 `;
@@ -238,16 +244,36 @@ const SectionTitle = styled.div`
   }
 `;
 
+const validator = yup.object({
+  email: yup
+    .string()
+    .required()
+    .email("Heb je een geldig emailadres gebruikt?"),
+});
+
+const subscribeForm = createFormModule({
+  validator,
+  init: async () => ({ email: "" }),
+  submit(data) {
+    return api.post(`${API_PATH.SUBSCRIBE}/`, { email: data.email });
+  },
+});
+
 function NullRenderer() {
   return null;
 }
 
 export default function Blog({ blogs }) {
+  useEffect(() => {
+    subscribeForm.actions.initialize();
+  }, []);
+
   function renderSliderBlog(blog) {
-   if (!blog) {
-     return null;
-   }
-   return (
+    if (!blog) {
+      return null;
+    }
+
+    return (
       <SliderBlogWrap>
         <background>
           {blog.post_image_thumb ? (
@@ -269,6 +295,10 @@ export default function Blog({ blogs }) {
   }
 
   function renderBlog(blog) {
+    if (!blog) {
+      return null;
+    }
+
     return (
       <BlogWrap>
         <background>
@@ -347,7 +377,15 @@ export default function Blog({ blogs }) {
                 </div>
                 <div>
                   <p>Nog niet aangemeld voor onze nieuwsbrief?</p>
-                  <Button>Schrijf in</Button>
+                  <Form module={subscribeForm}>
+                    <Field
+                      as={Input}
+                      name="email"
+                      size="large"
+                      placeholder="Please provide your email"
+                    />
+                    <Button>Schrijf in</Button>
+                  </Form>
                 </div>
               </RightSide>
               <SliderWrap>
@@ -356,20 +394,22 @@ export default function Blog({ blogs }) {
                 </Slider>
               </SliderWrap>
             </HeroWrap>
-            <BlogsSectionWrap>
-              <SectionTitle as="h2">Laatste blogs</SectionTitle>
-              <BlogsSection>
-                <BlogsList>
-                  <OnMobile only>{renderBlog(restOfBlogs.featured)}</OnMobile>
-                  {restOfBlogs.rest.map(renderBlog)}
-                </BlogsList>
-                <OnMobile show={false}>
-                  <FeaturedBlog>
-                    {renderSliderBlog(restOfBlogs.featured)}
-                  </FeaturedBlog>
-                </OnMobile>
-              </BlogsSection>
-            </BlogsSectionWrap>
+            {restOfBlogs.length ? (
+              <BlogsSectionWrap>
+                <SectionTitle as="h2">Laatste blogs</SectionTitle>
+                <BlogsSection>
+                  <BlogsList>
+                    <OnMobile only>{renderBlog(restOfBlogs.featured)}</OnMobile>
+                    {restOfBlogs.rest.map(renderBlog)}
+                  </BlogsList>
+                  <OnMobile show={false}>
+                    <FeaturedBlog>
+                      {renderSliderBlog(restOfBlogs.featured)}
+                    </FeaturedBlog>
+                  </OnMobile>
+                </BlogsSection>
+              </BlogsSectionWrap>
+            ) : null}
           </MaxConstraints>
         </div>
       </Main>

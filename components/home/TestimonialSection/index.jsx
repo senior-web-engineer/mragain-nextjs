@@ -60,9 +60,11 @@ const TESTIMONIAL_DATA = [
     author: "Vera",
     location: "Utrecht",
     review: (
-      <>Via MrAgain heb ik eenvoudig en snel een reparateur gevonden bij mij in de buurt.
-	Vooral het vergelijken van de reviews en het online maken van een afspraak vond ik handig, hierdoor wisten
-	ze dat ik zou komen en kon ik direct worden geholpen.
+      <>
+        Via MrAgain heb ik eenvoudig en snel een reparateur gevonden bij mij in
+        de buurt. Vooral het vergelijken van de reviews en het online maken van
+        een afspraak vond ik handig, hierdoor wisten ze dat ik zou komen en kon
+        ik direct worden geholpen.
         <p>Binnen een dag was mijn smartphone gefixed!</p>
       </>
     ),
@@ -71,9 +73,16 @@ const TESTIMONIAL_DATA = [
     author: "Quincy",
     location: "Den Haag",
     review: (
-      <> Mijn telefoon deed het niet meer en ik wist niet wat er aan de hand was. Gelukkig zag ik dat je bij
-	    veel reparateurs een diagnose afspraak met no cure no pay kan maken. Dat heb ik gedaan en op die manier ben ik toen snel geholpen.
-        <p>Super handig dat je kunt zien welke reparateur ook jouw toestel repareert!</p>
+      <>
+        {" "}
+        Mijn telefoon deed het niet meer en ik wist niet wat er aan de hand was.
+        Gelukkig zag ik dat je bij veel reparateurs een diagnose afspraak met no
+        cure no pay kan maken. Dat heb ik gedaan en op die manier ben ik toen
+        snel geholpen.
+        <p>
+          Super handig dat je kunt zien welke reparateur ook jouw toestel
+          repareert!
+        </p>
       </>
     ),
   },
@@ -82,27 +91,27 @@ const TESTIMONIAL_DATA = [
 const StatsWrap = styled.div`
   flex-grow: 1;
   display: flex;
+  flex-direction: column;
 
   ${media.desktop`
     margin-right: 50px;
+    flex-direction: row;
   `}
 `;
 
 const StatWrap = styled.div`
-  width: 131px;
-  height: 150px;
-  padding: 20px;
+  padding: 10px 20px;
   border-radius: 10px;
   background-color: #fff;
   display: inline-flex;
   justify-content: flex-end;
   align-items: flex-start;
   flex-direction: column;
-  margin: 0 4px;
+  margin: 4px;
+  align-items: center;
 
   h6 {
     font-size: 22px;
-    line-height: 8px;
     color: #06c987;
     font-weight: 500;
   }
@@ -112,7 +121,13 @@ const StatWrap = styled.div`
     line-height: 15px;
     color: #303030;
     font-weight: 500;
+    margin: 0;
   }
+
+  ${media.tablet`
+    width: 131px;
+    height: 150px;
+  `}
 `;
 
 const Testimonial = styled.div`
@@ -177,18 +192,6 @@ const TestimonialAuthor = styled.div`
 `;
 
 export default function TestimonialSection() {
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 2,
-    vertical: true,
-    arrows: false,
-    slidesToScroll: 1,
-    vertical: true,
-    verticalSwiping: true,
-  };
-
   function renderStat(stat) {
     return (
       <StatWrap key={stat.label}>

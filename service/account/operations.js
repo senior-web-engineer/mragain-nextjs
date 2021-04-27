@@ -87,12 +87,12 @@ export function registerUser() {
 
       notification.success({
         description:  "Bedankt voor je aanmelding bij MrAgain. We voeren nu enkele checks uit waarna je een email van ons ontvangt om je account te activeren. Let op: deze email kan in je spam terecht komen!",
-        duration: 2.5
+        duration: 5.5
       });
 
       setTimeout(() => {
         router.router.push("/");
-      }, 3000);
+      }, 6000);
 
     } catch (error) {
       const { errors } = registerFormModule.state;
