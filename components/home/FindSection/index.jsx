@@ -20,6 +20,7 @@ import Form, { useFormContext } from "@/modules/forms";
 import { searchForm } from "../modules";
 import Link from "next/link";
 import GooglePlaces from "@/components/common/GooglePlaces";
+import api from "@/utils/api";
 
 //
 
@@ -73,8 +74,6 @@ const SearchBar = styled.div`
     > * {
       width: 100%;
     }
-
-
   }
 
   .svg-inline--fa {
@@ -155,32 +154,15 @@ function SearchButton() {
 }
 
 export default function FindSection() {
-  const [searchData, updateSearchData] = useState({
-    devices: [],
-    models: [],
-    brands: [],
-  });
+  const [searchData, updateSearchData] = useState([]);
 
   const [searchResults, updateSearchResults] = useState([]);
 
   useEffect(() => {
     async function loadData() {
-      const devices = await axios.get(`${API_PATH.GETDEVICES}/`);
-      devices.data.forEach(async (device) => {
-        const brands = await axios.get(
-          `${API_PATH.GETBRANDS}/?device=${device.id}`
-        );
-        brands.data.forEach(async (brand) => {
-          const models = await axios.get(
-            `${API_PATH.GETMODELS}/?device=${device.id}&brand=${brand.id}`
-          );
-
-          updateSearchData((data) => ({
-            ...data,
-            models: [...data.models, ...models.data],
-          }));
-        });
-      });
+      const models = await api.get(`${API_PATH.ALL_MODELS}/`);
+      console.log(models);
+      updateSearchData(models);
     }
 
     searchForm.actions.initialize();
@@ -188,36 +170,38 @@ export default function FindSection() {
   }, []);
 
   const models = useMemo(() => {
-    return searchData.models.reduce((acc, model) => {
+    return searchData.reduce((acc, model) => {
       const item = {
         ...model,
-        label: `${model.brand.brand_name} ${model.model_name}`,
-        value: `${model.brand.device.id}~${model.brand.id}~${model.id}`,
+        label: `${model.brand_name} ${model.model_name}`,
+        value: `${model.device_id}~${model.brand_id}~${model.model_id}`,
       };
 
-      const foundDevice = acc.find(
-        (device) => device.id === model.brand.device.id
-      );
-      const device = foundDevice || model.brand.device;
+      const foundDevice = acc.find((device) => device.id === model.device_id);
+      const device = foundDevice || {
+        id: model.device_id,
+        name: model.device_name,
+      };
       if (!device.options) {
         device.options = [];
       }
       const existingOption = device.options.find(
-        (option) => option.id === model.id
+        (option) => option.model_id === model.model_id
       );
 
       if (!existingOption) {
         device.options.push(item);
       }
 
-      device.label = device.device_name;
-      device.value = `${device.id}`;
+      device.label = model.device_name;
+      device.value = `${model.device_id}`;
 
       if (!foundDevice) {
         acc.push({
           ...device,
+          device_name: model.device_name,
           options: [
-            { label: `All ${device.device_name}`, value: `${device.id}` },
+            { label: `All ${model.device_name}`, value: `${model.device_id}` },
             ...device.options,
           ],
         });
@@ -225,7 +209,7 @@ export default function FindSection() {
 
       return acc;
     }, []);
-  }, [searchData.models]);
+  }, [searchData]);
 
   function handleSearch(value) {
     const searchResults = models.reduce((acc, device) => {
@@ -291,7 +275,7 @@ export default function FindSection() {
                 dropdownStyle={{ minWidth: "320px" }}
                 name="model"
               >
-                <StyledInput  aria-label="Apparaat of model"/>
+                <StyledInput aria-label="Apparaat of model" />
               </Field>
             </div>
             <div>

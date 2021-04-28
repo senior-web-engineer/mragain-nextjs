@@ -126,7 +126,7 @@ const SidebarHeader = styled.div`
     letter-spacing: 0px;
     color: #ed1c24;
     font-weight: 300;
-    margin-right: 37px;
+    margin-right: 10px;
     text-transform: none;
     height: auto;
     line-height: 1em;
@@ -714,7 +714,7 @@ function ShopItem({ item }) {
             layout="responsive"
             width={150}
             height={150}
-            objectFit="cover"
+            objectFit="contain"
           />
         ) : null}
         <d-def>{item.shop.distance} km</d-def>
@@ -743,7 +743,7 @@ function ShopItem({ item }) {
                 <label>Eerst mogelijke afspraak</label>
                 <date>
                   {moment(item.next_slot).isValid()
-                    ? moment(item.next_slot).format("DD MMM, hh:mm")
+                    ? moment(item.next_slot).format("DD MMM, HH:mm")
                     : item.next_slot}
                 </date>
               </div>
