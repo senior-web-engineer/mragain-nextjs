@@ -714,7 +714,7 @@ function ShopItem({ item }) {
             layout="responsive"
             width={150}
             height={150}
-            objectFit="cover"
+            objectFit="contain"
           />
         ) : null}
         <d-def>{item.shop.distance} km</d-def>
