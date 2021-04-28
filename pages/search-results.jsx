@@ -743,7 +743,7 @@ function ShopItem({ item }) {
                 <label>Eerst mogelijke afspraak</label>
                 <date>
                   {moment(item.next_slot).isValid()
-                    ? moment(item.next_slot).format("DD MMM, hh:mm")
+                    ? moment(item.next_slot).format("DD MMM, HH:mm")
                     : item.next_slot}
                 </date>
               </div>
