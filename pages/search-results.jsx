@@ -126,7 +126,7 @@ const SidebarHeader = styled.div`
     letter-spacing: 0px;
     color: #ed1c24;
     font-weight: 300;
-    margin-right: 37px;
+    margin-right: 10px;
     text-transform: none;
     height: auto;
     line-height: 1em;
