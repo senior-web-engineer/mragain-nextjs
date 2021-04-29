@@ -20,6 +20,7 @@ export const FRONT_END_URL = process.env.NEXT_PUBLIC_FRONT_END_URL;
 
 console.log("API_URL", API_URL);
 export const API_PATH = {
+  ALL_MODELS: `${API_URL}/getAlldevBrndModel`,
   SEARCH: `${API_URL}/searchshop`,
   NEXT_SLOTS: `${API_URL}/searchShopNextslots`,
   SHOP_DEVICES: `${API_URL}/searchShopDevices`,

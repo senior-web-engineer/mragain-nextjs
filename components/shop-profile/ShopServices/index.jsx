@@ -373,7 +373,7 @@ function NextSlot({ id }) {
       <label>Eerst mogelijke afspraak</label>
       <date>
         {moment(data.next_slot).isValid()
-          ? moment(data.next_slot).format("DD MMM, hh:mm")
+          ? moment(data.next_slot).format("DD MMM, HH:mm")
           : data.next_slot}
       </date>
     </next-slot>
