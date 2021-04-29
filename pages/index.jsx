@@ -107,7 +107,7 @@ export default function Home({ shopList }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const shopList = await getNewestShopList(8, null, false);
 
   return {

@@ -308,7 +308,7 @@ export default function ShopHeader({ shop }) {
         <ContentWrap>
           <ShopLogo>
             {shop?.logo_photo ? (
-              <Image loading="lazy" layout="fill" objectFit="cover" src={shop.logo_photo} />
+              <Image loading="lazy" layout="fill" objectFit="contain" src={shop.logo_photo} />
             ) : null}
           </ShopLogo>
           <ShopMeta>

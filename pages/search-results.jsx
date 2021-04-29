@@ -55,7 +55,7 @@ import moment from "moment";
 
 import dynamic from "next/dynamic";
 import Loader from "@/components/common/Loader";
-import { API_URL, BACK_END_URL } from "@/constants";
+import { getShopLogo, getShopRoute } from "@/utils/shop";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
   loading: Loader,
@@ -683,7 +683,10 @@ function ShopItem({ item }) {
   const formState = filtersFormModule.state.values;
   // API changed does not include the city any longer?
   // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
-  const shopRoute = `/${item.shop.name}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
+
+  const shopRoute = `${getShopRoute(item.shop)}?device=${
+    formState.device
+  }&brand=${formState.brand}&model=${formState.model}`;
 
   function onClick() {
     if (!showMap) {
@@ -705,18 +708,14 @@ function ShopItem({ item }) {
       onClick={onClick}
     >
       <ShopImageWrap>
-        {item?.shop?.logo_photo || item?.shop?.bg_photo ? (
-          <Image
-            loading="lazy"
-            src={`${process.env.NEXT_PUBLIC_BACK_END_URL}/${
-              item?.shop?.logo_photo || item?.shop?.bg_photo || ""
-            }`}
-            layout="responsive"
-            width={150}
-            height={150}
-            objectFit="contain"
-          />
-        ) : null}
+        <Image
+          loading="lazy"
+          src={getShopLogo(item?.shop?.logo_photo)}
+          layout="responsive"
+          width={150}
+          height={150}
+          objectFit="contain"
+        />
         <d-def>{item.shop.distance} km</d-def>
       </ShopImageWrap>
       <ShopDetails tagColor={TAG_TO_COLOR[tag]}>
@@ -911,20 +910,20 @@ const SORT_BY = [
 ];
 
 const WARRANTIES = {
-  "0":  "Gleen",
-  "1": "",
-  "3": "",
-  "6": "6 maanden",
-}
+  0: "Gleen",
+  1: "",
+  3: "",
+  6: "6 maanden",
+};
 
 function warrantyLabel(value) {
   const mapping = {
-    "1": "1 maand garantie",
-    "3": "3 maand garantie",
-    "6": "6 maanden garantie",
-  }
+    1: "1 maand garantie",
+    3: "3 maand garantie",
+    6: "6 maanden garantie",
+  };
 
-  return mapping[value] || "Gleen garantie"
+  return mapping[value] || "Gleen garantie";
 }
 
 const WORKING_TIME = [
