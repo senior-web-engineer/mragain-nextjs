@@ -2,6 +2,7 @@ import SliderOnMobile from "@/components/common/SliderOnMobile";
 import { H2, SubTitle } from "@/components/styled/text";
 import Button from "@/components/ui/Button";
 import media from "@/utils/media";
+import { getShopRoute } from "@/utils/shop";
 import {
   faArrowRight,
   faMapMarkerAlt,
@@ -175,7 +176,7 @@ export function ShopCard({ shop, onClick }) {
     .filter(Boolean)
     .join(", ");
 
-  const shopUrl = `/${shop.name}--${shop.city}`
+  const shopUrl = getShopRoute(shop);
 
   return (
     <ShopWrap key={shop.id} onClick={onClick}>
@@ -248,9 +249,7 @@ export default function ShopsSection({ shopList = [] } = {}) {
         </div>
       </Toolbar>
       <ShopList>
-        <SliderOnMobile
-          tabletConfig={{ rows: 2, slidesPerRow: 3 }}
-        >
+        <SliderOnMobile tabletConfig={{ rows: 2, slidesPerRow: 3 }}>
           {shopList.map(renderShop)}
         </SliderOnMobile>
       </ShopList>

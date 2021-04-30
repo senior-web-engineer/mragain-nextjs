@@ -161,7 +161,6 @@ export default function FindSection() {
   useEffect(() => {
     async function loadData() {
       const models = await api.get(`${API_PATH.ALL_MODELS}/`);
-      console.log(models);
       updateSearchData(models);
     }
 
