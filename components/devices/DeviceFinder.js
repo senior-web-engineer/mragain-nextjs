@@ -52,7 +52,7 @@ const BrandsInnerWrap = styled.div`
 export function DeviceFinder({ models, brandName }) {
   const brands = useMemo(() => {
     return models.reduce((accumulator, model) => {
-      if (accumulator.find((existing) => existing.id === model.brand_id)) {
+      if (accumulator.find((existing) => existing.name === model.brand_name)) {
         return accumulator;
       }
       accumulator.push({ name: model.brand_name, id: model.brand_id });
