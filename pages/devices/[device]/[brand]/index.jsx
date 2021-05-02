@@ -6,25 +6,34 @@ import api from "@/utils/api";
 import React from "react";
 import DeviceModels from "@/components/devices/DeviceModels";
 
-
-export default function Devices({ models, brandName }) {
+export default function Devices({ models, deviceName, brandName }) {
   return (
     <DefaultLayout>
       <MaxConstraints>
-        <DeviceFinder models={models} brandName={brandName}/>
-        <DeviceModels models={models} brandName={brandName} />
+        <DeviceFinder
+          models={models}
+          deviceName={deviceName}
+          brandName={brandName}
+        />
+        <DeviceModels
+          models={models}
+          deviceName={deviceName}
+          brandName={brandName}
+        />
       </MaxConstraints>
     </DefaultLayout>
   );
 }
 
 export async function getServerSideProps(ctx) {
+  const deviceName = ctx.query.device;
   const brandName = ctx.query.brand;
   const models = await api.get(`${API_PATH.ALL_MODELS}/`);
   return {
     props: {
       models,
-      brandName
+      deviceName,
+      brandName,
     },
   };
 }
