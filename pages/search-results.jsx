@@ -910,7 +910,7 @@ const SORT_BY = [
 ];
 
 const WARRANTIES = {
-  0: "Gleen",
+  0: "Geen",
   1: "",
   3: "",
   6: "6 maanden",
@@ -923,7 +923,7 @@ function warrantyLabel(value) {
     6: "6 maanden garantie",
   };
 
-  return mapping[value] || "Gleen garantie";
+  return mapping[value] || "Geen garantie";
 }
 
 const WORKING_TIME = [
