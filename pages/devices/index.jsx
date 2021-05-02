@@ -18,6 +18,17 @@ export default function Devices({ models }) {
 
 export async function getServerSideProps() {
   const models = await api.get(`${API_PATH.ALL_MODELS}/`);
+  const firstDevice = models?.[0]?.device_name;
+
+  if (firstDevice) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: `/devices/${firstDevice}`,
+      },
+    }
+  }
+
   return {
     props: {
       models,
