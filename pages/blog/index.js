@@ -382,7 +382,7 @@ export default function Blog({ blogs }) {
                       as={Input}
                       name="email"
                       size="large"
-                      placeholder="Please provide your email"
+                      placeholder="Je e-mailadres"
                     />
                     <Button>Schrijf in</Button>
                   </Form>
