@@ -3,6 +3,8 @@ import { Main } from "@/styled-components/contact.style.jsx";
 import ContactBannerSection from "@/components/contact/ContactBannerSection/ContactBannerSection";
 import { TestmonialSection, Layout } from "@/components/global";
 import ContactMainSection from "@/components/contact/ContactMainSection/ContactMainSection";
+import MainContactUs from "@/components/contact/ContactMainSection/MainContactUs/MainContactUs"
+import ContactForm from "@/components/contact/ContactMainSection/ContactForm/ContactForm"
 import Head from "next/head"
 import { FRONT_END_URL } from "../constants.js";
 
@@ -39,9 +41,16 @@ const Contact = () => {
                 <meta name="og_site_name" property="og:site_name" content="Mr Again" />
                 <meta name="theme-color" content="#ffffff" />
             </Head>
+            {/* <h1>Contact banner section</h1>
             <ContactBannerSection />
-            <ContactMainSection />
-            <TestmonialSection />
+            <h1>Contact main section</h1>
+            <ContactMainSection /> */}
+
+            <h1>main contact us component</h1>
+            <MainContactUs />
+            <ContactForm />
+
+      
             </Main>
         </Layout>
       )
