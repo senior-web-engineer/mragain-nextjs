@@ -10,6 +10,10 @@ export const FormWrapper = styled.div`
   padding: 20px 40px;
   display: flex;
   flex-direction: column;
+  @media (max-width: 768px) {
+    width: 375px;
+    border-radius: 0px;
+  }
 `;
 export const FormTitle = styled.div`
   text-transform: uppercase;

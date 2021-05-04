@@ -11,47 +11,51 @@ import {
   TextArea,
   Button,
   LabelWrapper,
-  NumberInput
+  NumberInput,
+  FormBlock,
 } from "./ContactForm.style";
 
-const ContactForm = (props) => {
+const ContactForm = ({ position, top, right }) => {
+
   return (
     <>
-      <FormWrapper>
-        <FormTitle>Send us a message</FormTitle>
-        <FormText>
-          Have some feedback or inquiry for us?
-          <br />
-          Fill out the form below and we we'll get back to you
-          <br /> as soon as we can!
-        </FormText>
 
-        <FormBox onSubmit={ () => console.log("submit")}>
-          <LabelWrapper>
-            <Label>Name</Label>
-            <TextInput type="text" />
-          </LabelWrapper>
+        <FormWrapper>
+          <FormTitle>Send us a message</FormTitle>
+          <FormText>
+            Have some feedback or inquiry for us?
+            <br />
+            Fill out the form below and we we'll get back to you
+            <br /> as soon as we can!
+          </FormText>
 
-          <LabelWrapper>
-            <Label>Email Adress</Label>
-            <TextInput type="email" />
-          </LabelWrapper>
+          <FormBox onSubmit={() => console.log("submit")}>
+            <LabelWrapper>
+              <Label>Name</Label>
+              <TextInput type="text" />
+            </LabelWrapper>
 
-          <LabelWrapper>
-            <Label>Contact Number</Label>
-            <NumberInput type="number"/>
-          </LabelWrapper>
+            <LabelWrapper>
+              <Label>Email Adress</Label>
+              <TextInput type="email" />
+            </LabelWrapper>
 
-          <LabelWrapper>
-            <Label>Message</Label>
-            <TextArea type="text" />
-          </LabelWrapper>
+            <LabelWrapper>
+              <Label>Contact Number</Label>
+              <NumberInput type="number" />
+            </LabelWrapper>
 
-          <Button type="submit">
-            <FontAwesomeIcon icon={faArrowRight} style={{ color: "white" }} />
-          </Button>
-        </FormBox>
-      </FormWrapper>
+            <LabelWrapper>
+              <Label>Message</Label>
+              <TextArea type="text" />
+            </LabelWrapper>
+
+            <Button type="submit">
+              <FontAwesomeIcon icon={faArrowRight} style={{ color: "white" }} />
+            </Button>
+          </FormBox>
+        </FormWrapper>
+
     </>
   );
 };
