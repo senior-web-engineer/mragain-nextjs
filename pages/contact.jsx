@@ -12,11 +12,12 @@ import {
   FormWrapper,
 } from "@/styled-components/contact.style.jsx";
 import ContactForm from "@/components/contact/ContactMainSection/ContactForm/ContactForm";
+import ContactMap from "@/components/contact/ContactMainSection/ContactMap/ContactMap";
 import { Layout } from "@/components/global";
 import Head from "next/head";
 import { FRONT_END_URL } from "../constants.js";
 
-const Contact = ({ mapImgUrl }) => {
+const Contact = ({}) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -56,7 +57,6 @@ const Contact = ({ mapImgUrl }) => {
         </Head>
 
         <Wrapper>
-
           <Box>
             <Title>Contact Us</Title>
             <SubTitle>Get in touch with us</SubTitle>
@@ -66,7 +66,9 @@ const Contact = ({ mapImgUrl }) => {
             <ContactForm />
           </FormWrapper>
 
-          <Box mapImgUrl={mapImgUrl} />
+          <Box>
+            <ContactMap />
+          </Box>
 
           <Box>
             <BoxInfoWrap>

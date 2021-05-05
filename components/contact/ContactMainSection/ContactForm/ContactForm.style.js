@@ -14,6 +14,8 @@ export const FormWrapper = styled.div`
     width: 375px;
     border-radius: 0px;
   }
+  isolation: isolate;
+  z-index: 1;
 `;
 export const FormTitle = styled.div`
   text-transform: uppercase;

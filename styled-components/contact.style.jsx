@@ -6,35 +6,6 @@ export const Main = styled.div`
   flex-direction: column;
 `;
 
-export const ContactContainerWrap = styled.div`
-  width: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url(${bannerImage});
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;
-`;
-
-export const ContactContainer = styled.div`
-  max-width: 1600px;
-  // padding-left: 135px;
-  // padding-right: 135px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-export const ContactContent = styled.div`
-  width: 100%;
-  // height: 270px;
-  @media (max-width: 768px) {
-    float: left;
-    display: contents;
-  }
-`;
-
 export const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
@@ -42,9 +13,7 @@ export const Wrapper = styled.section`
 
 export const Box = styled.div`
   flex: 1 1 540px;
-  background-image: url(${(props) => props.mapImgUrl});
-  background-size: cover;
-  background-repeat: no-repeat;
+  height: 540px;
   @media (max-width: 768px) {
     flex: 1 1 100px;
     background-size: cover;
