@@ -25,7 +25,7 @@ export const API_PATH = {
   NEXT_SLOTS: `${API_URL}/searchShopNextslots`,
   SHOP_DEVICES: `${API_URL}/searchShopDevices`,
   CONTACTUS: `${API_URL}/contact-us`,
-  SUBSCRIBE: `${API_URL}/subscribe-blog`,
+  SUBSCRIBE: `${API_URL}/blog-subscription`,
   GETFILTERFIELDS: `${API_URL}/getfilterfields`,
   GETFILTERFIELDEXT: `${API_URL}/getfilterfieldext`,
   REGISTERUSER: `${API_URL}/signup`,
