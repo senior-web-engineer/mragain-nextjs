@@ -5,6 +5,7 @@ export function INITIALIZE_FORM_REQUEST(nextState, { guid }) {
     initialValues: {},
     values: {},
     isLoading: true,
+    submitted: false,
     errors: {},
   };
 }
@@ -36,6 +37,7 @@ export function SUBMIT_FORM_REQUEST(nextState, { guid, name, value }) {
 
 export function SUBMIT_FORM_SUCCESS(nextState, { guid, name, value }) {
   nextState[guid].isSubmitting = false;
+  nextState[guid].submitted = true;
 }
 
 export function SUBMIT_FORM_FAILURE(nextState, { guid }) {

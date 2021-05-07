@@ -55,8 +55,8 @@ export function createListModule({
   return {
     guid,
     actions: {
-      initialize() {
-        const query = getInitialQuery?.();
+      async initialize() {
+        const query = await getInitialQuery?.();
         dispatch({
           type: "INITIALIZE_LIST",
           guid,

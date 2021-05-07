@@ -2,7 +2,7 @@ import SliderOnMobile from "@/components/common/SliderOnMobile";
 import { H2, SubTitle } from "@/components/styled/text";
 import Button from "@/components/ui/Button";
 import media from "@/utils/media";
-import { getShopRoute } from "@/utils/shop";
+import { getShopLogo, getShopRoute } from "@/utils/shop";
 import {
   faArrowRight,
   faMapMarkerAlt,
@@ -177,18 +177,17 @@ export function ShopCard({ shop, onClick }) {
     .join(", ");
 
   const shopUrl = getShopRoute(shop);
+  const shopLogo = getShopLogo(shop.logo_photo)
 
   return (
     <ShopWrap key={shop.id} onClick={onClick}>
       <ShopImageWrap tagColor={TAG_TO_COLOR[shop.tag]}>
-        {shop.bg_photo ? (
           <Image
             loading="lazy"
-            src={shop.bg_photo}
+            src={shopLogo}
             layout="fill"
             objectFit="cover"
           />
-        ) : null}
         <d-def>
           {shop.rating !== undefined ? (
             <rating>

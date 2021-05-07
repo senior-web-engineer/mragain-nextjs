@@ -1118,22 +1118,6 @@ export default function SearchResults() {
     serviceFetcher.key(`${value}`).fetch();
   });
 
-  const syncListFilters = useCallback(async (data) => {
-    let parsedData = { ...data, lat: 0, long: 0 };
-    try {
-      const [result] = await geocodeByAddress(data.location);
-      const { lng, lat } = await getLatLng(result);
-
-      parsedData = {
-        ...parsedData,
-        long: lng,
-        lat,
-        location: data.location,
-      };
-    } catch (err) {}
-    shopListModule.actions.updateQuery(parsedData);
-  });
-
   const locationField = (
     <Field
       prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
@@ -1272,7 +1256,7 @@ export default function SearchResults() {
                     />
                   </MapTriggerWrap>
                 </ModelFields>
-                <SyncFormValues onChange={syncListFilters} />
+                <SyncFormValues onChange={shopListModule.actions.updateQuery} />
               </Form>
               <List module={shopListModule}>
                 <Listing Item={ShopItem} />
