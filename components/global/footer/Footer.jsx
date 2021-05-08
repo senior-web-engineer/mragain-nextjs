@@ -78,7 +78,7 @@ const FooterView = (routerProps) => {
                   priority={true}
                   width={104}
                   height={40}
-                  src="/images/mragainlogo_0.png"
+                  src="/images/mragain.svg"
                   alt="Logo Mr Again"
                 />
               </FooterLogoIcon>
