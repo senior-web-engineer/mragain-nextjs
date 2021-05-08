@@ -46,11 +46,10 @@ export const FormText = styled.div`
   @media (max-width: 768px) {
     padding-right: 0px;
   }
-
 `;
 export const FormBox = styled.div`
   width: 100%;
-  height:100%;
+  height: 100%;
 `;
 
 export const LabelWrapper = styled.div`
@@ -61,20 +60,19 @@ export const LabelWrapper = styled.div`
     margin: 0px 0px 10px 0px;
   }
 
-  &:nth-of-type(5) { 
-      :after { 
-    position: absolute;
-    top: 34px;
-    left: 17px;
-    content: "+31";
-    font-size: 11px;
-    color: #a0a0a0;
-    font-weight: 400;
-    font-family: "Montserrat";
-    z-index: 2;
-
+  &:nth-of-type(5) {
+    :after {
+      position: absolute;
+      top: 34px;
+      left: 17px;
+      content: "+31";
+      font-size: 11px;
+      color: #a0a0a0;
+      font-weight: 400;
+      font-family: "Montserrat";
+      z-index: 2;
     }
-}
+  }
 `;
 
 export const Label = styled.label`
@@ -90,13 +88,13 @@ export const Label = styled.label`
   color: #a0a0a0;
   font-weight: 400;
   font-family: "Montserrat";
-  z-index: 1
+  z-index: 1;
 `;
-
 
 export const TextInput = styled.input`
   display: block;
   width: 100%;
+  height: 100%;
   border: 1px solid hsl(0, 0%, 89%);
   border-bottom-width: 1px;
   padding: 32px 6px 6px 17px;
@@ -107,25 +105,23 @@ export const TextInput = styled.input`
   font-family: "Montserrat";
 `;
 
-
 export const NumberInput = styled.input`
-display: block;
-width: 100%;
-border: 1px solid hsl(0, 0%, 89%);
-border-bottom-width: 1px;
-padding: 32px 6px 6px 40px;
-border-radius: 5px;
-font-size: 13px;
-color: #303030;
-font-weight: 500;
-font-family: "Montserrat";
-
-`
+  display: block;
+  width: 100%;
+  border: 1px solid hsl(0, 0%, 89%);
+  border-bottom-width: 1px;
+  padding: 32px 6px 6px 40px;
+  border-radius: 5px;
+  font-size: 13px;
+  color: #303030;
+  font-weight: 500;
+  font-family: "Montserrat";
+`;
 
 export const TextArea = styled.textarea`
   display: block;
   width: 100%;
-  height: 140px;
+  height: 100%;
   border: 1px solid hsl(0, 0%, 89%);
   border-bottom-width: 1px;
   padding: 32px 6px 6px 17px;

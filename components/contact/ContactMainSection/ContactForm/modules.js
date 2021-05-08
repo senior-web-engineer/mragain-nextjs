@@ -5,14 +5,14 @@ import * as yup from "yup";
 
 
 const contactValidator = yup.object({
-    name: yup.string().required("Required"),
-    email: yup.string().required("Required"),
-    telephone: yup.number().required("Required").positive().max(9),
+    name: yup.string().required(),
+    email: yup.string().required(),
+    telephone: yup.number().required().positive().max(9),
     contents: yup.string()
   })
   
   export const contactFormModule = createFormModule({
-    contactValidator,
+    validator: contactValidator,
     async init() {
       return {
         name: "",

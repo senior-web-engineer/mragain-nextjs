@@ -16,7 +16,7 @@ import {
 } from "./ContactForm.style";
 import Form from "@/modules/forms";
 import { contactFormModule } from "./modules";
-import { Field, parseNativeEvent } from "@/modules/forms/Blocks";
+import { Field } from "@/modules/forms/Blocks";
 import router from "next/router";
 
 const ContactForm = () => {
@@ -37,11 +37,11 @@ const ContactForm = () => {
         duration: 2.5,
       });
 
-      console.log("state",contactFormModule.state)
+      console.log("state", contactFormModule.state);
 
-      // setTimeout(() => {
-      //   router.router.push("/");
-      // }, 3000);
+      setTimeout(() => {
+        router.router.push("/");
+      }, 3000);
     } catch (error) {
       const { errors } = contactFormModule.state;
       if (Object.keys(errors).length) {
@@ -55,42 +55,6 @@ const ContactForm = () => {
     }
   }
 
-  const ContactInput = ({ value, onChange }) => {
-    return (
-      <TextInput
-        onChange={(value) => {
-          const ev = parseNativeEvent(value);
-          onChange(ev);
-        }}
-        value={value}
-      />
-    );
-  };
-
-  const ContactNumberInput = ({ value, onChange }) => {
-    return (
-      <NumberInput
-        onChange={(value) => {
-          const ev = parseNativeEvent(value);
-          onChange(ev);
-        }}
-        value={value}
-      />
-    );
-  };
-
-  const ContactTextAreaInput = ({ value, onChange }) => {
-    return (
-      <TextArea
-        onChange={(value) => {
-          const ev = parseNativeEvent(value);
-          onChange(ev);
-        }}
-        value={value}
-      />
-    );
-  };
-
   return (
     <>
       <FormWrapper>
@@ -98,7 +62,8 @@ const ContactForm = () => {
         <FormText>
           Have some feedback or inquiry for us?
           <br />
-          Fill out the form below and we we'll get back to you as soon as we can!
+          Fill out the form below and we we'll get back to you as soon as we
+          can!
         </FormText>
 
         <FormBox>
@@ -112,23 +77,24 @@ const ContactForm = () => {
             <LabelWrapper>
               <Label>Name</Label>
             </LabelWrapper>
-            <Field name="name" as={ContactInput} />
+            <Field name="name" as={TextInput} />
 
             <LabelWrapper>
               <Label>Email</Label>
             </LabelWrapper>
-            <Field name="email" as={ContactInput} />
+            <Field name="email" as={TextInput} />
 
             <LabelWrapper>
               <Label>Contact Number</Label>
             </LabelWrapper>
-            <Field name="telephone" as={ContactNumberInput} />
+            <Field name="telephone" as={NumberInput} />
 
             <LabelWrapper>
               <Label>Message</Label>
             </LabelWrapper>
-            <Field name="contents" as={ContactTextAreaInput} />
-
+            
+            <Field name="contents" as={TextArea} />
+  
             <Button type="submit">
               <FontAwesomeIcon icon={faArrowRight} style={{ color: "white" }} />
             </Button>
