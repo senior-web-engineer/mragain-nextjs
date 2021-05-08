@@ -13,19 +13,24 @@ const StyledTable = styled(AntTable)`
     border-bottom: 0;
   }
 
-  .ant-table-tbody{
+  .ant-table-tbody {
     border-radius: 10px;
     overflow: hidden;
     background-color: #fff;
-    tr td{
+    tr td {
       border-bottom: 0;
     }
     tr:nth-child(2n) {
       background-color: #f8f8f8;
     }
   }
+`;
 
-
+const NoResultsMessage = styled.div`
+  text-align: center;
+  color: rgba(0, 0, 0, 0.65);
+  margin: 40px auto;
+  max-width: 500px;
 `;
 
 export function Listing({ Item }) {
@@ -80,4 +85,18 @@ export function LoadMore() {
   }
 
   return <button onClick={actions.nextPage}>Load more</button>;
+}
+
+export function NoResults({ message }) {
+  const { items, state } = useListContext();
+
+  if (state.isLoading) {
+    return null;
+  }
+
+  if (items.length === 0) {
+    return <NoResultsMessage>{message}</NoResultsMessage>;
+  }
+
+  return null;
 }

@@ -26,7 +26,7 @@ import {
   parseNativeEvent,
   SyncFormValues,
 } from "@/modules/forms/Blocks";
-import { Listing } from "@/modules/list/Blocks";
+import { Listing, NoResults } from "@/modules/list/Blocks";
 import Form, { useFormContext } from "@/modules/forms";
 import List, { useListContext } from "@/modules/list";
 import Select from "@/components/ui/Select";
@@ -1257,6 +1257,7 @@ export default function SearchResults() {
                 <SyncFormValues onChange={shopListModule.actions.updateQuery} />
               </Form>
               <List module={shopListModule}>
+                <NoResults message="Sorry, er zijn geen resultaten gevonden. Pas je afstand filter aan en probeer het opnieuw" />
                 <Listing Item={ShopItem} />
               </List>
             </Content>
