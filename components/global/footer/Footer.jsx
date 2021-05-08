@@ -112,11 +112,11 @@ const FooterView = (routerProps) => {
                     Over ons
                   </Link>
                 </li>
-                <li>
+	  {/* <li>
                   <Link prefetch={false} href="/reparatie">
                     Telefoon reparatie
                   </Link>
-                </li>
+                </li>*/}
                 <li>
                   <Link prefetch={false} href="/meld-je-aan-als-reparateur">
                     Meld je aan als reparateur
@@ -127,21 +127,21 @@ const FooterView = (routerProps) => {
                     Contact
                   </Link>
                 </li>
-                <li>
+	  {/* <li>
                   <Link prefetch={false} href="/veel-gestelde-vragen">
                     Veel gestelde vragen
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link prefetch={false} href="/blog">
                     Blogs
                   </Link>
                 </li>
-                <li>
+	  {/*<li>
                   <Link prefetch={false} href="/over-reparaties">
                     Reparaties
                   </Link>
-                </li>
+                </li>*/}
               </ul>
             </FooterSitemap>
             <FollowUs className="follow-us">
@@ -280,7 +280,7 @@ const FooterView = (routerProps) => {
                     Tablets
                   </Link>
                 </li>
-                <li>
+	  {/* <li>
                   <Link prefetch={false} href="/headphone-reparatie">
                     Headphones
                   </Link>
@@ -290,7 +290,7 @@ const FooterView = (routerProps) => {
                     Televisies
                   </Link>
                 </li>
-                <li>
+	        <li>
                   <Link prefetch={false} href="/laundry-machines-reparatie">
                     Wasmachines
                   </Link>
@@ -299,7 +299,7 @@ const FooterView = (routerProps) => {
                   <Link prefetch={false} href="/consoles-reparatie">
                     Consoles
                   </Link>
-                </li>
+                </li>*/}
               </ul>
             </FooterSitemap>
           </FooterLinkArea>{" "}
