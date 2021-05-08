@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const ContentWrap = styled.div`
   background-color: #fafafa;
-  padding-bottom: 45px;
+  padding-bottom: 127px;
 `;
 
 export default function DefaultLayout({ children, showSignup = false }) {
