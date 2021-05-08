@@ -13,7 +13,7 @@ import {
 } from "@/styled-components/contact.style.jsx";
 import ContactForm from "@/components/contact/ContactMainSection/ContactForm/ContactForm";
 import ContactMap from "@/components/contact/ContactMainSection/ContactMap/ContactMap";
-import { Layout } from "@/components/global";
+import DefaultLayout from "@/components/layouts/Homepage";
 import Head from "next/head";
 import { FRONT_END_URL } from "../constants.js";
 
@@ -22,7 +22,7 @@ const Contact = ({}) => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <Layout>
+    <DefaultLayout>
       <Main>
         <Head>
           <title>Contact met MrAgain | Mr Again</title>
@@ -90,7 +90,7 @@ const Contact = ({}) => {
           </Box>
         </Wrapper>
       </Main>
-    </Layout>
+    </DefaultLayout>
   );
 };
 

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import bannerImage from "@/assets/images/contact_banner_image.jpg";
 
 export const Main = styled.div`
   display: flex;
@@ -15,12 +14,12 @@ export const Box = styled.div`
   flex: 1 1 540px;
   height: 540px;
   @media (max-width: 768px) {
-    flex: 1 1 100px;
+    flex: 1 1 200px;
     background-size: cover;
   }
 
   &:first-of-type {
-    flex: 1 1 250px;
+    flex: 1 1 170px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -34,7 +33,7 @@ export const Box = styled.div`
   }
 
   &:last-of-type {
-    flex: 1 1 270px;
+    flex: 1 1 250px;
     padding: 40px 0px 0px 120px;
     background: #f4f3f3;
     display: flex;

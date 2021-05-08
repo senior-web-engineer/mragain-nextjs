@@ -38,13 +38,19 @@ export const FormTitle = styled.div`
 `;
 export const FormText = styled.div`
   padding: 30px 0px;
+  padding-right: 50px;
   font-size: 12px;
   color: #303030;
   font-weight: 400;
   font-family: "Montserrat";
+  @media (max-width: 768px) {
+    padding-right: 0px;
+  }
+
 `;
-export const FormBox = styled.form`
+export const FormBox = styled.div`
   width: 100%;
+  height:100%;
 `;
 
 export const LabelWrapper = styled.div`
@@ -55,10 +61,8 @@ export const LabelWrapper = styled.div`
     margin: 0px 0px 10px 0px;
   }
 
-  &:nth-of-type(3) { 
-
-      :before { 
-
+  &:nth-of-type(5) { 
+      :after { 
     position: absolute;
     top: 34px;
     left: 17px;
@@ -67,7 +71,7 @@ export const LabelWrapper = styled.div`
     color: #a0a0a0;
     font-weight: 400;
     font-family: "Montserrat";
-    z-index: 1;
+    z-index: 2;
 
     }
 }
@@ -88,6 +92,7 @@ export const Label = styled.label`
   font-family: "Montserrat";
   z-index: 1
 `;
+
 
 export const TextInput = styled.input`
   display: block;

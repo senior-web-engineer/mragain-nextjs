@@ -1,8 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { message } from "antd";
+import { notification } from "antd";
 import {
   FormWrapper,
   FormTitle,
@@ -15,46 +14,81 @@ import {
   LabelWrapper,
   NumberInput,
 } from "./ContactForm.style";
-import { contactUs } from "service/search/operations.js";
-import { ValidateEmail, ValidatePhoneNumber } from "assets/js/lib";
+import Form from "@/modules/forms";
+import { contactFormModule } from "./modules";
+import { Field, parseNativeEvent } from "@/modules/forms/Blocks";
+import router from "next/router";
 
-const ContactForm = (props) => {
-  const { contactUs } = props;
-
-  const [formData, setFormData] = React.useState({
-    name: "",
-    email: "",
-    telephone: "",
-    contents: "",
-  });
-  const { name, email, telephone, contents } = formData;
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (ValidateEmail(email) === false) {
-      message.error("Your email address doesn't seem to be correct!", 2.5);
-      return;
+const ContactForm = () => {
+  useEffect(() => {
+    async function loadData() {
+      await contactFormModule.actions.initialize();
     }
 
-    if (ValidatePhoneNumber(telephone) === false) {
-      message.error("Is your phone number correct?", 2.5);
-      return;
+    loadData();
+  }, []);
+
+  async function sendContactForm() {
+    try {
+      await contactFormModule.actions.submit();
+
+      notification.success({
+        description: "Thank you for contacting us! You will hear from us soon!",
+        duration: 2.5,
+      });
+
+      console.log("state",contactFormModule.state)
+
+      // setTimeout(() => {
+      //   router.router.push("/");
+      // }, 3000);
+    } catch (error) {
+      const { errors } = contactFormModule.state;
+      if (Object.keys(errors).length) {
+        return;
+      }
+      if (error !== "") {
+        notification.error({
+          message: error.msg,
+        });
+      }
     }
+  }
 
-    const contacts = {
-      name: name,
-      email: email,
-      telephone: telephone,
-      contents: contents,
-    };
-
-    contactUs(contacts);
+  const ContactInput = ({ value, onChange }) => {
+    return (
+      <TextInput
+        onChange={(value) => {
+          const ev = parseNativeEvent(value);
+          onChange(ev);
+        }}
+        value={value}
+      />
+    );
   };
 
-  const onChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const ContactNumberInput = ({ value, onChange }) => {
+    return (
+      <NumberInput
+        onChange={(value) => {
+          const ev = parseNativeEvent(value);
+          onChange(ev);
+        }}
+        value={value}
+      />
+    );
+  };
+
+  const ContactTextAreaInput = ({ value, onChange }) => {
+    return (
+      <TextArea
+        onChange={(value) => {
+          const ev = parseNativeEvent(value);
+          onChange(ev);
+        }}
+        value={value}
+      />
+    );
   };
 
   return (
@@ -64,72 +98,45 @@ const ContactForm = (props) => {
         <FormText>
           Have some feedback or inquiry for us?
           <br />
-          Fill out the form below and we we'll get back to you
-          <br /> as soon as we can!
+          Fill out the form below and we we'll get back to you as soon as we can!
         </FormText>
 
-        <FormBox onSubmit={handleSubmit}>
-          <LabelWrapper>
-            <Label>Name</Label>
-            <TextInput
-              type="text"
-              name="name"
-              value={name}
-              onChange={(e) => onChange(e)}
-            />
-          </LabelWrapper>
+        <FormBox>
+          <Form
+            module={contactFormModule}
+            onSubmit={(ev) => {
+              ev.preventDefault();
+              sendContactForm();
+            }}
+          >
+            <LabelWrapper>
+              <Label>Name</Label>
+            </LabelWrapper>
+            <Field name="name" as={ContactInput} />
 
-          <LabelWrapper>
-            <Label>Email Address</Label>
-            <TextInput
-              type="email"
-              name="email"
-              value={email}
-              onChange={(e) => onChange(e)}
-            />
-          </LabelWrapper>
+            <LabelWrapper>
+              <Label>Email</Label>
+            </LabelWrapper>
+            <Field name="email" as={ContactInput} />
 
-          <LabelWrapper>
-            <Label>Contact Number</Label>
-            <NumberInput
-              type="number"
-              name="telephone"
-              value={telephone}
-              onChange={(e) => onChange(e)}
-            />
-          </LabelWrapper>
+            <LabelWrapper>
+              <Label>Contact Number</Label>
+            </LabelWrapper>
+            <Field name="telephone" as={ContactNumberInput} />
 
-          <LabelWrapper>
-            <Label>Message</Label>
-            <TextArea
-              type="text"
-              name="contents"
-              value={contents}
-              onChange={(e) => onChange(e)}
-            />
-          </LabelWrapper>
+            <LabelWrapper>
+              <Label>Message</Label>
+            </LabelWrapper>
+            <Field name="contents" as={ContactTextAreaInput} />
 
-          <Button type="submit">
-            <FontAwesomeIcon icon={faArrowRight} style={{ color: "white" }} />
-          </Button>
+            <Button type="submit">
+              <FontAwesomeIcon icon={faArrowRight} style={{ color: "white" }} />
+            </Button>
+          </Form>
         </FormBox>
       </FormWrapper>
     </>
   );
 };
 
-const mapStateToProps = (state) => ({
-  //Maps state to redux store as props
-  shoplist: state.search.list,
-});
-
-const mapDispatchToProps = (dispatch) => {
-  // Action
-  return {
-    contactUs: (data, dispatch) => {
-      contactUs(data, dispatch);
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
+export default ContactForm;
