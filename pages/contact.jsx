@@ -58,8 +58,8 @@ const Contact = ({}) => {
 
         <Wrapper>
           <Box>
-            <Title>Contact Us</Title>
-            <SubTitle>Get in touch with us</SubTitle>
+            <Title>Contact met MrAgain</Title>
+            <SubTitle>Neem contact met ons op</SubTitle>
           </Box>
 
           <FormWrapper>
@@ -72,19 +72,19 @@ const Contact = ({}) => {
 
           <Box>
             <BoxInfoWrap>
-              <ContactTitle>Address</ContactTitle>
-              <ContactInfo>MrAgain Building</ContactInfo>
-              <ContactInfo>Maartensdijk</ContactInfo>
+              <ContactTitle>Adres</ContactTitle>
+              <ContactInfo>MrAgain</ContactInfo>
+	  {/*<ContactInfo>Maartensdijk</ContactInfo>*/}
               <ContactInfo>Utrecht</ContactInfo>
-              <ContactInfo>1013 GM</ContactInfo>
-              <ContactInfo>Netherlands</ContactInfo>
+              <ContactInfo>3561 LD</ContactInfo>
+              <ContactInfo>Nederland</ContactInfo>
             </BoxInfoWrap>
 
             <BoxInfoWrap>
-              <ContactTitle>Email Address</ContactTitle>
+              <ContactTitle>E-mailadres</ContactTitle>
               <ContactInfo>info@mragain.nl</ContactInfo>
               <Space />
-              <ContactTitle>Contact Number</ContactTitle>
+              <ContactTitle>Telefoon nummer</ContactTitle>
               <ContactInfo>+31 643972 9000</ContactInfo>
             </BoxInfoWrap>
           </Box>

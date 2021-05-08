@@ -58,12 +58,11 @@ const ContactForm = () => {
   return (
     <>
       <FormWrapper>
-        <FormTitle>Send us a message</FormTitle>
+        <FormTitle>Stuur ons een bericht</FormTitle>
         <FormText>
-          Have some feedback or inquiry for us?
+          Heb je feedback of wil je in contact met ons komen?
           <br />
-          Fill out the form below and we we'll get back to you as soon as we
-          can!
+          Laat een bericht achter en we nemen zo snel mogelijk contact met je op!
         </FormText>
 
         <FormBox>
@@ -75,22 +74,22 @@ const ContactForm = () => {
             }}
           >
             <LabelWrapper>
-              <Label>Name</Label>
+              <Label>Naam</Label>
             </LabelWrapper>
             <Field name="name" as={TextInput} />
 
             <LabelWrapper>
-              <Label>Email</Label>
+              <Label>E-mailadres</Label>
             </LabelWrapper>
             <Field name="email" as={TextInput} />
 
             <LabelWrapper>
-              <Label>Contact Number</Label>
+              <Label>Telefoon nummer</Label>
             </LabelWrapper>
             <Field name="telephone" as={NumberInput} />
 
             <LabelWrapper>
-              <Label>Message</Label>
+              <Label>Je bericht</Label>
             </LabelWrapper>
             
             <Field name="contents" as={TextArea} />
