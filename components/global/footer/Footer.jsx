@@ -317,7 +317,7 @@ const FooterView = (routerProps) => {
           </FooterLinkArea> */}
         </FooterViewContent>
       </DevicesContainer>{" "}
-      <FooterCopyright> Copyright @ 2021 MrAgain </FooterCopyright>
+      <FooterCopyright> Copyright @ 2021 MrAgain - info@mragain.nl </FooterCopyright>
       {!!notBot && (
         <CookieBanner
           message="We gebruiken cookies met als doel je een optimale gebruikerservaring te geven op onze website."
