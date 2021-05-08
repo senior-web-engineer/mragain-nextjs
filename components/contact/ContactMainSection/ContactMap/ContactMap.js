@@ -3,8 +3,8 @@ import GoogleMapReact from "google-map-react";
 
 const googleMapsApiKey = "AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE";
 const COORDIANTES = {
-  lat: 52.38282,
-  lng: 4.88888,
+  lat: 52.1134604,
+  lng: 5.1213952,
 };
 
 function ShopMarker() {
