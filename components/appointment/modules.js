@@ -10,8 +10,8 @@ import * as yup from "yup";
 
 //
 
-export const appointmentConfirmation = createModalModule()
-export const appointmentReview = createModalModule()
+export const appointmentConfirmation = createModalModule();
+export const appointmentReview = createModalModule();
 
 // NOTE: when adding address validation
 // use the when method (https://github.com/jquense/yup#mixedwhenkeys-string--arraystring-builder-object--value-schema-schema-schema)
@@ -19,16 +19,16 @@ const validator = yup.object({
   name: yup.string().required(),
   email: yup.string().required().email(),
   tel: yup.string().required(),
-  time: yup.string().required()
-})
+  time: yup.string().required(),
+});
 
 export const appointmentForm = createFormModule({
   validator,
   async init(shop) {
     const fromAddressBar = router.router.query;
     const address = [shop.street || "", shop.city || ""]
-    .filter(Boolean)
-    .join(", ");
+      .filter(Boolean)
+      .join(", ");
     return {
       shop: shop.id,
       shopAddress: address,
@@ -51,6 +51,15 @@ export const appointmentForm = createFormModule({
   async submit(data) {
     const service = serviceFetcher.selector(store.ref.getState()).result;
     const formatedDate = moment(data.date).format("MM-DD-YYYY");
+    const repairSeviceData = {
+      device: parseInt(data.device),
+      brand: parseInt(data.brand),
+      model: parseInt(data.model),
+      status: -1,
+      price: service.price,
+      guarantee: service.guarantee_time,
+      reparation: parseInt(service.reparation.id),
+    };
     const payload = {
       name: data.shopName,
       address: data.shopAddress,
@@ -65,19 +74,18 @@ export const appointmentForm = createFormModule({
         shop: data.shop,
         active: true,
       },
-      repairSeviceData: {
-        device: parseInt(data.device),
-        brand: parseInt(data.brand),
-        model: parseInt(data.model),
-        status: -1,
-        price: service.price,
-        guarantee: service.guarantee_time,
-        reparation: parseInt(service.reparation.id),
-      },
+      repairSeviceData,
     };
 
-    const promise = api.post(`${API_PATH.CREATEAPPOINTMENT}/`, payload);
-    return promise;
+    const appointment = await api.post(
+      `${API_PATH.CREATEAPPOINTMENT}/`,
+      payload
+    );
+
+    return api.post(`${API_PATH.CREATESHOPREPAIRSERVICE}/`, {
+      appointment: appointment.appointment_id,
+      ...repairSeviceData,
+    });
   },
 });
 
