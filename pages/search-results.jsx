@@ -97,10 +97,6 @@ const SidebarInnerWrap = styled.div`
   .ant-slider-mark {
     font-size: 10px;
   }
-
-  .ant-slider-mark-text {
-    width: 70px;
-  }
 `;
 
 const MapTriggerWrap = styled(FieldWrap)`
@@ -911,16 +907,18 @@ const SORT_BY = [
 
 const WARRANTIES = {
   0: "Geen",
-  1: "",
   3: "",
-  6: "6 maanden",
+  6: "",
+  9: "",
+  12: "12 maanden",
 };
 
 function warrantyLabel(value) {
   const mapping = {
-    1: "1 maand garantie",
     3: "3 maand garantie",
     6: "6 maanden garantie",
+    9: "9 maanden garantie",
+    12: "12 maanden garantie",
   };
 
   return mapping[value] || "Geen garantie";
@@ -1023,7 +1021,7 @@ function RefineSearchForm() {
         label="Garantie"
         tipFormatter={warrantyLabel}
         min={0}
-        max={6}
+        max={12}
         step={null}
       />
       {false && (
