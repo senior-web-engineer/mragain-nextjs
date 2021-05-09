@@ -300,10 +300,10 @@ const FooterView = (routerProps) => {
                     Consoles
                   </Link>
                 </li>
-              </ul>*/}
+              </ul>
             </FooterSitemap>
           </FooterLinkArea>{" "}
-          {/* <FooterLinkArea className="footer-link-area">
+           <FooterLinkArea className="footer-link-area">
             <FooterSitemap ClassName="custome-footer-sitename">
               <FooterSitemapTitle>Devices</FooterSitemapTitle>
               <ul>
@@ -314,9 +314,9 @@ const FooterView = (routerProps) => {
                 </li>
               </ul>
             </FooterSitemap>
-          </FooterLinkArea> */}
+          </FooterLinkArea> 
         </FooterViewContent>
-      </DevicesContainer>{" "}
+      </DevicesContainer>{" "}*/}
       <FooterCopyright> Copyright @ 2021 MrAgain - info@mragain.nl </FooterCopyright>
       {!!notBot && (
         <CookieBanner
