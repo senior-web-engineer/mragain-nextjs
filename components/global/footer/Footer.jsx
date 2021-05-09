@@ -264,7 +264,7 @@ const FooterView = (routerProps) => {
           </FooterLinkArea>
         </FooterViewContent>
       </FooterViewContainer>
-      <DevicesContainer show={visible}>
+	  {/* <DevicesContainer show={visible}>
         <FooterViewContent>
           <FooterLinkArea className="footer-link-area">
             <FooterSitemap ClassName="custome-footer-sitename">
@@ -280,7 +280,7 @@ const FooterView = (routerProps) => {
                     Tablets
                   </Link>
                 </li>
-	  {/* <li>
+	        <li>
                   <Link prefetch={false} href="/headphone-reparatie">
                     Headphones
                   </Link>
@@ -299,8 +299,8 @@ const FooterView = (routerProps) => {
                   <Link prefetch={false} href="/consoles-reparatie">
                     Consoles
                   </Link>
-                </li>*/}
-              </ul>
+                </li>
+              </ul>*/}
             </FooterSitemap>
           </FooterLinkArea>{" "}
           {/* <FooterLinkArea className="footer-link-area">
