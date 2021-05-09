@@ -9,6 +9,7 @@ import React, {
 import styled, { css } from "styled-components";
 import isEqual from "fast-deep-equal";
 import { Waypoint } from "react-waypoint";
+import isEquat from "fast-deep-equal"
 
 import DefaultLayout from "@/components/layouts/Homepage";
 import {
@@ -1055,7 +1056,9 @@ export default function SearchResults() {
     async function main() {
       await loadScript();
       await filtersFormModule.actions.initialize();
-      shopListModule.actions.initialize();
+      if (!isEqual(shopListModule?.state?.filters, filtersFormModule.state.values)) {
+        shopListModule.actions.initialize();
+      }
       deviceFetcher.fetch();
       const formValues = filtersFormModule.state.values;
       if (formValues.device) {
