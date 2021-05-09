@@ -232,7 +232,7 @@ export function contactUs(data, dispatch) {
   axios
     .post(`${API_PATH.CONTACTUS}/`, data)
     .then((res) => {})
-    .catch((err) => {});
+    .catch((err) => {console.log(err)});
 }
 
 export async function getReparationDetails(data, dispatch) {

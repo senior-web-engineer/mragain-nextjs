@@ -122,12 +122,12 @@ const FooterView = (routerProps) => {
                     Meld je aan als reparateur
                   </Link>
                 </li>
-                <li>
+	  {/*<li>
                   <Link prefetch={false} href="/contact">
                     Contact
                   </Link>
                 </li>
-	  {/* <li>
+	        <li>
                   <Link prefetch={false} href="/veel-gestelde-vragen">
                     Veel gestelde vragen
                   </Link>
@@ -264,7 +264,7 @@ const FooterView = (routerProps) => {
           </FooterLinkArea>
         </FooterViewContent>
       </FooterViewContainer>
-      <DevicesContainer show={visible}>
+	  {/* <DevicesContainer show={visible}>
         <FooterViewContent>
           <FooterLinkArea className="footer-link-area">
             <FooterSitemap ClassName="custome-footer-sitename">
@@ -280,7 +280,7 @@ const FooterView = (routerProps) => {
                     Tablets
                   </Link>
                 </li>
-	  {/* <li>
+	        <li>
                   <Link prefetch={false} href="/headphone-reparatie">
                     Headphones
                   </Link>
@@ -299,11 +299,11 @@ const FooterView = (routerProps) => {
                   <Link prefetch={false} href="/consoles-reparatie">
                     Consoles
                   </Link>
-                </li>*/}
+                </li>
               </ul>
             </FooterSitemap>
           </FooterLinkArea>{" "}
-          {/* <FooterLinkArea className="footer-link-area">
+           <FooterLinkArea className="footer-link-area">
             <FooterSitemap ClassName="custome-footer-sitename">
               <FooterSitemapTitle>Devices</FooterSitemapTitle>
               <ul>
@@ -314,10 +314,10 @@ const FooterView = (routerProps) => {
                 </li>
               </ul>
             </FooterSitemap>
-          </FooterLinkArea> */}
+          </FooterLinkArea> 
         </FooterViewContent>
-      </DevicesContainer>{" "}
-      <FooterCopyright> Copyright @ 2021 MrAgain </FooterCopyright>
+      </DevicesContainer>{" "}*/}
+      <FooterCopyright> Copyright @ 2021 MrAgain - info@mragain.nl </FooterCopyright>
       {!!notBot && (
         <CookieBanner
           message="We gebruiken cookies met als doel je een optimale gebruikerservaring te geven op onze website."

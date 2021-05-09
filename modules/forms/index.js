@@ -47,6 +47,7 @@ const Form = connect((state, ownProps) => ({
     if (moduleState.isLoading) {
       return;
     }
+
   }, [moduleState, module]);
 
   if (!moduleState || !module) {
