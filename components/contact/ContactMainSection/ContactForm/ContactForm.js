@@ -13,11 +13,13 @@ import {
   Button,
   LabelWrapper,
   NumberInput,
+  FlexHelper,
 } from "./ContactForm.style";
 import Form from "@/modules/forms";
 import { contactFormModule } from "./modules";
 import { Field } from "@/modules/forms/Blocks";
 import router from "next/router";
+import { reduce } from "lodash";
 
 const ContactForm = () => {
   useEffect(() => {
@@ -74,27 +76,32 @@ const ContactForm = () => {
               sendContactForm();
             }}
           >
-            <LabelWrapper>
-              <Label>Name</Label>
-            </LabelWrapper>
-            <Field name="name" as={TextInput} />
+            <FlexHelper>
+              <LabelWrapper>
+                <Label>Name</Label>
+              </LabelWrapper>
+              <Field name="name" as={TextInput} />
 
-            <LabelWrapper>
-              <Label>Email</Label>
-            </LabelWrapper>
-            <Field name="email" as={TextInput} />
+              <LabelWrapper>
+                <Label>Email</Label>
+              </LabelWrapper>
+              <Field name="email" as={TextInput} />
 
-            <LabelWrapper>
-              <Label>Contact Number</Label>
-            </LabelWrapper>
-            <Field name="telephone" as={NumberInput} />
+              <LabelWrapper>
+                <Label>Contact Number</Label>
+              </LabelWrapper>
+              <Field name="telephone" as={NumberInput} />
 
-            <LabelWrapper>
-              <Label>Message</Label>
-            </LabelWrapper>
-            
-            <Field name="contents" as={TextArea} />
-  
+              <LabelWrapper>
+                <Label>Message</Label>
+              </LabelWrapper>
+
+              <Field
+                name="contents"
+                as={TextArea}
+                style={{ flex: "1 1 150px", display: "flex" }}
+              />
+            </FlexHelper>
             <Button type="submit">
               <FontAwesomeIcon icon={faArrowRight} style={{ color: "white" }} />
             </Button>

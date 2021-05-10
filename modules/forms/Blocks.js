@@ -22,6 +22,7 @@ export function Field({
   showError = true,
   children,
   as = "input",
+  style,
   ...rest
 }) {
   const { state, actions } = useFormContext();
@@ -39,6 +40,8 @@ export function Field({
     [name, onFieldChange]
   );
 
+  console.log(children)
+
   const onBlur = useCallback(
     (ev) => {
       validateField({ name });
@@ -49,7 +52,7 @@ export function Field({
   const Component = as;
 
   return (
-    <FieldWrap>
+    <FieldWrap style={style}>
       {label ? (
         <label>
           {label}
