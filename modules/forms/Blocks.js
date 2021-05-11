@@ -40,8 +40,6 @@ export function Field({
     [name, onFieldChange]
   );
 
-  console.log(children)
-
   const onBlur = useCallback(
     (ev) => {
       validateField({ name });

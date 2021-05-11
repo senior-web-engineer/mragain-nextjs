@@ -19,7 +19,6 @@ import Form from "@/modules/forms";
 import { contactFormModule } from "./modules";
 import { Field } from "@/modules/forms/Blocks";
 import router from "next/router";
-import { reduce } from "lodash";
 
 const ContactForm = () => {
   useEffect(() => {
@@ -39,11 +38,9 @@ const ContactForm = () => {
         duration: 2.5,
       });
 
-      console.log("state", contactFormModule.state);
+      const updates = contactFormModule.state.initialValues;
 
-      setTimeout(() => {
-        router.router.push("/");
-      }, 3000);
+      contactFormModule.actions.batchChange({ updates });
     } catch (error) {
       const { errors } = contactFormModule.state;
       if (Object.keys(errors).length) {
