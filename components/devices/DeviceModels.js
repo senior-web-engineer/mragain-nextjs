@@ -1,17 +1,24 @@
+import media from "@/utils/media";
+import Link from "next/link";
 import React, { useMemo } from "react";
 import styled from "styled-components";
 
 const ModelsWrap = styled.div`
-  padding: 70px 60px;
   background-color: #fff;
   border-radius: 10px;
   margin-top: 40px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  > a {
-    max-width: 30%;
-  }
+  padding: 35px 30px;
+
+  ${media.tablet`
+    padding: 70px 60px;
+
+    > a {
+      max-width: 30%;
+    }
+  `}
 `;
 
 const ModelLink = styled.a`
@@ -30,7 +37,13 @@ export default function DeviceModels({ models, brandName }) {
   }, [models, brandName]);
 
   function renderModel(model) {
-    return <ModelLink>{model.model_name}</ModelLink>;
+    return (
+      <Link
+        href={`/devices/${model.device_name}/${model.brand_name}/${model.model_name}`}
+      >
+        <ModelLink>{model.model_name}</ModelLink>
+      </Link>
+    );
   }
 
   return <ModelsWrap>{filteredModels.map(renderModel)}</ModelsWrap>;

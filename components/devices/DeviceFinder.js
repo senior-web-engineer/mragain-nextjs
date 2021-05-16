@@ -1,5 +1,6 @@
 import { H2, SubTitle } from "@/components/styled/text";
 import { StyledInput } from "@/components/ui/Input";
+import media from "@/utils/media";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Icon } from "antd";
@@ -10,8 +11,12 @@ import styled, { css } from "styled-components";
 const SearchWrap = styled.div`
   padding: 80px 0 40px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+
+  ${media.tablet`
   align-items: center;
+    flex-direction: row;
+  `}
 `;
 
 const BrandsList = styled.div`
@@ -23,6 +28,7 @@ const BrandsList = styled.div`
 
 const DevicesList = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 const DeviceWrap = styled.a`
@@ -31,7 +37,7 @@ const DeviceWrap = styled.a`
   padding: 0px 15px;
   line-height: 40px;
   border-radius: 10px;
-  margin: 0px 5px;
+  margin: 5px;
   font-size: 13px;
 
   &:hover {
