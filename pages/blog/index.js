@@ -12,11 +12,11 @@ import Image from "next/image";
 import Link from "next/link";
 import moment from "moment";
 import media, { OnMobile } from "@/utils/media.js";
-import Form, { createFormModule } from "@/modules/forms/index.js";
+import Form, { createFormModule, useFormContext } from "@/modules/forms/index.js";
 import { Field } from "@/modules/forms/Blocks.js";
 import Input from "@/components/ui/Input.jsx";
 import api from "@/utils/api/index.js";
-import * as yup from "yup"
+import * as yup from "yup";
 
 const HeroWrap = styled.div`
   display: flex;
@@ -263,6 +263,27 @@ function NullRenderer() {
   return null;
 }
 
+function SubscribeForm() {
+  const {submitted} = useFormContext().state;
+
+  if (submitted) {
+    return <success>Thank you for subscribing</success>
+  }
+
+  return (
+    <>
+      <p>Nog niet aangemeld voor onze nieuwsbrief?</p>
+      <Field
+        as={Input}
+        name="email"
+        size="large"
+        placeholder="Je e-mailadres"
+      />
+      <Button>Schrijf in</Button>
+    </>
+  );
+}
+
 export default function Blog({ blogs }) {
   useEffect(() => {
     subscribeForm.actions.initialize();
@@ -276,12 +297,8 @@ export default function Blog({ blogs }) {
     return (
       <SliderBlogWrap>
         <background>
-          {blog.post_image_thumb ? (
-            <Image
-              layout="fill"
-              objectFit="cover"
-              src={blog.post_image_thumb}
-            />
+          {blog.post_image ? (
+            <Image layout="fill" objectFit="cover" src={blog.post_image} />
           ) : null}
         </background>
         <content>
@@ -302,12 +319,8 @@ export default function Blog({ blogs }) {
     return (
       <BlogWrap>
         <background>
-          {blog.post_image_thumb ? (
-            <Image
-              layout="fill"
-              objectFit="cover"
-              src={blog.post_image_thumb}
-            />
+          {blog.post_image ? (
+            <Image layout="fill" objectFit="cover" src={blog.post_image} />
           ) : null}
         </background>
         <content>
@@ -335,9 +348,11 @@ export default function Blog({ blogs }) {
   }, [blogs]);
 
   const restOfBlogs = useMemo(() => {
+    const shouldFeatureOne = blogs.length > 10;
+
     return {
-      featured: [...blogs][4],
-      rest: [...blogs].slice(5),
+      featured: shouldFeatureOne ? [...blogs][4] : null,
+      rest: [...blogs].slice(shouldFeatureOne ? 5 : 4),
     };
   }, [blogs]);
 
@@ -376,15 +391,8 @@ export default function Blog({ blogs }) {
                   <h1>Blogs</h1>
                 </div>
                 <div>
-                  <p>Nog niet aangemeld voor onze nieuwsbrief?</p>
                   <Form module={subscribeForm}>
-                    <Field
-                      as={Input}
-                      name="email"
-                      size="large"
-                      placeholder="Please provide your email"
-                    />
-                    <Button>Schrijf in</Button>
+                    <SubscribeForm />
                   </Form>
                 </div>
               </RightSide>
@@ -394,7 +402,7 @@ export default function Blog({ blogs }) {
                 </Slider>
               </SliderWrap>
             </HeroWrap>
-            {restOfBlogs.length ? (
+            {restOfBlogs.rest.length ? (
               <BlogsSectionWrap>
                 <SectionTitle as="h2">Laatste blogs</SectionTitle>
                 <BlogsSection>
@@ -402,11 +410,13 @@ export default function Blog({ blogs }) {
                     <OnMobile only>{renderBlog(restOfBlogs.featured)}</OnMobile>
                     {restOfBlogs.rest.map(renderBlog)}
                   </BlogsList>
-                  <OnMobile show={false}>
-                    <FeaturedBlog>
-                      {renderSliderBlog(restOfBlogs.featured)}
-                    </FeaturedBlog>
-                  </OnMobile>
+                  {restOfBlogs.featured ? (
+                    <OnMobile show={false}>
+                      <FeaturedBlog>
+                        {renderSliderBlog(restOfBlogs.featured)}
+                      </FeaturedBlog>
+                    </OnMobile>
+                  ) : null}
                 </BlogsSection>
               </BlogsSectionWrap>
             ) : null}

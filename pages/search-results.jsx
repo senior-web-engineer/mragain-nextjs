@@ -9,6 +9,7 @@ import React, {
 import styled, { css } from "styled-components";
 import isEqual from "fast-deep-equal";
 import { Waypoint } from "react-waypoint";
+import isEquat from "fast-deep-equal"
 
 import DefaultLayout from "@/components/layouts/Homepage";
 import {
@@ -26,7 +27,7 @@ import {
   parseNativeEvent,
   SyncFormValues,
 } from "@/modules/forms/Blocks";
-import { Listing } from "@/modules/list/Blocks";
+import { Listing, NoResults } from "@/modules/list/Blocks";
 import Form, { useFormContext } from "@/modules/forms";
 import List, { useListContext } from "@/modules/list";
 import Select from "@/components/ui/Select";
@@ -96,10 +97,6 @@ const SidebarInnerWrap = styled.div`
 
   .ant-slider-mark {
     font-size: 10px;
-  }
-
-  .ant-slider-mark-text {
-    width: 70px;
   }
 `;
 
@@ -910,20 +907,22 @@ const SORT_BY = [
 ];
 
 const WARRANTIES = {
-  0: "Gleen",
-  1: "",
+  0: "Geen",
   3: "",
-  6: "6 maanden",
+  6: "",
+  9: "",
+  12: "12 maanden",
 };
 
 function warrantyLabel(value) {
   const mapping = {
-    1: "1 maand garantie",
     3: "3 maand garantie",
     6: "6 maanden garantie",
+    9: "9 maanden garantie",
+    12: "12 maanden garantie",
   };
 
-  return mapping[value] || "Gleen garantie";
+  return mapping[value] || "Geen garantie";
 }
 
 const WORKING_TIME = [
@@ -1023,7 +1022,7 @@ function RefineSearchForm() {
         label="Garantie"
         tipFormatter={warrantyLabel}
         min={0}
-        max={6}
+        max={12}
         step={null}
       />
       {false && (
@@ -1057,7 +1056,9 @@ export default function SearchResults() {
     async function main() {
       await loadScript();
       await filtersFormModule.actions.initialize();
-      shopListModule.actions.initialize();
+      if (!isEqual(shopListModule?.state?.filters, filtersFormModule.state.values)) {
+        shopListModule.actions.initialize();
+      }
       deviceFetcher.fetch();
       const formValues = filtersFormModule.state.values;
       if (formValues.device) {
@@ -1116,22 +1117,6 @@ export default function SearchResults() {
       },
     });
     serviceFetcher.key(`${value}`).fetch();
-  });
-
-  const syncListFilters = useCallback(async (data) => {
-    let parsedData = { ...data, lat: 0, long: 0 };
-    try {
-      const [result] = await geocodeByAddress(data.location);
-      const { lng, lat } = await getLatLng(result);
-
-      parsedData = {
-        ...parsedData,
-        long: lng,
-        lat,
-        location: data.location,
-      };
-    } catch (err) {}
-    shopListModule.actions.updateQuery(parsedData);
   });
 
   const locationField = (
@@ -1272,9 +1257,10 @@ export default function SearchResults() {
                     />
                   </MapTriggerWrap>
                 </ModelFields>
-                <SyncFormValues onChange={syncListFilters} />
+                <SyncFormValues onChange={shopListModule.actions.updateQuery} />
               </Form>
               <List module={shopListModule}>
+                <NoResults message="Sorry, er zijn geen resultaten gevonden. Pas je afstand filter aan en probeer het opnieuw" />
                 <Listing Item={ShopItem} />
               </List>
             </Content>

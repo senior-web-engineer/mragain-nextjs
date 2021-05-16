@@ -78,7 +78,7 @@ const FooterView = (routerProps) => {
                   priority={true}
                   width={104}
                   height={40}
-                  src="/images/mragainlogo_0.png"
+                  src="/images/mragain.svg"
                   alt="Logo Mr Again"
                 />
               </FooterLogoIcon>
@@ -112,36 +112,36 @@ const FooterView = (routerProps) => {
                     Over ons
                   </Link>
                 </li>
-                <li>
+	  {/* <li>
                   <Link prefetch={false} href="/reparatie">
                     Telefoon reparatie
                   </Link>
-                </li>
+                </li>*/}
                 <li>
                   <Link prefetch={false} href="/meld-je-aan-als-reparateur">
                     Meld je aan als reparateur
                   </Link>
                 </li>
-                <li>
+	  {/*<li>
                   <Link prefetch={false} href="/contact">
                     Contact
                   </Link>
                 </li>
-                <li>
+	        <li>
                   <Link prefetch={false} href="/veel-gestelde-vragen">
                     Veel gestelde vragen
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link prefetch={false} href="/blog">
                     Blogs
                   </Link>
                 </li>
-                <li>
+	  {/*<li>
                   <Link prefetch={false} href="/over-reparaties">
                     Reparaties
                   </Link>
-                </li>
+                </li>*/}
               </ul>
             </FooterSitemap>
             <FollowUs className="follow-us">
@@ -264,7 +264,7 @@ const FooterView = (routerProps) => {
           </FooterLinkArea>
         </FooterViewContent>
       </FooterViewContainer>
-      <DevicesContainer show={visible}>
+	  {/* <DevicesContainer show={visible}>
         <FooterViewContent>
           <FooterLinkArea className="footer-link-area">
             <FooterSitemap ClassName="custome-footer-sitename">
@@ -280,7 +280,7 @@ const FooterView = (routerProps) => {
                     Tablets
                   </Link>
                 </li>
-                <li>
+	        <li>
                   <Link prefetch={false} href="/headphone-reparatie">
                     Headphones
                   </Link>
@@ -290,7 +290,7 @@ const FooterView = (routerProps) => {
                     Televisies
                   </Link>
                 </li>
-                <li>
+	        <li>
                   <Link prefetch={false} href="/laundry-machines-reparatie">
                     Wasmachines
                   </Link>
@@ -303,7 +303,7 @@ const FooterView = (routerProps) => {
               </ul>
             </FooterSitemap>
           </FooterLinkArea>{" "}
-          {/* <FooterLinkArea className="footer-link-area">
+           <FooterLinkArea className="footer-link-area">
             <FooterSitemap ClassName="custome-footer-sitename">
               <FooterSitemapTitle>Devices</FooterSitemapTitle>
               <ul>
@@ -314,10 +314,10 @@ const FooterView = (routerProps) => {
                 </li>
               </ul>
             </FooterSitemap>
-          </FooterLinkArea> */}
+          </FooterLinkArea> 
         </FooterViewContent>
-      </DevicesContainer>{" "}
-      <FooterCopyright> Copyright @ 2021 MrAgain </FooterCopyright>
+      </DevicesContainer>{" "}*/}
+      <FooterCopyright> Copyright @ 2021 MrAgain - info@mragain.nl </FooterCopyright>
       {!!notBot && (
         <CookieBanner
           message="We gebruiken cookies met als doel je een optimale gebruikerservaring te geven op onze website."

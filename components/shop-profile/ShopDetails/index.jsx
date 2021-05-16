@@ -162,24 +162,24 @@ export default function ShopDetails({ shop }) {
             </d-def>
             <d-term>Reparatie opties</d-term>
             <d-def>
-              <LocationWrap>
+	  {/*<LocationWrap>
                 <FontAwesomeIcon icon={faHome} /> Reparatie op locatie
-              </LocationWrap>
+              </LocationWrap>*/}
               <LocationWrap>
                 <FontAwesomeIcon icon={faStore} /> Reparatie in winkel
               </LocationWrap>
-              <LocationWrap>
+	  {/* <LocationWrap>
                 <FontAwesomeIcon icon={faBox} /> Opsturen
-              </LocationWrap>
+              </LocationWrap>*/}
             </d-def>
             <d-term>Services</d-term>
-            <d-def>Mobile Accessories, Storage Devices, Computer Accessories,</d-def>
+            <d-def>Mobiele accesoires</d-def>
             <d-term>Vervangend toestel</d-term>
             <d-def>Voor specifieke toestellen</d-def>
             <d-term>Wachtruimte</d-term>
-            <d-def>Niet beschikbaar</d-def>
+            <d-def>Beschikbaar</d-def>
             <d-term>Merken</d-term>
-            <d-def>Apple, Acer, Asus, Dell, Hewlett-Packard, Huawei, HTC,</d-def>
+            <d-def>Apple, Samsung</d-def>
           </d-list>
         </div>
         <Form module={serviceFormModule}>

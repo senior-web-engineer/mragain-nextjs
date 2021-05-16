@@ -20,3 +20,19 @@ export default {
     return "";
   }
 };
+
+export function ValidateEmail(mail) {
+  if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+    return true;
+  }
+  return false;
+}
+
+export function ValidatePhoneNumber(inputtxt) {
+  var phoneno = /^((\+|00(\s|\s?-\s?)?)31(\s|\s?-\s?)?(\(0\)[-\s]?)?|0)[1-9]((\s|\s?-\s?)?[0-9])((\s|\s?-\s?)?[0-9])((\s|\s?-\s?)?[0-9])\s?[0-9]\s?[0-9]\s?[0-9]\s?[0-9]\s?[0-9]$/;
+  if (inputtxt.match(phoneno)) {
+    return true;
+  } else {
+    return false;
+  }
+}

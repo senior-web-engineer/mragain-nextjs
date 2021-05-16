@@ -187,12 +187,12 @@ function HeaderLinks() {
     <>
       <Link href="/">Home</Link>
       <Link href="/over-ons">Over ons</Link>
-      <Link href="/reparatie">Reparatie</Link>
+	  {/*<Link href="/reparatie">Reparatie</Link>*/}
       <Link href="/meld-je-aan-als-reparateur">Meld je aan als reparateur</Link>
-      <Link href="/contact">Contact</Link>
-      <Link href="/veel-gestelde-vragen">FAQ</Link>
+	  {/*<Link href="/contact">Contact</Link>*/}
+	  {/*<Link href="/veel-gestelde-vragen">FAQ</Link>*/}
       <Link href="/blog">Blog</Link>
-      <Link href="/over-reparaties">Reparaties</Link>
+	  {/*<Link href="/over-reparaties">Reparaties</Link>*/}
     </>
   );
 }
@@ -216,7 +216,7 @@ const HeaderView = ({ showSignup }) => {
                 priority={true}
                 width={104}
                 height={40}
-                src="/images/mragainlogo_0.png"
+                src="/images/mragain.svg"
                 alt="Logo Mr Again"
               />
             </a>
@@ -239,7 +239,7 @@ const HeaderView = ({ showSignup }) => {
                       priority={true}
                       width={104}
                       height={40}
-                      src="/images/mragainlogo_0.png"
+                      src="/images/mragain.svg"
                       alt="Logo Mr Again"
                     />
                   </a>

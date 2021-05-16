@@ -7,7 +7,29 @@ import router from "next/router";
 import { createFormModule } from "@/modules/forms";
 import { createModalModule } from "@/modules/modal";
 import querystring from "querystring";
-import { store } from "@/configureStore";
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+
+//
+
+export async function prepareData({location, ...data}) {
+  let parsedData = { ...data, lat: 0, long: 0 };
+  try {
+    const [result] = await geocodeByAddress(location);
+    const { lng, lat } = await getLatLng(result);
+
+    parsedData = {
+      ...parsedData,
+      long: lng,
+      lat,
+      location,
+    };
+  } catch (err) {
+    console.log(err)
+  }
+
+  return parsedData;
+}
+
 export const filtersFormModule = createFormModule({
   guid: "shops",
   async init() {
@@ -27,30 +49,27 @@ export const filtersFormModule = createFormModule({
       lat: 0,
       limit: 100,
     };
-  },
-
-  submit(data) {
-    return shopListModule.actions.updateQuery(data);
-  },
+  }
 });
 
 export const shopListModule = createListModule({
   guid: "shops",
   async fetchData(query = {}) {
-    const nextURL = `${router.pathname}?${querystring.stringify(query)}`;
+    const params = await prepareData(query);
+    const nextURL = `${router.pathname}?${querystring.stringify(params)}`;
     router.router.replace(nextURL, nextURL, { shallow: true });
     try {
       let data = await api.get(`${API_PATH.SEARCH}/`, {
-        ...query,
-        brand: parseInt(query.brand),
-        service: parseInt(query.service),
-        model: parseInt(query.model),
-        phone: parseInt(query.device),
-        reparation: parseInt(query.service),
-        distance: parseInt(query.distance),
-        price: parseInt(query.price),
-        guarantee: parseInt(query.guarantee),
-        sort: query.sort,
+        ...params,
+        brand: parseInt(params.brand),
+        service: parseInt(params.service),
+        model: parseInt(params.model),
+        phone: parseInt(params.device),
+        reparation: parseInt(params.service),
+        distance: parseInt(params.distance),
+        price: parseInt(params.price),
+        guarantee: parseInt(params.guarantee),
+        sort: params.sort,
       });
 
       let shopDevices = await api.post(`${API_PATH.SHOP_DEVICES}/`, {
