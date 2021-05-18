@@ -74,22 +74,22 @@ const ContactForm = () => {
           >
             <FlexHelper>
               <LabelWrapper>
-                <Label>Name</Label>
+                <Label>Naam</Label>
               </LabelWrapper>
               <Field name="name" as={TextInput} />
 
               <LabelWrapper>
-                <Label>Email</Label>
+                <Label>e-mailadres</Label>
               </LabelWrapper>
               <Field name="email" as={TextInput} />
 
               <LabelWrapper>
-                <Label>Contact Number</Label>
+                <Label>Telefoon nummer</Label>
               </LabelWrapper>
               <Field name="telephone" as={NumberInput} />
 
               <LabelWrapper>
-                <Label>Message</Label>
+                <Label>Bericht</Label>
               </LabelWrapper>
 
               <Field
