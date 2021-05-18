@@ -6,8 +6,11 @@ import * as yup from "yup";
 
 const contactValidator = yup.object({
     name: yup.string().required(),
-    email: yup.string().required(),
-    telephone: yup.number().required().positive().max(9),
+    email: yup.string().required().email("Email is not valid"),
+    telephone: yup.string().required()
+    .matches(/^[0-9]+$/, "Must be only digits")
+    .min(9, 'Must be exactly 9 digits')
+    .max(9, 'Must be exactly 9 digits'),
     contents: yup.string()
   })
   
