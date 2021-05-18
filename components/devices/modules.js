@@ -1,5 +1,7 @@
 import { API_PATH } from "@/constants";
 import dataFetcher from "@/modules/dataFetcher";
+import { createFormModule } from "@/modules/forms";
+import { SUBMIT_FORM_FAILURE } from "@/modules/forms/reducers";
 import api from "@/utils/api";
 
 export const modelFetcher = dataFetcher({
@@ -17,3 +19,11 @@ export const modelReparationsFetcher = dataFetcher({
     return api.post(`${API_PATH.GETMODELREPARATIONS}/`, { model });
   },
 });
+
+export const appointmentFormModule = createFormModule({
+  async init() {
+    return {
+      service: null
+    }
+  }
+})

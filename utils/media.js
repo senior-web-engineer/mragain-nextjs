@@ -63,7 +63,7 @@ export function OnMobile({ children, show = true, only = false }) {
 
   if (isMobile) {
     if (show) {
-      return children;
+      return children || null;
     }
 
     return null;
@@ -73,5 +73,5 @@ export function OnMobile({ children, show = true, only = false }) {
     return null;
   }
 
-  return children;
+  return children || null;
 }
