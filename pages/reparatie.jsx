@@ -19,12 +19,21 @@ import { FRONT_END_URL } from "../constants.js";
 import Benefit from "@/components/advantages/Benefit";
 import Testimonial from "@/components/advantages/Testimonial";
 
-const texts = {
+const benefitTexts = {
   a: "Get direct access to you telephone repair costs",
   b: "Reliable reviews from people who went before you",
   c: "No more waiting unnecessarily, but receive Immediate help with your repair",
   d: "The longest possible warranty on your phone repair",
 };
+
+const testimonialTitles = {
+  a: "My phone now works as good as new",
+  b: "Speedy service, no more needless waiting"
+}
+
+const testimonialTexts = {
+  a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean placerat gravida lectus, sed iaculis ante scelerisque iaculis. Donec auctor libero et ligula mollis."
+}
 
 const Advantages = ({}) => {
   useEffect(() => {
@@ -80,16 +89,16 @@ const Advantages = ({}) => {
               <BenefitsWrapper>
                 <BenefitsSub>WHAT YOU GET</BenefitsSub>
                 <BenefitsTitle>Your benefits at Mr Again</BenefitsTitle>
-                <Benefit svgName={"wallet"} text={texts.a} />
-                <Benefit svgName={"thumb"} text={texts.b} />
-                <Benefit svgName={"clock"} text={texts.c} />
-                <Benefit svgName={"warranty"} text={texts.d} />
+                <Benefit svgName={"wallet"} text={benefitTexts.a} />
+                <Benefit svgName={"thumb"} text={benefitTexts.b} />
+                <Benefit svgName={"clock"} text={benefitTexts.c} />
+                <Benefit svgName={"warranty"} text={benefitTexts.d} />
               </BenefitsWrapper>
             </BenefitsOuterWrapper>
           </BenefitsArea>
 
           <TestimonialArea>
-              <Testimonial/>
+              <Testimonial title={testimonialTitles.a} text={testimonialTexts.a} name={"Pim"} place={"Utrecht"}/>
           </TestimonialArea>
         </Wrapper>
       </Main>

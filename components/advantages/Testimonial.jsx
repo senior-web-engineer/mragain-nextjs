@@ -1,10 +1,28 @@
 import React from "react";
-import {TestimonialBox} from "./Testimonial.style"
+import {
+  TestimonialBox,
+  TestimonialTitle,
+  TestimonialText,
+  TextWrapper,
+  StarsQuoteWrapper,
+  GoldStar,
+  TestimonialName,
+} from "./Testimonial.style";
 
-const Testimonial = ({}) => {
+const Testimonial = ({ title, text, name, place }) => {
   return (
     <>
-        <TestimonialBox></TestimonialBox>
+      <TestimonialBox>
+        <TextWrapper>
+          <TestimonialTitle>{title}</TestimonialTitle>
+          <TestimonialText>{text}</TestimonialText>
+        </TextWrapper>
+        <StarsQuoteWrapper>
+          <GoldStar />
+          <TestimonialName>{name}</TestimonialName>
+          <TestimonialText>{place}</TestimonialText>
+        </StarsQuoteWrapper>
+      </TestimonialBox>
     </>
   );
 };
