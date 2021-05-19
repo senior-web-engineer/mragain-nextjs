@@ -13,6 +13,7 @@ import {
   Button,
   LabelWrapper,
   NumberInput,
+  FlexHelper,
 } from "./ContactForm.style";
 import Form from "@/modules/forms";
 import { contactFormModule } from "./modules";
@@ -37,11 +38,9 @@ const ContactForm = () => {
         duration: 2.5,
       });
 
-      console.log("state", contactFormModule.state);
+      const updates = contactFormModule.state.initialValues;
 
-      setTimeout(() => {
-        router.router.push("/");
-      }, 3000);
+      contactFormModule.actions.batchChange({ updates });
     } catch (error) {
       const { errors } = contactFormModule.state;
       if (Object.keys(errors).length) {
@@ -73,27 +72,32 @@ const ContactForm = () => {
               sendContactForm();
             }}
           >
-            <LabelWrapper>
-              <Label>Naam</Label>
-            </LabelWrapper>
-            <Field name="name" as={TextInput} />
+            <FlexHelper>
+              <LabelWrapper>
+                <Label>Naam</Label>
+              </LabelWrapper>
+              <Field name="name" as={TextInput} />
 
-            <LabelWrapper>
-              <Label>E-mailadres</Label>
-            </LabelWrapper>
-            <Field name="email" as={TextInput} />
+              <LabelWrapper>
+                <Label>e-mailadres</Label>
+              </LabelWrapper>
+              <Field name="email" as={TextInput} />
 
-            <LabelWrapper>
-              <Label>Telefoon nummer</Label>
-            </LabelWrapper>
-            <Field name="telephone" as={NumberInput} />
+              <LabelWrapper>
+                <Label>Telefoon nummer</Label>
+              </LabelWrapper>
+              <Field name="telephone" as={NumberInput} />
 
-            <LabelWrapper>
-              <Label>Je bericht</Label>
-            </LabelWrapper>
-            
-            <Field name="contents" as={TextArea} />
-  
+              <LabelWrapper>
+                <Label>Bericht</Label>
+              </LabelWrapper>
+
+              <Field
+                name="contents"
+                as={TextArea}
+                style={{ flex: "1 1 150px", display: "flex" }}
+              />
+            </FlexHelper>
             <Button type="submit">
               <FontAwesomeIcon icon={faArrowRight} style={{ color: "white" }} />
             </Button>

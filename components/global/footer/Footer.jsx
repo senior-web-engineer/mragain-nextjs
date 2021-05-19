@@ -122,12 +122,12 @@ const FooterView = (routerProps) => {
                     Meld je aan als reparateur
                   </Link>
                 </li>
-	  {/*<li>
+	        <li>
                   <Link prefetch={false} href="/contact">
                     Contact
                   </Link>
                 </li>
-	        <li>
+	  {/* <li>
                   <Link prefetch={false} href="/veel-gestelde-vragen">
                     Veel gestelde vragen
                   </Link>
