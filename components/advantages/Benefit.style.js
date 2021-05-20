@@ -9,6 +9,10 @@ margin-left: 44px;
 width: 350px;
 max-width: 350px;
 min-width: 200px;
+@media (max-width: 768px) {
+    font-size: 10px;
+    max-width:200px;
+  }
 `
 
 export const Wrapper = styled.div`

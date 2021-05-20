@@ -12,6 +12,7 @@ import {
   BenefitsWrapper,
   Spacer,
   BenefitsOuterWrapper,
+  TestimonialWrapper
 } from "@/styled-components/reparatie.style";
 import DefaultLayout from "@/components/layouts/Homepage";
 import Head from "next/head";
@@ -28,12 +29,12 @@ const benefitTexts = {
 
 const testimonialTitles = {
   a: "My phone now works as good as new",
-  b: "Speedy service, no more needless waiting"
-}
+  b: "Speedy service, no more needless waiting",
+};
 
 const testimonialTexts = {
-  a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean placerat gravida lectus, sed iaculis ante scelerisque iaculis. Donec auctor libero et ligula mollis."
-}
+  a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean placerat gravida lectus, sed iaculis ante scelerisque iaculis. Donec auctor libero et ligula mollis.",
+};
 
 const Advantages = ({}) => {
   useEffect(() => {
@@ -45,10 +46,7 @@ const Advantages = ({}) => {
         <Head>
           <title>Advantages | Mr Again</title>
           <meta name="description" content="Advantages of MrAgain" />
-          <meta
-            name="Keywords"
-            content=""
-          />
+          <meta name="Keywords" content="" />
           <link rel="canonical" href={FRONT_END_URL} />
           {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
           <meta
@@ -57,10 +55,7 @@ const Advantages = ({}) => {
             content="Advantages of MrAgain"
           />
           <meta property="og:type" content="website" />
-          <meta
-            property="og:description"
-            content=""
-          />
+          <meta property="og:description" content="" />
           <meta name="og:url" content={FRONT_END_URL} />
           <meta
             property="og:image"
@@ -85,7 +80,7 @@ const Advantages = ({}) => {
 
           <BenefitsArea>
             <BenefitsOuterWrapper>
-              <Spacer/>
+              <Spacer />
               <BenefitsWrapper>
                 <BenefitsSub>WHAT YOU GET</BenefitsSub>
                 <BenefitsTitle>Your benefits at Mr Again</BenefitsTitle>
@@ -98,7 +93,29 @@ const Advantages = ({}) => {
           </BenefitsArea>
 
           <TestimonialArea>
-              <Testimonial title={testimonialTitles.a} text={testimonialTexts.a} name={"Pim"} place={"Utrecht"}/>
+            <BenefitsOuterWrapper>
+              <Spacer />
+              <BenefitsWrapper>
+                <BenefitsSub>TESTIMONIAL</BenefitsSub>
+                <BenefitsTitle>
+                  Still not convinced? Check the results
+                </BenefitsTitle>
+                <TestimonialWrapper>
+                <Testimonial
+                  title={testimonialTitles.a}
+                  text={testimonialTexts.a}
+                  name={"Pim"}
+                  place={"Utrecht"}
+                />
+                <Testimonial
+                  title={testimonialTitles.a}
+                  text={testimonialTexts.a}
+                  name={"Pim"}
+                  place={"Utrecht"}
+                />
+                </TestimonialWrapper>
+              </BenefitsWrapper>
+            </BenefitsOuterWrapper>
           </TestimonialArea>
         </Wrapper>
       </Main>

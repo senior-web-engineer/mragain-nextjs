@@ -27,6 +27,9 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: flex-start;
+@media (max-width: 768px) {
+  flex: 1 1 340px;
+}
 `;
 
 export const TestimonialArea = styled.div`
@@ -34,6 +37,10 @@ flex: 1 1 490px;
 width 100%;
 background-color: #F1FEFA;
 margin-bottom: -45px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
 `;
 
 export const Title = styled.h1`
@@ -65,6 +72,10 @@ export const BenefitsSub = styled.h2`
   color: #0076a3;
   font-weight: 600;
   font-family: "Dosis";
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 export const BenefitsTitle = styled.h1`
@@ -72,22 +83,34 @@ export const BenefitsTitle = styled.h1`
   color: #0d3244;
   font-weight: 500;
   font-family: "Montserrat";
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 export const BenefitsOuterWrapper = styled.div`
-display:flex;
-width: 100%;
-`
+  display: flex;
+  width: 100%;
+`;
 
 export const BenefitsWrapper = styled.div`
-display:flex;
-flex-direction:column;
-flex:1;
-`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
+
+export const TestimonialWrapper = styled.div`
+  display: flex;
+  flex: 1;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
 
 export const Spacer = styled.div`
- flex: 0 10 120px;
- width: 120px;
- min-width:10px;
-`
-
+  flex: 0 10 120px;
+  width: 120px;
+  min-width: 20px;
+`;

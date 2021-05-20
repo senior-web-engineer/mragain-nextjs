@@ -6,9 +6,14 @@ export const TestimonialBox = styled.div`
   height: 200px;
   box-shadow: 0px 1px 5px hsl(0deg 0% 89%);
   border-radius: 8px;
-  margin: 150px;
   background-color: white;
   padding: 31px 31px;
+  margin: 12px 12px 12px 0;
+  @media (max-width: 768px) {
+    width: 250px;
+    height: 120px;
+    padding: 20px;
+  }
 `;
 export const TestimonialTitle = styled.h1`
   font-size: 16px;
