@@ -184,48 +184,54 @@ export default function BookingInfo({ shop, nextStep }) {
         <h3>{shop.name}</h3>
         <location>{location}</location>
       </ShopDetails>
-      <ServiceDetailsWrap>
-        <ServiceImage>
-          {service?.reparation?.repair_image ? (
-            <Image
-              layout="fill"
-              objectFit="contain"
-              src={service.reparation.repair_image}
-            />
-          ) : null}
-        </ServiceImage>
-        <ServiceDetails>
-          <div>
-            <label>Apparaat:</label>
-            <strong>
-              <DeviceName />
-            </strong>
-          </div>
-          <div>
-            <label>Merk:</label>
-            <strong>
-              <BrandName />
-            </strong>
-          </div>
-          <div>
-            <label>Model:</label>
-            <strong>
-              <ModelName />
-            </strong>
-          </div>
-        </ServiceDetails>
-      </ServiceDetailsWrap>
+      {service ? (
+        <ServiceDetailsWrap>
+          <ServiceImage>
+            {service?.reparation?.repair_image ? (
+              <Image
+                layout="fill"
+                objectFit="contain"
+                src={service.reparation.repair_image}
+              />
+            ) : null}
+          </ServiceImage>
+          <ServiceDetails>
+            <div>
+              <label>Apparaat:</label>
+              <strong>
+                <DeviceName />
+              </strong>
+            </div>
+            <div>
+              <label>Merk:</label>
+              <strong>
+                <BrandName />
+              </strong>
+            </div>
+            <div>
+              <label>Model:</label>
+              <strong>
+                <ModelName />
+              </strong>
+            </div>
+          </ServiceDetails>
+        </ServiceDetailsWrap>
+      ) : null}
       <Form module={appointmentForm}>
         <UserInfo />
       </Form>
-      <ServiceCostWrap>
-        <item>{service?.reparation?.reparation_name}</item>
-        <price>&euro;{service?.price}</price>
-      </ServiceCostWrap>
-      <TotalWrap>
-        <label>Te betalen bij reparateur</label>
-        <price>&euro;{service?.price}</price>
-      </TotalWrap>
+      {service ? (
+        <>
+          <ServiceCostWrap>
+            <item>{service?.reparation?.reparation_name}</item>
+            <price>&euro;{service?.price}</price>
+          </ServiceCostWrap>
+          <TotalWrap>
+            <label>Te betalen bij reparateur</label>
+            <price>&euro;{service?.price}</price>
+          </TotalWrap>
+        </>
+      ) : null}
       <Button onClick={nextStep} aria-label="Next step">
         <FontAwesomeIcon icon={faArrowRight} />
       </Button>

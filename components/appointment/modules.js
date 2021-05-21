@@ -20,6 +20,7 @@ const validator = yup.object({
   email: yup.string().required().email(),
   tel: yup.string().required(),
   time: yup.string().required(),
+  service: yup.string().required()
 });
 
 export const appointmentForm = createFormModule({
@@ -34,6 +35,7 @@ export const appointmentForm = createFormModule({
       shopAddress: address,
       shopName: shop.name,
       ...fromAddressBar,
+      service: JSON.parse(fromAddressBar.service),
       location: "in-store",
       paymentType: "cash",
       date: new Date().toString(),
@@ -51,14 +53,15 @@ export const appointmentForm = createFormModule({
   async submit(data) {
     const service = serviceFetcher.selector(store.ref.getState()).result;
     const formatedDate = moment(data.date).format("MM-DD-YYYY");
+    const reparationId =  service?.reparation.id ? parseInt(service.reparation.id) : 0
     const repairSeviceData = {
       device: parseInt(data.device),
       brand: parseInt(data.brand),
       model: parseInt(data.model),
       status: -1,
-      price: service.price,
-      guarantee: service.guarantee_time,
-      reparation: parseInt(service.reparation.id),
+      price: service?.price,
+      guarantee: service?.guarantee_time,
+      reparation: reparationId,
     };
     const payload = {
       name: data.shopName,
@@ -67,7 +70,7 @@ export const appointmentForm = createFormModule({
       appointmentData: {
         date: formatedDate,
         time: data.time,
-        reparation: parseInt(service.reparation.id),
+        reparation: reparationId,
         client_name: data.name,
         client_email: data.email,
         client_phone: data.tel,
