@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 
 const MainWrap = styled.div`
   margin: 0 -20px;
+  display: flex;
 
   ${media.tablet`
     margin: 0;

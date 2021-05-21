@@ -14,8 +14,9 @@ const SearchWrap = styled.div`
   flex-direction: column;
 
   ${media.tablet`
-  align-items: center;
+    align-items: center;
     flex-direction: row;
+    justify-content: space-between;
   `}
 `;
 
