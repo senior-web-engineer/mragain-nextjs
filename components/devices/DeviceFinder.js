@@ -56,7 +56,7 @@ const DeviceWrap = styled.a`
 `;
 
 const BrandWrap = styled.a`
-  width: 255px;
+  width: 100%;
   height: 60px;
   border-radius: 4px;
   display: flex;
@@ -64,7 +64,7 @@ const BrandWrap = styled.a`
   align-items: center;
   background-color: #fff;
   padding: 0 30px;
-  margin: 9px;
+  margin: 4px;
   font-size: 15px;
   color: #303030;
   font-weight: 700;
@@ -74,6 +74,11 @@ const BrandWrap = styled.a`
     css`
       box-shadow: 0 0 0 2px #06c987;
     `}
+
+  ${media.tablet`
+    margin: 9px;
+    width: 255px;
+  `}
 `;
 
 const BrandsInnerWrap = styled.div`
