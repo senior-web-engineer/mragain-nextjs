@@ -34,6 +34,7 @@ import Button from "@/components/ui/Button";
 import router from "next/router";
 import { useFetcher } from "@/modules/dataFetcher";
 import { store } from "@/configureStore";
+import { appointmentFormModule } from "@/components/devices/modules";
 
 const MainWrap = styled.div`
   padding-top: 1px;
@@ -202,17 +203,29 @@ export default function AppointmentPage({ shop }) {
       behavior: "smooth",
     });
     if (step === 0) {
-      await appointmentForm.actions.validateField({ name: "time" });
+      await appointmentForm.actions.validateField({
+        name: ["time", "service"],
+      });
       const { errors } = appointmentForm.state;
       if (Object.keys(errors).length) {
         appointmentConfirmation.actions.open({
           type: "warning",
           message:
             "Je lijkt niet alle informatie te hebben ingevuld, even checken? ",
-          description:
-            "We hebben al je informatie nodig om een afspraak te maken",
+          description: errors.service ? (
+            <>
+              We hebben al je informatie nodig om een afspraak te maken.
+              <br /> You don't have a service selected. Proceed?
+            </>
+          ) : (
+            "We hebben al je informatie nodig om een afspraak te maken"
+          ),
           buttonLabel: "Probeer het nog een keer",
-        });
+        }).then(() => {
+          if (errors.service) {
+            appointmentForm.actions.onFieldChange({name: "service", value: "..."})
+          }
+        })
         return;
       }
     }

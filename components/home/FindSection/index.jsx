@@ -1,26 +1,25 @@
 import React, { useEffect, useState, useMemo } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import Image from "next/image";
 
 import {
   faMapMarkerAlt,
   faSearch,
   faArrowRight,
+  faMobile,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { StyledInput } from "@/components/ui/Input.jsx";
 import media from "@/utils/media";
 import Button from "@/components/ui/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AutoComplete } from "antd";
-import { API_PATH } from "@/constants";
 import { Field } from "@/modules/forms/Blocks";
 import Form, { useFormContext } from "@/modules/forms";
 import { searchForm } from "../modules";
 import Link from "next/link";
 import GooglePlaces from "@/components/common/GooglePlaces";
+import Select from "@/components/ui/Select";
 import api from "@/utils/api";
+import { API_PATH } from "@/constants";
 
 //
 
@@ -76,6 +75,10 @@ const SearchBar = styled.div`
     }
   }
 
+  .ant-select-selection {
+    border: 1px solid #ddd;
+  }
+
   .svg-inline--fa {
     margin-right: 12px;
   }
@@ -88,6 +91,7 @@ const SearchBar = styled.div`
     flex-direction: row;
     & > div {
       margin-top: 0px;
+      flex-grow: 1;
     }
   `}
 `;
@@ -137,13 +141,11 @@ const FindImage = styled.div`
 function SearchButton() {
   const { state } = useFormContext();
 
-  const { zip, model } = state.values || {};
-
-  const [deviceId = "", brandId = "", modelId = ""] = model.split("~");
+  const { zip, device } = state.values || {};
 
   return (
     <Link
-      href={`/search-results?zip=${zip}&device=${deviceId}&brand=${brandId}&model=${modelId}`}
+      href={`/search-results?zip=${zip}&device=${device}`}
     >
       <Button aria-label="Zoek">
         <span>Zoek</span>
@@ -154,105 +156,25 @@ function SearchButton() {
 }
 
 export default function FindSection() {
-  const [searchData, updateSearchData] = useState([]);
-
-  const [searchResults, updateSearchResults] = useState([]);
+  const [devices, setDevices] = useState([]);
 
   useEffect(() => {
+    searchForm.actions.initialize();
     async function loadData() {
-      const models = await api.get(`${API_PATH.ALL_MODELS}/`);
-      updateSearchData(models);
+      const data = await api.get(`${API_PATH.GETDEVICES}/`);
+      setDevices(data);
     }
 
-    searchForm.actions.initialize();
     loadData();
   }, []);
 
-  const models = useMemo(() => {
-    return searchData.reduce((acc, model) => {
-      const item = {
-        ...model,
-        label: `${model.brand_name} ${model.model_name}`,
-        value: `${model.device_id}~${model.brand_id}~${model.model_id}`,
-      };
-
-      const foundDevice = acc.find((device) => device.id === model.device_id);
-      const device = foundDevice || {
-        id: model.device_id,
-        name: model.device_name,
-      };
-      if (!device.options) {
-        device.options = [];
-      }
-      const existingOption = device.options.find(
-        (option) => option.model_id === model.model_id
-      );
-
-      if (!existingOption) {
-        device.options.push(item);
-      }
-
-      device.label = model.device_name;
-      device.value = `${model.device_id}`;
-
-      if (!foundDevice) {
-        acc.push({
-          ...device,
-          device_name: model.device_name,
-          options: [
-            { label: `All ${model.device_name}`, value: `${model.device_id}` },
-            ...device.options,
-          ],
-        });
-      }
-
-      return acc;
-    }, []);
-  }, [searchData]);
-
-  function handleSearch(value) {
-    const searchResults = models.reduce((acc, device) => {
-      const matchingValues = device.options.filter((option) => {
-        const modelWords = [...option.label.split(" "), device.device_name];
-
-        return value
-          .split(" ")
-          .every((word) =>
-            modelWords.some((modelWord) =>
-              modelWord.toLowerCase().startsWith(word.toLowerCase())
-            )
-          );
-      });
-      if (!matchingValues.length) {
-        return acc;
-      }
-
-      if (matchingValues.length > 5) {
-        matchingValues.length = 5;
-      }
-
-      return [
-        ...acc,
-        {
-          ...device,
-          options: matchingValues,
-        },
-      ];
-    }, []);
-    updateSearchResults(searchResults);
-  }
-
-  const searchOptions = useMemo(() => {
-    return searchResults.map((result) => (
-      <AutoComplete.OptGroup key={result.label} label={result.label}>
-        {result.options.map((option) => (
-          <AutoComplete.Option key={option.value} value={option.value}>
-            {option.label}
-          </AutoComplete.Option>
-        ))}
-      </AutoComplete.OptGroup>
-    ));
-  }, [searchResults]);
+  const deviceOptions = useMemo(() => {
+    return devices.map((device) => ({
+      ...device,
+      label: device.device_name,
+      value: device.id,
+    }));
+  }, [devices]);
 
   return (
     <FindWrap>
@@ -262,20 +184,16 @@ export default function FindSection() {
           <SearchBar>
             <div>
               <Field
-                as={AutoComplete}
-                dataSource={searchOptions}
-                onSearch={handleSearch}
+                as={Select}
+                name="device"
                 size="large"
+                options={deviceOptions}
                 placeholder={
                   <>
-                    <FontAwesomeIcon icon={faSearch} /> Apparaat of model
+                    <FontAwesomeIcon icon={faMobile} /> Apparaat of model
                   </>
                 }
-                dropdownStyle={{ minWidth: "320px" }}
-                name="model"
-              >
-                <StyledInput aria-label="Apparaat of model" />
-              </Field>
+              />
             </div>
             <div>
               <Field
