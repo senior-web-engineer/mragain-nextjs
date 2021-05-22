@@ -190,7 +190,7 @@ export default function FindSection() {
                 options={deviceOptions}
                 placeholder={
                   <>
-                    <FontAwesomeIcon icon={faMobile} /> Apparaat of model
+                    <FontAwesomeIcon icon={faMobile} /> Apparaat
                   </>
                 }
               />
