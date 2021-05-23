@@ -18,6 +18,11 @@ export const TitleArea = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  @media (max-width: 570px){
+    flex: 1 1 400px;
+    justify-content: flex-end;
+    padding-bottom: 30px
+  }
 `;
 
 export const BenefitsArea = styled.div`
@@ -27,7 +32,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: flex-start;
-@media (max-width: 768px) {
+@media (max-width: 570px) {
   flex: 1 1 340px;
 }
 `;
@@ -41,6 +46,9 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: flex-start;
+@media (max-width: 570px){
+  flex: 1 1 400px;
+}
 `;
 
 export const Title = styled.h1`
@@ -50,6 +58,10 @@ export const Title = styled.h1`
   font-family: "Montserrat";
   color: black;
   padding-left: 120px;
+  @media (max-width: 570px){
+    font-size: 25px;
+    padding-left:40px;
+  }
 `;
 
 export const BookBtn = styled.button`
@@ -64,6 +76,9 @@ export const BookBtn = styled.button`
   font-family: "Montserrat";
   border: none;
   margin-left: 120px;
+  @media (max-width: 570px){
+    margin-left:40px;
+  }
 `;
 
 export const BenefitsSub = styled.h2`
@@ -73,7 +88,7 @@ export const BenefitsSub = styled.h2`
   font-weight: 600;
   font-family: "Dosis";
 
-  @media (max-width: 768px) {
+  @media (max-width: 570px) {
     font-size: 12px;
   }
 `;
@@ -84,7 +99,7 @@ export const BenefitsTitle = styled.h1`
   font-weight: 500;
   font-family: "Montserrat";
 
-  @media (max-width: 768px) {
+  @media (max-width: 570px) {
     font-size: 15px;
   }
 `;
@@ -104,7 +119,7 @@ export const TestimonialWrapper = styled.div`
   display: flex;
   flex: 1;
 
-  @media (max-width: 768px) {
+  @media (max-width: 570px) {
     flex-direction: column;
   }
 `;
@@ -113,4 +128,8 @@ export const Spacer = styled.div`
   flex: 0 10 120px;
   width: 120px;
   min-width: 20px;
+
+  @media (max-width: 570px) {
+    flex: 0 10 40px;
+  }
 `;

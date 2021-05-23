@@ -37,7 +37,7 @@ const Faq = () => {
                 </Head>
             <FaqBannerSection />
             <FaqSection />
-            </Main>
+            </Main>   
         </Layout>
     )
 };

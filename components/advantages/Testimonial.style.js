@@ -9,10 +9,10 @@ export const TestimonialBox = styled.div`
   background-color: white;
   padding: 31px 31px;
   margin: 12px 12px 12px 0;
-  @media (max-width: 768px) {
+  @media (max-width: 570px) {
     width: 250px;
     height: 120px;
-    padding: 20px;
+    padding: 15px;
   }
 `;
 export const TestimonialTitle = styled.h1`
@@ -22,14 +22,24 @@ export const TestimonialTitle = styled.h1`
   font-family: "Montserrat";
   padding-right: 32px;
   padding-bottom: 10px;
+
+  @media (max-width: 570px) {
+    font-size:11px;
+    padding-bottom: 0px;
+
+  }
 `;
 
 export const TestimonialText = styled.div`
-  font-size: 12px;
+  font-size:12px;
   color: #0d3244;
   font-weight: 300;
   font-family: "Montserrat";
   line-height: 1.4;
+  @media (max-width: 570px) {
+    font-size:8px;
+
+  }
 `;
 
 export const TestimonialName = styled(TestimonialText)`
@@ -57,6 +67,17 @@ export const StarsQuoteWrapper = styled.div`
     position: absolute;
     bottom: -22px;
     color: #2875bc;
+  }
+
+  @media (max-width: 570px) {
+    &:after {
+      content: "”";
+      font-size: 35px;
+      position: absolute;
+      bottom: -3px;
+      color: #2875bc;
+    }
+
   }
 `;
 
