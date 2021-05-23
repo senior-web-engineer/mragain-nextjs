@@ -18,10 +18,15 @@ export const TitleArea = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  @media (max-width: 570px){
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(/telefoon-reparatie-mragain.jpg);
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  @media (max-width: 570px) {
     flex: 1 1 400px;
     justify-content: flex-end;
-    padding-bottom: 30px
+    padding-bottom: 30px;
   }
 `;
 
@@ -58,9 +63,9 @@ export const Title = styled.h1`
   font-family: "Montserrat";
   color: black;
   padding-left: 120px;
-  @media (max-width: 570px){
+  @media (max-width: 570px) {
     font-size: 25px;
-    padding-left:40px;
+    padding-left: 40px;
   }
 `;
 
@@ -76,8 +81,8 @@ export const BookBtn = styled.button`
   font-family: "Montserrat";
   border: none;
   margin-left: 120px;
-  @media (max-width: 570px){
-    margin-left:40px;
+  @media (max-width: 570px) {
+    margin-left: 40px;
   }
 `;
 

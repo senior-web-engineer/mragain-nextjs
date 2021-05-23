@@ -19,6 +19,7 @@ import Head from "next/head";
 import { FRONT_END_URL } from "../constants.js";
 import Benefit from "@/components/advantages/Benefit";
 import Testimonial from "@/components/advantages/Testimonial";
+import Link from 'next/link'
 
 const benefitTexts = {
   a: "Get direct access to you telephone repair costs",
@@ -46,7 +47,7 @@ const Advantages = ({}) => {
         <Head>
           <title>Advantages | Mr Again</title>
           <meta name="description" content="Advantages of MrAgain" />
-          <meta name="Keywords" content="" />
+          <meta name="Keywords" content="Advantages of MrAgain" />
           <link rel="canonical" href={FRONT_END_URL} />
           {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
           <meta
@@ -55,11 +56,11 @@ const Advantages = ({}) => {
             content="Advantages of MrAgain"
           />
           <meta property="og:type" content="website" />
-          <meta property="og:description" content="" />
+          <meta property="og:description" content="Advantages of MrAgain" />
           <meta name="og:url" content={FRONT_END_URL} />
           <meta
             property="og:image"
-            content={FRONT_END_URL + "media/contact_banner_image.jpg"}
+            content={FRONT_END_URL + "media//telefoon-reparatie-mragain.jpg"}
           />
           <meta
             name="og_site_name"
@@ -75,7 +76,9 @@ const Advantages = ({}) => {
               <br /> lifespan without
               <br /> the hassle
             </Title>
+            <Link href="/search-results">
             <BookBtn>Book an appointment</BookBtn>
+            </Link>
           </TitleArea>
 
           <BenefitsArea>
