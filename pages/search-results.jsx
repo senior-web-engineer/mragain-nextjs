@@ -973,7 +973,7 @@ const RefineModalWrap = styled.div`
   }
 `;
 
-function ClearFilters({ label = "Clear", alwaysShow = false }) {
+function ClearFilters({ label = "Reset", alwaysShow = false }) {
   const { state, actions } = useFormContext();
 
   const hasDiff = !isEqual(state.initialValues, state.values);
@@ -1043,7 +1043,7 @@ function ResultCount() {
     return null;
   }
 
-  return ` (${context.items.length} )`;
+  return ` (${context.items.length})`;
 }
 
 export default function SearchResults() {
