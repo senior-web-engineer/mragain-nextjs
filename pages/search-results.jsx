@@ -994,7 +994,7 @@ function RefineFooter() {
   return (
     <footer>
       <Button onClick={() => refineSearchModal.actions.close()}>
-        See results
+        Toon resultaten
       </Button>
       <Form module={filtersFormModule}>
         <ClearFilters label="Reset filters" alwaysShow />
@@ -1019,7 +1019,7 @@ function RefineSearchForm() {
         name="guarantee"
         as={Slider}
         marks={WARRANTIES}
-        label="Garantie"
+        label="Minimale garantie"
         tipFormatter={warrantyLabel}
         min={0}
         max={12}
@@ -1043,7 +1043,7 @@ function ResultCount() {
     return null;
   }
 
-  return ` (${context.items.length} shops)`;
+  return ` (${context.items.length} )`;
 }
 
 export default function SearchResults() {
