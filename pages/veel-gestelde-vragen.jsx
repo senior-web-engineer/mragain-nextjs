@@ -1,19 +1,23 @@
-import React, {useEffect} from "react";
-import { Main } from "@/styled-components/veel-gestelde-vragen.style.jsx";
-import { Layout } from "@/components/global";
-import FaqSection from "@/components/faq/FaqSection/FaqSection";
-import FaqBannerSection from "@/components/faq/FaqBannerSection/FaqBannerSection";
-import Head from "next/head"
-import { FRONT_END_URL} from "../constants.js";
+import React, { useEffect } from "react";
+import {
+  Main,
+  Wrapper,
+  Top,
+  Content
+} from "@/styled-components/veel-gestelde-vragen.style";
+import DefaultLayout from "@/components/layouts/Homepage";
+import Head from "next/head";
+import { FRONT_END_URL } from "../constants.js";
+import Question from "@/components/faq/FaqMain/Question"
 
-const Faq = () => {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-    return (
-        <Layout>
-            <Main>
-                <Head>
+const Faq = ({}) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <DefaultLayout>
+      <Main>
+      <Head>
                     <title>Veel gestelde vragen | Mr Again</title>
                     <meta
                     name="Keywords"
@@ -35,11 +39,18 @@ const Faq = () => {
                     <meta property="og:image" content="" />
                     <meta name="og_site_name" property="og:site_name" content="Mr Again" />
                 </Head>
-            <FaqBannerSection />
-            <FaqSection />
-            </Main>
-        </Layout>
-    )
+
+        <Wrapper>
+        <Top>
+          test
+        </Top>
+        <Content>
+            <Question/>
+        </Content>
+        </Wrapper>
+      </Main>
+    </DefaultLayout>
+  );
 };
 
 export default Faq;

@@ -10,14 +10,7 @@ export const Wrapper = styled.section`
   flex-direction: column;
 `;
 
-export const Top = styled.div`
-  background-color: #1CC174;
-  flex: 1 1 310px;
+export const Test1 = styled.section`
+  background-color: green;
+  height: 310px;
 `;
-
-export const Content = styled.div`
-  background-color: #F1F0F0;
-  height: auto;
-  min-height: 200px;
-
-`
