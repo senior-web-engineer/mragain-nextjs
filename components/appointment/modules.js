@@ -13,6 +13,16 @@ import * as yup from "yup";
 export const appointmentConfirmation = createModalModule();
 export const appointmentReview = createModalModule();
 
+const DEFAULT_SERVICE = {
+  guarantee: 0,
+  price: 0,
+  device: 10,
+  brand: 19,
+  model: 120,
+  status: -1,
+  reparation: 49,
+};
+
 // NOTE: when adding address validation
 // use the when method (https://github.com/jquense/yup#mixedwhenkeys-string--arraystring-builder-object--value-schema-schema-schema)
 const validator = yup.object({
@@ -26,6 +36,16 @@ export const appointmentForm = createFormModule({
   validator,
   async init(shop) {
     const fromAddressBar = router.router.query;
+
+    function getDefaultValue(type, defaultValue) {
+      const value = fromAddressBar[type]
+      if (["undefined", "null"].includes(value)) {
+        return defaultValue;
+      }
+
+      return value
+    }
+
     const address = [shop.street || "", shop.city || ""]
       .filter(Boolean)
       .join(", ");
@@ -34,7 +54,10 @@ export const appointmentForm = createFormModule({
       shopAddress: address,
       shopName: shop.name,
       ...fromAddressBar,
-      service: JSON.parse(fromAddressBar.service),
+      device: getDefaultValue("device", DEFAULT_SERVICE.device),
+      brand: getDefaultValue("brand", DEFAULT_SERVICE.brand),
+      model: getDefaultValue("model", DEFAULT_SERVICE.model),
+      service: getDefaultValue("service", DEFAULT_SERVICE.reparation),
       location: "in-store",
       paymentType: "cash",
       date: new Date().toString(),
@@ -52,8 +75,11 @@ export const appointmentForm = createFormModule({
   async submit(data) {
     const service = serviceFetcher.selector(store.ref.getState()).result;
     const formatedDate = moment(data.date).format("MM-DD-YYYY");
-    const reparationId =  service?.reparation.id ? parseInt(service.reparation.id) : 0
-    const repairSeviceData = {
+    const reparationId = service?.reparation.id
+      ? parseInt(service.reparation.id)
+      : 0;
+
+    let repairSeviceData = {
       device: parseInt(data.device),
       brand: parseInt(data.brand),
       model: parseInt(data.model),
@@ -62,6 +88,19 @@ export const appointmentForm = createFormModule({
       guarantee: service?.guarantee_time,
       reparation: reparationId,
     };
+
+    if (!reparationId) {
+      repairSeviceData = {
+        guarantee: 0,
+        price: 0,
+        device: 10,
+        brand: 19,
+        model: 120,
+        status: -1,
+        reparation: 49,
+      };
+    }
+
     const payload = {
       name: data.shopName,
       address: data.shopAddress,
@@ -69,7 +108,7 @@ export const appointmentForm = createFormModule({
       appointmentData: {
         date: formatedDate,
         time: data.time,
-        reparation: reparationId,
+        reparation: reparationId || 49,
         client_name: data.name,
         client_email: data.email,
         client_phone: data.tel,
