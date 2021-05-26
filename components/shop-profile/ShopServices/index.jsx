@@ -422,10 +422,10 @@ function AppointmentButton() {
               continueWitoutServiceModal.actions
                 .open({
                   type: "warning",
-                  message: "No service was selected",
+                  message: "Wil je een algemene diagnose afspraak maken?",
                   description:
-                    "Do you wish to continue witout providing information on the device, model and service?",
-                  buttonLabel: "Yes",
+                    "Je hebt geen reparatie geselecteerd, wil je doorgaan met het maken van een algemene reparatie afspraak?",
+                  buttonLabel: "Ja",
                 })
                 .then(() => {
                   router.push(nextLocation);
@@ -516,7 +516,7 @@ export default function ShopServices({ shop }) {
   return (
     <MaxConstraints>
       <Panel>
-        <SubTitle>Scheduele an apointment</SubTitle>
+        <SubTitle>Bekijk onze reparaties & maak een afspraak</SubTitle>
         <Form module={filtersFormModule}>
           <OnMobile only>
             <MobileDeviceSelectorWrap>
