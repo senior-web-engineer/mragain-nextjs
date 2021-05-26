@@ -188,7 +188,7 @@ function MobileAppointmentButton({ searchUrlData }) {
     <OnMobile only>
       <MobileToolbar>
         <Link href={`/search-results?${urlData}`}>
-          <Button disabled={!service} as="a">Book appointment</Button>
+          <Button disabled={!service} as="a">Bekijk reparateurs</Button>
         </Link>
       </MobileToolbar>
     </OnMobile>
@@ -231,7 +231,7 @@ export default function ModelPage({ data, reparations }) {
         <ReparationWrap.LastCell>
           {data.price[0] ? (
             <div>
-              <label>Starts at</label>
+              <label>Prijs vanaf</label>
               <price>&euro;{data?.price?.[0]}</price>
             </div>
           ) : null}
@@ -266,7 +266,7 @@ export default function ModelPage({ data, reparations }) {
       </WhiteBackground>
       <ServicesSection>
         <MaxConstraints>
-          <SubTitle>ALL AVAILABLE SERVICES OFFERED FOR {data.model_name}</SubTitle>
+          <SubTitle>ALLE {data.model_name} REPARATIES</SubTitle>
           <Form module={appointmentFormModule}>
             <Field name="service" as={RadioGroup}>
               {reparations.map(renderReparation)}

@@ -140,13 +140,13 @@ export function DeviceFinder({ models, deviceName, brandName }) {
     <>
       <SearchWrap>
         <div>
-          <SubTitle>Device list</SubTitle>
-          <H2>Find your device</H2>
+          <SubTitle>Alle apparaten</SubTitle>
+          <H2>Vind je apparaat</H2>
         </div>
         <div>
           <StyledInput
             prefix={<FontAwesomeIcon icon={faSearch} />}
-            placeholder="Search for device"
+            placeholder="Apparaat of model"
           />
         </div>
       </SearchWrap>

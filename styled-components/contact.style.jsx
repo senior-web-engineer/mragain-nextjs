@@ -37,6 +37,7 @@ export const Box = styled.div`
     padding: 40px 0px 0px 120px;
     background: #f4f3f3;
     display: flex;
+    margin-bottom: -127px;
     @media (max-width: 768px) {
       flex: 1 1 80px;
       padding: 20px 0px 20px 30px;

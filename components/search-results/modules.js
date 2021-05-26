@@ -116,7 +116,7 @@ export const shopListModule = createListModule({
       };
     } catch (err) {
       notification.error({
-        message: "Something went wrong while getting the list of shops",
+        message: "We hebben geen resultaten gevonden, heb je je locatie en apparaat ingevuld?",
       });
 
       return { items: [] };

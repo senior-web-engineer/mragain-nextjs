@@ -54,16 +54,14 @@ export const FormBox = styled.div`
 
 export const LabelWrapper = styled.div`
   position: relative;
-  margin: 20px 0px;
 
   &:first-of-type {
-    margin: 0px 0px 10px 0px;
   }
 
   &:nth-of-type(5) {
     :after {
       position: absolute;
-      top: 34px;
+      top: 43px;
       left: 17px;
       content: "+31";
       font-size: 11px;
@@ -82,7 +80,7 @@ export const Label = styled.label`
   margin: -13px 0px 0px 0px;
   background: white;
   position: absolute;
-  top: 15px;
+  top: 25px;
   left: 17px;
   font-size: 11px;
   color: #a0a0a0;
@@ -119,9 +117,7 @@ export const NumberInput = styled.input`
 `;
 
 export const TextArea = styled.textarea`
-  display: block;
   width: 100%;
-  height: 100%;
   border: 1px solid hsl(0, 0%, 89%);
   border-bottom-width: 1px;
   padding: 32px 6px 6px 17px;
@@ -132,6 +128,7 @@ export const TextArea = styled.textarea`
   font-family: "Montserrat";
   resize: none;
   overflow: auto;
+  flex: 1 1 150px;
 `;
 
 export const Button = styled.button`
@@ -146,3 +143,10 @@ export const Button = styled.button`
   border: none;
   z-index: 1;
 `;
+
+export const FlexHelper = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-height: 400px;
+  gap: 3px;
+`

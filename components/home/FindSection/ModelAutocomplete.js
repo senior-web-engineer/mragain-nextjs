@@ -111,13 +111,13 @@ export default function ModelAutocomplete() {
       size="large"
       placeholder={
         <>
-          <FontAwesomeIcon icon={faSearch} /> Apparaat of model
+          <FontAwesomeIcon icon={faSearch} /> Apparaat
         </>
       }
       dropdownStyle={{ minWidth: "320px" }}
       name="model"
     >
-      <StyledInput aria-label="Apparaat of model" />
+      <StyledInput aria-label="Apparaat" />
     </Field>
   );
 }
