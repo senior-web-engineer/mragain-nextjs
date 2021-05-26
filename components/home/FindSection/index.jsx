@@ -141,7 +141,7 @@ const FindImage = styled.div`
 function SearchButton() {
   const { state } = useFormContext();
 
-  const { zip, device } = state.values || {};
+  const { zip, device = 0 } = state.values || {};
 
   return (
     <Link
@@ -190,7 +190,7 @@ export default function FindSection() {
                 options={deviceOptions}
                 placeholder={
                   <>
-                    <FontAwesomeIcon icon={faMobile} /> Apparaat of model
+                    <FontAwesomeIcon icon={faMobile} /> Apparaat
                   </>
                 }
               />

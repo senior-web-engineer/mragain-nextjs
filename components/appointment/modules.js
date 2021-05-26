@@ -20,7 +20,6 @@ const validator = yup.object({
   email: yup.string().required().email(),
   tel: yup.string().required(),
   time: yup.string().required(),
-  service: yup.string().required()
 });
 
 export const appointmentForm = createFormModule({

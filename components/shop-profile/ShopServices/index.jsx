@@ -30,6 +30,8 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import Loader from "@/components/common/Loader";
 import moment from "moment";
+import ConfirmationModal from "@/components/common/ConfirmationModal";
+import { continueWitoutServiceModal } from "@/components/shop-profile/modules";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
   loading: Loader,
@@ -347,13 +349,29 @@ function AppointmentButton() {
   const { values } = useFormContext().state;
   const router = useRouter();
   const formValues = filtersFormModule.state.values;
-
+  const nextLocation = `/${router.query["city"]}/${router.query["shopId][api"]}/appointment?device=${formValues.device}&brand=${formValues.brand}&model=${formValues.model}&service=${values.service}`;
   return (
     <NextStepWrap>
       <Link
-        href={`/${router.query["city"]}/${router.query["shopId][api"]}/appointment?device=${formValues.device}&brand=${formValues.brand}&model=${formValues.model}&service=${values.service}`}
+        href={nextLocation}
       >
-        <Button aria-label="Book service">
+        <Button
+          aria-label="Book service"
+          onClick={(ev) => {
+            if (!formValues.service) {
+              ev.preventDefault();
+              continueWitoutServiceModal.actions.open({
+                type: "warning",
+                message: "No service was selected",
+                description:
+                  "Do you wish to continue witout providing information on the device, model and service?",
+                buttonLabel: "Yes",
+              }).then(() => {
+                router.push(nextLocation)
+              })
+            }
+          }}
+        >
           Afspraak maken <FontAwesomeIcon icon={faArrowRight} />{" "}
         </Button>
       </Link>
@@ -501,6 +519,7 @@ export default function ShopServices({ shop }) {
           {apointmentButton}
         </MobileToolbar>
       </OnMobile>
+      <ConfirmationModal module={continueWitoutServiceModal} />
     </MaxConstraints>
   );
 }
