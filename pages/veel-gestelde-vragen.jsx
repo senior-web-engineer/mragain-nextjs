@@ -8,7 +8,7 @@ import {
 import DefaultLayout from "@/components/layouts/Homepage";
 import Head from "next/head";
 import { FRONT_END_URL } from "../constants.js";
-import Question from "@/components/faq/FaqMain/Question"
+import QuestionList from "@/components/faq/FaqMain/QuestionList"
 
 const Faq = ({}) => {
   useEffect(() => {
@@ -42,10 +42,10 @@ const Faq = ({}) => {
 
         <Wrapper>
         <Top>
-          test
+          Green Search area
         </Top>
         <Content>
-            <Question/>
+            <QuestionList/>
         </Content>
         </Wrapper>
       </Main>
