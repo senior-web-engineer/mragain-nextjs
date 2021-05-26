@@ -55,7 +55,7 @@ const DescriptionWrap = styled.div`
   padding: 20px 0;
   margin-top: 20px;
   border-top: 2px solid #fafafa;
-  font-size: 12px;
+  font-size: 16px;
   color: #707070;
   font-weight: 300;
 `;
