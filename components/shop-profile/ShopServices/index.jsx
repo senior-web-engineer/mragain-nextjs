@@ -25,7 +25,7 @@ import Link from "next/link";
 import Button from "@/components/ui/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { OnMobile, useScreenSize } from "@/utils/media";
+import media, { OnMobile, useScreenSize } from "@/utils/media";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import Loader from "@/components/common/Loader";
@@ -49,11 +49,7 @@ const nextSlotCss = css`
     margin-right: 10px;
 
     > div:first-child {
-      width: 40px;
-    }
-
-    > div:nth-child(2) {
-      margin-left: 16px;
+      display: none!important;
     }
 
     label {
@@ -62,12 +58,26 @@ const nextSlotCss = css`
       margin: 0;
     }
   }
+
+
+  ${media.tablet`
+    next-slot {
+      > div:first-child {
+        width: 40px;
+        display: block!important;
+      }
+
+      > div:nth-child(2) {
+        margin-left: 16px;
+      }
+  `}
 `;
 
 const ModelFields = styled.div`
   display: flex;
   align-items: center;
-  margin: 19px 0;
+  margin: 19px -24px;
+  padding: 0 10px;
 
   > div {
     width: 100%;
@@ -84,6 +94,10 @@ const ModelFields = styled.div`
       margin: 11px 11px 2px 11px;
     }
   }
+
+  ${media.tablet`
+    padding: 0 24px;
+  `}
 
   ${nextSlotCss}
 `;
@@ -106,9 +120,11 @@ const ReparationCell = styled.div`
 `;
 
 const NextStepWrap = styled.div`
-  margin: 20px -24px 0;
-  padding: 15px 24px;
-  border-top: 1px solid #ddd;
+  ${media.tablet`
+    margin: 20px -24px 0;
+    padding: 15px 24px;
+    border-top: 1px solid #ddd;
+  `}
 `;
 
 const MobileToolbar = styled.div`
@@ -122,7 +138,7 @@ const MobileToolbar = styled.div`
   width: 100%;
   z-index: 110;
   left: 0;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 
   ${NextStepWrap} {
@@ -203,7 +219,7 @@ const SERVICE_COLUMNS = [
 
 const ServiceMobileListing = styled.div`
   background-color: #fafafa;
-  margin: 0 -20px;
+  margin: 0 -24px;
   padding: 0 20px;
 `;
 
@@ -304,8 +320,8 @@ const MobileDeviceSelector = createSelectComponent({
 
 const MobileDeviceSelectorWrap = styled.div`
   background-color: #fff;
-  margin: 5px -20px;
-  padding: 5px 20px;
+  margin: 5px -24px;
+  padding: 5px 10px;
 
   .ant-radio-group {
     width: 100%;
@@ -332,8 +348,11 @@ const MobileDeviceSelectorWrap = styled.div`
 const Panel = styled.div`
   background: #ffffff;
   border-radius: 8px;
-  padding: 1px 24px;
+  padding: 1px 24px 0;
   margin-bottom: 40px;
+  margin-top: 40px;
+  margin-top: 40px;
+  overflow: hidden;
 
   .ant-table-wrapper {
     border: 1px solid #f0f0f0;
@@ -342,7 +361,7 @@ const Panel = styled.div`
   }
 
   .ant-table-thead tr th {
-    background: #FAFAFA;
+    background: #fafafa;
   }
 
   ${SubTitle} {
@@ -350,6 +369,10 @@ const Panel = styled.div`
     padding: 15px 24px;
     border-bottom: 1px solid #ddd;
   }
+
+  ${media.tablet`
+    margin-top: 0;
+  `}
 `;
 
 function AppendIdentifier({ Component, name }) {
