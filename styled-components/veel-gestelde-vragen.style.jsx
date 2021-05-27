@@ -12,12 +12,45 @@ export const Wrapper = styled.section`
 
 export const Top = styled.div`
   background-color: #1CC174;
-  flex: 1 1 310px;
+  padding: 100px;
+`;
+
+export const FAQTitle = styled.div`
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: #0076a3;
+  font-weight: 600;
+  font-family: "Dosis";
+`
+
+export const FAQSubtitle = styled.div`
+  font-size: 30px;
+  color: #ffffff;
+  font-weight: 600;
+  font-family: "Montserrat";
+`
+
+export const FAQInput = styled.input`
+  outline:none;
+  border:none;
+  border-radius: 24px;
+  width: 554px;
+    padding:20px;
+  ::placeholder,
+  ::-webkit-input-placeholder {
+    font-size: 13px;
+    color: #e0e0e0;
+    font-weight: 900;
+  }
+  :-ms-input-placeholder {
+    font-size: 13px;
+    color: #e0e0e0;
+    font-weight: 900;
+  }
 `;
 
 export const Content = styled.div`
   background-color: #F1F0F0;
   height: auto;
   min-height: 200px;
-
 `

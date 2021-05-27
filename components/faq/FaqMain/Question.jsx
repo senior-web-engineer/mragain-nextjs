@@ -36,19 +36,20 @@ const Block = ({ faq }) => {
     }
     return (
         faq.map((item, index) => {
-            let { a, q, isOpen } = item
+            let { a, q } = item
+            let isOpen = clicked === index
             return (
                 <Fragment key={index}>
-                    <QuestionContainer onClick={() => toggle(index)}>
+                    <QuestionContainer style={{ fontWeight: !isOpen ? '500' : '700' }} onClick={() => toggle(index)}>
                         <BlockText>
                             {q}
                         </BlockText>
                         <PlusMinusButton>
-                            {clicked !== index ? <FontAwesomeIcon icon={faPlus} style={{ color: "#1CC174" }} /> :
+                            {!isOpen ? <FontAwesomeIcon icon={faPlus} style={{ color: "#1CC174" }} /> :
                                 <FontAwesomeIcon icon={faMinus} style={{ color: "#1CC174" }} />}
                         </PlusMinusButton>
                     </QuestionContainer>
-                    {clicked === index && <AnswerContainer >
+                    {isOpen && <AnswerContainer >
                         <BlockText>
                             {a}
                         </BlockText>

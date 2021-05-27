@@ -35,26 +35,33 @@ export const Underline = styled.span`
 export const TitleText = styled.span`
     width: auto;
     border-bottom: 3px solid #1CC174;
+    font-size: 15px;
+    color: #303030;
+    font-weight: 600;
+    font-family: "Montserrat";
     line-height: 30px;
     z-index:2;
 `;
 
 export const Content = styled.div`
-width: 100%;
-display: flex;
-flex-direction: column;
-align-items: end;
-padding-bottom:20px;
+    width: 100%;
+    padding-bottom:20px;
+    margin-bottom: -127px;
 `;
 
 export const QuestionContainer = styled.div`
-position:relative;
+    font-size: 15px;
+    color: #303030;
+    font-weight: 500;
+    font-family: "Montserrat";
+    position:relative;
     background-color:white;
     width:900px;
     height: 80px;
     border-radius:5px 5px 0px 0px;
     margin-top:9px;
     cursor:pointer;
+    margin-left:auto;
 `;
 
 export const BlockText = styled.div`
@@ -65,6 +72,9 @@ export const BlockText = styled.div`
 `;
 
 export const AnswerContainer = styled.div`
+    font-size: 15px;
+    color: #303030;
+    font-family: "Montserrat";
     position:relative;
     background-color: #E5E5E5;
     width:900px;
@@ -72,6 +82,8 @@ export const AnswerContainer = styled.div`
     border-radius:0px 0px 5px 5px;
     margin-bottom: 9px;
     border-left: 4px solid #1CC174;
+    margin-left:auto;
+
 `;
 
 export const PlusMinusButton = styled.div`
