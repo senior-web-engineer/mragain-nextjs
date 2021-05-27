@@ -424,7 +424,7 @@ function AppointmentButton() {
                   type: "warning",
                   message: "Wil je een algemene diagnose afspraak maken?",
                   description:
-                    "Je hebt geen reparatie geselecteerd, wil je doorgaan met het maken van een algemene reparatie afspraak?",
+                    "Selecteer een reparatie zodat de reparateur weet waarvoor je komt. Staat je reparatie er niet tussen, of weet je niet wat er aan de hand is? Ga dan door en maak een diagnose afspraak.",
                   buttonLabel: "Ja",
                 })
                 .then(() => {
