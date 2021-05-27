@@ -409,7 +409,7 @@ const ModelSelector = AppendIdentifier({
 function AppointmentButton() {
   const { values } = useFormContext().state;
   const router = useRouter();
-  const formValues = serviceFormModule.state.values;
+  const formValues = filtersFormModule.state.values;
   const nextLocation = `/${router.query["city"]}/${router.query["shopId][api"]}/appointment?device=${formValues.device}&brand=${formValues.brand}&model=${formValues.model}&service=${values.service}`;
   return (
     <NextStepWrap>
@@ -417,7 +417,7 @@ function AppointmentButton() {
         <Button
           aria-label="Book service"
           onClick={(ev) => {
-            if (!formValues.service) {
+            if (!values.service) {
               ev.preventDefault();
               continueWitoutServiceModal.actions
                 .open({
