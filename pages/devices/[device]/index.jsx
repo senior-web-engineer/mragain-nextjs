@@ -3,15 +3,24 @@ import DefaultLayout from "@/components/layouts/Homepage";
 import { MaxConstraints } from "@/components/styled/layout";
 import { API_PATH } from "@/constants";
 import api from "@/utils/api";
-import React from "react";
+import React, { useState } from "react";
 import DeviceModels from "@/components/devices/DeviceModels";
 
-
 export default function Devices({ models, deviceName }) {
+  const [searchTerm, updateSearchTerm] = useState("");
+
   return (
     <DefaultLayout>
       <MaxConstraints>
-        <DeviceFinder models={models} deviceName={deviceName}/>
+        <DeviceFinder
+          models={models}
+          deviceName={deviceName}
+          searchTerm={searchTerm}
+          onSearch={updateSearchTerm}
+        />
+        {searchTerm ? (
+          <DeviceModels models={models} searchTerm={searchTerm} />
+        ) : null}
       </MaxConstraints>
     </DefaultLayout>
   );
@@ -23,7 +32,7 @@ export async function getServerSideProps(ctx) {
   return {
     props: {
       models,
-      deviceName
+      deviceName,
     },
   };
 }

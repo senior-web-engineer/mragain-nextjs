@@ -89,7 +89,13 @@ const BrandsInnerWrap = styled.div`
   box-sizing: content-box;
 `;
 
-export function DeviceFinder({ models, deviceName, brandName }) {
+export function DeviceFinder({
+  models,
+  deviceName,
+  brandName,
+  searchTerm,
+  onSearch,
+}) {
   const deviceTypes = useMemo(() => {
     return models.reduce((accumulator, model) => {
       if (accumulator.find((existing) => existing.name === model.device_name)) {
@@ -147,14 +153,20 @@ export function DeviceFinder({ models, deviceName, brandName }) {
           <StyledInput
             prefix={<FontAwesomeIcon icon={faSearch} />}
             placeholder="Apparaat of model"
+            value={searchTerm}
+            onChange={(ev) => onSearch(ev.target.value)}
           />
         </div>
       </SearchWrap>
-      <DevicesList>{deviceTypes.map(renderDevice)}</DevicesList>
-      {deviceName ? (
-        <BrandsList>
-          <BrandsInnerWrap>{brands.map(renderBrand)}</BrandsInnerWrap>
-        </BrandsList>
+      {!searchTerm ? (
+        <>
+          <DevicesList>{deviceTypes.map(renderDevice)}</DevicesList>
+          {deviceName ? (
+            <BrandsList>
+              <BrandsInnerWrap>{brands.map(renderBrand)}</BrandsInnerWrap>
+            </BrandsList>
+          ) : null}
+        </>
       ) : null}
     </>
   );

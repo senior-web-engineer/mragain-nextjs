@@ -141,7 +141,7 @@ const ModelFields = styled.div`
     flex-grow: 1;
     width: 100%;
     margin-top: 0 !important;
-    margin: 10px 5px;
+    margin: 10px 0;
     background-color: #fff;
 
     > label {
@@ -1175,7 +1175,7 @@ export default function SearchResults() {
                 <ModelFields>
                   <OnMobile only>
                     <MobileDeviceSelector
-                      name="Apparaat"
+                      name="device"
                       aria-input-field-name="device"
                       onChange={onDeviceChange}
                     />
