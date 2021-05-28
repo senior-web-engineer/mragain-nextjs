@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Main,
   Wrapper,
@@ -14,9 +14,66 @@ import { FRONT_END_URL } from "../constants.js";
 import QuestionList from "@/components/faq/FaqMain/QuestionList"
 
 const Faq = ({ }) => {
+  let data = [
+    {
+        title: 'Guarantee',
+        faq:
+            [
+                {
+                    q: 'How about my warranty?',
+                    a: '100% return for free'
+                },
+
+                {
+                    q: 'How much warranty do I have on my repair?',
+                    a: 'Lorem ipsum answer sample'
+                },
+                {
+                    q: 'What can I do if the repairer and I disagree on the warranty?',
+                    a: 'Lorem ipsum answer sample'
+                }
+            ]
+    },
+    {
+        title: 'Payment',
+        faq:
+            [
+                {
+                    q: 'Where and how do I pay for my repair?',
+                    a: '100% return for free'
+                },
+                {
+                    q: 'How much warranty do I have on my repair?',
+                    a: 'Lorem ipsum answer sample'
+                },
+            ]
+    },
+
+]
+  const [filteredData, setFilteredData] = useState(data)
+  const [searchTerm, setSearchTerm] = useState('')
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleOnChange = (evt) => {
+    setSearchTerm(evt.target.value)
+    setFilteredData(filterFAQs(searchTerm))
+  }
+
+  const filterFAQs = (string) => {
+    // No search term - Display Everything
+    if (string == '') return data
+
+    // Filter Faq Array By search term
+    let filtered = data.map((item) => {
+        return {...item, faq: item.faq.filter(faq => 
+          faq.q.toLowerCase().includes(string.toLowerCase())) }
+      })
+    return filtered
+  }
+
   return (
     <DefaultLayout>
       <Main>
@@ -42,7 +99,6 @@ const Faq = ({ }) => {
           <meta property="og:image" content="" />
           <meta name="og_site_name" property="og:site_name" content="Mr Again" />
         </Head>
-
         <Wrapper>
           <Top>
             <FAQTitle>
@@ -51,10 +107,10 @@ const Faq = ({ }) => {
             <FAQSubtitle>
               Hi! How can we help you?
             </FAQSubtitle>
-            <FAQInput placeholder=' 🔍 Search our knowledgebase' />
+            <FAQInput onChange={(e)=>handleOnChange(e)} placeholder=' 🔍 Search our knowledgebase' />
           </Top>
           <Content>
-            <QuestionList />
+            <QuestionList data={filteredData} />
           </Content>
         </Wrapper>
       </Main>

@@ -7,14 +7,14 @@ import { Fragment } from "react";
 
 const Question = ({ data }) => {
     let { title, faq } = data
-
+ 
     return (
         <InnerContainer>
             <Title>
                 <TitleText>
                     {title}
                 </TitleText>
-                <Underline></Underline>
+                <Underline/>
             </Title>
             <Content>
                 <Block faq={faq} />
@@ -34,6 +34,8 @@ const Block = ({ faq }) => {
         }
         setClicked(index)
     }
+  
+    if (!faq.length > 0) return null
     return (
         faq.map((item, index) => {
             let { a, q } = item

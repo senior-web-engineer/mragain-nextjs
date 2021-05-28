@@ -7,12 +7,16 @@ export const Main = styled.div`
 
 export const OuterContainer = styled.div`
     background:#F1F0F0;
+    margin-bottom: -127px;
 `;
 
 export const InnerContainer = styled.div`
     max-width: 1130px;
-    margin: auto;
-    margin-top: 105px;
+    margin: 0 auto;
+    margin-top: 100px;
+    &:last-child {
+        padding-bottom:100px;
+    }
 `;
 
 export const Title = styled.div`
@@ -46,15 +50,12 @@ export const TitleText = styled.span`
 export const Content = styled.div`
     width: 100%;
     padding-bottom:20px;
-    margin-bottom: -127px;
 `;
 
 export const QuestionContainer = styled.div`
     font-size: 15px;
     color: #303030;
-    font-weight: 500;
     font-family: "Montserrat";
-    position:relative;
     background-color:white;
     width:900px;
     height: 80px;
@@ -62,7 +63,8 @@ export const QuestionContainer = styled.div`
     margin-top:9px;
     cursor:pointer;
     margin-left:auto;
-`;
+    position:relative;
+    `;
 
 export const BlockText = styled.div`
     margin-left: 30px;

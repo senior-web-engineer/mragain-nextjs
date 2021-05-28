@@ -33,7 +33,7 @@ export const FAQSubtitle = styled.div`
 export const FAQInput = styled.input`
   outline:none;
   border:none;
-  border-radius: 24px;
+  border-radius: 60px;
   width: 554px;
     padding:20px;
   ::placeholder,
