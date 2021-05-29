@@ -3,10 +3,12 @@ import DefaultLayout from "@/components/layouts/Homepage";
 import { MaxConstraints } from "@/components/styled/layout";
 import { API_PATH } from "@/constants";
 import api from "@/utils/api";
-import React from "react";
+import React, { useState } from "react";
 import DeviceModels from "@/components/devices/DeviceModels";
 
 export default function Devices({ models, deviceName, brandName }) {
+  const [searchTerm, updateSearchTerm] = useState("");
+
   return (
     <DefaultLayout>
       <MaxConstraints>
@@ -14,11 +16,14 @@ export default function Devices({ models, deviceName, brandName }) {
           models={models}
           deviceName={deviceName}
           brandName={brandName}
+          searchTerm={searchTerm}
+          onSearch={updateSearchTerm}
         />
         <DeviceModels
           models={models}
           deviceName={deviceName}
           brandName={brandName}
+          searchTerm={searchTerm}
         />
       </MaxConstraints>
     </DefaultLayout>
