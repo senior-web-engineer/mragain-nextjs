@@ -273,7 +273,7 @@ const ShopDashboard = (routerProps) => {
     setPhone(el.device.id);
     setBrand(el.brand.id);
     setModel(el.model.id);
-    setReparation(el.reparation.id);
+    setReparation(el.reparation.reparation_name);
     setShowModal(true);
     setSelectRepId(el.id);
     setGuarantee(el.guarnantee);
