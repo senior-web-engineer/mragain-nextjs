@@ -348,8 +348,8 @@ const ShopDashboard = (routerProps) => {
       repList !== [] &&
       repList.map((element) => {
         return (
-          <Option value={element.id} key={element.reparation_name}>
-            {element.reparation_name}
+          <Option value={element.id} key={element.name}>
+            {element.name}
           </Option>
         );
       })
