@@ -7,16 +7,24 @@ export const Main = styled.div`
 
 export const OuterContainer = styled.div`
     background:#F1F0F0;
-    margin-bottom: -127px;
+    position:relative;
 `;
 
 export const InnerContainer = styled.div`
     max-width: 1130px;
+    width: 90%;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 50px;
     &:last-child {
         padding-bottom:100px;
     }
+
+    @media (max-width: 500px) {
+        margin-top: 30px;
+        &:last-child {
+            padding-bottom:30px;
+        }
+      }
 `;
 
 export const Title = styled.div`
@@ -25,6 +33,12 @@ export const Title = styled.div`
     display: flex;
     justify-content: start;
     margin-bottom:30px;
+    @media (max-width: 500px) {
+        width: 322px;
+        margin: 0 auto;
+        margin-bottom: 30px;
+}
+
 `;
 
 export const Underline = styled.span`
@@ -33,6 +47,9 @@ export const Underline = styled.span`
     width: 100%;
     top:30px;
     z-index: 1;
+    @media (max-width: 500px) {
+        width: 322px;
+    }
 `;
 
 
@@ -45,7 +62,10 @@ export const TitleText = styled.span`
     font-family: "Montserrat";
     line-height: 30px;
     z-index:2;
-`;
+    @media (max-width: 500px) {
+        font-size:13px;
+    }
+    `;
 
 export const Content = styled.div`
     width: 100%;
@@ -57,13 +77,20 @@ export const QuestionContainer = styled.div`
     color: #303030;
     font-family: "Montserrat";
     background-color:white;
-    width:900px;
     height: 80px;
     border-radius:5px 5px 0px 0px;
     margin-top:9px;
     cursor:pointer;
     margin-left:auto;
     position:relative;
+
+    width: 79.6466%;
+    @media (max-width: 500px) {
+            font-size: 10px;
+            width: 322px;
+            height:50px;
+            margin: 9px auto 0 auto;
+    }
     `;
 
 export const BlockText = styled.div`
@@ -71,6 +98,8 @@ export const BlockText = styled.div`
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+    max-width: 75%;
+
 `;
 
 export const AnswerContainer = styled.div`
@@ -85,10 +114,21 @@ export const AnswerContainer = styled.div`
     margin-bottom: 9px;
     border-left: 4px solid #1CC174;
     margin-left:auto;
+    width: 79.6466%;
+    @media (max-width: 500px) {
+            font-size: 10px;
+            width: 322px;
+            height:50px;
+            margin: 0 auto;
+    }
 
 `;
 
 export const PlusMinusButton = styled.div`
     position: absolute;
     right:30px;
+    top:30px;
+    @media (max-width: 500px) {
+        top:20px
+    }
 `;

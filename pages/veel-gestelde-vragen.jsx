@@ -12,6 +12,7 @@ import DefaultLayout from "@/components/layouts/Homepage";
 import Head from "next/head";
 import { FRONT_END_URL } from "../constants.js";
 import QuestionList from "@/components/faq/FaqMain/QuestionList"
+import GetInTouch from "@/components/faq/FaqMain/GetInTouch"
 
 const Faq = ({ }) => {
   let data = [
@@ -99,7 +100,6 @@ const Faq = ({ }) => {
           <meta property="og:image" content="" />
           <meta name="og_site_name" property="og:site_name" content="Mr Again" />
         </Head>
-        <Wrapper>
           <Top>
             <FAQTitle>
               FREQUENTLY ASKED QUESTIONS
@@ -107,12 +107,12 @@ const Faq = ({ }) => {
             <FAQSubtitle>
               Hi! How can we help you?
             </FAQSubtitle>
-            <FAQInput onChange={(e)=>handleOnChange(e)} placeholder=' 🔍 Search our knowledgebase' />
+            <FAQInput onChange={(e)=>handleOnChange(e)} placeholder=' 🔍     Search our knowledgebase' />
           </Top>
           <Content>
             <QuestionList data={filteredData} />
+            <GetInTouch/>
           </Content>
-        </Wrapper>
       </Main>
     </DefaultLayout>
   );
