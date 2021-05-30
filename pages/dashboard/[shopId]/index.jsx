@@ -291,7 +291,7 @@ const ShopDashboard = (routerProps) => {
     }
     setPrice(el.price);
     getSearchFilterFieldExt(el.model.id);
-  };
+  }ii;
 
   function handlePhoneChange(value, e) {
     setPhone(value);
@@ -348,8 +348,8 @@ const ShopDashboard = (routerProps) => {
       repList !== [] &&
       repList.map((element) => {
         return (
-          <Option value={element.id} key={element.name}>
-            {element.name}
+          <Option value={element.id} key={element.reparation_name}>
+            {element.reparation_name}
           </Option>
         );
       })
