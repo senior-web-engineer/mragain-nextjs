@@ -291,7 +291,7 @@ const ShopDashboard = (routerProps) => {
     }
     setPrice(el.price);
     getSearchFilterFieldExt(el.model.id);
-  }ii;
+  };
 
   function handlePhoneChange(value, e) {
     setPhone(value);
