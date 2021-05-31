@@ -15,8 +15,6 @@ import AdvantagesSection from "@/components/home/AdvantagesSection/index.jsx";
 import StepsSection from "@/components/home/StepsSection/index.jsx";
 import ShopsSection from "@/components/home/ShopsSection/index.jsx";
 import OrderReview from "@/components/appointment/OrderReview.jsx";
-import { wrapper } from "@/configureStore.js";
-import { searchForm } from "@/components/home/modules.js";
 
 const HeroWrap = styled.div`
   overflow: hidden;
@@ -109,8 +107,7 @@ export default function Home({ shopList }) {
   );
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(async() => {
-  await searchForm.actions.initialize();
+export async function getServerSideProps() {
   const shopList = await getNewestShopList(8, null, false);
 
   return {
@@ -119,4 +116,4 @@ export const getServerSideProps = wrapper.getServerSideProps(async() => {
       shopList: shopList,
     },
   };
-})
+}
