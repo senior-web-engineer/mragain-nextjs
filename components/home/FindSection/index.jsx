@@ -20,6 +20,7 @@ import GooglePlaces from "@/components/common/GooglePlaces";
 import Select from "@/components/ui/Select";
 import api from "@/utils/api";
 import { API_PATH } from "@/constants";
+import { wrapper } from "@/configureStore";
 
 //
 
@@ -147,7 +148,7 @@ function SearchButton() {
     <Link
       href={`/search-results?zip=${zip}&device=${device}`}
     >
-      <Button aria-label="Zoek">
+      <Button aria-label="Zoek" as="a">
         <span>Zoek</span>
         <FontAwesomeIcon icon={faArrowRight} />
       </Button>
@@ -159,7 +160,6 @@ export default function FindSection() {
   const [devices, setDevices] = useState([]);
 
   useEffect(() => {
-    searchForm.actions.initialize();
     async function loadData() {
       const data = await api.get(`${API_PATH.GETDEVICES}/`);
       setDevices(data);
