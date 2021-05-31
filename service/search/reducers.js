@@ -149,7 +149,9 @@ const searchReducer = (state = initial_state, action) => {
       let fields = [];
       let recvFields = action.payload;
       let devDest, isExist, brandSrc, brandDst, modelSrc;
-
+      if (!Array.isArray(recvFields)) {
+        return state;
+      }
       recvFields.forEach((el1) => {
         devDest = el1["brand"]["device"];
         isExist = [];
@@ -228,19 +230,21 @@ const searchReducer = (state = initial_state, action) => {
     }
     case FETCH_FILTER_RPG_LIST: {
       let fields = [];
-      let recvFields = action.payload;
+      let recvFields = action.payload || [];
+      if (!Array.isArray(recvFields)) {
+        return state;
+      }
       recvFields.forEach((el) => {
-        if (el["reparation"].is_deleted === false) {
-          fields.push({
-            price: el.price,
-            guar_time: el.guarantee_time,
-            reparation: {
-              id: el["reparation"].id,
-              name: el["reparation"].reparation_name,
-            },
-          });
-        }
+        fields.push({
+          price: el.price,
+          guar_time: el.guarantee_time,
+          reparation: {
+            id: el["reparation"].id,
+            name: el["reparation"].reparation_name,
+          },
+        });
       });
+
       return {
         ...state,
         fieldlistRPG: fields,
