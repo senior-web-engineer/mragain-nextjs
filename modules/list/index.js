@@ -57,12 +57,15 @@ export function createListModule({
     actions: {
       async initialize() {
         const query = await getInitialQuery?.();
+        const promise =  fetchData(query);
         dispatch({
           type: "INITIALIZE_LIST",
           guid,
-          promise: fetchData(query),
+          promise,
           query,
         });
+
+        return promise;
       },
       nextPage() {
         dispatch({ type: "NEXT_PAGE", guid });
