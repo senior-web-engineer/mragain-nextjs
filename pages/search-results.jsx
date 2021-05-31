@@ -9,6 +9,8 @@ import React, {
 import styled, { css } from "styled-components";
 import isEqual from "fast-deep-equal";
 import { Waypoint } from "react-waypoint";
+import { store, wrapper } from "@/configureStore";
+
 
 import DefaultLayout from "@/components/layouts/Homepage";
 import {
@@ -56,7 +58,6 @@ import moment from "moment";
 import dynamic from "next/dynamic";
 import Loader from "@/components/common/Loader";
 import { getShopLogo, getShopRoute } from "@/utils/shop";
-import { store, wrapper } from "@/configureStore";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
   loading: Loader,

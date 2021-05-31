@@ -21,6 +21,7 @@ import Select from "@/components/ui/Select";
 import api from "@/utils/api";
 import { API_PATH } from "@/constants";
 import { wrapper } from "@/configureStore";
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
 //
 
@@ -141,12 +142,29 @@ const FindImage = styled.div`
 
 function SearchButton() {
   const { state } = useFormContext();
-
+  const [currentLocation, setCurrentLocation] = useState({ long: 0, lat: 0 });
   const { zip, device = 0 } = state.values || {};
+
+  useEffect(() => {
+    async function effect() {
+      try {
+        const [result] = await geocodeByAddress(state.values.zip);
+        const { lng, lat } = await getLatLng(result);
+        return setCurrentLocation({
+          long: lng,
+          lat,
+        });
+      } catch (err) {}
+
+      return setCurrentLocation({ long: 0, lat: 0 });
+    }
+
+    effect();
+  }, [state.values.zip]);
 
   return (
     <Link
-      href={`/search-results?zip=${zip}&device=${device}`}
+      href={`/search-results?zip=${zip}&device=${device}&long=${currentLocation.long}&lat=${currentLocation.lat}`}
     >
       <Button aria-label="Zoek" as="a">
         <span>Zoek</span>
