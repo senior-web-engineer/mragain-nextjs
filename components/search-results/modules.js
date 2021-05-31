@@ -32,19 +32,17 @@ export async function prepareData({location, ...data}) {
 
 export const filtersFormModule = createFormModule({
   guid: "shops",
-  async init() {
-    const fromAddressBar = router.router.query;
-
+  async init(query = {}) {
     return {
-      location: fromAddressBar.zip || fromAddressBar.location || "",
-      device: fromAddressBar.device || "0",
-      brand: fromAddressBar.brand || "0",
-      model: fromAddressBar.model || "0",
-      service: fromAddressBar.service || "0",
-      distance: fromAddressBar.distance || "5",
-      guarantee: fromAddressBar.guarantee || "-1",
-      price: fromAddressBar.price || "-1",
-      sort: parseInt(fromAddressBar.sort) || 0,
+      location: query.zip || query.location || "",
+      device: query.device || "0",
+      brand: query.brand || "0",
+      model: query.model || "0",
+      service: query.service || "0",
+      distance: query.distance || "5",
+      guarantee: query.guarantee || "-1",
+      price: query.price || "-1",
+      sort: parseInt(query.sort) || 0,
       long: 0,
       lat: 0,
       limit: 100,
@@ -56,8 +54,10 @@ export const shopListModule = createListModule({
   guid: "shops",
   async fetchData(query = {}) {
     const params = await prepareData(query);
-    const nextURL = `${router.pathname}?${querystring.stringify(params)}`;
-    router.router.replace(nextURL, nextURL, { shallow: true });
+    if (typeof window !== "undefined") {
+      const nextURL = `${router.pathname}?${querystring.stringify(params)}`;
+      router.router.replace(nextURL, nextURL, { shallow: true });
+    }
     try {
       let data = await api.get(`${API_PATH.SEARCH}/`, {
         ...params,
@@ -116,7 +116,7 @@ export const shopListModule = createListModule({
       };
     } catch (err) {
       notification.error({
-        message: "Something went wrong while getting the list of shops",
+        message: "We hebben geen resultaten gevonden, heb je je locatie en apparaat ingevuld?",
       });
 
       return { items: [] };

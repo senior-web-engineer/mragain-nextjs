@@ -123,3 +123,4 @@ export const openTimeFetcher = dataFetcher({
 
 export const reviewsModal = createModalModule()
 export const shopInfo = createModalModule()
+export const continueWitoutServiceModal = createModalModule()

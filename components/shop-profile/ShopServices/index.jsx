@@ -25,11 +25,15 @@ import Link from "next/link";
 import Button from "@/components/ui/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { OnMobile, useScreenSize } from "@/utils/media";
+import media, { OnMobile, useScreenSize } from "@/utils/media";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import Loader from "@/components/common/Loader";
 import moment from "moment";
+import ConfirmationModal from "@/components/common/ConfirmationModal";
+import { continueWitoutServiceModal } from "@/components/shop-profile/modules";
+import { SubTitle } from "@/components/styled/text";
+import Image from "next/image";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
   loading: Loader,
@@ -38,29 +42,50 @@ const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
 
 const nextSlotCss = css`
   next-slot {
-    display: block;
+    display: flex;
     white-space: nowrap;
     font-size: 12px;
-    font-weight: 500;
+    line-height: 18px;
     margin-right: 10px;
+
+    > div:first-child {
+      display: none!important;
+    }
 
     label {
       color: #c0c0c0;
       display: block;
+      margin: 0;
     }
   }
+
+
+  ${media.tablet`
+    next-slot {
+      > div:first-child {
+        width: 40px;
+        display: block!important;
+      }
+
+      > div:nth-child(2) {
+        margin-left: 16px;
+      }
+  `}
 `;
 
 const ModelFields = styled.div`
   display: flex;
   align-items: center;
-  margin: 19px -5px;
+  margin: 19px -24px;
+  padding: 0 10px;
 
   > div {
     width: 100%;
     margin-top: 0 !important;
     margin: 0 5px;
     background-color: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 4px;
 
     .ant-select {
       width: 100%;
@@ -69,6 +94,10 @@ const ModelFields = styled.div`
       margin: 11px 11px 2px 11px;
     }
   }
+
+  ${media.tablet`
+    padding: 0 24px;
+  `}
 
   ${nextSlotCss}
 `;
@@ -91,7 +120,11 @@ const ReparationCell = styled.div`
 `;
 
 const NextStepWrap = styled.div`
-  margin: 49px 0 86px;
+  ${media.tablet`
+    margin: 20px -24px 0;
+    padding: 15px 24px;
+    border-top: 1px solid #ddd;
+  `}
 `;
 
 const MobileToolbar = styled.div`
@@ -105,7 +138,7 @@ const MobileToolbar = styled.div`
   width: 100%;
   z-index: 110;
   left: 0;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 
   ${NextStepWrap} {
@@ -186,7 +219,7 @@ const SERVICE_COLUMNS = [
 
 const ServiceMobileListing = styled.div`
   background-color: #fafafa;
-  margin: 0 -20px;
+  margin: 0 -24px;
   padding: 0 20px;
 `;
 
@@ -287,8 +320,8 @@ const MobileDeviceSelector = createSelectComponent({
 
 const MobileDeviceSelectorWrap = styled.div`
   background-color: #fff;
-  margin: 5px -20px;
-  padding: 5px 20px;
+  margin: 5px -24px;
+  padding: 5px 10px;
 
   .ant-radio-group {
     width: 100%;
@@ -310,6 +343,36 @@ const MobileDeviceSelectorWrap = styled.div`
       background-color: #06c987;
     }
   }
+`;
+
+const Panel = styled.div`
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1px 24px 0;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  margin-top: 40px;
+  overflow: hidden;
+
+  .ant-table-wrapper {
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .ant-table-thead tr th {
+    background: #fafafa;
+  }
+
+  ${SubTitle} {
+    margin: 0 -24px;
+    padding: 15px 24px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  ${media.tablet`
+    margin-top: 0;
+  `}
 `;
 
 function AppendIdentifier({ Component, name }) {
@@ -347,13 +410,29 @@ function AppointmentButton() {
   const { values } = useFormContext().state;
   const router = useRouter();
   const formValues = filtersFormModule.state.values;
-
+  const nextLocation = `/${router.query["city"]}/${router.query["shopId][api"]}/appointment?device=${formValues.device}&brand=${formValues.brand}&model=${formValues.model}&service=${values.service}`;
   return (
     <NextStepWrap>
-      <Link
-        href={`/${router.query["city"]}/${router.query["shopId][api"]}/appointment?device=${formValues.device}&brand=${formValues.brand}&model=${formValues.model}&service=${values.service}`}
-      >
-        <Button disabled={!values.service} aria-label="Book service">
+      <Link href={nextLocation}>
+        <Button
+          aria-label="Book service"
+          onClick={(ev) => {
+            if (!values.service) {
+              ev.preventDefault();
+              continueWitoutServiceModal.actions
+                .open({
+                  type: "warning",
+                  message: "Wil je een algemene diagnose afspraak maken?",
+                  description:
+                    "Selecteer een reparatie zodat de reparateur weet waarvoor je komt. Staat je reparatie er niet tussen, of weet je niet wat er aan de hand is? Ga dan door en maak een diagnose afspraak.",
+                  buttonLabel: "Ja",
+                })
+                .then(() => {
+                  router.push(nextLocation);
+                });
+            }
+          }}
+        >
           Afspraak maken <FontAwesomeIcon icon={faArrowRight} />{" "}
         </Button>
       </Link>
@@ -370,12 +449,15 @@ function NextSlot({ id }) {
 
   return (
     <next-slot>
-      <label>Eerst mogelijke afspraak</label>
-      <date>
-        {moment(data.next_slot).isValid()
-          ? moment(data.next_slot).format("DD MMM, HH:mm")
-          : data.next_slot}
-      </date>
+      <Image src="/images/icons/nextSlot.svg" width={41} height={40} />
+      <div>
+        <label>Eerst mogelijke afspraak</label>
+        <date>
+          {moment(data.next_slot).isValid()
+            ? moment(data.next_slot).format("DD MMM, HH:mm")
+            : data.next_slot}
+        </date>
+      </div>
     </next-slot>
   );
 }
@@ -433,74 +515,78 @@ export default function ShopServices({ shop }) {
 
   return (
     <MaxConstraints>
-      <Form module={filtersFormModule}>
-        <OnMobile only>
-          <MobileDeviceSelectorWrap>
-            <MobileDeviceSelector name="device" onChange={onDeviceChange} />
-          </MobileDeviceSelectorWrap>
-        </OnMobile>
-        <ModelFields>
-          <OnMobile show={false}>
-            <NextSlot id={shop.id} />
-            <DeviceSelector
-              name="device"
+      <Panel>
+        <SubTitle>Bekijk onze reparaties & maak een afspraak</SubTitle>
+        <Form module={filtersFormModule}>
+          <OnMobile only>
+            <MobileDeviceSelectorWrap>
+              <MobileDeviceSelector name="device" onChange={onDeviceChange} />
+            </MobileDeviceSelectorWrap>
+          </OnMobile>
+          <ModelFields>
+            <OnMobile show={false}>
+              <NextSlot id={shop.id} />
+              <DeviceSelector
+                name="device"
+                as={Select}
+                label="Apparaat"
+                aria-input-field-name="device"
+                onChange={onDeviceChange}
+                dropdownStyle={{ minWidth: "200px" }}
+              />
+            </OnMobile>
+            <BrandSelector
+              name="brand"
               as={Select}
-              label="Apparaat"
-              aria-input-field-name="device"
-              onChange={onDeviceChange}
+              label="Merk"
+              aria-input-field-name="brand"
+              onChange={onBandChange}
               dropdownStyle={{ minWidth: "200px" }}
             />
-          </OnMobile>
-          <BrandSelector
-            name="brand"
-            as={Select}
-            label="Merk"
-            aria-input-field-name="brand"
-            onChange={onBandChange}
-            dropdownStyle={{ minWidth: "200px" }}
+            <ModelSelector
+              name="model"
+              as={Select}
+              label="Model"
+              aria-input-field-name="model"
+              {...(screenSize === "mobile"
+                ? {}
+                : { dropdownStyle: { minWidth: "200px" } })}
+            />
+          </ModelFields>
+          <SyncFormValues
+            onChange={(data) => {
+              shopServicesListModule.actions.updateQuery(data);
+              if (!serviceFormModule.state) {
+                return;
+              }
+              serviceFormModule.actions.onFieldChange({
+                name: "service",
+                value: null,
+              });
+            }}
           />
-          <ModelSelector
-            name="model"
-            as={Select}
-            label="Model"
-            aria-input-field-name="model"
-            {...(screenSize === "mobile"
-              ? {}
-              : { dropdownStyle: { minWidth: "200px" } })}
-          />
-        </ModelFields>
-        <SyncFormValues
-          onChange={(data) => {
-            shopServicesListModule.actions.updateQuery(data);
-            if (!serviceFormModule.state) {
-              return;
-            }
-            serviceFormModule.actions.onFieldChange({
-              name: "service",
-              value: null,
-            });
-          }}
-        />
-      </Form>
-      <List module={shopServicesListModule}>
-        <Form module={serviceFormModule}>
-          <OnMobile show={false}>
-            <Table columns={SERVICE_COLUMNS} />
-          </OnMobile>
-          <OnMobile only>
-            <ServiceMobileListing>
-              <Listing Item={MobileServiceItem} />
-            </ServiceMobileListing>
-          </OnMobile>
         </Form>
-      </List>
-      <OnMobile show={false}>{apointmentButton}</OnMobile>
-      <OnMobile only>
-        <MobileToolbar>
-          <NextSlot id={shop.id} />
-          {apointmentButton}
-        </MobileToolbar>
-      </OnMobile>
+        <List module={shopServicesListModule}>
+          <Form module={serviceFormModule}>
+            <OnMobile show={false}>
+              <Table columns={SERVICE_COLUMNS} />
+            </OnMobile>
+            <OnMobile only>
+              <ServiceMobileListing>
+                <Listing Item={MobileServiceItem} />
+              </ServiceMobileListing>
+            </OnMobile>
+          </Form>
+        </List>
+        <OnMobile show={false}>{apointmentButton}</OnMobile>
+        <OnMobile only>
+          <MobileToolbar>
+            <NextSlot id={shop.id} />
+            {apointmentButton}
+          </MobileToolbar>
+        </OnMobile>
+        <ConfirmationModal module={continueWitoutServiceModal} />
+      </Panel>
     </MaxConstraints>
   );
 }

@@ -174,44 +174,48 @@ export default function BookingInfoMobile({ shop, nextStep }) {
 
   const content = (
     <>
-      <ServiceDetailsWrap>
-        <ServiceImage>
-          {service?.reparation?.repair_image ? (
-            <Image
-              layout="fill"
-              objectFit="contain"
-              src={service.reparation.repair_image}
-            />
-          ) : null}
-        </ServiceImage>
-        <ServiceDetails>
-          <div>
-            <label>Apparaat:</label>
-            <strong>
-              <DeviceName />
-            </strong>
-          </div>
-          <div>
-            <label>Merk:</label>
-            <strong>
-              <BrandName />
-            </strong>
-          </div>
-          <div>
-            <label>Model:</label>
-            <strong>
-              <ModelName />
-            </strong>
-          </div>
-        </ServiceDetails>
-      </ServiceDetailsWrap>
+      {service ? (
+        <ServiceDetailsWrap>
+          <ServiceImage>
+            {service?.reparation?.repair_image ? (
+              <Image
+                layout="fill"
+                objectFit="contain"
+                src={service.reparation.repair_image}
+              />
+            ) : null}
+          </ServiceImage>
+          <ServiceDetails>
+            <div>
+              <label>Apparaat:</label>
+              <strong>
+                <DeviceName />
+              </strong>
+            </div>
+            <div>
+              <label>Merk:</label>
+              <strong>
+                <BrandName />
+              </strong>
+            </div>
+            <div>
+              <label>Model:</label>
+              <strong>
+                <ModelName />
+              </strong>
+            </div>
+          </ServiceDetails>
+        </ServiceDetailsWrap>
+      ) : null}
       <Form module={appointmentForm}>
         <UserInfo />
       </Form>
-      <ServiceCostWrap>
-        <item>{service?.reparation?.reparation_name}</item>
-        <price>&euro;{service?.price}</price>
-      </ServiceCostWrap>
+      {service ? (
+        <ServiceCostWrap>
+          <item>{service?.reparation?.reparation_name}</item>
+          <price>&euro;{service?.price}</price>
+        </ServiceCostWrap>
+      ) : null}
     </>
   );
 
@@ -239,12 +243,13 @@ export default function BookingInfoMobile({ shop, nextStep }) {
             <location>{location}</location>
           </ShopDetails>
         </ShopWrap>
-
-        <TotalWrap>
-          <label>Te betalen bij reparateur</label>
-          <price>&euro;{service?.price}</price>
-          <FontAwesomeIcon icon={faChevronDown} />
-        </TotalWrap>
+        {service?.price ? (
+          <TotalWrap>
+            <label>Te betalen bij reparateur</label>
+            <price>&euro;{service.price}</price>
+            <FontAwesomeIcon icon={faChevronDown} />
+          </TotalWrap>
+        ) : null}
       </MainWrap>
     </Popover>
   );

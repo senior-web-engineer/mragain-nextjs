@@ -39,16 +39,19 @@ export const initStore = (context) => {
   const routerMiddleware = createRouterMiddleware();
 
   const { asPath, pathname, query } = context.ctx || Router.router || {};
-
-  let initialState
+  let initialState = typeof window !== "undefined" ? window?.__NEXT_DATA__ : {};
+  initialState = initialState?.props?.pageProps?.initialState || {}
   if (asPath) {
     const url = format({ pathname, query })
     initialState = {
+      ...initialState,
       router: initialRouterState(url, asPath)
     }
   }
+  if (store.ref) {
+    return store.ref;
+  }
   store.ref = createStore(rootReducer, initialState, composeEnhancers(applyMiddleware(routerMiddleware, thunk, apiMiddleware)))
-
   return store.ref;
 }
 

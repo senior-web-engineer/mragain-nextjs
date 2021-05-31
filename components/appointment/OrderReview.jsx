@@ -83,20 +83,28 @@ const AppointmentReviewModalContent = connect(() => ({
           {modalData.form.email} <br />
           {modalData.form.tel}
         </d-term>
-        <hr />
-        <d-def>Jouw apparaat</d-def>
-        <d-term>
-          {modalData.device.device_name} <br />
-          {modalData.brand.brand_name} <br />
-          {modalData.model.model_name}
-        </d-term>
-        <hr />
-        <d-def>Reparatie & prijs</d-def>
-        <d-term>
-          {modalData.service.reparation.reparation_name}
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&euro;
-          {modalData.service.price}
-        </d-term>
+        {modalData.device || modalData.brand || modalData.model ? (
+          <>
+            <hr />
+            <d-def>Jouw apparaat</d-def>
+            <d-term>
+              {modalData.device?.device_name} <br />
+              {modalData.brand?.brand_name} <br />
+              {modalData.model?.model_name}
+            </d-term>
+          </>
+        ) : null}
+        {modalData.service ? (
+          <>
+            <hr />
+            <d-def>Reparatie & prijs</d-def>
+            <d-term>
+              {modalData.service?.reparation.reparation_name}
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&euro;
+              {modalData.service?.price}
+            </d-term>
+          </>
+        ) : null}
       </d-list>
     </ContentWrap>
   );
