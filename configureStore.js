@@ -48,6 +48,9 @@ export const initStore = (context) => {
       router: initialRouterState(url, asPath)
     }
   }
+  if (store.ref) {
+    return store.ref;
+  }
   store.ref = createStore(rootReducer, initialState, composeEnhancers(applyMiddleware(routerMiddleware, thunk, apiMiddleware)))
   return store.ref;
 }

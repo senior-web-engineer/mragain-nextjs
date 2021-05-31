@@ -826,10 +826,6 @@ const ModelSelector = AppendIdentifier({
     parseOptions(items = []) {
       return parseOptions(items || [], "model_name");
     },
-    Component: (props) => {
-      const { state } = useFormContext();
-      return <Field {...props} identifier={state?.values?.brand} />;
-    },
   }),
   name: "brand",
 });
@@ -839,10 +835,6 @@ const ServiceSelector = AppendIdentifier({
     dataFetcher: serviceFetcher,
     parseOptions(items = []) {
       return parseOptions(items || [], "reparation_name");
-    },
-    Component: (props) => {
-      const { state } = useFormContext();
-      return <Field {...props} identifier={state?.values?.model} />;
     },
   }),
   name: "model",
@@ -1054,6 +1046,17 @@ export default function SearchResults() {
   useEffect(() => {
     async function main() {
       await loadScript();
+      const formValues = filtersFormModule.state.values;
+      if (formValues.device) {
+        await brandFetcher.key(formValues.device).fetch();
+      }
+      if (formValues.brand) {
+        await modelFetcher.key(formValues.brand).fetch();
+      }
+
+      if (formValues.model) {
+        await serviceFetcher.key(formValues.model).fetch();
+      }
     }
     main();
   }, []);
@@ -1310,20 +1313,9 @@ export default function SearchResults() {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  async ({ req }) => {
-    await filtersFormModule.actions.initialize(req.query);
+  async ({ req, query }) => {
+    await filtersFormModule.actions.initialize(query);
     await shopListModule.actions.initialize();
     await deviceFetcher.fetch();
-    const formValues = filtersFormModule.state.values;
-    if (formValues.device) {
-      await brandFetcher.key(formValues.device).fetch();
-    }
-    if (formValues.brand) {
-      await modelFetcher.key(formValues.brand).fetch();
-    }
-
-    if (formValues.model) {
-      await serviceFetcher.key(formValues.model).fetch();
-    }
   }
 );
