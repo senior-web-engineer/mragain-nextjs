@@ -1048,14 +1048,14 @@ export default function SearchResults() {
       await loadScript();
       const formValues = filtersFormModule.state.values;
       if (formValues.device) {
-        await brandFetcher.key(formValues.device).fetch();
+        brandFetcher.key(formValues.device).fetch();
       }
       if (formValues.brand) {
-        await modelFetcher.key(formValues.brand).fetch();
+        modelFetcher.key(formValues.brand).fetch();
       }
 
       if (formValues.model) {
-        await serviceFetcher.key(formValues.model).fetch();
+        serviceFetcher.key(formValues.model).fetch();
       }
     }
     main();
