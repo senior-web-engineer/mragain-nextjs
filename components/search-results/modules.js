@@ -24,26 +24,29 @@ export async function prepareData({location, ...data}) {
       location,
     };
   } catch (err) {
-    return data;
+    console.log(err)
   }
 
+  return parsedData;
 }
 
 export const filtersFormModule = createFormModule({
   guid: "shops",
-  async init(query = {}) {
+  async init() {
+    const fromAddressBar = router.router.query;
+
     return {
-      location: query.zip || query.location || "",
-      device: query.device || "0",
-      brand: query.brand || "0",
-      model: query.model || "0",
-      service: query.service || "0",
-      distance: query.distance || "5",
-      guarantee: query.guarantee || "-1",
-      price: query.price || "-1",
-      sort: parseInt(query.sort) || 0,
-      long: query.long || 0,
-      lat: query.lat || 0,
+      location: fromAddressBar.zip || fromAddressBar.location || "",
+      device: fromAddressBar.device || "0",
+      brand: fromAddressBar.brand || "0",
+      model: fromAddressBar.model || "0",
+      service: fromAddressBar.service || "0",
+      distance: fromAddressBar.distance || "5",
+      guarantee: fromAddressBar.guarantee || "-1",
+      price: fromAddressBar.price || "-1",
+      sort: parseInt(fromAddressBar.sort) || 0,
+      long: 0,
+      lat: 0,
       limit: 100,
     };
   }
@@ -53,10 +56,8 @@ export const shopListModule = createListModule({
   guid: "shops",
   async fetchData(query = {}) {
     const params = await prepareData(query);
-    if (typeof window !== "undefined") {
-      const nextURL = `${router.pathname}?${querystring.stringify(params)}`;
-      router.router.replace(nextURL, nextURL, { shallow: true });
-    }
+    const nextURL = `${router.pathname}?${querystring.stringify(params)}`;
+    router.router.replace(nextURL, nextURL, { shallow: true });
     try {
       let data = await api.get(`${API_PATH.SEARCH}/`, {
         ...params,
