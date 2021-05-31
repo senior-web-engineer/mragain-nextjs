@@ -176,7 +176,7 @@ export function getReparationModelDetails(data, dispatch) {
 
 export function getSearchFilterFieldExt(model_id, dispatch) {
   axios
-    .get(`${API_PATH.GETFILTERFIELDEXT}/?id=${model_id}`, tokenConfig())
+    .get(`${API_PATH.GETFILTERFIELDEXT}/?id=${model_id}`)
     .then((res) => {
       dispatch(fetchFiterRPGList(res.data));
     })
