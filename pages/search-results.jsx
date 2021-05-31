@@ -9,8 +9,6 @@ import React, {
 import styled, { css } from "styled-components";
 import isEqual from "fast-deep-equal";
 import { Waypoint } from "react-waypoint";
-import { store, wrapper } from "@/configureStore";
-
 
 import DefaultLayout from "@/components/layouts/Homepage";
 import {
@@ -666,8 +664,9 @@ function ShopPrice({ item }) {
 
 function ShopItem({ item }) {
   const router = useRouter();
-  const { selectedShop, updateSelectedShop, showMap } =
-    useContext(ShopBridgeContext);
+  const { selectedShop, updateSelectedShop, showMap } = useContext(
+    ShopBridgeContext
+  );
   const location = [item.shop.street || "", item.shop.city || ""]
     .filter(Boolean)
     .join(", ");
@@ -827,6 +826,10 @@ const ModelSelector = AppendIdentifier({
     parseOptions(items = []) {
       return parseOptions(items || [], "model_name");
     },
+    Component: (props) => {
+      const { state } = useFormContext();
+      return <Field {...props} identifier={state?.values?.brand} />;
+    },
   }),
   name: "brand",
 });
@@ -836,6 +839,10 @@ const ServiceSelector = AppendIdentifier({
     dataFetcher: serviceFetcher,
     parseOptions(items = []) {
       return parseOptions(items || [], "reparation_name");
+    },
+    Component: (props) => {
+      const { state } = useFormContext();
+      return <Field {...props} identifier={state?.values?.model} />;
     },
   }),
   name: "model",
@@ -1042,11 +1049,16 @@ export default function SearchResults() {
   const [showMobileSearch, setShowMobileSearch] = useState();
   const [selectedShop, updateSelectedShop] = useState(null);
   const [showMap, updateShowMap] = useState(false);
+  const router = useRouter();
   const mobileSelectorsRef = useRef(null);
-
   useEffect(() => {
     async function main() {
       await loadScript();
+      await filtersFormModule.actions.initialize();
+      if (!isEqual(shopListModule?.state?.filters, filtersFormModule.state.values)) {
+        shopListModule.actions.initialize();
+      }
+      deviceFetcher.fetch();
       const formValues = filtersFormModule.state.values;
       if (formValues.device) {
         brandFetcher.key(formValues.device).fetch();
@@ -1059,6 +1071,7 @@ export default function SearchResults() {
         serviceFetcher.key(formValues.model).fetch();
       }
     }
+
     main();
   }, []);
 
@@ -1312,11 +1325,3 @@ export default function SearchResults() {
     </ShopBridgeContext.Provider>
   );
 }
-
-export const getServerSideProps = wrapper.getServerSideProps(
-  async ({ req, query }) => {
-    await filtersFormModule.actions.initialize(query);
-    await shopListModule.actions.initialize();
-    await deviceFetcher.fetch();
-  }
-);
