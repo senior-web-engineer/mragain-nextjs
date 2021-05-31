@@ -31,13 +31,13 @@ const ModelLink = styled.a`
   margin: 0 20px;
 `;
 
-export default function DeviceModels({ models, brandName, searchTerm }) {
+export default function DeviceModels({ models, brandName, searchTerm, deviceName }) {
   const filteredModels = useMemo(() => {
     if (searchTerm) {
       return models.filter((model) => model.model_name.toLowerCase().startsWith(searchTerm.toLowerCase()));
     }
 
-    return models.filter((model) => model.brand_name === brandName);
+    return models.filter((model) => model.brand_name === brandName && model.device_name === deviceName);
   }, [models, brandName, searchTerm]);
 
   function renderModel(model) {
