@@ -16,11 +16,11 @@ export const appointmentReview = createModalModule();
 const DEFAULT_SERVICE = {
   guarantee: 0,
   price: 0,
-  device: 10,
-  brand: 19,
-  model: 120,
+  device: 4,
+  brand: 20,
+  model: 748,
   status: -1,
-  reparation: 49,
+  reparation: 54,
 };
 
 // NOTE: when adding address validation
@@ -93,11 +93,11 @@ export const appointmentForm = createFormModule({
       repairSeviceData = {
         guarantee: 0,
         price: 0,
-        device: 10,
-        brand: 19,
-        model: 120,
+        device: 4,
+        brand: 20,
+        model: 748,
         status: -1,
-        reparation: 49,
+        reparation: 54,
       };
     }
 
@@ -108,7 +108,7 @@ export const appointmentForm = createFormModule({
       appointmentData: {
         date: formatedDate,
         time: data.time,
-        reparation: reparationId || 49,
+        reparation: reparationId || 54,
         client_name: data.name,
         client_email: data.email,
         client_phone: data.tel,
