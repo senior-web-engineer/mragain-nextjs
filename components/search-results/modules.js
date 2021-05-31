@@ -24,10 +24,9 @@ export async function prepareData({location, ...data}) {
       location,
     };
   } catch (err) {
-    console.log(err)
+    return data;
   }
 
-  return parsedData;
 }
 
 export const filtersFormModule = createFormModule({
@@ -43,8 +42,8 @@ export const filtersFormModule = createFormModule({
       guarantee: query.guarantee || "-1",
       price: query.price || "-1",
       sort: parseInt(query.sort) || 0,
-      long: 0,
-      lat: 0,
+      long: query.long || 0,
+      lat: query.lat || 0,
       limit: 100,
     };
   }
