@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import {
   Main,
-  Wrapper,
   Top,
   Content,
   FAQTitle,
   FAQSubtitle,
   FAQInput,
+  FAQInputContainer,
+  FAQsvg,
 } from '@/styled-components/veel-gestelde-vragen.style'
 import DefaultLayout from '@/components/layouts/Homepage'
 import Head from 'next/head'
 import { FRONT_END_URL } from '../constants.js'
 import QuestionList from '@/components/faq/FaqMain/QuestionList'
 import GetInTouch from '@/components/faq/FaqMain/GetInTouch'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const Faq = ({}) => {
-  let data = [
+const Faq = () => {
+  // dummy data
+  let SampleData = [
     {
       title: 'Guarantee',
       faq: [
@@ -49,28 +53,27 @@ const Faq = ({}) => {
       ],
     },
   ]
-  const [filteredData, setFilteredData] = useState(data)
-  const [searchTerm, setSearchTerm] = useState('')
+  const [data, setData] = useState(SampleData)
+  const [filteredData, setFilteredData] = useState(SampleData)
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
   const handleOnChange = (evt) => {
-    setSearchTerm(evt.target.value)
-    setFilteredData(filterFAQs(searchTerm))
+    setFilteredData(filterFAQs(evt.target.value))
   }
 
-  const filterFAQs = (string) => {
+  const filterFAQs = (searchValue) => {
     // No search term - Display Everything
-    if (string == '') return data
+    if (searchValue == '') return data
 
-    // Filter Faq Array By search term
+    // Filter Faq Array by searchValue
     let filtered = data.map((item) => {
       return {
         ...item,
         faq: item.faq.filter((faq) =>
-          faq.question.toLowerCase().includes(string.toLowerCase())
+          faq.question.toLowerCase().includes(searchValue.toLowerCase())
         ),
       }
     })
@@ -112,10 +115,15 @@ const Faq = ({}) => {
         <Top>
           <FAQTitle>FREQUENTLY ASKED QUESTIONS</FAQTitle>
           <FAQSubtitle>Hi! How can we help you?</FAQSubtitle>
-          <FAQInput
-            onChange={(e) => handleOnChange(e)}
-            placeholder=' 🔍     Search our knowledgebase'
-          />
+          <FAQInputContainer>
+            <FAQInput
+              onChange={(e) => handleOnChange(e)}
+              placeholder='Search our knowledgebase'
+            />
+            <FAQsvg>
+              <FontAwesomeIcon icon={faSearch} style={{ color: '#e0e0e0' }} />
+            </FAQsvg>
+          </FAQInputContainer>
         </Top>
         <Content>
           <QuestionList data={filteredData} />

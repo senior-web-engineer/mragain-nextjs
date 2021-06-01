@@ -13,15 +13,17 @@ export const OuterContainer = styled.div`
 
 export const InnerContainer = styled.div`
   max-width: 1130px;
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   margin-top: 50px;
+  padding: 0 20px;
   &:last-child {
     padding-bottom: 100px;
   }
 
   @media (max-width: ${sizes.mobile}px) {
     margin-top: 30px;
+    padding: 0;
     &:last-child {
       padding-bottom: 30px;
     }
@@ -86,7 +88,7 @@ export const QuestionContainer = styled.div`
   width: 79.6466%;
   @media (max-width: ${sizes.mobile}px) {
     font-size: 10px;
-    width: 322px;
+    width: 320px;
     height: 50px;
     margin: 9px auto 0 auto;
   }

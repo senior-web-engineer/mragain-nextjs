@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import {
   InnerContainer,
   Title,
@@ -12,7 +12,6 @@ import {
 } from '@/components/faq/FaqMain/Faq.style'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
-import { Fragment } from 'react'
 
 const Question = ({ data }) => {
   let { title, faq } = data
