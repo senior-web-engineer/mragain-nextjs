@@ -21,35 +21,53 @@ const Faq = () => {
   // dummy data
   let SampleData = [
     {
-      title: 'Guarantee',
+      title: 'Garantie',
       faq: [
         {
-          question: 'How about my warranty?',
-          answer: '100% return for free',
+          question: 'Hoe zit het met de garantie?',
+          answer: 'Na je reparatie ontvang je je garantiebewijs in je email, daarin staat ook tot wanneer je garantie hebt.',
         },
 
         {
-          question: 'How much warranty do I have on my repair?',
-          answer: 'Lorem ipsum answer sample',
+          question: 'Hoeveel garantie heb ik op mijn reparatie?',
+          answer: 'Alle reparateurs die bij MrAgain zijn aangesloten geven aan hoeveel garantie ze geven. Je kunt dit zien op de pagina van de betreffende reparateur. Let op: voor waterschade reparaties geldt vaak een maximale garantie van 3 maanden.',
         },
         {
           question:
-            'What can I do if the repairer and I disagree on the warranty?',
-          answer: 'Lorem ipsum answer sample',
+            'Wat kan ik doen als de reparateur en ik het niet eens zijn over de garantie?',
+          answer: 'Het is vervelend als jij en de reparateur van mening verschillen over de reparatie. Kom je er samen niet uit dan zullen we hierin bemiddelen. Let wel op: garante geldt alleen voor de reparatie en het gerepareerde onderdeel en vervalt bij zichtbare schade.',
         },
       ],
     },
     {
-      title: 'Payment',
+      title: 'Betalen',
       faq: [
         {
-          question: 'Where and how do I pay for my repair?',
-          answer: '100% return for free',
+          question: 'Waar en hoe moet ik betalen voor mijn reparatie?',
+          answer: 'Je betaalt bij de reparateur nadat deze de reparatie heeft uitgevoerd.',
         },
         {
-          question: 'How much warranty do I have on my repair?',
-          answer: 'Lorem ipsum answer sample',
+          question: 'Wat betaal ik voor mijn reparatie?',
+          answer: 'Je betaalt het bedrag dat vooraf is afgesproken voor de reparatie. Natuurlijk kan dit wijzigen als blijkt dat er een andere reparatie nodig is. De reparateur bespreekt dit dan met je.',
         },
+      ],
+    },
+    {
+      title: 'Reparatie',
+      faq: [ 
+	{
+          question: 'Hoe lang duurt mijn reparatie?',
+	  answer: 'De duur van je reparatie hangt af van de soort reparatie de beschikbaarheid van de reparateur. Normaal gesproken worden de meeste reparaties nog dezelfde dag uitgevoerd, lukt dit niet dan zal de reparateur dit met je bespreken.',
+        },
+      ],
+    },
+    {
+      title: 'Feedback en klachten',
+      faq: [
+	{
+          question: 'Ik heb feedback of een klacht, hoe kan ik contact met jullie opnemen?',
+	  answer: 'Je kunt ons gemakkelijk bereiken via onze contact pagina of mailen naar info@mragain.nl. We proberen dan zo snel mogelijk contact met je op te nemen!',
+	},
       ],
     },
   ]
@@ -114,11 +132,11 @@ const Faq = () => {
         </Head>
         <Top>
           <FAQTitle>FREQUENTLY ASKED QUESTIONS</FAQTitle>
-          <FAQSubtitle>Hi! How can we help you?</FAQSubtitle>
+          <FAQSubtitle>Hi! Hoe kunnen we je helpen?</FAQSubtitle>
           <FAQInputContainer>
             <FAQInput
               onChange={(e) => handleOnChange(e)}
-              placeholder='Search our knowledgebase'
+              placeholder='Zoek in onze FAQ'
             />
             <FAQsvg>
               <FontAwesomeIcon icon={faSearch} style={{ color: '#e0e0e0' }} />
