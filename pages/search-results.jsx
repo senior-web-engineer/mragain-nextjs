@@ -57,6 +57,7 @@ import moment from "moment";
 import dynamic from "next/dynamic";
 import Loader from "@/components/common/Loader";
 import { getShopLogo, getShopRoute } from "@/utils/shop";
+import Link from "next/link";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
   loading: Loader,
@@ -697,7 +698,7 @@ function ShopItem({ item }) {
     updateSelectedShop(item.shop.id);
   }
 
-  return (
+  const shopCard = (
     <ShopWrap
       ref={(node) => (shopRefs[item.shop.id] = node)}
       isSelected={item.shop.id === selectedShop}
@@ -756,6 +757,16 @@ function ShopItem({ item }) {
       </ShopDetails>
     </ShopWrap>
   );
+
+  if (typeof window === "undefined") {
+    return <Link href={shopRoute}>
+      <a>
+        {shopCard}
+      </a>
+    </Link>
+  }
+
+  return shopCard
 }
 
 function parseOptions(arr, key) {
