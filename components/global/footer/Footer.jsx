@@ -316,7 +316,7 @@ const FooterView = (routerProps) => {
             </FooterSitemap>
           </FooterLinkArea> 
         </FooterViewContent>
-      </DevicesContainer>{" "}*/}
+      </DevicesContainer>{" "}
       <FooterCopyright> Copyright @ 2021 MrAgain - info@mragain.nl </FooterCopyright>
       {!!notBot && (
         <CookieBanner
