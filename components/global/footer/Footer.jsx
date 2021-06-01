@@ -114,7 +114,7 @@ const FooterView = (routerProps) => {
                 </li>
 	        <li>
                   <Link prefetch={false} href="/reparatie">
-                    Alle apparaten
+                    De voordelen
                   </Link>
                 </li>
                 <li>
@@ -131,7 +131,7 @@ const FooterView = (routerProps) => {
                   <Link prefetch={false} href="/veel-gestelde-vragen">
                     Veel gestelde vragen
                   </Link>
-                </li> */}
+                </li>
                 <li>
                   <Link prefetch={false} href="/blog">
                     Blogs
@@ -264,23 +264,23 @@ const FooterView = (routerProps) => {
           </FooterLinkArea>
         </FooterViewContent>
       </FooterViewContainer>
-	  {/* <DevicesContainer show={visible}>
+       <DevicesContainer show={visible}>
         <FooterViewContent>
           <FooterLinkArea className="footer-link-area">
             <FooterSitemap ClassName="custome-footer-sitename">
               <FooterSitemapTitle>Apparaten</FooterSitemapTitle>
               <ul>
                 <li>
-                  <Link prefetch={false} href="/telefoon-reparatie">
+                  <Link prefetch={false} href="/devices">
                     Smartphones
                   </Link>
                 </li>
                 <li>
-                  <Link prefetch={false} href="/tablet-reparatie">
+                  <Link prefetch={false} href="/devices">
                     Tablets
                   </Link>
                 </li>
-	        <li>
+	{/*<li>
                   <Link prefetch={false} href="/headphone-reparatie">
                     Headphones
                   </Link>
@@ -299,7 +299,7 @@ const FooterView = (routerProps) => {
                   <Link prefetch={false} href="/consoles-reparatie">
                     Consoles
                   </Link>
-                </li>
+                </li>*/}
               </ul>
             </FooterSitemap>
           </FooterLinkArea>{" "}
