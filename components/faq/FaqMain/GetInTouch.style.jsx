@@ -15,6 +15,9 @@ export const Content = styled.div`
   margin: auto;
   padding: 60px 0;
   @media (max-width: ${sizes.tablet}px) {
+    padding: 45px 0;
+  }
+  @media (max-width: ${sizes.mobile}px) {
     flex-direction: column;
     justify-content: start;
     padding: 30px 0;
@@ -24,6 +27,9 @@ export const Content = styled.div`
 export const GetInTouchText = styled.div`
   margin-left: 20px;
   @media (max-width: ${sizes.tablet}px) {
+    margin-left: 20px;
+  }
+  @media (max-width: ${sizes.mobile}px) {
     margin-left: 25px;
   }
 `
@@ -34,7 +40,7 @@ export const Title = styled.div`
   font-weight: 500;
   font-family: 'Montserrat';
   @media (max-width: ${sizes.tablet}px) {
-    font-size: 15px;
+    font-size: 14px;
   }
 `
 
@@ -45,6 +51,11 @@ export const Subtitle = styled.div`
   font-weight: 400;
   font-family: 'Montserrat';
   @media (max-width: ${sizes.tablet}px) {
+    font-size: 10px;
+    width: auto;
+    max-width: 1000px;
+  }
+  @media (max-width: 550px) {
     font-size: 10px;
     max-width: 200px;
   }
@@ -62,7 +73,11 @@ export const GetInTouchButton = styled.button`
   padding: 20px 45px;
   margin-right: 20px;
   @media (max-width: ${sizes.tablet}px) {
-    width: 161px;
+    margin-right: 10px;
+    padding: 20px 35px;
+  }
+  @media (max-width: ${sizes.mobile}px) {
     margin: 20px 0 0 25px;
+    width: 161px;
   }
 `
