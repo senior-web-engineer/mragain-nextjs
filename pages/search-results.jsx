@@ -11,7 +11,6 @@ import isEqual from "fast-deep-equal";
 import { Waypoint } from "react-waypoint";
 import { store, wrapper } from "@/configureStore";
 
-
 import DefaultLayout from "@/components/layouts/Homepage";
 import {
   brandFetcher,
@@ -1047,17 +1046,6 @@ export default function SearchResults() {
   useEffect(() => {
     async function main() {
       await loadScript();
-      const formValues = filtersFormModule.state.values;
-      if (formValues.device) {
-        brandFetcher.key(formValues.device).fetch();
-      }
-      if (formValues.brand) {
-        modelFetcher.key(formValues.brand).fetch();
-      }
-
-      if (formValues.model) {
-        serviceFetcher.key(formValues.model).fetch();
-      }
     }
     main();
   }, []);
@@ -1318,5 +1306,16 @@ export const getServerSideProps = wrapper.getServerSideProps(
     await filtersFormModule.actions.initialize(query);
     await shopListModule.actions.initialize();
     await deviceFetcher.fetch();
+    const formValues = filtersFormModule.state.values;
+    if (formValues.device) {
+      brandFetcher.key(formValues.device).fetch();
+    }
+    if (formValues.brand) {
+      modelFetcher.key(formValues.brand).fetch();
+    }
+
+    if (formValues.model) {
+      serviceFetcher.key(formValues.model).fetch();
+    }
   }
 );
