@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 import {
   InnerContainer,
   Title,
@@ -9,13 +9,13 @@ import {
   AnswerContainer,
   BlockText,
   PlusMinusButton,
-} from "@/components/faq/FaqMain/Faq.style";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
-import { Fragment } from "react";
+} from '@/components/faq/FaqMain/Faq.style'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
+import { Fragment } from 'react'
 
 const Question = ({ data }) => {
-  let { title, faq } = data;
+  let { title, faq } = data
 
   return (
     <InnerContainer>
@@ -27,46 +27,45 @@ const Question = ({ data }) => {
         <Block faq={faq} />
       </Content>
     </InnerContainer>
-  );
-};
+  )
+}
 
-export default Question;
+export default Question
 
 const Block = ({ faq }) => {
-  const [clicked, setClicked] = useState(false);
-
+  const [expanded, setExpanded] = useState(false)
   const toggle = (index) => {
-    if (clicked === index) {
-      return setClicked(null);
+    if (expanded === index) {
+      return setExpanded(null)
     }
-    setClicked(index);
-  };
+    setExpanded(index)
+  }
 
-  if (!faq.length > 0) return null;
+  if (!faq.length > 0) return null
   return faq.map((item, index) => {
-    let { a, q } = item;
-    let isOpen = clicked === index;
+    let { answer, question } = item
+    let isOpen = expanded === index
     return (
       <Fragment key={index}>
         <QuestionContainer
-          style={{ fontWeight: !isOpen ? "500" : "700" }}
+          style={{ fontWeight: !isOpen ? '500' : '700' }}
           onClick={() => toggle(index)}
         >
-          <BlockText>{q}</BlockText>
+          <BlockText>{question}</BlockText>
           <PlusMinusButton>
             {!isOpen ? (
-              <FontAwesomeIcon icon={faPlus} style={{ color: "#1CC174" }} />
+              <FontAwesomeIcon icon={faPlus} style={{ color: '#1CC174' }} />
             ) : (
-              <FontAwesomeIcon icon={faMinus} style={{ color: "#1CC174" }} />
+              <FontAwesomeIcon icon={faMinus} style={{ color: '#1CC174' }} />
             )}
           </PlusMinusButton>
         </QuestionContainer>
         {isOpen && (
           <AnswerContainer>
-            <BlockText>{a}</BlockText>
+            <BlockText>{answer}</BlockText>
           </AnswerContainer>
         )}
       </Fragment>
-    );
-  });
-};
+    )
+  })
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import {
   GetinTouchContainer,
   Content,
@@ -6,12 +6,12 @@ import {
   Subtitle,
   GetInTouchText,
   GetInTouchButton,
-} from "./GetInTouch.style";
+} from './GetInTouch.style'
 
 const GetInTouch = () => {
   const handleGetInTouchAction = () => {
-    console.log("handleGetInTouchAction was clicked");
-  };
+    console.log('handleGetInTouchAction was clicked')
+  }
   return (
     <GetinTouchContainer>
       <Content>
@@ -26,7 +26,7 @@ const GetInTouch = () => {
         </GetInTouchButton>
       </Content>
     </GetinTouchContainer>
-  );
-};
+  )
+}
 
-export default GetInTouch;
+export default GetInTouch
