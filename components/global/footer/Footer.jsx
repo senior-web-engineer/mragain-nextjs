@@ -112,11 +112,11 @@ const FooterView = (routerProps) => {
                     Over ons
                   </Link>
                 </li>
-	  {/* <li>
+	        <li>
                   <Link prefetch={false} href="/reparatie">
-                    Telefoon reparatie
+                    Alle apparaten
                   </Link>
-                </li>*/}
+                </li>
                 <li>
                   <Link prefetch={false} href="/meld-je-aan-als-reparateur">
                     Meld je aan als reparateur
@@ -127,7 +127,7 @@ const FooterView = (routerProps) => {
                     Contact
                   </Link>
                 </li>
-	  {/* <li>
+	        <li>
                   <Link prefetch={false} href="/veel-gestelde-vragen">
                     Veel gestelde vragen
                   </Link>
@@ -137,8 +137,8 @@ const FooterView = (routerProps) => {
                     Blogs
                   </Link>
                 </li>
-	  {/*<li>
-                  <Link prefetch={false} href="/over-reparaties">
+	{/*<li>
+                  <Link prefetch={false} href="/reparatie">
                     Reparaties
                   </Link>
                 </li>*/}
