@@ -312,8 +312,8 @@ const FooterView = (routerProps) => {
                     Smartphones
                   </Link>
                 </li>
-              </ul>
-            </FooterSitemap>*/}
+              </ul>*/}
+            </FooterSitemap>
           </FooterLinkArea> 
         </FooterViewContent>
       </DevicesContainer>{" "}*/}
