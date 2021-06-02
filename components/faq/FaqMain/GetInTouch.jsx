@@ -16,13 +16,13 @@ const GetInTouch = () => {
     <GetinTouchContainer>
       <Content>
         <GetInTouchText>
-          <Title>Can't find what you're looking for?</Title>
+          <Title>Geen antwoord op je vraag kunnen vinden?</Title>
           <Subtitle>
-            Out team is just a message away and ready to answer your questions.
+            Neem contact met ons op en we komen zo snel mogelijk bij je terug.
           </Subtitle>
         </GetInTouchText>
         <GetInTouchButton onClick={() => handleGetInTouchAction()}>
-          Get in touch
+          Neem contact op
         </GetInTouchButton>
       </Content>
     </GetinTouchContainer>

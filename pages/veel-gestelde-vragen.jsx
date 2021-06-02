@@ -131,7 +131,7 @@ const Faq = () => {
           />
         </Head>
         <Top>
-          <FAQTitle>FREQUENTLY ASKED QUESTIONS</FAQTitle>
+          <FAQTitle>VEEL GESTELDE VRAGEN</FAQTitle>
           <FAQSubtitle>Hi! Hoe kunnen we je helpen?</FAQSubtitle>
           <FAQInputContainer>
             <FAQInput
