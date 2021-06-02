@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import {
   Main,
   Top,
@@ -18,6 +18,10 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Faq = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   // dummy data
   let SampleData = [
     {
@@ -71,15 +75,12 @@ const Faq = () => {
       ],
     },
   ]
+
   const [data, setData] = useState(SampleData)
-  const [filteredData, setFilteredData] = useState(SampleData)
+  const [searchTerm, setSearchTerm] = useState('')
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-
-  const handleOnChange = (evt) => {
-    setFilteredData(filterFAQs(evt.target.value))
+  const handleOnChange = (e) => {
+    setSearchTerm(e.target.value)
   }
 
   const filterFAQs = (searchValue) => {
@@ -97,6 +98,10 @@ const Faq = () => {
     })
     return filtered
   }
+
+  const filteredData = useMemo(() => {
+    return filterFAQs(searchTerm)
+  }, [searchTerm])
 
   return (
     <DefaultLayout>
