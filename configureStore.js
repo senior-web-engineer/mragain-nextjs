@@ -30,14 +30,17 @@ const rootReducer = combineReducers({
 });
 
 function ssrReducer(state, action) {
-  if (action.type === HYDRATE) {
+  if (
+    action.type === HYDRATE &&
+    Object.keys(action.payload.fetcher).length !== 0
+  ) {
     return {
       ...state,
       ...action.payload,
-    }
+    };
   }
 
-  return rootReducer(state, action)
+  return rootReducer(state, action);
 }
 
 const composeEnhancers =

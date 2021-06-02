@@ -12,7 +12,7 @@ import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 //
 
 export async function prepareData({location, ...data}) {
-  let parsedData = { ...data, lat: 0, long: 0 };
+  let parsedData = { lat: 0, long: 0, ...data };
   try {
     const [result] = await geocodeByAddress(location);
     const { lng, lat } = await getLatLng(result);
@@ -23,10 +23,9 @@ export async function prepareData({location, ...data}) {
       lat,
       location,
     };
-  } catch (err) {
-    return data;
-  }
+  } catch (err) {}
 
+  return parsedData;
 }
 
 export const filtersFormModule = createFormModule({
@@ -54,6 +53,7 @@ export const shopListModule = createListModule({
   async fetchData(query = {}) {
     const params = await prepareData(query);
     if (typeof window !== "undefined") {
+      console.log(params)
       const nextURL = `${router.pathname}?${querystring.stringify(params)}`;
       router.router.replace(nextURL, nextURL, { shallow: true });
     }
