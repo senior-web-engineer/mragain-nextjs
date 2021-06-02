@@ -53,7 +53,6 @@ export const shopListModule = createListModule({
   async fetchData(query = {}) {
     const params = await prepareData(query);
     if (typeof window !== "undefined") {
-      console.log(params)
       const nextURL = `${router.pathname}?${querystring.stringify(params)}`;
       router.router.replace(nextURL, nextURL, { shallow: true });
     }

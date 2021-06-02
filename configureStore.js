@@ -32,7 +32,8 @@ const rootReducer = combineReducers({
 function ssrReducer(state, action) {
   if (
     action.type === HYDRATE &&
-    Object.keys(action.payload.fetcher).length !== 0
+    (Object.keys(action.payload.fetcher).length !== 0 ||
+      Object.keys(action.payload.forms).length !== 0)
   ) {
     return {
       ...state,
