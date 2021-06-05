@@ -58,7 +58,7 @@ align-items: flex-start;
 
 export const Title = styled.h1`
   font-size: 45px;
-  color: #0d3244;
+  color: #FFFFFF;
   font-weight: 700;
   font-family: "Montserrat";
   color: black;

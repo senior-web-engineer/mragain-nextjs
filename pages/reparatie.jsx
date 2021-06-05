@@ -22,10 +22,10 @@ import Testimonial from "@/components/advantages/Testimonial";
 import Link from 'next/link'
 
 const benefitTexts = {
-  a: "Get direct access to you telephone repair costs",
-  b: "Reliable reviews from people who went before you",
-  c: "No more waiting unnecessarily, but receive Immediate help with your repair",
-  d: "The longest possible warranty on your phone repair",
+  a: "Vooraf duidelijkheid over de reparatiekosten",
+  b: "Echte reviews van mensen die jou voorgingen",
+  c: "Geen onnodig wachten, maar directe reparatie van jouw device",
+  d: "Direct inzicht in de garantie die je krijgt",
 };
 
 const testimonialTitles = {
@@ -53,7 +53,7 @@ const Advantages = ({}) => {
           <meta
             name="og_title"
             property="og:title"
-            content="Advantages of MrAgain"
+            content="Jouw voordelen bij MrAgain"
           />
           <meta property="og:type" content="website" />
           <meta property="og:description" content="Advantages of MrAgain" />
@@ -72,12 +72,12 @@ const Advantages = ({}) => {
         <Wrapper>
           <TitleArea>
             <Title>
-              Boost your device
-              <br /> lifespan without
-              <br /> the hassle
+              Verleng de levensduur van jouw apparaat en boek direct een afspraak bij een reparateur van jouw keuze
+              <br /> 
+              <br /> 
             </Title>
             <Link href="/search-results">
-            <BookBtn>Book an appointment</BookBtn>
+            <BookBtn>Vind een reparateur</BookBtn>
             </Link>
           </TitleArea>
 
