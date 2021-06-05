@@ -61,7 +61,7 @@ export const Title = styled.h1`
   color: #FFFFFF;
   font-weight: 700;
   font-family: "Montserrat";
-  color: black;
+  color: white;
   padding-left: 120px;
   @media (max-width: 570px) {
     font-size: 25px;

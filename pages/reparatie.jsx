@@ -72,9 +72,9 @@ const Advantages = ({}) => {
         <Wrapper>
           <TitleArea>
             <Title>
-              Verleng de levensduur van jouw apparaat en boek direct een afspraak bij een reparateur van jouw keuze
-              <br /> 
-              <br /> 
+              Verleng de levensduur van jouw apparaat
+              <br />en boek direct een afspraak 
+              <br /> bij een reparateur van jouw keuze
             </Title>
             <Link href="/search-results">
             <BookBtn>Vind een reparateur</BookBtn>
@@ -85,8 +85,8 @@ const Advantages = ({}) => {
             <BenefitsOuterWrapper>
               <Spacer />
               <BenefitsWrapper>
-                <BenefitsSub>WHAT YOU GET</BenefitsSub>
-                <BenefitsTitle>Your benefits at Mr Again</BenefitsTitle>
+                <BenefitsSub>WAAROM MRAGAIN</BenefitsSub>
+                <BenefitsTitle>Jouw voordelen bij MrAgain</BenefitsTitle>
                 <Benefit svgName={"wallet"} text={benefitTexts.a} />
                 <Benefit svgName={"thumb"} text={benefitTexts.b} />
                 <Benefit svgName={"clock"} text={benefitTexts.c} />
@@ -99,9 +99,9 @@ const Advantages = ({}) => {
             <BenefitsOuterWrapper>
               <Spacer />
               <BenefitsWrapper>
-                <BenefitsSub>TESTIMONIAL</BenefitsSub>
+                <BenefitsSub>REVIEWS</BenefitsSub>
                 <BenefitsTitle>
-                  Still not convinced? Check the results
+                  Niet overtuigd? Check onze reviews!
                 </BenefitsTitle>
                 <TestimonialWrapper>
                 <Testimonial
