@@ -24,9 +24,9 @@ const ADVANTAGES = [
   },
   {
     icon: faReceipt,
-    title: "Transparantie",
+    title: "Vooraf duidelijkheid",
     1: "Direct inzicht in reparatiekosten en garantie die je krijgt",
-    2: "Authentieke reviews van klanten die je voorgingen",
+    2: "Authentieke reviews van klanten die je voorgingen",	  
   },
   {
     icon: faTree,
