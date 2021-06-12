@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AutoComplete, Input } from "antd";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import PlacesAutocomplete from "react-places-autocomplete";
+import PlacesAutocomplete, { geocodeByAddress, getLatLng }  from "react-places-autocomplete";
+
 const googleMapsApiKey = "AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE";
 
 const MainWrap = styled.div`
@@ -49,6 +50,24 @@ export const loadScript = () => {
     document.getElementsByTagName("head")[0].appendChild(script);
   });
 };
+
+export async function getLongAndLat(location) {
+  try {
+    await loadScript()
+    const [result] = await geocodeByAddress(location);
+    const { lng, lat } = await getLatLng(result);
+
+    return {
+      long: lng,
+      lat,
+    }
+  } catch(err) {
+    return {
+      long: 0,
+      lat: 0
+    }
+  }
+}
 
 export default function GooglePlaces({
   value,

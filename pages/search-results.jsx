@@ -51,7 +51,6 @@ import media, { OnMobile } from "@/utils/media";
 import Modal from "@/modules/modal";
 import { useRouter } from "next/router";
 import GooglePlaces, { loadScript } from "@/components/common/GooglePlaces";
-import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import moment from "moment";
 
 import dynamic from "next/dynamic";

@@ -4,7 +4,6 @@ import Image from "next/image";
 
 import {
   faMapMarkerAlt,
-  faSearch,
   faArrowRight,
   faMobile,
 } from "@fortawesome/free-solid-svg-icons";
@@ -16,12 +15,10 @@ import { Field } from "@/modules/forms/Blocks";
 import Form, { useFormContext } from "@/modules/forms";
 import { searchForm } from "../modules";
 import Link from "next/link";
-import GooglePlaces from "@/components/common/GooglePlaces";
+import GooglePlaces, { getLongAndLat } from "@/components/common/GooglePlaces";
 import Select from "@/components/ui/Select";
 import api from "@/utils/api";
 import { API_PATH } from "@/constants";
-import { wrapper } from "@/configureStore";
-import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
 //
 
@@ -147,16 +144,11 @@ function SearchButton() {
 
   useEffect(() => {
     async function effect() {
-      try {
-        const [result] = await geocodeByAddress(state.values.zip);
-        const { lng, lat } = await getLatLng(result);
-        return setCurrentLocation({
-          long: lng,
-          lat,
-        });
-      } catch (err) {}
-
-      return setCurrentLocation({ long: 0, lat: 0 });
+      if (!state.values.zip) {
+        return null;
+      }
+      await getLongAndLat(state.values.zip);
+      return setCurrentLocation();
     }
 
     effect();
