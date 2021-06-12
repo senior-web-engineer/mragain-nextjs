@@ -30,7 +30,7 @@ const benefitTexts = {
 
 const testimonialTitles = {
   a: "Mijn telefoon is weer als nieuw!",
-  b: "Snelle service en aardige lui",
+  b: "Snelle service en zeer aardige lui",
 };
 
 const testimonialTexts = {

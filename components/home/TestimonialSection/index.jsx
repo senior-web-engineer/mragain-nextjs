@@ -61,11 +61,7 @@ const TESTIMONIAL_DATA = [
     location: "Utrecht",
     review: (
       <>
-        Via MrAgain heb ik eenvoudig en snel een reparateur gevonden bij mij in
-        de buurt. Vooral het vergelijken van de reviews en het online maken van
-        een afspraak vond ik handig, hierdoor wisten ze dat ik zou komen en kon
-        ik direct worden geholpen.
-        <p>Binnen een dag was mijn smartphone gefixed!</p>
+        Mijn telefoon werd snel gerepareerd en doet het weer als vanouds! Super handig dat je direct een afspraak kan maken en weet wanneer ze tijd voor je hebben.
       </>
     ),
   },
@@ -75,14 +71,7 @@ const TESTIMONIAL_DATA = [
     review: (
       <>
         {" "}
-        Mijn telefoon deed het niet meer en ik wist niet wat er aan de hand was.
-        Gelukkig zag ik dat je bij veel reparateurs een diagnose afspraak met no
-        cure no pay kan maken. Dat heb ik gedaan en op die manier ben ik toen
-        snel geholpen.
-        <p>
-          Super handig dat je kunt zien welke reparateur ook jouw toestel
-          repareert!
-        </p>
+    Top dat je makkelijk kan vergeljken tussen reparateurs. Ik kon nog dezelfde dag terecht en had mijn mobiel na 30 minuten weer terug, lekker!
       </>
     ),
   },
