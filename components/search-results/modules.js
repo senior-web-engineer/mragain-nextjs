@@ -7,20 +7,18 @@ import router from "next/router";
 import { createFormModule } from "@/modules/forms";
 import { createModalModule } from "@/modules/modal";
 import querystring from "querystring";
-import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import { getLongAndLat } from "../common/GooglePlaces";
 
 //
 
 export async function prepareData({location, ...data}) {
   let parsedData = { lat: 0, long: 0, ...data };
   try {
-    const [result] = await geocodeByAddress(location);
-    const { lng, lat } = await getLatLng(result);
+    const locationMetadata = await getLongAndLat(location)
 
     parsedData = {
       ...parsedData,
-      long: lng,
-      lat,
+      ...locationMetadata,
       location,
     };
   } catch (err) {}
