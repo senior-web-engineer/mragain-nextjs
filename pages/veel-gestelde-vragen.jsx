@@ -34,12 +34,12 @@ const Faq = () => {
 
         {
           question: 'Hoeveel garantie heb ik op mijn reparatie?',
-          answer: 'Alle reparateurs die bij MrAgain zijn aangesloten geven aan hoeveel garantie ze geven. Je kunt dit zien op de pagina van de betreffende reparateur.',
+          answer: 'Alle reparateurs die bij MrAgain zijn aangesloten geven aan hoeveel garantie ze op elke reparatie geven.',
         },
         {
           question:
             'Wat kan ik doen als de reparateur en ik het niet eens zijn over de garantie?',
-          answer: 'Het is vervelend als jij en de reparateur van mening verschillen over de reparatie. Kom je er samen niet uit dan zullen we hierin bemiddelen.',
+          answer: 'Probeer er eerst samen uit te komen, lukt dat niet dan bemiddelen we.',
         },
       ],
     },
@@ -52,7 +52,7 @@ const Faq = () => {
         },
         {
           question: 'Wat betaal ik voor mijn reparatie?',
-          answer: 'Je betaalt het bedrag dat vooraf is afgesproken voor de reparatie. Natuurlijk kan dit wijzigen als blijkt dat er een andere reparatie nodig is. De reparateur bespreekt dit dan met je.',
+          answer: 'Elke reparateur geeft zijn/haar prijzen per reparatie aan op zijn/haar pagina.',
         },
       ],
     },
@@ -61,7 +61,7 @@ const Faq = () => {
       faq: [ 
 	{
           question: 'Hoe lang duurt mijn reparatie?',
-	  answer: 'De duur van je reparatie hangt af van de soort reparatie de beschikbaarheid van de reparateur. Normaal gesproken worden de meeste reparaties nog dezelfde dag uigevoerd',
+	  answer: 'Dit hangt af van de reparatie, maar normaal gesproken worden de meeste reparaties nog dezelfde dag uigevoerd',
         },
       ],
     },
