@@ -410,7 +410,7 @@ function AppointmentButton() {
   const { values } = useFormContext().state;
   const router = useRouter();
   const formValues = filtersFormModule.state.values;
-  const nextLocation = `/${router.query["shopId][api"]}/appointment?device=${formValues.device}&brand=${formValues.brand}&model=${formValues.model}&service=${values.service}`;
+  const nextLocation = `/${router.query["city"]}/${router.query["shopId][api"]}/${router.query["street"]}/appointment?device=${formValues.device}&brand=${formValues.brand}&model=${formValues.model}&service=${values.service}`;
   return (
     <NextStepWrap>
       <Link href={nextLocation}>

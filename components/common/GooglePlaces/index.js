@@ -20,7 +20,7 @@ const MainWrap = styled.div`
   }
 `;
 
-export const loadScript = (callback) => {
+export const loadScript = () => {
   const url = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places,geocode`;
   if (document.getElementById("google-places")) {
     return Promise.resolve();

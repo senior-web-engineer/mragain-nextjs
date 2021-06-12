@@ -4,7 +4,6 @@ import { ServerStyleSheet } from "styled-components";
 import HeadWithoutPreload from "./HeadWithoutPreload";
 import { GA_TRACKING_ID } from "../lib/gtag";
 
-
 const hotJarScript = `
 (function(h,o,t,j,a,r){
   h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
@@ -23,6 +22,19 @@ gtag('js', new Date());
 gtag('config', '${GA_TRACKING_ID}', {
   page_path: window.location.pathname,
 });
+`;
+
+const facebookScript = `
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '211612300504557');
+fbq('track', 'PageView');
 `;
 
 export default class MyDocument extends Document {
@@ -71,10 +83,19 @@ export default class MyDocument extends Document {
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
           ></script>
-          <script dangerouslySetInnerHTML={{ __html: gaScript }} />
+          <noscript>
+            <img
+              height="1"
+              width="1"
+              style={{display:"none"}}
+              src="https://www.facebook.com/tr?id=211612300504557&ev=PageView&noscript=1"
+            />
+          </noscript>
           {isProduction ? (
             <>
+              <script dangerouslySetInnerHTML={{ __html: gaScript }} />
               <script dangerouslySetInnerHTML={{ __html: hotJarScript }} />
+              <script dangerouslySetInnerHTML={{ __html: facebookScript }} />
             </>
           ) : null}
         </HeadWithoutPreload>
