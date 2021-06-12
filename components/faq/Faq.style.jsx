@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { sizes } from 'utils/media'
 
 export const Main = styled.div`
   width: 100%;
@@ -7,7 +8,7 @@ export const Main = styled.div`
 export const FaqSectionArea = styled.div`
   display: flex;
   justify-content: center;
-  width : 100%;
+  width: 100%;
 `
 export const FaqContainer = styled.div`
   max-width: 1600px;
@@ -18,8 +19,8 @@ export const FaqContainer = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  @media (max-width:768px) {
-   padding:0px 0px;
+  @media (max-width: ${sizes.tablet}px) {
+    padding: 0px 0px;
   }
 `
 

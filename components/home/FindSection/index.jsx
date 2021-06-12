@@ -20,6 +20,8 @@ import GooglePlaces from "@/components/common/GooglePlaces";
 import Select from "@/components/ui/Select";
 import api from "@/utils/api";
 import { API_PATH } from "@/constants";
+import { wrapper } from "@/configureStore";
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
 //
 
@@ -140,14 +142,31 @@ const FindImage = styled.div`
 
 function SearchButton() {
   const { state } = useFormContext();
-
+  const [currentLocation, setCurrentLocation] = useState({ long: 0, lat: 0 });
   const { zip, device = 0 } = state.values || {};
+
+  useEffect(() => {
+    async function effect() {
+      try {
+        const [result] = await geocodeByAddress(state.values.zip);
+        const { lng, lat } = await getLatLng(result);
+        return setCurrentLocation({
+          long: lng,
+          lat,
+        });
+      } catch (err) {}
+
+      return setCurrentLocation({ long: 0, lat: 0 });
+    }
+
+    effect();
+  }, [state.values.zip]);
 
   return (
     <Link
-      href={`/search-results?zip=${zip}&device=${device}`}
+      href={`/search-results?zip=${zip}&device=${device}&long=${currentLocation.long}&lat=${currentLocation.lat}`}
     >
-      <Button aria-label="Zoek">
+      <Button aria-label="Zoek" as="a">
         <span>Zoek</span>
         <FontAwesomeIcon icon={faArrowRight} />
       </Button>
@@ -159,7 +178,6 @@ export default function FindSection() {
   const [devices, setDevices] = useState([]);
 
   useEffect(() => {
-    searchForm.actions.initialize();
     async function loadData() {
       const data = await api.get(`${API_PATH.GETDEVICES}/`);
       setDevices(data);
@@ -179,7 +197,7 @@ export default function FindSection() {
   return (
     <FindWrap>
       <SearchWrap>
-        <h1>Wat wil je laten repareren?</h1>
+        <h1>Vind snel een reparateur</h1>
         <Form module={searchForm}>
           <SearchBar>
             <div>

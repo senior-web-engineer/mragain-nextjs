@@ -25,14 +25,14 @@ const ADVANTAGES = [
   {
     icon: faReceipt,
     title: "Vooraf duidelijkheid",
-    1: "Vooraf duidelijkheid over wat je gaat betalen en de garantie die je krijgt",
-    2: "Afspraak bevestiging & garantie bewijs in je email",
+    1: "Direct inzicht in reparatiekosten en garantie die je krijgt",
+    2: "Authentieke reviews van klanten die je voorgingen",	  
   },
   {
     icon: faTree,
     title: "Je bent goed bezig!",
-    1: "Je bespaart geld",
-    2: "Je helpt het milieu door duurzaam met je apparaat om te gaan",
+    1: "Je helpt het milieu door duurzaam met je apparaat om te gaan",
+    2: "Door jouw review help je anderen!",
   },
 ];
 
@@ -120,7 +120,7 @@ export default function AdvantagesSection() {
   return (
     <>
       <SubTitle>mragain.nl</SubTitle>
-      <H2>Waarom je een afspraak maakt via MrAgain</H2>
+      <H2>Jouw voordelen</H2>
       <AdvantagesWrap>
         <SliderOnMobile tabletConfig={{slidesToShow: 2,  centerMode: true, centerPadding: "40px",}}>{ADVANTAGES.map(renderAdvantage)}</SliderOnMobile>
       </AdvantagesWrap>

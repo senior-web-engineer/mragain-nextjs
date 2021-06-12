@@ -9,6 +9,7 @@ import React, {
 import styled, { css } from "styled-components";
 import isEqual from "fast-deep-equal";
 import { Waypoint } from "react-waypoint";
+import { store, wrapper } from "@/configureStore";
 
 import DefaultLayout from "@/components/layouts/Homepage";
 import {
@@ -56,6 +57,7 @@ import moment from "moment";
 import dynamic from "next/dynamic";
 import Loader from "@/components/common/Loader";
 import { getShopLogo, getShopRoute } from "@/utils/shop";
+import Link from "next/link";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
   loading: Loader,
@@ -664,13 +666,11 @@ function ShopPrice({ item }) {
 
 function ShopItem({ item }) {
   const router = useRouter();
-  const { selectedShop, updateSelectedShop, showMap } = useContext(
-    ShopBridgeContext
-  );
+  const { selectedShop, updateSelectedShop, showMap } =
+    useContext(ShopBridgeContext);
   const location = [item.shop.street || "", item.shop.city || ""]
     .filter(Boolean)
     .join(", ");
-
   function renderService(service) {
     return <ShopDetails.Service>{service.device_name}</ShopDetails.Service>;
   }
@@ -697,7 +697,7 @@ function ShopItem({ item }) {
     updateSelectedShop(item.shop.id);
   }
 
-  return (
+  const shopCard = (
     <ShopWrap
       ref={(node) => (shopRefs[item.shop.id] = node)}
       isSelected={item.shop.id === selectedShop}
@@ -756,6 +756,16 @@ function ShopItem({ item }) {
       </ShopDetails>
     </ShopWrap>
   );
+
+  if (typeof window === "undefined") {
+    return <Link href={shopRoute}>
+      <a>
+        {shopCard}
+      </a>
+    </Link>
+  }
+
+  return shopCard
 }
 
 function parseOptions(arr, key) {
@@ -826,10 +836,6 @@ const ModelSelector = AppendIdentifier({
     parseOptions(items = []) {
       return parseOptions(items || [], "model_name");
     },
-    Component: (props) => {
-      const { state } = useFormContext();
-      return <Field {...props} identifier={state?.values?.brand} />;
-    },
   }),
   name: "brand",
 });
@@ -839,10 +845,6 @@ const ServiceSelector = AppendIdentifier({
     dataFetcher: serviceFetcher,
     parseOptions(items = []) {
       return parseOptions(items || [], "reparation_name");
-    },
-    Component: (props) => {
-      const { state } = useFormContext();
-      return <Field {...props} identifier={state?.values?.model} />;
     },
   }),
   name: "model",
@@ -1049,29 +1051,12 @@ export default function SearchResults() {
   const [showMobileSearch, setShowMobileSearch] = useState();
   const [selectedShop, updateSelectedShop] = useState(null);
   const [showMap, updateShowMap] = useState(false);
-  const router = useRouter();
   const mobileSelectorsRef = useRef(null);
+
   useEffect(() => {
     async function main() {
       await loadScript();
-      await filtersFormModule.actions.initialize();
-      if (!isEqual(shopListModule?.state?.filters, filtersFormModule.state.values)) {
-        shopListModule.actions.initialize();
-      }
-      deviceFetcher.fetch();
-      const formValues = filtersFormModule.state.values;
-      if (formValues.device) {
-        brandFetcher.key(formValues.device).fetch();
-      }
-      if (formValues.brand) {
-        modelFetcher.key(formValues.brand).fetch();
-      }
-
-      if (formValues.model) {
-        serviceFetcher.key(formValues.model).fetch();
-      }
     }
-
     main();
   }, []);
 
@@ -1325,3 +1310,22 @@ export default function SearchResults() {
     </ShopBridgeContext.Provider>
   );
 }
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  async ({ req, query }) => {
+    await filtersFormModule.actions.initialize(query);
+    await shopListModule.actions.initialize();
+    await deviceFetcher.fetch();
+    const formValues = filtersFormModule.state.values;
+    if (formValues.device) {
+      brandFetcher.key(formValues.device).fetch();
+    }
+    if (formValues.brand) {
+      modelFetcher.key(formValues.brand).fetch();
+    }
+
+    if (formValues.model) {
+      serviceFetcher.key(formValues.model).fetch();
+    }
+  }
+);

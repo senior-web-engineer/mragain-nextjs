@@ -1,7 +1,5 @@
 export function getShopRoute(shop) {
-  return `/${shop.city ? shop.city : "_"}/${[shop.name, shop.street]
-    .filter(Boolean)
-    .join("--")}`;
+  return `${shop.city || "_"}/${shop.name}/${shop.street || "_"}`.split(' ').join('-');
 }
 
 export function getShopLogo(logo) {

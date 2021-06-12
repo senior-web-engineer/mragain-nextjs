@@ -75,9 +75,9 @@ const STEPS = [
   },
   {
     title: "Vergelijk",
-    description: `Vergelijk op 
-    basis van prijs, garantie en
-    reviews van anderen`,
+    description: `Vergelijk op basis van  
+    reparatie prijs, garantie en
+    reviews`,
     image: "/images/compare.png",
   },
   {
@@ -89,9 +89,7 @@ const STEPS = [
   },
   {
     title: "Garantie",
-    description: `Ontvang de 
-    beste garantie en het bewijs
-    in je email`,
+    description: `Na je reparatie sturen we een garantiebewijs per mail`,
     image: "/images/guarantee.png",
   },
 ];

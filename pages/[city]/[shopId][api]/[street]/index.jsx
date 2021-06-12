@@ -12,6 +12,7 @@ import ShopDetails from "@/components/shop-profile/ShopDetails";
 import { OnMobile } from "@/utils/media";
 import Loader from "@/components/common/Loader";
 import dynamic from "next/dynamic";
+import { wrapper } from "@/configureStore";
 
 const LoadableReviews = dynamic(
   () =>
@@ -118,7 +119,7 @@ const ShopProfile = (routerProps) => {
   );
 };
 
-export async function getServerSideProps(ctx) {
+export const getServerSideProps = wrapper.getServerSideProps(async(ctx) => {
   const shopId = ctx.query["shopId][api"];
   const shopProfileServerInfo = await getShopProfileByInformationServer(shopId);
   return {
@@ -129,6 +130,6 @@ export async function getServerSideProps(ctx) {
           : shopProfileServerInfo,
     },
   };
-}
+})
 
 export default ShopProfile;
