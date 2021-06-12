@@ -34,8 +34,8 @@ const testimonialTitles = {
 };
 
 const testimonialTexts = {
-  a: "Mijn telefoon werd snel gerepareerd en doet het weer als vanouds!",
-  b: "Ik kon nog dezelfde dag terecht en had mijn mobiel na 30 minuten weer terug, lekker!",	
+  a: "Mijn telefoon werd snel gerepareerd en doet het weer als vanouds! Super handig dat je direct een afspraak kan maken en weet wanneer ze tijd voor je hebben.",
+  b: "Top dat je makkelijk kan vergeljken tussen reparateurs. Ik kon nog dezelfde dag terecht en had mijn mobiel na 30 minuten weer terug, lekker!  ",	
 };
 
 const Advantages = ({}) => {
@@ -76,7 +76,7 @@ const Advantages = ({}) => {
               Verleng de levensduur
               <br />van jouw apparaat
             </Title>
-            <Link href="/search-results">
+            <Link href="/search-results?zip=&device=0&long=0&lat=0">
             <BookBtn>Vind een reparateur</BookBtn>
             </Link>
           </TitleArea>
