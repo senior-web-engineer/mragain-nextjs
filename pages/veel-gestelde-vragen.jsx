@@ -34,12 +34,12 @@ const Faq = () => {
 
         {
           question: 'Hoeveel garantie heb ik op mijn reparatie?',
-          answer: 'Alle reparateurs die bij MrAgain zijn aangesloten geven aan hoeveel garantie ze geven. Je kunt dit zien op de pagina van de betreffende reparateur. Let op: voor waterschade reparaties geldt vaak een maximale garantie van 3 maanden.',
+          answer: 'Alle reparateurs die bij MrAgain zijn aangesloten geven aan hoeveel garantie ze geven. Je kunt dit zien op de pagina van de betreffende reparateur.',
         },
         {
           question:
             'Wat kan ik doen als de reparateur en ik het niet eens zijn over de garantie?',
-          answer: 'Het is vervelend als jij en de reparateur van mening verschillen over de reparatie. Kom je er samen niet uit dan zullen we hierin bemiddelen. Let wel op: garante geldt alleen voor de reparatie en het gerepareerde onderdeel en vervalt bij zichtbare schade.',
+          answer: 'Het is vervelend als jij en de reparateur van mening verschillen over de reparatie. Kom je er samen niet uit dan zullen we hierin bemiddelen.',
         },
       ],
     },
@@ -61,7 +61,7 @@ const Faq = () => {
       faq: [ 
 	{
           question: 'Hoe lang duurt mijn reparatie?',
-	  answer: 'De duur van je reparatie hangt af van de soort reparatie de beschikbaarheid van de reparateur. Normaal gesproken worden de meeste reparaties nog dezelfde dag uitgevoerd, lukt dit niet dan zal de reparateur dit met je bespreken.',
+	  answer: 'De duur van je reparatie hangt af van de soort reparatie de beschikbaarheid van de reparateur. Normaal gesproken worden de meeste reparaties nog dezelfde dag uigevoerd',
         },
       ],
     },
@@ -70,7 +70,7 @@ const Faq = () => {
       faq: [
 	{
           question: 'Ik heb feedback of een klacht, hoe kan ik contact met jullie opnemen?',
-	  answer: 'Je kunt ons gemakkelijk bereiken via onze contact pagina of mailen naar info@mragain.nl. We proberen dan zo snel mogelijk contact met je op te nemen!',
+	  answer: 'Je kunt ons gemakkelijk bereiken via onze contact pagina of mailen naar info@mragain.nl.',
 	},
       ],
     },
