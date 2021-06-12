@@ -46,18 +46,18 @@ const Advantages = ({}) => {
     <DefaultLayout>
       <Main>
         <Head>
-          <title>Advantages | Mr Again</title>
-          <meta name="description" content="Advantages of MrAgain" />
-          <meta name="Keywords" content="Advantages of MrAgain" />
+          <title>Reparatie via MrAgain | Mr Again</title>
+          <meta name="description" content="Reparatie via MrAgain en jouw voordelen" />
+          <meta name="Keywords" content="Reparatie via MrAgain en jouw voordelen" />
           <link rel="canonical" href={FRONT_END_URL} />
           {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
           <meta
             name="og_title"
             property="og:title"
-            content="Jouw voordelen bij MrAgain"
+            content="Reparatie via MrAgain en jouw voordelen bij MrAgain"
           />
           <meta property="og:type" content="website" />
-          <meta property="og:description" content="Advantages of MrAgain" />
+          <meta property="og:description" content="Reparatie via MrAgain en jouw voordelen" />
           <meta name="og:url" content={FRONT_END_URL} />
           <meta
             property="og:image"
