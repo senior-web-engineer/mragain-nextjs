@@ -29,12 +29,13 @@ const benefitTexts = {
 };
 
 const testimonialTitles = {
-  a: "My phone now works as good as new",
-  b: "Speedy service, no more needless waiting",
+  a: "Mijn telefoon is weer als nieuw!",
+  b: "Snelle service en aardige lui",
 };
 
 const testimonialTexts = {
-  a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean placerat gravida lectus, sed iaculis ante scelerisque iaculis. Donec auctor libero et ligula mollis.",
+  a: "Mijn telefoon werd snel gerepareerd en doet het weer als vanouds!",
+  b: "Ik kon nog dezelfde dag terecht en had mijn mobiel na 30 minuten weer terug, lekker!",	
 };
 
 const Advantages = ({}) => {
@@ -72,9 +73,8 @@ const Advantages = ({}) => {
         <Wrapper>
           <TitleArea>
             <Title>
-              Verleng de levensduur van jouw apparaat
-              <br />en boek direct een afspraak 
-              <br /> bij een reparateur van jouw keuze
+              Verleng de levensduur
+              <br />van jouw apparaat
             </Title>
             <Link href="/search-results">
             <BookBtn>Vind een reparateur</BookBtn>
@@ -107,14 +107,14 @@ const Advantages = ({}) => {
                 <Testimonial
                   title={testimonialTitles.a}
                   text={testimonialTexts.a}
-                  name={"Pim"}
+                  name={"Vera"}
                   place={"Utrecht"}
                 />
                 <Testimonial
-                  title={testimonialTitles.a}
-                  text={testimonialTexts.a}
-                  name={"Pim"}
-                  place={"Utrecht"}
+                  title={testimonialTitles.b}
+                  text={testimonialTexts.b}
+                  name={"Quincy"}
+                  place={"Den Haag"}
                 />
                 </TestimonialWrapper>
               </BenefitsWrapper>
