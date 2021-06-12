@@ -7,11 +7,11 @@ import {
   GetInTouchText,
   GetInTouchButton,
 } from './GetInTouch.style'
+import { useRouter } from 'next/router'
 
 const GetInTouch = () => {
-  const handleGetInTouchAction = () => {
-    console.log('handleGetInTouchAction was clicked')
-  }
+  const router = useRouter()  
+
   return (
     <GetinTouchContainer>
       <Content>
@@ -21,7 +21,7 @@ const GetInTouch = () => {
             Neem contact met ons op en we komen zo snel mogelijk bij je terug.
           </Subtitle>
         </GetInTouchText>
-        <GetInTouchButton onClick={() => handleGetInTouchAction()}>
+        <GetInTouchButton onClick={() => router.push('/contact')}>
           Neem contact op
         </GetInTouchButton>
       </Content>
