@@ -671,7 +671,6 @@ function ShopItem({ item }) {
   const location = [item.shop.street || "", item.shop.city || ""]
     .filter(Boolean)
     .join(", ");
-
   function renderService(service) {
     return <ShopDetails.Service>{service.device_name}</ShopDetails.Service>;
   }
