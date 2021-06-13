@@ -3,7 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AutoComplete, Input } from "antd";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import PlacesAutocomplete, { geocodeByAddress, getLatLng }  from "react-places-autocomplete";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
 
 const googleMapsApiKey = "AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE";
 
@@ -32,6 +35,11 @@ export const loadScript = () => {
     script.type = "text/javascript";
     script.id = "google-places";
 
+    function onResolve() {
+      document.getElementsByTagName("head")[0].appendChild(script);
+      resolve();
+    }
+
     if (script.readyState) {
       script.onreadystatechange = function () {
         if (
@@ -39,33 +47,29 @@ export const loadScript = () => {
           script.readyState === "complete"
         ) {
           script.onreadystatechange = null;
-          resolve();
+          onResolve();
         }
       };
     } else {
-      script.onload = () => resolve();
+      script.onload = () => onResolve();
     }
 
     script.src = url;
-    document.getElementsByTagName("head")[0].appendChild(script);
   });
 };
 
 export async function getLongAndLat(location) {
   try {
-    await loadScript()
+    await loadScript();
     const [result] = await geocodeByAddress(location);
     const { lng, lat } = await getLatLng(result);
 
     return {
       long: lng,
       lat,
-    }
-  } catch(err) {
-    return {
-      long: 0,
-      lat: 0
-    }
+    };
+  } catch (err) {
+    return {};
   }
 }
 
@@ -99,7 +103,6 @@ export default function GooglePlaces({
       loadScriptAction();
     }
   }, []);
-
 
   if (!scriptLoaded) {
     return (
