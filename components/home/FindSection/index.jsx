@@ -148,7 +148,7 @@ function SearchButton() {
         return null;
       }
       await getLongAndLat(state.values.zip);
-      const { lng, lat } = await getLongAndLat(result); 
+      const { lng, lat } = await getLongAndLat(state.values.zip); 
       return setCurrentLocation({
         long: lng, 
         lat, 
