@@ -147,8 +147,8 @@ function SearchButton() {
       if (!state.values.zip) {
         return null;
       }
-      await getLongAndLat(state.values.zip);
-      return setCurrentLocation();
+      const location = await getLongAndLat(state.values.zip);
+      return setCurrentLocation(location);
     }
 
     effect();
