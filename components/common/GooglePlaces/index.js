@@ -24,19 +24,29 @@ const MainWrap = styled.div`
   }
 `;
 
+let scriptLoaded = false;
 export const loadScript = () => {
   const url = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places,geocode`;
-  if (document.getElementById("google-places")) {
-    return Promise.resolve();
+  const script = document.getElementById("google-places");
+  if (script) {
+    if (scriptLoaded) {
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve) => {
+      script.onload = () => {
+        scriptLoaded = true;
+        resolve();
+      };
+    });
   }
 
   return new Promise((resolve) => {
     let script = document.createElement("script");
     script.type = "text/javascript";
     script.id = "google-places";
-
     function onResolve() {
-      document.getElementsByTagName("head")[0].appendChild(script);
+      scriptLoaded = true;
       resolve();
     }
 
@@ -55,10 +65,18 @@ export const loadScript = () => {
     }
 
     script.src = url;
+    document.getElementsByTagName("head")[0].appendChild(script);
   });
 };
 
 export async function getLongAndLat(location) {
+  if (!location) {
+    return {
+      long: 0,
+      lat: 0,
+    };
+  }
+
   try {
     await loadScript();
     const [result] = await geocodeByAddress(location);
@@ -140,10 +158,16 @@ export default function GooglePlaces({
               size={size}
               placeholder={placeholder}
               loading={loading}
+              allowClear={true}
               dropdownStyle={{ minWidth: "320px" }}
               onSelect={(description) => {
                 setSearchTerm(description);
                 onChange(description);
+              }}
+              onChange={(value) => {
+                if (!value) {
+                  onChange(value);
+                }
               }}
               onSearch={(value) => onSearch({ target: { value } })}
             >
