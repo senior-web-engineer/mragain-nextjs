@@ -3,7 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AutoComplete, Input } from "antd";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import PlacesAutocomplete, { geocodeByAddress, getLatLng }  from "react-places-autocomplete";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
 
 const googleMapsApiKey = "AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE";
 
@@ -21,16 +24,31 @@ const MainWrap = styled.div`
   }
 `;
 
+let scriptLoaded = false;
 export const loadScript = () => {
   const url = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places,geocode`;
-  if (document.getElementById("google-places")) {
-    return Promise.resolve();
+  const script = document.getElementById("google-places");
+  if (script) {
+    if (scriptLoaded) {
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve) => {
+      script.onload = () => {
+        scriptLoaded = true;
+        resolve();
+      };
+    });
   }
 
   return new Promise((resolve) => {
     let script = document.createElement("script");
     script.type = "text/javascript";
     script.id = "google-places";
+    function onResolve() {
+      scriptLoaded = true;
+      resolve();
+    }
 
     if (script.readyState) {
       script.onreadystatechange = function () {
@@ -39,11 +57,11 @@ export const loadScript = () => {
           script.readyState === "complete"
         ) {
           script.onreadystatechange = null;
-          resolve();
+          onResolve();
         }
       };
     } else {
-      script.onload = () => resolve();
+      script.onload = () => onResolve();
     }
 
     script.src = url;
@@ -52,20 +70,24 @@ export const loadScript = () => {
 };
 
 export async function getLongAndLat(location) {
+  if (!location) {
+    return {
+      long: 0,
+      lat: 0,
+    };
+  }
+
   try {
-    await loadScript()
+    await loadScript();
     const [result] = await geocodeByAddress(location);
     const { lng, lat } = await getLatLng(result);
 
     return {
       long: lng,
       lat,
-    }
-  } catch(err) {
-    return {
-      long: 0,
-      lat: 0
-    }
+    };
+  } catch (err) {
+    return {};
   }
 }
 
@@ -99,7 +121,6 @@ export default function GooglePlaces({
       loadScriptAction();
     }
   }, []);
-
 
   if (!scriptLoaded) {
     return (
@@ -137,10 +158,16 @@ export default function GooglePlaces({
               size={size}
               placeholder={placeholder}
               loading={loading}
+              allowClear={true}
               dropdownStyle={{ minWidth: "320px" }}
               onSelect={(description) => {
                 setSearchTerm(description);
                 onChange(description);
+              }}
+              onChange={(value) => {
+                if (!value) {
+                  onChange(value);
+                }
               }}
               onSearch={(value) => onSearch({ target: { value } })}
             >
