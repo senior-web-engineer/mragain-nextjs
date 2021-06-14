@@ -144,9 +144,6 @@ function SearchButton() {
 
   useEffect(() => {
     async function effect() {
-      if (!state.values.zip) {
-        return null;
-      }
       const location = await getLongAndLat(state.values.zip);
       return setCurrentLocation(location);
     }
