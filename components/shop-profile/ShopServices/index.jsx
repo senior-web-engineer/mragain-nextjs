@@ -516,7 +516,7 @@ export default function ShopServices({ shop }) {
   return (
     <MaxConstraints>
       <Panel>
-        <SubTitle>Bekijk onze reparaties & maak een afspraak</SubTitle>
+        <SubTitle>Selecteer je apparaat, merk en model & bekijk onze reparaties</SubTitle>
         <Form module={filtersFormModule}>
           <OnMobile only>
             <MobileDeviceSelectorWrap>
