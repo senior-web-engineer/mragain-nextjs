@@ -38,6 +38,14 @@ function ssrReducer(state, action) {
     return {
       ...state,
       ...action.payload,
+      fetcher: {
+        ...state.fetcher,
+        ...action.payload.fetcher,
+      },
+      forms: {
+        ...state.forms,
+        ...action.payload.forms,
+      }
     };
   }
 
