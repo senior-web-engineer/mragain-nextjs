@@ -167,7 +167,7 @@ const AdvantagesWrap = styled.div`
   margin-top: 40px;
   display: none;
 
-  h4 {
+  h3 {
     font-size: 12px;
     color: #0d3244;
     font-weight: 500;
@@ -252,7 +252,7 @@ export default function ShopHeader({ shop }) {
           <Image src={advantage.logo} width="31px" height="26px" />
         </image-wrap>
         <advantage-meta>
-          <h4>{advantage.title}</h4>
+          <h3>{advantage.title}</h3>
           <p>{advantage.description}</p>
         </advantage-meta>
       </advantage>
@@ -314,7 +314,7 @@ export default function ShopHeader({ shop }) {
           <ShopMeta>
             <ShopMeta.FirstRow tagColor={TAG_TO_COLOR[tag]}>
               <div>
-                <h1>{shop.name}</h1>
+                <h1>{shop.name}-{shop.city}</h1>
                 <OnMobile show={false}>
                   {tag ? <tag>{tag}</tag> : null}
                 </OnMobile>
