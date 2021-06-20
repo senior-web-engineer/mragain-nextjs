@@ -57,7 +57,7 @@ const ShopProfile = (routerProps) => {
       ? shopProfileServerInfo
       : shop_account_profile;
 
-  let title = `${shopAccountProfile.name} ${shopAccountProfile.city} - ${shopDevices} Reparatie - MrAgain.nl`;
+  let title = `${shopAccountProfile.name} ${shopAccountProfile.city} - ${devices} Reparatie - MrAgain.nl`;
   let description = `${shopAccountProfile.name}, ${shopAccountProfile.street}, ${shopAccountProfile.zipcode}, ${shopAccountProfile.city}. Laat je telefoon repareren bij ${shopAccountProfile.name} via mragain.nl. Transparant, betrouwbaar en snel!`;
 
   const shopSchema = `

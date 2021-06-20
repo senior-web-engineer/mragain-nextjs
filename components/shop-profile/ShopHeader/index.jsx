@@ -300,7 +300,7 @@ export default function ShopHeader({ shop }) {
     <div>
       <Wallpaper>
         {shop?.bg_photo ? (
-          <Image loading="lazy" layout="fill" objectFit="cover" src={shop.bg_photo} />
+          <Image loading="lazy" layout="fill" objectFit="contain" src={shop.bg_photo} />
         ) : null}
         <OnMobile only>{detailButtons}</OnMobile>
       </Wallpaper>
@@ -314,7 +314,7 @@ export default function ShopHeader({ shop }) {
           <ShopMeta>
             <ShopMeta.FirstRow tagColor={TAG_TO_COLOR[tag]}>
               <div>
-                <h1>{shop.name}-{shop.city}</h1>
+                <h1>{shop.name}</h1>
                 <OnMobile show={false}>
                   {tag ? <tag>{tag}</tag> : null}
                 </OnMobile>
