@@ -186,7 +186,7 @@ export function ShopCard({ shop, onClick }) {
             loading="lazy"
             src={shopLogo}
             layout="fill"
-            objectFit="cover"
+            objectFit="contained"
           />
         <d-def>
           {shop.rating !== undefined ? (
