@@ -9,13 +9,13 @@ const { createFormModule } = require("@/modules/forms");
 
 export const filtersFormModule = createFormModule({
   guid: "shop-services",
-  async init(shopId, queryParams) {
+  async init(shopId) {
     const fromAddressBar = router.router.query;
 
     return {
-      device: queryParams?.device || fromAddressBar.device || "0",
-      brand: queryParams?.brand || fromAddressBar.brand || "0",
-      model: queryParams?.model || fromAddressBar.model || "0",
+      device: fromAddressBar.device || "0",
+      brand: fromAddressBar.brand || "0",
+      model: fromAddressBar.model || "0",
       shop: shopId,
     };
   },
