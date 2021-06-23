@@ -468,7 +468,7 @@ export default function ShopServices({ shop }) {
       await filtersFormModule.actions.initialize(shop.id);
       nextSlotFetcher.key(`${shop.id}`).fetch();
       serviceFormModule.actions.initialize();
-      const devices = await deviceFetcher.fetch();
+      deviceFetcher.fetch();
       const formValues = filtersFormModule.state.values;
       if (formValues.device) {
         brandFetcher.key(formValues.device).fetch();
