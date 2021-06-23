@@ -30,7 +30,7 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import Loader from "@/components/common/Loader";
 import moment from "moment";
-import ConfirmationModal from "@/components/common/ConfirmationModal";
+import ConfirmationModal from "@/components/common/modals/ConfirmationModal";
 import { continueWitoutServiceModal } from "@/components/shop-profile/modules";
 import { SubTitle } from "@/components/styled/text";
 import Image from "next/image";
