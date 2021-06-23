@@ -470,6 +470,13 @@ export default function ShopServices({ shop }) {
       serviceFormModule.actions.initialize();
       const devices = await deviceFetcher.fetch();
       const formValues = filtersFormModule.state.values;
+      if (formValues.device) {
+        brandFetcher.key(formValues.device).fetch();
+      }
+      if (formValues.brand) {
+        modelFetcher.key(formValues.brand).fetch();
+      }
+
       if (formValues.device === '0' && devices.length > 0) {
         filtersFormModule.actions.batchChange({
           updates: {
@@ -488,14 +495,6 @@ export default function ShopServices({ shop }) {
           updates,
         });
 
-
-      } else {
-        if (formValues.device) {
-          brandFetcher.key(formValues.device).fetch();
-        }
-        if (formValues.brand) {
-          modelFetcher.key(formValues.brand).fetch();
-        }
       }
 
       shopServicesListModule.actions.initialize();
