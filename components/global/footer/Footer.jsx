@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import {
   FooterViewSection,
@@ -20,20 +20,21 @@ import {
 } from "./Footer.style";
 import "./Footer.less";
 import Link from "next/link";
+import cookieCutter from 'cookie-cutter';
 import { FRONT_END_URL } from "../../../constants.js";
 import dynamic from "next/dynamic";
 import { withUserAgent } from "next-useragent";
 import Image from "next/image";
-const CookieBanner = dynamic(
-  () => import("@palmabit/react-cookie-law").then((mod) => mod.CookieBanner),
-  {
-    ssr: false,
-    loading: () => <p>...</p>,
-  }
-);
+import { CookieBanner } from "@/components/cookie-banner/CookieBanner";
 
 const FooterView = (routerProps) => {
   const { location, ua, getDevices, shopDevices } = routerProps;
+  const [cookiesActive, setCookiesActive] = useState(false);
+
+  useEffect(() => {
+    const isConcentGiven = cookieCutter.get('rcl_consent_given')
+    setCookiesActive(isConcentGiven === 'true')
+  }, [])
 
   const router = useRouter();
   const splitUrl = "/" + router.pathname.split("/")[1];
@@ -318,18 +319,8 @@ const FooterView = (routerProps) => {
         </FooterViewContent>
       </DevicesContainer>{" "}
       <FooterCopyright> Copyright @ 2021 MrAgain - info@mragain.nl </FooterCopyright>
-      {!!notBot && (
-        <CookieBanner
-          message="We gebruiken cookies met als doel je een optimale gebruikerservaring te geven op onze website."
-          necessaryOptionText="Ja, ik wil graag een optimale website"
-          declineButtonText="Negeer"
-          acceptButtonText="Accepteer"
-          showDeclineButton={true}
-          showPreferencesOption={false}
-          showStatisticsOption={false}
-          showMarketingOption={false}
-          policyLink={FRONT_END_URL + "/algemene-voorwaarden"}
-        />
+      {!!notBot && !cookiesActive && (
+        <CookieBanner onCookiesChanged={() => setCookiesActive(true)} />
       )}
     </FooterViewSection>
   );
