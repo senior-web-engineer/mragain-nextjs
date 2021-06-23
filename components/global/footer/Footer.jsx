@@ -29,12 +29,6 @@ import { CookieBanner } from "@/components/cookie-banner/CookieBanner";
 
 const FooterView = (routerProps) => {
   const { location, ua, getDevices, shopDevices } = routerProps;
-  const [cookiesActive, setCookiesActive] = useState(false);
-
-  useEffect(() => {
-    const isConcentGiven = cookieCutter.get('rcl_consent_given')
-    setCookiesActive(isConcentGiven === 'true')
-  }, [])
 
   const router = useRouter();
   const splitUrl = "/" + router.pathname.split("/")[1];
@@ -319,8 +313,8 @@ const FooterView = (routerProps) => {
         </FooterViewContent>
       </DevicesContainer>{" "}
       <FooterCopyright> Copyright @ 2021 MrAgain - info@mragain.nl </FooterCopyright>
-      {!!notBot && !cookiesActive && (
-        <CookieBanner onCookiesChanged={() => setCookiesActive(true)} />
+      {!!notBot && (
+        <CookieBanner />
       )}
     </FooterViewSection>
   );
