@@ -469,14 +469,33 @@ export default function ShopServices({ shop }) {
       shopServicesListModule.actions.initialize();
       nextSlotFetcher.key(`${shop.id}`).fetch();
       serviceFormModule.actions.initialize();
-      deviceFetcher.fetch();
+      const devices = await deviceFetcher.fetch();
       const formValues = filtersFormModule.state.values;
-      if (formValues.device) {
-        brandFetcher.key(formValues.device).fetch();
+      if (formValues.device === '0' && devices.length > 0) {
+        filtersFormModule.actions.batchChange({
+          updates: {
+            device: `${devices[0].id}`,
+          },
+        });
+        const brands = await brandFetcher.key(`${devices[0].id}`).fetch();
+        const models = await modelFetcher.key(`${brands[0].id}`).fetch();
+
+        filtersFormModule.actions.batchChange({
+          updates: {
+            device: `${devices[0].id}`,
+            brand: `${brands[0].id}`,
+            model: `${models[0].id}`,
+          },
+        });
+      } else {
+        if (formValues.device) {
+          brandFetcher.key(formValues.device).fetch();
+        }
+        if (formValues.brand) {
+          modelFetcher.key(formValues.brand).fetch();
+        }
       }
-      if (formValues.brand) {
-        modelFetcher.key(formValues.brand).fetch();
-      }
+
     }
 
     main();
