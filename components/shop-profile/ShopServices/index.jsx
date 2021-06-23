@@ -466,7 +466,6 @@ export default function ShopServices({ shop }) {
   useEffect(() => {
     async function main() {
       await filtersFormModule.actions.initialize(shop.id);
-      shopServicesListModule.actions.initialize();
       nextSlotFetcher.key(`${shop.id}`).fetch();
       serviceFormModule.actions.initialize();
       const devices = await deviceFetcher.fetch();
@@ -489,6 +488,7 @@ export default function ShopServices({ shop }) {
           updates,
         });
 
+
       } else {
         if (formValues.device) {
           brandFetcher.key(formValues.device).fetch();
@@ -498,6 +498,7 @@ export default function ShopServices({ shop }) {
         }
       }
 
+      shopServicesListModule.actions.initialize();
     }
 
     main();
