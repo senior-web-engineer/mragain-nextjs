@@ -32,11 +32,11 @@ const cookieMainView = (onAcceptCookies, setManageConcent) => (
 );
 
 const renderPanel = (concent, onConcentChanged) => (
-    <Row className="cookie-banner__concent py-3 px-4" onClick={event => event.stopPropagation()}>
+    <Row className="cookie-banner__concent py-3 px-4">
         <Col span="20">
             <p className="m-0">{concent.text}</p>
         </Col>
-        <Col span="4">
+        <Col span="4" onClick={event => event.stopPropagation()}>
             <div class="cookie-banner__concent__switch">
                 { concent.id === 'rcl_consent_given' ? <Tag>Always Active</Tag> : (
                     <Switch
