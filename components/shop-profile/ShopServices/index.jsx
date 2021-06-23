@@ -479,14 +479,16 @@ export default function ShopServices({ shop }) {
         });
         const brands = await brandFetcher.key(`${devices[0].id}`).fetch();
         const models = await modelFetcher.key(`${brands[0].id}`).fetch();
+        const updates = {
+          device: devices.length > 0 ? `${devices[0].id}` : `0`,
+          brand: brands.length > 0 ? `${brands[0].id}` : `0`,
+          model: models.length > 0 ? `${models[0].id}` : `0`,
+        }
 
         filtersFormModule.actions.batchChange({
-          updates: {
-            device: `${devices[0].id}`,
-            brand: `${brands[0].id}`,
-            model: `${models[0].id}`,
-          },
+          updates,
         });
+
       } else {
         if (formValues.device) {
           brandFetcher.key(formValues.device).fetch();
