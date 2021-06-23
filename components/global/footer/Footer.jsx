@@ -20,9 +20,6 @@ import {
 } from "./Footer.style";
 import "./Footer.less";
 import Link from "next/link";
-import cookieCutter from 'cookie-cutter';
-import { FRONT_END_URL } from "../../../constants.js";
-import dynamic from "next/dynamic";
 import { withUserAgent } from "next-useragent";
 import Image from "next/image";
 import { CookieBanner } from "@/components/cookie-banner/CookieBanner";
