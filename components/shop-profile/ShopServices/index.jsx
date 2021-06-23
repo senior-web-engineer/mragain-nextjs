@@ -466,6 +466,7 @@ export default function ShopServices({ shop }) {
   useEffect(() => {
     async function main() {
       await filtersFormModule.actions.initialize(shop.id);
+      shopServicesListModule.actions.initialize();
       nextSlotFetcher.key(`${shop.id}`).fetch();
       serviceFormModule.actions.initialize();
       deviceFetcher.fetch();
