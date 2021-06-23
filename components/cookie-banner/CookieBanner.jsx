@@ -1,5 +1,5 @@
 import "./styles.less";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import cookieCutter from "cookie-cutter";
 
 import { CookieManageConcentView } from "./CookieManageConcentView";
@@ -10,7 +10,9 @@ const getCookieState = (id) => {
 };
 
 export const CookieBanner = () => {
-    const [cookiesActive, setCookiesActive] = useState(false);
+    const isConcentGiven = cookieCutter.get("rcl_consent_given");
+
+    const [cookiesActive, setCookiesActive] = useState(isConcentGiven === "true");
     const [manageConcent, setManageConcent] = useState(false);
     const [concents, setConcents] = useState([
         {
@@ -40,11 +42,6 @@ export const CookieBanner = () => {
         },
     ]);
 
-    useEffect(() => {
-        const isConcentGiven = cookieCutter.get("rcl_consent_given");
-        setCookiesActive(isConcentGiven === "true");
-    }, []);
-
     const onCookiesSet = () => {
         setCookiesActive(true);
     };
@@ -71,10 +68,8 @@ export const CookieBanner = () => {
     };
 
     const onConcentChanged = (data) => {
-        console.log(data);
-        const newConcents = [...concents];
-        setConcents(
-            newConcents.map((concent) => {
+        setConcents(concents =>
+            concents.map((concent) => {
                 if (concent.id === data.id) {
                     concent.active = data.active;
                 }
