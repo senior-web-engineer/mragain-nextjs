@@ -468,7 +468,7 @@ export default function ShopServices({ shop }) {
       await filtersFormModule.actions.initialize(shop.id);
       nextSlotFetcher.key(`${shop.id}`).fetch();
       serviceFormModule.actions.initialize();
-      deviceFetcher.fetch();
+      const devices = await deviceFetcher.fetch();
       const formValues = filtersFormModule.state.values;
       if (formValues.device) {
         brandFetcher.key(formValues.device).fetch();
@@ -494,7 +494,6 @@ export default function ShopServices({ shop }) {
         filtersFormModule.actions.batchChange({
           updates,
         });
-
       }
 
       shopServicesListModule.actions.initialize();
