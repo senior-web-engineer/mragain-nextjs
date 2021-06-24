@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import Button from "../ui/Button";
+import Button from "@/components/ui/Button";
 
 const TYPE_TO_IMAGE_PATH = {
   error: "/images/notifications/error.png",
