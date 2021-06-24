@@ -30,7 +30,7 @@ export const renderPanel = (concent, onConcentChanged) => (
 export const CookieManageConcentView = ({
     concents,
     onSaveSettings,
-    onRectAll,
+    onRejectAll,
     onConcentChanged,
 }) => (
     <>
@@ -73,7 +73,7 @@ export const CookieManageConcentView = ({
             >
                 Save Settings
             </Button>
-            <Button onClick={onRectAll} type="link" size="large">
+            <Button onClick={onRejectAll} type="link" size="large">
                 Reject All
             </Button>
         </ButtonsWrapper>
