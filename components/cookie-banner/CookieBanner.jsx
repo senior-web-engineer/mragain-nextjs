@@ -17,7 +17,7 @@ export const CookieBanner = () => {
     const [concents, setConcents] = useState([
         {
             id: "rcl_consent_given",
-            text: "Strictly Necessary",
+            text: "Noodzakelijke cookies",
             active: true,
             description:
                 "These cookies are necessary for the website to function and cannot be switched off in our systems.",
