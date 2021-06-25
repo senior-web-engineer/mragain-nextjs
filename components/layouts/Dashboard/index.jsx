@@ -47,8 +47,8 @@ function Menu() {
                     },
                 ]}
             />
-            <AccountMenu selected={selected} onSelect={onSelect} />
             <ManagementMenu selected={selected} onSelect={onSelect} />
+            <AccountMenu selected={selected} onSelect={onSelect} />
         </MenuWrap>
     );
 }

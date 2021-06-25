@@ -29,26 +29,18 @@ export const ManagementMenu = ({ selected, onSelect }) => (
                         {
                             title: "All",
                             key: "history/all",
-                            isLeaf: true,
-                            children: [],
                         },
                         {
                             title: "Completed",
                             key: "history/completed",
-                            isLeaf: true,
-                            children: [],
                         },
                         {
                             title: "Canceled",
                             key: "history/canceled",
-                            isLeaf: true,
-                            children: [],
                         },
                         {
                             title: "On-Hold",
                             key: "history/on-hold",
-                            isLeaf: true,
-                            children: [],
                         },
                     ],
                 },
