@@ -1,92 +1,67 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
 
 import Header from "./Header";
+import { useRouter } from "next/router";
 import Select from "@/components/ui/Select";
-import Link from "next/link";
-import { SubTitle } from "@/components/styled/text";
 
-//
+import DashboardImage from "@/assets/icons/dashboard.png";
 
-const MainWrap = styled.div`
-  background-color: #fafafa;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-`;
+import { Tree } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+import { AccountMenu } from "./Menus/AccountMenu";
+import { ManagementMenu } from "./Menus/ManagementMenu";
 
-const ContentWrap = styled.div`
-  background-color: #fafafa;
-  flex: 1;
-  display: flex;
-`;
-
-const PageContent = styled.div`
-  padding: 24px 32px 24px 48px;
-`;
-
-const MenuWrap = styled.div`
-  width: 254px;
-  height: 100%;
-  background-color: #fff;
-  padding: 16px;
-`;
-
-const MenuItem = styled.a`
-  display: block;
-  font-size: 12px;
-  line-height: 40px;
-  letter-spacing: -0.02em;
-  color: #404040;
-  height: 40px;
-
-  &.currentRoute {
-    background: #f0fff9;
-  }
-`;
+import { MenuWrap, MainWrap, ContentWrap, PageContent } from "./menu-styles";
 
 function Menu() {
-  return (
-    <MenuWrap>
-      <Select options={[{ label: "Main branch", value: "0" }]} value="0" />
-      <Link href="/dashboard">
-        <MenuItem>Overview</MenuItem>
-      </Link>
-      <SubTitle>Management</SubTitle>
-      <Link href="/dashboard">
-        <MenuItem>History</MenuItem>
-      </Link>
-      <Link href="/dashboard">
-        <MenuItem>Shop management</MenuItem>
-      </Link>
-      <Link href="/dashboard">
-        <MenuItem>Repair management</MenuItem>
-      </Link>
-      <Link href="/dashboard">
-        <MenuItem>Finance</MenuItem>
-      </Link>
-      <SubTitle>Account</SubTitle>
-      <Link href="/dashboard">
-        <MenuItem>Messages</MenuItem>
-      </Link>
-      <Link href="/dashboard">
-        <MenuItem>Notifications</MenuItem>
-      </Link>
-      <Link href="/dashboard">
-        <MenuItem>Account settings</MenuItem>
-      </Link>
-    </MenuWrap>
-  );
+    const router = useRouter();
+    const matchingRoute = router.pathname.substring(1);
+    const [selected, setSelected] = useState([
+        matchingRoute.split("/")[0],
+        matchingRoute,
+    ]);
+
+    const onSelect = (selectedKeys) => {
+        if (selectedKeys[selectedKeys.length - 1].includes("/")) {
+            const lastSelectedKey = selectedKeys[selectedKeys.length - 1];
+            setSelected([lastSelectedKey.split("/")[0], lastSelectedKey]);
+            router.push(`/${lastSelectedKey}`);
+        }
+    };
+
+    return (
+        <MenuWrap>
+            <Select className="mb-4" options={[{ label: "Main branch", value: "0" }]} value="0" />
+            <Tree
+                showIcon
+                showLine={false}
+                switcherIcon={<DownOutlined />}
+                selectedKeys={selected}
+                onSelect={onSelect}
+                multiple
+                treeData={[
+                    {
+                        title: "Dashboard",
+                        key: "dashboard/[shopId]",
+                        icon: <img src={DashboardImage} />,
+                        selectable: true,
+                    },
+                ]}
+            />
+            <ManagementMenu selected={selected} onSelect={onSelect} />
+            <AccountMenu selected={selected} onSelect={onSelect} />
+        </MenuWrap>
+    );
 }
 
 export default function DefaultLayout({ children, showSignup = false }) {
-  return (
-    <MainWrap>
-      <Header showSignup={showSignup} />
-      <ContentWrap>
-        <Menu />
-        <PageContent>{children}</PageContent>
-      </ContentWrap>
-    </MainWrap>
-  );
+    return (
+        <MainWrap>
+            <Header showSignup={showSignup} />
+            <ContentWrap>
+                <Menu />
+                <PageContent>{children}</PageContent>
+            </ContentWrap>
+        </MainWrap>
+    );
 }
