@@ -53,15 +53,9 @@ import { useRouter } from "next/router";
 import GooglePlaces, { loadScript } from "@/components/common/GooglePlaces";
 import moment from "moment";
 
-import dynamic from "next/dynamic";
-import Loader from "@/components/common/Loader";
 import { getShopLogo, getShopRoute } from "@/utils/shop";
 import Link from "next/link";
-
-const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
-  loading: Loader,
-  ssr: false,
-});
+import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
 
 //
 
@@ -757,14 +751,14 @@ function ShopItem({ item }) {
   );
 
   if (typeof window === "undefined") {
-    return <Link href={shopRoute}>
-      <a>
-        {shopCard}
-      </a>
-    </Link>
+    return (
+      <Link href={shopRoute}>
+        <a>{shopCard}</a>
+      </Link>
+    );
   }
 
-  return shopCard
+  return shopCard;
 }
 
 function parseOptions(arr, key) {
@@ -792,24 +786,7 @@ const MobileDeviceSelector = createSelectComponent({
   parseOptions(items = []) {
     return parseOptions(items || [], "device_name");
   },
-  Component({ options, ...rest }) {
-    const menuData = options.map((option) => (
-      <Radio.Button key={option.value} value={option.value}>
-        {option.label}
-      </Radio.Button>
-    ));
-
-    return (
-      <Field as={Radio.Group} {...rest}>
-        <Menu
-          alignCenter={false}
-          data={menuData}
-          selected={rest.value}
-          hideArrows={true}
-        />
-      </Field>
-    );
-  },
+  Component: MobileRadioButtons,
 });
 
 function AppendIdentifier({ Component, name }) {
@@ -1055,6 +1032,17 @@ export default function SearchResults() {
   useEffect(() => {
     async function main() {
       await loadScript();
+      const formValues = filtersFormModule.state.values;
+      if (formValues.device) {
+        await brandFetcher.key(formValues.device).fetch();
+      }
+      if (formValues.brand) {
+        await modelFetcher.key(formValues.brand).fetch();
+      }
+
+      if (formValues.model) {
+        await serviceFetcher.key(formValues.model).fetch();
+      }
     }
     main();
   }, []);
@@ -1157,7 +1145,8 @@ export default function SearchResults() {
                 </ZipFields>
                 <ModelFields>
                   <OnMobile only>
-                    <MobileDeviceSelector
+                    <Field
+                      as={MobileDeviceSelector}
                       name="device"
                       aria-input-field-name="device"
                       onChange={onDeviceChange}
@@ -1315,16 +1304,5 @@ export const getServerSideProps = wrapper.getServerSideProps(
     await filtersFormModule.actions.initialize(query);
     await shopListModule.actions.initialize();
     await deviceFetcher.fetch();
-    const formValues = filtersFormModule.state.values;
-    if (formValues.device) {
-      brandFetcher.key(formValues.device).fetch();
-    }
-    if (formValues.brand) {
-      modelFetcher.key(formValues.brand).fetch();
-    }
-
-    if (formValues.model) {
-      serviceFetcher.key(formValues.model).fetch();
-    }
   }
 );

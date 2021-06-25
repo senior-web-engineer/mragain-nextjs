@@ -34,6 +34,7 @@ import ConfirmationModal from "@/components/common/ConfirmationModal";
 import { continueWitoutServiceModal } from "@/components/shop-profile/modules";
 import { SubTitle } from "@/components/styled/text";
 import Image from "next/image";
+import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
   loading: Loader,
@@ -298,24 +299,7 @@ const MobileDeviceSelector = createSelectComponent({
   parseOptions(items = []) {
     return parseOptions(items || [], "device_name");
   },
-  Component({ options, ...rest }) {
-    const menuData = options.map((option) => (
-      <Radio.Button key={option.value} value={option.value}>
-        {option.label}
-      </Radio.Button>
-    ));
-
-    return (
-      <Field as={Radio.Group} {...rest}>
-        <Menu
-          alignCenter={false}
-          data={menuData}
-          selected={rest.value}
-          hideArrows={true}
-        />
-      </Field>
-    );
-  },
+  Component: MobileRadioButtons,
 });
 
 const MobileDeviceSelectorWrap = styled.div`
@@ -520,7 +504,7 @@ export default function ShopServices({ shop }) {
         <Form module={filtersFormModule}>
           <OnMobile only>
             <MobileDeviceSelectorWrap>
-              <MobileDeviceSelector name="device" onChange={onDeviceChange} />
+              <Field as={MobileDeviceSelector} name="device" onChange={onDeviceChange} />
             </MobileDeviceSelectorWrap>
           </OnMobile>
           <ModelFields>
