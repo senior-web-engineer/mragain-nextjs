@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Header from "./Header";
 import { useRouter } from "next/router";
+import Select from "@/components/ui/Select";
 
 import DashboardImage from "@/assets/icons/dashboard.png";
 
@@ -31,6 +32,7 @@ function Menu() {
 
     return (
         <MenuWrap>
+            <Select className="mb-4" options={[{ label: "Main branch", value: "0" }]} value="0" />
             <Tree
                 showIcon
                 showLine={false}
