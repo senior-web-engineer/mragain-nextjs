@@ -16,7 +16,6 @@ import { MenuWrap, MainWrap, ContentWrap, PageContent } from "./menu-styles";
 function Menu() {
     const router = useRouter();
     const matchingRoute = router.pathname.substring(1);
-    console.log(matchingRoute);
     const [selected, setSelected] = useState([
         matchingRoute.split("/")[0],
         matchingRoute,
