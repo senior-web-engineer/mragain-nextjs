@@ -35,6 +35,17 @@ export const MenuWrap = styled.div`
             background-color: transparent;
         }
     }
+    .ant-tree-switcher {
+        position: absolute !important;
+        width: 100% !important;
+        height: 38px !important;
+
+        span {
+            position: absolute !important;
+            top: 8px !important;
+            right: 0 !important;
+        }
+    }
 
     .ant-tree-icon__customize {
         margin-right: 10px !important;

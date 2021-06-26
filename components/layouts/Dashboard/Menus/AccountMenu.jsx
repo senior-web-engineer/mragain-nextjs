@@ -56,6 +56,7 @@ export const AccountMenu = ({ selected, onSelect }) => (
             selectedKeys={selected}
             onSelect={onSelect}
             multiple
+            blockNode
             treeData={accountMenuItems}
         />
     </>
