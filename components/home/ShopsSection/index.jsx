@@ -172,7 +172,7 @@ const Toolbar = styled.div`
 `;
 
 export function ShopCard({ shop, onClick }) {
-  const location = [shop.street || "", shop.city || "", shop.country || ""]
+  const location = [shop.city || "", shop.country || ""]
     .filter(Boolean)
     .join(", ");
 
