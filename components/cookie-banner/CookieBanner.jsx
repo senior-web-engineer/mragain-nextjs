@@ -17,7 +17,7 @@ export const CookieBanner = () => {
     const [concents, setConcents] = useState([
         {
             id: "rcl_consent_given",
-            text: "Noodzakelijke cookies",
+            text: "Standaard cookies",
             active: true,
             description:
                 "Deze cookies zijn nodig om onze website te laten functioneren en kunnen we niet uitzetten.",
