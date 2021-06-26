@@ -39,7 +39,7 @@ export const CookieManageConcentView = ({
                 <b>Beheer je cookie instellingen</b>
             </p>
             <p>
-                Als je website bezoekt kunnen deze informatie opslaan wat meestal 
+                Als je websites bezoekt kunnen deze informatie opslaan wat meestal 
 	        gebeurt in de vorm van cookies.
             </p>
         </div>
