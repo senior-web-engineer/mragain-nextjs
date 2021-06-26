@@ -26,14 +26,14 @@ export const CookieMainView = ({ onAcceptCookies, setManageConcent }) => (
                 type="primary"
                 size="large"
             >
-                Yes, I Accept
+                Prima!
             </Button>
             <Button
                 onClick={() => setManageConcent(true)}
                 type="link"
                 size="large"
             >
-                Manage Consent Preferences
+                Beheer je instellingen
             </Button>
         </ButtonsWrapper>
     </>
