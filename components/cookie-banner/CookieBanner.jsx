@@ -20,25 +20,25 @@ export const CookieBanner = () => {
             text: "Noodzakelijke cookies",
             active: true,
             description:
-                "These cookies are necessary for the website to function and cannot be switched off in our systems.",
+                "Deze cookies zijn nodig om onze website te laten functioneren en kunnen we niet uitzetten.",
         },
         {
             id: "rcl_analytics_consent",
-            text: "Analytics Cookies",
+            text: "Analytische cookies",
             active: getCookieState("rcl_analytics_consent"),
-            description: "Cookie description",
+            description: "Deze gebruiken we om je gedrag op onze website te analyseren om zo je ervaring te verbeteren.",
         },
         {
             id: "rcl_functional_consent",
-            text: "Functional Cookies",
+            text: "Functionele cookies",
             active: getCookieState("rcl_functional_consent"),
-            description: "Cookie description",
+            description: "Deze cookies gebruiken we om de website beter te laten functioneren.",
         },
         {
             id: "rcl_targeting_consent",
-            text: "Targeting Cookies",
+            text: "Marketing cookies",
             active: getCookieState("rcl_targeting_consent"),
-            description: "Cookie description",
+            description: "Deze cookies gebruiken we niet want wij zijn voor een reclame vrije website!",
         },
     ]);
 

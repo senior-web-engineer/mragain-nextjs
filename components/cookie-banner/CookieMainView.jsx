@@ -13,8 +13,8 @@ export const CookieMainView = ({ onAcceptCookies, setManageConcent }) => (
             </Col>
             <Col className="gutter-row" span={20}>
                 <p>
-                    We use third-party cookies in order to personalize your site
-                    experience
+                    We gebruiken cookies om je een zo goed mogelijke
+	            ervaring op onze website te geven. 
                 </p>
             </Col>
         </Row>

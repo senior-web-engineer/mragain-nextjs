@@ -13,7 +13,7 @@ export const renderPanel = (concent, onConcentChanged) => (
         <Col span="4" onClick={(event) => event.stopPropagation()}>
             <div class="cookie-banner__concent__switch">
                 {concent.id === "rcl_consent_given" ? (
-                    <Tag>Always Active</Tag>
+                    <Tag>Altijd actief</Tag>
                 ) : (
                     <Switch
                         checked={concent.active}
@@ -36,11 +36,11 @@ export const CookieManageConcentView = ({
     <>
         <div>
             <p>
-                <b>Manage Consent Preferences</b>
+                <b>Beheer je cookie instellingen</b>
             </p>
             <p>
-                When you visit any web site, it may store or retrieve
-                information on your browser, mostly in the form of cookies.
+                Als je website bezoekt kunnen deze informatie opslaan wat meestal 
+	        gebeurt in de vorm van cookies.
             </p>
         </div>
         <Collapse
@@ -71,10 +71,10 @@ export const CookieManageConcentView = ({
                 type="primary"
                 size="large"
             >
-                Save Settings
+                Opslaan
             </Button>
             <Button onClick={onRejectAll} type="link" size="large">
-                Reject All
+                Afwijzen
             </Button>
         </ButtonsWrapper>
     </>
