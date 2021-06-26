@@ -661,7 +661,7 @@ function ShopItem({ item }) {
   const router = useRouter();
   const { selectedShop, updateSelectedShop, showMap } =
     useContext(ShopBridgeContext);
-  const location = [item.shop.street || "", item.shop.city || ""]
+  const location = [item.shop.city || ""]
     .filter(Boolean)
     .join(", ");
   function renderService(service) {
