@@ -15,6 +15,7 @@ import { MenuWrap, MainWrap, ContentWrap, PageContent } from "./menu-styles";
 
 function Menu() {
     const router = useRouter();
+    const { shopId } = router.query
     const matchingRoute = router.pathname.substring(1);
     const [selected, setSelected] = useState([
         matchingRoute.split("/")[0],
@@ -25,7 +26,17 @@ function Menu() {
         if (selectedKeys[selectedKeys.length - 1].includes("/")) {
             const lastSelectedKey = selectedKeys[selectedKeys.length - 1];
             setSelected([lastSelectedKey.split("/")[0], lastSelectedKey]);
-            router.push(`/${lastSelectedKey}`);
+            let query = []
+            if (lastSelectedKey.split("?").length === 2) {
+              query = lastSelectedKey.split("?")[1].split("=");
+            }
+            const pathname = `/${lastSelectedKey.split("?")[0]}`;
+            console.log(query, pathname)
+            if (query.length === 2) {
+              router.push(pathname, `${pathname}?${[query[0]]}=${query[1]}`, { shallow: true });
+            } else {
+              router.push(pathname, undefined, { shallow: true });
+            }
         }
     };
 
@@ -42,13 +53,13 @@ function Menu() {
                 treeData={[
                     {
                         title: "Dashboard",
-                        key: "dashboard/[shopId]",
+                        key: `dashboard/${shopId}`,
                         icon: <img src={DashboardImage} />,
                         selectable: true,
                     },
                 ]}
             />
-            <ManagementMenu selected={selected} onSelect={onSelect} />
+            <ManagementMenu shopId={shopId} selected={selected} onSelect={onSelect} />
             <AccountMenu selected={selected} onSelect={onSelect} />
         </MenuWrap>
     );

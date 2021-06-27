@@ -15,6 +15,7 @@ export const ContentWrap = styled.div`
 
 export const PageContent = styled.div`
     padding: 24px 32px 24px 48px;
+    flex: 1;
 `;
 
 export const MenuWrap = styled.div`

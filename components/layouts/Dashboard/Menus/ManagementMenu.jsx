@@ -9,7 +9,7 @@ import Image from 'next/image'
 
 import { MenuHeader } from "../menu-styles";
 
-const managementMenuItems = [
+const managementMenuItems = (shopId) => [
     {
         title: "History",
         key: "history",
@@ -18,19 +18,19 @@ const managementMenuItems = [
         children: [
             {
                 title: "All",
-                key: "history/all",
+                key: `history/${shopId}?tab=all`,
             },
             {
                 title: "Completed",
-                key: "history/completed",
+                key: `history/${shopId}?tab=completed`,
             },
             {
                 title: "Canceled",
-                key: "history/canceled",
+                key: `history/${shopId}?tab=canceled`,
             },
             {
                 title: "On-Hold",
-                key: "history/on-hold",
+                key: `history/${shopId}?tab=on-hold`,
             },
         ],
     },
@@ -74,7 +74,7 @@ const managementMenuItems = [
     },
 ]
 
-export const ManagementMenu = ({ selected, onSelect }) => (
+export const ManagementMenu = ({ shopId, selected, onSelect }) => (
     <>
         <MenuHeader>MANAGEMENT</MenuHeader>
         <Tree
@@ -85,7 +85,7 @@ export const ManagementMenu = ({ selected, onSelect }) => (
             onSelect={onSelect}
             multiple
             blockNode
-            treeData={managementMenuItems}
+            treeData={managementMenuItems(shopId)}
         />
     </>
 );
