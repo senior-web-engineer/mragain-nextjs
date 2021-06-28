@@ -82,8 +82,8 @@ export const GeneralInfo = ({ shopInfo }) => {
                             <Col span={18}>
                                 <Field
                                     as={Input}
-                                    name="customerName"
-                                    label="Customer name"
+                                    name="about"
+                                    label="About"
                                 />
                             </Col>
                         </Row>
@@ -98,18 +98,18 @@ export const GeneralInfo = ({ shopInfo }) => {
                             <Col span={18}>
                                 <Field
                                     as={Input}
-                                    name="customerName"
-                                    label="Customer name"
+                                    name="phone"
+                                    label="Phone"
                                 />
                                 <Field
                                     as={Input}
-                                    name="customerName"
-                                    label="Customer name"
+                                    name="webSite"
+                                    label="Web Site"
                                 />
                                 <Field
                                     as={Input}
-                                    name="customerName"
-                                    label="Customer name"
+                                    name="address"
+                                    label="Address"
                                 />
                             </Col>
                         </Row>

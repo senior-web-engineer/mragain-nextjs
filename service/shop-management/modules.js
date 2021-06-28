@@ -36,7 +36,7 @@ export const shopManagementGeneralForm = createFormModule({
     return {
       about: '',
       phone: '',
-      website: '',
+      webSite: '',
       address: '',
     };
   },
