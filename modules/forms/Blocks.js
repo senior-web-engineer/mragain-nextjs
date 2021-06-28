@@ -18,6 +18,7 @@ export function parseNativeEvent(ev) {
 export function Field({
   name,
   label,
+  customLabel = false,
   optional = false,
   showError = true,
   children,
@@ -51,7 +52,7 @@ export function Field({
 
   return (
     <FieldWrap style={style}>
-      {label ? (
+      {label && !customLabel ? (
         <label>
           {label}
           {optional ? "(Optional)" : ""}
@@ -62,6 +63,7 @@ export function Field({
         onChange={onChange}
         onBlur={onBlur}
         children={children}
+        label={customLabel && label}
         {...rest}
       />
       {error ? <ErrorWrap>{error}</ErrorWrap> : null}

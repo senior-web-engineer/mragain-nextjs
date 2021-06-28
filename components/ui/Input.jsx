@@ -1,32 +1,60 @@
-import styled, { css } from "styled-components";
+import { useRef } from "react";
+import styled from "styled-components";
 import { Input as AntdInput } from "antd";
 
-export const StyledInput = styled(AntdInput)`
-  .ant-input-prefix {
-    color: #ccc;
-  }
+export const StyledInput = styled.div`
+    padding: 12px 20px;
+    border: 1px solid #F0F0F0;
+    box-sizing: border-box;
+    border-radius: 4px;
 
-  .ant-input.ant-input-lg {
-    font-size: 14px;
-  }
+    label {
+        color: #c0c0c0;
+    }
 
-  .ant-input {
-    ${(props) =>
-      props.noBorder &&
-      css`
-        border: 0;
-      `}
-  }
+    input, textarea {
+        border: none;
+        padding: 0 !important;
+        &:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
 `;
 
 function parseValue(ev) {
-  if (ev?.target) {
-    return ev?.target?.value;
-  }
+    if (ev?.target) {
+        return ev?.target?.value;
+    }
 
-  return ev;
+    return ev;
 }
 
 export default function Input({ onChange = () => {}, ...rest }) {
-  return <StyledInput {...rest} onChange={(ev) => onChange(parseValue(ev))} />;
+    const inputRef = useRef(null);
+
+    const onInputWrapperSelect = () => {
+        inputRef.current.focus({
+            cursor: "end",
+        });
+    };
+
+    return (
+        <StyledInput onClick={onInputWrapperSelect}>
+            <label htmlFor="">{rest.label}</label>
+            {rest.textarea ? (
+                <AntdInput.TextArea
+                    ref={inputRef}
+                    {...rest}
+                    onChange={(ev) => onChange(parseValue(ev))}
+                />
+            ) : (
+                <AntdInput
+                    ref={inputRef}
+                    {...rest}
+                    onChange={(ev) => onChange(parseValue(ev))}
+                />
+            )}
+        </StyledInput>
+    );
 }

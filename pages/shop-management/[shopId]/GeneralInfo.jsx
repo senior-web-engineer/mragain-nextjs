@@ -77,11 +77,17 @@ export const GeneralInfo = ({ shopInfo }) => {
                             justify="space-between"
                         >
                             <Col span={6}>
-                                <p>Devices</p>
+                                <h3>About the company</h3>
+                                <p>
+                                    Give a brief introduction to let your
+                                    clients know more about you.
+                                </p>
                             </Col>
                             <Col span={18}>
                                 <Field
                                     as={Input}
+                                    customLabel
+                                    textarea
                                     name="about"
                                     label="About"
                                 />
@@ -93,21 +99,28 @@ export const GeneralInfo = ({ shopInfo }) => {
                             justify="space-between"
                         >
                             <Col span={6}>
-                                <p>Devices</p>
+                                <h3>External links</h3>
+                                <p>
+                                    Let people visit you on other platforms you
+                                    have available
+                                </p>
                             </Col>
                             <Col span={18}>
                                 <Field
                                     as={Input}
+                                    customLabel
                                     name="phone"
                                     label="Phone"
                                 />
                                 <Field
                                     as={Input}
+                                    customLabel
                                     name="webSite"
                                     label="Web Site"
                                 />
                                 <Field
                                     as={Input}
+                                    customLabel
                                     name="address"
                                     label="Address"
                                 />
