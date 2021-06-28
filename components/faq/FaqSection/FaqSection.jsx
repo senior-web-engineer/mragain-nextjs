@@ -46,7 +46,8 @@ const FaqSection = () => (
 	    <FaqArticleTitle>Cashback</FaqArticleTitle>
 	    <lu>
 	    <li><b>Hoe werkt de cashback?</b></li>
-	    Na het achterlaten van een review ontvang je van ons 5 euro cashback, hiervoor vind je instructies in de review email. 
+	    Na het achterlaten van een review ontvang je van ons 5 euro cashback, hiervoor vind je instructies in de review email.
+	    <br></br>
 	    </lu>
 	    <FaqArticleTitle>Reparatie</FaqArticleTitle>
 	    <lu>
