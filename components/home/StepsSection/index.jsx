@@ -88,7 +88,7 @@ const STEPS = [
     image: "/images/appointment.png",
   },
   {
-    title: "Review & Cashback",
+    title: "Cashback",
     description: `Laat een review achter en ontvang 5 euro cashback`,
     image: "/images/guarantee.png",
   },

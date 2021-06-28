@@ -42,7 +42,12 @@ const FaqSection = () => (
 	    Je betaalt het bedrag dat vantevoren is afgesproken voor de reparatie. Natuurlijk kan dit wijzigen als blijkt dat er een andere reparatie nodig is, dit wordt dan vooraf
 	    door de reparateur met je besproken.
 	    <br></br>
-	    </lu> 
+	    </lu>
+	    <FaqArticleTitle>Cashback</FaqArticleTitle>
+	    <lu>
+	    <li><b>Hoe werkt de cashback?</b></li>
+	    Na het achterlaten van een review ontvang je van ons 5 euro cashback, hiervoor vind je instructies in de review email. 
+	    </lu>
 	    <FaqArticleTitle>Reparatie</FaqArticleTitle>
 	    <lu>
 	    <li><b>Hoe lang duurt mijn reparatie?</b></li>
