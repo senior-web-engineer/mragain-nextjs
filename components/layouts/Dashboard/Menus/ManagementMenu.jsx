@@ -1,10 +1,10 @@
 import { Tree } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 
-import HistoryImage from "@/assets/icons/history.png";
-import ShopImage from "@/assets/icons/shop.png";
-import ServicesImage from "@/assets/icons/services.png";
-import FinanceImage from "@/assets/icons/finance.png";
+import HistoryImage from "@/assets/icons/history.svg";
+import ShopImage from "@/assets/icons/shop.svg";
+import ServicesImage from "@/assets/icons/services.svg";
+import FinanceImage from "@/assets/icons/finance.svg";
 import Image from 'next/image'
 
 import { MenuHeader } from "../menu-styles";

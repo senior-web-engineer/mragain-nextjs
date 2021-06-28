@@ -4,7 +4,7 @@ import Header from "./Header";
 import { useRouter } from "next/router";
 import Select from "@/components/ui/Select";
 
-import DashboardImage from "@/assets/icons/dashboard.png";
+import DashboardImage from "@/assets/icons/dashboard.svg";
 
 import { Tree } from "antd";
 import { DownOutlined } from "@ant-design/icons";
