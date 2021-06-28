@@ -42,11 +42,11 @@ const managementMenuItems = (shopId) => [
         children: [
             {
                 title: "Profile Settings",
-                key: "shop-management/profile-settings",
+                key: `shop-management/${shopId}?tab=profile-settings`,
             },
             {
                 title: "Operational Hours",
-                key: "shop-management/operational-hours",
+                key: `shop-management/${shopId}?tab=operational-hours`,
             },
         ],
     },

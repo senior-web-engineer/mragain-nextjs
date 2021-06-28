@@ -4,7 +4,7 @@ import {
     currentUser,
     historyFetcher,
     reparationsList,
-} from "@/components/history/modules";
+} from "@/service/history/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
 import List from "@/modules/list";
 import { Table } from "@/modules/list/Blocks";
@@ -66,13 +66,6 @@ const columns = [
         },
     },
 ];
-
-function parseOptions(arr, labelKey, idKey = "id") {
-    return arr.map((item) => ({
-        value: get(item, idKey),
-        label: get(item, labelKey),
-    }));
-}
 
 const FILTER_OPTIONS = [
     {
