@@ -215,9 +215,9 @@ const DetailButtonsWrap = styled.div`
 
 const ADVANTAGES = [
   {
-    title: "Klaar terwijl u wacht",
+    title: "Cashback op je reparatie",
     logo: "/images/shop/wallet.png",
-    description: "De meeste reparaties zijn binnen 30 minuten klaar",
+    description: "Ontvang 5 euro cashback na het achterlaten van een review",
   },
   {
     title: "Altijd de beste garantie",
