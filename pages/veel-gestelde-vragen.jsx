@@ -66,6 +66,15 @@ const Faq = () => {
       ],
     },
     {
+      title: 'Cashback',
+      faq: [
+	{
+          question: 'Hoe werkt het met de cashback als ik een review achterlaat?',
+          answer: 'Heel simpel: na het versturen van een review stuur je ons een betaalverzoek!',
+	},
+      ],
+    },	    
+    {
       title: 'Feedback en klachten',
       faq: [
 	{
