@@ -92,7 +92,8 @@ export const API_PATH = {
   GETMODELDETAILS: `${API_URL}/get-model-detail`,
   GETMODELREPARATIONS: `${API_URL}/get-model-repairs/`,
   GETALLBRANDSMODELS: `${API_URL}/get-brandmodel`,
-  PAYMENT: `${API_URL}/payment/`
+  PAYMENT: `${API_URL}/payment/`,
+  GETPAYMENT: (id) => `${API_URL}/payment-status/${id}/`
 };
 
 export default {
