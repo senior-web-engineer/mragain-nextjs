@@ -13,7 +13,6 @@ import Input from "@/components/ui/Input";
 import { Tabs, Row, Col, Button, Divider } from "antd";
 import { useRouter } from "next/router";
 const { TabPane } = Tabs;
-//
 
 const columns = (actions) => [
     {
