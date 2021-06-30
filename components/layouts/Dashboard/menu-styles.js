@@ -15,6 +15,7 @@ export const ContentWrap = styled.div`
 
 export const PageContent = styled.div`
     padding: 24px 32px 24px 48px;
+    flex: 1;
 `;
 
 export const MenuWrap = styled.div`
@@ -33,6 +34,17 @@ export const MenuWrap = styled.div`
 
         span:hover {
             background-color: transparent;
+        }
+    }
+    .ant-tree-switcher {
+        position: absolute !important;
+        width: 100% !important;
+        height: 38px !important;
+
+        span {
+            position: absolute !important;
+            top: 8px !important;
+            right: 0 !important;
         }
     }
 

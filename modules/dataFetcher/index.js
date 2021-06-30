@@ -8,6 +8,7 @@ const SEPARATOR = "~";
 
 export default function dataFetcher({ selectors = [], fetchData }) {
   function getPath(state) {
+    console.log('SELECTORS', selectors);
     return selectors.reduce((accumulator, selector) => {
       function join(string) {
         return accumulator ? `${accumulator}${SEPARATOR}${string}` : string;
