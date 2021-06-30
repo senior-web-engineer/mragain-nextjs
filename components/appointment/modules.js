@@ -241,3 +241,13 @@ export const invalidTimeFetcher = dataFetcher({
     return JSON.parse(data?.[0]?.invalid_day_time || "[]");
   },
 });
+
+export function payForAppointment({appointment, shop, service}) {
+  console.log(appointment, shop, service)
+  return api.post(`${API_PATH.PAYMENT}`, {
+    appointment,
+    shop: shop.id,
+    price: `${service.price}.00`,
+    title: `${shop.name} appointment payment`
+  })
+}

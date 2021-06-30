@@ -9,6 +9,7 @@ import {
   invalidTimeFetcher,
   modelFetcher,
   openTimeFetcher,
+  payForAppointment,
   serviceFetcher,
 } from "@/components/appointment/modules";
 import { getShopProfileByInformationServer } from "@/service/account/operations";
@@ -33,6 +34,7 @@ import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
 import Button from "@/components/ui/Button";
 import router from "next/router";
 import { store } from "@/configureStore";
+import api from "@/utils/api";
 
 const MainWrap = styled.div`
   padding-top: 1px;
@@ -200,7 +202,11 @@ export default function AppointmentPage({ shop }) {
       top: 0,
       behavior: "smooth",
     });
-    if (step === 0) {
+    const fieldsToValidate = {
+      0: ["time", "service"],
+      1: ["name", "email", "tel"],
+    };
+    if (Object.keys(fieldsToValidate).includes(step)) {
       await appointmentForm.actions.validateField({
         name: ["time", "service"],
       });
@@ -219,7 +225,7 @@ export default function AppointmentPage({ shop }) {
       }
     }
 
-    if (step === 1) {
+    if (step === 2) {
       const reviewData = {
         form: appointmentForm.state.values,
         shop,
@@ -229,8 +235,13 @@ export default function AppointmentPage({ shop }) {
         model: modelFetcher.selector(store.ref.getState()).result,
       };
 
+      function onAppointmentConfirmed() {
+        appointmentReview.actions.open(reviewData);
+        router.router.push("/");
+      }
+
       try {
-        await appointmentForm.actions.submit();
+        const appointmentData = await appointmentForm.actions.submit();
         appointmentConfirmation.actions
           .open({
             type: "success",
@@ -239,9 +250,16 @@ export default function AppointmentPage({ shop }) {
               "We hebben een bevestiging email naar je verzonden (kan in je spam zitten!)",
             buttonLabel: "Bekijk afspraak gegevens",
           })
-          .then(() => {
-            appointmentReview.actions.open(reviewData);
-            router.router.push("/");
+          .then(async () => {
+            if (appointmentForm.state.values.paymentType === "credit-card") {
+              const paymentGatewayResponse = await payForAppointment({
+                ...appointmentData,
+                ...reviewData,
+              });
+              window.location.href = paymentGatewayResponse.data;
+              return;
+            }
+            onAppointmentConfirmed();
           });
       } catch (err) {
         if (err.validationErrors) {
@@ -262,6 +280,7 @@ export default function AppointmentPage({ shop }) {
           buttonLabel: "Probeer het nog eens",
         });
       }
+
       return;
     }
     updateStep((state) => state + 1);
