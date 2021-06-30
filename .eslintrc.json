@@ -1,9 +1,5 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:prettier/recommended"
-  ],
+  "extends": ["next", "prettier"],
   "plugins": ["react", "prettier", "react-hooks"],
   "env": {
     "es6": true,
@@ -12,11 +8,11 @@
     "jest": true
   },
   "rules": {
-    "prettier/prettier": ["warning", { "singleQuote": true }],
+    "prettier/prettier": ["error", { "singleQuote": false }],
     "no-console": "warn",
-    "simple-import-sort/imports": "warning",
+    "simple-import-sort/imports": "error",
     "@typescript-eslint/no-unused-vars": [
-      "warning",
+      "error",
       { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
     ]
   },
@@ -27,17 +23,8 @@
     },
     "import/resolver": {
       "node": {
-        "paths": ["./"]
+        "paths": ["."]
       }
     }
-  },
-  "parser": "@typescript-eslint/parser",
-  "overrides": [
-    {
-      "files": ["**/*.jsx"],
-      "rules": {
-        "react/prop-types": "off"
-      }
-    }
-  ]
+  }
 }
