@@ -9,18 +9,18 @@ import DefaultLayout from "@/components/layouts/Dashboard";
 import { Tabs, Row, Col } from "antd";
 import { useRouter } from "next/router";
 const { TabPane } = Tabs;
-import { BoxWrapper, RowWrapper, HoursEditor } from "./styles";
+import { BoxWrapper } from "./styles";
 import { ImageSection } from "./ImageSection";
 import { AdditionalInfo } from "./AdditionalInfo";
-import { OperationalHoursCalendar } from './OperationalHoursCalendar';
+import { OperationalHoursCalendar } from "./OperationalHoursCalendar";
 import { GeneralInfo } from "./GeneralInfo";
-
+import { ScheduleList } from "./ScheduleList";
 
 export default function ShopManagementPage({ auth_user }) {
     const router = useRouter();
     const { shopId } = router.query;
 
-    const [activeTab, setActiveTab] = useState('profile-settings')
+    const [activeTab, setActiveTab] = useState("profile-settings");
     const [shopInfo, setShopInfo] = useState();
 
     useEffect(() => {
@@ -38,11 +38,11 @@ export default function ShopManagementPage({ auth_user }) {
 
     useEffect(() => {
         const { tab } = router.query;
-        console.log('TABS', activeTab, tab)
+        console.log("TABS", activeTab, tab);
         if (activeTab !== tab) {
-            setActiveTab(tab)
+            setActiveTab(tab);
         }
-    }, [activeTab, router])
+    }, [activeTab, router]);
 
     const onTabChange = async (tab) => {
         setActiveTab(tab);
@@ -80,25 +80,13 @@ export default function ShopManagementPage({ auth_user }) {
                         </Row>
                     </>
                 </TabPane>
-                <TabPane
-                    tab="Operational Hours"
-                    key="operational-hours"
-                >
+                <TabPane tab="Operational Hours" key="operational-hours">
                     <Row gutter={[40, 40]}>
                         <Col span={14}>
-                            <RowWrapper>
-                                <Col span={16}>
-                                <OperationalHoursCalendar />
-                                </Col>
-                                <Col span={8}>
-                                    <HoursEditor>
-                                        Test
-                                    </HoursEditor>
-                                </Col>
-                            </RowWrapper>
+                            <OperationalHoursCalendar />
                         </Col>
                         <Col span={10}>
-                            <h3>Time list</h3>
+                            <ScheduleList />
                         </Col>
                     </Row>
                 </TabPane>

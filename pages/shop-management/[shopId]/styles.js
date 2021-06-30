@@ -116,8 +116,41 @@ export const HoursEditor = styled.div`
     background: #FAFAFA;
     width: 100%;
     height: 100%;
+    padding: 15px;
+`
+
+export const HoursEditorTitle = styled.div`
+    width: 100%;
+    padding: 26px 0 10px 0;
+    margin: 0;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #C0C0C0;
 `
 
 export const PaddingWrapper = styled.div`
     padding: 24px 32px;
+`
+
+export const ScheduleListWrapper = styled.div`
+    background: #FFFFFF;
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+`
+
+export const ListItemWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 18px;
+
+    .ant-col {
+        padding: 0 !important;
+    }
+
+    p {
+        margin: 0
+    }
 `

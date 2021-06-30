@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
     currentUser,
@@ -19,6 +19,7 @@ const columns = (actions) => [
     {
         width: "120px",
         title: "Date",
+        sorter: true,
         render(data) {
             return data?.appointment?.date;
         },
@@ -26,7 +27,7 @@ const columns = (actions) => [
     {
         title: "Repair Type",
         render(data) {
-            return data?.appointment?.repair_time;
+            return data?.reparation?.reparation_name;
         },
     },
     {
@@ -37,18 +38,14 @@ const columns = (actions) => [
     },
     {
         title: "IMEI Number",
+        sorter: true,
         render(data) {
-            return `${data?.reparation?.imei_number}`;
-        },
-    },
-    {
-        title: "Locked",
-        render(data) {
-            return `${data?.locked}`;
+            return data?.serialnumber;
         },
     },
     {
         title: "Price",
+        sorter: true,
         render(data) {
             return `${data?.price}`;
         },
@@ -56,7 +53,7 @@ const columns = (actions) => [
     {
         title: "Warranty",
         render(data) {
-            return `${data?.warranty}`;
+            return `${data?.guarantee} months`;
         },
     },
     {
@@ -94,16 +91,16 @@ const FILTER_OPTIONS = [
 export default function HistoryPage({ auth_user }) {
     const router = useRouter();
     const { shopId, tab } = router.query;
-    // const [showActions, setShowActions] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         async function loadData() {
             await currentUser.fetch();
-            const repList = await reparationsList.actions.initialize();
-            const history = await historyFetcher.fetch();
-            console.log(repList, history);
+            await reparationsList.actions.initialize();
+            setLoading(false);
         }
 
+        setLoading(true);
         loadData();
     }, []);
 
@@ -113,19 +110,25 @@ export default function HistoryPage({ auth_user }) {
             shallow: true,
         });
         const history = await historyFetcher.fetch();
-        // console.log(history);
     };
 
     const onSearch = (value) => {
         console.log(value);
     };
 
-    const handleOnRowsSelected = (keys, items) => console.log(keys, items)
+    const handleOnRowsSelected = (keys, items) => console.log(keys, items);
+
+    const handleTableChange = async (pagination, filters, sorter) => {
+        console.log(pagination, filters, sorter);
+        setLoading(true);
+        await reparationsList.actions.initialize();
+        setLoading(false);
+    };
 
     const actions = (data) => [
         { func: () => console.log(`1 ${data.warranty}`), name: "Test1" },
         { func: () => console.log(`2 ${data.warranty}`), name: "Test2" },
-    ]
+    ];
 
     return (
         <DefaultLayout>
@@ -163,7 +166,14 @@ export default function HistoryPage({ auth_user }) {
             </Row>
             <Divider />
             <List module={reparationsList}>
-                <Table columns={columns(actions)} onRowsSelected={handleOnRowsSelected} selection />
+                <Table
+                    loading={loading}
+                    columns={columns(actions)}
+                    onRowsSelected={handleOnRowsSelected}
+                    selection
+                    // onChange={handleTableChange}
+                    pagination
+                />
             </List>
         </DefaultLayout>
     );

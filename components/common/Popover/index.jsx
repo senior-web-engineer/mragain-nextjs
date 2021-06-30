@@ -27,7 +27,7 @@ export const Popover = ({ children, actions }) => {
         <AntdPopover
             content={
                 <ActionsWrapper>
-                    {actions.map((action, index) => (
+                    {actions && actions.map((action, index) => (
                         <>
                         <Button type="link"
                             onClick={() => {

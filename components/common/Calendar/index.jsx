@@ -119,25 +119,6 @@ export const Calendar = () => {
                         <div style={{ padding: 8 }}>
                             <Row gutter={8}>
                                 <Row type="flex" justify="space-between">
-                                    <Col></Col>
-                                    <Col>
-                                        <Radio.Group
-                                            size="large"
-                                            onChange={(e) =>
-                                                onTypeChange(e.target.value)
-                                            }
-                                            value={type}
-                                        >
-                                            <Radio.Button value="month">
-                                                Month
-                                            </Radio.Button>
-                                            <Radio.Button value="year">
-                                                Year
-                                            </Radio.Button>
-                                        </Radio.Group>
-                                    </Col>
-                                </Row>
-                                <Row type="flex" justify="space-between">
                                     <Col>
                                         <Col span={12}>
                                             <Select
