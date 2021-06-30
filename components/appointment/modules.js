@@ -101,6 +101,11 @@ export const appointmentForm = createFormModule({
       };
     }
 
+    let client_address;
+    if (data.location !== "in-store") {
+      client_address = [data.address, data.city, data.state, data.zip].filter(Boolean).join(', ')
+    }
+
     const payload = {
       name: data.shopName,
       address: data.shopAddress,
@@ -113,6 +118,7 @@ export const appointmentForm = createFormModule({
         client_email: data.email,
         client_phone: data.tel,
         shop: data.shop,
+        client_address,
         active: true,
       },
       repairSeviceData,

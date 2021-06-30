@@ -32,9 +32,7 @@ import media, { OnMobile } from "@/utils/media";
 import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
 import Button from "@/components/ui/Button";
 import router from "next/router";
-import { useFetcher } from "@/modules/dataFetcher";
 import { store } from "@/configureStore";
-import { appointmentFormModule } from "@/components/devices/modules";
 
 const MainWrap = styled.div`
   padding-top: 1px;
