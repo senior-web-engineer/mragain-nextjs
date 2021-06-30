@@ -11,6 +11,7 @@ import {
   serviceFetcher,
 } from "@/components/dashboard/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
+import { Popover } from "@/components/common/Popover";
 import List from "@/modules/list";
 import { Table } from "@/modules/list/Blocks";
 import { Drawer } from "@/modules/modal";
@@ -49,7 +50,7 @@ const columns = [
   {
     title: "Device details",
     render(data) {
-      return `${data?.device?.device_name} /  ${data?.brand.brand_name} / ${data?.model.model_name}`;
+      return `${data?.device?.device_name} /  ${data?.brand?.brand_name} / ${data?.model?.model_name}`;
     },
   },
   {
@@ -67,7 +68,7 @@ const columns = [
   {
     title: "Status",
     render(data) {
-      return `${data?.status}`;
+      return <Popover />;
     },
   },
 ];

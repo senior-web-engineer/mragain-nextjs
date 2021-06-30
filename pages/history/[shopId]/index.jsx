@@ -6,22 +6,16 @@ import {
     reparationsList,
 } from "@/service/history/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
+import { Popover } from "@/components/common/Popover";
 import List from "@/modules/list";
 import { Table } from "@/modules/list/Blocks";
 import Input from "@/components/ui/Input";
-import get from "lodash/get";
-import {
-    Tabs,
-    Row,
-    Col,
-    Button,
-    Divider,
-} from "antd";
+import { Tabs, Row, Col, Button, Divider } from "antd";
 import { useRouter } from "next/router";
 const { TabPane } = Tabs;
 //
 
-const columns = [
+const columns = (actions) => [
     {
         width: "120px",
         title: "Date",
@@ -38,7 +32,7 @@ const columns = [
     {
         title: "Device details",
         render(data) {
-            return `${data?.device?.device_name} /  ${data?.brand.brand_name} / ${data?.model.model_name}`;
+            return `${data?.device?.device_name} /  ${data?.brand?.brand_name} / ${data?.model?.model_name}`;
         },
     },
     {
@@ -65,6 +59,17 @@ const columns = [
             return `${data?.warranty}`;
         },
     },
+    {
+        title: "",
+        width: 50,
+        render(data) {
+            return (
+                <Popover actions={actions(data)}>
+                    <Button type="primary">Action</Button>
+                </Popover>
+            );
+        },
+    },
 ];
 
 const FILTER_OPTIONS = [
@@ -88,13 +93,14 @@ const FILTER_OPTIONS = [
 
 export default function HistoryPage({ auth_user }) {
     const router = useRouter();
-    const { shopId } = router.query;
+    const { shopId, tab } = router.query;
+    // const [showActions, setShowActions] = useState(false);
 
     useEffect(() => {
         async function loadData() {
             await currentUser.fetch();
-            const repList = reparationsList.actions.initialize();
-            const history = historyFetcher.fetch();
+            const repList = await reparationsList.actions.initialize();
+            const history = await historyFetcher.fetch();
             console.log(repList, history);
         }
 
@@ -103,14 +109,23 @@ export default function HistoryPage({ auth_user }) {
 
     const onTabChange = async (tab) => {
         console.log(tab);
-        router.push(`/history/${shopId}`, `/history/${shopId}?tab=${tab}`, { shallow: true });
+        router.push(`/history/${shopId}`, `/history/${shopId}?tab=${tab}`, {
+            shallow: true,
+        });
         const history = await historyFetcher.fetch();
-        console.log(history);
+        // console.log(history);
     };
 
     const onSearch = (value) => {
         console.log(value);
     };
+
+    const handleOnRowsSelected = (keys, items) => console.log(keys, items)
+
+    const actions = (data) => [
+        { func: () => console.log(`1 ${data.warranty}`), name: "Test1" },
+        { func: () => console.log(`2 ${data.warranty}`), name: "Test2" },
+    ]
 
     return (
         <DefaultLayout>
@@ -129,7 +144,7 @@ export default function HistoryPage({ auth_user }) {
                     </Row>
                 </Col>
             </Row>
-            <Tabs defaultActiveKey="1" onChange={onTabChange}>
+            <Tabs defaultActiveKey={tab} onChange={onTabChange}>
                 {FILTER_OPTIONS.map((option) => (
                     <TabPane tab={option.label} key={option.value} />
                 ))}
@@ -137,7 +152,8 @@ export default function HistoryPage({ auth_user }) {
             <Row>
                 <Col span={5}>
                     <Input
-                        placeholder="Search"
+                        small
+                        placeholder="SEARCH IMEI NUMBER"
                         size="large"
                         allowClear
                         onChange={onSearch}
@@ -147,7 +163,7 @@ export default function HistoryPage({ auth_user }) {
             </Row>
             <Divider />
             <List module={reparationsList}>
-                <Table columns={columns} />
+                <Table columns={columns(actions)} onRowsSelected={handleOnRowsSelected} selection />
             </List>
         </DefaultLayout>
     );

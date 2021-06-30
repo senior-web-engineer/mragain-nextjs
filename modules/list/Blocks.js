@@ -5,24 +5,20 @@ import { Table as AntTable } from "antd";
 import styled from "styled-components";
 
 const StyledTable = styled(AntTable)`
+  .ant-table-head {
+    background: #FAFAFA;
+  }
   .ant-table-thead > tr > th {
     font-size: 12px;
-    color: #c0c0c0;
+    color: #909090;
     font-weight: 400;
-    background-color: transparent;
     border-bottom: 0;
   }
 
   .ant-table-tbody {
     border-radius: 10px;
     overflow: hidden;
-    background-color: #fff;
-    tr td {
-      border-bottom: 0;
-    }
-    tr:nth-child(2n) {
-      background-color: #f8f8f8;
-    }
+    background: white;
   }
 `;
 
@@ -72,8 +68,18 @@ export function Table({ ...props }) {
     }, []);
   }, [items, pages]);
 
+  const rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+      props.onRowsSelected(selectedRowKeys, selectedRows)
+    },
+    getCheckboxProps: (item) => ({
+      disabled: item.disabled, // Column configuration not to be checked
+      name: item.name,
+    }),
+  };
+
   return (
-    <StyledTable pagination={false} {...props} dataSource={derivedItems} />
+    <StyledTable pagination={false} {...props} dataSource={derivedItems} rowSelection={props.selection && rowSelection} />
   );
 }
 

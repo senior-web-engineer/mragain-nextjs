@@ -6,30 +6,21 @@ import {
     getDevices,
 } from "@/service/shop-management/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
-import get from "lodash/get";
 import { Tabs, Row, Col } from "antd";
 import { useRouter } from "next/router";
 const { TabPane } = Tabs;
-import { BoxWrapper } from "./styles";
+import { BoxWrapper, RowWrapper, HoursEditor } from "./styles";
 import { ImageSection } from "./ImageSection";
 import { AdditionalInfo } from "./AdditionalInfo";
+import { OperationalHoursCalendar } from './OperationalHoursCalendar';
 import { GeneralInfo } from "./GeneralInfo";
 
-//
-const FILTER_OPTIONS = [
-    {
-        label: "Profile Settings",
-        value: "profile-settings",
-    },
-    {
-        label: "Operational Hours",
-        value: "operational-hours",
-    },
-];
 
 export default function ShopManagementPage({ auth_user }) {
     const router = useRouter();
     const { shopId } = router.query;
+
+    const [activeTab, setActiveTab] = useState('profile-settings')
     const [shopInfo, setShopInfo] = useState();
 
     useEffect(() => {
@@ -40,22 +31,26 @@ export default function ShopManagementPage({ auth_user }) {
                 setShopInfo(shopInfo);
             }
             const devices = await getDevices.fetch();
-            console.log(devices);
         }
 
         loadData();
     }, []);
 
+    useEffect(() => {
+        const { tab } = router.query;
+        console.log('TABS', activeTab, tab)
+        if (activeTab !== tab) {
+            setActiveTab(tab)
+        }
+    }, [activeTab, router])
+
     const onTabChange = async (tab) => {
+        setActiveTab(tab);
         router.push(
             `/shop-management/${shopId}`,
             `/shop-management/${shopId}?tab=${tab}`,
             { shallow: true }
         );
-    };
-
-    const onSearch = (value) => {
-        console.log(value);
     };
 
     return (
@@ -66,26 +61,48 @@ export default function ShopManagementPage({ auth_user }) {
                 </Col>
                 <Col />
             </Row>
-            <Tabs defaultActiveKey="1" onChange={onTabChange}>
-                {FILTER_OPTIONS.map((option) => (
-                    <TabPane tab={option.label} key={option.value} />
-                ))}
+            <Tabs defaultActiveKey={activeTab} onChange={onTabChange}>
+                <TabPane tab="Profile Settings" key="profile-settings">
+                    <>
+                        <ImageSection shopInfo={shopInfo} />
+
+                        <Row>
+                            <Col span={4}></Col>
+                            <Col span={20}>
+                                <BoxWrapper>
+                                    <GeneralInfo shopInfo={shopInfo} />
+                                </BoxWrapper>
+
+                                <BoxWrapper padding>
+                                    <AdditionalInfo shopInfo={shopInfo} />
+                                </BoxWrapper>
+                            </Col>
+                        </Row>
+                    </>
+                </TabPane>
+                <TabPane
+                    tab="Operational Hours"
+                    key="operational-hours"
+                >
+                    <Row gutter={[40, 40]}>
+                        <Col span={14}>
+                            <RowWrapper>
+                                <Col span={16}>
+                                <OperationalHoursCalendar />
+                                </Col>
+                                <Col span={8}>
+                                    <HoursEditor>
+                                        Test
+                                    </HoursEditor>
+                                </Col>
+                            </RowWrapper>
+                        </Col>
+                        <Col span={10}>
+                            <h3>Time list</h3>
+                        </Col>
+                    </Row>
+                </TabPane>
             </Tabs>
-            
-            <ImageSection shopInfo={shopInfo} />
-
-            <Row>
-                <Col span={4}></Col>
-                <Col span={20}>
-                    <BoxWrapper>
-                        <GeneralInfo shopInfo={shopInfo} />
-                    </BoxWrapper>
-
-                    <BoxWrapper padding>
-                        <AdditionalInfo shopInfo={shopInfo} />
-                    </BoxWrapper>
-                </Col>
-            </Row>
         </DefaultLayout>
     );
 }

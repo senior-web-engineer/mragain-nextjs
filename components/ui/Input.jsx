@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { Input as AntdInput } from "antd";
 
 export const StyledInput = styled.div`
-    padding: 12px 20px;
+    padding: ${props => props.small ? "6px 20px" : "12px 20px"};
     border: 1px solid #F0F0F0;
     box-sizing: border-box;
     border-radius: 4px;
+    background: white;
 
     label {
         color: #c0c0c0;
@@ -30,7 +31,7 @@ function parseValue(ev) {
     return ev;
 }
 
-export default function Input({ onChange = () => {}, ...rest }) {
+export default function Input({ onChange = () => {}, small, ...rest }) {
     const inputRef = useRef(null);
 
     const onInputWrapperSelect = () => {
@@ -40,7 +41,7 @@ export default function Input({ onChange = () => {}, ...rest }) {
     };
 
     return (
-        <StyledInput onClick={onInputWrapperSelect}>
+        <StyledInput small={small} onClick={onInputWrapperSelect}>
             <label htmlFor="">{rest.label}</label>
             {rest.textarea ? (
                 <AntdInput.TextArea

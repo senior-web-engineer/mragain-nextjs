@@ -8,7 +8,7 @@ export const MainWrap = styled.div`
 `;
 
 export const ContentWrap = styled.div`
-    background-color: #fafafa;
+    background-color: #F3F3F3;
     flex: 1;
     display: flex;
 `;

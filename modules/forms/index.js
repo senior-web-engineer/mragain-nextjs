@@ -50,7 +50,6 @@ const Form = connect((state, ownProps) => ({
 
   }, [moduleState, module]);
 
-  console.log('AAAAA', moduleState)
   if (!moduleState || !module) {
     return null;
   }

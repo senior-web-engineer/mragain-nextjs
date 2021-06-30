@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Row } from 'antd';
 
 export const rowStyle = {
     marginBottom: '24px',
@@ -104,6 +105,18 @@ export const BoxWrapper = styled.div`
     border-radius: 8px;
     overflow: hidden;
 `;
+
+export const RowWrapper = styled(Row)`
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+`;
+
+export const HoursEditor = styled.div`
+    background: #FAFAFA;
+    width: 100%;
+    height: 100%;
+`
 
 export const PaddingWrapper = styled.div`
     padding: 24px 32px;
