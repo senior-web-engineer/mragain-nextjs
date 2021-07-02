@@ -405,11 +405,11 @@ function AppointmentButton() {
               ev.preventDefault();
               continueWitoutServiceModal.actions
                 .open({
-                  type: "warning",
-                  message: "Wil je een algemene diagnose afspraak maken?",
+                  type: "success",
+                  message: "Algemene afspraak",
                   description:
-                    "Selecteer een reparatie zodat de reparateur weet waarvoor je komt. Staat je reparatie er niet tussen, of weet je niet wat er aan de hand is? Ga dan door en maak een diagnose afspraak.",
-                  buttonLabel: "Ja",
+                    "We maken een algemene afspraak voor je, de reparateur kan contact met je opnemen zodat hij weet waarvoor je komt.",
+                  buttonLabel: "Prima!",
                 })
                 .then(() => {
                   router.push(nextLocation);
