@@ -9,7 +9,9 @@ export function parseNativeEvent(ev) {
   }
 
   if (["checkbox", "radio"].includes(ev.target.type)) {
-    return typeof ev.target.value !== "undefined" ? ev.target.value : ev.target.checked;
+    return typeof ev.target.value !== "undefined"
+      ? ev.target.value
+      : ev.target.checked;
   }
 
   return ev.target.value;
@@ -18,7 +20,8 @@ export function parseNativeEvent(ev) {
 export function Field({
   name,
   label,
-  customLabel = false,
+  noBorder,
+  flexRow,
   optional = false,
   showError = true,
   children,
@@ -51,8 +54,8 @@ export function Field({
   const Component = as;
 
   return (
-    <FieldWrap style={style}>
-      {label && !customLabel ? (
+    <FieldWrap noBorder={noBorder} flexRow={flexRow} style={style}>
+      {label ? (
         <label>
           {label}
           {optional ? "(Optional)" : ""}
@@ -63,7 +66,6 @@ export function Field({
         onChange={onChange}
         onBlur={onBlur}
         children={children}
-        label={customLabel && label}
         {...rest}
       />
       {error ? <ErrorWrap>{error}</ErrorWrap> : null}
@@ -83,10 +85,10 @@ export function SyncFormValues({ onChange }) {
   return null;
 }
 
-export function ReadValue({name}) {
+export function ReadValue({ name }) {
   const { state } = useFormContext();
   const { values } = state;
   const value = get(values, name);
 
-  return value
+  return value;
 }

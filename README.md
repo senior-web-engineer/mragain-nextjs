@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started TEST ###
+## Getting Started TEST
 
 First, run the development server:
 
@@ -14,11 +14,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-<<<<<<< HEAD
-## Learn More About Next deploy 
-=======
-## Learn More About Nex  eddddt
->>>>>>> FAQ
+## Learn More About Next deploy
 
 To learn more about Next.js, take a look at the following resources:
 

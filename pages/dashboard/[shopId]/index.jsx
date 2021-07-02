@@ -200,7 +200,7 @@ export default function DashboardPage({ auth_user }) {
         Create appointment
       </Button>
       <List module={reparationsList}>
-        <Table columns={columns} />
+        <Table columns={columns} pagination />
       </List>
       <Drawer width="500px" module={createAppointmentFormModal}>
         <Form module={appointmentForm}>
