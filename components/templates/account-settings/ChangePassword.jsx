@@ -21,18 +21,21 @@ export const ChangePassword = ({ changePasswordForm }) => {
           <Col span={12}>
             <BoxWrapperContent>
               <Field
+                adminInput
                 as={Input}
                 name="oldPassword"
                 label="Old Password"
                 type="password"
               />
               <Field
+                adminInput
                 as={Input}
                 name="newPassword"
                 label="New Password"
                 type="password"
               />
               <Field
+                adminInput
                 as={Input}
                 name="confirmPassword"
                 label="Confirm Password"

@@ -20,14 +20,22 @@ export const BasicProfile = ({ basicSettingsForm }) => {
         <Row>
           <Col span={12}>
             <BoxWrapperContent>
-              <Field as={Input} name="name" label="Company Name" customLabel />
               <Field
+                adminInput
+                as={Input}
+                name="name"
+                label="Company Name"
+                customLabel
+              />
+              <Field
+                adminInput
                 as={Input}
                 name="email"
                 label="Company Email Address"
                 customLabel
               />
               <Field
+                adminInput
                 as={Input}
                 name="kvk"
                 label="Chamber of Commerce #"
@@ -36,6 +44,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
                 customLabel
               />
               <Field
+                adminInput
                 as={Input}
                 name="phone_number"
                 label="Contact Number"
@@ -50,6 +59,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
                 customLabel
               />
               <Field
+                adminInput
                 as={Input}
                 name="vat"
                 label="VAT Number"
@@ -57,6 +67,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
                 customLabel
               />
               <Field
+                adminInput
                 as={Input}
                 name="iban"
                 label="IBAN Account"

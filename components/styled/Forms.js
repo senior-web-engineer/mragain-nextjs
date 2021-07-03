@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FieldWrap = styled.div`
+export const FieldWrapAdmin = styled.div`
   margin-bottom: 32px;
   padding: 12px 20px;
   border: solid 1px lightgray;
@@ -40,6 +40,18 @@ export const FieldWrap = styled.div`
 
   .ant-select-selection__rendered {
     margin-left: 0;
+  }
+`;
+
+export const FieldWrap = styled.div`
+  margin: 7px 0;
+  > label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: #707070;
+    font-weight: 300;
+    text-transform: uppercase;
   }
 `;
 export const ErrorWrap = styled.div`
