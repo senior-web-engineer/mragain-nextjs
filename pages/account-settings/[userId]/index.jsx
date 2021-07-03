@@ -6,9 +6,9 @@ import {
   currentUser,
 } from "@/service/account-settings/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
-import { BasicProfile } from "./BasicProfile";
-import { ChangePassword } from "./ChangePassword";
-import { MyAddresses } from "./MyAddresses";
+import { BasicProfile } from "@/components/templates/account-settings/BasicProfile";
+import { ChangePassword } from "@/components/templates/account-settings/ChangePassword";
+import { MyAddresses } from "@/components/templates/account-settings/MyAddresses";
 import { Tabs, Row, Col } from "antd";
 import { useRouter } from "next/router";
 const { TabPane } = Tabs;

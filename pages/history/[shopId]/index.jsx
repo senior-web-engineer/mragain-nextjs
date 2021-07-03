@@ -15,7 +15,7 @@ import { Table } from "@/modules/list/Blocks";
 import Input from "@/components/ui/Input";
 import { Tabs, Row, Col, Button, Divider } from "antd";
 import { useRouter } from "next/router";
-import { EditRecord } from "./EditRecord";
+import { EditRecord } from "@/components/templates/history/EditRecord";
 const { TabPane } = Tabs;
 
 const columns = (actions) => [

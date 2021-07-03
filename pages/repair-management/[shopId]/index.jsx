@@ -5,8 +5,8 @@ import DefaultLayout from "@/components/layouts/Dashboard";
 import { Tabs, Row, Col } from "antd";
 import { useRouter } from "next/router";
 const { TabPane } = Tabs;
-import { DeviceTransfer } from "./DeviceTransfer";
-import { TreeTransfer } from "./TreeTransfer";
+import { DeviceTransfer } from "@/components/templates/repair-management/DeviceTransfer";
+import { TreeTransfer } from "@/components/templates/repair-management/TreeTransfer";
 
 const mockData = [];
 const originTargetKeys = mockData

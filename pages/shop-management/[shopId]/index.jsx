@@ -10,12 +10,12 @@ import DefaultLayout from "@/components/layouts/Dashboard";
 import { Tabs, Row, Col } from "antd";
 import { useRouter } from "next/router";
 const { TabPane } = Tabs;
-import { BoxWrapper } from "./styles";
-import { ImageSection } from "./ImageSection";
-import { AdditionalInfo } from "./AdditionalInfo";
-import { OperationalHoursCalendar } from "./OperationalHoursCalendar";
-import { GeneralInfo } from "./GeneralInfo";
-import { ScheduleList } from "./ScheduleList";
+import { BoxWrapper } from "@/components/templates/shop-management/styles";
+import { ImageSection } from "@/components/templates/shop-management/ImageSection";
+import { AdditionalInfo } from "@/components/templates/shop-management/AdditionalInfo";
+import { OperationalHoursCalendar } from "@/components/templates/shop-management/OperationalHoursCalendar";
+import { GeneralInfo } from "@/components/templates/shop-management/GeneralInfo";
+import { ScheduleList } from "@/components/templates/shop-management/ScheduleList";
 
 export default function ShopManagementPage({ auth_user }) {
   const router = useRouter();
