@@ -33,11 +33,9 @@ function Menu() {
       const pathname = `/${lastSelectedKey.split("?")[0]}`;
       console.log(query, pathname);
       if (query.length === 2) {
-        router.push(pathname, `${pathname}?${[query[0]]}=${query[1]}`, {
-          shallow: true,
-        });
+        router.push(`${pathname}?${[query[0]]}=${query[1]}`);
       } else {
-        router.push(pathname, undefined, { shallow: true });
+        router.push(pathname);
       }
     }
   };
