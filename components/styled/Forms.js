@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FieldWrap = styled.div`
-  margin: 7px 0;
+  margin-bottom: 32px;
   padding: 12px 20px;
   border: solid 1px lightgray;
   border: ${(props) => (props.noBorder ? "none" : "solid 1px #F0F0F0")};
@@ -23,6 +23,19 @@ export const FieldWrap = styled.div`
     font-weight: 300;
     text-transform: uppercase;
     padding: ${(props) => (props.flexRow ? "0 8px" : "0")};
+  }
+
+  input,
+  select {
+    border: none !important;
+
+    &:focus {
+      outline: none !important;
+      box-shadow: none !important;
+      border: none !important;
+      webkit-box-shadow: none !important;
+      border-color: none !important;
+    }
   }
 
   .ant-select-selection__rendered {

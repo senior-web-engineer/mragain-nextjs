@@ -109,7 +109,12 @@ export const GeneralInfo = ({ shopInfo }) => {
                 <Button size="large" onClick={() => setEditing(false)}>
                   Discard Changes
                 </Button>
-                <Button size="large" type="primary" onClick={onSave}>
+                <Button
+                  size="large"
+                  type="primary"
+                  htmlType="submit"
+                  onClick={onSave}
+                >
                   Save Changes
                 </Button>
               </Col>

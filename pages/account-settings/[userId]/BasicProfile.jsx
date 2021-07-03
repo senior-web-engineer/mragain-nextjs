@@ -9,7 +9,7 @@ import Form from "@/modules/forms";
 import { Button, Divider, Row, Col } from "antd";
 import { Field } from "@/modules/forms/Blocks";
 
-export const BasicProfile = ({ basicSettingsForm, discardChanges, onSave }) => {
+export const BasicProfile = ({ basicSettingsForm }) => {
   return (
     <Form module={basicSettingsForm}>
       <BoxWrapper>
@@ -70,7 +70,7 @@ export const BasicProfile = ({ basicSettingsForm, discardChanges, onSave }) => {
         <Divider />
         <ButtonsWrapper>
           <div />
-          <Button size="large" type="primary" onClick={onSave}>
+          <Button size="large" type="primary" htmlType="submit">
             Save Changes
           </Button>
         </ButtonsWrapper>

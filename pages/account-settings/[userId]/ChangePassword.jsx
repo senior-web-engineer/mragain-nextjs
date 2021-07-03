@@ -9,11 +9,7 @@ import Input from "@/components/ui/Input";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
 
-export const ChangePassword = ({
-  changePasswordForm,
-  discardChanges,
-  onSave,
-}) => {
+export const ChangePassword = ({ changePasswordForm }) => {
   return (
     <Form module={changePasswordForm}>
       <BoxWrapper>
@@ -49,7 +45,7 @@ export const ChangePassword = ({
         <Divider />
         <ButtonsWrapper>
           <div />
-          <Button size="large" type="primary" onClick={onSave}>
+          <Button size="large" type="primary" htmlType="submit">
             Save Changes
           </Button>
         </ButtonsWrapper>

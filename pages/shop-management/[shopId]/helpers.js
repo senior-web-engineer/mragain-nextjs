@@ -59,6 +59,7 @@ export const additionalInfoOptions = {
       description: "earphones, earbuds, headsets",
     },
   ],
+
   brands: [
     {
       value: "asus",

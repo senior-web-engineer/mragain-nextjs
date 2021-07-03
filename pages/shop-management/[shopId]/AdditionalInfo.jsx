@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Button, Row, Col, Divider, Switch } from "antd";
+import { Button, Row, Col, Divider, Switch, Tag } from "antd";
 import { SwitchGroup } from "@/components/common/SwitchGroup";
 import { MultiSelect } from "@/components/common/MultiSelect";
 import { additionalInfoOptions } from "./helpers";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
-import { shopManagementAdditionalForm } from "@/service/shop-management/modules";
+import Image from "next/image";
+import {
+  currentUser,
+  shopManagementAdditionalForm,
+  getBrands,
+} from "@/service/shop-management/modules";
 
 import { HeaderSmallText, rowStyle } from "./styles";
 
@@ -24,14 +29,20 @@ const renderDevicesList = (devices) => (
 
 export const AdditionalInfo = ({ shopInfo }) => {
   const [editing, setEditing] = useState(false);
+  const [brands, setBrands] = useState([]);
 
-  useEffect(() => {
-    shopManagementAdditionalForm.actions.initialize();
+  useEffect(async () => {
+    const user = await currentUser.fetch();
+    shopManagementAdditionalForm.actions.initialize(user.account_id);
+    const fetchedBrands = await getBrands.fetch();
+    console.log(fetchedBrands);
+    setBrands(fetchedBrands);
   }, []);
 
-  const onSave = () => {
-    setEditing(false);
-  };
+  if (!shopInfo) {
+    return <div>DATA MISSING</div>;
+  }
+  console.log(shopInfo);
 
   return (
     <>
@@ -46,7 +57,7 @@ export const AdditionalInfo = ({ shopInfo }) => {
                 <Button size="large" onClick={() => setEditing(false)}>
                   Discard Changes
                 </Button>
-                <Button size="large" type="primary" onClick={onSave}>
+                <Button size="large" type="primary" htmlType="submit">
                   Save Changes
                 </Button>
               </>
@@ -70,7 +81,15 @@ export const AdditionalInfo = ({ shopInfo }) => {
             {editing ? (
               renderDevicesList(additionalInfoOptions.devices)
             ) : (
-              <div>DEVICES LIST</div>
+              <div>
+                {additionalInfoOptions.devices
+                  .filter((device) =>
+                    shopInfo?.replacementDevices.includes(device.id)
+                  )
+                  .map((device) => (
+                    <Image width="60px" height="60px" src={device.icon} />
+                  ))}
+              </div>
             )}
           </Col>
         </Row>
@@ -87,7 +106,13 @@ export const AdditionalInfo = ({ shopInfo }) => {
                 options={additionalInfoOptions.brands}
               />
             ) : (
-              "BRANDS LIST"
+              <div>
+                {brands
+                  .filter((brand) => shopInfo?.cateredBrand.includes(brand.id))
+                  .map((brand) => (
+                    <Tag color="green">{brand.brand_name}</Tag>
+                  ))}
+              </div>
             )}
           </Col>
         </Row>
@@ -96,7 +121,9 @@ export const AdditionalInfo = ({ shopInfo }) => {
           <Col span={6}>
             <p>Payment Methods</p>
           </Col>
-          <Col span={18}></Col>
+          <Col span={18}>
+            <div>{shopInfo?.paymentMethod}</div>
+          </Col>
         </Row>
 
         <Row style={rowStyle} type="flex" justify="space-between">
@@ -108,6 +135,7 @@ export const AdditionalInfo = ({ shopInfo }) => {
               <Row gutter={[0, 16]}>
                 <Col span={24}>
                   <Field
+                    simple
                     as={SwitchGroup}
                     name="locationOptions.inStoreService"
                     title="In-Store Service"
@@ -115,6 +143,7 @@ export const AdditionalInfo = ({ shopInfo }) => {
                 </Col>
                 <Col span={24}>
                   <Field
+                    simple
                     as={SwitchGroup}
                     name="locationOptions.homeService"
                     title="Home Service"
@@ -122,6 +151,7 @@ export const AdditionalInfo = ({ shopInfo }) => {
                 </Col>
                 <Col span={24}>
                   <Field
+                    simple
                     as={SwitchGroup}
                     name="locationOptions.doorToDoorDelivery"
                     title="Door-to-Door Delivery"
@@ -157,7 +187,7 @@ export const AdditionalInfo = ({ shopInfo }) => {
           </Col>
           <Col span={18}>
             {editing ? (
-              <Field as={Switch} name="temporaryReplacement" />
+              <Field simple as={Switch} name="temporaryReplacement" />
             ) : (
               "For selected devices only"
             )}
@@ -170,7 +200,7 @@ export const AdditionalInfo = ({ shopInfo }) => {
           </Col>
           <Col span={18}>
             {editing ? (
-              <Field as={Switch} name="waitingArea" />
+              <Field simple as={Switch} name="waitingArea" />
             ) : (
               "Not available"
             )}

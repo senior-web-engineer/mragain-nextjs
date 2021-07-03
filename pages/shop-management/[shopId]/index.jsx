@@ -4,6 +4,7 @@ import {
   currentUser,
   shopInfoFetcher,
   getDevices,
+  shopManagementAdditionalForm,
 } from "@/service/shop-management/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
 import { Tabs, Row, Col } from "antd";
@@ -26,10 +27,12 @@ export default function ShopManagementPage({ auth_user }) {
   useEffect(() => {
     async function loadData() {
       const user = await currentUser.fetch();
-      const shopInfo = shopInfoFetcher.fetch();
+      const shopInfo = await shopInfoFetcher.fetch();
+      console.log("INFO", shopInfo);
       if (shopInfo) {
-        setShopInfo(shopInfo);
+        setShopInfo(shopInfo[0]);
       }
+      await shopManagementAdditionalForm.actions.initialize(user.account_id);
       const devices = await getDevices.fetch();
     }
 

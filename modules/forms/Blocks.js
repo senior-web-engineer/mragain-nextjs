@@ -22,6 +22,7 @@ export function Field({
   label,
   noBorder,
   flexRow,
+  simple,
   optional = false,
   showError = true,
   children,
@@ -52,6 +53,18 @@ export function Field({
   );
 
   const Component = as;
+
+  if (simple) {
+    return (
+      <Component
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        children={children}
+        {...rest}
+      />
+    );
+  }
 
   return (
     <FieldWrap noBorder={noBorder} flexRow={flexRow} style={style}>

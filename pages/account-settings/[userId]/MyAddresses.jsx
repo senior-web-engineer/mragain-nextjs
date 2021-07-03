@@ -8,13 +8,32 @@ import {
   ButtonsWrapper,
   HeaderSmallText,
 } from "./styles";
-import { Row, Col, Divider, Button, TimePicker, Checkbox } from "antd";
+import { Row, Col, Divider, Button, Checkbox } from "antd";
 import Select from "@/components/ui/Select";
-import moment from "moment";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
+import GooglePlaces from "@/components/common/GooglePlaces";
 
-export const MyAddresses = ({ basicSettingsForm, discardChanges, onSave }) => {
+const DURATION_OPTIONS = [
+  {
+    label: "30 minutes",
+    value: "30minutes",
+  },
+  {
+    label: "60 minutes",
+    value: "60minutes",
+  },
+  {
+    label: "90 minutes",
+    value: "90minutes",
+  },
+  {
+    label: "1 day",
+    value: "1day",
+  },
+];
+
+export const MyAddresses = ({ basicSettingsForm }) => {
   return (
     <BoxWrapper>
       <RowWrapper>
@@ -58,7 +77,7 @@ export const MyAddresses = ({ basicSettingsForm, discardChanges, onSave }) => {
                 </Col>
                 <Col span={8}>
                   <Field
-                    name="city"
+                    name="address_type"
                     as={Select}
                     placeholder="Select Address Type"
                     label="Address Type"
@@ -71,12 +90,11 @@ export const MyAddresses = ({ basicSettingsForm, discardChanges, onSave }) => {
                   />
                 </Col>
               </Row>
-              <Col span={24}>
+              <Col>
                 <Field
                   name="shop_type"
                   as={Input}
                   label="Address Line (House No, Building)"
-                  customLabel
                   size="large"
                 />
               </Col>
@@ -85,14 +103,10 @@ export const MyAddresses = ({ basicSettingsForm, discardChanges, onSave }) => {
                   <Col span={12}>
                     <Field
                       name="city"
-                      as={Select}
+                      as={GooglePlaces}
                       placeholder="City"
                       label="Select City"
                       size="large"
-                      options={[
-                        { label: "Test2", value: "test2" },
-                        { label: "Test", value: "test" },
-                      ]}
                     />
                   </Col>
                   <Col span={6}>
@@ -124,12 +138,9 @@ export const MyAddresses = ({ basicSettingsForm, discardChanges, onSave }) => {
                   <Field
                     name="allow_appointment"
                     as={Select}
-                    placeholder="Appointment Blocking"
+                    label="Appointment Blocking"
                     size="large"
-                    options={[
-                      { label: "Test2", value: "test2" },
-                      { label: "Test", value: "test" },
-                    ]}
+                    options={DURATION_OPTIONS}
                     allowClear
                   />
                 </Col>
@@ -138,9 +149,9 @@ export const MyAddresses = ({ basicSettingsForm, discardChanges, onSave }) => {
           </Form>
           <Divider />
           <ButtonsWrapper>
-            <Button size="large">Clear</Button>
-            <Button size="large" type="primary">
-              Add
+            <div />
+            <Button size="large" type="primary" htmlType="submit">
+              Save
             </Button>
           </ButtonsWrapper>
         </Col>
