@@ -6,7 +6,6 @@ import { Tabs, Row, Col } from "antd";
 import { useRouter } from "next/router";
 const { TabPane } = Tabs;
 import { DeviceTransfer } from "@/components/templates/repair-management/DeviceTransfer";
-import { TreeTransfer } from "@/components/templates/repair-management/TreeTransfer";
 
 const mockData = [];
 const originTargetKeys = mockData
@@ -47,9 +46,7 @@ export default function RepairManagementPage({ auth_user }) {
         <TabPane tab="Device Manager" key="device-manager">
           <DeviceTransfer targetKeys={targetKeys} onChange={onChange} />
         </TabPane>
-        <TabPane tab="Rules" key="rules">
-          <TreeTransfer />
-        </TabPane>
+        <TabPane tab="Rules" key="rules"></TabPane>
         <TabPane tab="Miscellaneous" key="miscellaneous"></TabPane>
       </Tabs>
     </DefaultLayout>

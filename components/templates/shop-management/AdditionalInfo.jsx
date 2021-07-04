@@ -101,6 +101,7 @@ export const AdditionalInfo = ({ shopInfo }) => {
           <Col span={18}>
             {editing ? (
               <Field
+                adminInput
                 as={MultiSelect}
                 name="storePurchases"
                 options={additionalInfoOptions.brands}
@@ -135,6 +136,7 @@ export const AdditionalInfo = ({ shopInfo }) => {
               <Row gutter={[0, 16]}>
                 <Col span={24}>
                   <Field
+                    adminInput
                     simple
                     as={SwitchGroup}
                     name="locationOptions.inStoreService"
@@ -143,6 +145,7 @@ export const AdditionalInfo = ({ shopInfo }) => {
                 </Col>
                 <Col span={24}>
                   <Field
+                    adminInput
                     simple
                     as={SwitchGroup}
                     name="locationOptions.homeService"
@@ -151,6 +154,7 @@ export const AdditionalInfo = ({ shopInfo }) => {
                 </Col>
                 <Col span={24}>
                   <Field
+                    adminInput
                     simple
                     as={SwitchGroup}
                     name="locationOptions.doorToDoorDelivery"
@@ -171,6 +175,7 @@ export const AdditionalInfo = ({ shopInfo }) => {
           <Col span={18}>
             {editing ? (
               <Field
+                adminInput
                 as={MultiSelect}
                 name="storePurchases"
                 options={additionalInfoOptions.brands}
@@ -187,7 +192,12 @@ export const AdditionalInfo = ({ shopInfo }) => {
           </Col>
           <Col span={18}>
             {editing ? (
-              <Field simple as={Switch} name="temporaryReplacement" />
+              <Field
+                adminInput
+                simple
+                as={Switch}
+                name="temporaryReplacement"
+              />
             ) : (
               "For selected devices only"
             )}
@@ -200,7 +210,7 @@ export const AdditionalInfo = ({ shopInfo }) => {
           </Col>
           <Col span={18}>
             {editing ? (
-              <Field simple as={Switch} name="waitingArea" />
+              <Field adminInput simple as={Switch} name="waitingArea" />
             ) : (
               "Not available"
             )}

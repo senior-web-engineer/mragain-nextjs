@@ -57,6 +57,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
               <Row>
                 <Col span={8}>
                   <Field
+                    adminInput
                     name="address"
                     as={Input}
                     label="Address"
@@ -68,6 +69,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
               <Row>
                 <Col>
                   <Field
+                    adminInput
                     name="shop_active"
                     noBorder
                     flexRow
@@ -77,6 +79,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                 </Col>
                 <Col span={8}>
                   <Field
+                    adminInput
                     name="address_type"
                     as={Select}
                     placeholder="Select Address Type"
@@ -92,6 +95,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
               </Row>
               <Col>
                 <Field
+                  adminInput
                   name="shop_type"
                   as={Input}
                   label="Address Line (House No, Building)"
@@ -102,6 +106,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                 <Row gutter={[16, 0]}>
                   <Col span={12}>
                     <Field
+                      adminInput
                       name="city"
                       as={GooglePlaces}
                       placeholder="City"
@@ -111,6 +116,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                   </Col>
                   <Col span={6}>
                     <Field
+                      adminInput
                       name="country"
                       as={Select}
                       placeholder="State"
@@ -124,6 +130,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                   </Col>
                   <Col span={6}>
                     <Field
+                      adminInput
                       name="zipcode"
                       as={Input}
                       label="Zip Code"
@@ -136,6 +143,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
               <Row>
                 <Col span={8}>
                   <Field
+                    adminInput
                     name="allow_appointment"
                     as={Select}
                     label="Appointment Blocking"

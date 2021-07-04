@@ -1,5 +1,9 @@
 import { useEffect, useCallback } from "react";
-import { FieldWrap, ErrorWrap } from "@/components/styled/Forms";
+import {
+  FieldWrap,
+  FieldWrapAdmin,
+  ErrorWrap,
+} from "@/components/styled/Forms";
 import { useFormContext } from ".";
 import get from "lodash/get";
 
@@ -23,6 +27,7 @@ export function Field({
   noBorder,
   flexRow,
   simple,
+  adminInput = false,
   optional = false,
   showError = true,
   children,
@@ -66,8 +71,29 @@ export function Field({
     );
   }
 
+  if (adminInput) {
+    return (
+      <FieldWrapAdmin noBorder={noBorder} flexRow={flexRow} style={style}>
+        {label ? (
+          <label>
+            {label}
+            {optional ? "(Optional)" : ""}
+          </label>
+        ) : null}
+        <Component
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
+          children={children}
+          {...rest}
+        />
+        {error ? <ErrorWrap>{error}</ErrorWrap> : null}
+      </FieldWrapAdmin>
+    );
+  }
+
   return (
-    <FieldWrap noBorder={noBorder} flexRow={flexRow} style={style}>
+    <FieldWrap>
       {label ? (
         <label>
           {label}

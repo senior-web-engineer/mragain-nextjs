@@ -125,9 +125,19 @@ export const EditRecord = ({ createAppointmentFormModal, appointmentForm }) => {
     <Drawer width="500px" module={createAppointmentFormModal}>
       <Form module={appointmentForm}>
         <SubTitle>Customer information</SubTitle>
-        <Field as={Input} name="customerName" label="Customer name" />
-        <Field as={Input} name="email" label="Email address" />
-        <Field as={Input} name="contactNumber" label="Contact number" />
+        <Field
+          adminInput
+          as={Input}
+          name="customerName"
+          label="Customer name"
+        />
+        <Field adminInput as={Input} name="email" label="Email address" />
+        <Field
+          adminInput
+          as={Input}
+          name="contactNumber"
+          label="Contact number"
+        />
         <SubTitle>Device information</SubTitle>
         <DeviceSelector
           as={Select}
@@ -149,8 +159,9 @@ export const EditRecord = ({ createAppointmentFormModal, appointmentForm }) => {
         />
         <ServiceSelector as={Select} label="Repration" name="reparation" />
         <SubTitle>Appointment scheduele</SubTitle>
-        <Field as={DatePicker} label="Date" name="date" />
+        <Field adminInput as={DatePicker} label="Date" name="date" />
         <Field
+          adminInput
           as={TimePicker}
           label="Time"
           name="time"
@@ -158,13 +169,14 @@ export const EditRecord = ({ createAppointmentFormModal, appointmentForm }) => {
           minuteStep={15}
         />
         <Field
+          adminInput
           as={Select}
           label="Duration"
           name="duration"
           options={DURATION_OPTIONS}
         />
-        <Field as={Input} name="price" label="Price" />
-        <Field as={Input} name="guarantee" label="Guarantee" />
+        <Field adminInput as={Input} name="price" label="Price" />
+        <Field adminInput as={Input} name="guarantee" label="Guarantee" />
         <Button type="primary" htmlType="submit">
           Create appointment
         </Button>

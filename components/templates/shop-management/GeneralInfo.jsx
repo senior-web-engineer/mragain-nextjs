@@ -81,6 +81,7 @@ export const GeneralInfo = ({ shopInfo }) => {
               </Col>
               <Col span={18}>
                 <Field
+                  adminInput
                   as={Input}
                   customLabel
                   textarea
@@ -97,9 +98,27 @@ export const GeneralInfo = ({ shopInfo }) => {
                 </p>
               </Col>
               <Col span={18}>
-                <Field as={Input} customLabel name="phone" label="Phone" />
-                <Field as={Input} customLabel name="webSite" label="Web Site" />
-                <Field as={Input} customLabel name="address" label="Address" />
+                <Field
+                  adminInput
+                  as={Input}
+                  customLabel
+                  name="phone"
+                  label="Phone"
+                />
+                <Field
+                  adminInput
+                  as={Input}
+                  customLabel
+                  name="webSite"
+                  label="Web Site"
+                />
+                <Field
+                  adminInput
+                  as={Input}
+                  customLabel
+                  name="address"
+                  label="Address"
+                />
               </Col>
             </Row>
 
