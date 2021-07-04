@@ -2,60 +2,6 @@ import { useState } from "react";
 import { Transfer, Table, Tag } from "antd";
 import difference from "lodash/difference";
 
-const mockTags = ["cat", "dog", "bird"];
-
-const mockData = [];
-for (let i = 0; i < 20; i++) {
-  mockData.push({
-    key: i.toString(),
-    device: `content${i + 1}`,
-    brand: mockTags[i % 3],
-    model: `description of content${i + 1}`,
-    disabled: i % 4 === 0,
-  });
-}
-
-const leftTableColumns = (filteredInfo) => [
-  {
-    dataIndex: "device",
-    title: "Device",
-    render: (device) => <Tag color="green">{device}</Tag>,
-    filters: [
-      { text: "Content1", value: "content1" },
-      { text: "Content2", value: "content2" },
-    ],
-    filteredValue: filteredInfo?.device || null,
-    onFilter: (value, record) => {
-      return record.device === value;
-    },
-  },
-  {
-    dataIndex: "brand",
-    title: "Brand",
-    onFilter: (value, record) => record.brand.indexOf(value) === 0,
-    sorter: (a, b) => a.brand.length - b.brand.length,
-  },
-  {
-    dataIndex: "model",
-    title: "Model",
-  },
-];
-const rightTableColumns = [
-  {
-    dataIndex: "device",
-    title: "Device",
-    render: (device) => <Tag color="green">{device}</Tag>,
-  },
-  {
-    dataIndex: "brand",
-    title: "Brand",
-  },
-  {
-    dataIndex: "model",
-    title: "Model",
-  },
-];
-
 const TableTransfer = ({ leftColumns, rightColumns, ...restProps }) => {
   const [filteredInfo, setFilteredInfo] = useState(null);
 
@@ -116,9 +62,15 @@ const TableTransfer = ({ leftColumns, rightColumns, ...restProps }) => {
   );
 };
 
-export const DeviceTransfer = ({ targetKeys, onChange }) => (
+export const DeviceTransfer = ({
+  targetKeys,
+  onChange,
+  leftTableColumns,
+  rightTableColumns,
+  data,
+}) => (
   <TableTransfer
-    dataSource={mockData}
+    dataSource={data}
     targetKeys={targetKeys}
     showSearch
     onChange={onChange}
