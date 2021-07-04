@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Transfer, Table, Tag } from "antd";
 import difference from "lodash/difference";
 
-const TableTransfer = ({ leftColumns, rightColumns, ...restProps }) => {
+export const TableTransfer = ({ leftColumns, rightColumns, ...restProps }) => {
   const [filteredInfo, setFilteredInfo] = useState(null);
 
   const handleChange = (pagination, filters, sorter) => {
@@ -61,24 +61,3 @@ const TableTransfer = ({ leftColumns, rightColumns, ...restProps }) => {
     </Transfer>
   );
 };
-
-export const DeviceTransfer = ({
-  targetKeys,
-  onChange,
-  leftTableColumns,
-  rightTableColumns,
-  data,
-}) => (
-  <TableTransfer
-    dataSource={data}
-    targetKeys={targetKeys}
-    showSearch
-    onChange={onChange}
-    filterOption={(inputValue, item) =>
-      item.device.indexOf(inputValue) !== -1 ||
-      item.brand.indexOf(inputValue) !== -1
-    }
-    leftColumns={leftTableColumns}
-    rightColumns={rightTableColumns}
-  />
-);

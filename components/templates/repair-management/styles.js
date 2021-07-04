@@ -1,8 +1,21 @@
 import styled from "styled-components";
 
+export const RowWrapper = styled.div`
+  display: flex;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+`;
+
+export const TransferWrapper = styled.div`
+  padding: 16px;
+  border-left: 1px solid lightgray;
+`;
+
 export const MenuWrap = styled.div`
   width: 100%;
   height: 100%;
+  display: flex;
   background-color: #fff;
   padding: 16px;
   color: #909090;

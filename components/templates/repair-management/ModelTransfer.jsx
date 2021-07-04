@@ -7,8 +7,8 @@ import ShopImage from "@/assets/icons/shop.svg";
 import ServicesImage from "@/assets/icons/services.svg";
 import FinanceImage from "@/assets/icons/finance.svg";
 import Image from "next/image";
-import { MenuWrap } from "./styles";
-import { DeviceTransfer } from "./DeviceTransfer";
+import { MenuWrap, RowWrapper, TransferWrapper } from "./styles";
+import { TableTransfer } from "./TableTransfer";
 
 const managementMenuItems = () => [
   {
@@ -76,6 +76,8 @@ const managementMenuItems = () => [
 ];
 
 export const ModelTransfer = ({
+  targetKeys,
+  onChange,
   leftTableColumns,
   rightTableColumns,
   data,
@@ -84,11 +86,12 @@ export const ModelTransfer = ({
 
   const onSelect = (selectedKeys) => {
     console.log(selectedKeys);
+    setSelected(selectedKeys);
   };
 
   return (
-    <Row>
-      <Col span="6">
+    <RowWrapper>
+      <Col span="4">
         <MenuWrap>
           <Tree
             showIcon
@@ -102,14 +105,22 @@ export const ModelTransfer = ({
           />
         </MenuWrap>
       </Col>
-      <Col span="18">
-        {/* <TreeList /> */}
-        <DeviceTransfer
-          data={data}
-          leftTableColumns={leftTableColumns}
-          rightTableColumns={rightTableColumns}
-        />
+      <Col span="20">
+        <TransferWrapper>
+          <TableTransfer
+            dataSource={data}
+            targetKeys={targetKeys}
+            showSearch
+            onChange={onChange}
+            filterOption={(inputValue, item) =>
+              item.device.indexOf(inputValue) !== -1 ||
+              item.brand.indexOf(inputValue) !== -1
+            }
+            leftColumns={leftTableColumns}
+            rightColumns={rightTableColumns}
+          />
+        </TransferWrapper>
       </Col>
-    </Row>
+    </RowWrapper>
   );
 };
