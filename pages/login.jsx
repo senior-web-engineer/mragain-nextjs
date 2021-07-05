@@ -86,9 +86,9 @@ const Login = () => {
       if (Object.keys(errors).length) {
         return;
       }
-      if (error !== "oops") {
+      if (error !== "") {
         notification.error({
-          message: error.msg,
+          message: "Bad Credentials, please try again",
         });
       }
     }
