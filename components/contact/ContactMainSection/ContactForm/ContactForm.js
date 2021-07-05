@@ -18,7 +18,6 @@ import {
 import Form from "@/modules/forms";
 import { contactFormModule } from "./modules";
 import { Field } from "@/modules/forms/Blocks";
-import router from "next/router";
 
 const ContactForm = () => {
   useEffect(() => {
