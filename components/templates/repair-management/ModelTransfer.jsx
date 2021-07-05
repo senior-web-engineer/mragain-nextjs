@@ -1,93 +1,51 @@
-import React, { useState } from "react";
-import { Transfer, Row, Col, Tree } from "antd";
+import React, { useState, useEffect } from "react";
+import { Row, Col, Tree, Button } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-
-import HistoryImage from "@/assets/icons/history.svg";
-import ShopImage from "@/assets/icons/shop.svg";
-import ServicesImage from "@/assets/icons/services.svg";
-import FinanceImage from "@/assets/icons/finance.svg";
 import Image from "next/image";
 import { MenuWrap, RowWrapper, TransferWrapper } from "./styles";
 import { TableTransfer } from "./TableTransfer";
 
-const managementMenuItems = () => [
-  {
-    title: "Phones",
-    key: "history",
-    icon: <Image width="24" height="24" src={HistoryImage} />,
-    selectable: false,
-    children: [
-      {
-        title: "Sony",
-        key: `history`,
-      },
-      {
-        title: "Xiaomi",
-        key: `history`,
-      },
-      {
-        title: "Apple",
-        key: `history`,
-      },
-      {
-        title: "...",
-        key: `history-hold`,
-      },
-    ],
-  },
-  {
-    title: "Headphones",
-    key: "shop-management",
-    icon: <Image width="24" height="24" src={ShopImage} />,
-    selectable: false,
-    children: [
-      {
-        title: "Profile Settings",
-        key: `shop-management-settings`,
-      },
-      {
-        title: "Operational Hours",
-        key: `shop-management-hours`,
-      },
-    ],
-  },
-  {
-    title: "TVs",
-    key: "repair-management",
-    icon: <Image width="24" height="24" src={ServicesImage} />,
-    selectable: false,
-    children: [
-      {
-        title: "Device Manager",
-        key: "repair-management/device-manager",
-      },
-      {
-        title: "Rules",
-        key: "repair-management/rules",
-      },
-    ],
-  },
-  {
-    title: "Laptops",
-    key: "finance",
-    icon: <Image width="24" height="24" src={FinanceImage} />,
-    selectable: false,
-  },
-];
+// const menuItems = () => [
+//   {
+//     title: "TVs",
+//     key: "repair-management",
+//     icon: <Image width="24" height="24" src={ServicesImage} />,
+//     selectable: false,
+//     children: [
+//       {
+//         title: "Device Manager",
+//         key: "repair-management/device-manager",
+//       },
+//       {
+//         title: "Rules",
+//         key: "repair-management/rules",
+//       },
+//     ],
+//   },
+// ];
 
 export const ModelTransfer = ({
   targetKeys,
   onChange,
   leftTableColumns,
   rightTableColumns,
+  menuItems,
   data,
+  onBrandSelected,
+  selectedBrand,
 }) => {
   const [selected, setSelected] = useState([]);
 
-  const onSelect = (selectedKeys) => {
-    console.log(selectedKeys);
+  const onSelect = (selectedKeys, event) => {
+    onBrandSelected(event.selectedNodes[0].props.id);
     setSelected(selectedKeys);
   };
+
+  useEffect(() => {
+    if (selectedBrand) {
+      setSelected(selectedBrand.key);
+    }
+  }, [selectedBrand]);
 
   return (
     <RowWrapper>
@@ -99,9 +57,8 @@ export const ModelTransfer = ({
             switcherIcon={<DownOutlined />}
             selectedKeys={selected}
             onSelect={onSelect}
-            multiple
             blockNode
-            treeData={managementMenuItems()}
+            treeData={menuItems}
           />
         </MenuWrap>
       </Col>

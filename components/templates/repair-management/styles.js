@@ -4,18 +4,20 @@ export const RowWrapper = styled.div`
   display: flex;
   background: white;
   border-radius: 10px;
-  overflow: hidden;
+  overflow: auto;
+  height: calc(100vh - 250px);
 `;
 
 export const TransferWrapper = styled.div`
   padding: 16px;
   border-left: 1px solid lightgray;
+  height: 100%;
 `;
 
 export const MenuWrap = styled.div`
   width: 100%;
   height: 100%;
-  display: flex;
+  display: inline-block;
   background-color: #fff;
   padding: 16px;
   color: #909090;

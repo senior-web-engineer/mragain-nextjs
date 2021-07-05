@@ -3,11 +3,19 @@ import { API_PATH } from "@/constants";
 import dataFetcher from "@/modules/dataFetcher";
 import api, { privateApi } from "@/utils/api";
 import { createFormModule } from "@/modules/forms";
+import { createModalModule } from "@/modules/modal";
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],
   fetchData() {
     return privateApi.get(`${API_PATH.GETAUTHUSER}/`);
+  },
+});
+
+export const getAllModels = dataFetcher({
+  selectors: [],
+  fetchData() {
+    return privateApi.get(`${API_PATH.GETFILTERFIELDS}/`);
   },
 });
 
@@ -21,19 +29,10 @@ export const getRepairDevices = dataFetcher({
 export const getRepairBrandModel = dataFetcher({
   selectors: [],
   fetchData() {
-    const shopName = currentUser.selector(store.ref.getState())?.result?.name;
+    const shopId = currentUser.selector(store.ref.getState())?.result
+      ?.account_id;
     return privateApi.get(
-      `${API_PATH.REPAIRBRANDMODEL}/${shopName}/?shop=${shopName}&device=1`
-    );
-  },
-});
-
-export const getShopReparationModel = dataFetcher({
-  selectors: [],
-  fetchData() {
-    const shopName = currentUser.selector(store.ref.getState())?.result?.name;
-    return privateApi.get(
-      `${API_PATH.GETSHOPREPAIRATION}/${shopName}/?shop=${shopId}&device=1&model=34&brand=2`
+      `${API_PATH.REPAIRBRANDMODEL}/${shopId}/?shop=${shopId}&device=1`
     );
   },
 });
@@ -46,3 +45,30 @@ export const shopInfoFetcher = dataFetcher({
     return data;
   },
 });
+
+export const getShopReparations = dataFetcher({
+  selectors: [],
+  async fetchData() {
+    const shopId = currentUser.selector(store.ref.getState())?.result
+      ?.account_id;
+    const data = await privateApi.get(
+      `${API_PATH.GETSHOPREPAIRATION}/?shop=${shopId}&device=1&model=34&brand=2`
+    );
+    return data;
+  },
+});
+
+export const saveShopReparations = dataFetcher({
+  selectors: [],
+  async fetchData(payload) {
+    const shopId = currentUser.selector(store.ref.getState())?.result
+      ?.account_id;
+    const data = await privateApi.put(`${API_PATH.GETSHOPREPAIRATION}/`, {
+      payload: payload,
+      shopId,
+    });
+    return data;
+  },
+});
+
+export const editRepairModelModal = createModalModule();
