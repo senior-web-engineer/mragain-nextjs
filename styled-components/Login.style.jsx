@@ -70,8 +70,6 @@ export const FormBox = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: -100px;
-    margin-right: 12px;
   }
 `;
 
@@ -82,6 +80,10 @@ export const LabelWrapper = styled.div`
 }
   &:nth-child(2) {
     margin-bottom: 50px;
+  }
+
+  @media (max-width: 1023px) {
+    width: 280px;
   }
 `;
 
@@ -116,22 +118,24 @@ export const TextInput = styled.input`
 `;
 
 export const Button = styled.button`
-  width: 65px;
-  height: 32px;
-  background: #06c987;
-  border-radius: 4px;
-  background: #3ec986;
-  padding: 0;
-  border: none;
-  color: #fff;
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 10px;
-  line-height: 14px;
-  z-index: 2;
+  background-color: rgb(6, 201, 135);
+  color: rgb(255, 255, 255);
+  min-width: 130px;
+  padding: 7px;
+  height: 51px;
+  line-height: 37px;
+  border: 0px;
+  text-align: center;
+  border-radius: 25px;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  position: relative;
+  box-shadow: rgb(250 250 250) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 4px,
+    rgb(6 201 135) 0px 0px 0px 0px;
   @media (max-width: 1023px) {
-    width: 100%;
+    width: 85%;
   }
 `;
 
@@ -151,6 +155,9 @@ export const BottomText = styled.div`
   line-height: 14px;
   margin-top: auto;
   margin-bottom: 30px;
+  @media (max-width: 1023px) {
+    margin-bottom: 20px;
+  }
 `;
 
 export const BottomTextATag = styled(BottomText)`
@@ -168,7 +175,7 @@ export const ForgotPass = styled.a`
   margin-left: 20px;
   color: #909090;
   @media (max-width: 1023px) {
-    margin: 20px 10px 0px 0px
+    margin: 20px 0px 10px 0px;
   }
 `;
 
@@ -178,10 +185,10 @@ export const Gradient = styled.div`
 `;
 
 export const ButtonWrapper = styled.div`
-@media (max-width: 1023px) {
+  @media (max-width: 1023px) {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-`
+  }
+`;

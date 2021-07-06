@@ -28,7 +28,7 @@ import {
   DrawingWrapper,
   ForgotPass,
   ButtonWrapper,
-} from "../components/login/Login.style";
+} from "../styled-components/Login.style";
 import Form from "@/modules/forms";
 import { loginModule } from "../components/login/modules";
 import { useWindowSize } from "@/utils/hooks/useWindowSize";
