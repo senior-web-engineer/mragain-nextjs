@@ -65,19 +65,27 @@ class EditableTable extends React.Component {
     this.state = { data: props.data, editingKey: "" };
     this.columns = [
       {
+        title: "Repair Type",
+        dataIndex: "reparation.reparation_name",
+      },
+      {
         title: "Price",
         dataIndex: "price",
         editable: true,
+        render: (price) => `$${price}`,
       },
       {
         title: "Guarantee Time",
         dataIndex: "guarantee_time",
         editable: true,
+        render: (guarantee_time) =>
+          `${guarantee_time} month${guarantee_time > 1 ? "s" : ""}`,
       },
       {
         title: "Reparation Time",
         dataIndex: "reparation_time",
         editable: true,
+        render: (reparation_time) => `$${reparation_time} minutes`,
       },
       {
         title: "Active",
