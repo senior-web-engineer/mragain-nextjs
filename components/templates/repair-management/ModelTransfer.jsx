@@ -1,28 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Row, Col, Tree, Button } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import Image from "next/image";
-import { MenuWrap, RowWrapper, TransferWrapper } from "./styles";
-import { TableTransfer } from "./TableTransfer";
-
-// const menuItems = () => [
-//   {
-//     title: "TVs",
-//     key: "repair-management",
-//     icon: <Image width="24" height="24" src={ServicesImage} />,
-//     selectable: false,
-//     children: [
-//       {
-//         title: "Device Manager",
-//         key: "repair-management/device-manager",
-//       },
-//       {
-//         title: "Rules",
-//         key: "repair-management/rules",
-//       },
-//     ],
-//   },
-// ];
+import { Checkbox, Col, Row, Tree, Input, Button } from "antd";
+import React, { useEffect, useState } from "react";
+import { MenuWrap, RowWrapper, TransferWrapper, ModelWrapper } from "./styles";
 
 export const ModelTransfer = ({
   targetKeys,
@@ -33,8 +12,11 @@ export const ModelTransfer = ({
   data,
   onBrandSelected,
   selectedBrand,
+  onEditModelReparations,
 }) => {
   const [selected, setSelected] = useState([]);
+  const [search, setSearch] = useState("");
+  const [editing, setEditing] = useState(false);
 
   const onSelect = (selectedKeys, event) => {
     onBrandSelected(event.selectedNodes[0].props.id);
@@ -64,18 +46,71 @@ export const ModelTransfer = ({
       </Col>
       <Col span="20">
         <TransferWrapper>
-          <TableTransfer
-            dataSource={data}
-            targetKeys={targetKeys}
-            showSearch
-            onChange={onChange}
-            filterOption={(inputValue, item) =>
-              item.device.indexOf(inputValue) !== -1 ||
-              item.brand.indexOf(inputValue) !== -1
-            }
-            leftColumns={leftTableColumns}
-            rightColumns={rightTableColumns}
-          />
+          <Row type="flex" justify="space-between">
+            <Col>
+              <h2>Google</h2>
+            </Col>
+            <Col>
+              <Row type="flex" gutter={[16, 16]}>
+                <Col>
+                  <Input
+                    size="large"
+                    value={search}
+                    onChange={(event) => setSearch(event.target.value)}
+                  />
+                </Col>
+                <Col>
+                  <Button size="large">Import</Button>
+                </Col>
+                <Col>
+                  <Button size="large">Export</Button>
+                </Col>
+                <Col>
+                  {editing ? (
+                    <Button
+                      size="large"
+                      type="primary"
+                      onClick={() => setEditing(false)}
+                    >
+                      Save
+                    </Button>
+                  ) : (
+                    <Button
+                      size="large"
+                      type="primary"
+                      onClick={() => setEditing(true)}
+                    >
+                      Edit
+                    </Button>
+                  )}
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <Row type="flex" gutter={[16, 16]}>
+            {data
+              .filter((item) => item.model.includes(search))
+              .map((item) => {
+                console.log(item, targetKeys);
+                return (
+                  <Col span={8}>
+                    <ModelWrapper>
+                      <p>{item.model}</p>
+                      {editing ? (
+                        <Checkbox
+                          defaultChecked={targetKeys.includes(item.key)}
+                          onChange={() => onChange(item.key)}
+                        />
+                      ) : (
+                        <Button onClick={() => onEditModelReparations(item)}>
+                          Edit
+                        </Button>
+                      )}
+                    </ModelWrapper>
+                  </Col>
+                );
+              })}
+          </Row>
         </TransferWrapper>
       </Col>
     </RowWrapper>

@@ -31,16 +31,6 @@ const rightTableColumns2 = [
     dataIndex: "action",
     title: "Actions",
     width: 100,
-    render: (data) => (
-      <Button
-        type="primary"
-        onClick={() => {
-          editRepairModelModal.actions.open();
-        }}
-      >
-        Edit
-      </Button>
-    ),
   },
 ];
 
@@ -120,8 +110,19 @@ export default function RepairManagementPage({ auth_user }) {
     setActiveTab(tab);
   };
 
-  const onChange = (nextTargetKeys) => {
-    setTargetKeys(nextTargetKeys);
+  const onChange = (key) => {
+    console.log(key);
+    if (targetKeys.includes(key)) {
+      const newTargetKeys = [...targetKeys];
+      newTargetKeys.splice(newTargetKeys.indexOf(key), 1);
+      setTargetKeys(newTargetKeys);
+    } else {
+      setTargetKeys([...targetKeys, key]);
+    }
+  };
+
+  const onEditModelReparations = () => {
+    editRepairModelModal.actions.open();
   };
 
   return (
@@ -142,6 +143,7 @@ export default function RepairManagementPage({ auth_user }) {
             menuItems={devices}
             onBrandSelected={handleOnBrandSelected}
             selectedBrand={selectedBrand}
+            onEditModelReparations={onEditModelReparations}
           />
         </TabPane>
         <TabPane tab="Rules" key="rules"></TabPane>

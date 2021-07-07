@@ -84,3 +84,14 @@ export const MenuWrap = styled.div`
     display: none !important;
   }
 `;
+
+export const ModelWrapper = styled.div`
+  width: 100%;
+  height: 50px;
+  padding: 0 16px;
+  border-radius: 6px;
+  display: flex;
+  background: #fafafa;
+  align-items: center;
+  justify-content: space-between;
+`;
