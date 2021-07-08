@@ -6,8 +6,8 @@ import {
   ButtonsWrapper,
 } from "./styles";
 import Form from "@/modules/forms";
-import { Button, Divider, Row, Col } from "antd";
 import { Field } from "@/modules/forms/Blocks";
+import { Button, Divider, Row, Col } from "antd";
 
 export const BasicProfile = ({ basicSettingsForm }) => {
   return (

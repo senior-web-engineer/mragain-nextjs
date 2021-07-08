@@ -1,26 +1,41 @@
 import { DownOutlined } from "@ant-design/icons";
 import { Checkbox, Col, Row, Tree, Input, Button } from "antd";
 import React, { useEffect, useState } from "react";
-import { MenuWrap, RowWrapper, TransferWrapper, ModelWrapper } from "./styles";
+import {
+  MenuWrap,
+  RowWrapper,
+  TransferWrapper,
+  ModelWrapper,
+  RowActionsWrapper,
+} from "./styles";
 
 export const ModelTransfer = ({
   targetKeys,
   onChange,
-  leftTableColumns,
-  rightTableColumns,
   menuItems,
   data,
   onBrandSelected,
   selectedBrand,
   onEditModelReparations,
+  onModelsSaved,
 }) => {
   const [selected, setSelected] = useState([]);
   const [search, setSearch] = useState("");
   const [editing, setEditing] = useState(false);
+  const [selectedBrandTitle, setSelectedBrandTitle] = useState("");
+  const [selectedDevice, setSelectedDevice] = useState();
 
   const onSelect = (selectedKeys, event) => {
+    console.log(selectedKeys, event);
+    setSelectedBrandTitle(event.selectedNodes[0].props.title);
     onBrandSelected(event.selectedNodes[0].props.id);
+    setSelectedDevice(selectedKeys[0].split("-")[0]);
     setSelected(selectedKeys);
+  };
+
+  const onSave = () => {
+    onModelsSaved(selectedDevice);
+    setEditing(false);
   };
 
   useEffect(() => {
@@ -46,9 +61,9 @@ export const ModelTransfer = ({
       </Col>
       <Col span="20">
         <TransferWrapper>
-          <Row type="flex" justify="space-between">
+          <RowActionsWrapper type="flex" justify="space-between">
             <Col>
-              <h2>Google</h2>
+              <h3>{selectedBrandTitle}</h3>
             </Col>
             <Col>
               <Row type="flex" gutter={[16, 16]}>
@@ -67,11 +82,7 @@ export const ModelTransfer = ({
                 </Col>
                 <Col>
                   {editing ? (
-                    <Button
-                      size="large"
-                      type="primary"
-                      onClick={() => setEditing(false)}
-                    >
+                    <Button size="large" type="primary" onClick={onSave}>
                       Save
                     </Button>
                   ) : (
@@ -86,16 +97,18 @@ export const ModelTransfer = ({
                 </Col>
               </Row>
             </Col>
-          </Row>
+          </RowActionsWrapper>
           <Row type="flex" gutter={[16, 16]}>
             {data
               .filter((item) => item.model.includes(search))
+              .filter((item) =>
+                !editing ? targetKeys.includes(item.key) : true
+              )
               .map((item) => {
-                console.log(item, targetKeys);
                 return (
                   <Col span={8}>
                     <ModelWrapper>
-                      <p>{item.model}</p>
+                      <p style={{ margin: 0 }}>{item.model}</p>
                       {editing ? (
                         <Checkbox
                           defaultChecked={targetKeys.includes(item.key)}

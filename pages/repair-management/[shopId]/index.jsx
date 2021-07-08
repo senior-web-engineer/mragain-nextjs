@@ -13,26 +13,10 @@ import {
   getShopReparations,
   getRepairDevices,
   getAllModels,
+  saveSelectedModels,
+  saveModelReparations,
 } from "@/service/repair-management/modules";
 import { find, uniqBy, filter } from "lodash";
-
-const leftTableColumns2 = (filteredInfo) => [
-  {
-    dataIndex: "model",
-    title: "Model",
-  },
-];
-const rightTableColumns2 = [
-  {
-    dataIndex: "model",
-    title: "Model",
-  },
-  {
-    dataIndex: "action",
-    title: "Actions",
-    width: 100,
-  },
-];
 
 export default function RepairManagementPage({ auth_user }) {
   const router = useRouter();
@@ -90,13 +74,13 @@ export default function RepairManagementPage({ auth_user }) {
       setTargetKeys(selectedModels);
       setSelectedModels(filter(models, ["brand_id", firstModel.id]));
 
-      const reparationModels = await getShopReparations.fetch();
-      setShopReparations(
-        reparationModels.map((reparationModel) => ({
-          ...reparationModel,
-          key: reparationModel.id.toString(),
-        }))
-      );
+      // const reparationModels = await getShopReparations.fetch();
+      // setShopReparations(
+      //   reparationModels.map((reparationModel) => ({
+      //     ...reparationModel,
+      //     key: reparationModel.id.toString(),
+      //   }))
+      // );
     }
 
     loadData();
@@ -111,7 +95,6 @@ export default function RepairManagementPage({ auth_user }) {
   };
 
   const onChange = (key) => {
-    console.log(key);
     if (targetKeys.includes(key)) {
       const newTargetKeys = [...targetKeys];
       newTargetKeys.splice(newTargetKeys.indexOf(key), 1);
@@ -121,8 +104,26 @@ export default function RepairManagementPage({ auth_user }) {
     }
   };
 
-  const onEditModelReparations = () => {
+  const onEditModelReparations = async () => {
+    setShopReparations(await saveModelReparations.actions.initialize());
     editRepairModelModal.actions.open();
+  };
+
+  const handleOnModelsSaved = (selectedDevice) => {
+    const savingData = [
+      {
+        brand_id: selectedBrand.id,
+        models: selectedModels
+          .filter((item) => targetKeys.includes(item.key))
+          .map((item) => item.id),
+      },
+    ];
+    const payload = {
+      brand: savingData,
+      device_id: selectedDevice,
+    };
+    console.log(payload);
+    saveSelectedModels.fetch(payload);
   };
 
   return (
@@ -138,12 +139,11 @@ export default function RepairManagementPage({ auth_user }) {
             data={selectedModels}
             targetKeys={targetKeys}
             onChange={onChange}
-            leftTableColumns={leftTableColumns2}
-            rightTableColumns={rightTableColumns2}
             menuItems={devices}
             onBrandSelected={handleOnBrandSelected}
             selectedBrand={selectedBrand}
             onEditModelReparations={onEditModelReparations}
+            onModelsSaved={handleOnModelsSaved}
           />
         </TabPane>
         <TabPane tab="Rules" key="rules"></TabPane>
@@ -151,7 +151,8 @@ export default function RepairManagementPage({ auth_user }) {
       </Tabs>
       <EditModal
         editRepairModelModal={editRepairModelModal}
-        shopReparations={shopReparations}
+        data={shopReparations}
+        saveModelReparations={saveModelReparations}
       />
     </DefaultLayout>
   );

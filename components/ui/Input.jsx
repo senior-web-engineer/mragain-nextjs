@@ -5,10 +5,11 @@ import { Input as AntdInput, InputNumber } from "antd";
 export const StyledInput = styled.div`
   box-sizing: border-box;
   border: none;
-  background: white;
+  background: transparent !important;
 
   input,
   textarea {
+    background: transparent !important;
     border: none;
     padding: 0 !important;
     &:focus {
@@ -17,11 +18,15 @@ export const StyledInput = styled.div`
     }
   }
 
-  .ant-input-group-addon:first-child {
+  .ant-input-group-addon:first-child,
+  .ant-input-group-addon:last-child {
     background: transparent;
     border: none;
     color: #c0c0c0;
     padding-left: 0;
+  }
+  .ant-input-group-addon:last-child {
+    padding-right: 0;
   }
 `;
 

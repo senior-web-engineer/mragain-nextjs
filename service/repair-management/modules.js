@@ -4,6 +4,7 @@ import dataFetcher from "@/modules/dataFetcher";
 import api, { privateApi } from "@/utils/api";
 import { createFormModule } from "@/modules/forms";
 import { createModalModule } from "@/modules/modal";
+import { notification } from "antd";
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],
@@ -49,11 +50,51 @@ export const shopInfoFetcher = dataFetcher({
 export const getShopReparations = dataFetcher({
   selectors: [],
   async fetchData() {
-    const shopId = currentUser.selector(store.ref.getState())?.result
+    const shopId = currentUser.selector(store.ref.getState())?.result.account_id
       ?.account_id;
     const data = await privateApi.get(
       `${API_PATH.GETSHOPREPAIRATION}/?shop=${shopId}&device=1&model=34&brand=2`
     );
+    return data;
+  },
+});
+
+export const saveModelReparations = createFormModule({
+  guid: "saveModelReparations",
+  async init(id) {
+    const shopId = currentUser.selector(store.ref.getState())?.result
+      .account_id;
+    const fetchedData = await privateApi.get(
+      `${API_PATH.GETSHOPREPAIRATION}/?shop=${shopId}&device=1&model=34&brand=2`
+    );
+    return fetchedData;
+  },
+  submit(data) {
+    const shopId = currentUser.selector(store.ref.getState())?.result
+      ?.account_id;
+    const promise = privateApi.put(`${API_PATH.SHOPGUARANTEE}/`, {
+      payload: data,
+      shop_id: shopId,
+    });
+
+    editRepairModelModal.actions.close();
+    notification.success({
+      message: "Saved successfully",
+    });
+
+    return promise;
+  },
+});
+
+export const saveSelectedModels = dataFetcher({
+  selectors: [],
+  async fetchData(payload) {
+    const shopId = currentUser.selector(store.ref.getState())?.result
+      ?.account_id;
+    const data = await privateApi.post(`${API_PATH.GUARANTEEMODELS}/`, {
+      payload,
+      shop_id: shopId,
+    });
     return data;
   },
 });

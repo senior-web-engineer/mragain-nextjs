@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Row } from "antd";
 
 export const RowWrapper = styled.div`
   display: flex;
@@ -94,4 +95,8 @@ export const ModelWrapper = styled.div`
   background: #fafafa;
   align-items: center;
   justify-content: space-between;
+`;
+
+export const RowActionsWrapper = styled(Row)`
+  padding-bottom: 20px;
 `;
