@@ -584,7 +584,7 @@ export default function ShopServices({ shop }) {
         <OnMobile show={false}>{apointmentButton}</OnMobile>
         <OnMobile only>
           <MobileToolbar>
-            <NextSlot id={shop.id} />
+	  {/*<NextSlot id={shop.id} />*/}
             {apointmentButton}
           </MobileToolbar>
         </OnMobile>
