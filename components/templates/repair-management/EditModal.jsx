@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Drawer } from "@/modules/modal";
 import { Row, Col, Divider, Switch, Table, Button } from "antd";
 import Form from "@/modules/forms";
+import { RowWrapperMargin } from "./styles";
 import Input from "@/components/ui/Input";
+import { cloneDeep } from "lodash";
 
-const columns = (onChange) => [
+const columns = (items) => [
   {
     title: "Reparation Type",
     dataIndex: "reparation.reparation_name",
@@ -17,7 +19,7 @@ const columns = (onChange) => [
       return (
         <Input
           defaultValue={price}
-          onChange={() => onChange("price", price, index)}
+          onChange={(value) => (items[index].price = value)}
           addonBefore="$"
           type="number"
         />
@@ -32,7 +34,7 @@ const columns = (onChange) => [
       return (
         <Input
           defaultValue={guarantee_time}
-          onChange={() => onChange("guarantee_time", guarantee_time, index)}
+          onChange={(value) => (items[index].guarantee_time = value)}
           type="number"
           addonAfter="months"
         />
@@ -47,7 +49,7 @@ const columns = (onChange) => [
       return (
         <Input
           defaultValue={reparation_time}
-          onChange={() => onChange("reparation_time", reparation_time, index)}
+          onChange={(value) => (items[index].reparation_time = value)}
           addonAfter="minutes"
           type="number"
         />
@@ -61,58 +63,54 @@ const columns = (onChange) => [
       return (
         <Switch
           defaultChecked={active}
-          onChange={() => onChange("active", active, index)}
+          onChange={(value) => (items[index].active = value)}
         />
       );
     },
   },
 ];
 
-export const EditModal = ({
-  data,
-  editRepairModelModal,
-  saveModelReparations,
-}) => {
-  const [items, setItems] = useState([]);
+export const EditModal = ({ model, data, editRepairModelModal, onSave }) => {
+  let [items, setItems] = useState([]);
   useEffect(() => {
-    setItems(data);
+    setItems(cloneDeep(data));
   }, [data]);
-
-  const onChange = (valueName, value, index) => {
-    const newItems = [...items];
-    console.log(newItems, index, valueName);
-    newItems[index] = { ...newItems[index], [valueName]: value };
-    setItems(newItems);
-  };
-
-  const onSave = () => {
-    saveModelReparations.actions.submit(items);
-  };
 
   return (
     <Drawer width="1000px" module={editRepairModelModal}>
       <h2>Model information</h2>
       <Divider />
       <p>Device</p>
-      <h4>Samsung Galaxy ...</h4>
+      <h4>{model}</h4>
       <Divider />
-      <Row type="flex" justify="space-between">
+      <RowWrapperMargin type="flex" justify="space-between" align="center">
         <Col>
-          <p>Services</p>
+          <h3>Services</h3>
+        </Col>
+        <Col></Col>
+      </RowWrapperMargin>
+      <Table
+        bordered
+        scroll={{ y: `calc(100vh - 420px)` }}
+        dataSource={items}
+        columns={columns(items)}
+        pagination={false}
+      />
+      <RowWrapperMargin type="flex" justify="space-between" align="center">
+        <Col>
+          <Button
+            size="large"
+            onClick={() => editRepairModelModal.actions.close()}
+          >
+            Cancel
+          </Button>
         </Col>
         <Col>
-          <Button onClick={onSave}>Save</Button>
+          <Button size="large" type="primary" onClick={() => onSave(items)}>
+            Save
+          </Button>
         </Col>
-      </Row>
-      <Form module={saveModelReparations}>
-        <Table
-          bordered
-          scroll={{ y: `calc(100vh - 350px)` }}
-          dataSource={items}
-          columns={columns(onChange)}
-          pagination={false}
-        />
-      </Form>
+      </RowWrapperMargin>
     </Drawer>
   );
 };

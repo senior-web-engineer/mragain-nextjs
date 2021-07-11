@@ -41,8 +41,10 @@ export const ModelTransfer = ({
   useEffect(() => {
     if (selectedBrand) {
       setSelected(selectedBrand.key);
+      onBrandSelected(selectedBrand.id);
+      setSelectedDevice(selectedBrand.key.split("-")[0]);
     }
-  }, [selectedBrand]);
+  }, [selectedBrand, menuItems]);
 
   return (
     <RowWrapper>
@@ -71,6 +73,7 @@ export const ModelTransfer = ({
                   <Input
                     size="large"
                     value={search}
+                    placeholder="Search model"
                     onChange={(event) => setSearch(event.target.value)}
                   />
                 </Col>
@@ -115,7 +118,11 @@ export const ModelTransfer = ({
                           onChange={() => onChange(item.key)}
                         />
                       ) : (
-                        <Button onClick={() => onEditModelReparations(item)}>
+                        <Button
+                          onClick={() =>
+                            onEditModelReparations(selectedDevice, item)
+                          }
+                        >
                           Edit
                         </Button>
                       )}

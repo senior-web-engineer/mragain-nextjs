@@ -17,6 +17,7 @@ import {
   saveModelReparations,
 } from "@/service/repair-management/modules";
 import { find, uniqBy, filter } from "lodash";
+import id from "date-fns/esm/locale/id/index.js";
 
 export default function RepairManagementPage({ auth_user }) {
   const router = useRouter();
@@ -25,6 +26,7 @@ export default function RepairManagementPage({ auth_user }) {
   const [devices, setDevices] = useState([]);
   const [models, setModels] = useState([]);
   const [selectedModels, setSelectedModels] = useState([]);
+  const [selectedModel, setSelectedModel] = useState();
   const [selectedBrand, setSelectedBrand] = useState();
   const [shopReparations, setShopReparations] = useState([]);
 
@@ -39,7 +41,7 @@ export default function RepairManagementPage({ auth_user }) {
         id: allModels[0].brand.id,
         key: `${fetchedDevices[0].id}-${allModels[0].brand.brand_name}`,
       };
-      setSelectedBrand(firstModel);
+
       const currentModels = await getRepairBrandModel.fetch();
       setDevices(
         fetchedDevices.map((device) => ({
@@ -81,6 +83,10 @@ export default function RepairManagementPage({ auth_user }) {
       //     key: reparationModel.id.toString(),
       //   }))
       // );
+
+      setTimeout(() => {
+        setSelectedBrand(firstModel);
+      }, 500);
     }
 
     loadData();
@@ -104,9 +110,22 @@ export default function RepairManagementPage({ auth_user }) {
     }
   };
 
-  const onEditModelReparations = async () => {
-    setShopReparations(await saveModelReparations.actions.initialize());
+  const onEditModelReparations = async (deviceId, item) => {
+    console.log("SITEM", item);
+    setSelectedModel(item.model);
+    setShopReparations(
+      await saveModelReparations.actions.initialize({
+        deviceId: deviceId,
+        brandId: item.brand_id,
+        modelId: item.id,
+      })
+    );
     editRepairModelModal.actions.open();
+  };
+
+  const onRepairModelSaved = (items) => {
+    console.log("ABC", items);
+    saveModelReparations.actions.submit(items);
   };
 
   const handleOnModelsSaved = (selectedDevice) => {
@@ -146,13 +165,12 @@ export default function RepairManagementPage({ auth_user }) {
             onModelsSaved={handleOnModelsSaved}
           />
         </TabPane>
-        <TabPane tab="Rules" key="rules"></TabPane>
-        <TabPane tab="Miscellaneous" key="miscellaneous"></TabPane>
       </Tabs>
       <EditModal
         editRepairModelModal={editRepairModelModal}
+        model={selectedModel}
         data={shopReparations}
-        saveModelReparations={saveModelReparations}
+        onSave={onRepairModelSaved}
       />
     </DefaultLayout>
   );

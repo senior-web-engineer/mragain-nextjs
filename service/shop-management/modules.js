@@ -53,7 +53,6 @@ export const shopManagementGeneralInfo = dataFetcher({
   async fetchData() {
     const id = currentUser.selector(store.ref.getState())?.result?.id;
     const data = await privateApi.get(`${API_PATH.ACCOUNTSETTING}/${id}`);
-    console.log("DT", data);
     return data;
   },
 });

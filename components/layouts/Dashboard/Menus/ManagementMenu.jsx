@@ -34,19 +34,9 @@ const managementMenuItems = (shopId) => [
   },
   {
     title: "Repair Management",
-    key: "repair-management",
+    key: "repair-management/device-manager",
     icon: <Image width="24" height="24" src={ServicesImage} />,
-    selectable: false,
-    children: [
-      {
-        title: "Device Manager",
-        key: "repair-management/device-manager",
-      },
-      {
-        title: "Rules",
-        key: "repair-management/rules",
-      },
-    ],
+    selectable: true,
   },
   {
     title: "Finance",

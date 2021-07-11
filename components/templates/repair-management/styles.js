@@ -9,6 +9,10 @@ export const RowWrapper = styled.div`
   height: calc(100vh - 250px);
 `;
 
+export const RowWrapperMargin = styled(Row)`
+  margin: 16px 0;
+`;
+
 export const TransferWrapper = styled.div`
   padding: 16px;
   border-left: 1px solid lightgray;

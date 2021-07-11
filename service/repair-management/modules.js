@@ -61,15 +61,16 @@ export const getShopReparations = dataFetcher({
 
 export const saveModelReparations = createFormModule({
   guid: "saveModelReparations",
-  async init(id) {
+  async init(data) {
     const shopId = currentUser.selector(store.ref.getState())?.result
       .account_id;
     const fetchedData = await privateApi.get(
-      `${API_PATH.GETSHOPREPAIRATION}/?shop=${shopId}&device=1&model=34&brand=2`
+      `${API_PATH.GETSHOPREPAIRATION}/?shop=${shopId}&device=${data.deviceId}&model=${data.modelId}&brand=${data.brandId}`
     );
     return fetchedData;
   },
   submit(data) {
+    console.log("DT CHECK", data);
     const shopId = currentUser.selector(store.ref.getState())?.result
       ?.account_id;
     const promise = privateApi.put(`${API_PATH.SHOPGUARANTEE}/`, {
@@ -89,6 +90,7 @@ export const saveModelReparations = createFormModule({
 export const saveSelectedModels = dataFetcher({
   selectors: [],
   async fetchData(payload) {
+    console.log("PYLD", payload);
     const shopId = currentUser.selector(store.ref.getState())?.result
       ?.account_id;
     const data = await privateApi.post(`${API_PATH.GUARANTEEMODELS}/`, {

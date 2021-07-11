@@ -38,14 +38,12 @@ export const AdditionalInfo = ({ shopData }) => {
     shopManagementAdditionalForm.actions.initialize(user.account_id);
     const fetchedBrands = await getBrands.fetch();
     setReparations(await getReparations.fetch());
-    console.log(fetchedBrands);
     setBrands(fetchedBrands);
   }, []);
 
   if (!shopData) {
     return <div>DATA MISSING</div>;
   }
-  console.log(shopData);
 
   return (
     <>
