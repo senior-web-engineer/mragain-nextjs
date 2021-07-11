@@ -5,6 +5,7 @@ import {
   shopInfoFetcher,
   getDevices,
   shopManagementAdditionalForm,
+  shopManagementGeneralInfo,
 } from "@/service/shop-management/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
 import { Tabs, Row, Col } from "antd";
@@ -23,11 +24,13 @@ export default function ShopManagementPage({ auth_user }) {
 
   const [activeTab, setActiveTab] = useState("profile-settings");
   const [shopInfo, setShopInfo] = useState();
+  const [shopData, setShopData] = useState();
 
   useEffect(() => {
     async function loadData() {
       const user = await currentUser.fetch();
       const shopInfo = await shopInfoFetcher.fetch();
+      setShopData(await shopManagementGeneralInfo.fetch());
       console.log("INFO", shopInfo);
       if (shopInfo) {
         setShopInfo(shopInfo[0]);
@@ -64,17 +67,17 @@ export default function ShopManagementPage({ auth_user }) {
       <Tabs defaultActiveKey={activeTab} onChange={onTabChange}>
         <TabPane tab="Profile Settings" key="profile-settings">
           <>
-            <ImageSection shopInfo={shopInfo} />
+            <ImageSection shopData={shopData} />
 
             <Row>
               <Col span={4}></Col>
               <Col span={20}>
                 <BoxWrapper>
-                  <GeneralInfo shopInfo={shopInfo} />
+                  <GeneralInfo shopData={shopData} />
                 </BoxWrapper>
 
                 <BoxWrapper padding>
-                  <AdditionalInfo shopInfo={shopInfo} />
+                  <AdditionalInfo shopData={shopInfo} />
                 </BoxWrapper>
               </Col>
             </Row>

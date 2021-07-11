@@ -3,6 +3,7 @@ import { API_PATH } from "@/constants";
 import dataFetcher from "@/modules/dataFetcher";
 import api, { privateApi } from "@/utils/api";
 import { createFormModule } from "@/modules/forms";
+import { notification } from "antd";
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],
@@ -42,12 +43,13 @@ export const basicSettingsForm = createFormModule({
       status_app_email: fetchedData.status_app_email || false,
       street: fetchedData.street || "",
       zipcode: fetchedData.zipcode || "",
+      intervals: fetchedData.intervals || 30,
     };
   },
   submit(data) {
     const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
     const auth = currentUser.selector(store.ref.getState())?.result?.id;
-    const promise = privateApi.post(`${API_PATH.ACCOUNTSETTING}/`, {
+    const promise = privateApi.put(`${API_PATH.ACCOUNTSETTING}/${auth}/`, {
       address: data.address,
       allow_appointment: data.allow_appointment,
       city: data.city,
@@ -67,11 +69,14 @@ export const basicSettingsForm = createFormModule({
       status_app_email: data.status_app_email,
       street: data.street,
       zipcode: data.zipcode,
+      intervals: data.intervals,
+      ///// non existing form fields
+      double_appointment: true,
+      /////
       shop,
       auth,
     });
 
-    createAppointmentFormModal.actions.close();
     notification.success({
       message: "General info saved successfully",
     });
@@ -99,7 +104,6 @@ export const changePasswordForm = createFormModule({
       shop,
     });
 
-    createAppointmentFormModal.actions.close();
     notification.success({
       message: "Password updated successfully",
     });

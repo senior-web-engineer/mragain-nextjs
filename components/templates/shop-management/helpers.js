@@ -7,6 +7,18 @@ import GamingConsoles from "@/assets/icons/headphones.svg";
 import Computers from "@/assets/icons/computer.svg";
 import SoundSystems from "@/assets/icons/headphones.svg";
 import Earphones from "@/assets/icons/computer.svg";
+// PAYMENT METHODS
+import Mastercard from "@/assets/icons/Method-Mastercard.svg";
+import PayPal from "@/assets/icons/Method-PayPal.svg";
+import Stripe from "@/assets/icons/Method-Stripe.svg";
+import Visa from "@/assets/icons/Method-Visa.svg";
+import Amex from "@/assets/icons/Method-Amex.svg";
+import Image from "next/image";
+import styled from "styled-components";
+
+const PaymentImageWrapper = styled.span`
+  margin-right: 10px;
+`;
 
 export const additionalInfoOptions = {
   devices: [
@@ -82,4 +94,40 @@ export const additionalInfoOptions = {
       label: "Sony",
     },
   ],
+};
+
+export const paymentMethods = (method) => {
+  let image;
+  switch (method.trim().toLocaleLowerCase()) {
+    case "cash":
+      return (
+        <PaymentImageWrapper>
+          <Image width="34" height="24" src={Mastercard} />
+        </PaymentImageWrapper>
+      );
+    case "pin":
+      return (
+        <PaymentImageWrapper>
+          <Image width="34" height="24" src={PayPal} />
+        </PaymentImageWrapper>
+      );
+    case "stripe":
+      return (
+        <PaymentImageWrapper>
+          <Image width="34" height="24" src={Stripe} />
+        </PaymentImageWrapper>
+      );
+    case "visa":
+      return (
+        <PaymentImageWrapper>
+          <Image width="34" height="24" src={Visa} />
+        </PaymentImageWrapper>
+      );
+    case "amex":
+      return (
+        <PaymentImageWrapper>
+          <Image width="34" height="24" src={Amex} />
+        </PaymentImageWrapper>
+      );
+  }
 };

@@ -17,19 +17,19 @@ import GooglePlaces from "@/components/common/GooglePlaces";
 const DURATION_OPTIONS = [
   {
     label: "30 minutes",
-    value: "30minutes",
+    value: 30,
   },
   {
     label: "60 minutes",
-    value: "60minutes",
+    value: 60,
   },
   {
     label: "90 minutes",
-    value: "90minutes",
+    value: 90,
   },
   {
     label: "1 day",
-    value: "1day",
+    value: 1,
   },
 ];
 
@@ -59,7 +59,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                   <Field
                     adminInput
                     name="address"
-                    as={Input}
+                    as={GooglePlaces}
                     label="Address"
                     customLabel
                     size="large"
@@ -118,14 +118,10 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                     <Field
                       adminInput
                       name="country"
-                      as={Select}
+                      as={GooglePlaces}
                       placeholder="State"
                       label="Select State"
                       size="large"
-                      options={[
-                        { label: "Test2", value: "test2" },
-                        { label: "Test", value: "test" },
-                      ]}
                     />
                   </Col>
                   <Col span={6}>
@@ -144,8 +140,9 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                 <Col span={8}>
                   <Field
                     adminInput
-                    name="allow_appointment"
+                    name="intervals"
                     as={Select}
+                    defaultValue={basicSettingsForm.state.values.intervals}
                     label="Appointment Blocking"
                     size="large"
                     options={DURATION_OPTIONS}
@@ -154,14 +151,14 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                 </Col>
               </Row>
             </BoxWrapperContent>
+            <Divider />
+            <ButtonsWrapper>
+              <div />
+              <Button size="large" type="primary" htmlType="submit">
+                Save Changes
+              </Button>
+            </ButtonsWrapper>
           </Form>
-          <Divider />
-          <ButtonsWrapper>
-            <div />
-            <Button size="large" type="primary" htmlType="submit">
-              Save
-            </Button>
-          </ButtonsWrapper>
         </Col>
       </RowWrapper>
     </BoxWrapper>

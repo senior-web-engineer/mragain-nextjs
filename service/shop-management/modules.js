@@ -3,6 +3,7 @@ import { API_PATH } from "@/constants";
 import dataFetcher from "@/modules/dataFetcher";
 import api, { privateApi } from "@/utils/api";
 import { createFormModule } from "@/modules/forms";
+import { createListModule } from "@/modules/list";
 import { notification } from "antd";
 
 export const currentUser = dataFetcher({
@@ -26,6 +27,16 @@ export const getBrands = dataFetcher({
   },
 });
 
+export const getReparations = dataFetcher({
+  selectors: [""],
+  fetchData() {
+    return privateApi.get(`${API_PATH.GETREPARATIONS}/`, {
+      device: 2,
+      model: 2,
+    });
+  },
+});
+
 export const shopInfoFetcher = dataFetcher({
   selectors: [],
   async fetchData() {
@@ -37,23 +48,37 @@ export const shopInfoFetcher = dataFetcher({
   },
 });
 
+export const shopManagementGeneralInfo = dataFetcher({
+  selectors: [],
+  async fetchData() {
+    const id = currentUser.selector(store.ref.getState())?.result?.id;
+    const data = await privateApi.get(`${API_PATH.ACCOUNTSETTING}/${id}`);
+    console.log("DT", data);
+    return data;
+  },
+});
+
 export const shopManagementGeneralForm = createFormModule({
   guid: "saveGeneralInfo",
   async init() {
+    const id = currentUser.selector(store.ref.getState())?.result?.id;
+    const fetchedData = await privateApi.get(
+      `${API_PATH.ACCOUNTSETTING}/${id}`
+    );
     return {
-      about: "",
-      phone: "",
-      webSite: "",
-      address: "",
+      about_us: fetchedData.about_us || "",
+      phone_number: fetchedData.phone_number || "",
+      site_url: fetchedData.site_url || "",
+      street: fetchedData.street || "",
     };
   },
   submit(data) {
     const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
     const promise = privateApi.post(`${API_PATH.CREATEAPPOINTMENTMANUALLY}/`, {
-      about: data.about,
-      phone: data.phone,
-      website: data.website,
-      address: data.address,
+      about_us: data.about_us,
+      phone_number: data.phone_number,
+      site_url: data.site_url,
+      street: data.street,
       shop,
     });
 

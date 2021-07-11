@@ -68,6 +68,8 @@ export const CoverWrapper = styled.div`
   height: 210px;
   border-radius: 10px;
   overflow: hidden;
+  display: flex;
+  align-items: center;
 
   button {
     position: absolute;
@@ -77,12 +79,12 @@ export const CoverWrapper = styled.div`
 `;
 
 export const ProfileWrapper = styled.div`
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   border-radius: 10px;
   position: absolute;
   top: 170px;
-  left: 40px;
+  left: 60px;
   overflow: hidden;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   z-index: 10;
@@ -91,9 +93,9 @@ export const ProfileWrapper = styled.div`
 export const ProfileButtonWrapper = styled.div`
   button {
     position: absolute;
-    width: 120px;
-    top: 310px;
-    left: 40px;
+    width: 140px;
+    top: 330px;
+    left: 60px;
     z-index: 10;
   }
 `;

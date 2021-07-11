@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Row, Col, Divider, Switch, Tag } from "antd";
 import { SwitchGroup } from "@/components/common/SwitchGroup";
 import { MultiSelect } from "@/components/common/MultiSelect";
-import { additionalInfoOptions } from "./helpers";
+import { additionalInfoOptions, paymentMethods } from "./helpers";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
 import Image from "next/image";
@@ -10,6 +10,7 @@ import {
   currentUser,
   shopManagementAdditionalForm,
   getBrands,
+  getReparations,
 } from "@/service/shop-management/modules";
 
 import { HeaderSmallText, rowStyle } from "./styles";
@@ -27,22 +28,24 @@ const renderDevicesList = (devices) => (
   </Row>
 );
 
-export const AdditionalInfo = ({ shopInfo }) => {
+export const AdditionalInfo = ({ shopData }) => {
   const [editing, setEditing] = useState(false);
   const [brands, setBrands] = useState([]);
+  const [reparations, setReparations] = useState([]);
 
   useEffect(async () => {
     const user = await currentUser.fetch();
     shopManagementAdditionalForm.actions.initialize(user.account_id);
     const fetchedBrands = await getBrands.fetch();
+    setReparations(await getReparations.fetch());
     console.log(fetchedBrands);
     setBrands(fetchedBrands);
   }, []);
 
-  if (!shopInfo) {
+  if (!shopData) {
     return <div>DATA MISSING</div>;
   }
-  console.log(shopInfo);
+  console.log(shopData);
 
   return (
     <>
@@ -84,7 +87,7 @@ export const AdditionalInfo = ({ shopInfo }) => {
               <div>
                 {additionalInfoOptions.devices
                   .filter((device) =>
-                    shopInfo?.replacementDevices.includes(device.id)
+                    shopData?.replacementDevices.includes(device.id)
                   )
                   .map((device) => (
                     <Image width="60px" height="60px" src={device.icon} />
@@ -109,7 +112,7 @@ export const AdditionalInfo = ({ shopInfo }) => {
             ) : (
               <div>
                 {brands
-                  .filter((brand) => shopInfo?.cateredBrand.includes(brand.id))
+                  .filter((brand) => shopData?.cateredBrand.includes(brand.id))
                   .map((brand) => (
                     <Tag color="green">{brand.brand_name}</Tag>
                   ))}
@@ -123,7 +126,11 @@ export const AdditionalInfo = ({ shopInfo }) => {
             <p>Payment Methods</p>
           </Col>
           <Col span={18}>
-            <div>{shopInfo?.paymentMethod}</div>
+            <div>
+              {shopData?.paymentMethod
+                .split(",")
+                .map((method) => paymentMethods(method))}
+            </div>
           </Col>
         </Row>
 
@@ -177,11 +184,22 @@ export const AdditionalInfo = ({ shopInfo }) => {
               <Field
                 adminInput
                 as={MultiSelect}
-                name="storePurchases"
-                options={additionalInfoOptions.brands}
+                name="ShopPurchase"
+                options={reparations.map((reparation) => ({
+                  label: reparation.reparation_name,
+                  value: reparation.id,
+                }))}
               />
             ) : (
-              "STORE PURCHASE LIST"
+              <div>
+                {reparations
+                  .filter((shopPurchase) =>
+                    shopData?.ShopPurchase.includes(shopPurchase.id)
+                  )
+                  .map((shopPurchase) => (
+                    <Tag color="green">{shopPurchase.reparation_name}</Tag>
+                  ))}
+              </div>
             )}
           </Col>
         </Row>

@@ -16,6 +16,7 @@ import Phone from "@/assets/icons/phone.svg";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
 import { shopManagementGeneralForm } from "@/service/shop-management/modules";
+import GooglePlaces from "@/components/common/GooglePlaces";
 
 const ADVANTAGES = [
   {
@@ -55,11 +56,11 @@ function renderAdvantage(advantage, index) {
   );
 }
 
-export const GeneralInfo = ({ shopInfo }) => {
+export const GeneralInfo = ({ shopData }) => {
   const [editing, setEditing] = useState(false);
 
-  useEffect(() => {
-    shopManagementGeneralForm.actions.initialize();
+  useEffect(async () => {
+    await shopManagementGeneralForm.actions.initialize();
   }, []);
 
   const onSave = () => {
@@ -85,7 +86,7 @@ export const GeneralInfo = ({ shopInfo }) => {
                   as={Input}
                   customLabel
                   textarea
-                  name="about"
+                  name="about_us"
                   label="About"
                 />
               </Col>
@@ -102,21 +103,21 @@ export const GeneralInfo = ({ shopInfo }) => {
                   adminInput
                   as={Input}
                   customLabel
-                  name="phone"
+                  name="phone_number"
                   label="Phone"
                 />
                 <Field
                   adminInput
                   as={Input}
                   customLabel
-                  name="webSite"
+                  name="site_url"
                   label="Web Site"
                 />
                 <Field
                   adminInput
-                  as={Input}
+                  as={GooglePlaces}
                   customLabel
-                  name="address"
+                  name="street"
                   label="Address"
                 />
               </Col>
@@ -145,7 +146,7 @@ export const GeneralInfo = ({ shopInfo }) => {
           <PaddingWrapper>
             <Row type="flex" justify="space-between" align="middle">
               <Col>
-                <HeaderText>Shop Name</HeaderText>
+                <HeaderText>{shopData?.name}</HeaderText>
               </Col>
               <Col>
                 <Button
@@ -159,21 +160,20 @@ export const GeneralInfo = ({ shopInfo }) => {
             </Row>
             <Row>
               <div>
-                <Rate disabled allowHalf defaultValue={3.5} />
-                <span>{"27 reviews"}</span>
+                <Rate disabled allowHalf value={Math.ceil(shopData?.mark)} />
               </div>
               <ContactInfo>
                 <span>
-                  <Image width="24px" height="24px" src={Phone} /> (+41) 1478
-                  5296 32
+                  <Image width="24px" height="24px" src={Phone} />
+                  {shopData?.phone_number}
                 </span>
                 <span>
-                  <Image width="24px" height="24px" src={Link} />{" "}
-                  www.fixandmatch.com
+                  <Image width="24px" height="24px" src={Link} />
+                  {shopData?.site_url}
                 </span>
                 <span>
-                  <Image width="24px" height="24px" src={MapMarker} />{" "}
-                  Bankastraat 55 C, Amsterdam
+                  <Image width="24px" height="24px" src={MapMarker} />
+                  {shopData?.street}
                 </span>
               </ContactInfo>
             </Row>
