@@ -60,7 +60,7 @@ const columns = (onChange) => [
     render(active, record, index) {
       return (
         <Switch
-          defaultValue={active}
+          defaultChecked={active}
           onChange={() => onChange("active", active, index)}
         />
       );

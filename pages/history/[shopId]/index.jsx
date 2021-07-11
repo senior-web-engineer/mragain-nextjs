@@ -1,10 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   currentUser,
-  historyFetcher,
   reparationsList,
-  appointmentForm,
   viewRecordModal,
 } from "@/service/history/modules";
 import { devicesFetcher } from "@/components/dashboard/modules";
@@ -18,11 +16,29 @@ import {
   Table,
   Input as AntdInput,
 } from "antd";
-import { useRouter } from "next/router";
 import { ViewRecord } from "@/components/templates/history/ViewRecord";
 import Highlighter from "react-highlight-words";
+import styled from "styled-components";
 
-const columns = (viewDetails, getColumnSearchProps) => [
+const StyledTable = styled(Table)`
+  .ant-table-head {
+    background: #fafafa;
+  }
+  .ant-table-thead > tr > th {
+    font-size: 12px;
+    color: #909090;
+    font-weight: 400;
+    border-bottom: 0;
+  }
+
+  .ant-table-tbody {
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+  }
+`;
+
+const columns = (viewDetails, search) => [
   {
     width: "120px",
     title: "Date",
@@ -45,16 +61,26 @@ const columns = (viewDetails, getColumnSearchProps) => [
   {
     title: "IMEI Number",
     dataIndex: "serialnumber",
-    ...getColumnSearchProps("serialnumber"),
+    width: 180,
     sorter: (a, b) => a.serialnumber - b.serialnumber,
+    render: (serialNumber) => (
+      <Highlighter
+        highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+        searchWords={[search]}
+        autoEscape
+        textToHighlight={serialNumber ? serialNumber.toString() : ""}
+      />
+    ),
   },
   {
     title: "Price",
     dataIndex: "price",
+    width: 150,
     sorter: (a, b) => +a.price - +b.price,
   },
   {
     title: "Warranty",
+    width: 150,
     render(data) {
       return `${data?.guarantee} months`;
     },
@@ -74,13 +100,9 @@ const columns = (viewDetails, getColumnSearchProps) => [
 ];
 
 export default function HistoryPage({ auth_user }) {
-  const router = useRouter();
-  const searchInput = useRef(null);
-  const { shopId, tab } = router.query;
   const [loading, setLoading] = useState(false);
   const [historyItems, setHistoryItems] = useState([]);
   const [search, setSearch] = useState("");
-  const [searchedColumn, setSearchedColumn] = useState("");
   const [selectedItem, setSelectedItem] = useState();
 
   useEffect(() => {
@@ -103,86 +125,12 @@ export default function HistoryPage({ auth_user }) {
 
   const handleOnRowsSelected = (keys, items) => console.log(keys, items);
 
-  const handleTableChange = async (pagination, filters, sorter) => {
-    console.log(pagination, filters, sorter);
-    setLoading(true);
-    await reparationsList.actions.initialize();
-    setLoading(false);
-  };
-
   const viewDetails = (data) => {
     console.log(data);
     setSelectedItem(data);
     viewRecordModal.actions.open();
     devicesFetcher.fetch();
   };
-
-  const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    setSearch(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  };
-
-  const handleReset = (clearFilters) => {
-    clearFilters();
-    setSearch("");
-  };
-
-  const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
-      <div style={{ padding: 8 }}>
-        <AntdInput
-          ref={searchInput}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
-          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{ width: 188, marginBottom: 8, display: "block" }}
-        />
-        <Button
-          type="primary"
-          onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          icon="search"
-          size="small"
-          style={{ width: 90, marginRight: 8 }}
-        >
-          Search
-        </Button>
-        <Button
-          onClick={() => handleReset(clearFilters)}
-          size="small"
-          style={{ width: 90 }}
-        >
-          Reset
-        </Button>
-      </div>
-    ),
-    filterIcon: (filtered) => (
-      <Icon type="search" style={{ color: filtered ? "#1890ff" : undefined }} />
-    ),
-    onFilter: (value, record) =>
-      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-    onFilterDropdownVisibleChange: (visible) => {
-      if (visible) {
-        setTimeout(() => searchInput.select());
-      }
-    },
-    render: (text) => (
-      <Highlighter
-        highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-        searchWords={[search]}
-        autoEscape
-        textToHighlight={text.toString()}
-      />
-    ),
-  });
 
   return (
     <DefaultLayout>
@@ -206,15 +154,14 @@ export default function HistoryPage({ auth_user }) {
         <Col></Col>
       </Row>
       <Divider />
-      <Table
+      <StyledTable
         loading={loading}
         dataSource={historyItems.filter((data) =>
           data.serialnumber.includes(search)
         )}
-        columns={columns(viewDetails, getColumnSearchProps)}
+        columns={columns(viewDetails, search)}
         onRowsSelected={handleOnRowsSelected}
         selection
-        // onChange={handleTableChange}
         pagination
       />
       <ViewRecord data={selectedItem} viewRecordModal={viewRecordModal} />
