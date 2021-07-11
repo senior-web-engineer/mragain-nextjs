@@ -705,7 +705,7 @@ const ShopDashboard = (routerProps) => {
                                   >
                                     Bewerk reparatie
                                   </Button>
-				    {el.status === -1 && (
+				   {/*{el.status === -1 && (
                                     <Popconfirm
                                       title="Weet je zeker dat je de afspraak wilt annuleren?"
                                       onConfirm={() => {
@@ -720,7 +720,7 @@ const ShopDashboard = (routerProps) => {
                                         Annuleer afspraak
                                       </Button>
                                     </Popconfirm>
-                                  )}
+                                  )}*/}
                                 </td>
                               </tr>
                             );
