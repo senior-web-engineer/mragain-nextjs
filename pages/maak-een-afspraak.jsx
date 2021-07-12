@@ -1234,7 +1234,7 @@ const ShopAppointment = (routerProps) => {
                             <p>De afspraak is gemaakt</p>
                             <p>
                               Bedankt voor het maken van een afspraak. We hebben
-                              je een bevestiging email gestuurd.
+                              je een bevestigingsemail gestuurd.
                             </p>
                           </Fragment>
                         )}

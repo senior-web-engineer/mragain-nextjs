@@ -34,6 +34,7 @@ import ConfirmationModal from "@/components/common/modals/ConfirmationModal";
 import { continueWitoutServiceModal } from "@/components/shop-profile/modules";
 import { SubTitle } from "@/components/styled/text";
 import Image from "next/image";
+import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
   loading: Loader,
@@ -262,8 +263,7 @@ function MobileServiceItem({ item }) {
       <ServiceMobileItemWrap.FirstColumn>
         {firstColumn}
         <d-def>
-          {item.guarantee_time} maanden garantie <br />~ {item.reparation_time}{" "}
-          reparatie tijd
+          {item.guarantee_time} maanden garantie
         </d-def>
       </ServiceMobileItemWrap.FirstColumn>
       <price>
@@ -298,24 +298,7 @@ const MobileDeviceSelector = createSelectComponent({
   parseOptions(items = []) {
     return parseOptions(items || [], "device_name");
   },
-  Component({ options, ...rest }) {
-    const menuData = options.map((option) => (
-      <Radio.Button key={option.value} value={option.value}>
-        {option.label}
-      </Radio.Button>
-    ));
-
-    return (
-      <Field as={Radio.Group} {...rest}>
-        <Menu
-          alignCenter={false}
-          data={menuData}
-          selected={rest.value}
-          hideArrows={true}
-        />
-      </Field>
-    );
-  },
+  Component: MobileRadioButtons,
 });
 
 const MobileDeviceSelectorWrap = styled.div`
@@ -421,11 +404,11 @@ function AppointmentButton() {
               ev.preventDefault();
               continueWitoutServiceModal.actions
                 .open({
-                  type: "warning",
-                  message: "Wil je een algemene diagnose afspraak maken?",
+                  type: "success",
+                  message: "Algemene afspraak",
                   description:
-                    "Selecteer een reparatie zodat de reparateur weet waarvoor je komt. Staat je reparatie er niet tussen, of weet je niet wat er aan de hand is? Ga dan door en maak een diagnose afspraak.",
-                  buttonLabel: "Ja",
+                    "We maken een algemene afspraak voor je, de reparateur kan contact met je opnemen zodat hij weet waarvoor je komt.",
+                  buttonLabel: "Prima!",
                 })
                 .then(() => {
                   router.push(nextLocation);
@@ -466,10 +449,9 @@ export default function ShopServices({ shop }) {
   useEffect(() => {
     async function main() {
       await filtersFormModule.actions.initialize(shop.id);
-      shopServicesListModule.actions.initialize();
       nextSlotFetcher.key(`${shop.id}`).fetch();
       serviceFormModule.actions.initialize();
-      deviceFetcher.fetch();
+      const devices = await deviceFetcher.fetch();
       const formValues = filtersFormModule.state.values;
       if (formValues.device) {
         brandFetcher.key(formValues.device).fetch();
@@ -477,6 +459,27 @@ export default function ShopServices({ shop }) {
       if (formValues.brand) {
         modelFetcher.key(formValues.brand).fetch();
       }
+
+      if (formValues.device === '0' && devices.length > 0) {
+        filtersFormModule.actions.batchChange({
+          updates: {
+            device: `${devices[0].id}`,
+          },
+        });
+        const brands = await brandFetcher.key(`${devices[0].id}`).fetch();
+        const models = await modelFetcher.key(`${brands[0].id}`).fetch();
+        const updates = {
+          device: devices.length > 0 ? `${devices[0].id}` : `0`,
+          brand: brands.length > 0 ? `${brands[0].id}` : `0`,
+          model: models.length > 0 ? `${models[0].id}` : `0`,
+        }
+
+        filtersFormModule.actions.batchChange({
+          updates,
+        });
+      }
+
+      shopServicesListModule.actions.initialize();
     }
 
     main();
@@ -520,7 +523,7 @@ export default function ShopServices({ shop }) {
         <Form module={filtersFormModule}>
           <OnMobile only>
             <MobileDeviceSelectorWrap>
-              <MobileDeviceSelector name="device" onChange={onDeviceChange} />
+              <Field as={MobileDeviceSelector} name="device" onChange={onDeviceChange} />
             </MobileDeviceSelectorWrap>
           </OnMobile>
           <ModelFields>
@@ -581,7 +584,7 @@ export default function ShopServices({ shop }) {
         <OnMobile show={false}>{apointmentButton}</OnMobile>
         <OnMobile only>
           <MobileToolbar>
-            <NextSlot id={shop.id} />
+	  {/*<NextSlot id={shop.id} />*/}
             {apointmentButton}
           </MobileToolbar>
         </OnMobile>

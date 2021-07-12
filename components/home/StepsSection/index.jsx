@@ -88,8 +88,8 @@ const STEPS = [
     image: "/images/appointment.png",
   },
   {
-    title: "Garantie",
-    description: `Na je reparatie sturen we een garantiebewijs per mail`,
+    title: "Cashback",
+    description: `Laat een review achter en ontvang 5 euro cashback`,
     image: "/images/guarantee.png",
   },
 ];

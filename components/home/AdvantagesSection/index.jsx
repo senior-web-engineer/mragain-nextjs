@@ -18,9 +18,9 @@ import { H2, SubTitle } from "@/components/styled/text";
 const ADVANTAGES = [
   {
     icon: faClock,
-    title: "Snelheid & Gemak",
-    1: "Altijd direct geholpen doordat de reparateur weet dat je komt",
-    2: "Snellere reparatie doordat de reparateur weet met welk toestel je komt",
+    title: "Korting & snelheid",
+    1: "5 euro cashback als je een review achterlaat",
+    2: "Direct geholpen doordat de reparateur weet dat je komt",
   },
   {
     icon: faReceipt,
