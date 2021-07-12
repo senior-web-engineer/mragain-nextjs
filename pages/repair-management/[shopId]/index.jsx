@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { currentUser } from "@/service/repair-management/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
-import { Tabs, Row, Col, Button } from "antd";
+import { Tabs, Row, Col } from "antd";
 import { useRouter } from "next/router";
 const { TabPane } = Tabs;
 import { ModelTransfer } from "@/components/templates/repair-management/ModelTransfer";
@@ -10,18 +10,15 @@ import { EditModal } from "@/components/templates/repair-management/EditModal";
 import {
   editRepairModelModal,
   getRepairBrandModel,
-  getShopReparations,
   getRepairDevices,
   getAllModels,
   saveSelectedModels,
   saveModelReparations,
 } from "@/service/repair-management/modules";
-import { find, uniqBy, filter } from "lodash";
-import id from "date-fns/esm/locale/id/index.js";
+import { uniqBy, filter } from "lodash";
 
-export default function RepairManagementPage({ auth_user }) {
+export default function RepairManagementPage() {
   const router = useRouter();
-  const { shopId } = router.query;
   const [targetKeys, setTargetKeys] = useState([]);
   const [devices, setDevices] = useState([]);
   const [models, setModels] = useState([]);
@@ -75,14 +72,6 @@ export default function RepairManagementPage({ auth_user }) {
       setModels(mappedModels.filter((model) => model !== undefined));
       setTargetKeys(selectedModels);
       setSelectedModels(filter(models, ["brand_id", firstModel.id]));
-
-      // const reparationModels = await getShopReparations.fetch();
-      // setShopReparations(
-      //   reparationModels.map((reparationModel) => ({
-      //     ...reparationModel,
-      //     key: reparationModel.id.toString(),
-      //   }))
-      // );
 
       setTimeout(() => {
         setSelectedBrand(firstModel);
