@@ -266,7 +266,7 @@ export default function ModelPage({ data, reparations }) {
       </WhiteBackground>
       <ServicesSection>
         <MaxConstraints>
-          <SubTitle>ALLE {data.brand.brand_name}{data.model_name} REPARATIES</SubTitle>
+          <SubTitle>ALLE {data.brand.brand_name} {data.model_name} REPARATIES</SubTitle>
           <Form module={appointmentFormModule}>
             <Field name="service" as={RadioGroup}>
               {reparations.map(renderReparation)}
