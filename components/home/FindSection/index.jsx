@@ -153,7 +153,7 @@ function SearchButton() {
 
   return (
     <Link
-      href={`/search-results?zip=${zip}&device=${device}&long=${currentLocation.long}&lat=${currentLocation.lat}`}
+      href={`/search-results?zip=${zip}&device=${device}&long=${currentLocation.long}&lat=${currentLocation.lat}&distance=20`}
     >
       <Button aria-label="Zoek" as="a">
         <span>Zoek</span>
