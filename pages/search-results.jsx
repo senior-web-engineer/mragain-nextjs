@@ -52,7 +52,8 @@ import Modal from "@/modules/modal";
 import { useRouter } from "next/router";
 import GooglePlaces, { loadScript } from "@/components/common/GooglePlaces";
 import moment from "moment";
-
+import Head from 'next/head'
+import { FRONT_END_URL } from '../constants.js'
 import { getShopLogo, getShopRoute } from "@/utils/shop";
 import Link from "next/link";
 import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
