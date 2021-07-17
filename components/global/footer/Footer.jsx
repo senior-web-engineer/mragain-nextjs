@@ -312,6 +312,7 @@ const FooterView = (routerProps) => {
 	          Laptop reparatie
 	        </Link>
 	        </li>
+	       </ul>
 	      </FooterSitemap>
           </FooterLinkArea>{" "}
            <FooterLinkArea className="footer-link-area">
