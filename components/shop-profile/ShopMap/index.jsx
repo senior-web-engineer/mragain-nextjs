@@ -298,62 +298,62 @@ export function Reviews({ shop }) {
 
     const optionsCount = options?.length || 0;
 
-    if (checkIfScoresExist(scores, REVIEW_MARKS)) {
-        return (
-            <NoReview>
-                <strong>
-                    This shop does not have reviews yet, be the first and get 10
-                    euro cashback
-                </strong>
-            </NoReview>
-        );
-    }
-
     return (
         <ReviewsWrap>
             <SubTitle as="h2">Reviews {shop?.name}</SubTitle>
-            <ReviewWrap>
-                <strong>Gemiddelde rating</strong>
-                <div>
-                    <Rate
-                        disabled
-                        style={{ fontSize: "13px" }}
-                        value={scores.overall}
-                        onChange={null}
-                    />{" "}
-                    {formatNumber(scores.overall)}
-                </div>
-            </ReviewWrap>
-            {REVIEW_MARKS.map((key) => (
-                <ReviewWrap>
-                    {REVIEW_MARK_TO_LABEL[key]}
-                    <div>
-                        <Rate
-                            disabled
-                            style={{ fontSize: "13px" }}
-                            value={scores[key]}
-                            onChange={null}
-                        />{" "}
-                        {formatNumber(scores[key])}
-                    </div>
-                </ReviewWrap>
-            ))}
-            <ReviewWrap>
-                <strong>Aanbevelingspercentage</strong>
-                <div>
-                    <Slider
-                        readOnly
-                        value={(recomandations / optionsCount) * 100}
-                    />{" "}
-                </div>
-            </ReviewWrap>
+            {!checkIfScoresExist(scores, REVIEW_MARKS) ? (
+                <NoReview>
+                    <strong>
+                        This shop does not have reviews yet, be the first and
+                        get 10 euro cashback
+                    </strong>
+                </NoReview>
+            ) : (
+                <>
+                    <ReviewWrap>
+                        <strong>Gemiddelde rating</strong>
+                        <div>
+                            <Rate
+                                disabled
+                                style={{ fontSize: "13px" }}
+                                value={scores.overall}
+                                onChange={null}
+                            />{" "}
+                            {formatNumber(scores.overall)}
+                        </div>
+                    </ReviewWrap>
+                    {REVIEW_MARKS.map((key) => (
+                        <ReviewWrap>
+                            {REVIEW_MARK_TO_LABEL[key]}
+                            <div>
+                                <Rate
+                                    disabled
+                                    style={{ fontSize: "13px" }}
+                                    value={scores[key]}
+                                    onChange={null}
+                                />{" "}
+                                {formatNumber(scores[key])}
+                            </div>
+                        </ReviewWrap>
+                    ))}
+                    <ReviewWrap>
+                        <strong>Aanbevelingspercentage</strong>
+                        <div>
+                            <Slider
+                                readOnly
+                                value={(recomandations / optionsCount) * 100}
+                            />{" "}
+                        </div>
+                    </ReviewWrap>
 
-            <Button
-                onClick={reviewsModal.actions.open}
-                aria-label="Meer reviews"
-            >
-                See reviews <FontAwesomeIcon icon={faArrowRight} />
-            </Button>
+                    <Button
+                        onClick={reviewsModal.actions.open}
+                        aria-label="Meer reviews"
+                    >
+                        See reviews <FontAwesomeIcon icon={faArrowRight} />
+                    </Button>
+                </>
+            )}
             <Modal
                 module={reviewsModal}
                 footer={null}
