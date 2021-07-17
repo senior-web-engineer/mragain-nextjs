@@ -72,6 +72,8 @@ const Login = () => {
     try {
       let res = await loginModule.actions.submit();
       let token = await res.key;
+      localStorage.setItem("auth-token", token)
+      console.log(token)
       axios
         .get(`${API_PATH.GETAUTHUSER}/`, tokenConfig1(token))
         .then((res) => {
@@ -88,7 +90,7 @@ const Login = () => {
       }
       if (error !== "") {
         notification.error({
-          message: "Bad Credentials, please try again",
+          message: "Bad Credentials, please try again ",
         });
       }
     }
