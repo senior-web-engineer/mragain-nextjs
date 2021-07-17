@@ -76,8 +76,18 @@ export const EditModal = ({ model, data, editRepairModelModal, onSave }) => {
     setItems(cloneDeep(data));
   }, [data]);
 
+  const onClose = () => {
+    console.log("onCLOSE");
+    setItems([]);
+  };
+
   return (
-    <Drawer width="1000px" module={editRepairModelModal}>
+    <Drawer
+      width="1000px"
+      module={editRepairModelModal}
+      destroyOnClose
+      onClose={onClose}
+    >
       <h2>Model information</h2>
       <Divider />
       <p>Device</p>
@@ -92,7 +102,7 @@ export const EditModal = ({ model, data, editRepairModelModal, onSave }) => {
       <Table
         bordered
         scroll={{ y: `calc(100vh - 420px)` }}
-        dataSource={items}
+        dataSource={cloneDeep(items)}
         columns={columns(items)}
         pagination={false}
       />

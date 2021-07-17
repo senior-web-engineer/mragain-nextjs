@@ -14,6 +14,7 @@ import {
   getAllModels,
   saveSelectedModels,
   saveModelReparations,
+  saveShopReparations,
 } from "@/service/repair-management/modules";
 import { uniqBy, filter } from "lodash";
 
@@ -103,7 +104,7 @@ export default function RepairManagementPage() {
     console.log("SITEM", item);
     setSelectedModel(item.model);
     setShopReparations(
-      await saveModelReparations.actions.initialize({
+      await saveModelReparations.fetch({
         deviceId: deviceId,
         brandId: item.brand_id,
         modelId: item.id,
@@ -114,7 +115,7 @@ export default function RepairManagementPage() {
 
   const onRepairModelSaved = (items) => {
     console.log("ABC", items);
-    saveModelReparations.actions.submit(items);
+    saveShopReparations(items);
   };
 
   const handleOnModelsSaved = (selectedDevice) => {
@@ -131,7 +132,7 @@ export default function RepairManagementPage() {
       device_id: selectedDevice,
     };
     console.log(payload);
-    saveSelectedModels.fetch(payload);
+    saveSelectedModels(payload);
   };
 
   return (
