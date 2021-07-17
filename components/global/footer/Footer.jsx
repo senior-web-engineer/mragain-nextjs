@@ -85,7 +85,7 @@ const FooterView = (routerProps) => {
               voor kunnen zorgen dat de levensduur van jouw device verlengd
               wordt. Van waterschade, vervangen van je scherm of ingewikkelde
               moederbord reparaties, er is altijd een telefoon reparateur die je
-              kan helpen met de reparatie van jouw telefoon.
+              kan helpen met jouw telefoon reparatie.
               <br />
               {/* <a href="#more">More..</a> */}
             </p>
@@ -260,7 +260,7 @@ const FooterView = (routerProps) => {
         <FooterViewContent>
           <FooterLinkArea className="footer-link-area">
             <FooterSitemap ClassName="custome-footer-sitename">
-              <FooterSitemapTitle>Apparaten</FooterSitemapTitle>
+              <FooterSitemapTitle>Zoek je device</FooterSitemapTitle>
               <ul>
                 <li>
                   <Link prefetch={false} href="/devices">
@@ -272,12 +272,12 @@ const FooterView = (routerProps) => {
                     Tablets
                   </Link>
                 </li>
-	{/*<li>
-                  <Link prefetch={false} href="/headphone-reparatie">
-                    Headphones
+	        <li>
+                  <Link prefetch={false} href="/devices">
+                    Laptops
                   </Link>
                 </li>
-                <li>
+	  {/*<li>
                   <Link prefetch={false} href="/tv-reparatie">
                     Televisies
                   </Link>
@@ -294,6 +294,25 @@ const FooterView = (routerProps) => {
                 </li>*/}
               </ul>
             </FooterSitemap>
+	      <FooterSitemap ClassName="custome-footer-sitename">
+	       <FooterSitemapTitle>Reparaties</FooterSitemapTitle>
+               <ul>
+	        <li>
+	          <Link prefetch={false} href="/devices">
+	          Telefoon reparatie
+	          </Link>
+	        </li>
+	        <li>
+	          <Link prefetch={false} href="/devices">
+	          Tablet reparatie
+	          </Link>
+	        </li>
+	        <li>
+	          <Link prefetch={false} href="/devices">
+	          Laptop reparatie
+	        </Link>
+	        </li>
+	      </FooterSitemap>
           </FooterLinkArea>{" "}
            <FooterLinkArea className="footer-link-area">
             <FooterSitemap ClassName="custome-footer-sitename">
