@@ -71,7 +71,7 @@ const TESTIMONIAL_DATA = [
     review: (
       <>
         {" "}
-    Top dat je makkelijk kan vergelijken tussen reparateurs die telefoon maken.  Ik kon nog dezelfde dag terecht en had mijn mobiel na 30 minuten weer terug, lekker!
+    Top dat je makkelijk kan vergelijken tussen reparateurs die je telefoon maken.  Ik kon nog dezelfde dag terecht en had mijn mobiel na 30 minuten weer terug, lekker!
       </>
     ),
   },
