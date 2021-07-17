@@ -32,7 +32,7 @@ import Loader from "@/components/common/Loader";
 import moment from "moment";
 import ConfirmationModal from "@/components/common/ConfirmationModal";
 import { continueWitoutServiceModal } from "@/components/shop-profile/modules";
-import { SubTitle } from "@/components/styled/text";
+import { SubTitle, SubTitleDescription } from "@/components/styled/text";
 import Image from "next/image";
 import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
 
@@ -120,11 +120,9 @@ const ReparationCell = styled.div`
 `;
 
 const NextStepWrap = styled.div`
-    ${media.tablet`
     margin: 20px -24px 0;
     padding: 15px 24px;
     border-top: 1px solid #ddd;
-  `}
 `;
 
 const MobileToolbar = styled.div`
@@ -340,6 +338,11 @@ const Panel = styled.div`
 
     ${SubTitle} {
         margin: 0 -24px;
+        padding: 15px 24px 0 24px;
+    }
+
+    ${SubTitleDescription} {
+        margin: 0 -24px;
         padding: 15px 24px;
         border-bottom: 1px solid #ddd;
     }
@@ -535,6 +538,10 @@ export default function ShopServices({ shop }) {
                     Selecteer je apparaat, merk en model & bekijk onze
                     reparaties
                 </SubTitle>
+                <SubTitleDescription>
+                    Can't find your model? Most likely we can help you anyway,
+                    make an appointment and we’ll check it out!
+                </SubTitleDescription>
                 <Form module={filtersFormModule}>
                     <OnMobile only>
                         <MobileDeviceSelectorWrap>
@@ -600,7 +607,7 @@ export default function ShopServices({ shop }) {
                         </OnMobile>
                     </Form>
                 </List>
-                <OnMobile show={false}>{apointmentButton}</OnMobile>
+                <OnMobile>{apointmentButton}</OnMobile>
                 <OnMobile only>
                     <MobileToolbar>
                         {/*<NextSlot id={shop.id} />*/}
