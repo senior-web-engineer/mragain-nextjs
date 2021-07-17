@@ -35,6 +35,7 @@ import { continueWitoutServiceModal } from "@/components/shop-profile/modules";
 import { SubTitle, SubTitleDescription } from "@/components/styled/text";
 import Image from "next/image";
 import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
+import { store } from "@/configureStore";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
     loading: Loader,
@@ -488,11 +489,7 @@ export default function ShopServices({ shop }) {
 
     const onDeviceChange = useCallback(async (ev) => {
         const value = parseNativeEvent(ev);
-        filtersFormModule.actions.batchChange({
-            updates: {
-                device: value,
-            },
-        });
+        console.log(value);
         const brands = await brandFetcher.key(value).fetch();
         filtersFormModule.actions.batchChange({
             updates: {
@@ -503,12 +500,10 @@ export default function ShopServices({ shop }) {
         const models = await modelFetcher.key(`${brands[0].id}`).fetch();
         filtersFormModule.actions.batchChange({
             updates: {
-                device: value,
-                brand: brands.length > 0 ? `${brands[0].id}` : `0`,
                 model: models.length > 0 ? `${models[0].id}` : `0`,
             },
         });
-        brandFetcher.key(`${value}`).fetch();
+        // brandFetcher.key(`${value}`).fetch();
     });
 
     const onBandChange = useCallback(async (value) => {
@@ -584,14 +579,28 @@ export default function ShopServices({ shop }) {
                     </ModelFields>
                     <SyncFormValues
                         onChange={(data) => {
-                            shopServicesListModule.actions.updateQuery(data);
-                            if (!serviceFormModule.state) {
-                                return;
+                            // TODO (V.T leave explanation)
+                            const models =
+                                modelFetcher
+                                    .key(data.brand)
+                                    .selector(store.ref.getState())?.result ||
+                                [];
+                            if (
+                                models.find(
+                                    (model) => +model.id === +data.model
+                                ) !== undefined
+                            ) {
+                                shopServicesListModule.actions.updateQuery(
+                                    data
+                                );
+                                if (!serviceFormModule.state) {
+                                    return;
+                                }
+                                serviceFormModule.actions.onFieldChange({
+                                    name: "service",
+                                    value: null,
+                                });
                             }
-                            serviceFormModule.actions.onFieldChange({
-                                name: "service",
-                                value: null,
-                            });
                         }}
                     />
                 </Form>
