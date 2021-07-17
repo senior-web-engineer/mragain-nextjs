@@ -213,7 +213,7 @@ export default function TestimonialSection() {
         <div>
           <StatsWrap>{STATS.map(renderStat)}</StatsWrap>
           <Button aria-label="Meer reviews">
-            {" "}
+            {"/reparatie"}
             <span>Meer reviews</span> <FontAwesomeIcon icon={faArrowRight} />
           </Button>
         </div>
