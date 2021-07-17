@@ -46,7 +46,7 @@ const STATS = [
     label: "Aantal apparaten",
   },
   {
-    count: "65",
+    count: "76",
     label: "Aangesloten reparateurs",
   },
   {
