@@ -52,7 +52,8 @@ import Modal from "@/modules/modal";
 import { useRouter } from "next/router";
 import GooglePlaces, { loadScript } from "@/components/common/GooglePlaces";
 import moment from "moment";
-
+import Head from 'next/head'
+import { FRONT_END_URL } from '../constants.js'
 import { getShopLogo, getShopRoute } from "@/utils/shop";
 import Link from "next/link";
 import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
@@ -1104,26 +1105,55 @@ export default function SearchResults() {
       value={{ selectedShop, updateSelectedShop, showMap }}
     >
       <DefaultLayout>
-        <MainWrap>
-          <MaxConstraints>
-            <Sidebar>
-              <SidebarInnerWrap>
-                <SidebarHeader>
-                  <SubTitle>
-                    Filter resultaten
-                    <List module={shopListModule}>
-                      <ResultCount />
-                    </List>
-                  </SubTitle>
-                  <Form module={filtersFormModule}>
-                    <ClearFilters />
-                  </Form>
-                </SidebarHeader>
-                <RefineSearchForm />
-              </SidebarInnerWrap>
-            </Sidebar>
-            <Content ref={mobileSelectorsRef}>
-              <Form module={filtersFormModule}>
+	  <Head>
+	  	<title>Zoek een telefoon reparateur | Mr Again</title>
+	            <meta
+	              name='Keywords'
+	              content='Zoek een telefoon reparateur, telefoon maken, telefoon reparateur, telefoon reparatie, scherm maken, Mr Again'
+	            />
+	            <meta
+	              name='description'
+	              content='Telefoon maken of telefoon reparatie? Bekijk de zoek resultaten bij MrAgain'
+	            />
+	            <link
+	              rel='canonical'
+	              href={FRONT_END_URL + '/search-results'}
+	            />
+	            {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
+	            <meta property='og:type' content='website' />
+	            <meta name='og_title' property='og:title' content='Zoek een telefoon reparateur' />
+	            <meta
+	              property='og:description'
+	              content='Zoek een telefoon reparateur'
+	            />
+	            <meta name='og:url' content={FRONT_END_URL} />
+	            <meta property='og:image' content='' />
+	            <meta
+	              name='og_site_name'
+	              property='og:site_name'
+	              content='Mr Again'
+	            />
+	  </Head>
+            <MainWrap>
+              <MaxConstraints>
+            	<Sidebar>
+                  <SidebarInnerWrap>
+                    <SidebarHeader>
+                      <SubTitle>
+                         Filter resultaten
+                          <List module={shopListModule}>
+                           <ResultCount />
+                         </List>
+                      </SubTitle>
+                         <Form module={filtersFormModule}>
+                           <ClearFilters />
+                         </Form>
+                    </SidebarHeader>
+                    <RefineSearchForm />
+                  </SidebarInnerWrap>
+                </Sidebar>
+                <Content ref={mobileSelectorsRef}>
+                <Form module={filtersFormModule}>
                 <ZipFields>
                   {locationField}
                   <hr />
