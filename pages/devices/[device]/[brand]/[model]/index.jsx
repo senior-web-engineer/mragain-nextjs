@@ -187,7 +187,7 @@ function MobileAppointmentButton({ searchUrlData }) {
   return (
     <OnMobile only>
       <MobileToolbar>
-        <Link href={`/search-results?${urlData}`}>
+        <Link href={`/zoek-een-reparateur?${urlData}`}>
           <Button disabled={!service} as="a">Bekijk reparateurs</Button>
         </Link>
       </MobileToolbar>
@@ -235,7 +235,7 @@ export default function ModelPage({ data, reparations }) {
               <price>&euro;{data?.price?.[0]}</price>
             </div>
           ) : null}
-          <Link href={`/search-results?${urlData}`}>
+          <Link href={`/zoek-een-reparateur?${urlData}`}>
             <Button as="a">
               <FontAwesomeIcon icon={faArrowRight} />
             </Button>

@@ -76,7 +76,7 @@ const Advantages = ({}) => {
               Verleng de levensduur
               <br />van jouw apparaat
             </Title>
-            <Link href="/search-results?zip=&device=0&long=0&lat=0">
+            <Link href="/zoek-een-reparateur?zip=&device=0&long=0&lat=0">
             <BookBtn>Vind een reparateur</BookBtn>
             </Link>
           </TitleArea>
