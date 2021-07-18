@@ -1117,7 +1117,7 @@ export default function SearchResults() {
 	            />
 	            <link
 	              rel='canonical'
-	              href={FRONT_END_URL + '/search-results'}
+	              href={FRONT_END_URL + '/zoek-een-reparateur'}
 	            />
 	            {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
 	            <meta property='og:type' content='website' />

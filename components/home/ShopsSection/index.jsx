@@ -240,7 +240,7 @@ export default function ShopsSection({ shopList = [] } = {}) {
           <filter-by hidden>Nieuw</filter-by>
         </div>
         <div>
-          <Link href="/search-results">
+          <Link href="/zoek-een-reparateur">
             <a className="view-all">
               Laad meer <FontAwesomeIcon icon={faArrowRight} />
             </a>
