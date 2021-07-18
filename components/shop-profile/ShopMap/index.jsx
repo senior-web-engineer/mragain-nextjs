@@ -34,14 +34,11 @@ const REVIEW_MARK_TO_LABEL = {
 };
 
 const NoReview = styled.div`
-    background-color: #fff;
     min-height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
-    padding: 40px;
-    margin: 20px 20px 40px 20px;
     font-size: 14px;
     border-radius: 15px;
 `;
@@ -301,7 +298,7 @@ export function Reviews({ shop }) {
     return (
         <ReviewsWrap>
             <SubTitle as="h2">Reviews {shop?.name}</SubTitle>
-            {!checkIfScoresExist(scores, REVIEW_MARKS) ? (
+            {checkIfScoresExist(scores, REVIEW_MARKS) ? (
                 <NoReview>
                     <strong>
                         This shop does not have reviews yet, be the first and
