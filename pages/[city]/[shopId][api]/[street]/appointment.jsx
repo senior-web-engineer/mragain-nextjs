@@ -321,7 +321,7 @@ export default function AppointmentPage({ shop }) {
             <MainWrap>
                 <MaxConstraints>
                     <OnMobile only>
-                        <BookingInfoMobile shop={shop} />
+                        <BookingInfoMobile shop={shop} step={step} />
                     </OnMobile>
                     <FormWrap>
                         <Steps currentStep={step} updateStep={updateStep} />
@@ -372,7 +372,11 @@ export default function AppointmentPage({ shop }) {
                         </OnMobile>
                     </FormWrap>
                     <OnMobile show={false}>
-                        <BookingInfo shop={shop} nextStep={onNext} />
+                        <BookingInfo
+                            shop={shop}
+                            step={step}
+                            nextStep={onNext}
+                        />
                     </OnMobile>
                     <ConfirmationModal module={appointmentConfirmation} />
                 </MaxConstraints>
