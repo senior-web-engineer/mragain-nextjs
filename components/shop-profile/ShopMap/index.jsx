@@ -345,7 +345,7 @@ export function Reviews({ shop }) {
                         onClick={reviewsModal.actions.open}
                         aria-label="Meer reviews"
                     >
-                        See reviews <FontAwesomeIcon icon={faArrowRight} />
+                        Bekijk reviews <FontAwesomeIcon icon={faArrowRight} />
                     </Button>
                 </>
             )}
