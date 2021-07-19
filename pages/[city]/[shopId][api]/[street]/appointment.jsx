@@ -305,7 +305,7 @@ export default function AppointmentPage({ shop }) {
             <OnMobile only>
                 {step > 0 ? (
                     <Button onClick={onNext} aria-label="Volgende">
-                        Confirm
+                        Bevestig
                     </Button>
                 ) : (
                     <Button onClick={onNext} aria-label="Volgende">

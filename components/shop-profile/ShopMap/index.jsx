@@ -299,8 +299,8 @@ export function Reviews({ shop }) {
             {checkIfScoresExist(scores, REVIEW_MARKS) ? (
                 <NoReview>
                     <strong>
-                        This shop does not have reviews yet, be the first and
-                        get 10 euro cashback
+                        Deze reparateur heeft nog geen reviews.
+                        Schrijf jij de eerste? Dan krijg je 10 euro cashback.
                     </strong>
                 </NoReview>
             ) : (
