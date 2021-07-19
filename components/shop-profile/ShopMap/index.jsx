@@ -34,7 +34,7 @@ const REVIEW_MARK_TO_LABEL = {
 };
 
 const NoReview = styled.div`
-    min-height: 200px;
+    max-width: calc(320px - 86px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,10 +55,8 @@ const ReviewsWrap = styled.div`
     position: relative;
 
     ${SubTitle} {
-        padding: 0 43px;
+        padding: 28px 43px;
         margin: 0 -43px;
-        min-height: 72px;
-        line-height: 72px;
         margin-bottom: 25px;
         border-bottom: 1px solid #ddd;
     }
@@ -260,7 +258,7 @@ export function Reviews({ shop }) {
     }, [options]);
 
     const checkIfScoresExist = (scoresList, reviews) => {
-        return reviews.filter((key) => scoresList[key] !== 0).length === 0;
+        return reviews.filter((key) => scoresList[key] !== 0).length !== 0;
     };
 
     function renderReview(review) {
