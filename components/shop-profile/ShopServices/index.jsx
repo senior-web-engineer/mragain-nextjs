@@ -535,7 +535,7 @@ export default function ShopServices({ shop }) {
                 </SubTitle>
                 <SubTitleDescription>
                     Staat je model of reparatie er niet tussen?
-                    Waarschijnlijk kunnen we je wel helpen, maak een afspraak en we kijker er naar!
+                    Waarschijnlijk kunnen we je wel helpen, maak een afspraak en we kijken er naar!
                 </SubTitleDescription>
                 <Form module={filtersFormModule}>
                     <OnMobile only>
