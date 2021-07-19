@@ -258,7 +258,7 @@ export function Reviews({ shop }) {
     }, [options]);
 
     const checkIfScoresExist = (scoresList, reviews) => {
-        return reviews.filter((key) => scoresList[key] !== 0).length !== 0;
+        return reviews.filter((key) => scoresList[key] !== 0).length === 0;
     };
 
     function renderReview(review) {
