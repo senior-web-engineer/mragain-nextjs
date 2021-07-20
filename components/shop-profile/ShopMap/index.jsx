@@ -300,7 +300,7 @@ export function Reviews({ shop }) {
                 <NoReview>
                     <strong>
                         Deze reparateur heeft nog geen reviews.
-                        Schrijf jij de eerste? Dan krijg je 10 euro cashback.
+                        Schrijf jij de eerste? Dan krijg je 7,50 euro cashback.
                     </strong>
                 </NoReview>
             ) : (
