@@ -74,7 +74,7 @@ const Contact = ({}) => {
             <BoxInfoWrap>
               <ContactTitle>Adres</ContactTitle>
               <ContactInfo>MrAgain</ContactInfo>
-	  {/*<ContactInfo>Maartensdijk</ContactInfo>*/}
+              {/*<ContactInfo>Maartensdijk</ContactInfo>*/}
               <ContactInfo>Utrecht</ContactInfo>
               <ContactInfo>3561 LD</ContactInfo>
               <ContactInfo>Nederland</ContactInfo>

@@ -5,14 +5,14 @@ import RepairServicingBannerSection from "./RepairServicingBannerSection/RepairS
 import AdvantageSection from "./AdvantageSection/AdvantageSection";
 
 const RepairServicing = () => {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-    <Main>
-        <RepairServicingBannerSection />
-        <AdvantageSection />
-        <TestmonialSection />
-    </Main>
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  <Main>
+    <RepairServicingBannerSection />
+    <AdvantageSection />
+    <TestmonialSection />
+  </Main>;
 };
 
 export default RepairServicing;

@@ -177,7 +177,7 @@ function SignupButtons({ hiddenOnMobile, showSignup }) {
   return (
     <UserMenuWrap hiddenOnMobile={hiddenOnMobile}>
       {renderButtons()}
-      <Select value="nl"  aria-label="Language" options={LANG_OPTIONS} />
+      <Select value="nl" aria-label="Language" options={LANG_OPTIONS} />
     </UserMenuWrap>
   );
 }
@@ -192,7 +192,7 @@ function HeaderLinks() {
       <Link href="/contact">Contact</Link>
       <Link href="/veel-gestelde-vragen">FAQ</Link>
       <Link href="/blog">Blog</Link>
-	  {/*<Link href="/over-reparaties">Reparaties</Link>*/}
+      {/*<Link href="/over-reparaties">Reparaties</Link>*/}
     </>
   );
 }
@@ -248,7 +248,7 @@ const HeaderView = ({ showSignup }) => {
                     onClick={() => updateMenuVisibility(false)}
                   />
                 </MobileMenuHeader>
-                <SignupButtons showSignup={showSignup}/>
+                <SignupButtons showSignup={showSignup} />
                 <MobileMenuLinks>
                   <HeaderLinks />
                 </MobileMenuLinks>

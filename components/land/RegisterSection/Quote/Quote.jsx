@@ -1,16 +1,19 @@
 import React from "react";
-import {
-  faCheck,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { QuoteArea, QuoteTitleArea, QuoteTitle, QuoteContentArea } from './Quote.style';
+import {
+  QuoteArea,
+  QuoteTitleArea,
+  QuoteTitle,
+  QuoteContentArea,
+} from "./Quote.style";
 
 const QuoteContent = (props) => {
   const { text } = props;
   return (
     <QuoteContentArea>
-      <FontAwesomeIcon icon={faCheck} className="quote-check"/>
+      <FontAwesomeIcon icon={faCheck} className="quote-check" />
       {text}
     </QuoteContentArea>
   );
@@ -24,10 +27,12 @@ const Quote = () => {
           Beter online gevonden worden is dichter bij dan je denkt!
         </QuoteTitle>
       </QuoteTitleArea>
-      <QuoteContent text={'Word beter gevonden bij jou in de buurt'}/>
-      <QuoteContent text={'Ontvang automatisch afspraken bij jou in de agenda'}/>
-      <QuoteContent text={'Krijg online reviews van al je klanten'}/>
-      <QuoteContent text={'Overzicht op al je afgeronde reparaties'}/>
+      <QuoteContent text={"Word beter gevonden bij jou in de buurt"} />
+      <QuoteContent
+        text={"Ontvang automatisch afspraken bij jou in de agenda"}
+      />
+      <QuoteContent text={"Krijg online reviews van al je klanten"} />
+      <QuoteContent text={"Overzicht op al je afgeronde reparaties"} />
     </QuoteArea>
   );
 };

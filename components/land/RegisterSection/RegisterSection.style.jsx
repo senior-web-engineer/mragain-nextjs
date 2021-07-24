@@ -6,13 +6,15 @@ export const RegisterSectionArea = styled.div`
   padding: 20px;
   max-width: 1133px;
   margin: auto;
-  @media (max-width:768px) {
+  @media (max-width: 768px) {
     padding: 0px;
   }
   .row {
     margin: 0px;
   }
-  .col-md-7, .col-md-5, col-sm-12 {
+  .col-md-7,
+  .col-md-5,
+  col-sm-12 {
     padding: 0px;
   }
 `;

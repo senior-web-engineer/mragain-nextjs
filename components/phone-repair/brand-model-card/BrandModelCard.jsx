@@ -120,7 +120,6 @@ const BrandModelCard = (routerProps) => {
   }, [brand_id, listPBM, newGuarantees]);
 
   return (
-    
     <div className="brand-model-card">
       <div className="brand-model-card-title">{brand.name}</div>
       <div className="brand-model-card-body">
@@ -158,21 +157,21 @@ const BrandModelCard = (routerProps) => {
               {checks[i] === true && isEditable === false && (
                 <Link
                   href={`/model-gegevens/?shopId=${shop_id}&deviceId=${newGuarantees.device_id}&brandId=${brand_id}&modelId=${el.id}&modelName=${el.model_name}`}
-                //   disabled={isEditGuarantee === true ? false : true}
+                  //   disabled={isEditGuarantee === true ? false : true}
                 >
-                    <a>
-                        <FontAwesomeIcon
-                            className="brand-model-reparation-edit"
-                            icon={["fas", "edit"]}
-                        ></FontAwesomeIcon>
-                    </a>
+                  <a>
+                    <FontAwesomeIcon
+                      className="brand-model-reparation-edit"
+                      icon={["fas", "edit"]}
+                    ></FontAwesomeIcon>
+                  </a>
                 </Link>
               )}
             </div>
           );
         })}
       </div>
-    </div>   
+    </div>
   );
 };
 

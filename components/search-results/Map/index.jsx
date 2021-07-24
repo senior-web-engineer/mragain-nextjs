@@ -9,7 +9,8 @@ import Loader from "@/components/common/Loader/index.js";
 import GoogleMap from "./GoogleMap.jsx";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
-  loading: Loader, ssr: false
+  loading: Loader,
+  ssr: false,
 });
 
 const MapWrap = styled.div`

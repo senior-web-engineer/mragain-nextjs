@@ -335,14 +335,19 @@ const ReparationOverView = (routerProps) => {
                   className="calendar-icon"
                   icon={["fas", "calendar"]}
                 />
-                <Link prefetch={false} href={"/dashboard/" + url_shopId}>Dashboard</Link>
+                <Link prefetch={false} href={"/dashboard/" + url_shopId}>
+                  Dashboard
+                </Link>
               </div>
               <div className="widget-shop-appointment">
                 <FontAwesomeIcon
                   className="over-icon"
                   icon={["fas", "chalkboard-teacher"]}
                 />
-                <Link prefetch={false} href={"/reparatie-overzicht/" + url_shopId}>
+                <Link
+                  prefetch={false}
+                  href={"/reparatie-overzicht/" + url_shopId}
+                >
                   Reparatie Overzicht
                 </Link>
               </div>
@@ -360,7 +365,9 @@ const ReparationOverView = (routerProps) => {
                   className="calendar-icon"
                   icon={["fas", "user"]}
                 />
-                <Link prefetch={false} href={"/profiel-beheer/" + url_shopId}>Profiel</Link>
+                <Link prefetch={false} href={"/profiel-beheer/" + url_shopId}>
+                  Profiel
+                </Link>
               </div>
               <div className="widget-shop-appointment">
                 <FontAwesomeIcon
@@ -397,14 +404,19 @@ const ReparationOverView = (routerProps) => {
                   className="calendar-icon"
                   icon={["fas", "calendar"]}
                 />
-                <Link prefetch={false} href={"/dashboard/" + url_shopId}>Dashboard</Link>
+                <Link prefetch={false} href={"/dashboard/" + url_shopId}>
+                  Dashboard
+                </Link>
               </div>
               <div className="widget-shop-appointment">
                 <FontAwesomeIcon
                   className="over-icon"
                   icon={["fas", "chalkboard-teacher"]}
                 />
-                <Link prefetch={false} href={"/reparatie-overzicht/" + url_shopId}>
+                <Link
+                  prefetch={false}
+                  href={"/reparatie-overzicht/" + url_shopId}
+                >
                   Reparatie Overzicht
                 </Link>
               </div>
@@ -422,7 +434,9 @@ const ReparationOverView = (routerProps) => {
                   className="calendar-icon"
                   icon={["fas", "user"]}
                 />
-                <Link prefetch={false} href={"/profiel-beheer/" + url_shopId}>Profiel</Link>
+                <Link prefetch={false} href={"/profiel-beheer/" + url_shopId}>
+                  Profiel
+                </Link>
               </div>
               <div className="widget-shop-appointment">
                 <FontAwesomeIcon

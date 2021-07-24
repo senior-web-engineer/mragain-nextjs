@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   GetinTouchContainer,
   Content,
@@ -6,11 +6,11 @@ import {
   Subtitle,
   GetInTouchText,
   GetInTouchButton,
-} from './GetInTouch.style'
-import { useRouter } from 'next/router'
+} from "./GetInTouch.style";
+import { useRouter } from "next/router";
 
 const GetInTouch = () => {
-  const router = useRouter()  
+  const router = useRouter();
 
   return (
     <GetinTouchContainer>
@@ -21,12 +21,12 @@ const GetInTouch = () => {
             Neem contact met ons op en we komen zo snel mogelijk bij je terug.
           </Subtitle>
         </GetInTouchText>
-        <GetInTouchButton onClick={() => router.push('/contact')}>
+        <GetInTouchButton onClick={() => router.push("/contact")}>
           Neem contact op
         </GetInTouchButton>
       </Content>
     </GetinTouchContainer>
-  )
-}
+  );
+};
 
-export default GetInTouch
+export default GetInTouch;

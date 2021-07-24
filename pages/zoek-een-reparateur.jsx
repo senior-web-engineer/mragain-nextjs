@@ -52,8 +52,8 @@ import Modal from "@/modules/modal";
 import { useRouter } from "next/router";
 import GooglePlaces, { loadScript } from "@/components/common/GooglePlaces";
 import moment from "moment";
-import Head from 'next/head'
-import { FRONT_END_URL } from '../constants.js'
+import Head from "next/head";
+import { FRONT_END_URL } from "../constants.js";
 import { getShopLogo, getShopRoute } from "@/utils/shop";
 import Link from "next/link";
 import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
@@ -451,8 +451,8 @@ const ShopDetails = styled.div`
     font-size: 8px;
     height: 26px;
     ${(props) =>
-    props.tagColor &&
-    css`
+      props.tagColor &&
+      css`
         background-color: ${props.tagColor || "#ddd"};
       `}
     color: #fff;
@@ -662,9 +662,7 @@ function ShopItem({ item }) {
   const router = useRouter();
   const { selectedShop, updateSelectedShop, showMap } =
     useContext(ShopBridgeContext);
-  const location = [item.shop.city || ""]
-    .filter(Boolean)
-    .join(", ");
+  const location = [item.shop.city || ""].filter(Boolean).join(", ");
   function renderService(service) {
     return <ShopDetails.Service>{service.device_name}</ShopDetails.Service>;
   }
@@ -674,8 +672,9 @@ function ShopItem({ item }) {
   // API changed does not include the city any longer?
   // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
 
-  const shopRoute = `${getShopRoute(item.shop)}?device=${formState.device
-    }&brand=${formState.brand}&model=${formState.model}`;
+  const shopRoute = `${getShopRoute(item.shop)}?device=${
+    formState.device
+  }&brand=${formState.brand}&model=${formState.model}`;
 
   function onClick() {
     if (!showMap) {
@@ -1014,7 +1013,12 @@ function RefineSearchForm() {
   );
 }
 
-function ModelFieldsComponent({ showMap, updateShowMap, setShowMobileSearch, showMobileSearch }) {
+function ModelFieldsComponent({
+  showMap,
+  updateShowMap,
+  setShowMobileSearch,
+  showMobileSearch,
+}) {
   const { state } = useFormContext();
   const onDeviceChange = useCallback((ev) => {
     const value = parseNativeEvent(ev);
@@ -1136,13 +1140,10 @@ function ModelFieldsComponent({ showMap, updateShowMap, setShowMobileSearch, sho
       </OnMobile>
       <MapTriggerWrap>
         <label>Kaart</label>
-        <Switch
-          checked={showMap}
-          onChange={(val) => updateShowMap(val)}
-        />
+        <Switch checked={showMap} onChange={(val) => updateShowMap(val)} />
       </MapTriggerWrap>
     </ModelFields>
-  )
+  );
 }
 
 function ResultCount() {
@@ -1204,30 +1205,31 @@ export default function SearchResults() {
         <Head>
           <title>Zoek een telefoon reparateur | Mr Again</title>
           <meta
-            name='Keywords'
-            content='Zoek een telefoon reparateur, telefoon maken, telefoon reparateur, telefoon reparatie, scherm maken, Mr Again'
+            name="Keywords"
+            content="Zoek een telefoon reparateur, telefoon maken, telefoon reparateur, telefoon reparatie, scherm maken, Mr Again"
           />
           <meta
-            name='description'
-            content='Telefoon maken of telefoon reparatie? Bekijk de zoek resultaten bij MrAgain'
+            name="description"
+            content="Telefoon maken of telefoon reparatie? Bekijk de zoek resultaten bij MrAgain"
           />
-          <link
-            rel='canonical'
-            href={FRONT_END_URL + '/zoek-een-reparateur'}
-          />
+          <link rel="canonical" href={FRONT_END_URL + "/zoek-een-reparateur"} />
           {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
-          <meta property='og:type' content='website' />
-          <meta name='og_title' property='og:title' content='Zoek een telefoon reparateur' />
+          <meta property="og:type" content="website" />
           <meta
-            property='og:description'
-            content='Zoek een telefoon reparateur'
+            name="og_title"
+            property="og:title"
+            content="Zoek een telefoon reparateur"
           />
-          <meta name='og:url' content={FRONT_END_URL} />
-          <meta property='og:image' content='' />
           <meta
-            name='og_site_name'
-            property='og:site_name'
-            content='Mr Again'
+            property="og:description"
+            content="Zoek een telefoon reparateur"
+          />
+          <meta name="og:url" content={FRONT_END_URL} />
+          <meta property="og:image" content="" />
+          <meta
+            name="og_site_name"
+            property="og:site_name"
+            content="Mr Again"
           />
         </Head>
         <MainWrap>

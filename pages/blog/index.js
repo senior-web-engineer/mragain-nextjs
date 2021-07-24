@@ -12,7 +12,10 @@ import Image from "next/image";
 import Link from "next/link";
 import moment from "moment";
 import media, { OnMobile } from "@/utils/media.js";
-import Form, { createFormModule, useFormContext } from "@/modules/forms/index.js";
+import Form, {
+  createFormModule,
+  useFormContext,
+} from "@/modules/forms/index.js";
 import { Field } from "@/modules/forms/Blocks.js";
 import Input from "@/components/ui/Input.jsx";
 import api from "@/utils/api/index.js";
@@ -264,10 +267,10 @@ function NullRenderer() {
 }
 
 function SubscribeForm() {
-  const {submitted} = useFormContext().state;
+  const { submitted } = useFormContext().state;
 
   if (submitted) {
-    return <success>Thank you for subscribing</success>
+    return <success>Thank you for subscribing</success>;
   }
 
   return (
