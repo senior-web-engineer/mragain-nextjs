@@ -139,6 +139,10 @@ const ModelFields = styled.div`
     margin: 10px 0;
     background-color: #fff;
 
+    &[disabled] {
+      background-color: #f5f5f5;
+    }
+
     > label {
       margin: 11px 11px 2px 11px;
     }
@@ -325,6 +329,7 @@ const Content = styled.div`
     padding: 30px 20px 0;
     position: relative;
     overflow: hidden;
+    min-height: 220px;
 
     > div {
       position: relative;
@@ -376,11 +381,6 @@ const ModelFieldsMobile = styled.div`
 
   > div {
     width: 100%;
-  }
-
-  > div:nth-child(1),
-  > div:nth-child(3) {
-    width: 40%;
   }
 `;
 
@@ -451,8 +451,8 @@ const ShopDetails = styled.div`
     font-size: 8px;
     height: 26px;
     ${(props) =>
-      props.tagColor &&
-      css`
+    props.tagColor &&
+    css`
         background-color: ${props.tagColor || "#ddd"};
       `}
     color: #fff;
@@ -674,9 +674,8 @@ function ShopItem({ item }) {
   // API changed does not include the city any longer?
   // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
 
-  const shopRoute = `${getShopRoute(item.shop)}?device=${
-    formState.device
-  }&brand=${formState.brand}&model=${formState.model}`;
+  const shopRoute = `${getShopRoute(item.shop)}?device=${formState.device
+    }&brand=${formState.brand}&model=${formState.model}`;
 
   function onClick() {
     if (!showMap) {
@@ -1015,6 +1014,137 @@ function RefineSearchForm() {
   );
 }
 
+function ModelFieldsComponent({ showMap, updateShowMap, setShowMobileSearch, showMobileSearch }) {
+  const { state } = useFormContext();
+  const onDeviceChange = useCallback((ev) => {
+    const value = parseNativeEvent(ev);
+    filtersFormModule.actions.batchChange({
+      updates: {
+        device: value,
+        brand: "0",
+        model: "0",
+        service: "0",
+      },
+    });
+    brandFetcher.key(`${value}`).fetch();
+  });
+
+  const onBandChange = useCallback((value) => {
+    filtersFormModule.actions.batchChange({
+      updates: {
+        brand: value,
+        model: "0",
+        service: "0",
+      },
+    });
+    modelFetcher.key(`${value}`).fetch();
+  });
+
+  const onModelChange = useCallback((value) => {
+    filtersFormModule.actions.batchChange({
+      updates: {
+        model: value,
+        service: "0",
+      },
+    });
+    serviceFetcher.key(`${value}`).fetch();
+  });
+  return (
+    <ModelFields>
+      <OnMobile only>
+        <Field
+          as={MobileDeviceSelector}
+          name="device"
+          aria-input-field-name="device"
+          onChange={onDeviceChange}
+        />
+        {state.values.device === "0" ? null : (
+          <ModelFieldsMobile>
+            <BrandSelector
+              name="brand"
+              as={Select}
+              label="Merk"
+              aria-input-field-name="brand"
+              onChange={onBandChange}
+              dropdownStyle={{ minWidth: "200px" }}
+            />
+            <ModelSelector
+              name="model"
+              as={Select}
+              label="Model"
+              aria-input-field-name="model"
+              disabled={state.values.brand === "0"}
+              onChange={onModelChange}
+            />
+            <ServiceSelector
+              name="service"
+              as={Select}
+              label="Reparatie"
+              disabled={state.values.model === "0"}
+              aria-input-field-name="service"
+              dropdownStyle={{ minWidth: "200px" }}
+            />
+            <Waypoint
+              onEnter={() => setShowMobileSearch(false)}
+              onLeave={() => setShowMobileSearch(true)}
+            />
+            <Field
+              name="sort"
+              as={Select}
+              options={SORT_BY}
+              label="Sorteer op"
+            />
+          </ModelFieldsMobile>
+        )}
+      </OnMobile>
+      <OnMobile show={false}>
+        <DeviceSelector
+          name="device"
+          as={Select}
+          label="Apparaat"
+          aria-input-field-name="device"
+          onChange={onDeviceChange}
+          dropdownStyle={{ minWidth: "200px" }}
+        />
+        <BrandSelector
+          name="brand"
+          as={Select}
+          label="Merk"
+          aria-input-field-name="brand"
+          onChange={onBandChange}
+          dropdownStyle={{ minWidth: "200px" }}
+          disabled={state.values.device === "0"}
+        />
+        <ModelSelector
+          name="model"
+          as={Select}
+          label="Model"
+          aria-input-field-name="model"
+          disabled={state.values.brand === "0"}
+          onChange={onModelChange}
+          dropdownStyle={{ minWidth: "200px" }}
+        />
+        <ServiceSelector
+          name="service"
+          as={Select}
+          label="Reparatie"
+          aria-input-field-name="service"
+          disabled={state.values.model === "0"}
+          dropdownStyle={{ minWidth: "200px" }}
+          popupPlacement="bottomRight"
+        />
+      </OnMobile>
+      <MapTriggerWrap>
+        <label>Kaart</label>
+        <Switch
+          checked={showMap}
+          onChange={(val) => updateShowMap(val)}
+        />
+      </MapTriggerWrap>
+    </ModelFields>
+  )
+}
+
 function ResultCount() {
   const context = useListContext();
   if (!context.items || context.state.isLoading) {
@@ -1057,40 +1187,6 @@ export default function SearchResults() {
     }
   }, [selectedShop]);
 
-  const onDeviceChange = useCallback((ev) => {
-    const value = parseNativeEvent(ev);
-    filtersFormModule.actions.batchChange({
-      updates: {
-        device: value,
-        brand: "0",
-        model: "0",
-        service: "0",
-      },
-    });
-    brandFetcher.key(`${value}`).fetch();
-  });
-
-  const onBandChange = useCallback((value) => {
-    filtersFormModule.actions.batchChange({
-      updates: {
-        brand: value,
-        model: "0",
-        service: "0",
-      },
-    });
-    modelFetcher.key(`${value}`).fetch();
-  });
-
-  const onModelChange = useCallback((value) => {
-    filtersFormModule.actions.batchChange({
-      updates: {
-        model: value,
-        service: "0",
-      },
-    });
-    serviceFetcher.key(`${value}`).fetch();
-  });
-
   const locationField = (
     <Field
       prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
@@ -1105,55 +1201,55 @@ export default function SearchResults() {
       value={{ selectedShop, updateSelectedShop, showMap }}
     >
       <DefaultLayout>
-	  <Head>
-	  	<title>Zoek een telefoon reparateur | Mr Again</title>
-	            <meta
-	              name='Keywords'
-	              content='Zoek een telefoon reparateur, telefoon maken, telefoon reparateur, telefoon reparatie, scherm maken, Mr Again'
-	            />
-	            <meta
-	              name='description'
-	              content='Telefoon maken of telefoon reparatie? Bekijk de zoek resultaten bij MrAgain'
-	            />
-	            <link
-	              rel='canonical'
-	              href={FRONT_END_URL + '/zoek-een-reparateur'}
-	            />
-	            {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
-	            <meta property='og:type' content='website' />
-	            <meta name='og_title' property='og:title' content='Zoek een telefoon reparateur' />
-	            <meta
-	              property='og:description'
-	              content='Zoek een telefoon reparateur'
-	            />
-	            <meta name='og:url' content={FRONT_END_URL} />
-	            <meta property='og:image' content='' />
-	            <meta
-	              name='og_site_name'
-	              property='og:site_name'
-	              content='Mr Again'
-	            />
-	  </Head>
-            <MainWrap>
-              <MaxConstraints>
-            	<Sidebar>
-                  <SidebarInnerWrap>
-                    <SidebarHeader>
-                      <SubTitle>
-                         Filter resultaten
-                          <List module={shopListModule}>
-                           <ResultCount />
-                         </List>
-                      </SubTitle>
-                         <Form module={filtersFormModule}>
-                           <ClearFilters />
-                         </Form>
-                    </SidebarHeader>
-                    <RefineSearchForm />
-                  </SidebarInnerWrap>
-                </Sidebar>
-                <Content ref={mobileSelectorsRef}>
-                <Form module={filtersFormModule}>
+        <Head>
+          <title>Zoek een telefoon reparateur | Mr Again</title>
+          <meta
+            name='Keywords'
+            content='Zoek een telefoon reparateur, telefoon maken, telefoon reparateur, telefoon reparatie, scherm maken, Mr Again'
+          />
+          <meta
+            name='description'
+            content='Telefoon maken of telefoon reparatie? Bekijk de zoek resultaten bij MrAgain'
+          />
+          <link
+            rel='canonical'
+            href={FRONT_END_URL + '/zoek-een-reparateur'}
+          />
+          {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
+          <meta property='og:type' content='website' />
+          <meta name='og_title' property='og:title' content='Zoek een telefoon reparateur' />
+          <meta
+            property='og:description'
+            content='Zoek een telefoon reparateur'
+          />
+          <meta name='og:url' content={FRONT_END_URL} />
+          <meta property='og:image' content='' />
+          <meta
+            name='og_site_name'
+            property='og:site_name'
+            content='Mr Again'
+          />
+        </Head>
+        <MainWrap>
+          <MaxConstraints>
+            <Sidebar>
+              <SidebarInnerWrap>
+                <SidebarHeader>
+                  <SubTitle>
+                    Filter resultaten
+                    <List module={shopListModule}>
+                      <ResultCount />
+                    </List>
+                  </SubTitle>
+                  <Form module={filtersFormModule}>
+                    <ClearFilters />
+                  </Form>
+                </SidebarHeader>
+                <RefineSearchForm />
+              </SidebarInnerWrap>
+            </Sidebar>
+            <Content ref={mobileSelectorsRef}>
+              <Form module={filtersFormModule}>
                 <ZipFields>
                   {locationField}
                   <hr />
@@ -1173,92 +1269,12 @@ export default function SearchResults() {
                     />
                   </OnMobile>
                 </ZipFields>
-                <ModelFields>
-                  <OnMobile only>
-                    <Field
-                      as={MobileDeviceSelector}
-                      name="device"
-                      aria-input-field-name="device"
-                      onChange={onDeviceChange}
-                    />
-                    <ModelFieldsMobile>
-                      <BrandSelector
-                        name="brand"
-                        as={Select}
-                        label="Merk"
-                        aria-input-field-name="brand"
-                        onChange={onBandChange}
-                        dropdownStyle={{ minWidth: "200px" }}
-                      />
-                      <hr />
-                      <ModelSelector
-                        name="model"
-                        as={Select}
-                        label="Model"
-                        aria-input-field-name="model"
-                        onChange={onModelChange}
-                      />
-                      <ServiceSelector
-                        name="service"
-                        as={Select}
-                        label="Reparatie"
-                        aria-input-field-name="service"
-                        dropdownStyle={{ minWidth: "200px" }}
-                      />
-                      <Waypoint
-                        onEnter={() => setShowMobileSearch(false)}
-                        onLeave={() => setShowMobileSearch(true)}
-                      />
-                      <Field
-                        name="sort"
-                        as={Select}
-                        options={SORT_BY}
-                        label="Sorteer op"
-                      />
-                    </ModelFieldsMobile>
-                  </OnMobile>
-                  <OnMobile show={false}>
-                    <DeviceSelector
-                      name="device"
-                      as={Select}
-                      label="Apparaat"
-                      aria-input-field-name="device"
-                      onChange={onDeviceChange}
-                      dropdownStyle={{ minWidth: "200px" }}
-                    />
-                    <BrandSelector
-                      name="brand"
-                      as={Select}
-                      label="Merk"
-                      aria-input-field-name="brand"
-                      onChange={onBandChange}
-                      dropdownStyle={{ minWidth: "200px" }}
-                    />
-                    <ModelSelector
-                      name="model"
-                      as={Select}
-                      label="Model"
-                      aria-input-field-name="model"
-                      onChange={onModelChange}
-                      dropdownStyle={{ minWidth: "200px" }}
-                    />
-                    <ServiceSelector
-                      name="service"
-                      as={Select}
-                      label="Reparatie"
-                      aria-input-field-name="service"
-                      dropdownStyle={{ minWidth: "200px" }}
-                      popupPlacement="bottomRight"
-                    />
-                  </OnMobile>
-                  <MapTriggerWrap>
-                    <label>Kaart</label>
-                    <Switch
-                      checked={showMap}
-                      onChange={(val) => updateShowMap(val)}
-                    />
-                  </MapTriggerWrap>
-                </ModelFields>
+                <ModelFieldsComponent
+                  showMap={showMap}
+                  updateShowMap={updateShowMap}
+                  setShowMobileSearch={setShowMobileSearch}
+                  showMobileSearch={showMobileSearch}
+                />
                 <SyncFormValues onChange={shopListModule.actions.updateQuery} />
               </Form>
               <List module={shopListModule}>
