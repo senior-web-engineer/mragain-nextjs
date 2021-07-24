@@ -1,16 +1,19 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./TestimonialSection.style.less";
+
 import React from "react";
 import { Container, Row } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { TestimonialSectionArea } from "./TestimonialSection.style";
-import TestimonialCarousel from "./TestimonialCarousel/TestimonialCarousel.jsx";
+
+import phoneIcon from "@/assets/images/phone-icon2.png";
+
 import {
   AdvantageSectionTitle,
-  SectionModel,
   DotDevider,
   PhoneIcon,
+  SectionModel,
 } from "../component.style.jsx";
-import "./TestimonialSection.style.less";
-import phoneIcon from "@/assets/images/phone-icon2.png";
+import TestimonialCarousel from "./TestimonialCarousel/TestimonialCarousel.jsx";
+import { TestimonialSectionArea } from "./TestimonialSection.style";
 
 const TestimonialSection = () => (
   <TestimonialSectionArea>

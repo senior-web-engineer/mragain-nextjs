@@ -1,9 +1,8 @@
 import React from "react";
 
-import { RegisterSectionArea } from "./RegisterSection.style";
-
 import Quote from "./Quote/Quote";
 import RegisterForm from "./RegisterForm/RegisterForm";
+import { RegisterSectionArea } from "./RegisterSection.style";
 
 const RegisterSection = () => {
   return (

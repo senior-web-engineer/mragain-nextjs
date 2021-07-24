@@ -1,16 +1,18 @@
+import "./MainLocateUs.style.css";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+
 import {
+  LocateEmail,
+  LocateInfo,
+  LocatePhone,
+  LocatePostion,
+  LocateTitle,
   MainLocateUsBlog,
   MainLocateUsContent,
-  LocateTitle,
-  LocateInfo,
   SocialLink,
-  LocatePostion,
-  LocatePhone,
-  LocateEmail,
 } from "./MainLocateUs.style";
-import "./MainLocateUs.style.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const MainLocateUs = () => (
   <MainLocateUsBlog>

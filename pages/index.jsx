@@ -1,22 +1,23 @@
+import "./index.style.less";
+
 import Head from "next/head";
 import React from "react";
-import { FRONT_END_URL } from "../constants.js";
-
-import "./index.style.less";
-import { getNewestShopList } from "@/service/search/operations";
-import DefaultLayout from "@/components/layouts/Homepage";
 import styled from "styled-components";
-import { MaxConstraints } from "@/components/styled/layout";
 
-import TestimonialSection from "@/components/home/TestimonialSection";
-import media from "@/utils/media.js";
-import FindSection from "@/components/home/FindSection/index.jsx";
-import AdvantagesSection from "@/components/home/AdvantagesSection/index.jsx";
-import StepsSection from "@/components/home/StepsSection/index.jsx";
-import ShopsSection from "@/components/home/ShopsSection/index.jsx";
 import OrderReview from "@/components/appointment/OrderReview.jsx";
-import { wrapper } from "@/configureStore.js";
+import AdvantagesSection from "@/components/home/AdvantagesSection/index.jsx";
+import FindSection from "@/components/home/FindSection/index.jsx";
 import { searchForm } from "@/components/home/modules.js";
+import ShopsSection from "@/components/home/ShopsSection/index.jsx";
+import StepsSection from "@/components/home/StepsSection/index.jsx";
+import TestimonialSection from "@/components/home/TestimonialSection";
+import DefaultLayout from "@/components/layouts/Homepage";
+import { MaxConstraints } from "@/components/styled/layout";
+import { wrapper } from "@/configureStore.js";
+import { getNewestShopList } from "@/service/search/operations";
+import media from "@/utils/media.js";
+
+import { FRONT_END_URL } from "../constants.js";
 
 const HeroWrap = styled.div`
   overflow: hidden;

@@ -1,9 +1,11 @@
+import "./pages.css";
+
+import dateFormat from "dateformat";
+import { useRouter } from "next/router";
 import React from "react";
 import { Fragment } from "react";
-import dateFormat from "dateformat";
+
 import noImageFound from "../../assets/images/noBlogImage.png";
-import { useRouter } from "next/router";
-import "./pages.css";
 
 const Pagelist = ({ pages }) => {
   const router = useRouter();

@@ -1,14 +1,16 @@
+import { faInfo } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useCallback } from "react";
+import styled from "styled-components";
+
 import Loader from "@/components/common/Loader";
 import { SubTitle } from "@/components/styled/text";
 import Button from "@/components/ui/Button";
 import { withData } from "@/modules/dataFetcher";
 import Modal from "@/modules/modal";
-import { faInfo } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useCallback } from "react";
+import { DAY_TO_FULL_NAME, DAYS_OF_WEEK } from "@/utils/date";
+
 import { openTimeFetcher, shopInfo } from "../modules";
-import styled from "styled-components";
-import { DAYS_OF_WEEK, DAY_TO_FULL_NAME } from "@/utils/date";
 
 const ScheduleSection = styled.section`
   margin-top: 40px;

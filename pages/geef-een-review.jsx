@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { Input, Button, Rate, Radio, message } from "antd";
-import { useRouter } from "next/router";
 import "./geef-een-review.less";
-import shopReviewIcon from "@/assets/images/shop-review.png";
+
+import { Button, Input, message, Radio, Rate } from "antd";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import {
-  createReview,
   checkReviewPage,
+  createReview,
 } from "service/appointments/operations.js";
+
+import shopReviewIcon from "@/assets/images/shop-review.png";
 import { Layout } from "@/components/global";
 
 const CheckoutReview = (routerProps) => {

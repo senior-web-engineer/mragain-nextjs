@@ -1,17 +1,19 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./RepairServicingBannerSection.style.less";
+
+import Head from "next/head";
 import React from "react";
 import { Breadcrumb } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+
+import { FRONT_END_URL } from "../../../constants.js";
 import {
-  RepairServicingSectionArea,
   RepairServicingContainer,
+  RepairServicingSectionArea,
 } from "../RepairServicing.style.jsx";
 import {
-  RepairServicingBreadcrumb,
   RepairServicingBannerTitle,
+  RepairServicingBreadcrumb,
 } from "./RepairServicingBannerSection.style.jsx";
-import "./RepairServicingBannerSection.style.less";
-import Head from "next/head";
-import { FRONT_END_URL } from "../../../constants.js";
 
 const RepairServicingBannerSection = () => (
   <RepairServicingSectionArea className="repair-servicing-banner-area">

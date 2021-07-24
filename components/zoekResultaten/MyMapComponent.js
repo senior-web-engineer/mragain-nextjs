@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { compose, withProps, lifecycle } from "recompose";
 import {
-  withScriptjs,
-  withGoogleMap,
   GoogleMap,
-  Marker,
   InfoWindow,
+  Marker,
+  withGoogleMap,
+  withScriptjs,
 } from "react-google-maps";
+import { compose, lifecycle, withProps } from "recompose";
 const googleMapsApiKey = "AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE";
 
 const MyMapComponent = compose(

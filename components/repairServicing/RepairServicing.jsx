@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
-import { Main } from "./RepairServicing.style.jsx";
+
 import { TestmonialSection } from "@/components";
-import RepairServicingBannerSection from "./RepairServicingBannerSection/RepairServicingBannerSection";
+
 import AdvantageSection from "./AdvantageSection/AdvantageSection";
+import { Main } from "./RepairServicing.style.jsx";
+import RepairServicingBannerSection from "./RepairServicingBannerSection/RepairServicingBannerSection";
 
 const RepairServicing = () => {
   useEffect(() => {

@@ -1,7 +1,9 @@
-import { Footer } from "@/components/global";
 import React from "react";
-import Header from "./Header";
 import styled from "styled-components";
+
+import { Footer } from "@/components/global";
+
+import Header from "./Header";
 
 const ContentWrap = styled.div`
   background-color: #fafafa;

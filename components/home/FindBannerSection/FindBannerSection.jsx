@@ -1,7 +1,8 @@
-import React from "react";
-import SearchForm from "./SearchForm/SearchForm.jsx";
-import { BannerSection } from "./FindBannerSection.style.jsx";
 import Image from "next/image";
+import React from "react";
+
+import { BannerSection } from "./FindBannerSection.style.jsx";
+import SearchForm from "./SearchForm/SearchForm.jsx";
 
 const FindBannerSection = () => {
   return (

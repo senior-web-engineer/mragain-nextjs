@@ -1,8 +1,3 @@
-import SliderOnMobile from "@/components/common/SliderOnMobile";
-import { H2, SubTitle } from "@/components/styled/text";
-import Button from "@/components/ui/Button";
-import media from "@/utils/media";
-import { getShopLogo, getShopRoute } from "@/utils/shop";
 import {
   faArrowRight,
   faMapMarkerAlt,
@@ -13,6 +8,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import styled, { css } from "styled-components";
+
+import SliderOnMobile from "@/components/common/SliderOnMobile";
+import { H2, SubTitle } from "@/components/styled/text";
+import Button from "@/components/ui/Button";
+import media from "@/utils/media";
+import { getShopLogo, getShopRoute } from "@/utils/shop";
 
 const ShopList = styled.div`
   margin: 0 -15px;

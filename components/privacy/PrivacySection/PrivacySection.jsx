@@ -1,12 +1,14 @@
-import React from "react";
-import { PrivacySectionArea, PrivacyContainer } from "../Privacy.style";
-import {
-  PrivacyContent,
-  PrivacyArticle,
-  PrivacyArticleTitle,
-  PrivacyArticleContent,
-} from "./PrivacySection.style.jsx";
 import "./PrivacySection.style.less";
+
+import React from "react";
+
+import { PrivacyContainer, PrivacySectionArea } from "../Privacy.style";
+import {
+  PrivacyArticle,
+  PrivacyArticleContent,
+  PrivacyArticleTitle,
+  PrivacyContent,
+} from "./PrivacySection.style.jsx";
 
 const PrivacySection = () => (
   <PrivacySectionArea className="privacy-area">

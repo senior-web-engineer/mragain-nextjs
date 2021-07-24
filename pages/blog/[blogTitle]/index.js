@@ -1,12 +1,13 @@
-import React from "react";
+import moment from "moment";
 import Head from "next/head";
+import Image from "next/image";
+import React from "react";
 import styled from "styled-components";
-import { API_PATH, FRONT_END_URL } from "../../../constants";
-import { MaxConstraints } from "@/components/styled/layout";
 
 import DefaultLayout from "@/components/layouts/Homepage";
-import moment from "moment";
-import Image from "next/image";
+import { MaxConstraints } from "@/components/styled/layout";
+
+import { API_PATH, FRONT_END_URL } from "../../../constants";
 
 const BlogWrap = styled.div`
   padding-top: 50px;

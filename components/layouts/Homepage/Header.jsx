@@ -1,18 +1,18 @@
-import React from "react";
-
+import { faBars, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BACK_END_URL } from "constants.js";
 import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import styled, { css } from "styled-components";
+
 import { MaxConstraints } from "@/components/styled/layout";
 import Button from "@/components/ui/Button";
 import { TextButton } from "@/components/ui/Button";
 import Select from "@/components/ui/Select";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
 import media from "@/utils/media";
-import { useState } from "react";
-import { useEffect } from "react";
 
 const HeaderWrap = styled.div`
   display: flex;

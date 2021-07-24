@@ -1,12 +1,14 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./AboutBannerSection.style.less";
+
 import React from "react";
 import { Breadcrumb } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { AboutSectionArea, AboutContainer } from "../ShopAppointment.style.jsx";
+
+import { AboutContainer, AboutSectionArea } from "../ShopAppointment.style.jsx";
 import {
-  AboutBreadcrumb,
   AboutBannerTitle,
+  AboutBreadcrumb,
 } from "./AboutBannerSection.style.jsx";
-import "./AboutBannerSection.style.less";
 
 const AboutBannerSection = () => (
   <AboutSectionArea className="about-banner-area">

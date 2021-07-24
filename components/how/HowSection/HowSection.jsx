@@ -1,13 +1,15 @@
-import React from "react";
-import { HowSectionArea, HowContainer } from "../How.style";
-import {
-  HowContent,
-  HowArticle,
-  HowArticleTitle,
-  HowArticleContent,
-} from "./HowSection.style.jsx";
 import "./HowSection.style.less";
+
+import React from "react";
+
 import { BACK_END_URL } from "../../../constants.js";
+import { HowContainer, HowSectionArea } from "../How.style";
+import {
+  HowArticle,
+  HowArticleContent,
+  HowArticleTitle,
+  HowContent,
+} from "./HowSection.style.jsx";
 
 const HowSection = () => (
   <HowSectionArea className="how-area">
