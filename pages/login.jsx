@@ -31,9 +31,9 @@ import {
 } from "../styled-components/Login.style";
 import Form from "@/modules/forms";
 import { loginModule } from "../components/login/modules";
-import { useWindowSize } from "@/utils/hooks/useWindowSize";
 import { Field } from "@/modules/forms/Blocks";
 import { useRouter } from "next/router";
+import { useScreenSize } from "@/utils/media";
 
 const Login = () => {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -41,7 +41,8 @@ const Login = () => {
     setPasswordShown(passwordShown ? false : true);
   };
 
-  const size = useWindowSize();
+  const smallScreenSizes = ["tablet", "desktop", "mobile"];
+  const { size } = useScreenSize();
   const router = useRouter();
 
   useEffect(() => {
@@ -72,8 +73,7 @@ const Login = () => {
     try {
       let res = await loginModule.actions.submit();
       let token = await res.key;
-      localStorage.setItem("auth-token", token)
-      console.log(token)
+      localStorage.setItem("auth-token", token);
       axios
         .get(`${API_PATH.GETAUTHUSER}/`, tokenConfig1(token))
         .then((res) => {
@@ -101,7 +101,7 @@ const Login = () => {
       <DefaultLayout showSignup={false}>
         <MainWrapper>
           <FormWrapper>
-            {size.width < 1023 && (
+            {smallScreenSizes.includes(size) && (
               <WaveWrapper>
                 <Image src={wave} layout="fill" objectFit="cover" />
                 <DrawingWrapper>
