@@ -62,7 +62,9 @@ export const shopServicesListModule = createListModule({
 export const nextSlotFetcher = keyedDataFetcher({
   selectors: ["shops", "nextSlot"],
   async fetchData([_1, _2, shopId]) {
-    return api.post(`${API_PATH.NEXT_SLOTS}/`, {shops: shopId}).then(data => data[0]);
+    return api
+      .post(`${API_PATH.NEXT_SLOTS}/`, { shops: shopId })
+      .then((data) => data[0]);
   },
 });
 
@@ -115,12 +117,12 @@ export const openTimeFetcher = dataFetcher({
     const response = await api.get(`${API_PATH.GETVALIDOPENTIME}/${shop}/`);
     try {
       return JSON.parse(response?.[0]?.valid_day_time || "");
-    } catch(err) {
+    } catch (err) {
       return null;
     }
   },
-})
+});
 
-export const reviewsModal = createModalModule()
-export const shopInfo = createModalModule()
-export const continueWitoutServiceModal = createModalModule()
+export const reviewsModal = createModalModule();
+export const shopInfo = createModalModule();
+export const continueWitoutServiceModal = createModalModule();

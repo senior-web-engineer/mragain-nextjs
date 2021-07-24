@@ -146,6 +146,10 @@ const TotalWrap = styled.div`
   }
 `;
 
+const ButtonWrapper = styled(Button)`
+  padding: 0 14px;
+`;
+
 const DeviceName = withData({
   dataFetcher: deviceFetcher,
   Component({ data }) {
@@ -167,7 +171,7 @@ const ModelName = withData({
   },
 });
 
-export default function BookingInfo({ shop, nextStep }) {
+export default function BookingInfo({ shop, step, nextStep }) {
   const location = [shop.street || "", shop.city || ""]
     .filter(Boolean)
     .join(", ");
@@ -232,9 +236,13 @@ export default function BookingInfo({ shop, nextStep }) {
           </TotalWrap>
         </>
       ) : null}
-      <Button onClick={nextStep} aria-label="Next step">
-        <FontAwesomeIcon icon={faArrowRight} />
-      </Button>
+      <ButtonWrapper onClick={nextStep} aria-label="Next step">
+        {step !== 0 ? (
+          <span>Bevestig</span>
+        ) : (
+          <FontAwesomeIcon icon={faArrowRight} />
+        )}
+      </ButtonWrapper>
     </MainWrap>
   );
 }

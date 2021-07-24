@@ -52,16 +52,11 @@ import Modal from "@/modules/modal";
 import { useRouter } from "next/router";
 import GooglePlaces, { loadScript } from "@/components/common/GooglePlaces";
 import moment from "moment";
-
-import dynamic from "next/dynamic";
-import Loader from "@/components/common/Loader";
+import Head from "next/head";
+import { FRONT_END_URL } from "../constants.js";
 import { getShopLogo, getShopRoute } from "@/utils/shop";
 import Link from "next/link";
-
-const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
-  loading: Loader,
-  ssr: false,
-});
+import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
 
 //
 
@@ -143,6 +138,10 @@ const ModelFields = styled.div`
     margin-top: 0 !important;
     margin: 10px 0;
     background-color: #fff;
+
+    &[disabled] {
+      background-color: #f5f5f5;
+    }
 
     > label {
       margin: 11px 11px 2px 11px;
@@ -330,6 +329,7 @@ const Content = styled.div`
     padding: 30px 20px 0;
     position: relative;
     overflow: hidden;
+    min-height: 220px;
 
     > div {
       position: relative;
@@ -381,11 +381,6 @@ const ModelFieldsMobile = styled.div`
 
   > div {
     width: 100%;
-  }
-
-  > div:nth-child(1),
-  > div:nth-child(3) {
-    width: 40%;
   }
 `;
 
@@ -667,9 +662,7 @@ function ShopItem({ item }) {
   const router = useRouter();
   const { selectedShop, updateSelectedShop, showMap } =
     useContext(ShopBridgeContext);
-  const location = [item.shop.street || "", item.shop.city || ""]
-    .filter(Boolean)
-    .join(", ");
+  const location = [item.shop.city || ""].filter(Boolean).join(", ");
   function renderService(service) {
     return <ShopDetails.Service>{service.device_name}</ShopDetails.Service>;
   }
@@ -757,14 +750,14 @@ function ShopItem({ item }) {
   );
 
   if (typeof window === "undefined") {
-    return <Link href={shopRoute}>
-      <a>
-        {shopCard}
-      </a>
-    </Link>
+    return (
+      <Link href={shopRoute}>
+        <a>{shopCard}</a>
+      </Link>
+    );
   }
 
-  return shopCard
+  return shopCard;
 }
 
 function parseOptions(arr, key) {
@@ -792,24 +785,7 @@ const MobileDeviceSelector = createSelectComponent({
   parseOptions(items = []) {
     return parseOptions(items || [], "device_name");
   },
-  Component({ options, ...rest }) {
-    const menuData = options.map((option) => (
-      <Radio.Button key={option.value} value={option.value}>
-        {option.label}
-      </Radio.Button>
-    ));
-
-    return (
-      <Field as={Radio.Group} {...rest}>
-        <Menu
-          alignCenter={false}
-          data={menuData}
-          selected={rest.value}
-          hideArrows={true}
-        />
-      </Field>
-    );
-  },
+  Component: MobileRadioButtons,
 });
 
 function AppendIdentifier({ Component, name }) {
@@ -1037,37 +1013,13 @@ function RefineSearchForm() {
   );
 }
 
-function ResultCount() {
-  const context = useListContext();
-  if (!context.items || context.state.isLoading) {
-    return null;
-  }
-
-  return ` (${context.items.length})`;
-}
-
-export default function SearchResults() {
-  const [showMobileSearch, setShowMobileSearch] = useState();
-  const [selectedShop, updateSelectedShop] = useState(null);
-  const [showMap, updateShowMap] = useState(false);
-  const mobileSelectorsRef = useRef(null);
-
-  useEffect(() => {
-    async function main() {
-      await loadScript();
-    }
-    main();
-  }, []);
-
-  useEffect(() => {
-    if (shopRefs[selectedShop]) {
-      shopRefs[selectedShop].scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-      });
-    }
-  }, [selectedShop]);
-
+function ModelFieldsComponent({
+  showMap,
+  updateShowMap,
+  setShowMobileSearch,
+  showMobileSearch,
+}) {
+  const { state } = useFormContext();
   const onDeviceChange = useCallback((ev) => {
     const value = parseNativeEvent(ev);
     filtersFormModule.actions.batchChange({
@@ -1101,6 +1053,140 @@ export default function SearchResults() {
     });
     serviceFetcher.key(`${value}`).fetch();
   });
+  return (
+    <ModelFields>
+      <OnMobile only>
+        <Field
+          as={MobileDeviceSelector}
+          name="device"
+          aria-input-field-name="device"
+          onChange={onDeviceChange}
+        />
+        {state.values.device === "0" ? null : (
+          <ModelFieldsMobile>
+            <BrandSelector
+              name="brand"
+              as={Select}
+              label="Merk"
+              aria-input-field-name="brand"
+              onChange={onBandChange}
+              dropdownStyle={{ minWidth: "200px" }}
+            />
+            <ModelSelector
+              name="model"
+              as={Select}
+              label="Model"
+              aria-input-field-name="model"
+              disabled={state.values.brand === "0"}
+              onChange={onModelChange}
+            />
+            <ServiceSelector
+              name="service"
+              as={Select}
+              label="Reparatie"
+              disabled={state.values.model === "0"}
+              aria-input-field-name="service"
+              dropdownStyle={{ minWidth: "200px" }}
+            />
+            <Waypoint
+              onEnter={() => setShowMobileSearch(false)}
+              onLeave={() => setShowMobileSearch(true)}
+            />
+            <Field
+              name="sort"
+              as={Select}
+              options={SORT_BY}
+              label="Sorteer op"
+            />
+          </ModelFieldsMobile>
+        )}
+      </OnMobile>
+      <OnMobile show={false}>
+        <DeviceSelector
+          name="device"
+          as={Select}
+          label="Apparaat"
+          aria-input-field-name="device"
+          onChange={onDeviceChange}
+          dropdownStyle={{ minWidth: "200px" }}
+        />
+        <BrandSelector
+          name="brand"
+          as={Select}
+          label="Merk"
+          aria-input-field-name="brand"
+          onChange={onBandChange}
+          dropdownStyle={{ minWidth: "200px" }}
+          disabled={state.values.device === "0"}
+        />
+        <ModelSelector
+          name="model"
+          as={Select}
+          label="Model"
+          aria-input-field-name="model"
+          disabled={state.values.brand === "0"}
+          onChange={onModelChange}
+          dropdownStyle={{ minWidth: "200px" }}
+        />
+        <ServiceSelector
+          name="service"
+          as={Select}
+          label="Reparatie"
+          aria-input-field-name="service"
+          disabled={state.values.model === "0"}
+          dropdownStyle={{ minWidth: "200px" }}
+          popupPlacement="bottomRight"
+        />
+      </OnMobile>
+      <MapTriggerWrap>
+        <label>Kaart</label>
+        <Switch checked={showMap} onChange={(val) => updateShowMap(val)} />
+      </MapTriggerWrap>
+    </ModelFields>
+  );
+}
+
+function ResultCount() {
+  const context = useListContext();
+  if (!context.items || context.state.isLoading) {
+    return null;
+  }
+
+  return ` (${context.items.length})`;
+}
+
+export default function SearchResults() {
+  const [showMobileSearch, setShowMobileSearch] = useState();
+  const [selectedShop, updateSelectedShop] = useState(null);
+  const [showMap, updateShowMap] = useState(false);
+  const mobileSelectorsRef = useRef(null);
+
+  useEffect(() => {
+    async function main() {
+      await loadScript();
+      const formValues = filtersFormModule.state.values;
+      if (formValues.device) {
+        await brandFetcher.key(formValues.device).fetch();
+      }
+      if (formValues.brand) {
+        await modelFetcher.key(formValues.brand).fetch();
+      }
+
+      if (formValues.model) {
+        await serviceFetcher.key(formValues.model).fetch();
+      }
+    }
+    main();
+  }, []);
+
+  useEffect(() => {
+    if (shopRefs[selectedShop]) {
+      shopRefs[selectedShop].scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }
+  }, [selectedShop]);
 
   const locationField = (
     <Field
@@ -1116,6 +1202,36 @@ export default function SearchResults() {
       value={{ selectedShop, updateSelectedShop, showMap }}
     >
       <DefaultLayout>
+        <Head>
+          <title>Zoek een telefoon reparateur | Mr Again</title>
+          <meta
+            name="Keywords"
+            content="Zoek een telefoon reparateur, telefoon maken, telefoon reparateur, telefoon reparatie, scherm maken, Mr Again"
+          />
+          <meta
+            name="description"
+            content="Telefoon maken of telefoon reparatie? Bekijk de zoek resultaten bij MrAgain"
+          />
+          <link rel="canonical" href={FRONT_END_URL + "/zoek-een-reparateur"} />
+          {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
+          <meta property="og:type" content="website" />
+          <meta
+            name="og_title"
+            property="og:title"
+            content="Zoek een telefoon reparateur"
+          />
+          <meta
+            property="og:description"
+            content="Zoek een telefoon reparateur"
+          />
+          <meta name="og:url" content={FRONT_END_URL} />
+          <meta property="og:image" content="" />
+          <meta
+            name="og_site_name"
+            property="og:site_name"
+            content="Mr Again"
+          />
+        </Head>
         <MainWrap>
           <MaxConstraints>
             <Sidebar>
@@ -1155,91 +1271,12 @@ export default function SearchResults() {
                     />
                   </OnMobile>
                 </ZipFields>
-                <ModelFields>
-                  <OnMobile only>
-                    <MobileDeviceSelector
-                      name="device"
-                      aria-input-field-name="device"
-                      onChange={onDeviceChange}
-                    />
-                    <ModelFieldsMobile>
-                      <BrandSelector
-                        name="brand"
-                        as={Select}
-                        label="Merk"
-                        aria-input-field-name="brand"
-                        onChange={onBandChange}
-                        dropdownStyle={{ minWidth: "200px" }}
-                      />
-                      <hr />
-                      <ModelSelector
-                        name="model"
-                        as={Select}
-                        label="Model"
-                        aria-input-field-name="model"
-                        onChange={onModelChange}
-                      />
-                      <ServiceSelector
-                        name="service"
-                        as={Select}
-                        label="Reparatie"
-                        aria-input-field-name="service"
-                        dropdownStyle={{ minWidth: "200px" }}
-                      />
-                      <Waypoint
-                        onEnter={() => setShowMobileSearch(false)}
-                        onLeave={() => setShowMobileSearch(true)}
-                      />
-                      <Field
-                        name="sort"
-                        as={Select}
-                        options={SORT_BY}
-                        label="Sorteer op"
-                      />
-                    </ModelFieldsMobile>
-                  </OnMobile>
-                  <OnMobile show={false}>
-                    <DeviceSelector
-                      name="device"
-                      as={Select}
-                      label="Apparaat"
-                      aria-input-field-name="device"
-                      onChange={onDeviceChange}
-                      dropdownStyle={{ minWidth: "200px" }}
-                    />
-                    <BrandSelector
-                      name="brand"
-                      as={Select}
-                      label="Merk"
-                      aria-input-field-name="brand"
-                      onChange={onBandChange}
-                      dropdownStyle={{ minWidth: "200px" }}
-                    />
-                    <ModelSelector
-                      name="model"
-                      as={Select}
-                      label="Model"
-                      aria-input-field-name="model"
-                      onChange={onModelChange}
-                      dropdownStyle={{ minWidth: "200px" }}
-                    />
-                    <ServiceSelector
-                      name="service"
-                      as={Select}
-                      label="Reparatie"
-                      aria-input-field-name="service"
-                      dropdownStyle={{ minWidth: "200px" }}
-                      popupPlacement="bottomRight"
-                    />
-                  </OnMobile>
-                  <MapTriggerWrap>
-                    <label>Kaart</label>
-                    <Switch
-                      checked={showMap}
-                      onChange={(val) => updateShowMap(val)}
-                    />
-                  </MapTriggerWrap>
-                </ModelFields>
+                <ModelFieldsComponent
+                  showMap={showMap}
+                  updateShowMap={updateShowMap}
+                  setShowMobileSearch={setShowMobileSearch}
+                  showMobileSearch={showMobileSearch}
+                />
                 <SyncFormValues onChange={shopListModule.actions.updateQuery} />
               </Form>
               <List module={shopListModule}>
@@ -1315,16 +1352,5 @@ export const getServerSideProps = wrapper.getServerSideProps(
     await filtersFormModule.actions.initialize(query);
     await shopListModule.actions.initialize();
     await deviceFetcher.fetch();
-    const formValues = filtersFormModule.state.values;
-    if (formValues.device) {
-      brandFetcher.key(formValues.device).fetch();
-    }
-    if (formValues.brand) {
-      modelFetcher.key(formValues.brand).fetch();
-    }
-
-    if (formValues.model) {
-      serviceFetcher.key(formValues.model).fetch();
-    }
   }
 );

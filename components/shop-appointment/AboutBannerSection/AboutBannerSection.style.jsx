@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const AboutBreadcrumb = styled.div`
   width: 218px;
@@ -6,7 +6,7 @@ export const AboutBreadcrumb = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-`
+`;
 
 export const AboutBannerTitle = styled.div`
   width: 218px;
@@ -16,4 +16,4 @@ export const AboutBannerTitle = styled.div`
   line-height: 38px;
   font-weight: bold;
   color: #fff;
-`
+`;

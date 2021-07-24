@@ -11,10 +11,10 @@ import { getLongAndLat } from "../common/GooglePlaces";
 
 //
 
-export async function prepareData({location, ...data}) {
+export async function prepareData({ location, ...data }) {
   let parsedData = { lat: 0, long: 0, ...data };
   try {
-    const locationMetadata = await getLongAndLat(location)
+    const locationMetadata = await getLongAndLat(location);
 
     parsedData = {
       ...parsedData,
@@ -43,7 +43,7 @@ export const filtersFormModule = createFormModule({
       lat: query.lat || 0,
       limit: 100,
     };
-  }
+  },
 });
 
 export const shopListModule = createListModule({
@@ -112,7 +112,8 @@ export const shopListModule = createListModule({
       };
     } catch (err) {
       notification.error({
-        message: "We hebben geen resultaten gevonden, heb je je locatie en apparaat ingevuld?",
+        message:
+          "We hebben geen resultaten gevonden, heb je je locatie en apparaat ingevuld?",
       });
 
       return { items: [] };

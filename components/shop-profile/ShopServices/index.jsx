@@ -32,8 +32,10 @@ import Loader from "@/components/common/Loader";
 import moment from "moment";
 import ConfirmationModal from "@/components/common/modals/ConfirmationModal";
 import { continueWitoutServiceModal } from "@/components/shop-profile/modules";
-import { SubTitle } from "@/components/styled/text";
+import { SubTitle, SubTitleDescription } from "@/components/styled/text";
 import Image from "next/image";
+import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
+import { store } from "@/configureStore";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
   loading: Loader,
@@ -49,7 +51,7 @@ const nextSlotCss = css`
     margin-right: 10px;
 
     > div:first-child {
-      display: none!important;
+      display: none !important;
     }
 
     label {
@@ -58,7 +60,6 @@ const nextSlotCss = css`
       margin: 0;
     }
   }
-
 
   ${media.tablet`
     next-slot {
@@ -120,11 +121,9 @@ const ReparationCell = styled.div`
 `;
 
 const NextStepWrap = styled.div`
-  ${media.tablet`
-    margin: 20px -24px 0;
-    padding: 15px 24px;
-    border-top: 1px solid #ddd;
-  `}
+  margin: 20px -24px 0;
+  padding: 15px 24px;
+  border-top: 1px solid #ddd;
 `;
 
 const MobileToolbar = styled.div`
@@ -261,10 +260,7 @@ function MobileServiceItem({ item }) {
     <ServiceMobileItemWrap>
       <ServiceMobileItemWrap.FirstColumn>
         {firstColumn}
-        <d-def>
-          {item.guarantee_time} maanden garantie <br />~ {item.reparation_time}{" "}
-          reparatie tijd
-        </d-def>
+        <d-def>{item.guarantee_time} maanden garantie</d-def>
       </ServiceMobileItemWrap.FirstColumn>
       <price>
         <span>&euro;{item.price}</span>
@@ -274,13 +270,7 @@ function MobileServiceItem({ item }) {
 }
 
 function parseOptions(arr, key) {
-  return [
-    {
-      id: "0",
-      [key]: "Alle",
-    },
-    ...arr,
-  ].map((item) => ({
+  return [...arr].map((item) => ({
     value: `${item.id}`,
     label: item[key],
   }));
@@ -298,24 +288,7 @@ const MobileDeviceSelector = createSelectComponent({
   parseOptions(items = []) {
     return parseOptions(items || [], "device_name");
   },
-  Component({ options, ...rest }) {
-    const menuData = options.map((option) => (
-      <Radio.Button key={option.value} value={option.value}>
-        {option.label}
-      </Radio.Button>
-    ));
-
-    return (
-      <Field as={Radio.Group} {...rest}>
-        <Menu
-          alignCenter={false}
-          data={menuData}
-          selected={rest.value}
-          hideArrows={true}
-        />
-      </Field>
-    );
-  },
+  Component: MobileRadioButtons,
 });
 
 const MobileDeviceSelectorWrap = styled.div`
@@ -365,6 +338,11 @@ const Panel = styled.div`
   }
 
   ${SubTitle} {
+    margin: 0 -24px;
+    padding: 15px 24px 0 24px;
+  }
+
+  ${SubTitleDescription} {
     margin: 0 -24px;
     padding: 15px 24px;
     border-bottom: 1px solid #ddd;
@@ -421,11 +399,11 @@ function AppointmentButton() {
               ev.preventDefault();
               continueWitoutServiceModal.actions
                 .open({
-                  type: "warning",
-                  message: "Wil je een algemene diagnose afspraak maken?",
+                  type: "success",
+                  message: "Algemene afspraak",
                   description:
-                    "Selecteer een reparatie zodat de reparateur weet waarvoor je komt. Staat je reparatie er niet tussen, of weet je niet wat er aan de hand is? Ga dan door en maak een diagnose afspraak.",
-                  buttonLabel: "Ja",
+                    "Je hebt geen reparatie geselecteerd, als je een afspraak wilt maken maken we daarom een algemene diagnose afspraak voor je.",
+                  buttonLabel: "Prima!",
                 })
                 .then(() => {
                   router.push(nextLocation);
@@ -433,7 +411,7 @@ function AppointmentButton() {
             }
           }}
         >
-          Afspraak maken <FontAwesomeIcon icon={faArrowRight} />{" "}
+          Contact & afspraak maken <FontAwesomeIcon icon={faArrowRight} />{" "}
         </Button>
       </Link>
     </NextStepWrap>
@@ -441,7 +419,10 @@ function AppointmentButton() {
 }
 
 function NextSlot({ id }) {
-  const { data } = useFetcher({ identifier: id, dataFetcher: nextSlotFetcher });
+  const { data } = useFetcher({
+    identifier: id,
+    dataFetcher: nextSlotFetcher,
+  });
 
   if (!data?.next_slot) {
     return null;
@@ -466,10 +447,9 @@ export default function ShopServices({ shop }) {
   useEffect(() => {
     async function main() {
       await filtersFormModule.actions.initialize(shop.id);
-      shopServicesListModule.actions.initialize();
       nextSlotFetcher.key(`${shop.id}`).fetch();
       serviceFormModule.actions.initialize();
-      deviceFetcher.fetch();
+      const devices = await deviceFetcher.fetch();
       const formValues = filtersFormModule.state.values;
       if (formValues.device) {
         brandFetcher.key(formValues.device).fetch();
@@ -477,28 +457,57 @@ export default function ShopServices({ shop }) {
       if (formValues.brand) {
         modelFetcher.key(formValues.brand).fetch();
       }
+
+      if (formValues.device === "0" && devices.length > 0) {
+        filtersFormModule.actions.batchChange({
+          updates: {
+            device: `${devices[0].id}`,
+          },
+        });
+        const brands = await brandFetcher.key(`${devices[0].id}`).fetch();
+        const models = await modelFetcher.key(`${brands[0].id}`).fetch();
+        const updates = {
+          device: devices.length > 0 ? `${devices[0].id}` : `0`,
+          brand: brands.length > 0 ? `${brands[0].id}` : `0`,
+          model: models.length > 0 ? `${models[0].id}` : `0`,
+        };
+
+        filtersFormModule.actions.batchChange({
+          updates,
+        });
+      }
+
+      shopServicesListModule.actions.initialize();
     }
 
     main();
   }, [shop.id]);
 
-  const onDeviceChange = useCallback((ev) => {
+  const onDeviceChange = useCallback(async (ev) => {
     const value = parseNativeEvent(ev);
+    console.log(value);
+    const brands = await brandFetcher.key(value).fetch();
     filtersFormModule.actions.batchChange({
       updates: {
         device: value,
-        brand: "0",
-        model: "0",
+        brand: brands.length > 0 ? `${brands[0].id}` : `0`,
       },
     });
-    brandFetcher.key(`${value}`).fetch();
+    const models = await modelFetcher.key(`${brands[0].id}`).fetch();
+    filtersFormModule.actions.batchChange({
+      updates: {
+        model: models.length > 0 ? `${models[0].id}` : `0`,
+      },
+    });
+    // brandFetcher.key(`${value}`).fetch();
   });
 
-  const onBandChange = useCallback((value) => {
+  const onBandChange = useCallback(async (value) => {
+    const models = await modelFetcher.key(value).fetch();
     filtersFormModule.actions.batchChange({
       updates: {
         brand: value,
-        model: "0",
+        model: models.length > 0 ? `${models[0].id}` : `0`,
       },
     });
     modelFetcher.key(`${value}`).fetch();
@@ -516,11 +525,21 @@ export default function ShopServices({ shop }) {
   return (
     <MaxConstraints>
       <Panel>
-        <SubTitle>Selecteer je apparaat, merk en model & bekijk onze reparaties</SubTitle>
+        <SubTitle>
+          Selecteer je apparaat, merk en model & bekijk onze reparaties
+        </SubTitle>
+        <SubTitleDescription>
+          Staat je model of reparatie er niet tussen? Waarschijnlijk kunnen we
+          je wel helpen, maak een afspraak en we kijken er naar!
+        </SubTitleDescription>
         <Form module={filtersFormModule}>
           <OnMobile only>
             <MobileDeviceSelectorWrap>
-              <MobileDeviceSelector name="device" onChange={onDeviceChange} />
+              <Field
+                as={MobileDeviceSelector}
+                name="device"
+                onChange={onDeviceChange}
+              />
             </MobileDeviceSelectorWrap>
           </OnMobile>
           <ModelFields>
@@ -555,14 +574,22 @@ export default function ShopServices({ shop }) {
           </ModelFields>
           <SyncFormValues
             onChange={(data) => {
-              shopServicesListModule.actions.updateQuery(data);
-              if (!serviceFormModule.state) {
-                return;
+              // TODO (V.T leave explanation)
+              const models =
+                modelFetcher.key(data.brand).selector(store.ref.getState())
+                  ?.result || [];
+              if (
+                models.find((model) => +model.id === +data.model) !== undefined
+              ) {
+                shopServicesListModule.actions.updateQuery(data);
+                if (!serviceFormModule.state) {
+                  return;
+                }
+                serviceFormModule.actions.onFieldChange({
+                  name: "service",
+                  value: null,
+                });
               }
-              serviceFormModule.actions.onFieldChange({
-                name: "service",
-                value: null,
-              });
             }}
           />
         </Form>
@@ -578,10 +605,10 @@ export default function ShopServices({ shop }) {
             </OnMobile>
           </Form>
         </List>
-        <OnMobile show={false}>{apointmentButton}</OnMobile>
+        <OnMobile>{apointmentButton}</OnMobile>
         <OnMobile only>
           <MobileToolbar>
-            <NextSlot id={shop.id} />
+            {/*<NextSlot id={shop.id} />*/}
             {apointmentButton}
           </MobileToolbar>
         </OnMobile>

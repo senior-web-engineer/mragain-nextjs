@@ -18,8 +18,8 @@ const TestmonialSection = () => (
           Wat onze bezoekers zeggen
         </h2>
       </Row>
-       <Row>
-	<SectionModel>
+      <Row>
+        <SectionModel>
           <DotDevider color={"#f8f8f8"} />
         </SectionModel>
       </Row>

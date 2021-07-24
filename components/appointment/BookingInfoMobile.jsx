@@ -165,7 +165,7 @@ const ModelName = withData({
   },
 });
 
-export default function BookingInfoMobile({ shop, nextStep }) {
+export default function BookingInfoMobile({ shop, step }) {
   const location = [shop.street || "", shop.city || ""]
     .filter(Boolean)
     .join(", ");

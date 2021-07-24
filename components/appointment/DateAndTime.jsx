@@ -72,7 +72,8 @@ const DatePickerWrap = styled.div`
     font-size: 13px;
   }
 
-  .ant-fullcalendar-next-month-btn-day:not(.ant-fullcalendar-disabled-cell) .ant-fullcalendar-value {
+  .ant-fullcalendar-next-month-btn-day:not(.ant-fullcalendar-disabled-cell)
+    .ant-fullcalendar-value {
     color: rgba(0, 0, 0, 0.65);
   }
 
@@ -329,10 +330,14 @@ export default function DateAndTime() {
         <SubTitle>Kies de datum die jou uitkomt</SubTitle>
       </header>
       <SchedueleContentWrap>
-        <Field name="date" as={CalendarField} onChange={(value) => {
-          appointmentForm.actions.onFieldChange({name: "date", value})
-          appointmentForm.actions.onFieldChange({name: "time", value: ""})
-        }}/>
+        <Field
+          name="date"
+          as={CalendarField}
+          onChange={(value) => {
+            appointmentForm.actions.onFieldChange({ name: "date", value });
+            appointmentForm.actions.onFieldChange({ name: "time", value: "" });
+          }}
+        />
         <Field name="time" as={TimePicker} />
       </SchedueleContentWrap>
     </DatePickerWrap>

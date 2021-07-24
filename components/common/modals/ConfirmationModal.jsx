@@ -71,7 +71,7 @@ export default connect(
     moduleData: ownProps.module.selectors.data || {},
   }),
   (_, ownProps) => ({
-    resolve: async() => {
+    resolve: async () => {
       await ownProps.module.actions.resolve();
       ownProps.module.actions.close();
     },

@@ -172,22 +172,22 @@ const Toolbar = styled.div`
 `;
 
 export function ShopCard({ shop, onClick }) {
-  const location = [shop.street || "", shop.city || "", shop.country || ""]
+  const location = [shop.city || "", shop.country || ""]
     .filter(Boolean)
     .join(", ");
 
   const shopUrl = getShopRoute(shop);
-  const shopLogo = getShopLogo(shop.logo_photo)
+  const shopLogo = getShopLogo(shop.logo_photo);
 
   return (
     <ShopWrap key={shop.id} onClick={onClick}>
       <ShopImageWrap tagColor={TAG_TO_COLOR[shop.tag]}>
-          <Image
-            loading="lazy"
-            src={shopLogo}
-            layout="fill"
-            objectFit="contained"
-          />
+        <Image
+          loading="lazy"
+          src={shopLogo}
+          layout="fill"
+          objectFit="contained"
+        />
         <d-def>
           {shop.rating !== undefined ? (
             <rating>
@@ -240,7 +240,7 @@ export default function ShopsSection({ shopList = [] } = {}) {
           <filter-by hidden>Nieuw</filter-by>
         </div>
         <div>
-          <Link href="/search-results">
+          <Link href="/zoek-een-reparateur">
             <a className="view-all">
               Laad meer <FontAwesomeIcon icon={faArrowRight} />
             </a>

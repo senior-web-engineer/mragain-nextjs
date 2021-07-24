@@ -33,6 +33,7 @@ export function Field({
   children,
   as = "input",
   style,
+  disabled,
   ...rest
 }) {
   const { state, actions } = useFormContext();
@@ -93,7 +94,7 @@ export function Field({
   }
 
   return (
-    <FieldWrap>
+    <FieldWrap style={style} disabled={disabled}>
       {label ? (
         <label>
           {label}
@@ -102,6 +103,7 @@ export function Field({
       ) : null}
       <Component
         value={value}
+        disabled={disabled}
         onChange={onChange}
         onBlur={onBlur}
         children={children}

@@ -39,7 +39,7 @@ const ChamberInput = ({ value, onChange }) => {
 
 const AgreeSection = styled.div`
   display: flex;
-`
+`;
 
 const TermCheckbox = ({ value, onChange }) => {
   return (
@@ -106,9 +106,7 @@ const RegisterForm = () => {
   return (
     <RegisterFormArea>
       <AccountTitle className="row">Laten we beginnen!</AccountTitle>
-      <AccountSubTitle>
-        Registreer nu je gratis account
-      </AccountSubTitle>
+      <AccountSubTitle>Registreer nu je gratis account</AccountSubTitle>
       <div className="row">
         <div className="account-create-container2">
           <div className="account-create-container2-wrap">
@@ -180,6 +178,5 @@ const RegisterForm = () => {
     </RegisterFormArea>
   );
 };
-
 
 export default RegisterForm;

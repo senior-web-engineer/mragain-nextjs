@@ -87,12 +87,17 @@ export default class MyDocument extends Document {
             <img
               height="1"
               width="1"
-              style={{display:"none"}}
+              style={{ display: "none" }}
               src="https://www.facebook.com/tr?id=211612300504557&ev=PageView&noscript=1"
             />
           </noscript>
           {isProduction ? (
             <>
+              <script
+                async
+                custom-element="amp-analytics"
+                src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"
+              />
               <script dangerouslySetInnerHTML={{ __html: gaScript }} />
               <script dangerouslySetInnerHTML={{ __html: hotJarScript }} />
               <script dangerouslySetInnerHTML={{ __html: facebookScript }} />
@@ -102,6 +107,14 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          {isProduction ? (
+            <>
+              <amp-analytics
+                config="https://www.googletagmanager.com/amp.json?id=GTM-T4WQQ47&gtm.url=SOURCE_URL"
+                data-credentials="include"
+              />
+            </>
+          ) : null}
         </body>
       </Html>
     );

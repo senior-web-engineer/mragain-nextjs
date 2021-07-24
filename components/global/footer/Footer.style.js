@@ -80,7 +80,7 @@ export const FooterBrandContent = styled.div``;
 
 export const FooterLinkArea = styled.div`
   display: flex;
-  width: 480px;
+  width: 550px;
   @media (max-width: 1125px) {
     width: 700px;
     padding-top: 25px;
@@ -97,7 +97,7 @@ export const FooterLinkArea = styled.div`
 `;
 
 export const FooterSitemap = styled.div`
-  width: 50%;
+  width: 70%;
   @media (max-width: 570px) {
     width: 100%;
   }

@@ -59,20 +59,23 @@ const SearchForm = (routerProps) => {
         <h1 className="main-title">
           Vind een betrouwbare telefoon reparateur bij jou in de buurt
         </h1>
-        <GreenText/>
+        <GreenText />
       </div>
       <div className="form-group">
-        <label htmlFor="main-search-from"
-               style={{
-                 opacity:0,
-                 width:0,
-                 height:0,
-               }}
-        >Woonplaats of postcode</label>
+        <label
+          htmlFor="main-search-from"
+          style={{
+            opacity: 0,
+            width: 0,
+            height: 0,
+          }}
+        >
+          Woonplaats of postcode
+        </label>
         <input
           type="input"
-          id={'main-search-from'}
-          name={'search'}
+          id={"main-search-from"}
+          name={"search"}
           className="form-control"
           placeholder="Woonplaats of postcode"
           value={location}

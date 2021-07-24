@@ -68,9 +68,8 @@ const ShopAppointment = (routerProps) => {
   const [manualReparation, setManualReparation] = useState(0);
   const [reparationId, setReparationId] = useState(0);
   const [manualMreparaties, setManualReparaties] = useState([]);
-  const [manualShowSaveReparation, setManualShowSaveReparation] = useState(
-    true
-  );
+  const [manualShowSaveReparation, setManualShowSaveReparation] =
+    useState(true);
   const [isResponse, setIsResponse] = useState(null);
   const [showSaveButton, setShowSaveButton] = useState(false);
   const [isUpdateReparatie, setIsUpdateReparatie] = useState(false);
@@ -204,7 +203,8 @@ const ShopAppointment = (routerProps) => {
   }
 
   function ValidatePhoneNumber(inputtxt) {
-    var phoneno = /^((\+|00(\s|\s?-\s?)?)31(\s|\s?-\s?)?(\(0\)[-\s]?)?|0)[1-9]((\s|\s?-\s?)?[0-9])((\s|\s?-\s?)?[0-9])((\s|\s?-\s?)?[0-9])\s?[0-9]\s?[0-9]\s?[0-9]\s?[0-9]\s?[0-9]$/;
+    var phoneno =
+      /^((\+|00(\s|\s?-\s?)?)31(\s|\s?-\s?)?(\(0\)[-\s]?)?|0)[1-9]((\s|\s?-\s?)?[0-9])((\s|\s?-\s?)?[0-9])((\s|\s?-\s?)?[0-9])\s?[0-9]\s?[0-9]\s?[0-9]\s?[0-9]\s?[0-9]$/;
     if (inputtxt.match(phoneno)) {
       return true;
     } else {
@@ -1234,7 +1234,7 @@ const ShopAppointment = (routerProps) => {
                             <p>De afspraak is gemaakt</p>
                             <p>
                               Bedankt voor het maken van een afspraak. We hebben
-                              je een bevestiging email gestuurd.
+                              je een bevestigingsemail gestuurd.
                             </p>
                           </Fragment>
                         )}

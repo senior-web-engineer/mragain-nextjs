@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const StyledTable = styled(AntTable)`
   .ant-table-head {
-    background: #FAFAFA;
+    background: #fafafa;
   }
   .ant-table-thead > tr > th {
     font-size: 12px;
@@ -70,7 +70,7 @@ export function Table({ ...props }) {
 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
-      props.onRowsSelected(selectedRowKeys, selectedRows)
+      props.onRowsSelected(selectedRowKeys, selectedRows);
     },
     getCheckboxProps: (item) => ({
       disabled: item.disabled, // Column configuration not to be checked
@@ -79,7 +79,12 @@ export function Table({ ...props }) {
   };
 
   return (
-    <StyledTable pagination={false} {...props} dataSource={derivedItems} rowSelection={props.selection && rowSelection} />
+    <StyledTable
+      pagination={false}
+      {...props}
+      dataSource={derivedItems}
+      rowSelection={props.selection && rowSelection}
+    />
   );
 }
 

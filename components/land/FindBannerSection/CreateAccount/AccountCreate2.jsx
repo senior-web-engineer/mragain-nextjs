@@ -186,7 +186,8 @@ function AccountCreate2(routerProps) {
           </Form>
         </div>
         <h1 className="account-create-title2">
-          Lever jij de beste kwaliteit telefoon reparaties en wil je online gevonden worden?<br></br>
+          Lever jij de beste kwaliteit telefoon reparaties en wil je online
+          gevonden worden?<br></br>
           Met een gratis account sta je binnen 5 minuten online!{" "}
         </h1>
       </div>

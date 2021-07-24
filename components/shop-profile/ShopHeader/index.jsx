@@ -13,7 +13,11 @@ import { Popover, Rate } from "antd";
 import Image from "next/image";
 import React, { useCallback, useEffect } from "react";
 import styled, { css } from "styled-components";
-import { openTimeFetcher, reviewsFetcher, shopInfo } from "@/components/shop-profile/modules";
+import {
+  openTimeFetcher,
+  reviewsFetcher,
+  shopInfo,
+} from "@/components/shop-profile/modules";
 
 import {
   FacebookShareButton,
@@ -61,6 +65,7 @@ const ContentWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 
   ${media.tablet`
     flex-direction: row;
@@ -189,12 +194,12 @@ const AdvantagesWrap = styled.div`
 `;
 
 const DetailButtonsWrap = styled.div`
+  top: 12px;
   position: absolute;
-  top: 10px;
   right: 0;
   z-index: 100;
   ${Button} {
-    margin: 0 10px;
+    margin-left: 10px;
     height: 35px;
     line-height: 11px;
     min-width: 35px;
@@ -215,9 +220,9 @@ const DetailButtonsWrap = styled.div`
 
 const ADVANTAGES = [
   {
-    title: "Klaar terwijl u wacht",
+    title: "Cashback op je reparatie",
     logo: "/images/shop/wallet.png",
-    description: "De meeste reparaties zijn binnen 30 minuten klaar",
+    description: "Ontvang 5 euro cashback na het achterlaten van een review",
   },
   {
     title: "Altijd de beste garantie",
@@ -243,7 +248,10 @@ export default function ShopHeader({ shop }) {
     .filter(Boolean)
     .join(", ");
 
-  const { data: reviews } = useFetcher({dataFetcher: reviewsFetcher, identifier: shop.id});
+  const { data: reviews } = useFetcher({
+    dataFetcher: reviewsFetcher,
+    identifier: shop.id,
+  });
 
   function renderAdvantage(advantage) {
     return (
@@ -300,17 +308,27 @@ export default function ShopHeader({ shop }) {
     <div>
       <Wallpaper>
         {shop?.bg_photo ? (
-          <Image loading="lazy" layout="fill" objectFit="contain" src={shop.bg_photo} />
+          <Image
+            loading="lazy"
+            layout="fill"
+            objectFit="contain"
+            src={shop.bg_photo}
+          />
         ) : null}
-        <OnMobile only>{detailButtons}</OnMobile>
       </Wallpaper>
       <MaxConstraints>
         <ContentWrap>
           <ShopLogo>
             {shop?.logo_photo ? (
-              <Image loading="lazy" layout="fill" objectFit="contain" src={shop.logo_photo} />
+              <Image
+                loading="lazy"
+                layout="fill"
+                objectFit="contain"
+                src={shop.logo_photo}
+              />
             ) : null}
           </ShopLogo>
+          <OnMobile only>{detailButtons}</OnMobile>
           <ShopMeta>
             <ShopMeta.FirstRow tagColor={TAG_TO_COLOR[tag]}>
               <div>

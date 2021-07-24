@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { AboutSectionArea, AboutContainer } from "../ShopAppointment.style.jsx";
 import {
   AboutBreadcrumb,
-  AboutBannerTitle
+  AboutBannerTitle,
 } from "./AboutBannerSection.style.jsx";
 import "./AboutBannerSection.style.less";
 
