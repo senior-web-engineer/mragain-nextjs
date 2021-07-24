@@ -8,7 +8,7 @@ import {
   modelFetcher,
   brandFetcher,
   reparationsList,
-  serviceFetcher,
+  servicesFetcher,
 } from "@/components/dashboard/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
 import List from "@/modules/list";
@@ -23,6 +23,7 @@ import { createSelectComponent } from "@/modules/dataFetcher";
 import Select from "@/components/ui/Select";
 import get from "lodash/get";
 import { DatePicker, notification, TimePicker } from "antd";
+import { store } from "@/configureStore";
 
 //
 
@@ -115,9 +116,9 @@ const ModelSelector = AppendIdentifier({
 
 const ServiceSelector = AppendIdentifier({
   Component: createSelectComponent({
-    dataFetcher: serviceFetcher,
+    dataFetcher: servicesFetcher,
     parseOptions(items = []) {
-      return parseOptions(items || [], "reparation_name");
+      return parseOptions(items || [], "reparation.reparation_name", "reparation.id");
     },
   }),
   name: "model",
@@ -159,7 +160,7 @@ export default function DashboardPage({ auth_user }) {
         device: value,
         brand: "",
         model: "",
-        service: "",
+        reparation: "",
       },
     });
     brandFetcher.key(`${value}`).fetch();
@@ -170,7 +171,7 @@ export default function DashboardPage({ auth_user }) {
       updates: {
         brand: value,
         model: "",
-        service: "",
+        reparation: "",
       },
     });
     modelFetcher.key(`${value}`).fetch();
@@ -180,10 +181,28 @@ export default function DashboardPage({ auth_user }) {
     appointmentForm.actions.batchChange({
       updates: {
         model: value,
-        service: "",
+        reparation: "",
       },
     });
-    serviceFetcher.key(`${value}`).fetch();
+    servicesFetcher.key(`${value}`).fetch();
+  });
+
+  const onReparationChange = useCallback(async(value) => {
+    appointmentForm.actions.batchChange({
+      updates: {
+        reparation: value,
+      },
+    });
+    const services = await servicesFetcher.key(`${appointmentForm.state.values.model}`).fetch()
+    const serviceMetaInfo = services.find(service => service.reparation.id === value);
+    if (serviceMetaInfo) {
+      appointmentForm.actions.batchChange({
+        updates: {
+          price: serviceMetaInfo.price,
+          guarantee_time: serviceMetaInfo.guarantee_time,
+        },
+      });
+    }
   });
 
   return (
@@ -226,8 +245,8 @@ export default function DashboardPage({ auth_user }) {
             name="model"
             onChange={onModelChange}
           />
-          <ServiceSelector as={Select} label="Repration" name="reparation" />
-          <SubTitle>Appointment scheduele</SubTitle>
+          <ServiceSelector as={Select} label="Reparation" name="reparation"  onChange={onReparationChange} />
+          <SubTitle>Appointment schedule</SubTitle>
           <Field as={DatePicker} label="Date" name="date" />
           <Field
             as={TimePicker}
@@ -243,7 +262,7 @@ export default function DashboardPage({ auth_user }) {
             options={DURATION_OPTIONS}
           />
           <Field as={Input} name="price" label="Price" />
-          <Field as={Input} name="guarantee" label="Guarantee" />
+          <Field as={Input} name="guarantee_time" label="Guarantee" />
           <Button>Create appointment</Button>
         </Form>
       </Drawer>

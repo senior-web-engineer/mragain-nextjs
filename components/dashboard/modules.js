@@ -75,13 +75,13 @@ export const appointmentForm = createFormModule({
         reparation: data.reparation,
         status: "-1",
         price: data.price,
-        guarantee: data.guarantee,
+        guarantee: data.guarantee_time,
       },
     });
 
     createAppointmentFormModal.actions.close();
     notification.success({
-      message: "Appointment created successfull",
+      message: "Appointment created successfully",
     });
 
     return promise;
@@ -122,14 +122,16 @@ export const modelFetcher = keyedDataFetcher({
   },
 });
 
-export const serviceFetcher = keyedDataFetcher({
+export const servicesFetcher = keyedDataFetcher({
   selectors: [
     "dashboard",
     "services",
     () => appointmentForm.state.values.device,
+    () => appointmentForm.state.values.brand,
   ],
-  fetchData([_1, _2, device, model]) {
-    return api.get(`${API_PATH.GETREPARATIONS}/`, { device, model });
+  fetchData([_1, _2, device, brand, model]) {
+    const shop = currentUser.selector(store.ref.getState())?.result?.id;
+    return api.get(`${API_PATH.GETSHOPREPARATIONDETAILS}/`, { device, model, brand, shop });
   },
 });
 
