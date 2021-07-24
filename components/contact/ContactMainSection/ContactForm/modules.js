@@ -1,7 +1,8 @@
+import * as yup from "yup";
+
 import { API_PATH } from "@/constants";
 import { createFormModule } from "@/modules/forms";
 import api from "@/utils/api";
-import * as yup from "yup";
 
 const contactValidator = yup.object({
   name: yup.string().required(),

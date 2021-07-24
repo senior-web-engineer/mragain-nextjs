@@ -1,15 +1,18 @@
+import "./AdvantageSectionWrapper.style.less";
+
 import React from "react";
-import { Row, Col } from "react-bootstrap";
-import { AdvantageSectionArea } from "./AdvantageSectionWrapper.style.jsx";
-import AdvantageFontAweSome from "./AdvantageFontAweSome/AdvantageFontAweSome.jsx";
+import { Col, Row } from "react-bootstrap";
+
+import phoneIcon from "@/assets/images/phone-icon1.png";
+
 import {
   AdvantageSectionTitle,
-  SectionModel,
   DotDevider,
   PhoneIcon,
+  SectionModel,
 } from "../component.style.jsx";
-import "./AdvantageSectionWrapper.style.less";
-import phoneIcon from "@/assets/images/phone-icon1.png";
+import AdvantageFontAweSome from "./AdvantageFontAweSome/AdvantageFontAweSome.jsx";
+import { AdvantageSectionArea } from "./AdvantageSectionWrapper.style.jsx";
 
 const AdvantageSectionWrapper = () => (
   <AdvantageSectionArea>

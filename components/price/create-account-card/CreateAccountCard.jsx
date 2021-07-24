@@ -1,7 +1,8 @@
-import React from "react";
+import "./CreateAccountCard.less";
+
 import { Button } from "antd";
 import Link from "next/link";
-import "./CreateAccountCard.less";
+import React from "react";
 
 const CreateAccountCard = (params) => {
   return (

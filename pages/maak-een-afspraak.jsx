@@ -1,38 +1,41 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { useRouter } from "next/router";
-import { Button, DatePicker, Input, Select, Divider, message } from "antd";
-import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Label } from "semantic-ui-react";
-import moment from "moment";
 import "./maak-een-afspraak.less";
-import { Main } from "@/styled-components/maak-een-afspraak.style.jsx";
-import AboutBannerSection from "@/components/shop-appointment/AboutBannerSection/AboutBannerSection";
-import { Layout } from "@/components/global";
-import {
-  getSearchFilterField,
-  getSearchFilterFieldExt,
-  getModelService,
-  getBrands,
-  getModels,
-  getReparations,
-  getReparationDetails,
-  getDevices,
-  saveReparationData,
-  updateReparationData,
-} from "service/search/operations.js";
-import { setLoadService } from "service/search/action.js";
+
+import { Button, DatePicker, Divider, Input, message, Select } from "antd";
+import { Checkbox } from "antd";
+import moment from "moment";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { Fragment } from "react";
+import { Modal } from "react-bootstrap";
+import { connect } from "react-redux";
+import { Label } from "semantic-ui-react";
+import { getAccountProfile } from "service/account/operations.js";
 import {
   createAppointment,
   createManualAppointment,
   getAppointmentTimeTable,
 } from "service/appointments/operations";
-import { setLoadedProfile } from "../service/account/action";
-import { Checkbox } from "antd";
-import { getAccountProfile } from "service/account/operations.js";
 import { getReparationGuarantee } from "service/appointments/operations.js";
-import { Fragment } from "react";
+import { setLoadService } from "service/search/action.js";
+import {
+  getBrands,
+  getDevices,
+  getModels,
+  getModelService,
+  getReparationDetails,
+  getReparations,
+  getSearchFilterField,
+  getSearchFilterFieldExt,
+  saveReparationData,
+  updateReparationData,
+} from "service/search/operations.js";
+
+import { Layout } from "@/components/global";
+import AboutBannerSection from "@/components/shop-appointment/AboutBannerSection/AboutBannerSection";
+import { Main } from "@/styled-components/maak-een-afspraak.style.jsx";
+
+import { setLoadedProfile } from "../service/account/action";
 
 const { Option } = Select;
 

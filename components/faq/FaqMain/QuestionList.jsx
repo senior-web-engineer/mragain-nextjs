@@ -1,6 +1,8 @@
 import React from "react";
-import Question from "./Question";
+
 import { OuterContainer } from "@/components/faq/FaqMain/Faq.style";
+
+import Question from "./Question";
 
 const QuestionList = ({ data }) => {
   return (

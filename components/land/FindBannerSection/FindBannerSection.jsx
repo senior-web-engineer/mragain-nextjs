@@ -1,8 +1,9 @@
+import Head from "next/head";
 import React from "react";
+
+import { FRONT_END_URL } from "../../../constants.js";
 import AccountCreate2 from "./CreateAccount/AccountCreate2.jsx";
 import { BannerSection } from "./FindBannerSection.style.jsx";
-import Head from "next/head";
-import { FRONT_END_URL } from "../../../constants.js";
 
 const FindBannerSection = () => (
   <BannerSection>

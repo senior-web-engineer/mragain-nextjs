@@ -1,14 +1,15 @@
 import React from "react";
+import { useEffect } from "react";
 
-import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
-import { API_PATH } from "../../../constants.js";
 import { Layout } from "@/components/global/index.jsx";
 import ModelDetails from "@/components/models/ModelDetails.js";
-import { useEffect } from "react";
 import {
-  getModelReparations,
   getModelDetails,
+  getModelReparations,
 } from "@/service/search/operations.js";
+import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
+
+import { API_PATH } from "../../../constants.js";
 
 export default function index({ modelDetails }) {
   useEffect(() => {

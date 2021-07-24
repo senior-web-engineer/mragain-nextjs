@@ -1,8 +1,9 @@
-import media, { useScreenSize } from "@/utils/media";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styled, { css } from "styled-components";
+
+import media, { useScreenSize } from "@/utils/media";
 
 //
 

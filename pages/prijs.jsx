@@ -1,9 +1,11 @@
+import "./prijs.less";
+
 import React from "react";
+
+import { Layout } from "@/components/global";
 import CreateAccountCard1 from "@/components/price/create-account-card/CreateAccountCard1";
 import CreateAccountCard2 from "@/components/price/create-account-card/CreateAccountCard2";
 import CreateAccountCard3 from "@/components/price/create-account-card/CreateAccountCard3";
-import { Layout } from "@/components/global";
-import "./prijs.less";
 
 const Price = () => {
   return (

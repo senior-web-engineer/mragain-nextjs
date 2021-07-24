@@ -1,8 +1,9 @@
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { getAuthUser, loginAsUser } from "service/account/operations";
+
 import { Layout } from "@/components/global";
 
 const AdminLoginAsUser = (routerProps) => {

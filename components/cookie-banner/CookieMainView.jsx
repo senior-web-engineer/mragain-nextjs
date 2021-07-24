@@ -1,6 +1,7 @@
-import { Row, Col, Button } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCookie } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button, Col, Row } from "antd";
+
 import { ButtonsWrapper, CenterFull } from "./helpers";
 
 export const CookieMainView = ({ onAcceptCookies, setManageConcent }) => (

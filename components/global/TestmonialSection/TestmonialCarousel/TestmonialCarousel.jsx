@@ -1,11 +1,13 @@
-import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
 import "./TestmonialCarousel.style.less";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import prev from "@/assets/images/prev-arrow.jpg";
+import React from "react";
+import Slider from "react-slick";
+
 import next from "@/assets/images/next-arrow.jpg";
+import prev from "@/assets/images/prev-arrow.jpg";
 
 export default function TestimonialCarousel() {
   const SlickButtonFix = ({ currentSlide, slideCount, children, ...props }) => (

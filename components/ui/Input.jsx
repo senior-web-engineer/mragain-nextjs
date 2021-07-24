@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
 import { Input as AntdInput } from "antd";
+import styled, { css } from "styled-components";
 
 export const StyledInput = styled(AntdInput)`
   .ant-input-prefix {

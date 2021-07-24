@@ -1,6 +1,3 @@
-import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
-import { MaxConstraints } from "@/components/styled/layout";
-import Button from "@/components/ui/Button";
 import {
   faInfo,
   faLink,
@@ -12,26 +9,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Popover, Rate } from "antd";
 import Image from "next/image";
 import React, { useCallback, useEffect } from "react";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from "react-share";
 import styled, { css } from "styled-components";
+
+import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
 import {
   openTimeFetcher,
   reviewsFetcher,
   shopInfo,
 } from "@/components/shop-profile/modules";
-
-import {
-  FacebookShareButton,
-  LinkedinShareButton,
-  TwitterShareButton,
-  WhatsappShareButton,
-  FacebookIcon,
-  LinkedinIcon,
-  WhatsappIcon,
-  TwitterIcon,
-} from "react-share";
-import DetailsModal from "./DetailsModal";
-import media, { OnMobile } from "@/utils/media";
+import { MaxConstraints } from "@/components/styled/layout";
+import Button from "@/components/ui/Button";
 import { useFetcher } from "@/modules/dataFetcher";
+import media, { OnMobile } from "@/utils/media";
+
+import DetailsModal from "./DetailsModal";
 
 const Wallpaper = styled.div`
   height: 260px;

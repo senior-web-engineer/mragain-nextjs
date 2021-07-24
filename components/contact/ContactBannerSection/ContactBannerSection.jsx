@@ -1,15 +1,17 @@
+import "./ContactBannerSection.style.less";
+
 import React from "react";
 import { Breadcrumb } from "react-bootstrap";
+
 import {
-  ContactSectionArea,
   ContactContainer,
   ContactContainerWrap,
+  ContactSectionArea,
 } from "../Contact.style.jsx";
 import {
-  AboutBreadcrumb,
   AboutBannerTitle,
+  AboutBreadcrumb,
 } from "./ContactBannerSection.style.jsx";
-import "./ContactBannerSection.style.less";
 
 const ContactBannerSection = () => (
   <ContactSectionArea className="about-banner-area">

@@ -1,24 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./model-gegevens.less";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button, Input } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Input, Button } from "antd";
+import { connect } from "react-redux";
 import Switch from "react-switch";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { setLoadPBM, setSelectShopGuarantee } from "service/account/action";
+import { setGuaranteeDevice } from "service/account/action.js";
 import {
   deleteShopGuarantee,
   // getShopBrandModel,
   getShopRepairation,
   updateShopModalGuarantees,
 } from "service/account/operations";
-import { setLoadPBM, setSelectShopGuarantee } from "service/account/action";
-import { setGuaranteeDevice } from "service/account/action.js";
+
 import { Layout } from "@/components/global";
-import "./model-gegevens.less";
 
 const DetailPerPhone = (routerProps) => {
   const [update, setUpdate] = useState(true);

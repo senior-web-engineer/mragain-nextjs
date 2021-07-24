@@ -1,8 +1,9 @@
+import "./pages.css";
+
+import dateFormat from "dateformat";
+import parse from "html-react-parser";
 import React from "react";
 import { Fragment } from "react";
-import parse from "html-react-parser";
-import dateFormat from "dateformat";
-import "./pages.css";
 
 export default function PageDetails({ pageDetails }) {
   console.log("🚀 => PageDetails => pageDetails", pageDetails);

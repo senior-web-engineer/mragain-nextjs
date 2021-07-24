@@ -1,25 +1,27 @@
+import Head from "next/head";
+import Link from "next/link";
 import React, { useEffect } from "react";
+
+import Benefit from "@/components/advantages/Benefit";
+import Testimonial from "@/components/advantages/Testimonial";
+import DefaultLayout from "@/components/layouts/Homepage";
 import {
-  Main,
-  Wrapper,
-  TitleArea,
   BenefitsArea,
-  TestimonialArea,
-  Title,
-  BookBtn,
+  BenefitsOuterWrapper,
   BenefitsSub,
   BenefitsTitle,
   BenefitsWrapper,
+  BookBtn,
+  Main,
   Spacer,
-  BenefitsOuterWrapper,
+  TestimonialArea,
   TestimonialWrapper,
+  Title,
+  TitleArea,
+  Wrapper,
 } from "@/styled-components/reparatie.style";
-import DefaultLayout from "@/components/layouts/Homepage";
-import Head from "next/head";
+
 import { FRONT_END_URL } from "../constants.js";
-import Benefit from "@/components/advantages/Benefit";
-import Testimonial from "@/components/advantages/Testimonial";
-import Link from "next/link";
 
 const benefitTexts = {
   a: "Vooraf duidelijkheid over de reparatiekosten",

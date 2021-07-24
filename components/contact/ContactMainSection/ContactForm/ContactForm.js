@@ -1,24 +1,26 @@
-import React, { useEffect } from "react";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { notification } from "antd";
+import router from "next/router";
+import React, { useEffect } from "react";
+
+import Form from "@/modules/forms";
+import { Field } from "@/modules/forms/Blocks";
+
 import {
-  FormWrapper,
-  FormTitle,
-  FormText,
-  FormBox,
-  Label,
-  TextInput,
-  TextArea,
   Button,
+  FlexHelper,
+  FormBox,
+  FormText,
+  FormTitle,
+  FormWrapper,
+  Label,
   LabelWrapper,
   NumberInput,
-  FlexHelper,
+  TextArea,
+  TextInput,
 } from "./ContactForm.style";
-import Form from "@/modules/forms";
 import { contactFormModule } from "./modules";
-import { Field } from "@/modules/forms/Blocks";
-import router from "next/router";
 
 const ContactForm = () => {
   useEffect(() => {

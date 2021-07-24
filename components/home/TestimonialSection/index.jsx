@@ -1,10 +1,11 @@
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+
+import SliderOnMobile from "@/components/common/SliderOnMobile";
 import { H2, SubTitle } from "@/components/styled/text";
 import Button from "@/components/ui/Button";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import media from "@/utils/media";
-import SliderOnMobile from "@/components/common/SliderOnMobile";
 
 const MainWrap = styled.div`
   border-radius: 200px;

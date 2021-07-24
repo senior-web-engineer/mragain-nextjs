@@ -1,21 +1,23 @@
-import React, { useEffect, useState, useMemo } from "react";
-import {
-  Main,
-  Top,
-  Content,
-  FAQTitle,
-  FAQSubtitle,
-  FAQInput,
-  FAQInputContainer,
-  FAQsvg,
-} from "@/styled-components/veel-gestelde-vragen.style";
-import DefaultLayout from "@/components/layouts/Homepage";
-import Head from "next/head";
-import { FRONT_END_URL } from "../constants.js";
-import QuestionList from "@/components/faq/FaqMain/QuestionList";
-import GetInTouch from "@/components/faq/FaqMain/GetInTouch";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Head from "next/head";
+import React, { useEffect, useMemo, useState } from "react";
+
+import GetInTouch from "@/components/faq/FaqMain/GetInTouch";
+import QuestionList from "@/components/faq/FaqMain/QuestionList";
+import DefaultLayout from "@/components/layouts/Homepage";
+import {
+  Content,
+  FAQInput,
+  FAQInputContainer,
+  FAQSubtitle,
+  FAQsvg,
+  FAQTitle,
+  Main,
+  Top,
+} from "@/styled-components/veel-gestelde-vragen.style";
+
+import { FRONT_END_URL } from "../constants.js";
 
 const Faq = () => {
   useEffect(() => {

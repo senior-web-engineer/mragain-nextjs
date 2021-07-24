@@ -1,7 +1,8 @@
-import React from "react";
-import { AboutSectionArea } from "./AboutBannerSection.style";
 import Head from "next/head";
+import React from "react";
+
 import { FRONT_END_URL } from "../../../constants.js";
+import { AboutSectionArea } from "./AboutBannerSection.style";
 
 const AboutBannerSection = () => (
   <AboutSectionArea>

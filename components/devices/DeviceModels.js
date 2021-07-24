@@ -1,7 +1,8 @@
-import media from "@/utils/media";
 import Link from "next/link";
 import React, { useMemo } from "react";
 import styled from "styled-components";
+
+import media from "@/utils/media";
 
 const ModelsWrap = styled.div`
   background-color: #fff;

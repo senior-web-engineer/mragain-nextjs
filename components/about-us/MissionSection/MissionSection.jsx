@@ -2,12 +2,12 @@ import React from "react";
 
 import {
   MissionSectionArea,
-  MissionSectionImage,
-  MissionSectionContentArea,
   MissionSectionContent,
-  MissionSectionContentTitle,
-  MissionSectionContentSubtitle,
+  MissionSectionContentArea,
   MissionSectionContentDescription,
+  MissionSectionContentSubtitle,
+  MissionSectionContentTitle,
+  MissionSectionImage,
 } from "./MissionSection.style.jsx";
 
 const MissionSection = () => (

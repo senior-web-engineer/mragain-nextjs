@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { useRouter } from "next/router";
-import { Modal, Input } from "antd";
-import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./index.less";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Input, Modal } from "antd";
+import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { setGuaranteeDevice } from "service/account/action.js";
 import {
   createRepairDevice,
   getDevices,
   getShopIdByInformation,
 } from "service/account/operations.js";
-import { setGuaranteeDevice } from "service/account/action.js";
 import { getShopBrandModel } from "service/account/operations.js";
-import Head from "next/head";
-import { FRONT_END_URL } from "../../../constants.js";
+
 import { Layout } from "@/components/global";
+
+import { FRONT_END_URL } from "../../../constants.js";
 
 const ReparationGuarantee = (routerProps) => {
   const [isload, setIsLoad] = useState(true);
