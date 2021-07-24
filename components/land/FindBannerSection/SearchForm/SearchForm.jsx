@@ -67,7 +67,7 @@ const SearchForm = (routerProps) => {
         <CommonText>Altijd een werkende telefoon</CommonText>{" "}
         <GreenText></GreenText>
       </div>
-      <div classname="form-subtitle">
+      <div className="form-subtitle">
         <GreenText>Vind de beste reparateur bij jou in de buurt</GreenText>
       </div>
       <div className="form-group">

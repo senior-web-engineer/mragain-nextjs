@@ -3,7 +3,7 @@ import { Button } from "antd";
 import Link from "next/link";
 import "./CreateAccountCard.less";
 
-const CreateAccountCard1 = params => {
+const CreateAccountCard1 = (params) => {
   return (
     <div className="trial-month">
       <div className={"trial-month-title bgcolor-" + params.color}>
@@ -13,7 +13,8 @@ const CreateAccountCard1 = params => {
         <div className="trial-month-content-title">
           <span></span>
           <span>
-            <span className="price-value">Eenmalig €{params.price}</span> + €3.00 / afspraak
+            <span className="price-value">Eenmalig €{params.price}</span> +
+            €3.00 / afspraak
           </span>
         </div>
         <div className="trial-month-content-body">

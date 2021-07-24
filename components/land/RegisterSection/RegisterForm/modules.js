@@ -64,5 +64,4 @@ export const registerFormModule = createFormModule({
   },
 });
 
-
-export const agrementModal = createModalModule()
+export const agrementModal = createModalModule();

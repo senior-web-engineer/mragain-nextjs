@@ -23,7 +23,7 @@ export const modelReparationsFetcher = dataFetcher({
 export const appointmentFormModule = createFormModule({
   async init() {
     return {
-      service: null
-    }
-  }
-})
+      service: null,
+    };
+  },
+});

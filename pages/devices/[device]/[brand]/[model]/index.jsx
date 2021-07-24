@@ -188,7 +188,9 @@ function MobileAppointmentButton({ searchUrlData }) {
     <OnMobile only>
       <MobileToolbar>
         <Link href={`/zoek-een-reparateur?${urlData}`}>
-          <Button disabled={!service} as="a">Bekijk reparateurs</Button>
+          <Button disabled={!service} as="a">
+            Bekijk reparateurs
+          </Button>
         </Link>
       </MobileToolbar>
     </OnMobile>
@@ -266,7 +268,9 @@ export default function ModelPage({ data, reparations }) {
       </WhiteBackground>
       <ServicesSection>
         <MaxConstraints>
-          <SubTitle>ALLE {data.brand.brand_name} {data.model_name} REPARATIES</SubTitle>
+          <SubTitle>
+            ALLE {data.brand.brand_name} {data.model_name} REPARATIES
+          </SubTitle>
           <Form module={appointmentFormModule}>
             <Field name="service" as={RadioGroup}>
               {reparations.map(renderReparation)}

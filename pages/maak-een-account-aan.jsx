@@ -13,13 +13,8 @@ import { resetAuthError } from "service/account/action.js";
 function AccountCreate(routerProps) {
   const [validated, setValidated] = useState(false);
 
-  const {
-    registerUser,
-    isSignUp,
-    auth_error,
-    isAuth_Error,
-    resetAuthError,
-  } = routerProps;
+  const { registerUser, isSignUp, auth_error, isAuth_Error, resetAuthError } =
+    routerProps;
   const router = useRouter();
 
   const handleSubmit = (event) => {

@@ -8,11 +8,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "antd";
 import "./ShopInfoCard.style.less";
 import StarRatingInfo from "../StarRatingInfo/StarRatingInfo";
-import Image from 'next/image';
-import Link from 'next/link'
+import Image from "next/image";
+import Link from "next/link";
 const ShopInfoCard = (routerProps) => {
-  const {
-  } = routerProps;
+  const {} = routerProps;
   const router = useRouter();
   const onProfilePage = (shop_name, city, street) => {
     let shop = shop_name;
@@ -31,7 +30,7 @@ const ShopInfoCard = (routerProps) => {
 
     // router.push(`/profiel/${shop}--${cityName}--${streetName}`);
     // router.push(routerData);
-      return routerData;
+    return routerData;
   };
 
   function onMakeAppointment(shop_id) {
@@ -71,28 +70,33 @@ const ShopInfoCard = (routerProps) => {
 
   return (
     <Card>
-      <Link href={onProfilePage(
+      <Link
+        href={onProfilePage(
           routerProps.shop_name,
           routerProps.city,
           routerProps.street
-      )}
-            passHref={true}
-            prefetch={false}
-      ><a ><Image
-          width={240}
-          height={162}
-          className={'card-img-top'}
-          variant="top"
-        src={routerProps.image}
-        alt="Reparateur-profielfoto"
-        // onClick={() =>
-        //   onProfilePage(
-        //     routerProps.shop_name,
-        //     routerProps.city,
-        //     routerProps.street
-        //   )
-        // }
-      /></a></Link>
+        )}
+        passHref={true}
+        prefetch={false}
+      >
+        <a>
+          <Image
+            width={240}
+            height={162}
+            className={"card-img-top"}
+            variant="top"
+            src={routerProps.image}
+            alt="Reparateur-profielfoto"
+            // onClick={() =>
+            //   onProfilePage(
+            //     routerProps.shop_name,
+            //     routerProps.city,
+            //     routerProps.street
+            //   )
+            // }
+          />
+        </a>
+      </Link>
       <Card.Body>
         <Card.Title>
           {routerProps.title}

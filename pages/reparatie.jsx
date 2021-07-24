@@ -12,14 +12,14 @@ import {
   BenefitsWrapper,
   Spacer,
   BenefitsOuterWrapper,
-  TestimonialWrapper
+  TestimonialWrapper,
 } from "@/styled-components/reparatie.style";
 import DefaultLayout from "@/components/layouts/Homepage";
 import Head from "next/head";
 import { FRONT_END_URL } from "../constants.js";
 import Benefit from "@/components/advantages/Benefit";
 import Testimonial from "@/components/advantages/Testimonial";
-import Link from 'next/link'
+import Link from "next/link";
 
 const benefitTexts = {
   a: "Vooraf duidelijkheid over de reparatiekosten",
@@ -35,7 +35,7 @@ const testimonialTitles = {
 
 const testimonialTexts = {
   a: "Mijn telefoon werd snel gerepareerd en doet het weer als vanouds! Super handig dat je direct een afspraak kan maken en weet wanneer ze tijd voor je hebben.",
-  b: "Top dat je makkelijk kan vergeljken tussen reparateurs. Ik kon nog dezelfde dag terecht en had mijn mobiel na 30 minuten weer terug, lekker!  ",	
+  b: "Top dat je makkelijk kan vergeljken tussen reparateurs. Ik kon nog dezelfde dag terecht en had mijn mobiel na 30 minuten weer terug, lekker!  ",
 };
 
 const Advantages = ({}) => {
@@ -47,8 +47,14 @@ const Advantages = ({}) => {
       <Main>
         <Head>
           <title>Reparatie via MrAgain | Mr Again</title>
-          <meta name="description" content="Reparatie via MrAgain en jouw voordelen" />
-          <meta name="Keywords" content="Reparatie via MrAgain en jouw voordelen" />
+          <meta
+            name="description"
+            content="Reparatie via MrAgain en jouw voordelen"
+          />
+          <meta
+            name="Keywords"
+            content="Reparatie via MrAgain en jouw voordelen"
+          />
           <link rel="canonical" href={FRONT_END_URL} />
           {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
           <meta
@@ -57,7 +63,10 @@ const Advantages = ({}) => {
             content="Reparatie via MrAgain en jouw voordelen bij MrAgain"
           />
           <meta property="og:type" content="website" />
-          <meta property="og:description" content="Reparatie via MrAgain en jouw voordelen" />
+          <meta
+            property="og:description"
+            content="Reparatie via MrAgain en jouw voordelen"
+          />
           <meta name="og:url" content={FRONT_END_URL} />
           <meta
             property="og:image"
@@ -74,10 +83,11 @@ const Advantages = ({}) => {
           <TitleArea>
             <Title>
               Verleng de levensduur
-              <br />van jouw apparaat
+              <br />
+              van jouw apparaat
             </Title>
             <Link href="/zoek-een-reparateur?zip=&device=0&long=0&lat=0">
-            <BookBtn>Vind een reparateur</BookBtn>
+              <BookBtn>Vind een reparateur</BookBtn>
             </Link>
           </TitleArea>
 
@@ -104,18 +114,18 @@ const Advantages = ({}) => {
                   Niet overtuigd? Check onze reviews!
                 </BenefitsTitle>
                 <TestimonialWrapper>
-                <Testimonial
-                  title={testimonialTitles.a}
-                  text={testimonialTexts.a}
-                  name={"Vera"}
-                  place={"Utrecht"}
-                />
-                <Testimonial
-                  title={testimonialTitles.b}
-                  text={testimonialTexts.b}
-                  name={"Quincy"}
-                  place={"Den Haag"}
-                />
+                  <Testimonial
+                    title={testimonialTitles.a}
+                    text={testimonialTexts.a}
+                    name={"Vera"}
+                    place={"Utrecht"}
+                  />
+                  <Testimonial
+                    title={testimonialTitles.b}
+                    text={testimonialTexts.b}
+                    name={"Quincy"}
+                    place={"Den Haag"}
+                  />
                 </TestimonialWrapper>
               </BenefitsWrapper>
             </BenefitsOuterWrapper>

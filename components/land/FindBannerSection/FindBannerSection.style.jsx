@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 // import bannerImage from '@/assets/images/meld-je-aan-als-telefoon-reparateur.jpg'
 
 export const BannerSection = styled.div`
@@ -10,17 +10,18 @@ export const BannerSection = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/meld-je-aan-als-telefoon-reparateur.jpg');
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/meld-je-aan-als-telefoon-reparateur.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 
-  @media (max-width:668px) {
+  @media (max-width: 668px) {
     padding-left: 75px;
     padding-right: 75px;
   }
-  @media (max-width:400px) {
+  @media (max-width: 400px) {
     padding-left: 30px;
     padding-right: 30px;
   }
-`
+`;

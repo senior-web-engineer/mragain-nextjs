@@ -13,12 +13,14 @@ export function MobileRadioButtons({ options, value, ...rest }) {
       {option.label}
     </Radio.Button>
   ));
-  return <Radio.Group value={value} {...rest}>
-    <Menu
-      alignCenter={false}
-      data={menuData}
-      selected={value}
-      hideArrows={true}
-    />
-  </Radio.Group>
+  return (
+    <Radio.Group value={value} {...rest}>
+      <Menu
+        alignCenter={false}
+        data={menuData}
+        selected={value}
+        hideArrows={true}
+      />
+    </Radio.Group>
+  );
 }

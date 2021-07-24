@@ -327,10 +327,12 @@ const PhoneRepair = (routerProps) => {
         console.log(err.response);
 
         // showNotification("Error!", "Error occurred, Please try again later", "error").then(
-        showNotification("Error!", err.response.data.error, "error").then((value) => {
-          setShowImportModal(false);
-          setImportBtnLoading(false);
-        });
+        showNotification("Error!", err.response.data.error, "error").then(
+          (value) => {
+            setShowImportModal(false);
+            setImportBtnLoading(false);
+          }
+        );
       });
   };
 

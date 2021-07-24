@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import media from "@/utils/media";
 
 export const AboutSectionArea = styled.div`
   display: flex;
   justify-content: center;
-  width : 100%;
+  width: 100%;
   max-width: 1133px;
   margin: auto;
   padding: 0px;

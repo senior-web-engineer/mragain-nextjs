@@ -177,17 +177,17 @@ export function ShopCard({ shop, onClick }) {
     .join(", ");
 
   const shopUrl = getShopRoute(shop);
-  const shopLogo = getShopLogo(shop.logo_photo)
+  const shopLogo = getShopLogo(shop.logo_photo);
 
   return (
     <ShopWrap key={shop.id} onClick={onClick}>
       <ShopImageWrap tagColor={TAG_TO_COLOR[shop.tag]}>
-          <Image
-            loading="lazy"
-            src={shopLogo}
-            layout="fill"
-            objectFit="contained"
-          />
+        <Image
+          loading="lazy"
+          src={shopLogo}
+          layout="fill"
+          objectFit="contained"
+        />
         <d-def>
           {shop.rating !== undefined ? (
             <rating>
