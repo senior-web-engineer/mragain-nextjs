@@ -58,28 +58,6 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                 <Col span={8}>
                   <Field
                     adminInput
-                    name="address"
-                    as={GooglePlaces}
-                    label="Address"
-                    customLabel
-                    size="large"
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Field
-                    adminInput
-                    name="shop_active"
-                    noBorder
-                    flexRow
-                    as={Checkbox}
-                    label="Primary Branch"
-                  />
-                </Col>
-                <Col span={8}>
-                  <Field
-                    adminInput
                     name="address_type"
                     as={Select}
                     placeholder="Select Address Type"
@@ -87,21 +65,28 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                     size="large"
                     customLabel
                     options={[
-                      { label: "Test2", value: "test2" },
-                      { label: "Test", value: "test" },
+                      { label: "Physical store", value: "0" },
+                      {
+                        label: "Mobile store (truck coming to you)",
+                        value: "1",
+                      },
+                      { label: "Both", value: "2" },
                     ]}
                   />
                 </Col>
               </Row>
-              <Col>
-                <Field
-                  adminInput
-                  name="shop_type"
-                  as={Input}
-                  label="Address Line (House No, Building)"
-                  size="large"
-                />
-              </Col>
+              <Row>
+                <Col span={8}>
+                  <Field
+                    adminInput
+                    name="street"
+                    as={GooglePlaces}
+                    label="Address"
+                    customLabel
+                    size="large"
+                  />
+                </Col>
+              </Row>
               <Col>
                 <Row gutter={[16, 0]}>
                   <Col span={12}>

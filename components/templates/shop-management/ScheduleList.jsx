@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { ScheduleListWrapper, ListItemWrapper } from "./styles";
-import { List, Tag, Col } from "antd";
+import { List, Tag, Col, Input, Switch } from "antd";
 
 const mockData = [
   {
@@ -48,6 +48,15 @@ const mockData = [
 ];
 
 export const ScheduleList = () => {
+  const [editingRow, setEditingRow] = useState();
+
+  const onEditSave = (index) => {
+    if (index === editingRow) {
+    } else {
+      setEditingRow(index);
+    }
+  };
+
   return (
     <ScheduleListWrapper>
       <List
@@ -56,24 +65,38 @@ export const ScheduleList = () => {
         }
         size="large"
         dataSource={mockData}
-        renderItem={(item) => (
+        renderItem={(item, index) => (
           <List.Item>
             <ListItemWrapper>
               <Col span="6">
                 <p>{item.day}</p>
               </Col>
               <Col span="6">
-                <p>{item.start || "..."}</p>
+                {editingRow === index ? (
+                  <Input value={item.start} />
+                ) : (
+                  <p>{item.start || "..."}</p>
+                )}
               </Col>
               <Col span="6">
-                <p>{item.end || "..."}</p>
+                {editingRow === index ? (
+                  <Input value={item.end} />
+                ) : (
+                  <p>{item.end || "..."}</p>
+                )}
               </Col>
               <Col span="4">
-                <Tag color={item.hours ? "green" : "red"}>
-                  {item.hours ? `${item.hours} Hours` : "Closed"}
-                </Tag>
+                {editingRow === index ? (
+                  <Switch defaultChecked={item.hours !== 0} />
+                ) : (
+                  <Tag color={item.hours ? "green" : "red"}>
+                    {item.hours ? `${item.hours} Hours` : "Closed"}
+                  </Tag>
+                )}
               </Col>
-              <Col span="4">Edit</Col>
+              <Col span="4" onClick={() => onEditSave(index)}>
+                {editingRow === index ? <a>Save</a> : <a>Edit</a>}
+              </Col>
             </ListItemWrapper>
           </List.Item>
         )}

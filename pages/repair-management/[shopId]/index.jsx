@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { currentUser } from "@/service/repair-management/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
-import { Tabs, Row, Col } from "antd";
+import { Row, Col, Divider } from "antd";
 import { useRouter } from "next/router";
-const { TabPane } = Tabs;
 import { ModelTransfer } from "@/components/templates/repair-management/ModelTransfer";
 import { EditModal } from "@/components/templates/repair-management/EditModal";
 import {
@@ -142,20 +141,17 @@ export default function RepairManagementPage() {
           <h1>Repair Management</h1>
         </Col>
       </Row>
-      <Tabs defaultActiveKey={activeTab} onChange={onTabChange}>
-        <TabPane tab="Device Manager" key="device-manager">
-          <ModelTransfer
-            data={selectedModels}
-            targetKeys={targetKeys}
-            onChange={onChange}
-            menuItems={devices}
-            onBrandSelected={handleOnBrandSelected}
-            selectedBrand={selectedBrand}
-            onEditModelReparations={onEditModelReparations}
-            onModelsSaved={handleOnModelsSaved}
-          />
-        </TabPane>
-      </Tabs>
+      <Divider />
+      <ModelTransfer
+        data={selectedModels}
+        targetKeys={targetKeys}
+        onChange={onChange}
+        menuItems={devices}
+        onBrandSelected={handleOnBrandSelected}
+        selectedBrand={selectedBrand}
+        onEditModelReparations={onEditModelReparations}
+        onModelsSaved={handleOnModelsSaved}
+      />
       <EditModal
         editRepairModelModal={editRepairModelModal}
         model={selectedModel}

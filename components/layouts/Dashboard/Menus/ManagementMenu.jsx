@@ -18,19 +18,9 @@ const managementMenuItems = (shopId) => [
   },
   {
     title: "Shop Management",
-    key: "shop-management",
+    key: `shop-management/${shopId}?tab=profile-settings`,
     icon: <Image width="24" height="24" src={ShopImage} />,
-    selectable: false,
-    children: [
-      {
-        title: "Profile Settings",
-        key: `shop-management/${shopId}?tab=profile-settings`,
-      },
-      {
-        title: "Operational Hours",
-        key: `shop-management/${shopId}?tab=operational-hours`,
-      },
-    ],
+    selectable: true,
   },
   {
     title: "Repair Management",
@@ -40,9 +30,9 @@ const managementMenuItems = (shopId) => [
   },
   {
     title: "Finance",
-    key: "finance",
+    key: "finance/all",
     icon: <Image width="24" height="24" src={FinanceImage} />,
-    selectable: false,
+    selectable: true,
   },
 ];
 

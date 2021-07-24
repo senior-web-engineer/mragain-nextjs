@@ -48,6 +48,29 @@ export const shopInfoFetcher = dataFetcher({
   },
 });
 
+export const getShopNonWorkingDays = dataFetcher({
+  selectors: [],
+  async fetchData() {
+    const shopId = currentUser.selector(store.ref.getState())?.result?.id;
+    const data = await privateApi.get(`${API_PATH.GETINVALIDTIME}/${shopId}/`);
+    return data;
+  },
+});
+
+export const saveShopNonWorkingDays = (data) => {
+  const shopId = currentUser.selector(store.ref.getState())?.result?.account_id;
+  const promise = privateApi.post(
+    `${API_PATH.SAVEINVALIDTIME}/${shopId}`,
+    data
+  );
+
+  notification.success({
+    message: "Saved successfully",
+  });
+
+  return promise;
+};
+
 export const shopManagementGeneralInfo = dataFetcher({
   selectors: [],
   async fetchData() {

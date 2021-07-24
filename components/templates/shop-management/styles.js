@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Row } from "antd";
+import { Row, Table } from "antd";
 
 export const rowStyle = {
   marginBottom: "24px",
@@ -155,5 +155,11 @@ export const ListItemWrapper = styled.div`
 
   p {
     margin: 0;
+  }
+`;
+
+export const TableWrapper = styled(Table)`
+  .ant-table-tbody {
+    background: white;
   }
 `;

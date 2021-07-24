@@ -94,6 +94,8 @@ export const API_PATH = {
   GETALLBRANDSMODELS: `${API_URL}/get-brandmodel`,
   GETSHOPGENERALINFO: `${API_URL}/getshopGeneralInfo`,
   UPDATESHOPGENERALINFO: `${API_URL}/update-shop-info`,
+  SAVEINVALIDTIME: `${API_URL}/save-invalid-time`,
+  GETINVALIDTIME: `${API_URL}/get-shop-invalid-time`,
 };
 
 export default {

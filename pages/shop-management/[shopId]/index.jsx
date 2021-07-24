@@ -6,6 +6,8 @@ import {
   getDevices,
   shopManagementAdditionalForm,
   shopManagementGeneralInfo,
+  getShopNonWorkingDays,
+  saveShopNonWorkingDays,
 } from "@/service/shop-management/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
 import { Tabs, Row, Col } from "antd";
@@ -25,12 +27,14 @@ export default function ShopManagementPage({ auth_user }) {
   const [activeTab, setActiveTab] = useState("profile-settings");
   const [shopInfo, setShopInfo] = useState();
   const [shopData, setShopData] = useState();
+  const [nonWorkingDays, setNonWorkingDays] = useState();
 
   useEffect(() => {
     async function loadData() {
       const user = await currentUser.fetch();
       const shopInfo = await shopInfoFetcher.fetch();
       setShopData(await shopManagementGeneralInfo.fetch());
+      setNonWorkingDays(await getShopNonWorkingDays.fetch());
       console.log("INFO", shopInfo);
       if (shopInfo) {
         setShopInfo(shopInfo[0]);
@@ -55,6 +59,10 @@ export default function ShopManagementPage({ auth_user }) {
     //   `/shop-management/${shopId}?tab=${tab}`,
     //   { shallow: true }
     // );
+  };
+
+  const onNonWorkingDaysSaved = (data) => {
+    saveShopNonWorkingDays(data);
   };
 
   return (
@@ -86,7 +94,12 @@ export default function ShopManagementPage({ auth_user }) {
         <TabPane tab="Operational Hours" key="operational-hours">
           <Row gutter={[40, 40]}>
             <Col span={14}>
-              <OperationalHoursCalendar />
+              {nonWorkingDays && (
+                <OperationalHoursCalendar
+                  nonWorkingDays={nonWorkingDays}
+                  onNonWorkingDaysSaved={onNonWorkingDaysSaved}
+                />
+              )}
             </Col>
             <Col span={10}>
               <ScheduleList />

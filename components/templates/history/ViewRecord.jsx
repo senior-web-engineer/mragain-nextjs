@@ -16,58 +16,7 @@ export const ViewRecord = ({ data, viewRecordModal }) => {
     <Drawer width="800px" module={viewRecordModal}>
       {data && (
         <div>
-          <Descriptions title="General Info" layout="vertical" bordered>
-            <Descriptions.Item label="IMEI Number">
-              {data?.serialnumber}
-            </Descriptions.Item>
-            <Descriptions.Item label="Guaranty">
-              <Badge
-                status={getGuaranteeStatus(
-                  data?.appointment.date,
-                  data?.guarantee
-                )}
-                text={data?.guarantee}
-              />
-            </Descriptions.Item>
-            <Descriptions.Item label="Reparation active">
-              {data?.reparation.repair_active ? "YES" : "NO"}
-            </Descriptions.Item>
-            <Descriptions.Item label="Reparation Type">
-              {data?.reparation.reparation_name}
-            </Descriptions.Item>
-            <Descriptions.Item label="Description">
-              {data?.reparation.description}
-            </Descriptions.Item>
-          </Descriptions>
-          <Divider />
           <Descriptions title="Appointment Info" layout="vertical" bordered>
-            <Descriptions.Item label="Client name">
-              {data?.appointment.client_name}
-            </Descriptions.Item>
-            <Descriptions.Item label="Client email">
-              {data?.appointment.client_email}
-            </Descriptions.Item>
-            <Descriptions.Item label="Client phone">
-              {data?.appointment.client_phone}
-            </Descriptions.Item>
-            <Descriptions.Item label="Client Address">
-              {data?.appointment.client_address}
-            </Descriptions.Item>
-            <Descriptions.Item label="Client Active">
-              <Badge
-                status={data?.appointment.active ? "success" : "error"}
-                text={data?.appointment.active ? "YES" : "NO"}
-              />
-            </Descriptions.Item>
-            <Descriptions.Item label="Appointment Date">
-              {data?.appointment.date}
-            </Descriptions.Item>
-            <Descriptions.Item label="Appointment Time">
-              {data?.appointment.time}
-            </Descriptions.Item>
-          </Descriptions>
-          <Divider />
-          <Descriptions title="Device Info" layout="vertical" bordered>
             <Descriptions.Item label="Type" span={3}>
               {data?.device.device_name}
             </Descriptions.Item>
@@ -77,9 +26,47 @@ export const ViewRecord = ({ data, viewRecordModal }) => {
             <Descriptions.Item label="Model">
               {data?.model.model_name}
             </Descriptions.Item>
-            <Descriptions.Item label="Memory">{data?.memory}</Descriptions.Item>
-            <Descriptions.Item label="Model info" span={3}>
-              {data?.model.model_info}
+            <Descriptions.Item label="Reparation Type">
+              {data?.reparation.reparation_name}
+            </Descriptions.Item>
+            <Descriptions.Item label="Date">
+              {data?.appointment.date}
+            </Descriptions.Item>
+            <Descriptions.Item label="Price">{data?.price}</Descriptions.Item>
+            <Descriptions.Item label="Guaranty">
+              <Badge
+                status={getGuaranteeStatus(
+                  data?.appointment.date,
+                  data?.guarantee
+                )}
+                text={data?.guarantee}
+              />
+            </Descriptions.Item>
+          </Descriptions>
+          <Divider />
+
+          <Descriptions title="Reparation comments" layout="vertical" bordered>
+            <Descriptions.Item label="IMEI Number">
+              {data?.serialnumber}
+            </Descriptions.Item>
+            <Descriptions.Item label="Description" span={2}>
+              {data?.reparation.comments}
+            </Descriptions.Item>
+            <Descriptions.Item label="Images" span={3}>
+              <img src={data?.images}></img>
+            </Descriptions.Item>
+          </Descriptions>
+          <Divider />
+
+          <Descriptions title="Client data" layout="vertical" bordered>
+            <Descriptions.Item label="Client name">
+              {data?.appointment.client_name}
+            </Descriptions.Item>
+            <Descriptions.Item label="Client email">
+              {data?.appointment.client_email}
+            </Descriptions.Item>
+            <Descriptions.Item label="Client phone">
+              {data?.appointment.client_phone}
             </Descriptions.Item>
           </Descriptions>
         </div>
