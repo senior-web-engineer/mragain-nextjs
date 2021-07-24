@@ -407,7 +407,7 @@ function AppointmentButton() {
                   type: "success",
                   message: "Algemene afspraak",
                   description:
-                    "We maken een algemene afspraak voor je, de reparateur kan contact met je opnemen zodat hij weet waarvoor je komt.",
+                    "Je hebt geen reparatie geselecteerd, als je een afspraak wilt maken maken we daarom een algemene diagnose afspraak voor je.",
                   buttonLabel: "Prima!",
                 })
                 .then(() => {
@@ -416,7 +416,7 @@ function AppointmentButton() {
             }
           }}
         >
-          Afspraak maken <FontAwesomeIcon icon={faArrowRight} />{" "}
+          Afspraak maken of contact opnemen <FontAwesomeIcon icon={faArrowRight} />{" "}
         </Button>
       </Link>
     </NextStepWrap>
