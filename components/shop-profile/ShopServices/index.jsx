@@ -411,7 +411,7 @@ function AppointmentButton() {
             }
           }}
         >
-          Afspraak maken of contact opnemen <FontAwesomeIcon icon={faArrowRight} />{" "}
+          Contact & afspraak maken <FontAwesomeIcon icon={faArrowRight} />{" "}
         </Button>
       </Link>
     </NextStepWrap>
