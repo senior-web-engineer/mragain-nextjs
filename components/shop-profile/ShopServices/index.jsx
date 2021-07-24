@@ -385,37 +385,37 @@ const ModelSelector = AppendIdentifier({
 });
 
 function AppointmentButton() {
-    const { values } = useFormContext().state;
-    const router = useRouter();
-    const formValues = filtersFormModule.state.values;
-    const nextLocation = `/${router.query["city"]}/${router.query["shopId][api"]}/${router.query["street"]}/appointment?device=${formValues.device}&brand=${formValues.brand}&model=${formValues.model}&service=${values.service}`;
-    return (
-        <NextStepWrap>
-            <Link href={nextLocation}>
-                <Button
-                    aria-label="Book service"
-                    onClick={(ev) => {
-                        if (!values.service) {
-                            ev.preventDefault();
-                            continueWitoutServiceModal.actions
-                                .open({
-                                    type: "success",
-                                    message: "Algemene afspraak",
-                                    description:
-                                        "We maken een algemene afspraak voor je, de reparateur kan contact met je opnemen zodat hij weet waarvoor je komt.",
-                                    buttonLabel: "Prima!",
-                                })
-                                .then(() => {
-                                    router.push(nextLocation);
-                                });
-                        }
-                    }}
-                >
-                    Afspraak maken <FontAwesomeIcon icon={faArrowRight} />{" "}
-                </Button>
-            </Link>
-        </NextStepWrap>
-    );
+  const { values } = useFormContext().state;
+  const router = useRouter();
+  const formValues = filtersFormModule.state.values;
+  const nextLocation = `/${router.query["city"]}/${router.query["shopId][api"]}/${router.query["street"]}/appointment?device=${formValues.device}&brand=${formValues.brand}&model=${formValues.model}&service=${values.service}`;
+  return (
+    <NextStepWrap>
+      <Link href={nextLocation}>
+        <Button
+          aria-label="Book service"
+          onClick={(ev) => {
+            if (!values.service) {
+              ev.preventDefault();
+              continueWitoutServiceModal.actions
+                .open({
+                  type: "success",
+                  message: "Algemene afspraak",
+                  description:
+                    "Je hebt geen reparatie geselecteerd, als je een afspraak wilt maken maken we daarom een algemene diagnose afspraak voor je.",
+                  buttonLabel: "Prima!",
+                })
+                .then(() => {
+                  router.push(nextLocation);
+                });
+            }
+          }}
+        >
+          Contact & afspraak maken <FontAwesomeIcon icon={faArrowRight} />{" "}
+        </Button>
+      </Link>
+    </NextStepWrap>
+  );
 }
 
 function NextSlot({ id }) {
