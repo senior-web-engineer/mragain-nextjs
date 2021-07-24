@@ -1,28 +1,31 @@
-import React from "react";
+import "./Footer.less";
+
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import { withUserAgent } from "next-useragent";
+import React from "react";
+
+import { CookieBanner } from "@/components/cookie-banner/CookieBanner";
+
 import {
-  FooterViewSection,
-  FooterViewContainer,
-  FooterViewContent,
-  FooterCopyright,
-  FooterBrandArea,
-  FooterBrandLogo,
-  FooterLogoIcon,
-  FooterBrandTitle,
-  LogoTopTitle,
-  LogoBottomTitle,
-  FooterLinkArea,
-  FooterSitemap,
-  FooterSitemapTitle,
+  DevicesContainer,
   FollowUs,
   FollowUsTitle,
-  DevicesContainer,
+  FooterBrandArea,
+  FooterBrandLogo,
+  FooterBrandTitle,
+  FooterCopyright,
+  FooterLinkArea,
+  FooterLogoIcon,
+  FooterSitemap,
+  FooterSitemapTitle,
+  FooterViewContainer,
+  FooterViewContent,
+  FooterViewSection,
+  LogoBottomTitle,
+  LogoTopTitle,
 } from "./Footer.style";
-import "./Footer.less";
-import Link from "next/link";
-import { withUserAgent } from "next-useragent";
-import Image from "next/image";
-import { CookieBanner } from "@/components/cookie-banner/CookieBanner";
 
 const FooterView = (routerProps) => {
   const { location, ua, getDevices, shopDevices } = routerProps;
@@ -104,7 +107,7 @@ const FooterView = (routerProps) => {
                     Over ons
                   </Link>
                 </li>
-	        <li>
+                <li>
                   <Link prefetch={false} href="/reparatie">
                     De voordelen
                   </Link>
@@ -114,12 +117,12 @@ const FooterView = (routerProps) => {
                     Meld je aan als reparateur
                   </Link>
                 </li>
-	        <li>
+                <li>
                   <Link prefetch={false} href="/contact">
                     Contact
                   </Link>
                 </li>
-	        <li>
+                <li>
                   <Link prefetch={false} href="/veel-gestelde-vragen">
                     Veel gestelde vragen
                   </Link>
@@ -129,7 +132,7 @@ const FooterView = (routerProps) => {
                     Blogs
                   </Link>
                 </li>
-	{/*<li>
+                {/*<li>
                   <Link prefetch={false} href="/reparatie">
                     Reparaties
                   </Link>
@@ -256,7 +259,7 @@ const FooterView = (routerProps) => {
           </FooterLinkArea>
         </FooterViewContent>
       </FooterViewContainer>
-       <DevicesContainer show={visible}>
+      <DevicesContainer show={visible}>
         <FooterViewContent>
           <FooterLinkArea className="footer-link-area">
             <FooterSitemap ClassName="custome-footer-sitename">
@@ -272,12 +275,12 @@ const FooterView = (routerProps) => {
                     Tablets
                   </Link>
                 </li>
-	        <li>
+                <li>
                   <Link prefetch={false} href="/devices">
                     Laptops
                   </Link>
                 </li>
-	  {/*<li>
+                {/*<li>
                   <Link prefetch={false} href="/tv-reparatie">
                     Televisies
                   </Link>
@@ -294,75 +297,108 @@ const FooterView = (routerProps) => {
                 </li>*/}
               </ul>
             </FooterSitemap>
-	      <FooterSitemap ClassName="custome-footer-sitename">
-	       <FooterSitemapTitle>Reparaties</FooterSitemapTitle>
-               <ul>
-	        <li>
-	          <Link prefetch={false} href="/zoek-een-reparateur?zip=&device=1&long=0&lat=0&distance=30&sort=8">
-	          Telefoon reparatie
-	          </Link>
-	        </li>
-	        <li>
-	          <Link prefetch={false} href="/zoek-een-reparateur?zip=&device=2&long=0&lat=0&distance=30&sort=8">
-	          Tablet reparatie
-	          </Link>
-	        </li>
-	        <li>
-	          <Link prefetch={false} href="/zoek-een-reparateur?zip=&device=3&long=0&lat=0&distance=30&sort=8">
-	          Laptop reparatie
-	        </Link>
-	        </li>
-	       </ul>
-	      </FooterSitemap>
-	       <FooterSitemap ClassName="custome-footer-sitename">
-	         <FooterSitemapTitle>Steden</FooterSitemapTitle>
-	         <ul>
-	           <li>
-	             <Link prefetch={false} href="/zoek-een-reparateur?zip=Amsterdam,%20Nederland&device=0&long=4.9041389&lat=52.3675734&distance=30&sort=8">
-	             Amsterdam
-	             </Link>
-	           </li>
-	           <li>
-	             <Link prefetch={false} href="/zoek-een-reparateur?zip=Rotterdam,%20Nederland&device=0&long=4.4777326&lat=51.9244201&distance=30&sort=8">
-	             Rotterdam
-	             </Link>
-	           </li>
-	           <li>
-                     <Link prefetch={false} href="/zoek-een-reparateur?zip=Den%20Haag,%20Nederland&device=0&long=4.3006999&lat=52.0704978&distance=30&sort=8">
-	             Den Haag
-	             </Link>
-	           </li>
-	           <li>
-	             <Link prefetch={false} href="/zoek-een-reparateur?zip=Utrecht,%20Nederland&device=0&long=5.1214201&lat=52.09073739999999&distance=30&sort=8">
-	             Utrecht
-	             </Link>
-	           </li>
-	           <li>
-	             <Link prefetch={false} href="/zoek-een-reparateur?zip=Groningen,%20Nederland&device=0&long=6.5665017&lat=53.2193835&distance=30&sort=8">
-	             Groningen
-	           </Link>
-	           </li>
-	           <li>
-	             <Link prefetch={false} href="/zoek-een-reparateur?zip=Den%20Bosch,%20Nederland&device=0&long=5.3036748&lat=51.6978162&distance=30&sort=8">
-	             Den Bosch
-	             </Link>
-	           </li>
-	           <li>
-	             <Link prefetch={false} href="/zoek-een-reparateur?zip=Tilburg,%20Nederland&device=0&long=5.0919143&lat=51.560596&distance=30&sort=8">
-	             Tilburg
-	             </Link>
-	           </li>
-	           <li>
-	             <Link prefetch={false} href="/zoek-een-reparateur?zip=Maastricht,%20Nederland&device=0&long=5.6909725&lat=50.8513682&distance=30&sort=8">
-	             Maastricht
-	             </Link>
-	           </li>
-	         </ul>
-               </FooterSitemap>
-          </FooterLinkArea>{" "}
-           <FooterLinkArea className="footer-link-area">
             <FooterSitemap ClassName="custome-footer-sitename">
-	  {/* <FooterSitemapTitle>Devices</FooterSitemapTitle>
+              <FooterSitemapTitle>Reparaties</FooterSitemapTitle>
+              <ul>
+                <li>
+                  <Link
+                    prefetch={false}
+                    href="/zoek-een-reparateur?zip=&device=1&long=0&lat=0&distance=30&sort=8"
+                  >
+                    Telefoon reparatie
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    prefetch={false}
+                    href="/zoek-een-reparateur?zip=&device=2&long=0&lat=0&distance=30&sort=8"
+                  >
+                    Tablet reparatie
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    prefetch={false}
+                    href="/zoek-een-reparateur?zip=&device=3&long=0&lat=0&distance=30&sort=8"
+                  >
+                    Laptop reparatie
+                  </Link>
+                </li>
+              </ul>
+            </FooterSitemap>
+            <FooterSitemap ClassName="custome-footer-sitename">
+              <FooterSitemapTitle>Steden</FooterSitemapTitle>
+              <ul>
+                <li>
+                  <Link
+                    prefetch={false}
+                    href="/zoek-een-reparateur?zip=Amsterdam,%20Nederland&device=0&long=4.9041389&lat=52.3675734&distance=30&sort=8"
+                  >
+                    Amsterdam
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    prefetch={false}
+                    href="/zoek-een-reparateur?zip=Rotterdam,%20Nederland&device=0&long=4.4777326&lat=51.9244201&distance=30&sort=8"
+                  >
+                    Rotterdam
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    prefetch={false}
+                    href="/zoek-een-reparateur?zip=Den%20Haag,%20Nederland&device=0&long=4.3006999&lat=52.0704978&distance=30&sort=8"
+                  >
+                    Den Haag
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    prefetch={false}
+                    href="/zoek-een-reparateur?zip=Utrecht,%20Nederland&device=0&long=5.1214201&lat=52.09073739999999&distance=30&sort=8"
+                  >
+                    Utrecht
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    prefetch={false}
+                    href="/zoek-een-reparateur?zip=Groningen,%20Nederland&device=0&long=6.5665017&lat=53.2193835&distance=30&sort=8"
+                  >
+                    Groningen
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    prefetch={false}
+                    href="/zoek-een-reparateur?zip=Den%20Bosch,%20Nederland&device=0&long=5.3036748&lat=51.6978162&distance=30&sort=8"
+                  >
+                    Den Bosch
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    prefetch={false}
+                    href="/zoek-een-reparateur?zip=Tilburg,%20Nederland&device=0&long=5.0919143&lat=51.560596&distance=30&sort=8"
+                  >
+                    Tilburg
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    prefetch={false}
+                    href="/zoek-een-reparateur?zip=Maastricht,%20Nederland&device=0&long=5.6909725&lat=50.8513682&distance=30&sort=8"
+                  >
+                    Maastricht
+                  </Link>
+                </li>
+              </ul>
+            </FooterSitemap>
+          </FooterLinkArea>{" "}
+          <FooterLinkArea className="footer-link-area">
+            <FooterSitemap ClassName="custome-footer-sitename">
+              {/* <FooterSitemapTitle>Devices</FooterSitemapTitle>
               <ul>
                 <li>
                   <Link prefetch={false} href="/reparatie">
@@ -371,13 +407,14 @@ const FooterView = (routerProps) => {
                 </li>
               </ul>*/}
             </FooterSitemap>
-          </FooterLinkArea> 
+          </FooterLinkArea>
         </FooterViewContent>
       </DevicesContainer>{" "}
-      <FooterCopyright> Copyright @ 2021 MrAgain - info@mragain.nl </FooterCopyright>
-      {!!notBot && (
-        <CookieBanner />
-      )}
+      <FooterCopyright>
+        {" "}
+        Copyright @ 2021 MrAgain - info@mragain.nl{" "}
+      </FooterCopyright>
+      {!!notBot && <CookieBanner />}
     </FooterViewSection>
   );
 };

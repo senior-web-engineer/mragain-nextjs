@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useRouter } from "next/router";
-import { setFindedLocation, setSearchFilter } from "service/search/action.js";
-import { h1, CommonText, GreenText } from "./SearchForm.style.jsx";
 import "./SearchForm.style.less";
+
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import { Button } from "react-bootstrap";
+import { connect } from "react-redux";
+import { setFindedLocation, setSearchFilter } from "service/search/action.js";
+
+import { CommonText, GreenText, h1 } from "./SearchForm.style.jsx";
 
 const SearchForm = (routerProps) => {
   const { setFindedLocation, setSearchFilter } = routerProps;
@@ -59,20 +61,23 @@ const SearchForm = (routerProps) => {
         <h1 className="main-title">
           Vind een betrouwbare telefoon reparateur bij jou in de buurt
         </h1>
-        <GreenText/>
+        <GreenText />
       </div>
       <div className="form-group">
-        <label htmlFor="main-search-from"
-               style={{
-                 opacity:0,
-                 width:0,
-                 height:0,
-               }}
-        >Woonplaats of postcode</label>
+        <label
+          htmlFor="main-search-from"
+          style={{
+            opacity: 0,
+            width: 0,
+            height: 0,
+          }}
+        >
+          Woonplaats of postcode
+        </label>
         <input
           type="input"
-          id={'main-search-from'}
-          name={'search'}
+          id={"main-search-from"}
+          name={"search"}
           className="form-control"
           placeholder="Woonplaats of postcode"
           value={location}

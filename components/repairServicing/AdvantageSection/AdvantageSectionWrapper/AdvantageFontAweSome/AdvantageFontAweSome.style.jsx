@@ -1,19 +1,21 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const Blog = styled.div`
   width: 100%;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-`
+`;
 export const BlogTitle = styled.div`
   font-size: 18px;
-  {/*color: #1c2430;*/}
+   {
+    /*color: #1c2430;*/
+  }
   color: #1c2430;
   text-align: center;
-`
+`;
 
 export const CircleIcon = styled.div`
   width: 125px;
@@ -22,5 +24,5 @@ export const CircleIcon = styled.div`
   border-radius: 50%;
   position: relative;
   padding-bottom: 0px;
-  margin:0px auto;
-`
+  margin: 0px auto;
+`;

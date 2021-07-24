@@ -1,8 +1,3 @@
-import SliderOnMobile from "@/components/common/SliderOnMobile";
-import { H2, SubTitle } from "@/components/styled/text";
-import Button from "@/components/ui/Button";
-import media from "@/utils/media";
-import { getShopLogo, getShopRoute } from "@/utils/shop";
 import {
   faArrowRight,
   faMapMarkerAlt,
@@ -13,6 +8,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import styled, { css } from "styled-components";
+
+import SliderOnMobile from "@/components/common/SliderOnMobile";
+import { H2, SubTitle } from "@/components/styled/text";
+import Button from "@/components/ui/Button";
+import media from "@/utils/media";
+import { getShopLogo, getShopRoute } from "@/utils/shop";
 
 const ShopList = styled.div`
   margin: 0 -15px;
@@ -177,17 +178,17 @@ export function ShopCard({ shop, onClick }) {
     .join(", ");
 
   const shopUrl = getShopRoute(shop);
-  const shopLogo = getShopLogo(shop.logo_photo)
+  const shopLogo = getShopLogo(shop.logo_photo);
 
   return (
     <ShopWrap key={shop.id} onClick={onClick}>
       <ShopImageWrap tagColor={TAG_TO_COLOR[shop.tag]}>
-          <Image
-            loading="lazy"
-            src={shopLogo}
-            layout="fill"
-            objectFit="contained"
-          />
+        <Image
+          loading="lazy"
+          src={shopLogo}
+          layout="fill"
+          objectFit="contained"
+        />
         <d-def>
           {shop.rating !== undefined ? (
             <rating>

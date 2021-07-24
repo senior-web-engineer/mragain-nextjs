@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import "./index.less";
+
+import { Button, Checkbox, Input, message, Popconfirm, Select } from "antd";
+import Head from "next/head";
 import { useRouter } from "next/router";
-import { message, Button, Checkbox, Input, Popconfirm, Select } from "antd";
-import lib from "@/assets/js/lib";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { resetAuthError } from "service/account/action.js";
 import {
-  updateAccountSettings,
-  getShopIdByInformation,
-  resetPasswordConfirm,
   deleteAccount,
   getAccountSettings,
+  getShopIdByInformation,
+  resetPasswordConfirm,
+  updateAccountSettings,
 } from "service/account/operations.js";
-import { resetAuthError } from "service/account/action.js";
 import { logout } from "service/account/operations.js";
-import "./index.less";
-import Head from "next/head";
-import { FRONT_END_URL } from "../../../constants.js";
+
+import lib from "@/assets/js/lib";
+
 import { Layout } from "../../../components/global";
+import { FRONT_END_URL } from "../../../constants.js";
 import filterObjectKeys from "../../../scripts/filterObjectKeys";
 
 const { Option } = Select;

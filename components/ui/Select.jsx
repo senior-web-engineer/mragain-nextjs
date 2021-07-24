@@ -16,7 +16,6 @@ const StyledSelect = styled(AntdSelect)`
       margin-right: 0;
       font-size: 8px;
       color: #06c987;
-
     }
   }
 `;
@@ -24,7 +23,9 @@ const StyledSelect = styled(AntdSelect)`
 export default function Select({ options, ...rest }) {
   function renderOption(option) {
     return (
-      <AntdSelect.Option key={option.value} value={option.value}>{option.label}</AntdSelect.Option>
+      <AntdSelect.Option key={option.value} value={option.value}>
+        {option.label}
+      </AntdSelect.Option>
     );
   }
 

@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
-import Image from "next/image";
-import { appointmentReview } from "./modules";
-import { connect } from "react-redux";
-import Modal from "@/modules/modal";
-import styled from "styled-components";
 import moment from "moment";
+import Image from "next/image";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import styled from "styled-components";
+
+import Modal from "@/modules/modal";
 import media from "@/utils/media";
+
+import { appointmentReview } from "./modules";
 
 const ContentWrap = styled.div`
   text-align: center;

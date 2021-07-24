@@ -1,15 +1,18 @@
-import { useScreenSize } from "@/utils/media";
-import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import dynamic from "next/dynamic";
+import React from "react";
+import styled from "styled-components";
+
+import { useScreenSize } from "@/utils/media";
+
 import Loader from "../Loader";
 
 const Slider = dynamic(() => import("react-slick"), {

@@ -1,8 +1,9 @@
+import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
-import Document, { Head, Main, NextScript, Html } from "next/document";
 import { ServerStyleSheet } from "styled-components";
-import HeadWithoutPreload from "./HeadWithoutPreload";
+
 import { GA_TRACKING_ID } from "../lib/gtag";
+import HeadWithoutPreload from "./HeadWithoutPreload";
 
 const hotJarScript = `
 (function(h,o,t,j,a,r){
@@ -93,7 +94,11 @@ export default class MyDocument extends Document {
           </noscript>
           {isProduction ? (
             <>
-              <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"/>
+              <script
+                async
+                custom-element="amp-analytics"
+                src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"
+              />
               <script dangerouslySetInnerHTML={{ __html: gaScript }} />
               <script dangerouslySetInnerHTML={{ __html: hotJarScript }} />
               <script dangerouslySetInnerHTML={{ __html: facebookScript }} />
@@ -107,7 +112,8 @@ export default class MyDocument extends Document {
             <>
               <amp-analytics
                 config="https://www.googletagmanager.com/amp.json?id=GTM-T4WQQ47&gtm.url=SOURCE_URL"
-                data-credentials="include" />
+                data-credentials="include"
+              />
             </>
           ) : null}
         </body>

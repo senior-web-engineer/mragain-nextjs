@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { message } from "antd";
 import "./reset-je-wachtwoord.less";
-import { resetPasswordEmail } from "service/account/operations.js";
-import { resetAuthError } from "service/account/action.js";
-import { Layout } from "@/components/global";
+
+import { message } from "antd";
 import Head from "next/head";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import { Button, Form } from "react-bootstrap";
+import { connect } from "react-redux";
+import { resetAuthError } from "service/account/action.js";
+import { resetPasswordEmail } from "service/account/operations.js";
+
+import { Layout } from "@/components/global";
 
 function PasswordResetEmail(routerProps) {
   const [validated, setValidated] = React.useState(false);

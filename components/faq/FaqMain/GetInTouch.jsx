@@ -1,16 +1,17 @@
-import React from 'react'
+import { useRouter } from "next/router";
+import React from "react";
+
 import {
-  GetinTouchContainer,
   Content,
-  Title,
-  Subtitle,
-  GetInTouchText,
   GetInTouchButton,
-} from './GetInTouch.style'
-import { useRouter } from 'next/router'
+  GetinTouchContainer,
+  GetInTouchText,
+  Subtitle,
+  Title,
+} from "./GetInTouch.style";
 
 const GetInTouch = () => {
-  const router = useRouter()  
+  const router = useRouter();
 
   return (
     <GetinTouchContainer>
@@ -21,12 +22,12 @@ const GetInTouch = () => {
             Neem contact met ons op en we komen zo snel mogelijk bij je terug.
           </Subtitle>
         </GetInTouchText>
-        <GetInTouchButton onClick={() => router.push('/contact')}>
+        <GetInTouchButton onClick={() => router.push("/contact")}>
           Neem contact op
         </GetInTouchButton>
       </Content>
     </GetinTouchContainer>
-  )
-}
+  );
+};
 
-export default GetInTouch
+export default GetInTouch;

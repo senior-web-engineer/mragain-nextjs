@@ -1,13 +1,15 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import React, { Component } from "react";
-import { BannerSection } from "@/components/home/FindBannerSection/FindBannerSection.style";
+
 import { Layout } from "@/components/global";
-import 'bootstrap/dist/css/bootstrap.min.css'
+import { BannerSection } from "@/components/home/FindBannerSection/FindBannerSection.style";
 
 const EmailConfirmation = () => {
-  return ( 
+  return (
     <Layout>
       <BannerSection />
     </Layout>
-  )
-}
+  );
+};
 export default EmailConfirmation;

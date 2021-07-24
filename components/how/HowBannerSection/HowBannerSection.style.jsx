@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const HowBannerTitle = styled.div`
   width: 400px;
@@ -8,4 +8,4 @@ export const HowBannerTitle = styled.div`
   line-height: 38px;
   font-weight: bold;
   color: #fff;
-`
+`;

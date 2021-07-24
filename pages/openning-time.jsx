@@ -1,25 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import moment from "moment";
-import {
-  TimePicker,
-  Button,
-  Modal,
-  Input,
-  Select,
-  message,
-  Checkbox,
-} from "antd";
-import { Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  getAccountProfile,
-  updateValidOpenTime,
-  updateInvalidOpenTime,
-} from "service/account/operations.js";
-import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
 import "./openning-time.less";
+
+import {
+  Button,
+  Checkbox,
+  Input,
+  message,
+  Modal,
+  Select,
+  TimePicker,
+} from "antd";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { Table } from "react-bootstrap";
+import DayPicker from "react-day-picker";
+import { connect } from "react-redux";
+import {
+  getAccountProfile,
+  updateInvalidOpenTime,
+  updateValidOpenTime,
+} from "service/account/operations.js";
 
 import { Layout } from "@/components/global";
 

@@ -1,9 +1,10 @@
+import { notification } from "antd";
+
 import { store } from "@/configureStore";
 import { API_PATH } from "@/constants";
 import dataFetcher from "@/modules/dataFetcher";
 import { createListModule } from "@/modules/list";
 import api, { privateApi } from "@/utils/api";
-import { notification } from "antd";
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],

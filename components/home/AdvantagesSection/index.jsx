@@ -1,17 +1,16 @@
+import {
+  faCheck,
+  faClock,
+  faReceipt,
+  faTree,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styled from "styled-components";
 
-import {
-  faReceipt,
-  faClock,
-  faTree,
-  faCheck,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import SliderOnMobile from "@/components/common/SliderOnMobile";
-import media from "@/utils/media";
 import { H2, SubTitle } from "@/components/styled/text";
+import media from "@/utils/media";
 
 //
 
@@ -26,7 +25,7 @@ const ADVANTAGES = [
     icon: faReceipt,
     title: "Vooraf duidelijkheid",
     1: "Direct inzicht in reparatiekosten en garantie die je krijgt",
-    2: "Authentieke reviews van klanten die je voorgingen",	  
+    2: "Authentieke reviews van klanten die je voorgingen",
   },
   {
     icon: faTree,
@@ -108,11 +107,11 @@ export default function AdvantagesSection() {
       <AdvantageWrap key={title}>
         <FontAwesomeIcon icon={icon} />
         <h3>{title}</h3>
-          {Object.keys(rest).map((perk, index) => (
-            <d-item key={index}>
-              <FontAwesomeIcon icon={faCheck} /> {rest[perk]}
-            </d-item>
-          ))}
+        {Object.keys(rest).map((perk, index) => (
+          <d-item key={index}>
+            <FontAwesomeIcon icon={faCheck} /> {rest[perk]}
+          </d-item>
+        ))}
       </AdvantageWrap>
     );
   }
@@ -122,7 +121,15 @@ export default function AdvantagesSection() {
       <SubTitle>mragain.nl</SubTitle>
       <H2>Jouw voordelen</H2>
       <AdvantagesWrap>
-        <SliderOnMobile tabletConfig={{slidesToShow: 2,  centerMode: true, centerPadding: "40px",}}>{ADVANTAGES.map(renderAdvantage)}</SliderOnMobile>
+        <SliderOnMobile
+          tabletConfig={{
+            slidesToShow: 2,
+            centerMode: true,
+            centerPadding: "40px",
+          }}
+        >
+          {ADVANTAGES.map(renderAdvantage)}
+        </SliderOnMobile>
       </AdvantagesWrap>
     </>
   );

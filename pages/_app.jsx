@@ -1,23 +1,24 @@
-import React from "react";
-import App from "next/app";
-
-import { ConnectedRouter } from "connected-next-router";
-import { wrapper } from "../configureStore";
-import { connect } from "react-redux";
 import "./_app.less";
 import "rc-dialog/assets/index.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { config, library } from "@fortawesome/fontawesome-svg-core";
+import "moment/locale/nl";
 
-// fontawesome icons
-import { fas } from "@fortawesome/free-solid-svg-icons";
+import { config, library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
-import { ScreenSizeProvider } from "@/utils/media";
+// fontawesome icons
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { ConnectedRouter } from "connected-next-router";
 import moment from "moment";
-import "moment/locale/nl";
+import App from "next/app";
 import router from "next/router";
+import React from "react";
+import { connect } from "react-redux";
+
 import * as gtag from "@/lib/gtag";
+import { ScreenSizeProvider } from "@/utils/media";
+
+import { wrapper } from "../configureStore";
 
 const isProduction = process.env.NODE_ENV === "production";
 const handleRouteChange = (url, { shallow }) => {

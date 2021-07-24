@@ -1,29 +1,29 @@
+import { DatePicker, TimePicker } from "antd";
+import get from "lodash/get";
 import React, { useCallback, useEffect } from "react";
 
 import {
   appointmentForm,
+  brandFetcher,
   createAppointmentFormModal,
   currentUser,
   devicesFetcher,
   modelFetcher,
-  brandFetcher,
   reparationsList,
   servicesFetcher,
 } from "@/components/dashboard/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
+import { SubTitle } from "@/components/styled/text";
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
+import Select from "@/components/ui/Select";
+import { store } from "@/configureStore";
+import { createSelectComponent } from "@/modules/dataFetcher";
+import Form, { useFormContext } from "@/modules/forms";
+import { Field, parseNativeEvent } from "@/modules/forms/Blocks";
 import List from "@/modules/list";
 import { Table } from "@/modules/list/Blocks";
 import { Drawer } from "@/modules/modal";
-import Button from "@/components/ui/Button";
-import Form, { useFormContext } from "@/modules/forms";
-import { SubTitle } from "@/components/styled/text";
-import { Field, parseNativeEvent } from "@/modules/forms/Blocks";
-import Input from "@/components/ui/Input";
-import { createSelectComponent } from "@/modules/dataFetcher";
-import Select from "@/components/ui/Select";
-import get from "lodash/get";
-import { DatePicker, notification, TimePicker } from "antd";
-import { store } from "@/configureStore";
 
 //
 
@@ -88,7 +88,7 @@ const DeviceSelector = createSelectComponent({
 });
 
 function AppendIdentifier({ Component, name }) {
-  return function (props) {
+  return function AppendedComponent(props) {
     const { state } = useFormContext();
     return <Component identifier={`${state?.values?.[name]}`} {...props} />;
   };
@@ -118,7 +118,11 @@ const ServiceSelector = AppendIdentifier({
   Component: createSelectComponent({
     dataFetcher: servicesFetcher,
     parseOptions(items = []) {
-      return parseOptions(items || [], "reparation.reparation_name", "reparation.id");
+      return parseOptions(
+        items || [],
+        "reparation.reparation_name",
+        "reparation.id"
+      );
     },
   }),
   name: "model",
@@ -187,14 +191,18 @@ export default function DashboardPage({ auth_user }) {
     servicesFetcher.key(`${value}`).fetch();
   });
 
-  const onReparationChange = useCallback(async(value) => {
+  const onReparationChange = useCallback(async (value) => {
     appointmentForm.actions.batchChange({
       updates: {
         reparation: value,
       },
     });
-    const services = await servicesFetcher.key(`${appointmentForm.state.values.model}`).fetch()
-    const serviceMetaInfo = services.find(service => service.reparation.id === value);
+    const services = await servicesFetcher
+      .key(`${appointmentForm.state.values.model}`)
+      .fetch();
+    const serviceMetaInfo = services.find(
+      (service) => service.reparation.id === value
+    );
     if (serviceMetaInfo) {
       appointmentForm.actions.batchChange({
         updates: {
@@ -245,7 +253,12 @@ export default function DashboardPage({ auth_user }) {
             name="model"
             onChange={onModelChange}
           />
-          <ServiceSelector as={Select} label="Reparation" name="reparation"  onChange={onReparationChange} />
+          <ServiceSelector
+            as={Select}
+            label="Reparation"
+            name="reparation"
+            onChange={onReparationChange}
+          />
           <SubTitle>Appointment schedule</SubTitle>
           <Field as={DatePicker} label="Date" name="date" />
           <Field

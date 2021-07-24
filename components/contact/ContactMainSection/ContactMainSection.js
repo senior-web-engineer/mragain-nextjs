@@ -1,16 +1,18 @@
-import React from 'react';
+import "./ContactMainSection.style.css";
+
+import React from "react";
+
 import {
-  ContactSectionArea,
   ContactContainer,
   ContactContent,
-} from '../Contact.style.jsx';
-import MainLocateUs from './MainLocateUs/MainLocateUs';
-import MainContactUs from './MainContactUs/MainContactUs';
-import './ContactMainSection.style.css';
+  ContactSectionArea,
+} from "../Contact.style.jsx";
+import MainContactUs from "./MainContactUs/MainContactUs";
+import MainLocateUs from "./MainLocateUs/MainLocateUs";
 
 const ContactMainSection = () => (
   <ContactSectionArea>
-    <ContactContainer className="contact-container" >
+    <ContactContainer className="contact-container">
       <ContactContent className="contact-content">
         <MainLocateUs />
         <MainContactUs />

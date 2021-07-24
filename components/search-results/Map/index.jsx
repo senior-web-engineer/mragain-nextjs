@@ -1,15 +1,17 @@
+import dynamic from "next/dynamic";
 import React, { useMemo } from "react";
 import styled from "styled-components";
-import dynamic from "next/dynamic";
-import media, { OnMobile } from "@/utils/media.js";
-import { useListContext } from "@/modules/list";
 
-import { ShopCard } from "@/components/home/ShopsSection";
 import Loader from "@/components/common/Loader/index.js";
+import { ShopCard } from "@/components/home/ShopsSection";
+import { useListContext } from "@/modules/list";
+import media, { OnMobile } from "@/utils/media.js";
+
 import GoogleMap from "./GoogleMap.jsx";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
-  loading: Loader, ssr: false
+  loading: Loader,
+  ssr: false,
 });
 
 const MapWrap = styled.div`

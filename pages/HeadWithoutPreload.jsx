@@ -1,11 +1,11 @@
-import { Head } from 'next/document'
+import { Head } from "next/document";
 
 export default class HeadWithoutPreload extends Head {
-    getPreloadDynamicChunks () {
-        return []
-    }
+  getPreloadDynamicChunks() {
+    return [];
+  }
 
-    getPreloadMainLinks () {
-        return []
-    }
+  getPreloadMainLinks() {
+    return [];
+  }
 }

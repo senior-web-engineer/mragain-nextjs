@@ -1,7 +1,7 @@
-import React from "react";
-
 import Image from "next/image";
+import React from "react";
 import styled from "styled-components";
+
 import media from "@/utils/media";
 
 const HeaderWrap = styled.div`
@@ -19,8 +19,6 @@ const HeaderWrap = styled.div`
   `}
 `;
 
-
-
 const HeaderInnerWrap = styled.div`
   display: flex;
   align-items: center;
@@ -31,7 +29,6 @@ const HeaderInnerWrap = styled.div`
     align-items: center;
   }
 `;
-
 
 const HeaderView = () => {
   return (
