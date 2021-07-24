@@ -1,10 +1,12 @@
-import React from "react";
-import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
 import { Layout } from "components/global";
 import Head from "next/head";
-import { API_PATH, FRONT_END_URL } from "../../constants.js";
+import React from "react";
 import { useEffect } from "react";
+
 import Pagelist from "@/components/PageComponent/PageList.js";
+import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
+
+import { API_PATH, FRONT_END_URL } from "../../constants.js";
 
 export default function Blog({ blogs }) {
   useEffect(() => {

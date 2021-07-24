@@ -1,7 +1,9 @@
-import media, { OnMobile } from "@/utils/media";
 import Image from "next/image";
 import React, { useMemo, useState } from "react";
 import styled, { css } from "styled-components";
+
+import media, { OnMobile } from "@/utils/media";
+
 import SliderOnMobile from "../common/SliderOnMobile";
 
 const MainWrap = styled.div`

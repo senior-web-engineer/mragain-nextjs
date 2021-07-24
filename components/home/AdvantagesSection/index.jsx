@@ -1,17 +1,16 @@
+import {
+  faCheck,
+  faClock,
+  faReceipt,
+  faTree,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styled from "styled-components";
 
-import {
-  faReceipt,
-  faClock,
-  faTree,
-  faCheck,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import SliderOnMobile from "@/components/common/SliderOnMobile";
-import media from "@/utils/media";
 import { H2, SubTitle } from "@/components/styled/text";
+import media from "@/utils/media";
 
 //
 

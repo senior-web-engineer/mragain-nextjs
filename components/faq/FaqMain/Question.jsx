@@ -1,17 +1,18 @@
-import React, { useState, Fragment } from "react";
+import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Fragment, useState } from "react";
+
 import {
-  InnerContainer,
-  Title,
-  Content,
-  TitleText,
-  Underline,
-  QuestionContainer,
   AnswerContainer,
   BlockText,
+  Content,
+  InnerContainer,
   PlusMinusButton,
+  QuestionContainer,
+  Title,
+  TitleText,
+  Underline,
 } from "@/components/faq/FaqMain/Faq.style";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 
 const Question = ({ data }) => {
   let { title, faq } = data;

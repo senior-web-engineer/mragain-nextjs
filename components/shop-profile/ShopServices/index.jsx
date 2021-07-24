@@ -1,41 +1,43 @@
-import { createSelectComponent, useFetcher } from "@/modules/dataFetcher";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Checkbox, Radio } from "antd";
+import moment from "moment";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useCallback, useEffect } from "react";
-import {
-  brandFetcher,
-  deviceFetcher,
-  filtersFormModule,
-  shopServicesListModule,
-  modelFetcher,
-  serviceFormModule,
-  nextSlotFetcher,
-} from "../modules";
+import styled, { css } from "styled-components";
+
+import Loader from "@/components/common/Loader";
+import ConfirmationModal from "@/components/common/modals/ConfirmationModal";
+import { continueWitoutServiceModal } from "@/components/shop-profile/modules";
+import { MaxConstraints } from "@/components/styled/layout";
+import { SubTitle, SubTitleDescription } from "@/components/styled/text";
+import Button from "@/components/ui/Button";
+import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
+import Select from "@/components/ui/Select";
+import { store } from "@/configureStore";
+import { createSelectComponent, useFetcher } from "@/modules/dataFetcher";
 import Form, { useFormContext } from "@/modules/forms";
 import {
   Field,
   parseNativeEvent,
   SyncFormValues,
 } from "@/modules/forms/Blocks";
-import Select from "@/components/ui/Select";
 import List from "@/modules/list";
 import { Listing, Table } from "@/modules/list/Blocks";
-import styled, { css } from "styled-components";
-import { MaxConstraints } from "@/components/styled/layout";
-import { Checkbox, Radio } from "antd";
-import Link from "next/link";
-import Button from "@/components/ui/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import media, { OnMobile, useScreenSize } from "@/utils/media";
-import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
-import Loader from "@/components/common/Loader";
-import moment from "moment";
-import ConfirmationModal from "@/components/common/modals/ConfirmationModal";
-import { continueWitoutServiceModal } from "@/components/shop-profile/modules";
-import { SubTitle, SubTitleDescription } from "@/components/styled/text";
-import Image from "next/image";
-import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
-import { store } from "@/configureStore";
+
+import {
+  brandFetcher,
+  deviceFetcher,
+  filtersFormModule,
+  modelFetcher,
+  nextSlotFetcher,
+  serviceFormModule,
+  shopServicesListModule,
+} from "../modules";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
   loading: Loader,

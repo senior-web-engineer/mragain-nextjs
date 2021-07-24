@@ -1,11 +1,12 @@
 import React from "react";
+
 import {
   AboutSectionArea,
-  AboutSectionQuote,
   AboutSectionContent,
-  AboutSectionContentTitle,
-  AboutSectionContentSubTitle,
   AboutSectionContentDescription,
+  AboutSectionContentSubTitle,
+  AboutSectionContentTitle,
+  AboutSectionQuote,
 } from "./AboutUsSection.style.jsx";
 
 const AboutUsSection = () => (

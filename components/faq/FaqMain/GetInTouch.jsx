@@ -1,13 +1,14 @@
-import React from "react";
-import {
-  GetinTouchContainer,
-  Content,
-  Title,
-  Subtitle,
-  GetInTouchText,
-  GetInTouchButton,
-} from "./GetInTouch.style";
 import { useRouter } from "next/router";
+import React from "react";
+
+import {
+  Content,
+  GetInTouchButton,
+  GetinTouchContainer,
+  GetInTouchText,
+  Subtitle,
+  Title,
+} from "./GetInTouch.style";
 
 const GetInTouch = () => {
   const router = useRouter();

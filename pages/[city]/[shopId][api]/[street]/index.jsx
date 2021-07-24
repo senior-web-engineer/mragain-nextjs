@@ -1,18 +1,18 @@
-import React from "react";
+import dynamic from "next/dynamic";
+import Head from "next/head";
 import { useRouter } from "next/router";
+import React from "react";
+import { getShopProfileByInformationServer } from "service/account/operations";
 import styled from "styled-components";
 
-import Head from "next/head";
-import { FRONT_END_URL } from "@/constants";
-import { getShopProfileByInformationServer } from "service/account/operations";
+import Loader from "@/components/common/Loader";
 import DefaultLayout from "@/components/layouts/Homepage";
+import ShopDetails from "@/components/shop-profile/ShopDetails";
 import ShopHeader from "@/components/shop-profile/ShopHeader";
 import ShopServices from "@/components/shop-profile/ShopServices";
-import ShopDetails from "@/components/shop-profile/ShopDetails";
-import { OnMobile } from "@/utils/media";
-import Loader from "@/components/common/Loader";
-import dynamic from "next/dynamic";
 import { wrapper } from "@/configureStore";
+import { FRONT_END_URL } from "@/constants";
+import { OnMobile } from "@/utils/media";
 
 const LoadableReviews = dynamic(
   () =>

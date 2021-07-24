@@ -1,9 +1,11 @@
-import React from "react";
 import "./ProfileMainSection.less";
+
+import React from "react";
+
 import {
-  ReviewCheckOut,
-  DeviceTypeSelect,
   AppointmentDirectly,
+  DeviceTypeSelect,
+  ReviewCheckOut,
   ServiceTable,
   ShopServiceInfo,
 } from "./components";

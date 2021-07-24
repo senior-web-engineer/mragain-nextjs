@@ -1,10 +1,11 @@
+import React, { useState } from "react";
+
 import { DeviceFinder } from "@/components/devices/DeviceFinder";
+import DeviceModels from "@/components/devices/DeviceModels";
 import DefaultLayout from "@/components/layouts/Homepage";
 import { MaxConstraints } from "@/components/styled/layout";
 import { API_PATH } from "@/constants";
 import api from "@/utils/api";
-import React, { useState } from "react";
-import DeviceModels from "@/components/devices/DeviceModels";
 
 export default function Devices({ models, deviceName, brandName }) {
   const [searchTerm, updateSearchTerm] = useState("");

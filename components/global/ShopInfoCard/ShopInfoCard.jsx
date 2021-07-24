@@ -1,15 +1,17 @@
-import React from "react";
-import { connect } from "react-redux";
-import { useRouter } from "next/router";
-import { Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { CardInfo } from "./ShopInfoCard.style.jsx";
+import "./ShopInfoCard.style.less";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "antd";
-import "./ShopInfoCard.style.less";
-import StarRatingInfo from "../StarRatingInfo/StarRatingInfo";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import React from "react";
+import { Card } from "react-bootstrap";
+import { connect } from "react-redux";
+
+import StarRatingInfo from "../StarRatingInfo/StarRatingInfo";
+import { CardInfo } from "./ShopInfoCard.style.jsx";
 const ShopInfoCard = (routerProps) => {
   const {} = routerProps;
   const router = useRouter();

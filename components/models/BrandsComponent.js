@@ -1,7 +1,8 @@
-import React from "react";
 import "./modelDetails.css";
-import { Fragment } from "react";
+
 import { useRouter } from "next/router";
+import React from "react";
+import { Fragment } from "react";
 
 export default function BrandsComponent({ data, deviceId }) {
   const router = useRouter();

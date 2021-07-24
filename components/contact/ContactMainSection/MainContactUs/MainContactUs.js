@@ -1,18 +1,20 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import { message } from "antd";
+import React from "react";
+import { Button, Form } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { connect } from "react-redux";
+import { contactUs } from "service/search/operations.js";
+
+import { LocateTitle } from "../MainLocateUs/MainLocateUs.style";
 import {
+  FormSubBlog,
+  MainContactForm,
   MainContactUsBlog,
   MainContactUsContent,
-  MainContactForm,
-  FormSubBlog,
 } from "./MainContactUs.style";
-import { LocateTitle } from "../MainLocateUs/MainLocateUs.style";
-import { contactUs } from "service/search/operations.js";
 
 const MainContactUs = (props) => {
   const { contactUs } = props;

@@ -1,23 +1,26 @@
-import React from "react";
-import { useState } from "react";
-import { SideBySideMagnifier } from "react-image-magnifiers";
-import Slider from "react-slick";
 import "./modelDetails.css";
-import { Rate } from "antd";
 import "../../components/global/StarRatingInfo/StarRatingInfo.less";
-import batteryIssue from "../../assets/icons/Problems - Battery.svg";
-import crackIssue from "../../assets/icons/Problems - Crack.svg";
-import signalIssue from "../../assets/icons/Problems - Signal.svg";
-import locationIssue from "../../assets/icons/Problems - Location.svg";
-import connectivityIssue from "../../assets/icons/Problems - Connectivity.svg";
-import releasedDate from "../../assets/icons/Specifications - Date.svg";
-import { useEffect } from "react";
-import noPreview from "../../assets/images/no-preview-available.png";
-import { FRONT_END_URL } from "@/constants.js";
-import { Fragment } from "react";
+
+import { Rate } from "antd";
+import classnames from "classnames";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import classnames from "classnames";
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { Fragment } from "react";
+import { SideBySideMagnifier } from "react-image-magnifiers";
+import Slider from "react-slick";
+
+import { FRONT_END_URL } from "@/constants.js";
+
+import batteryIssue from "../../assets/icons/Problems - Battery.svg";
+import connectivityIssue from "../../assets/icons/Problems - Connectivity.svg";
+import crackIssue from "../../assets/icons/Problems - Crack.svg";
+import locationIssue from "../../assets/icons/Problems - Location.svg";
+import signalIssue from "../../assets/icons/Problems - Signal.svg";
+import releasedDate from "../../assets/icons/Specifications - Date.svg";
+import noPreview from "../../assets/images/no-preview-available.png";
 
 export default function ModelDetails(routerProps) {
   const { modelDetails, reparations } = routerProps;

@@ -1,6 +1,7 @@
-import media from "@/utils/media";
 import React from "react";
 import styled, { css } from "styled-components";
+
+import media from "@/utils/media";
 
 const MainWrap = styled.div`
   font-size: 13px;

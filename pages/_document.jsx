@@ -1,8 +1,9 @@
+import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
-import Document, { Head, Main, NextScript, Html } from "next/document";
 import { ServerStyleSheet } from "styled-components";
-import HeadWithoutPreload from "./HeadWithoutPreload";
+
 import { GA_TRACKING_ID } from "../lib/gtag";
+import HeadWithoutPreload from "./HeadWithoutPreload";
 
 const hotJarScript = `
 (function(h,o,t,j,a,r){

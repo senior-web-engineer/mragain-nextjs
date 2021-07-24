@@ -1,12 +1,13 @@
 import React from "react";
+
 import {
-  TestimonialBox,
-  TestimonialTitle,
-  TestimonialText,
-  TextWrapper,
-  StarsQuoteWrapper,
   GoldStar,
+  StarsQuoteWrapper,
+  TestimonialBox,
   TestimonialName,
+  TestimonialText,
+  TestimonialTitle,
+  TextWrapper,
 } from "./Testimonial.style";
 
 const Testimonial = ({ title, text, name, place }) => {
