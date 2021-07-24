@@ -4,7 +4,7 @@ export const MainWrapper = styled.div`
   display: flex;
   height: 70vh;
   margin: 20px 0px -127px 0px;
-  @media (max-width: 1023px) {
+  @media (max-width: 1024px) {
     margin-top: 0px;
   }
 `;
@@ -16,7 +16,7 @@ export const FormWrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  @media (max-width: 1023px) {
+  @media (max-width: 1024px) {
     padding: 0px;
     align-items: center;
   }
@@ -51,7 +51,7 @@ export const FormTitle = styled.div`
   font-size: 20px;
   line-height: 26px;
   padding-bottom: 10px;
-  @media (max-width: 1023px) {
+  @media (max-width: 1024px) {
     color: #3ec986;
   }
 `;
@@ -66,7 +66,7 @@ export const FormText = styled.div`
 export const FormBox = styled.div`
   width: 100%;
   height: 58%;
-  @media (max-width: 1023px) {
+  @media (max-width: 1024px) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -82,7 +82,7 @@ export const LabelWrapper = styled.div`
     margin-bottom: 50px;
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 1024px) {
     width: 280px;
   }
 `;
@@ -135,7 +135,7 @@ export const Button = styled.button`
   position: relative;
   box-shadow: rgb(250 250 250) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 4px,
     rgb(6 201 135) 0px 0px 0px 0px;
-  @media (max-width: 1023px) {
+  @media (max-width: 1024px) {
     width: 85%;
   }
 `;
@@ -156,7 +156,7 @@ export const BottomText = styled.div`
   line-height: 14px;
   margin-top: auto;
   margin-bottom: 30px;
-  @media (max-width: 1023px) {
+  @media (max-width: 1024px) {
     margin-bottom: 20px;
   }
 `;
@@ -175,7 +175,7 @@ export const ForgotPass = styled.a`
   line-height: 14px;
   margin-left: 20px;
   color: #909090;
-  @media (max-width: 1023px) {
+  @media (max-width: 1024px) {
     margin: 20px 0px 10px 0px;
   }
 `;
@@ -186,7 +186,7 @@ export const Gradient = styled.div`
 `;
 
 export const ButtonWrapper = styled.div`
-  @media (max-width: 1023px) {
+  @media (max-width: 1024px) {
     display: flex;
     flex-direction: column;
     justify-content: center;

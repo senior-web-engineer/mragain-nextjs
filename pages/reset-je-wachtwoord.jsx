@@ -22,13 +22,14 @@ import {
   ButtonWrapper,
 } from "../styled-components/reset-password";
 import Form from "@/modules/forms";
-import { resetPasswordModule } from "../components/resetPassword/modules";
-import { useWindowSize } from "@/utils/hooks/useWindowSize";
+import { resetPasswordModule } from "../components/resetPassword/modules";ç
+import { useScreenSize } from "@/utils/media";
 import { Field } from "@/modules/forms/Blocks";
 
 const ResetPass = () => {
-  const size = useWindowSize();
   const [disable, setDisable] = useState(false);
+  const smallScreenSizes = ["tablet", "desktop", "mobile"];
+  const { size } = useScreenSize();
 
   useEffect(() => {
     async function loadData() {
@@ -64,7 +65,7 @@ const ResetPass = () => {
   return (
     <>
       <DefaultLayout showSignup={false}>
-      <Head>
+        <Head>
           <title itemProp="name">Mr Again - Reset je wachtwoord</title>
           <meta
             name="Keywords"
@@ -97,7 +98,7 @@ const ResetPass = () => {
         </Head>
         <MainWrapper>
           <FormWrapper>
-            {size.width < 1023 && (
+            {smallScreenSizes.includes(size) && (
               <WaveWrapper>
                 <Image src={wave} layout="fill" objectFit="cover" />
                 <DrawingWrapper>
