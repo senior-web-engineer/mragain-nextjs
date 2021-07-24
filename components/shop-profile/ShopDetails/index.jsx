@@ -162,13 +162,13 @@ export default function ShopDetails({ shop }) {
             </d-def>
             <d-term>Reparatie opties</d-term>
             <d-def>
-	  {/*<LocationWrap>
+              {/*<LocationWrap>
                 <FontAwesomeIcon icon={faHome} /> Reparatie op locatie
               </LocationWrap>*/}
               <LocationWrap>
                 <FontAwesomeIcon icon={faStore} /> Reparatie in winkel
               </LocationWrap>
-	  {/* <LocationWrap>
+              {/* <LocationWrap>
                 <FontAwesomeIcon icon={faBox} /> Opsturen
               </LocationWrap>*/}
             </d-def>

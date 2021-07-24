@@ -38,12 +38,12 @@ export const appointmentForm = createFormModule({
     const fromAddressBar = router.router.query;
 
     function getDefaultValue(type, defaultValue) {
-      const value = fromAddressBar[type]
+      const value = fromAddressBar[type];
       if (["undefined", "null"].includes(value)) {
         return defaultValue;
       }
 
-      return value
+      return value;
     }
 
     const address = [shop.street || "", shop.city || ""]

@@ -61,7 +61,8 @@ const ContactForm = () => {
         <FormText>
           Heb je feedback of wil je in contact met ons komen?
           <br />
-          Laat een bericht achter en we nemen zo snel mogelijk contact met je op!
+          Laat een bericht achter en we nemen zo snel mogelijk contact met je
+          op!
         </FormText>
 
         <FormBox>

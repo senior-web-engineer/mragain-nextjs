@@ -38,11 +38,8 @@ const MainWrap = styled.div`
 `;
 
 const ShopProfile = (routerProps) => {
-  const {
-    shop_account_profile,
-    shopProfileServerInfo,
-    shopDevices,
-  } = routerProps;
+  const { shop_account_profile, shopProfileServerInfo, shopDevices } =
+    routerProps;
 
   const router = useRouter();
 
@@ -78,7 +75,9 @@ const ShopProfile = (routerProps) => {
       "telephone": "${shopAccountProfile.phone_number}",
       "url": "${shopAccountProfile.site_url}"
     }
-  `.split(`\n`).join('');
+  `
+    .split(`\n`)
+    .join("");
 
   return (
     <DefaultLayout>
@@ -119,7 +118,7 @@ const ShopProfile = (routerProps) => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async(ctx) => {
+export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
   const shopId = ctx.query["shopId][api"];
   const shopProfileServerInfo = await getShopProfileByInformationServer(shopId);
   return {
@@ -130,6 +129,6 @@ export const getServerSideProps = wrapper.getServerSideProps(async(ctx) => {
           : shopProfileServerInfo,
     },
   };
-})
+});
 
 export default ShopProfile;

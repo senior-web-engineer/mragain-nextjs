@@ -16,7 +16,7 @@ import {
 } from "service/account/operations.js";
 import { getAppointments } from "service/appointments/operations.js";
 import { BACK_END_URL } from "constants.js";
-import Image from 'next/image';
+import Image from "next/image";
 
 const { Header } = Layout;
 
@@ -42,8 +42,7 @@ const HeaderView = (routerProps) => {
     else if (router.pathname === "/over-ons") return `App-header home-page`;
     else if (router.pathname === "/meld-je-aan-als-reparateur")
       return `App-header home-page`;
-    else if (router.pathname === "/reparatie")
-      return `App-header home-page`;
+    else if (router.pathname === "/reparatie") return `App-header home-page`;
     else if (router.pathname === "/veel-gestelde-vragen")
       return `App-header home-page`;
     else if (router.pathname === "/hoe-werkt-het")
@@ -51,7 +50,6 @@ const HeaderView = (routerProps) => {
     else if (router.pathname === "/contact") return `App-header home-page`;
     else return `App-header`;
   })();
-
 
   useEffect(() => {
     if (is_load === true) {
@@ -134,7 +132,7 @@ const HeaderView = (routerProps) => {
         )}
         <Menu.Item>
           <Link
-              prefetch={false}
+            prefetch={false}
             href={
               "/account-gegevens/" +
               (auth_user.account_id === undefined && adminName !== null
@@ -150,7 +148,7 @@ const HeaderView = (routerProps) => {
         </Menu.Item>
         <Menu.Item>
           <Link
-              prefetch={false}
+            prefetch={false}
             href={
               "/dashboard/" +
               (auth_user.account_id === undefined && adminName !== null
@@ -167,7 +165,7 @@ const HeaderView = (routerProps) => {
         </Menu.Item>
         <Menu.Item>
           <Link
-              prefetch={false}
+            prefetch={false}
             href={
               "/apparaten-beheer/" +
               (auth_user.account_id === undefined && adminName !== null
@@ -183,7 +181,7 @@ const HeaderView = (routerProps) => {
         </Menu.Item>
         <Menu.Item>
           <Link
-              prefetch={false}
+            prefetch={false}
             href={
               "/profiel-beheer/" +
               (auth_user.account_id === undefined && adminName !== null
@@ -198,7 +196,9 @@ const HeaderView = (routerProps) => {
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <Link prefetch={false} href={"/hoe-werkt-het"}>Hoe werkt het</Link>
+          <Link prefetch={false} href={"/hoe-werkt-het"}>
+            Hoe werkt het
+          </Link>
         </Menu.Item>
         <Menu.Item>
           <span
@@ -237,21 +237,22 @@ const HeaderView = (routerProps) => {
         <div className="logo-blog">
           <a className="logo" href="/">
             <Image
-                quality={50}
-                loading={'eager'}
-                priority={true}
-                width={120} height={46}
-                src={logo}
-                alt="Logo Mr Again"
-                style={{
-                      display: 'table-cell',
-                      verticalAlign: 'middle'
-                    }}
+              quality={50}
+              loading={"eager"}
+              priority={true}
+              width={120}
+              height={46}
+              src={logo}
+              alt="Logo Mr Again"
+              style={{
+                display: "table-cell",
+                verticalAlign: "middle",
+              }}
             />
           </a>
           <div className="logo-title">
-            <div className="top"/>
-            <div className="bottom"/>
+            <div className="top" />
+            <div className="bottom" />
           </div>
         </div>
         <Menu
@@ -265,10 +266,14 @@ const HeaderView = (routerProps) => {
             </Link>
           </Menu.Item>
           <Menu.Item key="/over-ons">
-            <Link prefetch={false} href="/over-ons">Over MrAgain</Link>
+            <Link prefetch={false} href="/over-ons">
+              Over MrAgain
+            </Link>
           </Menu.Item>
           <Menu.Item key="/reparatie">
-            <Link prefetch={false} href="/reparatie">Reparatie</Link>
+            <Link prefetch={false} href="/reparatie">
+              Reparatie
+            </Link>
           </Menu.Item>
           <Menu.Item key="/meld-je-aan-als-reparateur">
             <Link prefetch={false} href="/meld-je-aan-als-reparateur">
@@ -278,7 +283,6 @@ const HeaderView = (routerProps) => {
         </Menu>
         {initSignMenu()}
       </Header>
-
     </Fragment>
   );
 };

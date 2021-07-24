@@ -5,32 +5,28 @@ import {
   AboutSectionContent,
   AboutSectionContentTitle,
   AboutSectionContentSubTitle,
-  AboutSectionContentDescription
+  AboutSectionContentDescription,
 } from "./AboutUsSection.style.jsx";
 
 const AboutUsSection = () => (
   <AboutSectionArea>
     <AboutSectionQuote>
-     "Wij geloven dat de wereld net 
-      een beetje mooier wordt 
-      als we er voor kunnen zorgen 
-      dat de levensduur van jouw apparaat 
-      wordt verlengd"
+      "Wij geloven dat de wereld net een beetje mooier wordt als we er voor
+      kunnen zorgen dat de levensduur van jouw apparaat wordt verlengd"
     </AboutSectionQuote>
     <AboutSectionContent>
-      <AboutSectionContentTitle>
-        OVER MRAGAIN
-      </AboutSectionContentTitle>
+      <AboutSectionContentTitle>OVER MRAGAIN</AboutSectionContentTitle>
       <AboutSectionContentSubTitle>
         Ons team en onze dromen
       </AboutSectionContentSubTitle>
       <AboutSectionContentDescription>
-	MrAgain is een start-up uit Utrecht. We zijn ondernemers, dromers en 
-	idealisten met een gezonde dosis optimisme. We zijn MrAgain gestart vanuit
-	het besef dat het repareren van elektronische apparaten de norm moet zijn. 
-	We promoten reparatie van elektronische apparatuur - en dus hergebruik -
-	door deze markt transparant en overzichtelijk te maken. Dat is bovenal
-	goed voor het milieu, maar natuurlijk ook voor je portemonnee.
+        MrAgain is een start-up uit Utrecht. We zijn ondernemers, dromers en
+        idealisten met een gezonde dosis optimisme. We zijn MrAgain gestart
+        vanuit het besef dat het repareren van elektronische apparaten de norm
+        moet zijn. We promoten reparatie van elektronische apparatuur - en dus
+        hergebruik - door deze markt transparant en overzichtelijk te maken. Dat
+        is bovenal goed voor het milieu, maar natuurlijk ook voor je
+        portemonnee.
       </AboutSectionContentDescription>
     </AboutSectionContent>
   </AboutSectionArea>

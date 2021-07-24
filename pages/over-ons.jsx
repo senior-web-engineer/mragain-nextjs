@@ -1,10 +1,10 @@
 import React from "react";
 import { Main } from "@/styled-components/over-ons.style.jsx";
-import { 
+import {
   AboutUsSection,
   PlatformSection,
   MissionSection,
-  AboutBannerSection
+  AboutBannerSection,
 } from "@/components/about-us";
 import DefaultLayout from "@/components/layouts/Homepage";
 

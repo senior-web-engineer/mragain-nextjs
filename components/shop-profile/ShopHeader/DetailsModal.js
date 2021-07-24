@@ -7,17 +7,17 @@ import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback } from "react";
 import { openTimeFetcher, shopInfo } from "../modules";
-import styled from "styled-components"
+import styled from "styled-components";
 import { DAYS_OF_WEEK, DAY_TO_FULL_NAME } from "@/utils/date";
 
 const ScheduleSection = styled.section`
-  margin-top:40px;
-`
+  margin-top: 40px;
+`;
 
 const DayWrap = styled.div`
   display: flex;
   justify-content: space-between;
-`
+`;
 
 const Schedule = withData({
   dataFetcher: openTimeFetcher,

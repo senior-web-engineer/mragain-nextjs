@@ -57,18 +57,16 @@ function Section({ fields, showTitle }) {
       if (name === "date") {
         return `${values.time ? values.time : ""} ${moment(values.date).format(
           "dddd, DD MMMM YYYY"
-        )}`
+        )}`;
       }
 
-      return values?.[name]
+      return values?.[name];
     }
 
     return (
       <div>
         <label>{FIELDS_LABELS[name]}: </label>
-        <strong>
-          {formatValue()}
-        </strong>
+        <strong>{formatValue()}</strong>
       </div>
     );
   }
