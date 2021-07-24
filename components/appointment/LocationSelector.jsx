@@ -1,5 +1,6 @@
 import { faBox, faHome, faStore } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
+
 import InlineSelector from "./InlineSelector";
 
 //

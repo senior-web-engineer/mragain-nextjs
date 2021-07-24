@@ -1,10 +1,12 @@
-import React from "react";
-import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
-import Head from "next/head";
 import { Layout } from "components/global";
-import { API_PATH, FRONT_END_URL } from "../../../constants";
+import Head from "next/head";
+import React from "react";
 import { useEffect } from "react";
+
 import PageDetails from "@/components/PageComponent/PageDetails";
+import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
+
+import { API_PATH, FRONT_END_URL } from "../../../constants";
 
 export default function ReparatieTitle({ reparatieDetails, reparatieTitle }) {
   useEffect(() => {

@@ -1,22 +1,24 @@
+import "./RepairServicingSection.style.less";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Figure } from "react-bootstrap";
-import {
-  RepairServicingSectionArea,
-  RepairServicingContainer,
-} from "../RepairServicing.style";
-import {
-  RepairServicingContent,
-  RepairServicingArticle,
-  FontAwesomeFigure,
-  RepairServicingArticleTitle,
-  RepairServicingArticleContent,
-  RepairServicingArticleLink,
-  CircleFontIcon,
-} from "./RepairServicingSection.style.jsx";
+
 import RepairServicingImage from "@/assets/images/telefoon-reparatie-mragain.jpg";
 
-import "./RepairServicingSection.style.less";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  RepairServicingContainer,
+  RepairServicingSectionArea,
+} from "../RepairServicing.style";
+import {
+  CircleFontIcon,
+  FontAwesomeFigure,
+  RepairServicingArticle,
+  RepairServicingArticleContent,
+  RepairServicingArticleLink,
+  RepairServicingArticleTitle,
+  RepairServicingContent,
+} from "./RepairServicingSection.style.jsx";
 
 const RepairServicingSection = () => (
   <RepairServicingSectionArea className="repair-servicing-area">

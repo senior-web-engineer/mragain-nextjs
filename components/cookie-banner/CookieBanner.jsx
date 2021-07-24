@@ -1,9 +1,10 @@
 import "./styles.less";
-import React, { useState } from "react";
-import cookieCutter from "cookie-cutter";
 
-import { CookieManageConcentView } from "./CookieManageConcentView";
+import cookieCutter from "cookie-cutter";
+import React, { useState } from "react";
+
 import { CookieMainView } from "./CookieMainView";
+import { CookieManageConcentView } from "./CookieManageConcentView";
 
 const getCookieState = (id) => {
   return Boolean(cookieCutter.get(id)) || false;

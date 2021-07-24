@@ -1,10 +1,12 @@
-import { useFetcher, withData } from "@/modules/dataFetcher";
-import Form from "@/modules/forms";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
+
+import { useFetcher, withData } from "@/modules/dataFetcher";
+import Form from "@/modules/forms";
+
 import { SubTitle } from "../styled/text";
 import Button from "../ui/Button";
 import {

@@ -1,13 +1,15 @@
-import { useFetcher } from "@/modules/dataFetcher";
-import { Field } from "@/modules/forms/Blocks";
-import { DAYS_OF_WEEK } from "@/utils/date";
-import media from "@/utils/media";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Calendar, Tooltip } from "antd";
 import moment from "moment";
 import React, { useMemo } from "react";
 import styled, { css } from "styled-components";
+
+import { useFetcher } from "@/modules/dataFetcher";
+import { Field } from "@/modules/forms/Blocks";
+import { DAYS_OF_WEEK } from "@/utils/date";
+import media from "@/utils/media";
+
 import { SubTitle } from "../styled/text";
 import {
   appointmentForm,

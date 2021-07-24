@@ -1,7 +1,9 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Blog, BlogTitle, CircleIcon } from "./AdvantageFontAweSome.style.jsx";
 import "./AdvantageFontAweSome.style.less";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+
+import { Blog, BlogTitle, CircleIcon } from "./AdvantageFontAweSome.style.jsx";
 
 const AdvantageFontAweSome = (param) => (
   <Blog>

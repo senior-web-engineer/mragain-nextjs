@@ -1,3 +1,16 @@
+import {
+  faMapMarkerAlt,
+  faSortAmountDown,
+  faStore,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Radio, Rate, Slider, Switch } from "antd";
+import isEqual from "fast-deep-equal";
+import moment from "moment";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import React, {
   createContext,
   useCallback,
@@ -6,12 +19,13 @@ import React, {
   useRef,
   useState,
 } from "react";
-import styled, { css } from "styled-components";
-import isEqual from "fast-deep-equal";
 import { Waypoint } from "react-waypoint";
-import { store, wrapper } from "@/configureStore";
+import styled, { css } from "styled-components";
 
+import GooglePlaces, { loadScript } from "@/components/common/GooglePlaces";
+import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
 import DefaultLayout from "@/components/layouts/Homepage";
+import Map from "@/components/search-results/Map";
 import {
   brandFetcher,
   deviceFetcher,
@@ -21,42 +35,28 @@ import {
   serviceFetcher,
   shopListModule,
 } from "@/components/search-results/modules";
-
+import { FieldWrap } from "@/components/styled/Forms";
+import { MaxConstraints } from "@/components/styled/layout";
+import { SubTitle } from "@/components/styled/text";
+import Button from "@/components/ui/Button";
+import { TextButton } from "@/components/ui/Button";
+import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
+import Select from "@/components/ui/Select";
+import { store, wrapper } from "@/configureStore";
+import { createSelectComponent } from "@/modules/dataFetcher";
+import Form, { useFormContext } from "@/modules/forms";
 import {
   Field,
   parseNativeEvent,
   SyncFormValues,
 } from "@/modules/forms/Blocks";
-import { Listing, NoResults } from "@/modules/list/Blocks";
-import Form, { useFormContext } from "@/modules/forms";
 import List, { useListContext } from "@/modules/list";
-import Select from "@/components/ui/Select";
-import { createSelectComponent } from "@/modules/dataFetcher";
-import { Radio, Rate, Slider, Switch } from "antd";
-import { MaxConstraints } from "@/components/styled/layout";
-import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMapMarkerAlt,
-  faSortAmountDown,
-  faStore,
-} from "@fortawesome/free-solid-svg-icons";
-import Button from "@/components/ui/Button";
-import { FieldWrap } from "@/components/styled/Forms";
-import Map from "@/components/search-results/Map";
-import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
-import { SubTitle } from "@/components/styled/text";
-import { TextButton } from "@/components/ui/Button";
-import media, { OnMobile } from "@/utils/media";
+import { Listing, NoResults } from "@/modules/list/Blocks";
 import Modal from "@/modules/modal";
-import { useRouter } from "next/router";
-import GooglePlaces, { loadScript } from "@/components/common/GooglePlaces";
-import moment from "moment";
-import Head from "next/head";
-import { FRONT_END_URL } from "../constants.js";
+import media, { OnMobile } from "@/utils/media";
 import { getShopLogo, getShopRoute } from "@/utils/shop";
-import Link from "next/link";
-import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
+
+import { FRONT_END_URL } from "../constants.js";
 
 //
 

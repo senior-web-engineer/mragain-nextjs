@@ -1,19 +1,19 @@
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Rate, Slider } from "antd";
+import moment from "moment-timezone";
 import React, { useEffect, useMemo } from "react";
 import styled from "styled-components";
-import moment from "moment-timezone";
 
+import GoogleMap from "@/components/search-results/Map/GoogleMap.jsx";
 import {
   reviewsFetcher,
   reviewsModal,
 } from "@/components/shop-profile/modules";
-import GoogleMap from "@/components/search-results/Map/GoogleMap.jsx";
-import { useFetcher } from "@/modules/dataFetcher";
-import { SubTitle } from "@/components/styled/text";
-import { Rate, Slider } from "antd";
 import { MaxConstraints } from "@/components/styled/layout";
+import { SubTitle } from "@/components/styled/text";
 import Button from "@/components/ui/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { useFetcher } from "@/modules/dataFetcher";
 import Modal from "@/modules/modal";
 import media from "@/utils/media";
 

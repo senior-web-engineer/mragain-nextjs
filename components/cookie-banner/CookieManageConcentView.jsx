@@ -1,8 +1,10 @@
 import "./cookie-manage-styles.less";
+
+import { faCookie, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCookie, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import { Button, Col, Collapse, Row, Switch, Tag } from "antd";
+
 import { ButtonsWrapper } from "./helpers";
-import { Row, Col, Collapse, Switch, Button, Tag } from "antd";
 const { Panel } = Collapse;
 
 export const renderPanel = (concent, onConcentChanged) => (

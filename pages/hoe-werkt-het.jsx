@@ -1,10 +1,12 @@
-import React from "react";
-import { Main } from "@/styled-components/how-werkt-het.style";
-import HowSection from "@/components/how/HowSection/HowSection";
-import HowBannerSection from "@/components/how/HowBannerSection/HowBannerSection";
 import Head from "next/head";
-import { FRONT_END_URL } from "../constants";
+import React from "react";
+
 import { Layout } from "@/components/global";
+import HowBannerSection from "@/components/how/HowBannerSection/HowBannerSection";
+import HowSection from "@/components/how/HowSection/HowSection";
+import { Main } from "@/styled-components/how-werkt-het.style";
+
+import { FRONT_END_URL } from "../constants";
 
 const How = () => (
   <Layout>

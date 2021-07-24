@@ -2,13 +2,13 @@ import React from "react";
 
 import {
   PlatformSectionArea,
-  PlatformSectionImage,
-  PlatformSectionContentBackground,
-  PlatformSectionContentArea,
   PlatformSectionContent,
-  PlatformSectionContentTitle,
-  PlatformSectionContentSubTitle,
+  PlatformSectionContentArea,
+  PlatformSectionContentBackground,
   PlatformSectionContentDescription,
+  PlatformSectionContentSubTitle,
+  PlatformSectionContentTitle,
+  PlatformSectionImage,
 } from "./PlatformSection.style.jsx";
 
 const PlatformSection = () => (

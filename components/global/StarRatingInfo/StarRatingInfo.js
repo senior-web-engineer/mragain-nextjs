@@ -1,6 +1,7 @@
-import React from "react";
-import { Rate } from "antd";
 import "./StarRatingInfo.less";
+
+import { Rate } from "antd";
+import React from "react";
 
 const StarRatingInfo = (params) => {
   return (

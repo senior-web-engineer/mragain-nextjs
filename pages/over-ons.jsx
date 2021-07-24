@@ -1,12 +1,13 @@
 import React from "react";
-import { Main } from "@/styled-components/over-ons.style.jsx";
+
 import {
-  AboutUsSection,
-  PlatformSection,
-  MissionSection,
   AboutBannerSection,
+  AboutUsSection,
+  MissionSection,
+  PlatformSection,
 } from "@/components/about-us";
 import DefaultLayout from "@/components/layouts/Homepage";
+import { Main } from "@/styled-components/over-ons.style.jsx";
 
 const AboutUs = () => (
   <DefaultLayout showSignup>

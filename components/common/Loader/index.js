@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { Icon, Spin } from "antd";
+import styled from "styled-components";
 
 const antIcon = <Icon type="loading" spin />;
 const LoaderWrap = styled.div`

@@ -1,5 +1,6 @@
 import { Radio } from "antd";
 import dynamic from "next/dynamic";
+
 import Loader from "@/components/common/Loader";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {

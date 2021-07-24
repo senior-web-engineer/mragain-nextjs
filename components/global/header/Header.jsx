@@ -1,22 +1,24 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { connect } from "react-redux";
-import { Layout, Menu, Button, Dropdown, Avatar } from "antd";
-import { useRouter } from "next/router";
-import logo from "@/assets/images/logo.png";
-import Link from "next/link";
 import "./Header.less";
+
+import { Avatar, Button, Dropdown, Layout, Menu } from "antd";
+import { BACK_END_URL } from "constants.js";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { Fragment, useEffect, useState } from "react";
+import { connect } from "react-redux";
 import { initUserLoginChange } from "service/account/action.js";
 import { logout } from "service/account/operations.js";
 import {
-  getAccountSettings,
   getAccountProfile,
-  getDevices,
+  getAccountSettings,
   getAuthUser,
+  getDevices,
   getShopIdByInformation,
 } from "service/account/operations.js";
 import { getAppointments } from "service/appointments/operations.js";
-import { BACK_END_URL } from "constants.js";
-import Image from "next/image";
+
+import logo from "@/assets/images/logo.png";
 
 const { Header } = Layout;
 

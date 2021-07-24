@@ -1,28 +1,31 @@
-import React from "react";
+import "./Footer.less";
+
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import { withUserAgent } from "next-useragent";
+import React from "react";
+
+import { CookieBanner } from "@/components/cookie-banner/CookieBanner";
+
 import {
-  FooterViewSection,
-  FooterViewContainer,
-  FooterViewContent,
-  FooterCopyright,
-  FooterBrandArea,
-  FooterBrandLogo,
-  FooterLogoIcon,
-  FooterBrandTitle,
-  LogoTopTitle,
-  LogoBottomTitle,
-  FooterLinkArea,
-  FooterSitemap,
-  FooterSitemapTitle,
+  DevicesContainer,
   FollowUs,
   FollowUsTitle,
-  DevicesContainer,
+  FooterBrandArea,
+  FooterBrandLogo,
+  FooterBrandTitle,
+  FooterCopyright,
+  FooterLinkArea,
+  FooterLogoIcon,
+  FooterSitemap,
+  FooterSitemapTitle,
+  FooterViewContainer,
+  FooterViewContent,
+  FooterViewSection,
+  LogoBottomTitle,
+  LogoTopTitle,
 } from "./Footer.style";
-import "./Footer.less";
-import Link from "next/link";
-import { withUserAgent } from "next-useragent";
-import Image from "next/image";
-import { CookieBanner } from "@/components/cookie-banner/CookieBanner";
 
 const FooterView = (routerProps) => {
   const { location, ua, getDevices, shopDevices } = routerProps;
