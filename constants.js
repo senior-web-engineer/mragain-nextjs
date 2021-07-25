@@ -93,6 +93,8 @@ export const API_PATH = {
   GETMODELREPARATIONS: `${API_URL}/get-model-repairs/`,
   GETALLBRANDSMODELS: `${API_URL}/get-brandmodel`,
   GETSHOPGENERALINFO: `${API_URL}/getshopGeneralInfo`,
+  GETACTIVEBRANDS: `${API_URL}/get-active-brands`,
+  GETPURCAHSES: `${API_URL}/get-purchases`,
   UPDATESHOPGENERALINFO: `${API_URL}/update-shop-info`,
   SAVEINVALIDTIME: `${API_URL}/save-invalid-time`,
   GETINVALIDTIME: `${API_URL}/get-shop-invalid-time`,

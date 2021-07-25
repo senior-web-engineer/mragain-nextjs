@@ -80,6 +80,26 @@ export const shopManagementGeneralInfo = dataFetcher({
   },
 });
 
+export const getValidOpenTime = dataFetcher({
+  selectors: [],
+  async fetchData() {
+    const id = currentUser.selector(store.ref.getState())?.result?.id;
+    const data = await privateApi.get(`${API_PATH.GETVALIDOPENTIME}/${id}/`);
+    return data;
+  },
+});
+
+export const saveValidOpenTime = async (payload) => {
+  console.log(payload);
+  const id = currentUser.selector(store.ref.getState())?.result?.id;
+  const data = await privateApi.put(`${API_PATH.UPDATEVALIDOPENTIME}/${id}/`, {
+    id: id,
+    shop: id,
+    valid_day_time: payload,
+  });
+  return data;
+};
+
 export const shopManagementGeneralForm = createFormModule({
   guid: "saveGeneralInfo",
   async init() {

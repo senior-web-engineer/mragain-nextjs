@@ -8,6 +8,8 @@ import {
   shopManagementGeneralInfo,
   getShopNonWorkingDays,
   saveShopNonWorkingDays,
+  getValidOpenTime,
+  saveValidOpenTime,
 } from "@/service/shop-management/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
 import { Tabs, Row, Col } from "antd";
@@ -28,6 +30,7 @@ export default function ShopManagementPage({ auth_user }) {
   const [shopInfo, setShopInfo] = useState();
   const [shopData, setShopData] = useState();
   const [nonWorkingDays, setNonWorkingDays] = useState();
+  const [validOpenTime, setValidOpenTime] = useState();
 
   useEffect(() => {
     async function loadData() {
@@ -35,6 +38,7 @@ export default function ShopManagementPage({ auth_user }) {
       const shopInfo = await shopInfoFetcher.fetch();
       setShopData(await shopManagementGeneralInfo.fetch());
       setNonWorkingDays(await getShopNonWorkingDays.fetch());
+      setValidOpenTime(await getValidOpenTime.fetch());
       console.log("INFO", shopInfo);
       if (shopInfo) {
         setShopInfo(shopInfo[0]);
@@ -102,7 +106,10 @@ export default function ShopManagementPage({ auth_user }) {
               )}
             </Col>
             <Col span={10}>
-              <ScheduleList />
+              <ScheduleList
+                validOpenTime={validOpenTime}
+                onSave={saveValidOpenTime}
+              />
             </Col>
           </Row>
         </TabPane>
