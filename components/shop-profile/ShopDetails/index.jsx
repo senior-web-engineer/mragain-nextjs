@@ -1,9 +1,3 @@
-import { MaxConstraints } from "@/components/styled/layout";
-import { SubTitle } from "@/components/styled/text";
-import { store } from "@/configureStore";
-import Form, { useFormContext } from "@/modules/forms";
-import List, { useListContext } from "@/modules/list";
-import media from "@/utils/media";
 import {
   faCcMastercard,
   faCcVisa,
@@ -23,6 +17,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import React, { useMemo } from "react";
 import styled from "styled-components";
+
+import { MaxConstraints } from "@/components/styled/layout";
+import { SubTitle } from "@/components/styled/text";
+import { store } from "@/configureStore";
+import Form, { useFormContext } from "@/modules/forms";
+import List, { useListContext } from "@/modules/list";
+import media from "@/utils/media";
+
 import { serviceFormModule, shopServicesListModule } from "../modules";
 
 const MainWrap = styled.div`
@@ -162,13 +164,13 @@ export default function ShopDetails({ shop }) {
             </d-def>
             <d-term>Reparatie opties</d-term>
             <d-def>
-	  {/*<LocationWrap>
+              {/*<LocationWrap>
                 <FontAwesomeIcon icon={faHome} /> Reparatie op locatie
               </LocationWrap>*/}
               <LocationWrap>
                 <FontAwesomeIcon icon={faStore} /> Reparatie in winkel
               </LocationWrap>
-	  {/* <LocationWrap>
+              {/* <LocationWrap>
                 <FontAwesomeIcon icon={faBox} /> Opsturen
               </LocationWrap>*/}
             </d-def>

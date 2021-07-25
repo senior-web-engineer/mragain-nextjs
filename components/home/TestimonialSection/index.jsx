@@ -1,10 +1,11 @@
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+
+import SliderOnMobile from "@/components/common/SliderOnMobile";
 import { H2, SubTitle } from "@/components/styled/text";
 import Button from "@/components/ui/Button";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import media from "@/utils/media";
-import SliderOnMobile from "@/components/common/SliderOnMobile";
 
 const MainWrap = styled.div`
   border-radius: 200px;
@@ -46,7 +47,7 @@ const STATS = [
     label: "Aantal apparaten",
   },
   {
-    count: "65",
+    count: "76",
     label: "Aangesloten reparateurs",
   },
   {
@@ -61,7 +62,9 @@ const TESTIMONIAL_DATA = [
     location: "Utrecht",
     review: (
       <>
-        Mijn telefoon werd snel gerepareerd en doet het weer als vanouds! Super handig dat je direct een afspraak kan maken en weet wanneer ze tijd voor je hebben.
+        Mijn telefoon werd snel gerepareerd en doet het weer als vanouds! Super
+        handig dat je direct een afspraak kan maken voor telefoon reparatie en
+        weet wanneer ze tijd voor je hebben.
       </>
     ),
   },
@@ -71,7 +74,9 @@ const TESTIMONIAL_DATA = [
     review: (
       <>
         {" "}
-    Top dat je makkelijk kan vergeljken tussen reparateurs. Ik kon nog dezelfde dag terecht en had mijn mobiel na 30 minuten weer terug, lekker!
+        Top dat je makkelijk kan vergelijken tussen reparateurs die je telefoon
+        maken. Ik kon nog dezelfde dag terecht en had mijn mobiel na 30 minuten
+        weer terug, lekker!
       </>
     ),
   },

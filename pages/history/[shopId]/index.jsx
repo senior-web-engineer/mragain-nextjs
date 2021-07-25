@@ -1,24 +1,24 @@
+import {
+  Button,
+  Col,
+  Divider,
+  Icon,
+  Input as AntdInput,
+  Row,
+  Table,
+} from "antd";
 import React, { useEffect, useState } from "react";
+import Highlighter from "react-highlight-words";
+import styled from "styled-components";
 
+import { devicesFetcher } from "@/components/dashboard/modules";
+import DefaultLayout from "@/components/layouts/Dashboard";
+import { ViewRecord } from "@/components/templates/history/ViewRecord";
 import {
   currentUser,
   reparationsList,
   viewRecordModal,
 } from "@/service/history/modules";
-import { devicesFetcher } from "@/components/dashboard/modules";
-import DefaultLayout from "@/components/layouts/Dashboard";
-import {
-  Row,
-  Col,
-  Button,
-  Divider,
-  Icon,
-  Table,
-  Input as AntdInput,
-} from "antd";
-import { ViewRecord } from "@/components/templates/history/ViewRecord";
-import Highlighter from "react-highlight-words";
-import styled from "styled-components";
 
 const StyledTable = styled(Table)`
   .ant-table-head {

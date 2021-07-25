@@ -1,6 +1,3 @@
-import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
-import { MaxConstraints } from "@/components/styled/layout";
-import Button from "@/components/ui/Button";
 import {
   faInfo,
   faLink,
@@ -12,22 +9,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Popover, Rate } from "antd";
 import Image from "next/image";
 import React, { useCallback, useEffect } from "react";
-import styled, { css } from "styled-components";
-import { openTimeFetcher, reviewsFetcher, shopInfo } from "@/components/shop-profile/modules";
-
 import {
-  FacebookShareButton,
-  LinkedinShareButton,
-  TwitterShareButton,
-  WhatsappShareButton,
   FacebookIcon,
+  FacebookShareButton,
   LinkedinIcon,
-  WhatsappIcon,
+  LinkedinShareButton,
   TwitterIcon,
+  TwitterShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
 } from "react-share";
-import DetailsModal from "./DetailsModal";
-import media, { OnMobile } from "@/utils/media";
+import styled, { css } from "styled-components";
+
+import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
+import {
+  openTimeFetcher,
+  reviewsFetcher,
+  shopInfo,
+} from "@/components/shop-profile/modules";
+import { MaxConstraints } from "@/components/styled/layout";
+import Button from "@/components/ui/Button";
 import { useFetcher } from "@/modules/dataFetcher";
+import media, { OnMobile } from "@/utils/media";
+
+import DetailsModal from "./DetailsModal";
 
 const Wallpaper = styled.div`
   height: 260px;
@@ -61,6 +66,7 @@ const ContentWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 
   ${media.tablet`
     flex-direction: row;
@@ -189,12 +195,12 @@ const AdvantagesWrap = styled.div`
 `;
 
 const DetailButtonsWrap = styled.div`
+  top: 12px;
   position: absolute;
-  top: 10px;
   right: 0;
   z-index: 100;
   ${Button} {
-    margin: 0 10px;
+    margin-left: 10px;
     height: 35px;
     line-height: 11px;
     min-width: 35px;
@@ -243,7 +249,10 @@ export default function ShopHeader({ shop }) {
     .filter(Boolean)
     .join(", ");
 
-  const { data: reviews } = useFetcher({dataFetcher: reviewsFetcher, identifier: shop.id});
+  const { data: reviews } = useFetcher({
+    dataFetcher: reviewsFetcher,
+    identifier: shop.id,
+  });
 
   function renderAdvantage(advantage) {
     return (
@@ -300,17 +309,27 @@ export default function ShopHeader({ shop }) {
     <div>
       <Wallpaper>
         {shop?.bg_photo ? (
-          <Image loading="lazy" layout="fill" objectFit="contain" src={shop.bg_photo} />
+          <Image
+            loading="lazy"
+            layout="fill"
+            objectFit="contain"
+            src={shop.bg_photo}
+          />
         ) : null}
-        <OnMobile only>{detailButtons}</OnMobile>
       </Wallpaper>
       <MaxConstraints>
         <ContentWrap>
           <ShopLogo>
             {shop?.logo_photo ? (
-              <Image loading="lazy" layout="fill" objectFit="contain" src={shop.logo_photo} />
+              <Image
+                loading="lazy"
+                layout="fill"
+                objectFit="contain"
+                src={shop.logo_photo}
+              />
             ) : null}
           </ShopLogo>
+          <OnMobile only>{detailButtons}</OnMobile>
           <ShopMeta>
             <ShopMeta.FirstRow tagColor={TAG_TO_COLOR[tag]}>
               <div>

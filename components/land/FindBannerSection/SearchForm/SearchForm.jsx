@@ -1,14 +1,17 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { Button, input, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useRouter } from "next/router";
-import { searchShopFilter } from "service/search/operations.js";
-import { setFindedLocation, setSearchFilter } from "service/search/action.js";
-import lib from "@/assets/js/lib";
-import { CommonText, GreenText } from "./SearchForm.style.jsx";
 import "./SearchForm.style.less";
+
 import { message } from "antd";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import { Button, input, Modal } from "react-bootstrap";
+import { connect } from "react-redux";
+import { setFindedLocation, setSearchFilter } from "service/search/action.js";
+import { searchShopFilter } from "service/search/operations.js";
+
+import lib from "@/assets/js/lib";
+
+import { CommonText, GreenText } from "./SearchForm.style.jsx";
 
 const SearchForm = (routerProps) => {
   const { findShopbyFilter, setFindedLocation, setSearchFilter } = routerProps;
@@ -67,7 +70,7 @@ const SearchForm = (routerProps) => {
         <CommonText>Altijd een werkende telefoon</CommonText>{" "}
         <GreenText></GreenText>
       </div>
-      <div classname="form-subtitle">
+      <div className="form-subtitle">
         <GreenText>Vind de beste reparateur bij jou in de buurt</GreenText>
       </div>
       <div className="form-group">

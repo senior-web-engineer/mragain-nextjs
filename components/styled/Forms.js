@@ -49,8 +49,8 @@ export const FieldWrap = styled.div`
     display: block;
     font-size: 10px;
     letter-spacing: 1px;
-    color: #707070;
-    font-weight: 300;
+    color: #808080;
+    font-weight: 400;
     text-transform: uppercase;
   }
 `;

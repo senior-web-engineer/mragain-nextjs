@@ -1,10 +1,12 @@
-import { useFetcher, withData } from "@/modules/dataFetcher";
-import Form from "@/modules/forms";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
+
+import { useFetcher, withData } from "@/modules/dataFetcher";
+import Form from "@/modules/forms";
+
 import { SubTitle } from "../styled/text";
 import Button from "../ui/Button";
 import {
@@ -146,6 +148,10 @@ const TotalWrap = styled.div`
   }
 `;
 
+const ButtonWrapper = styled(Button)`
+  padding: 0 14px;
+`;
+
 const DeviceName = withData({
   dataFetcher: deviceFetcher,
   Component({ data }) {
@@ -167,7 +173,7 @@ const ModelName = withData({
   },
 });
 
-export default function BookingInfo({ shop, nextStep }) {
+export default function BookingInfo({ shop, step, nextStep }) {
   const location = [shop.street || "", shop.city || ""]
     .filter(Boolean)
     .join(", ");
@@ -232,9 +238,13 @@ export default function BookingInfo({ shop, nextStep }) {
           </TotalWrap>
         </>
       ) : null}
-      <Button onClick={nextStep} aria-label="Next step">
-        <FontAwesomeIcon icon={faArrowRight} />
-      </Button>
+      <ButtonWrapper onClick={nextStep} aria-label="Next step">
+        {step !== 0 ? (
+          <span>Bevestig</span>
+        ) : (
+          <FontAwesomeIcon icon={faArrowRight} />
+        )}
+      </ButtonWrapper>
     </MainWrap>
   );
 }

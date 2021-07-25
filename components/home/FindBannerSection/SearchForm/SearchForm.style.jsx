@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const GreenText = styled.div`
   color: #fff;
@@ -7,7 +7,7 @@ export const GreenText = styled.div`
   margin-bottom: 30px;
   text-align: center;
   font-weigth: bold;
-`
+`;
 
 export const CommonText = styled.div`
   color: #fff;
@@ -20,4 +20,4 @@ export const CommonText = styled.div`
     font-size: 30px;
     text-align:center;
   }
-`
+`;

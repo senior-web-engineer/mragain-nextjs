@@ -1,23 +1,26 @@
-import React from "react";
-import { useState } from "react";
-import { SideBySideMagnifier } from "react-image-magnifiers";
-import Slider from "react-slick";
 import "./modelDetails.css";
-import { Rate } from "antd";
 import "../../components/global/StarRatingInfo/StarRatingInfo.less";
-import batteryIssue from "../../assets/icons/Problems - Battery.svg";
-import crackIssue from "../../assets/icons/Problems - Crack.svg";
-import signalIssue from "../../assets/icons/Problems - Signal.svg";
-import locationIssue from "../../assets/icons/Problems - Location.svg";
-import connectivityIssue from "../../assets/icons/Problems - Connectivity.svg";
-import releasedDate from "../../assets/icons/Specifications - Date.svg";
-import { useEffect } from "react";
-import noPreview from "../../assets/images/no-preview-available.png";
-import { FRONT_END_URL } from "@/constants.js";
-import { Fragment } from "react";
+
+import { Rate } from "antd";
+import classnames from "classnames";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import classnames from "classnames";
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { Fragment } from "react";
+import { SideBySideMagnifier } from "react-image-magnifiers";
+import Slider from "react-slick";
+
+import { FRONT_END_URL } from "@/constants.js";
+
+import batteryIssue from "../../assets/icons/Problems - Battery.svg";
+import connectivityIssue from "../../assets/icons/Problems - Connectivity.svg";
+import crackIssue from "../../assets/icons/Problems - Crack.svg";
+import locationIssue from "../../assets/icons/Problems - Location.svg";
+import signalIssue from "../../assets/icons/Problems - Signal.svg";
+import releasedDate from "../../assets/icons/Specifications - Date.svg";
+import noPreview from "../../assets/images/no-preview-available.png";
 
 export default function ModelDetails(routerProps) {
   const { modelDetails, reparations } = routerProps;
@@ -104,15 +107,15 @@ export default function ModelDetails(routerProps) {
     setcurrentImage(image);
   };
 
-let title = `${model.model_name} reparatie | MrAgain`	
-let description = `Alles over de meest voorkomende ${model.model_name} problemen en reparaties vind je hier`
+  let title = `${model.model_name} reparatie | MrAgain`;
+  let description = `Alles over de meest voorkomende ${model.model_name} problemen en reparaties vind je hier`;
 
   return (
     <Fragment>
       <Head>
         <title>{title}</title>
         <meta name="Keywords" content="Model Details, Mr-Again" />
-        <meta name="description" content={description}/>
+        <meta name="description" content={description} />
         <script
           src="https://kit.fontawesome.com/6cdc6e8865.js"
           crossOrigin="anonymous"
@@ -125,7 +128,7 @@ let description = `Alles over de meest voorkomende ${model.model_name} problemen
         ></link>
         <link rel="canonical" href={FRONT_END_URL + router.asPath} />
         <meta property="og:type" content="website" />
-        <meta name="og_title" property="og:title" content={description}/>
+        <meta name="og_title" property="og:title" content={description} />
         <meta
           property="og:description"
           content="Vind de beste reparateur bij jou in de buurt"
@@ -203,9 +206,9 @@ let description = `Alles over de meest voorkomende ${model.model_name} problemen
               </div>
               <hr />
               <div className="text-justify">
-                 {model.model_info !== null
-                 ? model.model_info
-                 : "No details available for this model"}
+                {model.model_info !== null
+                  ? model.model_info
+                  : "No details available for this model"}
               </div>
               <button className="btn book-repair">
                 Zoek een reparateur{" "}
@@ -215,7 +218,9 @@ let description = `Alles over de meest voorkomende ${model.model_name} problemen
           </div>
         </div>
         <div className="w-100  mb-5 mx-md-5 mx-sm-3 mx-xs-3">
-          <div className="list-title">De 5 meest voorkomende {model.model_name} problemen</div>
+          <div className="list-title">
+            De 5 meest voorkomende {model.model_name} problemen
+          </div>
           <div className="top-5-content px-0  mx-0">
             <div className="row mx-2 mx-sm-2 px-sm-2  mx-xs-1 px-xs-1 px-5">
               {issueData.length > 0

@@ -1,9 +1,10 @@
-import React from "react";
-import { Button } from "antd";
-import Link from "next/link";
 import "./CreateAccountCard.less";
 
-const CreateAccountCard2 = params => {
+import { Button } from "antd";
+import Link from "next/link";
+import React from "react";
+
+const CreateAccountCard2 = (params) => {
   return (
     <div className="trial-month">
       <div className={"trial-month-title bgcolor-" + params.color}>

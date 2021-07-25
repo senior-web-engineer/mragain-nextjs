@@ -1,13 +1,16 @@
-import React from "react";
-import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
-import Head from "next/head";
-import { Layout } from "components/global";
-import { FRONT_END_URL } from "@/constants";
-import { useEffect } from "react";
-import { getAllBrandModels } from "@/service/search/operations";
-import BrandsComponent from "../../components/models/BrandsComponent";
 import "../general.css";
+
+import { Layout } from "components/global";
+import Head from "next/head";
 import { useRouter } from "next/router";
+import React from "react";
+import { useEffect } from "react";
+
+import { FRONT_END_URL } from "@/constants";
+import { getAllBrandModels } from "@/service/search/operations";
+import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
+
+import BrandsComponent from "../../components/models/BrandsComponent";
 
 export default function index({ brandModels, device }) {
   const router = useRouter();

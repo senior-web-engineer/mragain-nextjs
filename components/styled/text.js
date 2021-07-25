@@ -10,6 +10,15 @@ export const SubTitle = styled.h4`
   text-transform: uppercase;
 `;
 
+export const SubTitleDescription = styled.h4`
+  font-size: 12px;
+  letter-spacing: 1px;
+  line-height: 16px;
+  color: #222222;
+  font-weight: 600;
+  font-family: "Dosis", "sans-serif";
+`;
+
 export const H2 = styled.h2`
   font-size: 30px;
   line-height: 35px;

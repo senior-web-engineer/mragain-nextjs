@@ -1,11 +1,13 @@
-import { useFetcher, withData } from "@/modules/dataFetcher";
-import Form from "@/modules/forms";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Popover } from "antd";
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
+
+import { useFetcher, withData } from "@/modules/dataFetcher";
+import Form from "@/modules/forms";
+
 import { SubTitle } from "../styled/text";
 import Button from "../ui/Button";
 import {
@@ -165,7 +167,7 @@ const ModelName = withData({
   },
 });
 
-export default function BookingInfoMobile({ shop, nextStep }) {
+export default function BookingInfoMobile({ shop, step }) {
   const location = [shop.street || "", shop.city || ""]
     .filter(Boolean)
     .join(", ");

@@ -1,10 +1,10 @@
-import { Tree } from "antd";
 import { DownOutlined } from "@ant-design/icons";
+import { Tree } from "antd";
+import Image from "next/image";
 
 import MessagesImage from "@/assets/icons/messages.svg";
 import NotificationsImage from "@/assets/icons/notifications.svg";
 import SettingsImage from "@/assets/icons/settings.svg";
-import Image from "next/image";
 
 import { MenuHeader } from "../menu-styles";
 

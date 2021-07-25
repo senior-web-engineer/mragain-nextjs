@@ -1,9 +1,10 @@
-import Modal from "@/modules/modal";
 import Image from "next/image";
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+
 import Button from "@/components/ui/Button";
+import Modal from "@/modules/modal";
 
 const TYPE_TO_IMAGE_PATH = {
   error: "/images/notifications/error.png",
@@ -71,7 +72,7 @@ export default connect(
     moduleData: ownProps.module.selectors.data || {},
   }),
   (_, ownProps) => ({
-    resolve: async() => {
+    resolve: async () => {
       await ownProps.module.actions.resolve();
       ownProps.module.actions.close();
     },

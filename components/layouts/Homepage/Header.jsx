@@ -1,18 +1,18 @@
-import React from "react";
-
+import { faBars, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BACK_END_URL } from "constants.js";
 import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import styled, { css } from "styled-components";
+
 import { MaxConstraints } from "@/components/styled/layout";
 import Button from "@/components/ui/Button";
 import { TextButton } from "@/components/ui/Button";
 import Select from "@/components/ui/Select";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
 import media from "@/utils/media";
-import { useState } from "react";
-import { useEffect } from "react";
 
 const HeaderWrap = styled.div`
   display: flex;
@@ -177,7 +177,7 @@ function SignupButtons({ hiddenOnMobile, showSignup }) {
   return (
     <UserMenuWrap hiddenOnMobile={hiddenOnMobile}>
       {renderButtons()}
-      <Select value="nl"  aria-label="Language" options={LANG_OPTIONS} />
+      <Select value="nl" aria-label="Language" options={LANG_OPTIONS} />
     </UserMenuWrap>
   );
 }
@@ -192,7 +192,7 @@ function HeaderLinks() {
       <Link href="/contact">Contact</Link>
       <Link href="/veel-gestelde-vragen">FAQ</Link>
       <Link href="/blog">Blog</Link>
-	  {/*<Link href="/over-reparaties">Reparaties</Link>*/}
+      {/*<Link href="/over-reparaties">Reparaties</Link>*/}
     </>
   );
 }
@@ -248,7 +248,7 @@ const HeaderView = ({ showSignup }) => {
                     onClick={() => updateMenuVisibility(false)}
                   />
                 </MobileMenuHeader>
-                <SignupButtons showSignup={showSignup}/>
+                <SignupButtons showSignup={showSignup} />
                 <MobileMenuLinks>
                   <HeaderLinks />
                 </MobileMenuLinks>

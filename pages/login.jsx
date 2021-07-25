@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { connect } from "react-redux";
-import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { message } from "antd";
-import Link from "next/link";
 import "./login.less";
+
+import { message } from "antd";
 import classnames from "classnames";
-import { login } from "service/account/operations.js";
-import { resetAuthError } from "service/account/action.js";
 import Head from "next/head";
-import { FRONT_END_URL } from "../constants";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { Button, Form } from "react-bootstrap";
+import { connect } from "react-redux";
+import { resetAuthError } from "service/account/action.js";
+import { login } from "service/account/operations.js";
+
 import { Layout } from "../components/global";
+import { FRONT_END_URL } from "../constants";
 
 function Login(routerProps) {
   const [state, setstate] = useState({ email: "", password: "" });

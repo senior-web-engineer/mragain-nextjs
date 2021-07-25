@@ -1,29 +1,29 @@
+import { DatePicker, notification, TimePicker } from "antd";
+import get from "lodash/get";
 import React, { useCallback, useEffect } from "react";
 
+import { Popover } from "@/components/common/Popover";
 import {
   appointmentForm,
+  brandFetcher,
   createAppointmentFormModal,
   currentUser,
   devicesFetcher,
   modelFetcher,
-  brandFetcher,
   reparationsList,
   serviceFetcher,
 } from "@/components/dashboard/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
-import { Popover } from "@/components/common/Popover";
+import { SubTitle } from "@/components/styled/text";
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
+import Select from "@/components/ui/Select";
+import { createSelectComponent } from "@/modules/dataFetcher";
+import Form, { useFormContext } from "@/modules/forms";
+import { Field, parseNativeEvent } from "@/modules/forms/Blocks";
 import List from "@/modules/list";
 import { Table } from "@/modules/list/Blocks";
 import { Drawer } from "@/modules/modal";
-import Button from "@/components/ui/Button";
-import Form, { useFormContext } from "@/modules/forms";
-import { SubTitle } from "@/components/styled/text";
-import { Field, parseNativeEvent } from "@/modules/forms/Blocks";
-import Input from "@/components/ui/Input";
-import { createSelectComponent } from "@/modules/dataFetcher";
-import Select from "@/components/ui/Select";
-import get from "lodash/get";
-import { DatePicker, notification, TimePicker } from "antd";
 
 //
 

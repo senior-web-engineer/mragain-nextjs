@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const RepairServicingBreadcrumb = styled.div`
   width: 350px;
@@ -6,7 +6,7 @@ export const RepairServicingBreadcrumb = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-`
+`;
 
 export const RepairServicingBannerTitle = styled.div`
   width: 218px;
@@ -16,4 +16,4 @@ export const RepairServicingBannerTitle = styled.div`
   line-height: 38px;
   font-weight: bold;
   color: #fff;
-`
+`;

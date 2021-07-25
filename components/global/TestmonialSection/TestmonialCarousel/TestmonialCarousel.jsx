@@ -1,11 +1,13 @@
-import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
 import "./TestmonialCarousel.style.less";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import prev from "@/assets/images/prev-arrow.jpg";
+import React from "react";
+import Slider from "react-slick";
+
 import next from "@/assets/images/next-arrow.jpg";
+import prev from "@/assets/images/prev-arrow.jpg";
 
 export default function TestimonialCarousel() {
   const SlickButtonFix = ({ currentSlide, slideCount, children, ...props }) => (
@@ -37,15 +39,16 @@ export default function TestimonialCarousel() {
         <div>
           <div>
             <p>
-	     Via MrAgain heb ik snel een goede telefoon reparateur bij mij in 
-	     de buurt kunnen vinden. Een afspraak maken was zo gepiept. 
+              Via MrAgain heb ik snel een goede telefoon reparateur bij mij in
+              de buurt kunnen vinden. Een afspraak maken was zo gepiept.
             </p>
             <p>
-	    Na de scherm reparatie ontving ik een garantie bewijs in mijn email, 
-	    maar deze heb ik niet nodig gehad, hij doet het perfect! 
+              Na de scherm reparatie ontving ik een garantie bewijs in mijn
+              email, maar deze heb ik niet nodig gehad, hij doet het perfect!
             </p>
             <p>
-	    Ik kan iedereen die een telefoon reparateur zoekt MrAgain van harte aanbevelen! 
+              Ik kan iedereen die een telefoon reparateur zoekt MrAgain van
+              harte aanbevelen!
             </p>
           </div>
           <div className="testmonial-icon">
@@ -62,16 +65,17 @@ export default function TestimonialCarousel() {
         <div>
           <div>
             <p>
-	    Mijn telefoon was goed kapot doordat deze in een plas water was gevallen.
-	    Via MrAgain kon ik makkelijk zien wie waar ze waterschade behandelingen uitvoeren.
+              Mijn telefoon was goed kapot doordat deze in een plas water was
+              gevallen. Via MrAgain kon ik makkelijk zien wie waar ze
+              waterschade behandelingen uitvoeren.
             </p>
             <p>
-	    Na het bekijken van enkele reviews heb ik een reparatie,
-	    gepland bij een telefoon reparateur bij mij in de buurt.
+              Na het bekijken van enkele reviews heb ik een reparatie, gepland
+              bij een telefoon reparateur bij mij in de buurt.
             </p>
             <p>
-	    De telefoon is perfect gerepareerd en de mensen waren erg vriendelijk,
-	    ik ga zeker terug!
+              De telefoon is perfect gerepareerd en de mensen waren erg
+              vriendelijk, ik ga zeker terug!
             </p>
           </div>
           <div className="testmonial-icon">

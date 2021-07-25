@@ -24,21 +24,19 @@ export const TestimonialTitle = styled.h1`
   padding-bottom: 10px;
 
   @media (max-width: 570px) {
-    font-size:11px;
+    font-size: 11px;
     padding-bottom: 0px;
-
   }
 `;
 
 export const TestimonialText = styled.div`
-  font-size:12px;
+  font-size: 12px;
   color: #0d3244;
   font-weight: 300;
   font-family: "Montserrat";
   line-height: 1.4;
   @media (max-width: 570px) {
-    font-size:8px;
-
+    font-size: 8px;
   }
 `;
 
@@ -77,7 +75,6 @@ export const StarsQuoteWrapper = styled.div`
       bottom: -3px;
       color: #2875bc;
     }
-
   }
 `;
 

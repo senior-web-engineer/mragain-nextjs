@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { useRouter } from "next/router";
-import { Container, Row, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { NewestShopSectionArea } from "./NewestShopSection.style";
-import ShopInfoCard from "./ShopInfoCard/ShopInfoCard";
-import {
-  AdvantageSectionTitle,
-  SectionModel,
-  DotDevider,
-} from "../component.style.jsx";
 import "../component.style.less";
 import "./NewestShopSection.style.less";
+
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { Button, Container, Row } from "react-bootstrap";
+import { connect } from "react-redux";
 import { getNewestShopList } from "service/search/operations.js";
+
 // import { getAccountProfile } from "service/account/operations.js";
 import { BACK_END_URL } from "../../../constants.js";
+import {
+  AdvantageSectionTitle,
+  DotDevider,
+  SectionModel,
+} from "../component.style.jsx";
+import { NewestShopSectionArea } from "./NewestShopSection.style";
+import ShopInfoCard from "./ShopInfoCard/ShopInfoCard";
 
 const image3 = BACK_END_URL + "/static/media/home_newest_image3.8798cc16.jpg";
 

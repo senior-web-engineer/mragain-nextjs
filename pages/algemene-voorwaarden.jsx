@@ -1,9 +1,11 @@
-import React from "react";
-import { Main } from "@/styled-components/algemene-voorwaarden.style.jsx";
-import { Layout } from "@/components/global";
-import PrivacySection from "@/components/privacy/PrivacySection/PrivacySection";
-import PrivacyBannerSection from "@/components/privacy/PrivacyBannerSection/PrivacyBannerSection";
 import Head from "next/head";
+import React from "react";
+
+import { Layout } from "@/components/global";
+import PrivacyBannerSection from "@/components/privacy/PrivacyBannerSection/PrivacyBannerSection";
+import PrivacySection from "@/components/privacy/PrivacySection/PrivacySection";
+import { Main } from "@/styled-components/algemene-voorwaarden.style.jsx";
+
 import { FRONT_END_URL } from "../constants.js";
 
 const Privacy = () => (

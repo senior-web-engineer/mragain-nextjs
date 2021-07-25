@@ -1,19 +1,19 @@
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Rate, Slider } from "antd";
+import moment from "moment-timezone";
 import React, { useEffect, useMemo } from "react";
 import styled from "styled-components";
-import moment from "moment-timezone";
 
+import GoogleMap from "@/components/search-results/Map/GoogleMap.jsx";
 import {
   reviewsFetcher,
   reviewsModal,
 } from "@/components/shop-profile/modules";
-import GoogleMap from "@/components/search-results/Map/GoogleMap.jsx";
-import { useFetcher } from "@/modules/dataFetcher";
-import { SubTitle } from "@/components/styled/text";
-import { Rate, Slider } from "antd";
 import { MaxConstraints } from "@/components/styled/layout";
+import { SubTitle } from "@/components/styled/text";
 import Button from "@/components/ui/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { useFetcher } from "@/modules/dataFetcher";
 import Modal from "@/modules/modal";
 import media from "@/utils/media";
 
@@ -33,6 +33,16 @@ const REVIEW_MARK_TO_LABEL = {
   wait_mark: "Wachttijd",
 };
 
+const NoReview = styled.div`
+  max-width: calc(320px - 86px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 14px;
+  border-radius: 15px;
+`;
+
 const ReviewsWrap = styled.div`
   background-color: #fff;
   border-radius: 15px;
@@ -45,10 +55,8 @@ const ReviewsWrap = styled.div`
   position: relative;
 
   ${SubTitle} {
-    padding: 0 43px;
+    padding: 28px 43px;
     margin: 0 -43px;
-    height: 72px;
-    line-height: 72px;
     margin-bottom: 25px;
     border-bottom: 1px solid #ddd;
   }
@@ -59,6 +67,7 @@ const ReviewsWrap = styled.div`
     right: 43px;
     min-width: 51px;
     margin: 0;
+    padding: 7px 22px;
   }
 
   ${media.tablet`
@@ -172,8 +181,6 @@ const ModalReviewWrap = styled.div`
   font-size: 13px;
   color: #0d3244;
 
-
-
   ${media.tablet`
     display: flex;
     justify-content: space-between;
@@ -250,6 +257,10 @@ export function Reviews({ shop }) {
     }, 0);
   }, [options]);
 
+  const checkIfScoresExist = (scoresList, reviews) => {
+    return reviews.filter((key) => scoresList[key] !== 0).length === 0;
+  };
+
   function renderReview(review) {
     return (
       <ModalReviewWrap>
@@ -283,42 +294,53 @@ export function Reviews({ shop }) {
   return (
     <ReviewsWrap>
       <SubTitle as="h2">Reviews {shop?.name}</SubTitle>
-      <ReviewWrap>
-        <strong>Gemiddelde rating</strong>
-        <div>
-          <Rate
-            disabled
-            style={{ fontSize: "13px" }}
-            value={scores.overall}
-            onChange={null}
-          />{" "}
-          {formatNumber(scores.overall)}
-        </div>
-      </ReviewWrap>
-      {REVIEW_MARKS.map((key) => (
-        <ReviewWrap>
-          {REVIEW_MARK_TO_LABEL[key]}
-          <div>
-            <Rate
-              disabled
-              style={{ fontSize: "13px" }}
-              value={scores[key]}
-              onChange={null}
-            />{" "}
-            {formatNumber(scores[key])}
-          </div>
-        </ReviewWrap>
-      ))}
-      <ReviewWrap>
-        <strong>Aanbevelingspercentage</strong>
-        <div>
-          <Slider readOnly value={(recomandations / optionsCount) * 100} />{" "}
-        </div>
-      </ReviewWrap>
+      {checkIfScoresExist(scores, REVIEW_MARKS) ? (
+        <NoReview>
+          <strong>
+            Deze reparateur heeft nog geen reviews. Schrijf jij de eerste? Dan
+            krijg je 7,50 euro cashback.
+          </strong>
+        </NoReview>
+      ) : (
+        <>
+          <ReviewWrap>
+            <strong>Gemiddelde rating</strong>
+            <div>
+              <Rate
+                disabled
+                style={{ fontSize: "13px" }}
+                value={scores.overall}
+                onChange={null}
+              />{" "}
+              {formatNumber(scores.overall)}
+            </div>
+          </ReviewWrap>
+          {REVIEW_MARKS.map((key) => (
+            <ReviewWrap>
+              {REVIEW_MARK_TO_LABEL[key]}
+              <div>
+                <Rate
+                  disabled
+                  style={{ fontSize: "13px" }}
+                  value={scores[key]}
+                  onChange={null}
+                />{" "}
+                {formatNumber(scores[key])}
+              </div>
+            </ReviewWrap>
+          ))}
+          <ReviewWrap>
+            <strong>Aanbevelingspercentage</strong>
+            <div>
+              <Slider readOnly value={(recomandations / optionsCount) * 100} />{" "}
+            </div>
+          </ReviewWrap>
 
-      <Button onClick={reviewsModal.actions.open} aria-label="Meer reviews">
-        <FontAwesomeIcon icon={faArrowRight} />
-      </Button>
+          <Button onClick={reviewsModal.actions.open} aria-label="Meer reviews">
+            Bekijk reviews <FontAwesomeIcon icon={faArrowRight} />
+          </Button>
+        </>
+      )}
       <Modal
         module={reviewsModal}
         footer={null}

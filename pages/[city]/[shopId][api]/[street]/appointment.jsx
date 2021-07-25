@@ -1,5 +1,13 @@
-import DefaultLayout from "@/components/layouts/Homepage";
-import { MaxConstraints } from "@/components/styled/layout";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import router from "next/router";
+import React, { useCallback, useEffect, useState } from "react";
+import styled, { css } from "styled-components";
+
+import BookingInfo from "@/components/appointment/BookingInfo";
+import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
+import DateAndTime from "@/components/appointment/DateAndTime";
+import LocationSelector from "@/components/appointment/LocationSelector";
 import {
   appointmentConfirmation,
   appointmentForm,
@@ -11,30 +19,23 @@ import {
   openTimeFetcher,
   serviceFetcher,
 } from "@/components/appointment/modules";
-import { getShopProfileByInformationServer } from "@/service/account/operations";
-import React, { useCallback, useEffect, useState } from "react";
-import BookingInfo from "@/components/appointment/BookingInfo";
-import styled, { css } from "styled-components";
-import { SubTitle } from "@/components/styled/text";
-import { Field } from "@/modules/forms/Blocks";
-import LocationSelector from "@/components/appointment/LocationSelector";
 import PaymentSelector from "@/components/appointment/PaymentSelector";
-import Form from "@/modules/forms";
-import DateAndTime from "@/components/appointment/DateAndTime";
 import Steps from "@/components/appointment/Steps";
-import Switch from "@/components/common/Switch";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { TextButton } from "@/components/ui/Button";
-import { FieldWrap } from "@/components/styled/Forms";
 import ConfirmationModal from "@/components/common/modals/ConfirmationModal";
-import media, { OnMobile } from "@/utils/media";
-import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
-import Button from "@/components/ui/Button";
-import router from "next/router";
-import { useFetcher } from "@/modules/dataFetcher";
-import { store } from "@/configureStore";
+import Switch from "@/components/common/Switch";
 import { appointmentFormModule } from "@/components/devices/modules";
+import DefaultLayout from "@/components/layouts/Homepage";
+import { FieldWrap } from "@/components/styled/Forms";
+import { MaxConstraints } from "@/components/styled/layout";
+import { SubTitle } from "@/components/styled/text";
+import { TextButton } from "@/components/ui/Button";
+import Button from "@/components/ui/Button";
+import { store } from "@/configureStore";
+import { useFetcher } from "@/modules/dataFetcher";
+import Form from "@/modules/forms";
+import { Field } from "@/modules/forms/Blocks";
+import { getShopProfileByInformationServer } from "@/service/account/operations";
+import media, { OnMobile } from "@/utils/media";
 
 const MainWrap = styled.div`
   padding-top: 1px;
@@ -302,9 +303,15 @@ export default function AppointmentPage({ shop }) {
         <span />
       )}
       <OnMobile only>
-        <Button onClick={onNext} aria-label="Volgende">
-          Volgende <FontAwesomeIcon icon={faArrowRight} />
-        </Button>
+        {step > 0 ? (
+          <Button onClick={onNext} aria-label="Volgende">
+            Bevestig
+          </Button>
+        ) : (
+          <Button onClick={onNext} aria-label="Volgende">
+            Volgende <FontAwesomeIcon icon={faArrowRight} />
+          </Button>
+        )}
       </OnMobile>
     </CTAButtons>
   );
@@ -314,7 +321,7 @@ export default function AppointmentPage({ shop }) {
       <MainWrap>
         <MaxConstraints>
           <OnMobile only>
-            <BookingInfoMobile shop={shop} />
+            <BookingInfoMobile shop={shop} step={step} />
           </OnMobile>
           <FormWrap>
             <Steps currentStep={step} updateStep={updateStep} />
@@ -359,7 +366,7 @@ export default function AppointmentPage({ shop }) {
             </OnMobile>
           </FormWrap>
           <OnMobile show={false}>
-            <BookingInfo shop={shop} nextStep={onNext} />
+            <BookingInfo shop={shop} step={step} nextStep={onNext} />
           </OnMobile>
           <ConfirmationModal module={appointmentConfirmation} />
         </MaxConstraints>

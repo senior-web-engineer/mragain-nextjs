@@ -1,25 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./maak-een-account-aan.less";
+
 import { message } from "antd";
 import { useRouter } from "next/router";
-import "./maak-een-account-aan.less";
-import { Layout } from "@/components/global";
-
-import { registerUser } from "service/account/operations.js";
+import React, { useEffect, useState } from "react";
+import { Button, Form } from "react-bootstrap";
+import { connect } from "react-redux";
 import { resetAuthError } from "service/account/action.js";
+import { registerUser } from "service/account/operations.js";
+
+import { Layout } from "@/components/global";
 
 function AccountCreate(routerProps) {
   const [validated, setValidated] = useState(false);
 
-  const {
-    registerUser,
-    isSignUp,
-    auth_error,
-    isAuth_Error,
-    resetAuthError,
-  } = routerProps;
+  const { registerUser, isSignUp, auth_error, isAuth_Error, resetAuthError } =
+    routerProps;
   const router = useRouter();
 
   const handleSubmit = (event) => {

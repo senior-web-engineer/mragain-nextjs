@@ -1,6 +1,6 @@
+import { Input as AntdInput, InputNumber } from "antd";
 import { useRef } from "react";
 import styled from "styled-components";
-import { Input as AntdInput, InputNumber } from "antd";
 
 export const StyledInput = styled.div`
   box-sizing: border-box;
@@ -38,7 +38,7 @@ function parseValue(ev) {
   return ev;
 }
 
-export default function Input({ onChange = () => {}, small, ...rest }) {
+export default function Input({ onChange = () => { }, small, ...rest }) {
   const inputRef = useRef(null);
 
   const onInputWrapperSelect = () => {
