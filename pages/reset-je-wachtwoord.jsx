@@ -22,7 +22,7 @@ import {
   ButtonWrapper,
 } from "../styled-components/reset-password";
 import Form from "@/modules/forms";
-import { resetPasswordModule } from "../components/resetPassword/modules";ç
+import { resetPasswordModule } from "../components/resetPassword/modules";
 import { useScreenSize } from "@/utils/media";
 import { Field } from "@/modules/forms/Blocks";
 
