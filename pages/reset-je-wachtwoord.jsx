@@ -56,7 +56,7 @@ const ResetPass = () => {
       }
       if (error !== "") {
         notification.error({
-          message: "Something went wrong",
+          message: "Er is wat fout gegaan, klopt je emailadres?",
         });
       }
     }
@@ -107,8 +107,8 @@ const ResetPass = () => {
               </WaveWrapper>
             )}
 
-            <FormTitle>Reset your password</FormTitle>
-            <FormText>Enter your email adress:</FormText>
+            <FormTitle>Reset je wachtwoord</FormTitle>
+            <FormText>Vul je emailadres in:</FormText>
 
             <FormBox>
               <Form
@@ -120,14 +120,14 @@ const ResetPass = () => {
                 }}
               >
                 <LabelWrapper>
-                  <Label>Email Address</Label>
+                  <Label>Emailadres</Label>
 
                   <Field name="email" as={TextInput} />
                 </LabelWrapper>
 
                 <ButtonWrapper>
                   <Button type="submit" disabled={disable}>
-                    Reset Password
+                    Reset wachtwoord
                   </Button>{" "}
                 </ButtonWrapper>
               </Form>

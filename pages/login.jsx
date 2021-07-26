@@ -146,15 +146,15 @@ const Login = () => {
                 <ButtonWrapper>
                   <Button type="submit">Log in</Button>{" "}
                   <Link href="/reset-je-wachtwoord">
-                    <ForgotPass>Wachtwoord vergeten</ForgotPass>
+                    <ForgotPass>Wachtwoord vergeten?</ForgotPass>
                   </Link>
                 </ButtonWrapper>
               </Form>
             </FormBox>
             <BottomText>
-              Not a member?{" "}
+              Nog geen lid?{" "}
               <Link href="/meld-je-aan-als-reparateur">
-                <BottomTextATag>Sign Up Now</BottomTextATag>
+                <BottomTextATag>Meld je aan!</BottomTextATag>
               </Link>
             </BottomText>
           </FormWrapper>
