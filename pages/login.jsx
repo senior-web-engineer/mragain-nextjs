@@ -110,8 +110,8 @@ const Login = () => {
               </WaveWrapper>
             )}
 
-            <FormTitle>Welcome back!</FormTitle>
-            <FormText>Log in to your account</FormText>
+            <FormTitle>Welkom terug!</FormTitle>
+            <FormText>Log in op je account</FormText>
 
             <FormBox>
               <Form
@@ -122,12 +122,12 @@ const Login = () => {
                 }}
               >
                 <LabelWrapper>
-                  <Label>Email Address</Label>
+                  <Label>Emailadres</Label>
 
                   <Field name="email" as={TextInput} />
                 </LabelWrapper>
                 <LabelWrapper>
-                  <Label>Password</Label>
+                  <Label>Wachtwoord</Label>
 
                   <Field
                     name="password"
@@ -146,7 +146,7 @@ const Login = () => {
                 <ButtonWrapper>
                   <Button type="submit">Log in</Button>{" "}
                   <Link href="/reset-je-wachtwoord">
-                    <ForgotPass>Forgot Password</ForgotPass>
+                    <ForgotPass>Wachtwoord vergeten</ForgotPass>
                   </Link>
                 </ButtonWrapper>
               </Form>
