@@ -160,7 +160,7 @@ export function loginAsUser(token) {
     });
 }
 
-export function logout(dispatch) {
+export async function logout(dispatch) {
   axios
     .get(`${API_PATH.LOGOUT}/`, tokenConfig())
     .then((res) => {
