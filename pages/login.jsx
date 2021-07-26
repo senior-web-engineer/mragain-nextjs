@@ -110,8 +110,8 @@ const Login = () => {
               </WaveWrapper>
             )}
 
-            <FormTitle>Welcome Back!</FormTitle>
-            <FormText>Login to your account</FormText>
+            <FormTitle>Welcome back!</FormTitle>
+            <FormText>Log in to your account</FormText>
 
             <FormBox>
               <Form
