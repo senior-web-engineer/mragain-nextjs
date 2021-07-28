@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { Transfer, Table, Tag, Row, Col, Button } from "antd";
+import { Button, Col, Row, Table, Tag, Transfer } from "antd";
 import difference from "lodash/difference";
+import { useState } from "react";
 
 export const TableTransfer = ({ leftColumns, rightColumns, ...restProps }) => {
   const [filteredInfo, setFilteredInfo] = useState(null);
@@ -52,7 +52,6 @@ export const TableTransfer = ({ leftColumns, rightColumns, ...restProps }) => {
 
           return (
             <Table
-              size="large"
               pagination={{ pageSize: 18 }}
               rowSelection={rowSelection}
               columns={columns}
