@@ -166,7 +166,7 @@ const SERVICE_COLUMNS = [
   {
     title: "Reparatie",
     key: "reparation_name",
-    render: (item) => {
+    render: function ReparationName(item) {
       if (false) {
         return (
           <ReparationCell>
@@ -214,7 +214,9 @@ const SERVICE_COLUMNS = [
     title: "Prijs",
     dataIndex: "price",
     key: "price",
-    render: (text) => <span>&euro;{text}</span>,
+    render: function Price(text) {
+      return <span>&euro;{text}</span>;
+    },
   },
 ];
 
@@ -356,7 +358,7 @@ const Panel = styled.div`
 `;
 
 function AppendIdentifier({ Component, name }) {
-  return function (props) {
+  return function IdentifiedComponent(props) {
     const { state } = useFormContext();
     return <Component identifier={`${state?.values?.[name]}`} {...props} />;
   };
@@ -378,7 +380,7 @@ const ModelSelector = AppendIdentifier({
     parseOptions(items = []) {
       return parseOptions(items || [], "model_name");
     },
-    Component: (props) => {
+    Component: function ModelSelectorComponent(props) {
       const { state } = useFormContext();
       return <Field {...props} identifier={state?.values?.brand} />;
     },
@@ -487,7 +489,6 @@ export default function ShopServices({ shop }) {
 
   const onDeviceChange = useCallback(async (ev) => {
     const value = parseNativeEvent(ev);
-    console.log(value);
     const brands = await brandFetcher.key(value).fetch();
     filtersFormModule.actions.batchChange({
       updates: {

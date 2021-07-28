@@ -23,7 +23,7 @@ const CreateAccountCard2 = (params) => {
           <p>printing and typesetting</p>
           <p>industry. Lorem Ipsum</p>
           <p>has been the</p>
-          <p>Industry's standard</p>
+          <p>Industry&apos;s standard</p>
           <p>dummy text ever since the</p>
           <Link prefetch={false} href="/maak-een-account-aan">
             <Button className={"price-page-btn bgcolor-" + params.color}>

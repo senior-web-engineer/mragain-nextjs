@@ -66,7 +66,11 @@ export default function Map({ selectedShop, updateSelectedShop }) {
 
   const menuData = useMemo(() => {
     return shopList.map((shop) => (
-      <ShopCard shop={shop} onClick={() => updateSelectedShop(shop.id)} />
+      <ShopCard
+        key={shop.id}
+        shop={shop}
+        onClick={() => updateSelectedShop(shop.id)}
+      />
     ));
   }, [shopList]);
 
