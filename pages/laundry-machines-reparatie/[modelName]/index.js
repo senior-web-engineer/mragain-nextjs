@@ -11,7 +11,7 @@ import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
 
 import { API_PATH } from "../../../constants.js";
 
-export default function index({ modelDetails }) {
+export default function Index({ modelDetails }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

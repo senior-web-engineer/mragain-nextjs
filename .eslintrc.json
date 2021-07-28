@@ -8,13 +8,18 @@
     "jest": true
   },
   "rules": {
-    "prettier/prettier": ["error", { "singleQuote": false }],
+    "prettier/prettier": ["warn", { "singleQuote": false }],
     "no-console": "warn",
     "simple-import-sort/imports": "error",
     "no-unused-vars": [
       "error",
       { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
-    ]
+    ],
+    "@next/next/no-document-import-in-page": "warn",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-key": "warn",
+    "react/no-unescaped-entities": "warn",
+    "react-hooks/rules-of-hooks": "warn"
   },
   "settings": {
     "react": {
