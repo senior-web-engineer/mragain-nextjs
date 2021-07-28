@@ -10,9 +10,11 @@
   "rules": {
     "prettier/prettier": ["warn", { "singleQuote": false }],
     "no-console": "warn",
-    "simple-import-sort/imports": "error",
+    "simple-import-sort/imports": "warn",
+    "react/no-children-prop": "warn",
+    "react/display-name": "warn",
     "no-unused-vars": [
-      "error",
+      "warn",
       { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
     ],
     "@next/next/no-document-import-in-page": "warn",
