@@ -1,5 +1,5 @@
 import GoogleMapReact from "google-map-react";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 const googleMapsApiKey = "AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE";
 import styled, { css } from "styled-components";
 
@@ -69,6 +69,7 @@ function MapComponent({
     >
       {shopList.map((shop) => (
         <ShopMarker
+          key={shop.id}
           selected={shop.id === selectedShopId}
           lat={shop.geo_lat}
           lng={shop.geo_long}

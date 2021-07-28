@@ -12,7 +12,7 @@ import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
 
 import BrandsComponent from "../../components/models/BrandsComponent";
 
-export default function index({ brandModels, device }) {
+export default function Index({ brandModels, device }) {
   const router = useRouter();
   useEffect(() => {
     window.scrollTo(0, 0);

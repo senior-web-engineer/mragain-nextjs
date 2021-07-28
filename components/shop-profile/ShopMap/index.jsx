@@ -271,7 +271,7 @@ export function Reviews({ shop }) {
         </div>
         <div>
           {REVIEW_MARKS.map((key) => (
-            <ReviewWrap>
+            <ReviewWrap key={key}>
               <span>{REVIEW_MARK_TO_LABEL[key]}</span>
               <div>
                 <Rate
@@ -316,7 +316,7 @@ export function Reviews({ shop }) {
             </div>
           </ReviewWrap>
           {REVIEW_MARKS.map((key) => (
-            <ReviewWrap>
+            <ReviewWrap key={key}>
               {REVIEW_MARK_TO_LABEL[key]}
               <div>
                 <Rate

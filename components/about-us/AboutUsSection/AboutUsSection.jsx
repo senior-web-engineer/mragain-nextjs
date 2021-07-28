@@ -12,8 +12,8 @@ import {
 const AboutUsSection = () => (
   <AboutSectionArea>
     <AboutSectionQuote>
-      "Wij geloven dat de wereld net een beetje mooier wordt als we er voor
-      kunnen zorgen dat de levensduur van jouw apparaat wordt verlengd"
+      &quot;Wij geloven dat de wereld net een beetje mooier wordt als we er voor
+      kunnen zorgen dat de levensduur van jouw apparaat wordt verlengd&quot;
     </AboutSectionQuote>
     <AboutSectionContent>
       <AboutSectionContentTitle>OVER MRAGAIN</AboutSectionContentTitle>

@@ -19,7 +19,7 @@ import locationIssue from "../../assets/icons/Problems - Location.svg";
 import signalIssue from "../../assets/icons/Problems - Signal.svg";
 import releasedDate from "../../assets/icons/Specifications - Date.svg";
 import { API_PATH, FRONT_END_URL } from "../../constants.js";
-export default function index() {
+export default function Index() {
   const [modelImages, setmodelImages] = useState([
     "https://cdn-0.idownloadblog.com/wp-content/uploads/2019/09/iPhone-11-Pro-Max-Midnight-Green-Mockup-with-AR72014-iDownloadBlog-scaled.jpeg",
     "https://www.iphonehacks.com/wp-content/uploads/2019/10/iphone-11-pro-max-teardown.jpg",

@@ -15,6 +15,8 @@ import {
   getReparations,
 } from "service/search/operations";
 
+const Option = Select.Option;
+
 const MakeAppointment = (routerProps) => {
   const {
     shop,
