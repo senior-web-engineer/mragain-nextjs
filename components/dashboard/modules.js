@@ -132,7 +132,12 @@ export const servicesFetcher = keyedDataFetcher({
   ],
   fetchData([_1, _2, device, brand, model]) {
     const shop = currentUser.selector(store.ref.getState())?.result?.id;
-    return api.get(`${API_PATH.GETSHOPREPARATIONDETAILS}/`, { device, model, brand, shop });
+    return api.get(`${API_PATH.GETSHOPREPARATIONDETAILS}/`, {
+      device,
+      model,
+      brand,
+      shop,
+    });
   },
 });
 

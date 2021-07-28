@@ -36,7 +36,7 @@ const Schedule = withData({
       <ScheduleSection>
         <SubTitle as="h3">Onze openingstijden</SubTitle>
         {DAYS_OF_WEEK.map((day) => (
-          <DayWrap>
+          <DayWrap key={day}>
             <span>{DAY_TO_FULL_NAME[day]}</span>
             {data[day]}
           </DayWrap>

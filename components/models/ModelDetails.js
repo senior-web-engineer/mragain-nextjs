@@ -248,7 +248,7 @@ export default function ModelDetails(routerProps) {
               </div>
               {reparations !== undefined && reparations.length > 0 ? (
                 reparations.map((reparation, i) => (
-                  <Fragment>
+                  <Fragment key={i}>
                     {reparation.price.length > 0 && (
                       <div className="services-list" key={i}>
                         <div className="row">

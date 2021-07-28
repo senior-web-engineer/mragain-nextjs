@@ -451,8 +451,8 @@ const ShopDetails = styled.div`
     font-size: 8px;
     height: 26px;
     ${(props) =>
-      props.tagColor &&
-      css`
+    props.tagColor &&
+    css`
         background-color: ${props.tagColor || "#ddd"};
       `}
     color: #fff;
@@ -672,9 +672,8 @@ function ShopItem({ item }) {
   // API changed does not include the city any longer?
   // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
 
-  const shopRoute = `${getShopRoute(item.shop)}?device=${
-    formState.device
-  }&brand=${formState.brand}&model=${formState.model}`;
+  const shopRoute = `${getShopRoute(item.shop)}?device=${formState.device
+    }&brand=${formState.brand}&model=${formState.model}`;
 
   function onClick() {
     if (!showMap) {
@@ -789,7 +788,7 @@ const MobileDeviceSelector = createSelectComponent({
 });
 
 function AppendIdentifier({ Component, name }) {
-  return function (props) {
+  return function IdentifiedComponent(props) {
     const { state } = useFormContext();
     return <Component identifier={`${state?.values?.[name]}`} {...props} />;
   };

@@ -11,7 +11,7 @@ import { FRONT_END_URL } from "@/constants";
 import { getAllBrandModels } from "@/service/search/operations.js";
 import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
 
-export default function index({ brandModels, device }) {
+export default function Index({ brandModels, device }) {
   const router = useRouter();
   useEffect(() => {
     window.scrollTo(0, 0);
