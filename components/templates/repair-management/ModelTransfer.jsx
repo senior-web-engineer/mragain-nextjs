@@ -1,12 +1,15 @@
 import { DownOutlined } from "@ant-design/icons";
-import { Checkbox, Col, Row, Tree, Input, Button } from "antd";
+import { EditOutlined } from "@ant-design/icons";
+import { Button, Checkbox, Col, Input, Row, Tree } from "antd";
 import React, { useEffect, useState } from "react";
+
 import {
   MenuWrap,
-  RowWrapper,
-  TransferWrapper,
   ModelWrapper,
   RowActionsWrapper,
+  RowWrapper,
+  RowModelsWrapper,
+  TransferWrapper,
 } from "./styles";
 
 export const ModelTransfer = ({
@@ -26,7 +29,6 @@ export const ModelTransfer = ({
   const [selectedDevice, setSelectedDevice] = useState();
 
   const onSelect = (selectedKeys, event) => {
-    console.log(selectedKeys, event);
     setSelectedBrandTitle(event.selectedNodes[0].props.title);
     onBrandSelected(event.selectedNodes[0].props.id);
     setSelectedDevice(selectedKeys[0].split("-")[0]);
@@ -101,7 +103,7 @@ export const ModelTransfer = ({
               </Row>
             </Col>
           </RowActionsWrapper>
-          <Row type="flex" gutter={[16, 16]}>
+          <RowModelsWrapper type="flex" gutter={[16, 16]}>
             {data
               .filter((item) => item.model.includes(search))
               .filter((item) =>
@@ -123,14 +125,14 @@ export const ModelTransfer = ({
                             onEditModelReparations(selectedDevice, item)
                           }
                         >
-                          Edit
+                          <EditOutlined />
                         </Button>
                       )}
                     </ModelWrapper>
                   </Col>
                 );
               })}
-          </Row>
+          </RowModelsWrapper>
         </TransferWrapper>
       </Col>
     </RowWrapper>

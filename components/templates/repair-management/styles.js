@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { Row } from "antd";
+import styled from "styled-components";
 
 export const RowWrapper = styled.div`
   display: flex;
@@ -9,12 +9,15 @@ export const RowWrapper = styled.div`
   height: calc(100vh - 250px);
 `;
 
+export const RowModelsWrapper = styled(Row)`
+  padding: 20px;
+`;
+
 export const RowWrapperMargin = styled(Row)`
   margin: 16px 0;
 `;
 
 export const TransferWrapper = styled.div`
-  padding: 16px;
   border-left: 1px solid lightgray;
   height: 100%;
 `;
@@ -59,11 +62,11 @@ export const MenuWrap = styled.div`
   }
 
   .ant-tree > li > ul {
-    padding: 14px 0 0 16px;
+    padding: 14px 0 0 24px;
   }
   .ant-tree > li > ul > li {
     border-left: solid 2px #e0e0e0;
-    padding: 13px 0 11px 15px !important;
+    padding: 13px 0 11px 30px !important;
   }
 
   .ant-tree > li.ant-tree-treenode-selected {
@@ -102,5 +105,11 @@ export const ModelWrapper = styled.div`
 `;
 
 export const RowActionsWrapper = styled(Row)`
-  padding-bottom: 20px;
+  padding: 20px;
+  border-bottom: solid 1px lightgray;
+  align-items: center;
+
+  h3 {
+    margin: 0;
+  }
 `;

@@ -6,7 +6,11 @@ import {
   Input as AntdInput,
   Row,
   Table,
+  Tag,
 } from "antd";
+import { find } from "lodash";
+import * as moment from "moment";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Highlighter from "react-highlight-words";
 import styled from "styled-components";
@@ -14,6 +18,7 @@ import styled from "styled-components";
 import { devicesFetcher } from "@/components/dashboard/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
 import { ViewRecord } from "@/components/templates/history/ViewRecord";
+import { additionalInfoOptions } from "@/components/templates/shop-management/helpers";
 import {
   currentUser,
   reparationsList,
@@ -38,6 +43,29 @@ const StyledTable = styled(Table)`
   }
 `;
 
+const DeviceDetailsWrapper = styled.div`
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .brand-model {
+    margin-left: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+const TagWrapper = styled(Tag)`
+  transform: scale(1.2);
+`;
+
+const getGuaranteeStatus = (date, guarantee) => {
+  return moment().isAfter(moment(date, "YYYY-MM-DD").add(guarantee, "months"))
+    ? "red"
+    : "green";
+};
+
 const columns = (viewDetails, search) => [
   {
     width: "120px",
@@ -48,14 +76,35 @@ const columns = (viewDetails, search) => [
   },
   {
     title: "Repair Type",
+    width: 150,
     render(data) {
-      return data?.reparation?.reparation_name;
+      return <b>{data?.reparation?.reparation_name}</b>;
     },
   },
   {
     title: "Device details",
+    width: 300,
     render(data) {
-      return `${data?.device?.device_name} /  ${data?.brand?.brand_name} / ${data?.model?.model_name}`;
+      return (
+        <DeviceDetailsWrapper>
+          <div>
+            <Image
+              width={60}
+              height={60}
+              src={
+                find(additionalInfoOptions.devices, ["id", data?.device?.id])
+                  .icon || ""
+              }
+            />
+          </div>
+          <div className="brand-model">
+            <div>
+              <b>{data?.model?.model_name}</b>
+            </div>
+            <div>{data?.brand?.brand_name}</div>
+          </div>
+        </DeviceDetailsWrapper>
+      );
     },
   },
   {
@@ -64,12 +113,14 @@ const columns = (viewDetails, search) => [
     width: 180,
     sorter: (a, b) => a.serialnumber - b.serialnumber,
     render: (serialNumber) => (
-      <Highlighter
-        highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-        searchWords={[search]}
-        autoEscape
-        textToHighlight={serialNumber ? serialNumber.toString() : ""}
-      />
+      <b>
+        <Highlighter
+          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+          searchWords={[search]}
+          autoEscape
+          textToHighlight={serialNumber ? serialNumber.toString() : ""}
+        />
+      </b>
     ),
   },
   {
@@ -82,7 +133,11 @@ const columns = (viewDetails, search) => [
     title: "Warranty",
     width: 150,
     render(data) {
-      return `${data?.guarantee} months`;
+      return (
+        <TagWrapper
+          color={getGuaranteeStatus(data?.appointment.date, data?.guarantee)}
+        >{`${data?.guarantee} months`}</TagWrapper>
+      );
     },
     sorter: (a, b) => a.guarantee - b.guarantee,
   },

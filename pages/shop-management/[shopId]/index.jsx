@@ -1,5 +1,4 @@
 import { Col, Row, Tabs } from "antd";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 import DefaultLayout from "@/components/layouts/Dashboard";

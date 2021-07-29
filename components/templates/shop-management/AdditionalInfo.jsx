@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { Button, Row, Col, Divider, Switch, Tag } from "antd";
-import { SwitchGroup } from "@/components/common/SwitchGroup";
+import { Button, Col, Divider, Row, Switch, Tag } from "antd";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+
 import { MultiSelect } from "@/components/common/MultiSelect";
-import { additionalInfoOptions, paymentMethods } from "./helpers";
+import { SwitchGroup } from "@/components/common/SwitchGroup";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
-import Image from "next/image";
 import {
   currentUser,
-  shopManagementAdditionalForm,
   getBrands,
   getReparations,
+  shopManagementAdditionalForm,
 } from "@/service/shop-management/modules";
 
+import { additionalInfoOptions, paymentMethods } from "./helpers";
 import { HeaderSmallText, rowStyle } from "./styles";
 
 const renderDevicesList = (devices) => (

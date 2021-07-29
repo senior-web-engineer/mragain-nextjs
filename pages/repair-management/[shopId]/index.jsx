@@ -1,24 +1,43 @@
+import { Col, Divider, Row } from "antd";
+import { filter, uniqBy } from "lodash";
+import { find } from "lodash";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
-import { currentUser } from "@/service/repair-management/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
-import { Row, Col, Divider } from "antd";
-import { useRouter } from "next/router";
-import { ModelTransfer } from "@/components/templates/repair-management/ModelTransfer";
 import { EditModal } from "@/components/templates/repair-management/EditModal";
+import { ModelTransfer } from "@/components/templates/repair-management/ModelTransfer";
+import { additionalInfoOptions } from "@/components/templates/shop-management/helpers";
 import {
+  currentUser,
   editRepairModelModal,
+  getAllModels,
   getRepairBrandModel,
   getRepairDevices,
-  getAllModels,
-  saveSelectedModels,
   saveModelReparations,
+  saveSelectedModels,
   saveShopReparations,
 } from "@/service/repair-management/modules";
-import { uniqBy, filter } from "lodash";
+
+const DeviceItemWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  .device-info {
+    margin-left: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .synonyms {
+    font-weight: lighter;
+    font-size: 12px;
+  }
+`;
 
 export default function RepairManagementPage() {
-  const router = useRouter();
   const [targetKeys, setTargetKeys] = useState([]);
   const [devices, setDevices] = useState([]);
   const [models, setModels] = useState([]);
@@ -27,11 +46,9 @@ export default function RepairManagementPage() {
   const [selectedBrand, setSelectedBrand] = useState();
   const [shopReparations, setShopReparations] = useState([]);
 
-  const [activeTab, setActiveTab] = useState("device-manager");
-
   useEffect(() => {
     async function loadData() {
-      const user = await currentUser.fetch();
+      await currentUser.fetch();
       const fetchedDevices = await getRepairDevices.fetch();
       const allModels = await getAllModels.fetch();
       const firstModel = {
@@ -42,7 +59,28 @@ export default function RepairManagementPage() {
       const currentModels = await getRepairBrandModel.fetch();
       setDevices(
         fetchedDevices.map((device) => ({
-          title: device.device_name,
+          title: (
+            <DeviceItemWrapper>
+              <div>
+                <Image
+                  width={40}
+                  height={40}
+                  src={
+                    find(additionalInfoOptions.devices, [
+                      "id",
+                      device.id > 8 ? 1 : device.id,
+                    ])?.icon || ""
+                  }
+                />
+              </div>
+              <div className="device-info">
+                <div>
+                  <b>{device.device_name}</b>
+                </div>
+                <div className="synonyms">{device?.synonyms}</div>
+              </div>
+            </DeviceItemWrapper>
+          ),
           key: device.id,
           id: device.id,
           selectable: false,
@@ -85,10 +123,6 @@ export default function RepairManagementPage() {
     setSelectedModels(filter(models, ["brand_id", brandId]));
   };
 
-  const onTabChange = async (tab) => {
-    setActiveTab(tab);
-  };
-
   const onChange = (key) => {
     if (targetKeys.includes(key)) {
       const newTargetKeys = [...targetKeys];
@@ -100,7 +134,6 @@ export default function RepairManagementPage() {
   };
 
   const onEditModelReparations = async (deviceId, item) => {
-    console.log("SITEM", item);
     setSelectedModel(item.model);
     setShopReparations(
       await saveModelReparations.fetch({
@@ -113,7 +146,6 @@ export default function RepairManagementPage() {
   };
 
   const onRepairModelSaved = (items) => {
-    console.log("ABC", items);
     saveShopReparations(items);
   };
 
@@ -130,7 +162,6 @@ export default function RepairManagementPage() {
       brand: savingData,
       device_id: selectedDevice,
     };
-    console.log(payload);
     saveSelectedModels(payload);
   };
 
