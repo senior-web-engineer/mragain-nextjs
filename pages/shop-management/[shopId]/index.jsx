@@ -13,6 +13,7 @@ import {
   shopManagementAdditionalForm,
   shopManagementGeneralInfo,
 } from "@/service/shop-management/modules";
+import { OnMobile } from "@/utils/media";
 const { TabPane } = Tabs;
 import { AdditionalInfo } from "@/components/templates/shop-management/AdditionalInfo";
 import { GeneralInfo } from "@/components/templates/shop-management/GeneralInfo";
@@ -59,44 +60,51 @@ export default function ShopManagementPage() {
           <h1>Shop Management</h1>
         </Col>
       </Row>
-      <Tabs defaultActiveKey={activeTab} onChange={onTabChange}>
-        <TabPane tab="Profile Settings" key="profile-settings">
-          <>
-            <ImageSection shopData={shopData} />
+      <OnMobile only>
+        <h5>
+          <b>Please View this page on desktop</b>
+        </h5>
+      </OnMobile>
+      <OnMobile show={false}>
+        <Tabs defaultActiveKey={activeTab} onChange={onTabChange}>
+          <TabPane tab="Profile Settings" key="profile-settings">
+            <>
+              <ImageSection shopData={shopData} />
 
-            <Row>
-              <Col span={4}></Col>
-              <Col span={20}>
-                <BoxWrapper>
-                  <GeneralInfo shopData={shopData} />
-                </BoxWrapper>
+              <Row>
+                <Col span={4}></Col>
+                <Col span={20}>
+                  <BoxWrapper>
+                    <GeneralInfo shopData={shopData} />
+                  </BoxWrapper>
 
-                <BoxWrapper padding>
-                  <AdditionalInfo shopData={shopInfo} />
-                </BoxWrapper>
+                  <BoxWrapper padding>
+                    <AdditionalInfo shopData={shopInfo} />
+                  </BoxWrapper>
+                </Col>
+              </Row>
+            </>
+          </TabPane>
+          <TabPane tab="Operational Hours" key="operational-hours">
+            <Row gutter={[40, 40]}>
+              <Col xxl={14} lg={24}>
+                {nonWorkingDays && (
+                  <OperationalHoursCalendar
+                    nonWorkingDays={nonWorkingDays}
+                    onNonWorkingDaysSaved={onNonWorkingDaysSaved}
+                  />
+                )}
+              </Col>
+              <Col xxl={10} lg={24}>
+                <ScheduleList
+                  validOpenTime={validOpenTime}
+                  onSave={saveValidOpenTime}
+                />
               </Col>
             </Row>
-          </>
-        </TabPane>
-        <TabPane tab="Operational Hours" key="operational-hours">
-          <Row gutter={[40, 40]}>
-            <Col span={14}>
-              {nonWorkingDays && (
-                <OperationalHoursCalendar
-                  nonWorkingDays={nonWorkingDays}
-                  onNonWorkingDaysSaved={onNonWorkingDaysSaved}
-                />
-              )}
-            </Col>
-            <Col span={10}>
-              <ScheduleList
-                validOpenTime={validOpenTime}
-                onSave={saveValidOpenTime}
-              />
-            </Col>
-          </Row>
-        </TabPane>
-      </Tabs>
+          </TabPane>
+        </Tabs>
+      </OnMobile>
     </DefaultLayout>
   );
 }
