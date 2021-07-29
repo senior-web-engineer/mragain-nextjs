@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
-import styled from "styled-components";
-import { DateRange } from "react-date-range";
-import * as moment from "moment";
 import { format } from "date-fns";
+import { flatten } from "lodash";
+import * as moment from "moment";
+import { useEffect, useState } from "react";
+import { DateRange } from "react-date-range";
+import styled from "styled-components";
 
 const CalendarRangeWrapper = styled.div`
   background: white;
@@ -46,32 +47,63 @@ export const CalendarRange = ({ onChange, disabledDates, repeatingList }) => {
   ]);
 
   useEffect(() => {
-    setComparedDates(
-      disabledDates.map((date) => moment(date).format("YYYY-MM-DD"))
-    );
+    if (disabledDates) {
+      setComparedDates(
+        disabledDates.map((date) => ({
+          dates: flatten(getDates(date.startDate, date.endDate)),
+          type: date.type,
+        }))
+      );
+    }
   }, [disabledDates]);
 
   const onRangeSelect = (item) => {
     onChange(item.selection);
-    console.log(item);
     if (item.hasOwnProperty("selection")) {
       setState([item["selection"]]);
     }
   };
 
+  const dateType = (type) => {
+    if (type === 0) return "#52c41a";
+    if (type === 1) return "#1890ff";
+    return "#f5222d";
+  };
+
+  const getDates = (startDate, endDate) => {
+    var dateArray = [];
+    var currentDate = moment(startDate);
+    var endDate = moment(endDate);
+    while (currentDate <= endDate) {
+      dateArray.push(moment(currentDate).toDate());
+      currentDate = moment(currentDate).add(1, "days");
+    }
+    return dateArray;
+  };
+
   const customDayContent = (day, dates) => {
     let extraDot = null;
-    if (dates.includes(moment(day).format("YYYY-MM-DD"))) {
+    let disabledDay = null;
+    dates
+      .map((item) => ({
+        ...item,
+        dates: item.dates.map((date) => moment(date).format("YYYY-MM-DD")),
+      }))
+      .forEach((item) => {
+        if (item.dates.includes(moment(day).format("YYYY-MM-DD"))) {
+          disabledDay = item;
+        }
+      });
+    if (disabledDay) {
       extraDot = (
         <div
           style={{
-            height: "10px",
-            width: "10px",
-            borderRadius: "100%",
-            background: "#1890ff",
+            height: "5px",
+            width: "100%",
+            background: dateType(disabledDay.type),
             position: "absolute",
-            top: 2,
-            right: 2,
+            top: "-5px",
+            left: 0,
           }}
         />
       );
@@ -91,7 +123,11 @@ export const CalendarRange = ({ onChange, disabledDates, repeatingList }) => {
         onChange={onRangeSelect}
         moveRangeOnFirstSelection={false}
         ranges={state}
-        disabledDates={disabledDates}
+        disabledDates={flatten(
+          disabledDates.map((date) =>
+            flatten(getDates(date.startDate, date.endDate))
+          )
+        )}
         dayContentRenderer={(day) => customDayContent(day, comparedDates)}
       />
     </CalendarRangeWrapper>

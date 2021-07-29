@@ -1,31 +1,27 @@
+import { Col, Row, Tabs } from "antd";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
+import DefaultLayout from "@/components/layouts/Dashboard";
 import {
   currentUser,
+  getShopNonWorkingDays,
+  getValidOpenTime,
+  saveShopNonWorkingDays,
+  saveValidOpenTime,
   shopInfoFetcher,
-  getDevices,
   shopManagementAdditionalForm,
   shopManagementGeneralInfo,
-  getShopNonWorkingDays,
-  saveShopNonWorkingDays,
-  getValidOpenTime,
-  saveValidOpenTime,
 } from "@/service/shop-management/modules";
-import DefaultLayout from "@/components/layouts/Dashboard";
-import { Tabs, Row, Col } from "antd";
-import { useRouter } from "next/router";
 const { TabPane } = Tabs;
-import { BoxWrapper } from "@/components/templates/shop-management/styles";
-import { ImageSection } from "@/components/templates/shop-management/ImageSection";
 import { AdditionalInfo } from "@/components/templates/shop-management/AdditionalInfo";
-import { OperationalHoursCalendar } from "@/components/templates/shop-management/OperationalHoursCalendar";
 import { GeneralInfo } from "@/components/templates/shop-management/GeneralInfo";
+import { ImageSection } from "@/components/templates/shop-management/ImageSection";
+import { OperationalHoursCalendar } from "@/components/templates/shop-management/OperationalHoursCalendar";
 import { ScheduleList } from "@/components/templates/shop-management/ScheduleList";
+import { BoxWrapper } from "@/components/templates/shop-management/styles";
 
-export default function ShopManagementPage({ auth_user }) {
-  const router = useRouter();
-  const { shopId, tab } = router.query;
-
+export default function ShopManagementPage() {
   const [activeTab, setActiveTab] = useState("profile-settings");
   const [shopInfo, setShopInfo] = useState();
   const [shopData, setShopData] = useState();
@@ -39,30 +35,17 @@ export default function ShopManagementPage({ auth_user }) {
       setShopData(await shopManagementGeneralInfo.fetch());
       setNonWorkingDays(await getShopNonWorkingDays.fetch());
       setValidOpenTime(await getValidOpenTime.fetch());
-      console.log("INFO", shopInfo);
       if (shopInfo) {
         setShopInfo(shopInfo[0]);
       }
       await shopManagementAdditionalForm.actions.initialize(user.account_id);
-      const devices = await getDevices.fetch();
     }
 
     loadData();
   }, []);
 
-  useEffect(() => {
-    const { tab } = router.query;
-    console.log("TABS", activeTab, tab);
-    setActiveTab(tab);
-  }, [router]);
-
   const onTabChange = async (tab) => {
     setActiveTab(tab);
-    // router.push(
-    //   `/shop-management/${shopId}`,
-    //   `/shop-management/${shopId}?tab=${tab}`,
-    //   { shallow: true }
-    // );
   };
 
   const onNonWorkingDaysSaved = (data) => {

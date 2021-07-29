@@ -1,6 +1,5 @@
-import React from "react";
+import { Row, Table, Tag } from "antd";
 import styled from "styled-components";
-import { Row, Table } from "antd";
 
 export const rowStyle = {
   marginBottom: "24px",
@@ -162,4 +161,12 @@ export const TableWrapper = styled(Table)`
   .ant-table-tbody {
     background: white;
   }
+`;
+
+export const TagWrapper = styled(Tag)`
+  transform: scale(1.2);
+`;
+
+export const Action = styled.a`
+  color: #0077cc;
 `;
