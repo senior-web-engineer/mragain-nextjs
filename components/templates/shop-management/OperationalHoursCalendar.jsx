@@ -1,22 +1,39 @@
-import React, { useState, useCallback } from "react";
-import { Calendar } from "@/components/common/Calendar";
+import { Button, Col, Divider, Input, Row, Tag, TimePicker } from "antd";
+import moment from "moment";
+import React, { useCallback, useState } from "react";
+
 import { CalendarRange } from "@/components/common/Calendar/CalendarRange";
+import Select from "@/components/ui/Select";
+
+import { repeatingList } from "./helpers";
 import {
-  RowWrapper,
+  Action,
   HoursEditor,
   HoursEditorTitle,
+  RowWrapper,
   TableWrapper,
 } from "./styles";
-import { Input, Row, Col, Divider, Button, TimePicker, Tag } from "antd";
-import Select from "@/components/ui/Select";
-import moment from "moment";
-import { repeatingList } from "./helpers";
 
 const getColor = (repeat) => {
   return repeatingList[repeat];
 };
 
-const columns = [
+const renderRepeat = (repeat) => {
+  const res = getColor(repeat);
+  return (
+    <Tag color={res.color} key={res.value}>
+      {res.label}
+    </Tag>
+  );
+};
+
+const renderAction = (item, onDelete) => (
+  <div size="middle">
+    <Action onClick={() => onDelete(item)}>Delete</Action>
+  </div>
+);
+
+const columns = (onDelete) => [
   {
     title: "Name",
     dataIndex: "name",
@@ -46,23 +63,12 @@ const columns = [
     title: "Repeat",
     key: "repeat",
     dataIndex: "repeat",
-    render: (repeat) => {
-      const res = getColor(repeat);
-      return (
-        <Tag color={res.color} key={res.value}>
-          {res.label}
-        </Tag>
-      );
-    },
+    render: renderRepeat,
   },
   {
     title: "Action",
     key: "action",
-    render: (text, record) => (
-      <div size="middle">
-        <a>Delete</a>
-      </div>
-    ),
+    render: (value, item) => renderAction(item, onDelete),
   },
 ];
 
@@ -96,7 +102,6 @@ export const OperationalHoursCalendar = ({
   }, [nonRegularHours, onNonWorkingDaysSaved]);
 
   const isAddDisabled = useCallback(() => {
-    console.log("OOOO", nonRegularHours);
     return (
       nonRegularHours.name === "" ||
       nonRegularHours.time.startTime === null ||
@@ -116,16 +121,21 @@ export const OperationalHoursCalendar = ({
     });
   };
 
+  const handelOnDelete = (item) => {
+    console.log("DELETE", item);
+  };
+
   return (
     <>
       <RowWrapper>
         <Col span={16}>
-          {/* <Calendar /> */}
           <CalendarRange
             repeatingList={repeatingList}
-            disabledDates={nonWorkingDays.map((item) =>
-              moment(item.startDate, "YYYY-MM-DD").toDate()
-            )}
+            disabledDates={nonWorkingDays.map((item) => ({
+              startDate: moment(item.startDate, "YYYY-MM-DD").toDate(),
+              endDate: moment(item.endDate, "YYYY-MM-DD").toDate(),
+              type: item.repeat,
+            }))}
             onChange={(value) => {
               setNonRegularHours({
                 ...nonRegularHours,
@@ -221,8 +231,7 @@ export const OperationalHoursCalendar = ({
       <RowWrapper style={{ marginTop: "40px" }}>
         <Col span={24}>
           <TableWrapper
-            size="large"
-            columns={columns}
+            columns={columns(handelOnDelete)}
             dataSource={nonWorkingDays}
           />
         </Col>

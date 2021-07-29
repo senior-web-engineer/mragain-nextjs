@@ -1,10 +1,11 @@
+import { notification } from "antd";
+
 import { store } from "@/configureStore";
 import { API_PATH } from "@/constants";
 import dataFetcher from "@/modules/dataFetcher";
-import api, { privateApi } from "@/utils/api";
 import { createFormModule } from "@/modules/forms";
 import { createListModule } from "@/modules/list";
-import { notification } from "antd";
+import api, { privateApi } from "@/utils/api";
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],
@@ -90,7 +91,6 @@ export const getValidOpenTime = dataFetcher({
 });
 
 export const saveValidOpenTime = async (payload) => {
-  console.log(payload);
   const id = currentUser.selector(store.ref.getState())?.result?.id;
   const data = await privateApi.put(`${API_PATH.UPDATEVALIDOPENTIME}/${id}/`, {
     id: id,
