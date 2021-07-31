@@ -111,6 +111,7 @@ export const EditModal = ({ item, data, editRepairModelModal, onSave }) => {
       </RowWrapperMargin>
       <Divider />
       <Table
+        style={{ minHeight: `calc(100vh - 360px)` }}
         scroll={{ y: `calc(100vh - 420px)` }}
         dataSource={cloneDeep(items)}
         columns={columns(items)}

@@ -1,36 +1,38 @@
-import { API_PATH } from "../../constants";
+import { notification } from "antd";
 import axios from "axios";
+import Axios from "axios";
+import router from "next/router";
+
+import { registerFormModule } from "@/components/land/RegisterSection/RegisterForm/modules";
+import filterObjectKeys from "@/scripts/filterObjectKeys";
+
+import { API_PATH } from "../../constants";
 import {
-  signupSuccess,
-  logoutA,
-  signupFail,
-  loginFail,
+  authenticated,
+  fetchAccountSettings,
+  fetchRepairDevices,
+  fetchShopModelGuarantee,
+  initAccountInvalidTime,
+  initAccountProfile,
+  initAccountReviews,
+  initAccountValidTime,
+  initShopAccountProfile,
   initUserLoginChange,
+  loginFail,
+  logoutA,
   registerAuthToken,
   registerAuthUser,
   resetPasswordFail,
   resetPasswordSuccess,
-  fetchAccountSettings,
-  initAccountProfile,
-  initAccountValidTime,
-  initAccountInvalidTime,
-  fetchRepairDevices,
-  setLoadedProfile,
-  initAccountReviews,
-  fetchShopModelGuarantee,
-  setLoadPBM,
   setCreatedGuarantee,
   setDeletedGuarantee,
-  setUpdateScheduleTime,
+  setLoadedProfile,
+  setLoadPBM,
   setSuccessData,
-  authenticated,
-  initShopAccountProfile,
+  setUpdateScheduleTime,
+  signupFail,
+  signupSuccess,
 } from "./action";
-import Axios from "axios";
-import filterObjectKeys from "@/scripts/filterObjectKeys";
-import { registerFormModule } from "@/components/land/RegisterSection/RegisterForm/modules";
-import { notification } from "antd";
-import router from "next/router";
 
 export const tokenConfig = () => {
   const token = localStorage.getItem("auth-token");
@@ -86,14 +88,14 @@ export function registerUser() {
       await registerFormModule.actions.submit();
 
       notification.success({
-        description:  "Bedankt voor je aanmelding bij MrAgain. We voeren nu enkele checks uit waarna je een email van ons ontvangt om je account te activeren. Let op: deze email kan in je spam terecht komen!",
-        duration: 5.5
+        description:
+          "Bedankt voor je aanmelding bij MrAgain. We voeren nu enkele checks uit waarna je een email van ons ontvangt om je account te activeren. Let op: deze email kan in je spam terecht komen!",
+        duration: 5.5,
       });
 
       setTimeout(() => {
         router.router.push("/");
       }, 6000);
-
     } catch (error) {
       const { errors } = registerFormModule.state;
       if (Object.keys(errors).length) {
@@ -684,7 +686,7 @@ export const deleteGuaranteeModels = async (data, dispatch) => {
     .catch((err) => {});
 };
 
-export const createImportReparationAndGuaranteeCSV = async (data, options) => {
+export const createImportReparationAndGuaranteeCSV = async (data) => {
   const configure = {
     onUploadProgress: (progressEvent) => console.log(progressEvent.loaded),
   };

@@ -27,18 +27,14 @@ export const MenuWrap = styled.div`
   height: 100%;
   display: inline-block;
   background-color: #fff;
-  padding: 16px;
   color: #909090;
   font-size: 12px !important;
   overflow: auto;
 
   .ant-tree > li {
     position: relative;
-    padding: 13px 0 11px 0 !important;
-
-    span:hover {
-      background-color: transparent;
-    }
+    padding: 22px !important;
+    border-bottom: solid 1px lightgray;
   }
   .ant-tree-switcher {
     position: absolute !important;
@@ -48,7 +44,7 @@ export const MenuWrap = styled.div`
     span {
       position: absolute !important;
       top: 8px !important;
-      right: 0 !important;
+      right: 16px !important;
     }
   }
 
@@ -69,15 +65,21 @@ export const MenuWrap = styled.div`
     padding: 13px 0 11px 30px !important;
   }
 
+  .device-icon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+  }
+
   .ant-tree > li.ant-tree-treenode-selected {
-    background: rgb(251, 191, 36);
-    background: linear-gradient(
-      0deg,
-      rgba(251, 191, 36, 0) calc(100% - 50px),
-      rgba(240, 255, 249, 1) calc(100% - 50px),
-      rgba(240, 255, 249, 1) 50px
-    );
     border-left: none !important;
+
+    .device-icon {
+      background: rgba(6, 201, 135, 0.5);
+    }
   }
 
   .ant-tree-treenode-selected {

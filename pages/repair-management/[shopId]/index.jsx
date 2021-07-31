@@ -2,13 +2,14 @@ import { Col, Divider, Row } from "antd";
 import { filter, uniqBy } from "lodash";
 import { find } from "lodash";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import DefaultLayout from "@/components/layouts/Dashboard";
 import { EditModal } from "@/components/templates/repair-management/EditModal";
 import { ModelTransfer } from "@/components/templates/repair-management/ModelTransfer";
 import { additionalInfoOptions } from "@/components/templates/shop-management/helpers";
+import { getAuthUser } from "@/service/account/operations";
 import {
   currentUser,
   editRepairModelModal,
@@ -44,11 +45,14 @@ export default function RepairManagementPage() {
   const [selectedModels, setSelectedModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState();
   const [selectedBrand, setSelectedBrand] = useState();
+  const [selectedBrandId, setSelectedBrandId] = useState();
+  const [user, setUser] = useState();
   const [shopReparations, setShopReparations] = useState([]);
 
   useEffect(() => {
     async function loadData() {
-      await currentUser.fetch();
+      const user = await currentUser.fetch();
+      setUser(user);
       const fetchedDevices = await getRepairDevices.fetch();
       const allModels = await getAllModels.fetch();
       const firstModel = {
@@ -61,7 +65,7 @@ export default function RepairManagementPage() {
         fetchedDevices.map((device) => ({
           title: (
             <DeviceItemWrapper>
-              <div>
+              <div className="device-icon">
                 <Image
                   width={40}
                   height={40}
@@ -120,10 +124,13 @@ export default function RepairManagementPage() {
   }, []);
 
   const handleOnBrandSelected = async (brandId) => {
+    setSelectedBrandId(brandId);
     setSelectedModels(filter(models, ["brand_id", brandId]));
   };
 
   const onChange = (key) => {
+    console.log(key);
+
     if (targetKeys.includes(key)) {
       const newTargetKeys = [...targetKeys];
       newTargetKeys.splice(newTargetKeys.indexOf(key), 1);
@@ -150,21 +157,24 @@ export default function RepairManagementPage() {
     saveShopReparations(items);
   };
 
-  const handleOnModelsSaved = (selectedDevice) => {
-    const savingData = [
-      {
-        brand_id: selectedBrand.id,
-        models: selectedModels
-          .filter((item) => targetKeys.includes(item.key))
-          .map((item) => item.id),
-      },
-    ];
-    const payload = {
-      brand: savingData,
-      device_id: selectedDevice,
-    };
-    saveSelectedModels(payload);
-  };
+  const handleOnModelsSaved = useCallback(
+    (selectedDevice) => {
+      const savingData = [
+        {
+          brand_id: selectedBrandId,
+          models: selectedModels
+            .filter((item) => targetKeys.includes(item.key))
+            .map((item) => item.id),
+        },
+      ];
+      const payload = {
+        brand: savingData,
+        device_id: selectedDevice,
+      };
+      saveSelectedModels(payload);
+    },
+    [selectedModels, selectedBrandId, targetKeys]
+  );
 
   return (
     <DefaultLayout>
@@ -175,6 +185,7 @@ export default function RepairManagementPage() {
       </Row>
       <Divider />
       <ModelTransfer
+        shopId={user?.id}
         data={selectedModels}
         targetKeys={targetKeys}
         onChange={onChange}
