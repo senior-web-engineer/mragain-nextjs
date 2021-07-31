@@ -168,6 +168,7 @@ export const shopManagementAdditionalForm = createFormModule({
     };
   },
   submit(data) {
+    console.log(data);
     const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
     const promise = privateApi.put(
       `${API_PATH.UPDATESHOPGENERALINFO}/${shop}/`,
@@ -187,10 +188,10 @@ export const shopManagementAdditionalForm = createFormModule({
       //   shop,
       // }
       {
-        payMethod: data.payMethod || "",
+        payMethod: data.payMethod.join(", ") || "",
         repairOption: data.repairOption || "",
         services: data.services || "",
-        waitingArea: data.waitingArea || 0,
+        waitingArea: data.waitingArea || false,
         parkingArea: data.parkingArea || "",
         insurance: data.insurance || 0,
         devices: data.devices || [],

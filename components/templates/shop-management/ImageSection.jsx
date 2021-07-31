@@ -1,6 +1,6 @@
 import { Button, Col, message, Row, Upload } from "antd";
-import React from "react";
-import { uploadImage } from "service/account/operations.js";
+import React, { useState } from "react";
+import { uploadImage, uploadLogoImage } from "service/account/operations.js";
 
 import {
   CoverWrapper,
@@ -10,19 +10,40 @@ import {
 } from "./styles";
 
 export const ImageSection = ({ shopData, authUser }) => {
+  const [previewCover, setPreviewCover] = useState();
+  const [previewLogo, setPreviewLogo] = useState();
+
   const uploadPhotoProps = {
-    name: "file",
-    headers: {
-      authorization: "authorization-text",
-    },
+    name: "cover",
     showUploadList: false,
     onChange(info) {
       if (info.file.status === "done") {
         const formData = new FormData();
         formData.append("image", info.fileList[0].originFileObj);
         formData.append("shop_id", authUser.id);
-        uploadImage(formData);
-        message.success(`${info.file.name} file uploaded successfully`);
+        uploadImage(formData).then(() => {
+          message.success(`${info.file.name} file uploaded successfully`);
+          setPreviewCover(URL.createObjectURL(info.fileList[0].originFileObj));
+        });
+      } else if (info.file.status === "error") {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+  };
+
+  const uploadLogoPhotoProps = {
+    name: "logo",
+    showUploadList: false,
+    onChange(info) {
+      if (info.file.status === "done") {
+        const formData = new FormData();
+        formData.append("image", info.fileList[0].originFileObj);
+        formData.append("shop_id", authUser.id);
+        uploadLogoImage(formData).then(() => {
+          message.success(`${info.file.name} file uploaded successfully`);
+          setPreviewLogo(URL.createObjectURL(info.fileList[0].originFileObj));
+        });
+        onUploadCompleted();
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed.`);
       }
@@ -34,16 +55,16 @@ export const ImageSection = ({ shopData, authUser }) => {
       <Col span={24}>
         <ImageWrapper>
           <CoverWrapper>
-            <img width="100%" src={shopData?.bg_photo} />
+            <img width="100%" src={previewCover || shopData?.bg_photo} />
             <Upload {...uploadPhotoProps}>
               <Button>Change Cover Photo</Button>
             </Upload>
           </CoverWrapper>
           <ProfileWrapper>
-            <img height="100%" src={shopData?.logo_photo} />
+            <img height="100%" src={previewLogo || shopData?.logo_photo} />
           </ProfileWrapper>
           <ProfileButtonWrapper>
-            <Upload {...uploadPhotoProps}>
+            <Upload {...uploadLogoPhotoProps}>
               <Button type="primary">Upload Photo</Button>
             </Upload>
           </ProfileButtonWrapper>

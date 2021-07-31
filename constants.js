@@ -71,6 +71,7 @@ export const API_PATH = {
   EVALUATERATE: `${API_URL}/evaluate-shop-rate`,
   GETNEWESTSHOPS: `${API_URL}/get-newest-shops`,
   UPLOADIMAGE: `${API_URL}/upload-image`,
+  UPLOADLOGOIMAGE: `${API_URL}/logo-image`,
   GETREPARATIONGUARANTEE: `${API_URL}/get-reparation-guarantee`,
   DELETEGUARANTEEMODELS: `${API_URL}/delete-guarantee-model`,
   RESETPASSWORDEMAIL: `${API_URL}/password/reset`,

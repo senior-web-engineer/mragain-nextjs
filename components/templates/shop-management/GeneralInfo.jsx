@@ -129,7 +129,11 @@ export const GeneralInfo = ({ shopData }) => {
             <Row type="flex" justify="space-between" align="middle">
               <Col />
               <Col>
-                <Button size="large" onClick={() => setEditing(false)}>
+                <Button
+                  style={{ marginRight: "10px" }}
+                  size="large"
+                  onClick={() => setEditing(false)}
+                >
                   Discard Changes
                 </Button>
                 <Button

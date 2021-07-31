@@ -508,31 +508,22 @@ export function getShopProfileAccount(id, str, dispatch) {
  * @param {*} flg
  * @param {*} dispatch
  */
-export async function uploadImage(data, id, name, flg, dispatch) {
+export async function uploadImage(data) {
   axios
     .post(`${API_PATH.UPLOADIMAGE}`, data, tokenConfig())
     .then((res) => {
       console.log("image upload for post", res);
-      // if (flg === true) {
-      //   axios
-      //     .put(
-      //       `${API_PATH.UPDATEACCOUNTPROFILE}/${id}/`,
-      //       {
-      //         name: name,
-      //         bg_photo: res.data.file,
-      //       },
-      //       tokenConfig()
-      //     )
-      //     .then((res) => {
-      //       console.log("image upload", res);
-      //       return res;
-      //     })
-      //     .catch((err) => {
-      //       console.log("error");
-      //     });
-      // } else {
-      //   return res.data.file;
-      // }
+    })
+    .catch((err) => {
+      return console.log("error");
+    });
+}
+
+export async function uploadLogoImage(data) {
+  axios
+    .post(`${API_PATH.UPLOADLOGOIMAGE}`, data, tokenConfig())
+    .then((res) => {
+      console.log("image upload for post", res);
     })
     .catch((err) => {
       return console.log("error");

@@ -82,7 +82,11 @@ export const AdditionalInfo = ({ shopData }) => {
           <Col>
             {editing ? (
               <>
-                <Button size="large" onClick={() => setEditing(false)}>
+                <Button
+                  style={{ marginRight: "10px" }}
+                  size="large"
+                  onClick={() => setEditing(false)}
+                >
                   Discard Changes
                 </Button>
                 <Button size="large" type="primary" htmlType="submit">

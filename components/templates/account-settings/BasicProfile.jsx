@@ -1,13 +1,15 @@
+import { Button, Col, Divider, Row } from "antd";
+
 import Input from "@/components/ui/Input";
-import {
-  BoxWrapper,
-  HeaderSmallText,
-  BoxWrapperContent,
-  ButtonsWrapper,
-} from "./styles";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
-import { Button, Divider, Row, Col } from "antd";
+
+import {
+  BoxWrapper,
+  BoxWrapperContent,
+  ButtonsWrapper,
+  HeaderSmallText,
+} from "./styles";
 
 export const BasicProfile = ({ basicSettingsForm }) => {
   return (
@@ -56,14 +58,6 @@ export const BasicProfile = ({ basicSettingsForm }) => {
                     "($1) $2-$3"
                   )
                 }
-                customLabel
-              />
-              <Field
-                adminInput
-                as={Input}
-                name="vat"
-                label="VAT Number"
-                type="number"
                 customLabel
               />
               <Field
