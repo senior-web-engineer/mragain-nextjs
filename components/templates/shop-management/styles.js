@@ -72,7 +72,7 @@ export const CoverWrapper = styled.div`
 
   button {
     position: absolute;
-    bottom: 24px;
+    bottom: 38px;
     right: 24px;
   }
 `;

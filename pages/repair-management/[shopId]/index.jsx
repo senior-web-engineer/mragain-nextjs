@@ -134,7 +134,8 @@ export default function RepairManagementPage() {
   };
 
   const onEditModelReparations = async (deviceId, item) => {
-    setSelectedModel(item.model);
+    console.log(item);
+    setSelectedModel(item);
     setShopReparations(
       await saveModelReparations.fetch({
         deviceId: deviceId,
@@ -185,7 +186,7 @@ export default function RepairManagementPage() {
       />
       <EditModal
         editRepairModelModal={editRepairModelModal}
-        model={selectedModel}
+        item={selectedModel}
         data={shopReparations}
         onSave={onRepairModelSaved}
       />

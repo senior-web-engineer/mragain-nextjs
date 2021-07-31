@@ -1,4 +1,5 @@
 import { Button, Col, Divider, Row, Switch, Tag } from "antd";
+import { cloneDeep } from "lodash";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
@@ -16,13 +17,15 @@ import {
 import { additionalInfoOptions, paymentMethods } from "./helpers";
 import { HeaderSmallText, rowStyle } from "./styles";
 
-const renderDevicesList = (devices) => (
+const renderDevicesList = (devices, selectedDevices, onChange) => (
   <Row gutter={[16, 16]}>
     {devices.map((device, index) => (
       <Col span={12} key={`device-${index}`}>
         <SwitchGroup
           title={device.device_name}
           description={device.description}
+          defaultChecked={selectedDevices.includes(device.id)}
+          onChange={(value) => onChange(device.id, value)}
         />
       </Col>
     ))}
@@ -33,18 +36,41 @@ export const AdditionalInfo = ({ shopData }) => {
   const [editing, setEditing] = useState(false);
   const [brands, setBrands] = useState([]);
   const [reparations, setReparations] = useState([]);
+  const [selectedDevices, setSelectedDevices] = useState([]);
 
-  useEffect(async () => {
-    const user = await currentUser.fetch();
-    shopManagementAdditionalForm.actions.initialize(user.account_id);
-    const fetchedBrands = await getBrands.fetch();
-    setReparations(await getReparations.fetch());
-    setBrands(fetchedBrands);
+  useEffect(() => {
+    const fetchData = async () => {
+      const user = await currentUser.fetch();
+      shopManagementAdditionalForm.actions.initialize(user.account_id);
+      const fetchedBrands = await getBrands.fetch();
+      setReparations(await getReparations.fetch());
+      setBrands(fetchedBrands);
+    };
+    fetchData();
   }, []);
+
+  useEffect(() => {
+    if (shopData) {
+      console.log("SHOP DATA", shopData);
+      setSelectedDevices(shopData.replacementDevices);
+    }
+  }, [shopData]);
 
   if (!shopData) {
     return <div>DATA MISSING</div>;
   }
+
+  const onDeviceSelected = (id, value) => {
+    console.log(value);
+    let newSelectedDevices = cloneDeep(selectedDevices);
+    if (newSelectedDevices.includes(id) && value === false) {
+      newSelectedDevices.splice(newSelectedDevices.indexOf(id), 1);
+    } else if (!newSelectedDevices.includes(id)) {
+      newSelectedDevices = [...newSelectedDevices, id];
+    }
+    console.log(newSelectedDevices);
+    setSelectedDevices(newSelectedDevices);
+  };
 
   return (
     <>
@@ -81,7 +107,11 @@ export const AdditionalInfo = ({ shopData }) => {
           </Col>
           <Col span={18}>
             {editing ? (
-              renderDevicesList(additionalInfoOptions.devices)
+              renderDevicesList(
+                additionalInfoOptions.devices,
+                shopData.replacementDevices,
+                onDeviceSelected
+              )
             ) : (
               <div>
                 {additionalInfoOptions.devices
@@ -105,8 +135,12 @@ export const AdditionalInfo = ({ shopData }) => {
               <Field
                 adminInput
                 as={MultiSelect}
-                name="storePurchases"
-                options={additionalInfoOptions.brands}
+                name="cateredBrand"
+                options={brands.map((item) => ({
+                  value: item.id.toString(),
+                  label: item.brand_name,
+                }))}
+                value={shopData?.cateredBrand.map((id) => id.toString())}
               />
             ) : (
               <div>
@@ -125,11 +159,23 @@ export const AdditionalInfo = ({ shopData }) => {
             <p>Payment Methods</p>
           </Col>
           <Col span={18}>
-            <div>
-              {shopData?.paymentMethod
-                .split(",")
-                .map((method) => paymentMethods(method))}
-            </div>
+            {editing ? (
+              <Field
+                adminInput
+                as={MultiSelect}
+                name="payMethod"
+                options={additionalInfoOptions.paymentMethods}
+                value={shopData.paymentMethod
+                  .split(",")
+                  .map((id) => id.toLowerCase().replace(/\s/g, ""))}
+              />
+            ) : (
+              <div>
+                {shopData?.paymentMethod
+                  .split(",")
+                  .map((method) => paymentMethods(method))}
+              </div>
+            )}
           </Col>
         </Row>
 
@@ -188,6 +234,7 @@ export const AdditionalInfo = ({ shopData }) => {
                   label: reparation.reparation_name,
                   value: reparation.id,
                 }))}
+                value={shopData.ShopPurchase.map((id) => id.toString())}
               />
             ) : (
               <div>

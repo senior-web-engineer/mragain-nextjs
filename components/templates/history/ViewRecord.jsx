@@ -1,8 +1,9 @@
-import React from "react";
-import { Descriptions, Badge, Divider } from "antd";
-import { Drawer } from "@/modules/modal";
-import Image from "next/image";
+import { Badge, Descriptions, Divider } from "antd";
 import moment from "moment";
+import Image from "next/image";
+import React from "react";
+
+import { Drawer } from "@/modules/modal";
 
 export const ViewRecord = ({ data, viewRecordModal }) => {
   console.log(data);
@@ -16,24 +17,26 @@ export const ViewRecord = ({ data, viewRecordModal }) => {
     <Drawer width="800px" module={viewRecordModal}>
       {data && (
         <div>
-          <Descriptions title="Appointment Info" layout="vertical" bordered>
+          <Descriptions title="Appointment Info" bordered>
             <Descriptions.Item label="Type" span={3}>
               {data?.device.device_name}
             </Descriptions.Item>
-            <Descriptions.Item label="Brand">
+            <Descriptions.Item label="Brand" span={3}>
               {data?.brand.brand_name}
             </Descriptions.Item>
-            <Descriptions.Item label="Model">
+            <Descriptions.Item label="Model" span={3}>
               {data?.model.model_name}
             </Descriptions.Item>
-            <Descriptions.Item label="Reparation Type">
+            <Descriptions.Item label="Reparation Type" span={3}>
               {data?.reparation.reparation_name}
             </Descriptions.Item>
-            <Descriptions.Item label="Date">
+            <Descriptions.Item label="Date" span={3}>
               {data?.appointment.date}
             </Descriptions.Item>
-            <Descriptions.Item label="Price">{data?.price}</Descriptions.Item>
-            <Descriptions.Item label="Guaranty">
+            <Descriptions.Item label="Price" span={3}>
+              {data?.price}
+            </Descriptions.Item>
+            <Descriptions.Item label="Guaranty" span={3}>
               <Badge
                 status={getGuaranteeStatus(
                   data?.appointment.date,
@@ -45,11 +48,11 @@ export const ViewRecord = ({ data, viewRecordModal }) => {
           </Descriptions>
           <Divider />
 
-          <Descriptions title="Reparation comments" layout="vertical" bordered>
-            <Descriptions.Item label="IMEI Number">
+          <Descriptions title="Reparation comments" bordered>
+            <Descriptions.Item label="IMEI Number" span={3}>
               {data?.serialnumber}
             </Descriptions.Item>
-            <Descriptions.Item label="Description" span={2}>
+            <Descriptions.Item label="Description" span={3}>
               {data?.reparation.comments}
             </Descriptions.Item>
             <Descriptions.Item label="Images" span={3}>
@@ -58,14 +61,14 @@ export const ViewRecord = ({ data, viewRecordModal }) => {
           </Descriptions>
           <Divider />
 
-          <Descriptions title="Client data" layout="vertical" bordered>
-            <Descriptions.Item label="Client name">
+          <Descriptions title="Client data" bordered>
+            <Descriptions.Item label="Client name" span={3}>
               {data?.appointment.client_name}
             </Descriptions.Item>
-            <Descriptions.Item label="Client email">
+            <Descriptions.Item label="Client email" span={3}>
               {data?.appointment.client_email}
             </Descriptions.Item>
-            <Descriptions.Item label="Client phone">
+            <Descriptions.Item label="Client phone" span={3}>
               {data?.appointment.client_phone}
             </Descriptions.Item>
           </Descriptions>

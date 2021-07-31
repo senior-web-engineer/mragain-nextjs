@@ -21,16 +21,18 @@ import { OperationalHoursCalendar } from "@/components/templates/shop-management
 import { ScheduleList } from "@/components/templates/shop-management/ScheduleList";
 import { BoxWrapper } from "@/components/templates/shop-management/styles";
 
-export default function ShopManagementPage() {
+export default function ShopManagementPage({ auth_user }) {
   const [activeTab, setActiveTab] = useState("profile-settings");
   const [shopInfo, setShopInfo] = useState();
   const [shopData, setShopData] = useState();
   const [nonWorkingDays, setNonWorkingDays] = useState();
   const [validOpenTime, setValidOpenTime] = useState();
+  const [user, setUser] = useState();
 
   useEffect(() => {
     async function loadData() {
       const user = await currentUser.fetch();
+      setUser(user);
       const shopInfo = await shopInfoFetcher.fetch();
       setShopData(await shopManagementGeneralInfo.fetch());
       setNonWorkingDays(await getShopNonWorkingDays.fetch());
@@ -68,7 +70,7 @@ export default function ShopManagementPage() {
         <Tabs defaultActiveKey={activeTab} onChange={onTabChange}>
           <TabPane tab="Profile Settings" key="profile-settings">
             <>
-              <ImageSection shopData={shopData} />
+              <ImageSection shopData={shopData} authUser={user} />
 
               <Row>
                 <Col span={4}></Col>
@@ -85,8 +87,8 @@ export default function ShopManagementPage() {
             </>
           </TabPane>
           <TabPane tab="Operational Hours" key="operational-hours">
-            <Row gutter={[40, 40]}>
-              <Col xxl={14} lg={24}>
+            <Row gutter={[40, 40]} type="flex">
+              <Col xxl={{ span: 14, order: 1 }} lg={{ span: 24, order: 2 }}>
                 {nonWorkingDays && (
                   <OperationalHoursCalendar
                     nonWorkingDays={nonWorkingDays}
@@ -94,7 +96,11 @@ export default function ShopManagementPage() {
                   />
                 )}
               </Col>
-              <Col xxl={10} lg={24}>
+              <Col
+                xxl={{ span: 10, order: 2 }}
+                lg={{ span: 24, order: 1 }}
+                style={{ height: "fit-content" }}
+              >
                 <ScheduleList
                   validOpenTime={validOpenTime}
                   onSave={saveValidOpenTime}

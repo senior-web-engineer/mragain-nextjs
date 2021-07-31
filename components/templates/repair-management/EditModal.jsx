@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Drawer } from "@/modules/modal";
-import { Row, Col, Divider, Switch, Table, Button } from "antd";
-import Form from "@/modules/forms";
-import { RowWrapperMargin } from "./styles";
-import Input from "@/components/ui/Input";
+import { Button, Col, Divider, Row, Switch, Table } from "antd";
 import { cloneDeep } from "lodash";
+import React, { useEffect, useState } from "react";
+
+import Input from "@/components/ui/Input";
+import { Drawer } from "@/modules/modal";
+
+import { HeaderSmallText, RowWrapperMargin } from "./styles";
 
 const columns = (items) => [
   {
@@ -70,7 +71,7 @@ const columns = (items) => [
   },
 ];
 
-export const EditModal = ({ model, data, editRepairModelModal, onSave }) => {
+export const EditModal = ({ item, data, editRepairModelModal, onSave }) => {
   let [items, setItems] = useState([]);
   useEffect(() => {
     setItems(cloneDeep(data));
@@ -88,19 +89,28 @@ export const EditModal = ({ model, data, editRepairModelModal, onSave }) => {
       destroyOnClose
       onClose={onClose}
     >
-      <h2>Model information</h2>
+      <h2 style={{ marginBottom: "30px" }}>Model information</h2>
+      <HeaderSmallText>Device</HeaderSmallText>
       <Divider />
-      <p>Device</p>
-      <h4>{model}</h4>
+      <Row type="flex" justify="space-between">
+        <Col>
+          <h3>
+            <b>{item?.model}</b>
+          </h3>
+        </Col>
+        <Col>
+          <Button>View Product</Button>
+        </Col>
+      </Row>
       <Divider />
       <RowWrapperMargin type="flex" justify="space-between" align="center">
         <Col>
-          <h3>Services</h3>
+          <HeaderSmallText>Services</HeaderSmallText>
         </Col>
         <Col></Col>
       </RowWrapperMargin>
+      <Divider />
       <Table
-        bordered
         scroll={{ y: `calc(100vh - 420px)` }}
         dataSource={cloneDeep(items)}
         columns={columns(items)}

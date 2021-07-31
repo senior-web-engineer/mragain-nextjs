@@ -38,7 +38,7 @@ function parseValue(ev) {
   return ev;
 }
 
-export default function Input({ onChange = () => { }, small, ...rest }) {
+export default function Input({ onChange = () => {}, small, ...rest }) {
   const inputRef = useRef(null);
 
   const onInputWrapperSelect = () => {

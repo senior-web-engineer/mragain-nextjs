@@ -1,20 +1,21 @@
+import Image from "next/image";
 import React from "react";
-import MobilePhone from "@/assets/icons/mobile-phone.svg";
+import styled from "styled-components";
+
+import Computers from "@/assets/icons/computer.svg";
+import Earphones from "@/assets/icons/computer.svg";
 import Tablets from "@/assets/icons/headphones.svg";
 import Wearables from "@/assets/icons/headphones.svg";
 import Laundry from "@/assets/icons/headphones.svg";
 import GamingConsoles from "@/assets/icons/headphones.svg";
-import Computers from "@/assets/icons/computer.svg";
 import SoundSystems from "@/assets/icons/headphones.svg";
-import Earphones from "@/assets/icons/computer.svg";
+import Amex from "@/assets/icons/Method-Amex.svg";
 // PAYMENT METHODS
 import Mastercard from "@/assets/icons/Method-Mastercard.svg";
 import PayPal from "@/assets/icons/Method-PayPal.svg";
 import Stripe from "@/assets/icons/Method-Stripe.svg";
 import Visa from "@/assets/icons/Method-Visa.svg";
-import Amex from "@/assets/icons/Method-Amex.svg";
-import Image from "next/image";
-import styled from "styled-components";
+import MobilePhone from "@/assets/icons/mobile-phone.svg";
 
 const PaymentImageWrapper = styled.span`
   margin-right: 10px;
@@ -71,27 +72,18 @@ export const additionalInfoOptions = {
       description: "earphones, earbuds, headsets",
     },
   ],
-
-  brands: [
+  paymentMethods: [
     {
-      value: "asus",
-      label: "Asus",
+      value: "cash",
+      label: "Cash",
     },
     {
-      value: "samsung",
-      label: "Samsung",
+      value: "pin",
+      label: "PIN",
     },
     {
-      value: "xiaomi",
-      label: "Xiaomi",
-    },
-    {
-      value: "apple",
-      label: "Apple",
-    },
-    {
-      value: "sony",
-      label: "Sony",
+      value: "master-card",
+      label: "Master Card",
     },
   ],
 };

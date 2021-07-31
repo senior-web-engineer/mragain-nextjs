@@ -168,9 +168,9 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
           <List.Item>
             <ListItemWrapper>
               <Col span="6">
-                <h6 style={{ margin: 0 }}>
+                <h4 style={{ margin: 0 }}>
                   <b>{item.day}</b>
-                </h6>
+                </h4>
               </Col>
               <Col span="6">
                 {editingRow === index ? (

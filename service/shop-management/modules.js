@@ -24,7 +24,7 @@ export const getDevices = dataFetcher({
 export const getBrands = dataFetcher({
   selectors: [""],
   fetchData() {
-    return privateApi.get(`${API_PATH.GETBRANDS}/?device=1`);
+    return privateApi.get(`${API_PATH.GETACTIVEBRANDS}/`);
   },
 });
 
@@ -107,6 +107,7 @@ export const shopManagementGeneralForm = createFormModule({
     const fetchedData = await privateApi.get(
       `${API_PATH.ACCOUNTSETTING}/${id}`
     );
+    console.log("FD", fetchedData);
     return {
       about_us: fetchedData.about_us || "",
       phone_number: fetchedData.phone_number || "",

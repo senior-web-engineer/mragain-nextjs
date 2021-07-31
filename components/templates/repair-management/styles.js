@@ -113,3 +113,11 @@ export const RowActionsWrapper = styled(Row)`
     margin: 0;
   }
 `;
+
+export const HeaderSmallText = styled.p`
+  display: block;
+  font-size: 16px;
+  line-height: 10px;
+  color: #3090b4;
+  margin: 0;
+`;

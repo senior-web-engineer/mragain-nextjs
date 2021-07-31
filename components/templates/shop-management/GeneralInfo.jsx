@@ -1,22 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { Button, Row, Col } from "antd";
+import { Button, Col, Row } from "antd";
 import { Rate } from "antd";
-import Input from "@/components/ui/Input";
-import {
-  HeaderText,
-  ContactInfo,
-  AdvantagesWrap,
-  PaddingWrapper,
-  rowStyle,
-} from "./styles";
 import Image from "next/image";
+import React, { useEffect, useState } from "react";
+
 import Link from "@/assets/icons/link.svg";
 import MapMarker from "@/assets/icons/map-marker.svg";
 import Phone from "@/assets/icons/phone.svg";
+import GooglePlaces from "@/components/common/GooglePlaces";
+import Input from "@/components/ui/Input";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
 import { shopManagementGeneralForm } from "@/service/shop-management/modules";
-import GooglePlaces from "@/components/common/GooglePlaces";
+
+import {
+  AdvantagesWrap,
+  ContactInfo,
+  HeaderText,
+  PaddingWrapper,
+  rowStyle,
+} from "./styles";
 
 const ADVANTAGES = [
   {
@@ -59,12 +61,13 @@ function renderAdvantage(advantage, index) {
 export const GeneralInfo = ({ shopData }) => {
   const [editing, setEditing] = useState(false);
 
-  useEffect(async () => {
-    await shopManagementGeneralForm.actions.initialize();
-  }, []);
-
   const onSave = () => {
     setEditing(false);
+  };
+
+  const onEdit = async () => {
+    setEditing(true);
+    await shopManagementGeneralForm.actions.initialize();
   };
 
   return (
@@ -149,11 +152,7 @@ export const GeneralInfo = ({ shopData }) => {
                 <HeaderText>{shopData?.name}</HeaderText>
               </Col>
               <Col>
-                <Button
-                  size="large"
-                  type="primary"
-                  onClick={() => setEditing(true)}
-                >
+                <Button size="large" type="primary" onClick={onEdit}>
                   Edit
                 </Button>
               </Col>
