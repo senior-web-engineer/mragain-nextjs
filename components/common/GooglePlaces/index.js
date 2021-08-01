@@ -12,7 +12,7 @@ const googleMapsApiKey = "AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE";
 
 const MainWrap = styled.div`
   .ant-select-selection__placeholder {
-    padding-left: 18px;
+    padding-left: 22px;
   }
 
   * {
@@ -131,7 +131,6 @@ export default function GooglePlaces({
       <MainWrap>
         <AutoComplete size={size} placeholder={placeholder}>
           <Input
-            size="small"
             prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
             aria-label={"Postcode of stad"}
             onFocus={async () => {
@@ -177,7 +176,6 @@ export default function GooglePlaces({
               onSearch={(value) => onSearch({ target: { value } })}
             >
               <Input
-                size="small"
                 prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
                 aria-label={"Postcode of stad"}
               />

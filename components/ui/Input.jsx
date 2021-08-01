@@ -55,7 +55,6 @@ export default function Input({ onChange = () => {}, small, ...rest }) {
     return (
       <StyledInput small={small} onClick={onInputWrapperSelect}>
         <AntdInput.TextArea
-          size="small"
           ref={inputRef}
           {...rest}
           onChange={(ev) => onChange(parseValue(ev))}
@@ -67,7 +66,6 @@ export default function Input({ onChange = () => {}, small, ...rest }) {
   if (rest.number) {
     <StyledInput small={small} onClick={onInputWrapperSelect}>
       <InputNumber
-        size="small"
         ref={inputRef}
         {...rest}
         onChange={(ev) => onChange(parseValue(ev))}
@@ -78,7 +76,6 @@ export default function Input({ onChange = () => {}, small, ...rest }) {
   return (
     <StyledInput small={small} onClick={onInputWrapperSelect}>
       <AntdInput
-        size="small"
         ref={inputRef}
         {...rest}
         onChange={(ev) => onChange(parseValue(ev))}

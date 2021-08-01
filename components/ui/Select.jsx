@@ -42,7 +42,6 @@ export default function Select({ options, ...rest }) {
   return (
     <StyledSelect
       {...rest}
-      size="small"
       suffixIcon={<FontAwesomeIcon icon={faChevronDown} />}
     >
       {(options || []).map(renderOption)}
