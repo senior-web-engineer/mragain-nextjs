@@ -15,6 +15,7 @@ import React, { useEffect, useState } from "react";
 import Highlighter from "react-highlight-words";
 import styled from "styled-components";
 
+import { Text } from "@/components/common/Text/Text";
 import { devicesFetcher } from "@/components/dashboard/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
 import { ViewRecord } from "@/components/templates/history/ViewRecord";
@@ -34,6 +35,11 @@ const StyledTable = styled(Table)`
     color: #909090;
     font-weight: 400;
     border-bottom: 0;
+  }
+
+  .ant-table-tbody > tr > td {
+    font-size: 12px;
+    font-weight: 400;
   }
 
   .ant-table-tbody {
@@ -57,7 +63,7 @@ const DeviceDetailsWrapper = styled.div`
 `;
 
 const TagWrapper = styled(Tag)`
-  transform: scale(1.2);
+  transform: scale(1.1);
 `;
 
 const getGuaranteeStatus = (date, guarantee) => {
@@ -89,8 +95,8 @@ const columns = (viewDetails, search) => [
         <DeviceDetailsWrapper>
           <div>
             <Image
-              width={60}
-              height={60}
+              width={40}
+              height={40}
               src={
                 find(additionalInfoOptions.devices, ["id", data?.device?.id])
                   .icon || ""
@@ -191,14 +197,15 @@ export default function HistoryPage({ auth_user }) {
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
         <Col>
-          <h1>History</h1>
+          <Text.Headline style={{ marginBottom: "20px" }}>
+            History
+          </Text.Headline>
         </Col>
         <Col />
       </Row>
       <Row>
         <Col span={5}>
           <AntdInput
-            small
             placeholder="Search IMEI Number"
             size="large"
             allowClear

@@ -1,18 +1,20 @@
+import { Button, Checkbox, Col, Divider, Row } from "antd";
 import React from "react";
+
+import GooglePlaces from "@/components/common/GooglePlaces";
 import Input from "@/components/ui/Input";
-import {
-  BoxWrapper,
-  BoxWrapperContent,
-  RowWrapper,
-  HoursEditor,
-  ButtonsWrapper,
-  HeaderSmallText,
-} from "./styles";
-import { Row, Col, Divider, Button, Checkbox } from "antd";
 import Select from "@/components/ui/Select";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
-import GooglePlaces from "@/components/common/GooglePlaces";
+
+import {
+  BoxWrapper,
+  BoxWrapperContent,
+  ButtonsWrapper,
+  HeaderSmallText,
+  HoursEditor,
+  RowWrapper,
+} from "./styles";
 
 const DURATION_OPTIONS = [
   {
@@ -83,7 +85,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                     as={GooglePlaces}
                     label="Address"
                     customLabel
-                    size="large"
+                    size="small"
                   />
                 </Col>
               </Row>
@@ -96,7 +98,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                       as={GooglePlaces}
                       placeholder="City"
                       label="Select City"
-                      size="large"
+                      size="small"
                     />
                   </Col>
                   <Col span={6}>
@@ -106,7 +108,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                       as={GooglePlaces}
                       placeholder="State"
                       label="Select State"
-                      size="large"
+                      size="small"
                     />
                   </Col>
                   <Col span={6}>
@@ -116,7 +118,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                       as={Input}
                       label="Zip Code"
                       customLabel
-                      size="large"
+                      size="small"
                     />
                   </Col>
                 </Row>

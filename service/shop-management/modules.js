@@ -189,11 +189,11 @@ export const shopManagementAdditionalForm = createFormModule({
       // }
       {
         payMethod: data.payMethod.join(", ") || "",
-        repairOption: data.repairOption || "",
-        services: data.services || "",
+        repairOption: data.repairOption.join(", ") || "",
+        services: data.services.join(", ") || "",
         waitingArea: data.waitingArea || false,
-        parkingArea: data.parkingArea || "",
-        insurance: data.insurance || 0,
+        parkingArea: "",
+        insurance: 0,
         devices: data.devices || [],
         brands: data.brands || [],
         purchases: data.purchases || [],

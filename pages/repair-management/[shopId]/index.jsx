@@ -5,6 +5,7 @@ import Image from "next/image";
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 
+import { Text } from "@/components/common/Text/Text";
 import DefaultLayout from "@/components/layouts/Dashboard";
 import { EditModal } from "@/components/templates/repair-management/EditModal";
 import { ModelTransfer } from "@/components/templates/repair-management/ModelTransfer";
@@ -180,7 +181,7 @@ export default function RepairManagementPage() {
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
         <Col span={24}>
-          <h1>Repair Management</h1>
+          <Text.Headline>Repair Management</Text.Headline>
         </Col>
       </Row>
       <Divider />

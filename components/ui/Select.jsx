@@ -6,6 +6,10 @@ import styled from "styled-components";
 const StyledSelect = styled(AntdSelect)`
   display: block;
 
+  * {
+    font-size: 12px !important;
+  }
+
   .ant-select {
     &:focus {
       outline: none;
@@ -38,6 +42,7 @@ export default function Select({ options, ...rest }) {
   return (
     <StyledSelect
       {...rest}
+      size="small"
       suffixIcon={<FontAwesomeIcon icon={faChevronDown} />}
     >
       {(options || []).map(renderOption)}

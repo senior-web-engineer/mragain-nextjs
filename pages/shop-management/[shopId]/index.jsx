@@ -14,6 +14,7 @@ import {
 } from "@/service/shop-management/modules";
 import { OnMobile } from "@/utils/media";
 const { TabPane } = Tabs;
+import { Text } from "@/components/common/Text/Text";
 import { AdditionalInfo } from "@/components/templates/shop-management/AdditionalInfo";
 import { GeneralInfo } from "@/components/templates/shop-management/GeneralInfo";
 import { ImageSection } from "@/components/templates/shop-management/ImageSection";
@@ -58,7 +59,7 @@ export default function ShopManagementPage({ auth_user }) {
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
         <Col span={24}>
-          <h1>Shop Management</h1>
+          <Text.Headline>Shop Management</Text.Headline>
         </Col>
       </Row>
       <OnMobile only>

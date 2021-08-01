@@ -83,7 +83,7 @@ export const additionalInfoOptions = {
     },
     {
       value: "master-card",
-      label: "Master Card",
+      label: "CreditCard",
     },
   ],
 };

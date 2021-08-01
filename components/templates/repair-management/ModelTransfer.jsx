@@ -7,6 +7,8 @@ import {
   getExportReparationAndGuaranteeCSV,
 } from "service/account/operations";
 
+import { Text } from "@/components/common/Text/Text";
+
 import {
   MenuWrap,
   ModelWrapper,
@@ -110,7 +112,7 @@ export const ModelTransfer = ({
 
   return (
     <RowWrapper>
-      <Col span="4">
+      <Col xxl={{ span: 4 }} lg={{ span: 6 }}>
         <MenuWrap>
           <Tree
             showIcon
@@ -123,11 +125,13 @@ export const ModelTransfer = ({
           />
         </MenuWrap>
       </Col>
-      <Col span="20">
+      <Col xxl={{ span: 20 }} lg={{ span: 18 }}>
         <TransferWrapper>
           <RowActionsWrapper type="flex" justify="space-between">
             <Col>
-              <h3>{selectedBrandTitle}</h3>
+              <Text.Headline weight="normal">
+                {selectedBrandTitle}
+              </Text.Headline>
             </Col>
             <Col>
               <Row type="flex" gutter={[16, 16]}>
@@ -194,9 +198,11 @@ export const ModelTransfer = ({
               )
               .map((item) => {
                 return (
-                  <Col span={8}>
+                  <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
                     <ModelWrapper>
-                      <p style={{ margin: 0 }}>{item.model}</p>
+                      <Text.Body style={{ margin: 0 }} size="12">
+                        {item.model}
+                      </Text.Body>
                       {editing ? (
                         <Checkbox
                           defaultChecked={targetKeys.includes(item.key)}

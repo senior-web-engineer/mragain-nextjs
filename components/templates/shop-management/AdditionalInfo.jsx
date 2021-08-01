@@ -69,6 +69,12 @@ export const AdditionalInfo = ({ shopData }) => {
       newSelectedDevices = [...newSelectedDevices, id];
     }
     console.log(newSelectedDevices);
+    shopManagementAdditionalForm.actions.batchChange({
+      updates: {
+        devices: newSelectedDevices,
+      },
+    });
+    console.log(shopManagementAdditionalForm.state.values);
     setSelectedDevices(newSelectedDevices);
   };
 
@@ -139,7 +145,7 @@ export const AdditionalInfo = ({ shopData }) => {
               <Field
                 adminInput
                 as={MultiSelect}
-                name="cateredBrand"
+                name="brands"
                 options={brands.map((item) => ({
                   value: item.id.toString(),
                   label: item.brand_name,
@@ -233,7 +239,7 @@ export const AdditionalInfo = ({ shopData }) => {
               <Field
                 adminInput
                 as={MultiSelect}
-                name="ShopPurchase"
+                name="repairOption"
                 options={reparations.map((reparation) => ({
                   label: reparation.reparation_name,
                   value: reparation.id,
