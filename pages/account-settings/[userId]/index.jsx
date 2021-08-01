@@ -44,7 +44,7 @@ export default function RepairManagementPage() {
       <Tabs defaultActiveKey={activeTab} onChange={onTabChange}>
         <TabPane tab="General" key="general">
           <Row>
-            <Col span={16}>
+            <Col xxl={{ span: 16 }} lg={{ span: 24 }}>
               <BasicProfile
                 basicSettingsForm={basicSettingsForm}
                 discardChanges={console.log}
@@ -56,7 +56,7 @@ export default function RepairManagementPage() {
                 onSave={console.log}
               />
             </Col>
-            <Col span={8}></Col>
+            <Col xxl={{ span: 8 }} lg={{ span: 0 }}></Col>
           </Row>
         </TabPane>
         <TabPane tab="My Address" key="my-address">

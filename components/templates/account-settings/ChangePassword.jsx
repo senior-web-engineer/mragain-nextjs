@@ -1,13 +1,15 @@
-import {
-  HeaderSmallText,
-  BoxWrapper,
-  BoxWrapperContent,
-  ButtonsWrapper,
-} from "./styles";
-import { Button, Divider, Row, Col } from "antd";
+import { Button, Col, Divider, Row } from "antd";
+
 import Input from "@/components/ui/Input";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
+
+import {
+  BoxWrapper,
+  BoxWrapperContent,
+  ButtonsWrapper,
+  HeaderSmallText,
+} from "./styles";
 
 export const ChangePassword = ({ changePasswordForm }) => {
   return (
@@ -18,7 +20,7 @@ export const ChangePassword = ({ changePasswordForm }) => {
         </div>
         <Divider />
         <Row>
-          <Col span={12}>
+          <Col xxl={{ span: 12 }} lg={{ span: 24 }}>
             <BoxWrapperContent>
               <Field
                 adminInput
@@ -43,7 +45,7 @@ export const ChangePassword = ({ changePasswordForm }) => {
               />
             </BoxWrapperContent>
           </Col>
-          <Col span={12}></Col>
+          <Col xxl={{ span: 12 }} lg={{ span: 24 }}></Col>
         </Row>
         <Divider />
         <ButtonsWrapper>

@@ -57,7 +57,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
           <Form module={basicSettingsForm}>
             <BoxWrapperContent paddingY>
               <Row>
-                <Col span={8}>
+                <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
                   <Field
                     adminInput
                     name="address_type"
@@ -78,7 +78,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                 </Col>
               </Row>
               <Row>
-                <Col span={8}>
+                <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
                   <Field
                     adminInput
                     name="street"
@@ -91,7 +91,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
               </Row>
               <Col>
                 <Row gutter={[16, 0]}>
-                  <Col span={12}>
+                  <Col lg={{ span: 12 }} md={{ span: 24 }}>
                     <Field
                       adminInput
                       name="city"
@@ -101,7 +101,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                       size="small"
                     />
                   </Col>
-                  <Col span={6}>
+                  <Col xxl={{ span: 6 }} lg={{ span: 12 }} md={{ span: 24 }}>
                     <Field
                       adminInput
                       name="country"
@@ -111,7 +111,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                       size="small"
                     />
                   </Col>
-                  <Col span={6}>
+                  <Col xxl={{ span: 6 }} lg={{ span: 12 }} md={{ span: 24 }}>
                     <Field
                       adminInput
                       name="zipcode"
@@ -124,7 +124,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                 </Row>
               </Col>
               <Row>
-                <Col span={8}>
+                <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
                   <Field
                     adminInput
                     name="intervals"
