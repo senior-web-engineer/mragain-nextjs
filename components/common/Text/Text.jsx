@@ -14,7 +14,7 @@ export const generatePreset = (props, size, weight, spacing, lineHeight) => {
   return classNames(
     common,
     `size-${size || "2xl"}`,
-    `weight-${weight || "normal"}`,
+    `weight-${weight || "regular"}`,
     `spacing-${spacing || "normal"}`,
     `leading-${lineHeight || "normal"}`,
     { "text-uppercase": props.upperCase },
@@ -59,7 +59,7 @@ class Text {
   render() {
     const {
       size = "base",
-      weight = "normal",
+      weight = "regular",
       spacing = "normal",
       lineHeight = "normal",
       upperCase = false,

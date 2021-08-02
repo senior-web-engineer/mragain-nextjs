@@ -164,7 +164,7 @@ export const TableWrapper = styled(Table)`
 `;
 
 export const TagWrapper = styled(Tag)`
-  transform: scale(1.2);
+  transform: scale(1.1);
 `;
 
 export const Action = styled.a`

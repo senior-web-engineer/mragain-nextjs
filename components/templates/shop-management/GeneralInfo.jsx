@@ -7,6 +7,7 @@ import Link from "@/assets/icons/link.svg";
 import MapMarker from "@/assets/icons/map-marker.svg";
 import Phone from "@/assets/icons/phone.svg";
 import GooglePlaces from "@/components/common/GooglePlaces";
+import { Text } from "@/components/common/Text/Text";
 import Input from "@/components/ui/Input";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
@@ -153,7 +154,7 @@ export const GeneralInfo = ({ shopData }) => {
           <PaddingWrapper>
             <Row type="flex" justify="space-between" align="middle">
               <Col>
-                <HeaderText>{shopData?.name}</HeaderText>
+                <Text.Headline>{shopData?.name}</Text.Headline>
               </Col>
               <Col>
                 <Button size="large" type="primary" onClick={onEdit}>
@@ -168,15 +169,21 @@ export const GeneralInfo = ({ shopData }) => {
               <ContactInfo>
                 <span>
                   <Image width="24px" height="24px" src={Phone} />
-                  {shopData?.phone_number}
+                  <Text.Body size="12" style={{ margin: 0 }}>
+                    {shopData?.phone_number}
+                  </Text.Body>
                 </span>
                 <span>
                   <Image width="24px" height="24px" src={Link} />
-                  {shopData?.site_url}
+                  <Text.Body size="12" style={{ margin: 0 }}>
+                    {shopData?.site_url}
+                  </Text.Body>
                 </span>
                 <span>
                   <Image width="24px" height="24px" src={MapMarker} />
-                  {shopData?.street}
+                  <Text.Body size="12" style={{ margin: 0 }}>
+                    {shopData?.street}
+                  </Text.Body>
                 </span>
               </ContactInfo>
             </Row>

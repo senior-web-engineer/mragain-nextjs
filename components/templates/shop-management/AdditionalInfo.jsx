@@ -1,5 +1,6 @@
 import { Button, Col, Divider, Row, Switch, Tag } from "antd";
 import { cloneDeep } from "lodash";
+import { find } from "lodash";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
@@ -14,7 +15,7 @@ import {
   shopManagementAdditionalForm,
 } from "@/service/shop-management/modules";
 
-import { additionalInfoOptions, paymentMethods } from "./helpers";
+import { additionalInfoOptions } from "./helpers";
 import { HeaderSmallText, rowStyle } from "./styles";
 
 const renderDevicesList = (devices, selectedDevices, onChange) => (
@@ -177,13 +178,26 @@ export const AdditionalInfo = ({ shopData }) => {
                 options={additionalInfoOptions.paymentMethods}
                 value={shopData.paymentMethod
                   .split(",")
-                  .map((id) => id.toLowerCase().replace(/\s/g, ""))}
+                  .map(
+                    (id) =>
+                      find(additionalInfoOptions.paymentMethods, [
+                        "id",
+                        id.toLowerCase().replace(/\s/g, ""),
+                      ]).value
+                  )}
               />
             ) : (
               <div>
-                {shopData?.paymentMethod
+                {shopData.paymentMethod}
+                {shopData.paymentMethod
                   .split(",")
-                  .map((method) => paymentMethods(method))}
+                  .map(
+                    (id) =>
+                      find(additionalInfoOptions.paymentMethods, [
+                        "id",
+                        id.toLowerCase().replace(/\s/g, ""),
+                      ]).value
+                  )}
               </div>
             )}
           </Col>

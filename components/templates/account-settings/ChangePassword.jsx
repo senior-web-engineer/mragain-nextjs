@@ -28,6 +28,7 @@ export const ChangePassword = ({ changePasswordForm }) => {
                 name="oldPassword"
                 label="Old Password"
                 type="password"
+                size="small"
               />
               <Field
                 adminInput
@@ -35,6 +36,7 @@ export const ChangePassword = ({ changePasswordForm }) => {
                 name="newPassword"
                 label="New Password"
                 type="password"
+                size="small"
               />
               <Field
                 adminInput
@@ -42,6 +44,7 @@ export const ChangePassword = ({ changePasswordForm }) => {
                 name="confirmPassword"
                 label="Confirm Password"
                 type="password"
+                size="small"
               />
             </BoxWrapperContent>
           </Col>

@@ -189,7 +189,8 @@ export const shopManagementAdditionalForm = createFormModule({
       // }
       {
         payMethod: data.payMethod.join(", ") || "",
-        repairOption: data.repairOption.join(", ") || "",
+        repairOption: data.repairOption.join(", ") || "1, 2",
+        reparationOption: data.repairOption || [],
         services: data.services.join(", ") || "",
         waitingArea: data.waitingArea || false,
         parkingArea: "",

@@ -2,8 +2,11 @@ import { Col, List, Switch, Tag, TimePicker } from "antd";
 import moment from "moment-timezone";
 import React, { useCallback, useEffect, useState } from "react";
 
+import { Text } from "@/components/common/Text/Text";
+
 import {
   Action,
+  HeaderSmallText,
   ListItemWrapper,
   ScheduleListWrapper,
   TagWrapper,
@@ -160,7 +163,9 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
     <ScheduleListWrapper>
       <List
         header={
-          <h3 style={{ padding: "0 18px", margin: 0 }}>Regular Schedule</h3>
+          <HeaderSmallText style={{ padding: "0 18px", margin: "12px 0" }}>
+            Regular Schedule
+          </HeaderSmallText>
         }
         size="large"
         dataSource={workingHours}
@@ -168,9 +173,9 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
           <List.Item>
             <ListItemWrapper>
               <Col span="6">
-                <h4 style={{ margin: 0 }}>
+                <Text.Headline size="14" weight="regular" style={{ margin: 0 }}>
                   <b>{item.day}</b>
-                </h4>
+                </Text.Headline>
               </Col>
               <Col span="6">
                 {editingRow === index ? (

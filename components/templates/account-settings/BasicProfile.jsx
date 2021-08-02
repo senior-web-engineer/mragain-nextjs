@@ -25,6 +25,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
               <Field
                 adminInput
                 as={Input}
+                size="small"
                 name="name"
                 label="Company Name"
                 customLabel
@@ -32,6 +33,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
               <Field
                 adminInput
                 as={Input}
+                size="small"
                 name="email"
                 label="Company Email Address"
                 customLabel
@@ -39,6 +41,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
               <Field
                 adminInput
                 as={Input}
+                size="small"
                 name="kvk"
                 label="Chamber of Commerce #"
                 addonBefore="NL -KVK - "
@@ -48,6 +51,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
               <Field
                 adminInput
                 as={Input}
+                size="small"
                 name="phone_number"
                 label="Contact Number"
                 addonBefore="+31 "
@@ -66,6 +70,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
                 name="iban"
                 label="IBAN Account"
                 type="number"
+                size="small"
                 customLabel
               />
             </BoxWrapperContent>

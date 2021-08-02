@@ -74,16 +74,24 @@ export const additionalInfoOptions = {
   ],
   paymentMethods: [
     {
-      value: "cash",
+      value: "1",
+      id: "cash",
       label: "Cash",
     },
     {
-      value: "pin",
+      value: "2",
+      id: "pin",
       label: "PIN",
     },
     {
-      value: "master-card",
+      value: "3",
+      id: "creditcard",
       label: "CreditCard",
+    },
+    {
+      value: "4",
+      id: "klarna/afterpay",
+      label: "Klarna/Afterpay",
     },
   ],
 };

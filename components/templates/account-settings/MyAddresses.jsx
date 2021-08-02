@@ -64,7 +64,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                     as={Select}
                     placeholder="Select Address Type"
                     label="Address Type"
-                    size="large"
+                    size="small"
                     customLabel
                     options={[
                       { label: "Physical store", value: "0" },
@@ -131,7 +131,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                     as={Select}
                     defaultValue={basicSettingsForm.state.values.intervals}
                     label="Appointment Blocking"
-                    size="large"
+                    size="small"
                     options={DURATION_OPTIONS}
                     allowClear
                   />
