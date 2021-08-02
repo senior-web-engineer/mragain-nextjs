@@ -183,12 +183,11 @@ export const AdditionalInfo = ({ shopData }) => {
                       find(additionalInfoOptions.paymentMethods, [
                         "id",
                         id.toLowerCase().replace(/\s/g, ""),
-                      ]).value
+                      ])?.value
                   )}
               />
             ) : (
               <div>
-                {shopData.paymentMethod}
                 {shopData.paymentMethod
                   .split(",")
                   .map(
@@ -196,7 +195,7 @@ export const AdditionalInfo = ({ shopData }) => {
                       find(additionalInfoOptions.paymentMethods, [
                         "id",
                         id.toLowerCase().replace(/\s/g, ""),
-                      ]).value
+                      ])?.value
                   )}
               </div>
             )}
