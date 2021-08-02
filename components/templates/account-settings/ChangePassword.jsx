@@ -16,7 +16,7 @@ export const ChangePassword = ({ changePasswordForm }) => {
     <Form module={changePasswordForm}>
       <BoxWrapper>
         <div>
-          <HeaderSmallText>Basic Profile</HeaderSmallText>
+          <HeaderSmallText>Wachtwoord</HeaderSmallText>
         </div>
         <Divider />
         <Row>
@@ -26,7 +26,7 @@ export const ChangePassword = ({ changePasswordForm }) => {
                 adminInput
                 as={Input}
                 name="oldPassword"
-                label="Old Password"
+                label="Huidig wachtwoord"
                 type="password"
                 size="small"
               />
@@ -34,7 +34,7 @@ export const ChangePassword = ({ changePasswordForm }) => {
                 adminInput
                 as={Input}
                 name="newPassword"
-                label="New Password"
+                label="Nieuw wachtwoord"
                 type="password"
                 size="small"
               />
@@ -42,7 +42,7 @@ export const ChangePassword = ({ changePasswordForm }) => {
                 adminInput
                 as={Input}
                 name="confirmPassword"
-                label="Confirm Password"
+                label="Bevestig nieuw wachtwoord"
                 type="password"
                 size="small"
               />
@@ -54,7 +54,7 @@ export const ChangePassword = ({ changePasswordForm }) => {
         <ButtonsWrapper>
           <div />
           <Button size="large" type="primary" htmlType="submit">
-            Save Changes
+            Wachtwoord wijzigingen
           </Button>
         </ButtonsWrapper>
       </BoxWrapper>

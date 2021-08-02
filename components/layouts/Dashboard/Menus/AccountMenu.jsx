@@ -10,19 +10,19 @@ import { MenuHeader } from "../menu-styles";
 
 const accountMenuItems = [
   {
-    title: "Messages",
+    title: "Berichten",
     key: "messages/all",
     icon: <Image width="24" height="24" src={MessagesImage} />,
     selectable: true,
   },
   {
-    title: "Notifications",
+    title: "Notificaties",
     key: "notifications/all",
     icon: <Image width="24" height="24" src={NotificationsImage} />,
     selectable: true,
   },
   {
-    title: "Account Settings",
+    title: "Account gegevens",
     key: "account-settings/general-settings",
     icon: <Image width="24" height="24" src={SettingsImage} />,
     selectable: true,

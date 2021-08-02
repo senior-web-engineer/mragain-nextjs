@@ -215,7 +215,7 @@ export const AdditionalInfo = ({ shopData }) => {
                     simple
                     as={SwitchGroup}
                     name="locationOptions.inStoreService"
-                    title="In-Store Service"
+                    title="Reparatie in de winkel"
                   />
                 </Col>
                 <Col span={24}>
@@ -224,7 +224,7 @@ export const AdditionalInfo = ({ shopData }) => {
                     simple
                     as={SwitchGroup}
                     name="locationOptions.homeService"
-                    title="Home Service"
+                    title="Reparatie op locatie"
                   />
                 </Col>
                 <Col span={24}>
@@ -233,7 +233,7 @@ export const AdditionalInfo = ({ shopData }) => {
                     simple
                     as={SwitchGroup}
                     name="locationOptions.doorToDoorDelivery"
-                    title="Door-to-Door Delivery"
+                    title="Toestel opsturen"
                   />
                 </Col>
               </Row>
@@ -286,7 +286,7 @@ export const AdditionalInfo = ({ shopData }) => {
                 name="temporaryReplacement"
               />
             ) : (
-              "For selected devices only"
+              "Voor specifieke toestellen"
             )}
           </Col>
         </Row>

@@ -11,25 +11,25 @@ import { MenuHeader } from "../menu-styles";
 
 const managementMenuItems = (shopId) => [
   {
-    title: "History",
+    title: "Afgeronde Reparaties",
     key: `history/${shopId}`,
     icon: <Image width="24" height="24" src={HistoryImage} />,
     selectable: true,
   },
   {
-    title: "Shop Management",
+    title: "Profiel",
     key: `shop-management/${shopId}?tab=profile-settings`,
     icon: <Image width="24" height="24" src={ShopImage} />,
     selectable: true,
   },
   {
-    title: "Repair Management",
+    title: "Reparatie beheer",
     key: "repair-management/device-manager",
     icon: <Image width="24" height="24" src={ServicesImage} />,
     selectable: true,
   },
   {
-    title: "Finance",
+    title: "Financieen",
     key: "finance/all",
     icon: <Image width="24" height="24" src={FinanceImage} />,
     selectable: true,
