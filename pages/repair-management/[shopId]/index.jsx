@@ -181,7 +181,7 @@ export default function RepairManagementPage() {
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
         <Col span={24}>
-          <Text.Headline>Repair Management</Text.Headline>
+          <Text.Headline>Reparatie beheer</Text.Headline>
         </Col>
       </Row>
       <Divider />

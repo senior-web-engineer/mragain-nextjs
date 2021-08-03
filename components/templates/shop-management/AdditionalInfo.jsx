@@ -84,7 +84,7 @@ export const AdditionalInfo = ({ shopData }) => {
       <Form module={shopManagementAdditionalForm}>
         <Row type="flex" justify="space-between" align="middle">
           <Col>
-            <HeaderSmallText>Additional information</HeaderSmallText>
+            <HeaderSmallText>Algemene informatie</HeaderSmallText>
           </Col>
           <Col>
             {editing ? (
@@ -94,10 +94,10 @@ export const AdditionalInfo = ({ shopData }) => {
                   size="large"
                   onClick={() => setEditing(false)}
                 >
-                  Discard Changes
+                  Annuleren
                 </Button>
                 <Button size="large" type="primary" htmlType="submit">
-                  Save Changes
+                  Opslaan
                 </Button>
               </>
             ) : (
@@ -106,7 +106,7 @@ export const AdditionalInfo = ({ shopData }) => {
                 type="primary"
                 onClick={() => setEditing(true)}
               >
-                Edit
+                Wijzigen
               </Button>
             )}
           </Col>
@@ -114,7 +114,7 @@ export const AdditionalInfo = ({ shopData }) => {
         <Divider />
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
-            <p>Devices</p>
+            <p>Apparaten</p>
           </Col>
           <Col span={18}>
             {editing ? (
@@ -139,7 +139,7 @@ export const AdditionalInfo = ({ shopData }) => {
 
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
-            <p>Catered Brands</p>
+            <p>Merken</p>
           </Col>
           <Col span={18}>
             {editing ? (
@@ -167,7 +167,7 @@ export const AdditionalInfo = ({ shopData }) => {
 
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
-            <p>Payment Methods</p>
+            <p>Betaal opties</p>
           </Col>
           <Col span={18}>
             {editing ? (
@@ -204,7 +204,7 @@ export const AdditionalInfo = ({ shopData }) => {
 
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
-            <p>Location Options</p>
+            <p>Reparatie opties</p>
           </Col>
           <Col span={18}>
             {editing ? (
@@ -245,7 +245,7 @@ export const AdditionalInfo = ({ shopData }) => {
 
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
-            <p>Store Purchases</p>
+            <p>Extra services</p>
           </Col>
           <Col span={18}>
             {editing ? (
@@ -275,7 +275,7 @@ export const AdditionalInfo = ({ shopData }) => {
 
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
-            <p>Temporary replacement</p>
+            <p>Vervangend toestel</p>
           </Col>
           <Col span={18}>
             {editing ? (
@@ -293,7 +293,7 @@ export const AdditionalInfo = ({ shopData }) => {
 
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
-            <p>Waiting Area</p>
+            <p>Wachtruimte</p>
           </Col>
           <Col span={18}>
             {editing ? (

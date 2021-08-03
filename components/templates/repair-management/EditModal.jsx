@@ -9,11 +9,11 @@ import { HeaderSmallText, RowWrapperMargin } from "./styles";
 
 const columns = (items) => [
   {
-    title: "Reparation Type",
+    title: "Reparatie",
     dataIndex: "reparation.reparation_name",
   },
   {
-    title: "Price",
+    title: "Prijs",
     dataIndex: "price",
     width: 150,
     render(price, record, index) {
@@ -28,7 +28,7 @@ const columns = (items) => [
     },
   },
   {
-    title: "Guarantee Time",
+    title: "Garantie",
     dataIndex: "guarantee_time",
     width: 200,
     render(guarantee_time, record, index) {
@@ -37,13 +37,13 @@ const columns = (items) => [
           defaultValue={guarantee_time}
           onChange={(value) => (items[index].guarantee_time = value)}
           type="number"
-          addonAfter="months"
+          addonAfter="maanden"
         />
       );
     },
   },
   {
-    title: "Reparation Time",
+    title: "Reparatie tijd",
     dataIndex: "reparation_time",
     width: 200,
     render(reparation_time, record, index) {
@@ -51,14 +51,14 @@ const columns = (items) => [
         <Input
           defaultValue={reparation_time}
           onChange={(value) => (items[index].reparation_time = value)}
-          addonAfter="minutes"
+          addonAfter="minuten"
           type="number"
         />
       );
     },
   },
   {
-    title: "Active",
+    title: "Actief",
     dataIndex: "active",
     render(active, record, index) {
       return (
@@ -99,13 +99,13 @@ export const EditModal = ({ item, data, editRepairModelModal, onSave }) => {
           </h3>
         </Col>
         <Col>
-          <Button>View Product</Button>
+          <Button>Bekijk model</Button>
         </Col>
       </Row>
       <Divider />
       <RowWrapperMargin type="flex" justify="space-between" align="center">
         <Col>
-          <HeaderSmallText>Services</HeaderSmallText>
+          <HeaderSmallText>Reparaties</HeaderSmallText>
         </Col>
         <Col></Col>
       </RowWrapperMargin>
@@ -123,12 +123,12 @@ export const EditModal = ({ item, data, editRepairModelModal, onSave }) => {
             size="large"
             onClick={() => editRepairModelModal.actions.close()}
           >
-            Cancel
+            Annuleer
           </Button>
         </Col>
         <Col>
           <Button size="large" type="primary" onClick={() => onSave(items)}>
-            Save
+            Opslaan
           </Button>
         </Col>
       </RowWrapperMargin>
