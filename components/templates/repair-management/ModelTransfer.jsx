@@ -10,6 +10,7 @@ import {
 import { Text } from "@/components/common/Text/Text";
 
 import {
+  BrandImage,
   MenuWrap,
   ModelWrapper,
   NoItemsSelected,
@@ -133,10 +134,12 @@ export const ModelTransfer = ({
         <TransferWrapper>
           <RowActionsWrapper type="flex" justify="space-between">
             <Col>
-              <Text.Headline weight="normal">
-                {selectedBrandTitle}
-                {selectedBrandImage}
-              </Text.Headline>
+              <Row align="middle">
+                <BrandImage src={selectedBrandImage} />
+                <Text.Headline weight="normal" style={{ margin: 0 }}>
+                  {selectedBrandTitle}
+                </Text.Headline>
+              </Row>
             </Col>
             <Col>
               <Row type="flex" gutter={[16, 16]}>

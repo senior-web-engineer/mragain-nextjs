@@ -131,3 +131,9 @@ export const NoItemsSelected = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const BrandImage = styled.img`
+  width: auto;
+  height: 20px;
+  margin: 5px 10px 5px 0;
+`;
