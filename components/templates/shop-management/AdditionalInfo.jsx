@@ -135,7 +135,7 @@ export const AdditionalInfo = ({ shopData }) => {
                     shopData?.replacementDevices.includes(device.id)
                   )
                   .map((device) => (
-                    <Image width="60px" height="60px" src={device.icon} />
+                    <Image width="40px" height="40px" src={device.icon} />
                   ))}
               </div>
             )}

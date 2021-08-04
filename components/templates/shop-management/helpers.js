@@ -2,20 +2,21 @@ import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
 
-import Computers from "@/assets/icons/computer.svg";
-import Earphones from "@/assets/icons/computer.svg";
-import Tablets from "@/assets/icons/headphones.svg";
-import Wearables from "@/assets/icons/headphones.svg";
-import Laundry from "@/assets/icons/headphones.svg";
-import GamingConsoles from "@/assets/icons/headphones.svg";
-import SoundSystems from "@/assets/icons/headphones.svg";
-import Amex from "@/assets/icons/Method-Amex.svg";
+import GamingConsoles from "@/assets/icons/devices/console.png";
+import Earphones from "@/assets/icons/devices/headset.png";
+import SoundSystems from "@/assets/icons/devices/microphone.png";
+import Computers from "@/assets/icons/devices/pc.png";
+import MobilePhone from "@/assets/icons/devices/smartphone.png";
+import Wearables from "@/assets/icons/devices/smartwatch.png";
+import Tablets from "@/assets/icons/devices/tablet.png";
+import TV from "@/assets/icons/devices/tv.png";
+import Laundry from "@/assets/icons/devices/washingmachine.png";
 // PAYMENT METHODS
+import Amex from "@/assets/icons/Method-Amex.svg";
 import Mastercard from "@/assets/icons/Method-Mastercard.svg";
 import PayPal from "@/assets/icons/Method-PayPal.svg";
 import Stripe from "@/assets/icons/Method-Stripe.svg";
 import Visa from "@/assets/icons/Method-Visa.svg";
-import MobilePhone from "@/assets/icons/mobile-phone.svg";
 
 const PaymentImageWrapper = styled.span`
   margin-right: 10px;
@@ -37,18 +38,18 @@ export const additionalInfoOptions = {
     },
     {
       id: 3,
+      icon: Earphones,
+      device_name: "Headphones",
+      description: "earphones, earbuds, headsets",
+    },
+    {
+      id: 10,
       icon: Wearables,
       device_name: "Wearables",
       description: "smartwatch, fitness tracker",
     },
     {
-      id: 4,
-      icon: Laundry,
-      device_name: "Laundry",
-      description: "washing machine, dryer",
-    },
-    {
-      id: 5,
+      id: 9,
       icon: GamingConsoles,
       device_name: "Gaming Consoles",
       description: "home, portable consoles",
@@ -61,15 +62,21 @@ export const additionalInfoOptions = {
     },
     {
       id: 7,
+      icon: TV,
+      device_name: "TV",
+      description: "television, oled, smart TV",
+    },
+    {
+      id: 9,
       icon: SoundSystems,
       device_name: "Sound Systems",
       description: "speakers, microphones",
     },
     {
       id: 8,
-      icon: Earphones,
-      device_name: "Earphones",
-      description: "earphones, earbuds, headsets",
+      icon: Laundry,
+      device_name: "Laundry Machine",
+      description: "washing machine, dryer",
     },
   ],
   paymentMethods: [

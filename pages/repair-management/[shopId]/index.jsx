@@ -70,10 +70,8 @@ export default function RepairManagementPage() {
                   width={40}
                   height={40}
                   src={
-                    find(additionalInfoOptions.devices, [
-                      "id",
-                      device.id > 8 ? 1 : device.id,
-                    ])?.icon || ""
+                    find(additionalInfoOptions.devices, ["id", device.id])
+                      ?.icon || ""
                   }
                 />
               </div>
