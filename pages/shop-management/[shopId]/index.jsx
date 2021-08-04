@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import DefaultLayout from "@/components/layouts/Dashboard";
 import {
   currentUser,
+  deleteNonRegularHours,
   getShopNonWorkingDays,
   getValidOpenTime,
   saveShopNonWorkingDays,
@@ -55,6 +56,10 @@ export default function ShopManagementPage({ auth_user }) {
     saveShopNonWorkingDays(data);
   };
 
+  const onDeleteNonWorkingDays = (id) => {
+    deleteNonRegularHours(id);
+  };
+
   return (
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
@@ -94,6 +99,7 @@ export default function ShopManagementPage({ auth_user }) {
                   <OperationalHoursCalendar
                     nonWorkingDays={nonWorkingDays}
                     onNonWorkingDaysSaved={onNonWorkingDaysSaved}
+                    onDeleteNonWorkingDays={onDeleteNonWorkingDays}
                   />
                 )}
               </Col>

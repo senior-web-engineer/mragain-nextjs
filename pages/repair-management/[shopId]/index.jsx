@@ -10,7 +10,6 @@ import DefaultLayout from "@/components/layouts/Dashboard";
 import { EditModal } from "@/components/templates/repair-management/EditModal";
 import { ModelTransfer } from "@/components/templates/repair-management/ModelTransfer";
 import { additionalInfoOptions } from "@/components/templates/shop-management/helpers";
-import { getAuthUser } from "@/service/account/operations";
 import {
   currentUser,
   editRepairModelModal,
@@ -96,6 +95,7 @@ export default function RepairManagementPage() {
                 key: `${device.id}-${model.brand.brand_name}`,
                 title: model.brand.brand_name,
                 id: model.brand.id,
+                image: model.brand.brand_image,
               })),
             "key"
           ),

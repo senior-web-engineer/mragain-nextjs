@@ -21,20 +21,10 @@ function Menu() {
   ]);
 
   const onSelect = (selectedKeys) => {
-    if (selectedKeys[selectedKeys.length - 1].includes("/")) {
+    if (selectedKeys.length !== 0) {
       const lastSelectedKey = selectedKeys[selectedKeys.length - 1];
-      setSelected([lastSelectedKey.split("/")[0], lastSelectedKey]);
-      let query = [];
-      if (lastSelectedKey.split("?").length === 2) {
-        query = lastSelectedKey.split("?")[1].split("=");
-      }
-      const pathname = `/${lastSelectedKey.split("?")[0]}`;
-      // console.log(query, pathname);
-      if (query.length === 2) {
-        router.push(`${pathname}?${[query[0]]}=${query[1]}`);
-      } else {
-        router.push(pathname);
-      }
+      setSelected([lastSelectedKey]);
+      router.push(`/${lastSelectedKey}/${shopId}`);
     }
   };
 
@@ -56,14 +46,14 @@ function Menu() {
         treeData={[
           {
             title: "Dashboard",
-            key: `dashboard/${shopId}`,
+            key: "dashboard",
             icon: <img src={DashboardImage} />,
             selectable: true,
           },
         ]}
       />
       <ManagementMenu shopId={shopId} selected={selected} onSelect={onSelect} />
-      <AccountMenu selected={selected} onSelect={onSelect} />
+      <AccountMenu shopId={shopId} selected={selected} onSelect={onSelect} />
     </MenuWrap>
   );
 }

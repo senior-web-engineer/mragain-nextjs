@@ -28,6 +28,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
                 size="small"
                 name="name"
                 label="Company Name"
+                disabled={true}
                 customLabel
               />
               <Field
@@ -36,6 +37,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
                 size="small"
                 name="email"
                 label="Company Email Address"
+                disabled={true}
                 customLabel
               />
               <Field

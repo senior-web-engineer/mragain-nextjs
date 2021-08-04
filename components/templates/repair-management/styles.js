@@ -123,3 +123,11 @@ export const HeaderSmallText = styled.p`
   color: #3090b4;
   margin: 0;
 `;
+
+export const NoItemsSelected = styled.div`
+  width: 100%;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

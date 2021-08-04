@@ -100,6 +100,17 @@ export const saveValidOpenTime = async (payload) => {
   return data;
 };
 
+export const deleteNonRegularHours = async (id) => {
+  const shopId = currentUser.selector(store.ref.getState())?.result?.id;
+  const data = await privateApi.delete(
+    `${API_PATH.DELETEINVALIDTIME}/${shopId}/`,
+    {
+      id,
+    }
+  );
+  return data;
+};
+
 export const shopManagementGeneralForm = createFormModule({
   guid: "saveGeneralInfo",
   async init() {
@@ -187,17 +198,29 @@ export const shopManagementAdditionalForm = createFormModule({
       //   insurance: data.insurance,
       //   shop,
       // }
+      // {
+      //   payMethod: data.payMethod.join(",") || "",
+      //   repairOption: "1,2",
+      //   reparationOption: "1,2",
+      //   services: data.services.join(",") || "",
+      //   waitingArea: data.waitingArea || false,
+      //   parkingArea: "1,2",
+      //   insurance: 0,
+      //   devices: data.devices || [],
+      //   brands: data.brands || [],
+      //   purchases: data.purchases || [],
+      // }
       {
-        payMethod: data.payMethod.join(", ") || "",
-        repairOption: data.repairOption.join(", ") || "1, 2",
-        reparationOption: data.repairOption || [],
-        services: data.services.join(", ") || "",
-        waitingArea: data.waitingArea || false,
-        parkingArea: "",
+        payMethod: "1,2",
+        repairOption: "1,2",
+        services: "1,2",
+        waitingArea: 0,
+        parkingArea: "1,2,3",
         insurance: 0,
         devices: data.devices || [],
-        brands: data.brands || [],
-        purchases: data.purchases || [],
+        // brands: data.brands.map((id) => +id) || [],
+        brands: [1, 2, 3],
+        purchases: [1, 2, 3],
       }
     );
 

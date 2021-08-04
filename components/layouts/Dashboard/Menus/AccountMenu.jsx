@@ -2,34 +2,20 @@ import { DownOutlined } from "@ant-design/icons";
 import { Tree } from "antd";
 import Image from "next/image";
 
-import MessagesImage from "@/assets/icons/messages.svg";
-import NotificationsImage from "@/assets/icons/notifications.svg";
 import SettingsImage from "@/assets/icons/settings.svg";
 
 import { MenuHeader } from "../menu-styles";
 
-const accountMenuItems = [
-  {
-    title: "Messages",
-    key: "messages/all",
-    icon: <Image width="24" height="24" src={MessagesImage} />,
-    selectable: true,
-  },
-  {
-    title: "Notifications",
-    key: "notifications/all",
-    icon: <Image width="24" height="24" src={NotificationsImage} />,
-    selectable: true,
-  },
+const accountMenuItems = (shopId) => [
   {
     title: "Account Settings",
-    key: "account-settings/general-settings",
+    key: "account-settings",
     icon: <Image width="24" height="24" src={SettingsImage} />,
     selectable: true,
   },
 ];
 
-export const AccountMenu = ({ selected, onSelect }) => (
+export const AccountMenu = ({ selected, onSelect, shopId }) => (
   <>
     <MenuHeader>ACCOUNT</MenuHeader>
     <Tree
@@ -40,7 +26,7 @@ export const AccountMenu = ({ selected, onSelect }) => (
       onSelect={onSelect}
       multiple
       blockNode
-      treeData={accountMenuItems}
+      treeData={accountMenuItems(shopId)}
     />
   </>
 );

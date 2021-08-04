@@ -12,6 +12,7 @@ import { Text } from "@/components/common/Text/Text";
 import {
   MenuWrap,
   ModelWrapper,
+  NoItemsSelected,
   RowActionsWrapper,
   RowModelsWrapper,
   RowWrapper,
@@ -33,12 +34,14 @@ export const ModelTransfer = ({
   const [search, setSearch] = useState("");
   const [editing, setEditing] = useState(false);
   const [selectedBrandTitle, setSelectedBrandTitle] = useState("");
+  const [selectedBrandImage, setSelectedBrandImage] = useState("");
   const [selectedDevice, setSelectedDevice] = useState();
   const [exportBtnLoading, setExportBtnLoading] = useState(false);
   const [importBtnLoading, setImportBtnLoading] = useState(false);
 
   const onSelect = (selectedKeys, event) => {
     setSelectedBrandTitle(event.selectedNodes[0].props.title);
+    setSelectedBrandImage(event.selectedNodes[0].props.image);
     onBrandSelected(event.selectedNodes[0].props.id);
     setSelectedDevice(selectedKeys[0].split("-")[0]);
     setSelected([selectedKeys[0].split("-")[0], selectedKeys[0]]);
@@ -51,6 +54,7 @@ export const ModelTransfer = ({
 
   useEffect(() => {
     if (selectedBrand) {
+      console.log(selectedBrand);
       setSelected([selectedBrand.key.split("-")[0], selectedBrand.key]);
       setSelectedBrandTitle(selectedBrand.key.split("-")[1]);
       onBrandSelected(selectedBrand.id);
@@ -131,6 +135,7 @@ export const ModelTransfer = ({
             <Col>
               <Text.Headline weight="normal">
                 {selectedBrandTitle}
+                {selectedBrandImage}
               </Text.Headline>
             </Col>
             <Col>
@@ -195,32 +200,46 @@ export const ModelTransfer = ({
               )
               .filter((item) =>
                 !editing ? targetKeys.includes(item.key) : true
-              )
-              .map((item) => {
-                return (
-                  <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
-                    <ModelWrapper>
-                      <Text.Body style={{ margin: 0 }} size="12">
-                        {item.model}
-                      </Text.Body>
-                      {editing ? (
-                        <Checkbox
-                          defaultChecked={targetKeys.includes(item.key)}
-                          onChange={() => onChange(item.key)}
-                        />
-                      ) : (
-                        <Button
-                          onClick={() =>
-                            onEditModelReparations(selectedDevice, item)
-                          }
-                        >
-                          <EditOutlined />
-                        </Button>
-                      )}
-                    </ModelWrapper>
-                  </Col>
-                );
-              })}
+              ).length === 0 ? (
+              <NoItemsSelected>
+                <Text.Headline>
+                  You don't have Models selected yet!
+                </Text.Headline>
+              </NoItemsSelected>
+            ) : (
+              data
+                .filter((item) =>
+                  item.model.toLowerCase().includes(search.toLocaleLowerCase())
+                )
+                .filter((item) =>
+                  !editing ? targetKeys.includes(item.key) : true
+                )
+                .map((item) => {
+                  return (
+                    <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
+                      <ModelWrapper>
+                        <Text.Body style={{ margin: 0 }} size="12">
+                          {item.model}
+                        </Text.Body>
+                        {editing ? (
+                          <Checkbox
+                            defaultChecked={targetKeys.includes(item.key)}
+                            onChange={() => onChange(item.key)}
+                          />
+                        ) : (
+                          <Button
+                            onClick={() =>
+                              onEditModelReparations(selectedDevice, item)
+                            }
+                          >
+                            <EditOutlined />
+                          </Button>
+                        )}
+                      </ModelWrapper>
+                    </Col>
+                  );
+                })
+            )}
           </RowModelsWrapper>
         </TransferWrapper>
       </Col>

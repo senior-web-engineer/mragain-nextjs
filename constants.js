@@ -99,6 +99,7 @@ export const API_PATH = {
   UPDATESHOPGENERALINFO: `${API_URL}/update-shop-info`,
   SAVEINVALIDTIME: `${API_URL}/save-invalid-time`,
   GETINVALIDTIME: `${API_URL}/get-shop-invalid-time`,
+  DELETEINVALIDTIME: `${API_URL}/delete-invalid-time`,
 };
 
 export default {

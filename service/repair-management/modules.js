@@ -3,9 +3,8 @@ import { notification } from "antd";
 import { store } from "@/configureStore";
 import { API_PATH } from "@/constants";
 import dataFetcher from "@/modules/dataFetcher";
-import { createFormModule } from "@/modules/forms";
 import { createModalModule } from "@/modules/modal";
-import api, { privateApi } from "@/utils/api";
+import { privateApi } from "@/utils/api";
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],

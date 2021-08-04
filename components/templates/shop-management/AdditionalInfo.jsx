@@ -6,11 +6,13 @@ import React, { useEffect, useState } from "react";
 
 import { MultiSelect } from "@/components/common/MultiSelect";
 import { SwitchGroup } from "@/components/common/SwitchGroup";
+import { Text } from "@/components/common/Text/Text";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
 import {
   currentUser,
   getBrands,
+  getDevices,
   getReparations,
   shopManagementAdditionalForm,
 } from "@/service/shop-management/modules";
@@ -45,6 +47,7 @@ export const AdditionalInfo = ({ shopData }) => {
       shopManagementAdditionalForm.actions.initialize(user.account_id);
       const fetchedBrands = await getBrands.fetch();
       setReparations(await getReparations.fetch());
+      console.log(await getDevices.fetch());
       setBrands(fetchedBrands);
     };
     fetchData();
@@ -114,7 +117,9 @@ export const AdditionalInfo = ({ shopData }) => {
         <Divider />
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
-            <p>Devices</p>
+            <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+              Devices
+            </Text.Body>
           </Col>
           <Col span={18}>
             {editing ? (
@@ -139,7 +144,9 @@ export const AdditionalInfo = ({ shopData }) => {
 
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
-            <p>Catered Brands</p>
+            <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+              Catered Brands
+            </Text.Body>
           </Col>
           <Col span={18}>
             {editing ? (
@@ -167,7 +174,9 @@ export const AdditionalInfo = ({ shopData }) => {
 
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
-            <p>Payment Methods</p>
+            <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+              Payment Methods
+            </Text.Body>
           </Col>
           <Col span={18}>
             {editing ? (
@@ -204,7 +213,9 @@ export const AdditionalInfo = ({ shopData }) => {
 
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
-            <p>Location Options</p>
+            <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+              Location Options
+            </Text.Body>
           </Col>
           <Col span={18}>
             {editing ? (
@@ -245,14 +256,16 @@ export const AdditionalInfo = ({ shopData }) => {
 
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
-            <p>Store Purchases</p>
+            <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+              Store Purchases
+            </Text.Body>
           </Col>
           <Col span={18}>
             {editing ? (
               <Field
                 adminInput
                 as={MultiSelect}
-                name="repairOption"
+                name="services"
                 options={reparations.map((reparation) => ({
                   label: reparation.reparation_name,
                   value: reparation.id,
@@ -275,7 +288,9 @@ export const AdditionalInfo = ({ shopData }) => {
 
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
-            <p>Temporary replacement</p>
+            <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+              Temporary replacement
+            </Text.Body>
           </Col>
           <Col span={18}>
             {editing ? (
@@ -293,7 +308,9 @@ export const AdditionalInfo = ({ shopData }) => {
 
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
-            <p>Waiting Area</p>
+            <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+              Waiting Area
+            </Text.Body>
           </Col>
           <Col span={18}>
             {editing ? (

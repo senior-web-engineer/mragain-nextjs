@@ -75,6 +75,7 @@ const columns = (onDelete) => [
 export const OperationalHoursCalendar = ({
   nonWorkingDays,
   onNonWorkingDaysSaved,
+  onDeleteNonWorkingDays,
 }) => {
   const [nonRegularHours, setNonRegularHours] = useState({
     range: {
@@ -123,6 +124,7 @@ export const OperationalHoursCalendar = ({
 
   const handelOnDelete = (item) => {
     console.log("DELETE", item);
+    onDeleteNonWorkingDays(item.id);
   };
 
   return (
@@ -199,7 +201,6 @@ export const OperationalHoursCalendar = ({
             <Col>
               <HoursEditorTitle>Repeat</HoursEditorTitle>
               <Select
-                small
                 value={nonRegularHours.repeat}
                 options={repeatingList}
                 size="large"

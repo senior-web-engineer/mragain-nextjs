@@ -119,6 +119,10 @@ export const HoursEditor = styled.div`
   width: 100%;
   height: 100%;
   padding: 15px;
+
+  input {
+    font-size: 12px !important;
+  }
 `;
 
 export const HoursEditorTitle = styled.div`
@@ -126,8 +130,9 @@ export const HoursEditorTitle = styled.div`
   padding: 26px 0 10px 0;
   margin: 0;
   letter-spacing: 0.05em;
+  font-size: 14px;
   text-transform: uppercase;
-  color: #c0c0c0;
+  color: #707070;
 `;
 
 export const PaddingWrapper = styled.div`

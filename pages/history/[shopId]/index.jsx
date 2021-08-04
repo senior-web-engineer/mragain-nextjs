@@ -20,6 +20,7 @@ import { devicesFetcher } from "@/components/dashboard/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
 import { ViewRecord } from "@/components/templates/history/ViewRecord";
 import { additionalInfoOptions } from "@/components/templates/shop-management/helpers";
+import Price from "@/pages/prijs";
 import {
   currentUser,
   reparationsList,
@@ -94,14 +95,17 @@ const columns = (viewDetails, search) => [
       return (
         <DeviceDetailsWrapper>
           <div>
-            <Image
-              width={40}
-              height={40}
-              src={
-                find(additionalInfoOptions.devices, ["id", data?.device?.id])
-                  .icon || ""
-              }
-            />
+            {find(additionalInfoOptions.devices, ["id", data?.device?.id])
+              ?.icon && (
+              <Image
+                width={40}
+                height={40}
+                src={
+                  find(additionalInfoOptions.devices, ["id", data?.device?.id])
+                    ?.icon || ""
+                }
+              />
+            )}
           </div>
           <div className="brand-model">
             <div>
@@ -133,6 +137,11 @@ const columns = (viewDetails, search) => [
     title: "Price",
     dataIndex: "price",
     width: 150,
+    render: (price) =>
+      new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "EUR",
+      }).format(price),
     sorter: (a, b) => +a.price - +b.price,
   },
   {
@@ -210,6 +219,7 @@ export default function HistoryPage({ auth_user }) {
             size="large"
             allowClear
             value={search}
+            style={{ fontSize: "12px" }}
             onChange={(event) => onSearch(event.target.value)}
           />
         </Col>
