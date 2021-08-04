@@ -76,20 +76,20 @@ const getGuaranteeStatus = (date, guarantee) => {
 const columns = (viewDetails, search) => [
   {
     width: "120px",
-    title: "Date",
+    title: "Datum",
     render(data) {
       return data?.appointment?.date;
     },
   },
   {
-    title: "Repair Type",
+    title: "Reparatie",
     width: 150,
     render(data) {
       return <b>{data?.reparation?.reparation_name}</b>;
     },
   },
   {
-    title: "Device details",
+    title: "Apparaat",
     width: 300,
     render(data) {
       return (
@@ -118,7 +118,7 @@ const columns = (viewDetails, search) => [
     },
   },
   {
-    title: "IMEI Number",
+    title: "IMEI nummer",
     dataIndex: "serialnumber",
     width: 180,
     sorter: (a, b) => a.serialnumber - b.serialnumber,
@@ -134,7 +134,7 @@ const columns = (viewDetails, search) => [
     ),
   },
   {
-    title: "Price",
+    title: "Prijs",
     dataIndex: "price",
     width: 150,
     render: (price) =>
@@ -145,13 +145,13 @@ const columns = (viewDetails, search) => [
     sorter: (a, b) => +a.price - +b.price,
   },
   {
-    title: "Warranty",
+    title: "Garantie",
     width: 150,
     render(data) {
       return (
         <TagWrapper
           color={getGuaranteeStatus(data?.appointment.date, data?.guarantee)}
-        >{`${data?.guarantee} months`}</TagWrapper>
+        >{`${data?.guarantee} maanden`}</TagWrapper>
       );
     },
     sorter: (a, b) => a.guarantee - b.guarantee,
@@ -215,7 +215,7 @@ export default function HistoryPage({ auth_user }) {
       <Row>
         <Col span={5}>
           <AntdInput
-            placeholder="Search IMEI Number"
+            placeholder="Zoek IMEI"
             size="large"
             allowClear
             value={search}

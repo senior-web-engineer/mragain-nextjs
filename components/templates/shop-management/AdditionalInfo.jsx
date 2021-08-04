@@ -87,7 +87,7 @@ export const AdditionalInfo = ({ shopData }) => {
       <Form module={shopManagementAdditionalForm}>
         <Row type="flex" justify="space-between" align="middle">
           <Col>
-            <HeaderSmallText>Additional information</HeaderSmallText>
+            <HeaderSmallText>Algemene informatie</HeaderSmallText>
           </Col>
           <Col>
             {editing ? (
@@ -97,10 +97,10 @@ export const AdditionalInfo = ({ shopData }) => {
                   size="large"
                   onClick={() => setEditing(false)}
                 >
-                  Discard Changes
+                  Annuleren
                 </Button>
                 <Button size="large" type="primary" htmlType="submit">
-                  Save Changes
+                  Opslaan
                 </Button>
               </>
             ) : (
@@ -109,7 +109,7 @@ export const AdditionalInfo = ({ shopData }) => {
                 type="primary"
                 onClick={() => setEditing(true)}
               >
-                Edit
+                Wijzigen
               </Button>
             )}
           </Col>
@@ -226,7 +226,7 @@ export const AdditionalInfo = ({ shopData }) => {
                     simple
                     as={SwitchGroup}
                     name="locationOptions.inStoreService"
-                    title="In-Store Service"
+                    title="Reparatie in de winkel"
                   />
                 </Col>
                 <Col span={24}>
@@ -235,7 +235,7 @@ export const AdditionalInfo = ({ shopData }) => {
                     simple
                     as={SwitchGroup}
                     name="locationOptions.homeService"
-                    title="Home Service"
+                    title="Reparatie op locatie"
                   />
                 </Col>
                 <Col span={24}>
@@ -244,7 +244,7 @@ export const AdditionalInfo = ({ shopData }) => {
                     simple
                     as={SwitchGroup}
                     name="locationOptions.doorToDoorDelivery"
-                    title="Door-to-Door Delivery"
+                    title="Toestel opsturen"
                   />
                 </Col>
               </Row>
@@ -301,7 +301,7 @@ export const AdditionalInfo = ({ shopData }) => {
                 name="temporaryReplacement"
               />
             ) : (
-              "For selected devices only"
+              "Voor specifieke toestellen"
             )}
           </Col>
         </Row>

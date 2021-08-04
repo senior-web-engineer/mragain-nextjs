@@ -31,37 +31,37 @@ import { Drawer } from "@/modules/modal";
 const columns = [
   {
     width: "120px",
-    title: "Date",
+    title: "Datum",
     render(data) {
       return data?.appointment?.date;
     },
   },
   {
-    title: "Time",
+    title: "Tijd",
     render(data) {
       return data?.appointment?.time;
     },
   },
   {
-    title: "Customer information",
+    title: "Klant informatie",
     render(data) {
       return `${data?.appointment?.client_name} / ${data?.appointment?.client_phone}`;
     },
   },
   {
-    title: "Device details",
+    title: "Model gegevens",
     render(data) {
       return `${data?.device?.device_name} /  ${data?.brand?.brand_name} / ${data?.model?.model_name}`;
     },
   },
   {
-    title: "Reparation",
+    title: "Reparatie",
     render(data) {
       return `${data?.reparation?.reparation_name}`;
     },
   },
   {
-    title: "Price",
+    title: "Prijs",
     render(data) {
       return `${data?.price}`;
     },

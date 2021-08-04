@@ -78,13 +78,13 @@ export const ModelTransfer = ({
         formData.append("shop_id", shopId);
         formData.append("csv_file", info.fileList[0].originFileObj);
 
-        message.info(`${info.file.name} is uploading`);
+        message.info(`${info.file.name} is aan het uploaden`);
         createImportReparationAndGuaranteeCSV(formData).then(() => {
           setImportBtnLoading(false);
-          message.success(`${info.file.name} file uploaded successfully`);
+          message.success(`${info.file.name} bestand succesvol opgeslagen`);
         });
       } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
+        message.error(`${info.file.name} bestand opslaan mislukt.`);
       }
     },
   };
@@ -144,7 +144,7 @@ export const ModelTransfer = ({
                   <Input
                     size="large"
                     value={search}
-                    placeholder="Search model"
+                    placeholder="Zoek model"
                     onChange={(event) => setSearch(event.target.value)}
                   />
                 </Col>
@@ -178,7 +178,7 @@ export const ModelTransfer = ({
                 <Col>
                   {editing ? (
                     <Button size="large" type="primary" onClick={onSave}>
-                      Save
+                      Opslaan
                     </Button>
                   ) : (
                     <Button
@@ -186,7 +186,7 @@ export const ModelTransfer = ({
                       type="primary"
                       onClick={() => setEditing(true)}
                     >
-                      Edit
+                      Wijzigen
                     </Button>
                   )}
                 </Col>

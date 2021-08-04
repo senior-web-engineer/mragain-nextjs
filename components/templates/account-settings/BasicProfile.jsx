@@ -16,7 +16,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
     <Form module={basicSettingsForm}>
       <BoxWrapper>
         <div>
-          <HeaderSmallText>Basic Profile</HeaderSmallText>
+          <HeaderSmallText>Algemene gegevens</HeaderSmallText>
         </div>
         <Divider />
         <Row>
@@ -45,7 +45,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
                 as={Input}
                 size="small"
                 name="kvk"
-                label="Chamber of Commerce #"
+                label="kvk nummer"
                 addonBefore="NL -KVK - "
                 type="number"
                 customLabel
@@ -55,7 +55,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
                 as={Input}
                 size="small"
                 name="phone_number"
-                label="Contact Number"
+                label="Telefoon nummer"
                 addonBefore="+31 "
                 number
                 formatter={(value) =>
@@ -70,7 +70,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
                 adminInput
                 as={Input}
                 name="iban"
-                label="IBAN Account"
+                label="IBAN"
                 type="number"
                 size="small"
                 customLabel
@@ -83,7 +83,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
         <ButtonsWrapper>
           <div />
           <Button size="large" type="primary" htmlType="submit">
-            Save Changes
+            Wijzigingen opslaan
           </Button>
         </ButtonsWrapper>
       </BoxWrapper>

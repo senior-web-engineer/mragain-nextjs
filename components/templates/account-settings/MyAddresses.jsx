@@ -41,13 +41,13 @@ export const MyAddresses = ({ basicSettingsForm }) => {
       <RowWrapper>
         <Col span={6}>
           <HoursEditor>
-            <HeaderSmallText>My Addresses</HeaderSmallText>
+            <HeaderSmallText>Mijn locaties</HeaderSmallText>
             <Divider></Divider>
             <BoxWrapperContent>
               <Row>
                 <Col>
-                  <h4>Main Store</h4>
-                  <p>PHYSICAL STORE</p>
+                  <h4>Hoofd locatie</h4>
+                  <p>Fysieke winkel</p>
                 </Col>
               </Row>
             </BoxWrapperContent>
@@ -63,16 +63,16 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                     name="address_type"
                     as={Select}
                     placeholder="Select Address Type"
-                    label="Address Type"
+                    label="Locatie type"
                     size="small"
                     customLabel
                     options={[
-                      { label: "Physical store", value: "0" },
+                      { label: "Fysieke werkplaats", value: "0" },
                       {
-                        label: "Mobile store (truck coming to you)",
+                        label: "Mobiele werkplaats (reparatie op locatie)",
                         value: "1",
                       },
-                      { label: "Both", value: "2" },
+                      { label: "Allebei", value: "2" },
                     ]}
                   />
                 </Col>
@@ -83,7 +83,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                     adminInput
                     name="street"
                     as={GooglePlaces}
-                    label="Address"
+                    label="Straat en huisnummer"
                     customLabel
                     size="small"
                   />
@@ -96,8 +96,8 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                       adminInput
                       name="city"
                       as={GooglePlaces}
-                      placeholder="City"
-                      label="Select City"
+                      placeholder="Stad"
+                      label="Stad"
                       size="small"
                     />
                   </Col>
@@ -106,8 +106,8 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                       adminInput
                       name="country"
                       as={GooglePlaces}
-                      placeholder="State"
-                      label="Select State"
+                      placeholder="Land"
+                      label="Land"
                       size="small"
                     />
                   </Col>
@@ -116,7 +116,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                       adminInput
                       name="zipcode"
                       as={Input}
-                      label="Zip Code"
+                      label="Postcode"
                       customLabel
                       size="small"
                     />
@@ -130,7 +130,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                     name="intervals"
                     as={Select}
                     defaultValue={basicSettingsForm.state.values.intervals}
-                    label="Appointment Blocking"
+                    label="Tijd per afspraak"
                     size="small"
                     options={DURATION_OPTIONS}
                     allowClear
@@ -142,7 +142,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
             <ButtonsWrapper>
               <div />
               <Button size="large" type="primary" htmlType="submit">
-                Save Changes
+                Wijzigingen opslaan
               </Button>
             </ButtonsWrapper>
           </Form>

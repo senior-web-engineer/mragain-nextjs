@@ -91,15 +91,15 @@ export const GeneralInfo = ({ shopData }) => {
                   customLabel
                   textarea
                   name="about_us"
-                  label="About"
+                  label="Over ons"
                 />
               </Col>
             </Row>
             <Row style={rowStyle} type="flex" justify="space-between">
               <Col span={6}>
-                <h3>External links</h3>
+                <h3>Contact informatie</h3>
                 <p>
-                  Let people visit you on other platforms you have available
+                  Laat bezoekers weten hoe ze je kunnen bereiken.
                 </p>
               </Col>
               <Col span={18}>
@@ -108,21 +108,21 @@ export const GeneralInfo = ({ shopData }) => {
                   as={Input}
                   customLabel
                   name="phone_number"
-                  label="Phone"
+                  label="Telefoonnummer"
                 />
                 <Field
                   adminInput
                   as={Input}
                   customLabel
                   name="site_url"
-                  label="Web Site"
+                  label="Website"
                 />
                 <Field
                   adminInput
                   as={GooglePlaces}
                   customLabel
                   name="street"
-                  label="Address"
+                  label="Adres"
                 />
               </Col>
             </Row>
@@ -135,7 +135,7 @@ export const GeneralInfo = ({ shopData }) => {
                   size="large"
                   onClick={() => setEditing(false)}
                 >
-                  Discard Changes
+                  Annuleren
                 </Button>
                 <Button
                   size="large"
@@ -143,7 +143,7 @@ export const GeneralInfo = ({ shopData }) => {
                   htmlType="submit"
                   onClick={onSave}
                 >
-                  Save Changes
+                  Opslaan
                 </Button>
               </Col>
             </Row>
@@ -158,7 +158,7 @@ export const GeneralInfo = ({ shopData }) => {
               </Col>
               <Col>
                 <Button size="large" type="primary" onClick={onEdit}>
-                  Edit
+                  Wijzig
                 </Button>
               </Col>
             </Row>
