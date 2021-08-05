@@ -15,7 +15,7 @@ import {
 const template = [
   {
     key: "Mon",
-    day: "Monday",
+    day: "Maandag",
     start: undefined,
     end: undefined,
     hours: 0,
@@ -23,7 +23,7 @@ const template = [
   },
   {
     key: "Tue",
-    day: "Tuesday",
+    day: "Dinsdag",
     start: undefined,
     end: undefined,
     hours: 0,
@@ -31,7 +31,7 @@ const template = [
   },
   {
     key: "Wed",
-    day: "Wednesday",
+    day: "Woensdag",
     start: undefined,
     end: undefined,
     hours: 0,
@@ -39,7 +39,7 @@ const template = [
   },
   {
     key: "Thu",
-    day: "Thursday",
+    day: "Donderdag",
     start: undefined,
     end: undefined,
     hours: 0,
@@ -47,7 +47,7 @@ const template = [
   },
   {
     key: "Fri",
-    day: "Friday",
+    day: "Vrijdag",
     start: undefined,
     end: undefined,
     hours: 0,
@@ -55,7 +55,7 @@ const template = [
   },
   {
     key: "Sat",
-    day: "Saturday",
+    day: "Zaterdag",
     start: undefined,
     end: undefined,
     hours: 0,
@@ -63,7 +63,7 @@ const template = [
   },
   {
     key: "Sun",
-    day: "Sunday",
+    day: "Zondag",
     start: undefined,
     end: undefined,
     hours: 0,
@@ -164,7 +164,7 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
       <List
         header={
           <HeaderSmallText style={{ padding: "0 18px", margin: "12px 0" }}>
-            Regular Schedule
+            Openingstijden
           </HeaderSmallText>
         }
         size="large"
@@ -207,15 +207,15 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
                   />
                 ) : (
                   <TagWrapper color={item.opened ? "green" : "red"}>
-                    {item.opened ? `${Math.ceil(item.hours)} Hours` : "Closed"}
+                    {item.opened ? `${Math.ceil(item.hours)} uur` : "Gesloten"}
                   </TagWrapper>
                 )}
               </Col>
               <Col span="4">
                 {editingRow === index ? (
-                  <Action onClick={() => onSaveClick(index)}>Save</Action>
+                  <Action onClick={() => onSaveClick(index)}>Opslaan</Action>
                 ) : (
-                  <Action onClick={() => onEditClick(index)}>Edit</Action>
+                  <Action onClick={() => onEditClick(index)}>Wijzigen</Action>
                 )}
               </Col>
             </ListItemWrapper>

@@ -142,17 +142,17 @@ export const paymentMethods = (method) => {
 export const repeatingList = [
   {
     value: 0,
-    label: "Every Year",
+    label: "Elk jaar",
     color: "green",
   },
   {
     value: 1,
-    label: "Every Month",
+    label: "Elke maand",
     color: "blue",
   },
   {
     value: 2,
-    label: "Every Week",
+    label: "Elke week",
     color: "red",
   },
 ];

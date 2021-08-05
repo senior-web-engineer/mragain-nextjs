@@ -27,7 +27,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
                 as={Input}
                 size="small"
                 name="name"
-                label="Company Name"
+                label="Bedrijfsnaam"
                 disabled={true}
                 customLabel
               />
@@ -36,7 +36,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
                 as={Input}
                 size="small"
                 name="email"
-                label="Company Email Address"
+                label="Emailadres"
                 disabled={true}
                 customLabel
               />

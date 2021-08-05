@@ -206,7 +206,7 @@ export const ModelTransfer = ({
               ).length === 0 ? (
               <NoItemsSelected>
                 <Text.Headline>
-                  You don't have Models selected yet!
+                  Je hebt nog geen modellen geselecteerd. Klik op wijzigen en voeg ze toe!
                 </Text.Headline>
               </NoItemsSelected>
             ) : (

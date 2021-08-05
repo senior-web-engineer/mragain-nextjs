@@ -8,7 +8,7 @@ import { MenuHeader } from "../menu-styles";
 
 const accountMenuItems = (shopId) => [
   {
-    title: "Account Settings",
+    title: "Account gegevens",
     key: "account-settings",
     icon: <Image width="24" height="24" src={SettingsImage} />,
     selectable: true,

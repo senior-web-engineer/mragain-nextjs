@@ -38,11 +38,11 @@ export default function RepairManagementPage() {
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
         <Col span={24}>
-          <Text.Headline>Account Settings</Text.Headline>
+          <Text.Headline>Account gegevens</Text.Headline>
         </Col>
       </Row>
       <Tabs defaultActiveKey={activeTab} onChange={onTabChange}>
-        <TabPane tab="General" key="general">
+        <TabPane tab="Algemeen" key="general">
           <Row>
             <Col xxl={{ span: 16 }} lg={{ span: 24 }}>
               <BasicProfile
@@ -59,7 +59,7 @@ export default function RepairManagementPage() {
             <Col xxl={{ span: 8 }} lg={{ span: 0 }}></Col>
           </Row>
         </TabPane>
-        <TabPane tab="My Address" key="my-address">
+        <TabPane tab="Locaties" key="my-address">
           <MyAddresses
             basicSettingsForm={basicSettingsForm}
             discardChanges={console.log}

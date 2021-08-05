@@ -74,7 +74,7 @@ export default function ShopManagementPage({ auth_user }) {
       </OnMobile>
       <OnMobile show={false}>
         <Tabs defaultActiveKey={activeTab} onChange={onTabChange}>
-          <TabPane tab="Profile Settings" key="profile-settings">
+          <TabPane tab="Profiel" key="profile-settings">
             <>
               <ImageSection shopData={shopData} authUser={user} />
 
@@ -92,7 +92,7 @@ export default function ShopManagementPage({ auth_user }) {
               </Row>
             </>
           </TabPane>
-          <TabPane tab="Operational Hours" key="operational-hours">
+          <TabPane tab="Openingstijden" key="operational-hours">
             <Row gutter={[40, 40]} type="flex">
               <Col xxl={{ span: 14, order: 1 }} lg={{ span: 24, order: 2 }}>
                 {nonWorkingDays && (

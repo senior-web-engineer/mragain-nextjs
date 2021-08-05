@@ -35,38 +35,38 @@ const renderAction = (item, onDelete) => (
 
 const columns = (onDelete) => [
   {
-    title: "Name",
+    title: "Naam",
     dataIndex: "name",
     key: "name",
   },
   {
-    title: "Start Date",
+    title: "Begin datum",
     dataIndex: "startDate",
     key: "startDate",
   },
   {
-    title: "End Date",
+    title: "Eind datum",
     dataIndex: "endDate",
     key: "endDate",
   },
   {
-    title: "Start Time",
+    title: "Van",
     dataIndex: "startTime",
     key: "startTime",
   },
   {
-    title: "End Time",
+    title: "Tot",
     dataIndex: "endTime",
     key: "endTime",
   },
   {
-    title: "Repeat",
+    title: "Herhaling",
     key: "repeat",
     dataIndex: "repeat",
     render: renderRepeat,
   },
   {
-    title: "Action",
+    title: "Actie",
     key: "action",
     render: (value, item) => renderAction(item, onDelete),
   },
@@ -152,10 +152,10 @@ export const OperationalHoursCalendar = ({
         <Col span={8}>
           <HoursEditor>
             <Col>
-              <HoursEditorTitle>Title</HoursEditorTitle>
+              <HoursEditorTitle>Beschrijving afwijkende openingstijd</HoursEditorTitle>
               <Input
                 small
-                placeholder="Enter Title"
+                placeholder="Beschrijving"
                 size="large"
                 allowClear
                 value={nonRegularHours.name}
@@ -168,7 +168,7 @@ export const OperationalHoursCalendar = ({
               />
             </Col>
             <Col>
-              <HoursEditorTitle>Schedule</HoursEditorTitle>
+              <HoursEditorTitle>Openingstijd</HoursEditorTitle>
               <Row>
                 <Col span={12}>
                   <TimePicker
@@ -199,7 +199,7 @@ export const OperationalHoursCalendar = ({
               </Row>
             </Col>
             <Col>
-              <HoursEditorTitle>Repeat</HoursEditorTitle>
+              <HoursEditorTitle>Herhaling</HoursEditorTitle>
               <Select
                 value={nonRegularHours.repeat}
                 options={repeatingList}
@@ -215,7 +215,7 @@ export const OperationalHoursCalendar = ({
             <Divider />
             <Row type="flex" justify="space-between">
               <Button size="large" onClick={onClear}>
-                Clear
+                Wis
               </Button>
               <Button
                 size="large"
@@ -223,7 +223,7 @@ export const OperationalHoursCalendar = ({
                 onClick={onAdd}
                 disabled={isAddDisabled()}
               >
-                Add
+                Voeg toe
               </Button>
             </Row>
           </HoursEditor>

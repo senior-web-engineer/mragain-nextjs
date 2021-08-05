@@ -10,19 +10,19 @@ import { MenuHeader } from "../menu-styles";
 
 const managementMenuItems = (shopId) => [
   {
-    title: "History",
+    title: "Afgeronde reparaties",
     key: "history",
     icon: <Image width="24" height="24" src={HistoryImage} />,
     selectable: true,
   },
   {
-    title: "Shop Management",
+    title: "Profiel beheer",
     key: "shop-management",
     icon: <Image width="24" height="24" src={ShopImage} />,
     selectable: true,
   },
   {
-    title: "Repair Management",
+    title: "Reparatie management",
     key: "repair-management",
     icon: <Image width="24" height="24" src={ServicesImage} />,
     selectable: true,
