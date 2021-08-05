@@ -64,12 +64,12 @@ export default function ShopManagementPage({ auth_user }) {
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
         <Col span={24}>
-          <Text.Headline>Shop Management</Text.Headline>
+          <Text.Headline>Profiel beheer</Text.Headline>
         </Col>
       </Row>
       <OnMobile only>
         <h5>
-          <b>Please View this page on desktop</b>
+          <b>Profiel beheer is nog niet beschikbaar op je mobiel.</b>
         </h5>
       </OnMobile>
       <OnMobile show={false}>
