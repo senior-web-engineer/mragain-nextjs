@@ -1,15 +1,15 @@
 import DefaultLayout from "@/components/layouts/Homepage";
 import { MaxConstraints } from "@/components/styled/layout";
 import {
-    appointmentConfirmation,
-    appointmentForm,
-    appointmentReview,
-    brandFetcher,
-    deviceFetcher,
-    invalidTimeFetcher,
-    modelFetcher,
-    openTimeFetcher,
-    serviceFetcher,
+  appointmentConfirmation,
+  appointmentForm,
+  appointmentReview,
+  brandFetcher,
+  deviceFetcher,
+  invalidTimeFetcher,
+  modelFetcher,
+  openTimeFetcher,
+  serviceFetcher,
 } from "@/components/appointment/modules";
 import { getShopProfileByInformationServer } from "@/service/account/operations";
 import React, { useCallback, useEffect, useState } from "react";
@@ -181,221 +181,221 @@ const AddressSection = styled.div`
 `;
 
 export default function AppointmentPage({ shop }) {
-    const [step, updateStep] = useState(0);
+  const [step, updateStep] = useState(0);
 
-    useEffect(() => {
-        async function loadData() {
-            await appointmentForm.actions.initialize(shop);
-            deviceFetcher.fetch();
-            brandFetcher.fetch();
-            modelFetcher.fetch();
-            serviceFetcher.fetch();
-            invalidTimeFetcher.fetch();
-            openTimeFetcher.fetch();
-        }
-
-        loadData();
-    }, []);
-
-    const onNext = useCallback(async () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
-        if (step === 0) {
-            await appointmentForm.actions.validateField({
-                name: ["time", "service"],
-            });
-            const { errors } = appointmentForm.state;
-            if (Object.keys(errors).length) {
-                appointmentConfirmation.actions.open({
-                    type: "warning",
-                    message:
-                        "Je lijkt niet alle informatie te hebben ingevuld, even checken? ",
-                    description:
-                        "We hebben al je informatie nodig om een afspraak te maken",
-                    buttonLabel: "Probeer het nog een keer",
-                });
-
-                return;
-            }
-        }
-
-        if (step === 1) {
-            const reviewData = {
-                form: appointmentForm.state.values,
-                shop,
-                service: serviceFetcher.selector(store.ref.getState()).result,
-                brand: brandFetcher.selector(store.ref.getState()).result,
-                device: deviceFetcher.selector(store.ref.getState()).result,
-                model: modelFetcher.selector(store.ref.getState()).result,
-            };
-
-            try {
-                await appointmentForm.actions.submit();
-                appointmentConfirmation.actions
-                    .open({
-                        type: "success",
-                        message: "Afspraak succesvol gemaakt! ",
-                        description:
-                            "We hebben een bevestiging email naar je verzonden (kan in je spam zitten!)",
-                        buttonLabel: "Bekijk afspraak gegevens",
-                    })
-                    .then(() => {
-                        appointmentReview.actions.open(reviewData);
-                        router.router.push("/");
-                    });
-            } catch (err) {
-                if (err.validationErrors) {
-                    appointmentConfirmation.actions.open({
-                        type: "warning",
-                        message:
-                            "Je lijkt niet alle informatie te hebben ingevuld, even checken?",
-                        description:
-                            "We hebben al je informatie nodig om een afspraak te maken",
-                        buttonLabel: "Probeer het nog een keer",
-                    });
-                    return;
-                }
-                appointmentConfirmation.actions.open({
-                    type: "error",
-                    message: "Oops!",
-                    description: "Er is iets fout gegaan",
-                    buttonLabel: "Probeer het nog eens",
-                });
-            }
-            return;
-        }
-        updateStep((state) => state + 1);
-    });
-
-    function renderAddressFields() {
-        if (appointmentForm.state?.values?.location === "in-store") {
-            return null;
-        }
-        return (
-            <AddressSection>
-                <Field
-                    name="address"
-                    label="Street Address"
-                    autoComplete="street-address"
-                />
-                <InlineFields>
-                    <Field name="city" label="City" />
-                    <Field name="state" label="State" />
-                    <Field name="zip" label="Zip" autoComplete="postal-code" />
-                </InlineFields>
-            </AddressSection>
-        );
+  useEffect(() => {
+    async function loadData() {
+      await appointmentForm.actions.initialize({shop});
+      deviceFetcher.fetch();
+      brandFetcher.fetch();
+      modelFetcher.fetch();
+      serviceFetcher.fetch();
+      invalidTimeFetcher.fetch();
+      openTimeFetcher.fetch();
     }
 
-    const ctaButtons = (
-        <CTAButtons>
-            {step > 0 ? (
-                <TextButton
-                    aria-label="Terug naar vorige stap"
-                    onClick={() => updateStep((state) => state - 1)}
-                >
-                    <FontAwesomeIcon icon={faArrowLeft} /> Terug naar vorige
-                    stap
-                </TextButton>
-            ) : (
-                <span />
-            )}
-            <OnMobile only>
-                {step > 0 ? (
-                    <Button onClick={onNext} aria-label="Volgende">
-                        Bevestig
-                    </Button>
-                ) : (
-                    <Button onClick={onNext} aria-label="Volgende">
-                        Volgende <FontAwesomeIcon icon={faArrowRight} />
-                    </Button>
-                )}
-            </OnMobile>
-        </CTAButtons>
-    );
+    loadData();
+  }, []);
 
+  const onNext = useCallback(async () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    if (step === 0) {
+      await appointmentForm.actions.validateField({
+        name: ["time", "service"],
+      });
+      const { errors } = appointmentForm.state;
+      if (Object.keys(errors).length) {
+        appointmentConfirmation.actions.open({
+          type: "warning",
+          message:
+            "Je lijkt niet alle informatie te hebben ingevuld, even checken? ",
+          description:
+            "We hebben al je informatie nodig om een afspraak te maken",
+          buttonLabel: "Probeer het nog een keer",
+        });
+
+        return;
+      }
+    }
+
+    if (step === 1) {
+      const reviewData = {
+        form: appointmentForm.state.values,
+        shop,
+        service: serviceFetcher.selector(store.ref.getState()).result,
+        brand: brandFetcher.selector(store.ref.getState()).result,
+        device: deviceFetcher.selector(store.ref.getState()).result,
+        model: modelFetcher.selector(store.ref.getState()).result,
+      };
+
+      try {
+        await appointmentForm.actions.submit();
+        appointmentConfirmation.actions
+          .open({
+            type: "success",
+            message: "Afspraak succesvol gemaakt! ",
+            description:
+              "We hebben een bevestiging email naar je verzonden (kan in je spam zitten!)",
+            buttonLabel: "Bekijk afspraak gegevens",
+          })
+          .then(() => {
+            appointmentReview.actions.open(reviewData);
+            router.router.push("/");
+          });
+      } catch (err) {
+        if (err.validationErrors) {
+          appointmentConfirmation.actions.open({
+            type: "warning",
+            message:
+              "Je lijkt niet alle informatie te hebben ingevuld, even checken?",
+            description:
+              "We hebben al je informatie nodig om een afspraak te maken",
+            buttonLabel: "Probeer het nog een keer",
+          });
+          return;
+        }
+        appointmentConfirmation.actions.open({
+          type: "error",
+          message: "Oops!",
+          description: "Er is iets fout gegaan",
+          buttonLabel: "Probeer het nog eens",
+        });
+      }
+      return;
+    }
+    updateStep((state) => state + 1);
+  });
+
+  function renderAddressFields() {
+    if (appointmentForm.state?.values?.location === "in-store") {
+      return null;
+    }
     return (
-        <DefaultLayout>
-            <MainWrap>
-                <MaxConstraints>
-                    <OnMobile only>
-                        <BookingInfoMobile shop={shop} step={step} />
-                    </OnMobile>
-                    <FormWrap>
-                        <Steps currentStep={step} updateStep={updateStep} />
-                        <Form module={appointmentForm}>
-                            <Switch value={step}>
-                                <Switch.Case value={0}>
-                                    <LocationFieldWrap>
-                                        <SubTitle>Maak je keuze</SubTitle>
-                                        <Field
-                                            name="location"
-                                            as={LocationSelector}
-                                        />
-                                    </LocationFieldWrap>
-                                    <DateAndTime />
-                                </Switch.Case>
-                                <Switch.Case value={1}>
-                                    <DetailsForm>
-                                        <header>
-                                            <SubTitle>Jouw gegevens</SubTitle>
-                                        </header>
-                                        <Field name="name" label="Naam" />
-                                        <InlineFields>
-                                            <Field
-                                                name="email"
-                                                label="E-mail adres"
-                                                autoComplete="email"
-                                            />
-                                            <Field
-                                                name="tel"
-                                                label="Telefoon nummer"
-                                                autoComplete="tel"
-                                            />
-                                        </InlineFields>
-                                        {renderAddressFields()}
-                                    </DetailsForm>
-                                </Switch.Case>
-                                <Switch.Case value={2}>
-                                    <Field
-                                        name="paymentType"
-                                        as={PaymentSelector}
-                                    />
-                                </Switch.Case>
-                            </Switch>
-                        </Form>
-                        <OnMobile show={false}>{ctaButtons}</OnMobile>
-                        <OnMobile only>
-                            <MobileToolbar>{ctaButtons}</MobileToolbar>
-                        </OnMobile>
-                    </FormWrap>
-                    <OnMobile show={false}>
-                        <BookingInfo
-                            shop={shop}
-                            step={step}
-                            nextStep={onNext}
-                        />
-                    </OnMobile>
-                    <ConfirmationModal module={appointmentConfirmation} />
-                </MaxConstraints>
-            </MainWrap>
-        </DefaultLayout>
+      <AddressSection>
+        <Field
+          name="address"
+          label="Street Address"
+          autoComplete="street-address"
+        />
+        <InlineFields>
+          <Field name="city" label="City" />
+          <Field name="state" label="State" />
+          <Field name="zip" label="Zip" autoComplete="postal-code" />
+        </InlineFields>
+      </AddressSection>
     );
+  }
+
+  const ctaButtons = (
+    <CTAButtons>
+      {step > 0 ? (
+        <TextButton
+          aria-label="Terug naar vorige stap"
+          onClick={() => updateStep((state) => state - 1)}
+        >
+          <FontAwesomeIcon icon={faArrowLeft} /> Terug naar vorige
+          stap
+        </TextButton>
+      ) : (
+        <span />
+      )}
+      <OnMobile only>
+        {step > 0 ? (
+          <Button onClick={onNext} aria-label="Volgende">
+            Bevestig
+          </Button>
+        ) : (
+          <Button onClick={onNext} aria-label="Volgende">
+            Volgende <FontAwesomeIcon icon={faArrowRight} />
+          </Button>
+        )}
+      </OnMobile>
+    </CTAButtons>
+  );
+
+  return (
+    <DefaultLayout>
+      <MainWrap>
+        <MaxConstraints>
+          <OnMobile only>
+            <BookingInfoMobile shop={shop} step={step} />
+          </OnMobile>
+          <FormWrap>
+            <Steps currentStep={step} updateStep={updateStep} />
+            <Form module={appointmentForm}>
+              <Switch value={step}>
+                <Switch.Case value={0}>
+                  <LocationFieldWrap>
+                    <SubTitle>Maak je keuze</SubTitle>
+                    <Field
+                      name="location"
+                      as={LocationSelector}
+                    />
+                  </LocationFieldWrap>
+                  <DateAndTime />
+                </Switch.Case>
+                <Switch.Case value={1}>
+                  <DetailsForm>
+                    <header>
+                      <SubTitle>Jouw gegevens</SubTitle>
+                    </header>
+                    <Field name="name" label="Naam" />
+                    <InlineFields>
+                      <Field
+                        name="email"
+                        label="E-mail adres"
+                        autoComplete="email"
+                      />
+                      <Field
+                        name="tel"
+                        label="Telefoon nummer"
+                        autoComplete="tel"
+                      />
+                    </InlineFields>
+                    {renderAddressFields()}
+                  </DetailsForm>
+                </Switch.Case>
+                <Switch.Case value={2}>
+                  <Field
+                    name="paymentType"
+                    as={PaymentSelector}
+                  />
+                </Switch.Case>
+              </Switch>
+            </Form>
+            <OnMobile show={false}>{ctaButtons}</OnMobile>
+            <OnMobile only>
+              <MobileToolbar>{ctaButtons}</MobileToolbar>
+            </OnMobile>
+          </FormWrap>
+          <OnMobile show={false}>
+            <BookingInfo
+              shop={shop}
+              step={step}
+              nextStep={onNext}
+            />
+          </OnMobile>
+          <ConfirmationModal module={appointmentConfirmation} />
+        </MaxConstraints>
+      </MainWrap>
+    </DefaultLayout>
+  );
 }
 
 export async function getServerSideProps(ctx) {
-    const shopId = ctx.query["shopId][api"];
-    const shopProfileServerInfo = await getShopProfileByInformationServer(
-        shopId
-    );
-    return {
-        props: {
-            shop:
-                shopProfileServerInfo && shopProfileServerInfo[0]
-                    ? shopProfileServerInfo[0]
-                    : shopProfileServerInfo,
-        },
-    };
+  const shopId = ctx.query["shopId][api"];
+  const shopProfileServerInfo = await getShopProfileByInformationServer(
+    shopId
+  );
+  return {
+    props: {
+      shop:
+        shopProfileServerInfo && shopProfileServerInfo[0]
+          ? shopProfileServerInfo[0]
+          : shopProfileServerInfo,
+    },
+  };
 }

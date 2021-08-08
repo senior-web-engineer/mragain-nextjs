@@ -29,27 +29,34 @@ const validator = yup.object({
   name: yup.string().required(),
   email: yup.string().required().email(),
   tel: yup.string().required(),
-  time: yup.string().required(),
+  time: yup.string().when("type", {
+    is: "contact",
+    otherwise: yup.string().required(),
+  }),
+  enquiry: yup.string().when("type", {
+    is: "contact",
+    then: yup.string().required(),
+  }),
 });
 
 export const appointmentForm = createFormModule({
   validator,
-  async init(shop) {
+  async init({ shop, type = "appointment" }) {
     const fromAddressBar = router.router.query;
 
     function getDefaultValue(type, defaultValue) {
-      const value = fromAddressBar[type]
+      const value = fromAddressBar[type];
       if (["undefined", "null"].includes(value)) {
         return defaultValue;
       }
 
-      return value
+      return value;
     }
 
     const address = [shop.street || "", shop.city || ""]
       .filter(Boolean)
       .join(", ");
-    return {
+    const values = {
       shop: shop.id,
       shopAddress: address,
       shopName: shop.name,
@@ -60,7 +67,7 @@ export const appointmentForm = createFormModule({
       service: getDefaultValue("service", DEFAULT_SERVICE.reparation),
       location: "in-store",
       paymentType: "cash",
-      date: new Date().toString(),
+      type,
       time: "",
       name: "",
       email: "",
@@ -69,12 +76,15 @@ export const appointmentForm = createFormModule({
       city: "",
       zip: "",
       state: "",
+      date: new Date().toString(),
     };
+
+    return values;
   },
 
   async submit(data) {
     const service = serviceFetcher.selector(store.ref.getState()).result;
-    const formatedDate = moment(data.date).format("MM-DD-YYYY");
+    const formatedDate = moment(data.date).format("YYYY-MM-DD");
     const reparationId = service?.reparation.id
       ? parseInt(service.reparation.id)
       : 0;
@@ -104,15 +114,18 @@ export const appointmentForm = createFormModule({
     const payload = {
       name: data.shopName,
       address: data.shopAddress,
-      datetime: `${formatedDate} - ${data.time}`,
+      datetime:
+        data.type === "contact" ? undefined : `${formatedDate} - ${data.time}`,
       appointmentData: {
-        date: formatedDate,
-        time: data.time,
+        date: data.type === "contact" ? undefined : formatedDate,
+        time: data.type === "contact" ? undefined : data.time,
+        appointment_type: data.type === "contact" ? 3 : 1,
         reparation: reparationId || 54,
         client_name: data.name,
         client_email: data.email,
         client_phone: data.tel,
         shop: data.shop,
+        appointment_comment: data.enquiry,
         active: true,
       },
       repairSeviceData,

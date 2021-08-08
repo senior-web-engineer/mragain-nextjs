@@ -1,37 +1,38 @@
+import React from "react";
 import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
 import { MaxConstraints } from "@/components/styled/layout";
 import Button from "@/components/ui/Button";
 import {
-    faInfo,
-    faLink,
-    faMapMarkerAlt,
-    faPhone,
-    faShare,
+  faAddressBook,
+  faLink,
+  faMapMarkerAlt,
+  faPhone,
+  faShare,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Popover, Rate } from "antd";
 import Image from "next/image";
-import React, { useCallback, useEffect } from "react";
 import styled, { css } from "styled-components";
 import {
-    openTimeFetcher,
-    reviewsFetcher,
-    shopInfo,
+  reviewsFetcher,
 } from "@/components/shop-profile/modules";
 
 import {
-    FacebookShareButton,
-    LinkedinShareButton,
-    TwitterShareButton,
-    WhatsappShareButton,
-    FacebookIcon,
-    LinkedinIcon,
-    WhatsappIcon,
-    TwitterIcon,
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  LinkedinIcon,
+  WhatsappIcon,
+  TwitterIcon,
 } from "react-share";
 import DetailsModal from "./DetailsModal";
 import media, { OnMobile } from "@/utils/media";
 import { useFetcher } from "@/modules/dataFetcher";
+import Form from "@/modules/forms";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Wallpaper = styled.div`
     height: 260px;
@@ -108,8 +109,8 @@ ShopMeta.FirstRow = styled.div`
         display: inline-block;
         height: 31px;
         ${(props) =>
-            props.tagColor &&
-            css`
+    props.tagColor &&
+    css`
                 background-color: ${props.tagColor || "#ddd"};
             `}
         color: #fff;
@@ -199,11 +200,11 @@ const DetailButtonsWrap = styled.div`
     right: 0;
     z-index: 100;
     ${Button} {
-        margin-left: 10px;
-        height: 35px;
-        line-height: 11px;
-        min-width: 35px;
-        border-radius: 35px;
+      margin-left: 10px;
+      height: 35px;
+      line-height: 11px;
+      min-width: 35px;
+      border-radius: 35px;
     }
 
     ${media.tablet`
@@ -219,181 +220,198 @@ const DetailButtonsWrap = styled.div`
 `;
 
 const ADVANTAGES = [
-    {
-        title: "Cashback op je reparatie",
-        logo: "/images/shop/wallet.png",
-        description:
-            "Ontvang 5 euro cashback na het achterlaten van een review",
-    },
-    {
-        title: "Altijd de beste garantie",
-        logo: "/images/shop/star.png",
-        description: "Per reparatie zie je hoeveel maanden garantie je krijgt",
-    },
-    {
-        title: "Kwaliteit staat voorop",
-        logo: "/images/shop/profile.png",
-        description:
-            "Wij werken uitsluitend met onderdelen van de hoogste kwaliteit",
-    },
-    {
-        title: "Wordt snel geholpen",
-        logo: "/images/shop/gauge.png",
-        description: "Door een afspraak te maken weten we dat je komt",
-    },
+  {
+    title: "Cashback op je reparatie",
+    logo: "/images/shop/wallet.png",
+    description:
+      "Ontvang 5 euro cashback na het achterlaten van een review",
+  },
+  {
+    title: "Altijd de beste garantie",
+    logo: "/images/shop/star.png",
+    description: "Per reparatie zie je hoeveel maanden garantie je krijgt",
+  },
+  {
+    title: "Kwaliteit staat voorop",
+    logo: "/images/shop/profile.png",
+    description:
+      "Wij werken uitsluitend met onderdelen van de hoogste kwaliteit",
+  },
+  {
+    title: "Wordt snel geholpen",
+    logo: "/images/shop/gauge.png",
+    description: "Door een afspraak te maken weten we dat je komt",
+  },
 ];
 
+function ContactButton() {
+  const router = useRouter()
+  const nextLocation = `/${router.query["city"]}/${router.query["shopId][api"]}/${router.query["street"]}/contact`;
+
+  return (
+    <Link href={nextLocation}>
+      <Button
+        aria-label="Book service"
+      >
+        <FontAwesomeIcon icon={faAddressBook} /> Contact
+      </Button>
+    </Link>
+  )
+}
+
 export default function ShopHeader({ shop }) {
-    const tag = shop.tag;
-    const location = [shop.street, shop.city, shop.zipcode]
-        .filter(Boolean)
-        .join(", ");
+  const tag = shop.tag;
+  const location = [shop.street, shop.city, shop.zipcode]
+    .filter(Boolean)
+    .join(", ");
 
-    const { data: reviews } = useFetcher({
-        dataFetcher: reviewsFetcher,
-        identifier: shop.id,
-    });
+  const { data: reviews } = useFetcher({
+    dataFetcher: reviewsFetcher,
+    identifier: shop.id,
+  });
 
-    function renderAdvantage(advantage) {
-        return (
-            <advantage>
-                <image-wrap>
-                    <Image src={advantage.logo} width="31px" height="26px" />
-                </image-wrap>
-                <advantage-meta>
-                    <h3>{advantage.title}</h3>
-                    <p>{advantage.description}</p>
-                </advantage-meta>
-            </advantage>
-        );
-    }
+  function renderAdvantage(advantage) {
+    return (
+      <advantage>
+        <image-wrap>
+          <Image src={advantage.logo} width="31px" height="26px" />
+        </image-wrap>
+        <advantage-meta>
+          <h3>{advantage.title}</h3>
+          <p>{advantage.description}</p>
+        </advantage-meta>
+      </advantage>
+    );
+  }
 
-    const shareText = `
+  const shareText = `
     Ik heb  "${shop.name}" gevonden via MrAgain. Heb je een kapot apparaat? Bij MrAgain vind je de beste reparateur bij jou in de buurt
   `.trim();
-    const shopURL = typeof window !== "undefined" ? window.location.href : "";
-    const detailButtons = (
-        <DetailButtonsWrap>
-            <DetailsModal shop={shop} />
-            <Popover
-                overlayClassName="share-popover"
-                content={
-                    <>
-                        <FacebookShareButton url={shopURL} quote={shareText}>
-                            <FacebookIcon size={40} round />
-                        </FacebookShareButton>
-                        <LinkedinShareButton
-                            url={shopURL}
-                            title={shop.name}
-                            summary={shareText}
-                        >
-                            <LinkedinIcon size={40} round />
-                        </LinkedinShareButton>
-                        <WhatsappShareButton url={shopURL} title={shareText}>
-                            <WhatsappIcon size={40} round />
-                        </WhatsappShareButton>
-                        <TwitterShareButton url={shopURL} title={shareText}>
-                            <TwitterIcon size={40} round />
-                        </TwitterShareButton>
-                    </>
-                }
-            >
-                <Button>
-                    <FontAwesomeIcon icon={faShare} />
-                </Button>
-            </Popover>
-        </DetailButtonsWrap>
-    );
+  const shopURL = typeof window !== "undefined" ? window.location.href : "";
 
-    return (
-        <div>
-            <Wallpaper>
-                {shop?.bg_photo ? (
-                    <Image
-                        loading="lazy"
-                        layout="fill"
-                        objectFit="contain"
-                        src={shop.bg_photo}
-                    />
+  const detailButtons = (
+    <DetailButtonsWrap>
+      <DetailsModal shop={shop} />
+      <Popover
+        overlayClassName="share-popover"
+        content={
+          <>
+            <FacebookShareButton url={shopURL} quote={shareText}>
+              <FacebookIcon size={40} round />
+            </FacebookShareButton>
+            <LinkedinShareButton
+              url={shopURL}
+              title={shop.name}
+              summary={shareText}
+            >
+              <LinkedinIcon size={40} round />
+            </LinkedinShareButton>
+            <WhatsappShareButton url={shopURL} title={shareText}>
+              <WhatsappIcon size={40} round />
+            </WhatsappShareButton>
+            <TwitterShareButton url={shopURL} title={shareText}>
+              <TwitterIcon size={40} round />
+            </TwitterShareButton>
+          </>
+        }
+      >
+        <Button>
+          <FontAwesomeIcon icon={faShare} />
+        </Button>
+      </Popover>
+      <ContactButton />
+    </DetailButtonsWrap>
+  );
+
+  return (
+    <div>
+      <Wallpaper>
+        {shop?.bg_photo ? (
+          <Image
+            loading="lazy"
+            layout="fill"
+            objectFit="contain"
+            src={shop.bg_photo}
+          />
+        ) : null}
+      </Wallpaper>
+      <MaxConstraints>
+        <ContentWrap>
+          <ShopLogo>
+            {shop?.logo_photo ? (
+              <Image
+                loading="lazy"
+                layout="fill"
+                objectFit="contain"
+                src={shop.logo_photo}
+              />
+            ) : null}
+          </ShopLogo>
+          <OnMobile only>{detailButtons}</OnMobile>
+          <ShopMeta>
+            <ShopMeta.FirstRow tagColor={TAG_TO_COLOR[tag]}>
+              <div>
+                <h1>{shop.name}</h1>
+                <OnMobile show={false}>
+                  {tag ? <tag>{tag}</tag> : null}
+                </OnMobile>
+              </div>
+              <OnMobile show={false}>{detailButtons}</OnMobile>
+            </ShopMeta.FirstRow>
+            <ShopMeta.SecondRow>
+              <Rate
+                disabled
+                style={{ fontSize: "13px" }}
+                value={shop.mark}
+                onChange={null}
+              />
+              <span>{reviews?.length || 0} Reviews</span>
+            </ShopMeta.SecondRow>
+            <ShopMeta.ThirdRow>
+              <d-list>
+                <OnMobile show={false}>
+                  {shop.phone_number ? (
+                    <>
+                      <d-term>
+                        <FontAwesomeIcon
+                          title="phone"
+                          icon={faPhone}
+                        />
+                      </d-term>
+                      <d-def>{shop.phone_number}</d-def>
+                    </>
+                  ) : null}
+                  {shop.site_url ? (
+                    <>
+                      <d-term>
+                        <FontAwesomeIcon
+                          title="website"
+                          icon={faLink}
+                        />
+                      </d-term>
+                      <d-def>{shop.site_url}</d-def>
+                    </>
+                  ) : null}
+                </OnMobile>
+                {location ? (
+                  <>
+                    <d-term>
+                      <FontAwesomeIcon
+                        title="location"
+                        icon={faMapMarkerAlt}
+                      />
+                    </d-term>
+                    <d-def>{location}</d-def>
+                  </>
                 ) : null}
-            </Wallpaper>
-            <MaxConstraints>
-                <ContentWrap>
-                    <ShopLogo>
-                        {shop?.logo_photo ? (
-                            <Image
-                                loading="lazy"
-                                layout="fill"
-                                objectFit="contain"
-                                src={shop.logo_photo}
-                            />
-                        ) : null}
-                    </ShopLogo>
-                    <OnMobile only>{detailButtons}</OnMobile>
-                    <ShopMeta>
-                        <ShopMeta.FirstRow tagColor={TAG_TO_COLOR[tag]}>
-                            <div>
-                                <h1>{shop.name}</h1>
-                                <OnMobile show={false}>
-                                    {tag ? <tag>{tag}</tag> : null}
-                                </OnMobile>
-                            </div>
-                            <OnMobile show={false}>{detailButtons}</OnMobile>
-                        </ShopMeta.FirstRow>
-                        <ShopMeta.SecondRow>
-                            <Rate
-                                disabled
-                                style={{ fontSize: "13px" }}
-                                value={shop.mark}
-                                onChange={null}
-                            />
-                            <span>{reviews?.length || 0} Reviews</span>
-                        </ShopMeta.SecondRow>
-                        <ShopMeta.ThirdRow>
-                            <d-list>
-                                <OnMobile show={false}>
-                                    {shop.phone_number ? (
-                                        <>
-                                            <d-term>
-                                                <FontAwesomeIcon
-                                                    title="phone"
-                                                    icon={faPhone}
-                                                />
-                                            </d-term>
-                                            <d-def>{shop.phone_number}</d-def>
-                                        </>
-                                    ) : null}
-                                    {shop.site_url ? (
-                                        <>
-                                            <d-term>
-                                                <FontAwesomeIcon
-                                                    title="website"
-                                                    icon={faLink}
-                                                />
-                                            </d-term>
-                                            <d-def>{shop.site_url}</d-def>
-                                        </>
-                                    ) : null}
-                                </OnMobile>
-                                {location ? (
-                                    <>
-                                        <d-term>
-                                            <FontAwesomeIcon
-                                                title="location"
-                                                icon={faMapMarkerAlt}
-                                            />
-                                        </d-term>
-                                        <d-def>{location}</d-def>
-                                    </>
-                                ) : null}
-                            </d-list>
-                        </ShopMeta.ThirdRow>
-                        <AdvantagesWrap>
-                            {ADVANTAGES.map(renderAdvantage)}
-                        </AdvantagesWrap>
-                    </ShopMeta>
-                </ContentWrap>
-            </MaxConstraints>
-        </div>
-    );
+              </d-list>
+            </ShopMeta.ThirdRow>
+            <AdvantagesWrap>
+              {ADVANTAGES.map(renderAdvantage)}
+            </AdvantagesWrap>
+          </ShopMeta>
+        </ContentWrap>
+      </MaxConstraints>
+    </div>
+  );
 }
