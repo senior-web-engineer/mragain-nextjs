@@ -4,11 +4,13 @@ import React, { useCallback, useEffect } from "react";
 
 import {
   appointmentForm,
+  appointmentStats,
   brandFetcher,
   createAppointmentFormModal,
   currentUser,
   devicesFetcher,
   modelFetcher,
+  recentActivity,
   reparationsList,
   servicesFetcher,
 } from "@/components/dashboard/modules";
@@ -151,6 +153,8 @@ export default function DashboardPage({ auth_user }) {
   useEffect(() => {
     async function loadData() {
       await currentUser.fetch();
+      recentActivity.fetch();
+      appointmentStats.fetch();
       reparationsList.actions.initialize();
     }
 
@@ -168,7 +172,7 @@ export default function DashboardPage({ auth_user }) {
       },
     });
     brandFetcher.key(`${value}`).fetch();
-  });
+  }, []);
 
   const onBandChange = useCallback((value) => {
     appointmentForm.actions.batchChange({
@@ -179,7 +183,7 @@ export default function DashboardPage({ auth_user }) {
       },
     });
     modelFetcher.key(`${value}`).fetch();
-  });
+  }, []);
 
   const onModelChange = useCallback((value) => {
     appointmentForm.actions.batchChange({
@@ -189,7 +193,7 @@ export default function DashboardPage({ auth_user }) {
       },
     });
     servicesFetcher.key(`${value}`).fetch();
-  });
+  }, []);
 
   const onReparationChange = useCallback(async (value) => {
     appointmentForm.actions.batchChange({
@@ -211,7 +215,7 @@ export default function DashboardPage({ auth_user }) {
         },
       });
     }
-  });
+  }, []);
 
   return (
     <DefaultLayout>

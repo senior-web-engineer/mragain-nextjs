@@ -75,7 +75,7 @@ export const appointmentForm = createFormModule({
 
   async submit(data) {
     const service = serviceFetcher.selector(store.ref.getState()).result;
-    const formatedDate = moment(data.date).format("MM-DD-YYYY");
+    const formatedDate = moment(data.date).format("YYYY-MM-DD");
     const reparationId = service?.reparation.id
       ? parseInt(service.reparation.id)
       : 0;
@@ -109,6 +109,7 @@ export const appointmentForm = createFormModule({
       appointmentData: {
         date: formatedDate,
         time: data.time,
+        appointment_type: 1,
         reparation: reparationId || 54,
         client_name: data.name,
         client_email: data.email,
