@@ -2,7 +2,6 @@ import { DatePicker, TimePicker } from "antd";
 import get from "lodash/get";
 import React, { useCallback, useEffect } from "react";
 
-import { Popover } from "@/components/common/Popover";
 import {
   appointmentForm,
   brandFetcher,
@@ -18,7 +17,6 @@ import { SubTitle } from "@/components/styled/text";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
-import { store } from "@/configureStore";
 import { createSelectComponent } from "@/modules/dataFetcher";
 import Form, { useFormContext } from "@/modules/forms";
 import { Field, parseNativeEvent } from "@/modules/forms/Blocks";
@@ -69,7 +67,7 @@ const columns = [
   {
     title: "Status",
     render(data) {
-      return <Popover />;
+      return <div>status</div>;
     },
   },
 ];
