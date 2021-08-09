@@ -23,7 +23,7 @@ import { OperationalHoursCalendar } from "@/components/templates/shop-management
 import { ScheduleList } from "@/components/templates/shop-management/ScheduleList";
 import { BoxWrapper } from "@/components/templates/shop-management/styles";
 
-export default function ShopManagementPage({ auth_user }) {
+export default function ShopManagementPage() {
   const [activeTab, setActiveTab] = useState("profile-settings");
   const [shopInfo, setShopInfo] = useState();
   const [shopData, setShopData] = useState();
@@ -52,12 +52,14 @@ export default function ShopManagementPage({ auth_user }) {
     setActiveTab(tab);
   };
 
-  const onNonWorkingDaysSaved = (data) => {
-    saveShopNonWorkingDays(data);
+  const onNonWorkingDaysSaved = async (data) => {
+    await saveShopNonWorkingDays(data);
+    setNonWorkingDays(await getShopNonWorkingDays.fetch());
   };
 
-  const onDeleteNonWorkingDays = (id) => {
+  const onDeleteNonWorkingDays = async (id) => {
     deleteNonRegularHours(id);
+    setNonWorkingDays(await getShopNonWorkingDays.fetch());
   };
 
   return (

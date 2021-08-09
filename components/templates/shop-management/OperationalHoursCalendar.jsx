@@ -94,6 +94,12 @@ export const OperationalHoursCalendar = ({
     onNonWorkingDaysSaved({
       data: {
         ...nonRegularHours,
+        range: {
+          startDate: moment(nonRegularHours.range.startDate).format(
+            "YYYY-MM-DD"
+          ),
+          endDate: moment(nonRegularHours.range.endDate).format("YYYY-MM-DD"),
+        },
         time: {
           startTime: moment(nonRegularHours.time.startTime).format("HH:mm:ss"),
           endTime: moment(nonRegularHours.time.endTime).format("HH:mm:ss"),
@@ -152,7 +158,9 @@ export const OperationalHoursCalendar = ({
         <Col span={8}>
           <HoursEditor>
             <Col>
-              <HoursEditorTitle>Beschrijving afwijkende openingstijd</HoursEditorTitle>
+              <HoursEditorTitle>
+                Beschrijving afwijkende openingstijd
+              </HoursEditorTitle>
               <Input
                 small
                 placeholder="Beschrijving"

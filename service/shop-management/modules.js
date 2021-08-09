@@ -102,7 +102,7 @@ export const saveValidOpenTime = async (payload) => {
 
 export const deleteNonRegularHours = async (id) => {
   const shopId = currentUser.selector(store.ref.getState())?.result?.id;
-  const data = await privateApi.delete(
+  const data = await privateApi.post(
     `${API_PATH.DELETEINVALIDTIME}/${shopId}/`,
     {
       id,
