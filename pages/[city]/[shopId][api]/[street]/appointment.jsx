@@ -37,10 +37,10 @@ import { store } from "@/configureStore";
 import api from "@/utils/api";
 
 const MainWrap = styled.div`
-  padding-top: 1px;
-  margin-bottom: -87px;
+    padding-top: 1px;
+    margin-bottom: -87px;
 
-  ${media.tablet`
+    ${media.tablet`
     > ${MaxConstraints} {
       display: flex;
       justify-content: space-between;
@@ -49,21 +49,21 @@ const MainWrap = styled.div`
 `;
 
 const FormWrap = styled.div`
-  max-width: 690px;
-  width: 100%;
+    max-width: 690px;
+    width: 100%;
 
-  form.fullwidth {
-    margin: 0 -20px;
-  }
+    form.fullwidth {
+        margin: 0 -20px;
+    }
 `;
 
 const LocationFieldWrap = styled.div`
-  ${SubTitle} {
-    display: none;
-    margin: 52px 0 32px;
-  }
+    ${SubTitle} {
+        display: none;
+        margin: 52px 0 32px;
+    }
 
-  ${media.tablet`
+    ${media.tablet`
     ${SubTitle} {
       display: block;
     }
@@ -71,47 +71,47 @@ const LocationFieldWrap = styled.div`
 `;
 
 const CTAButtons = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 30px 0;
-  > button {
-    font-size: 10px;
-    text-transform: none;
-  }
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0;
+    > button {
+        font-size: 10px;
+        text-transform: none;
+    }
 `;
 
 const DetailsForm = styled.div`
-  background-color: #fff;
-  width: calc(100% + 40px);
-  margin: 11px -20px 0;
-  padding: 0 20px 30px;
+    background-color: #fff;
+    width: calc(100% + 40px);
+    margin: 11px -20px 0;
+    padding: 0 20px 30px;
 
-  header {
-    height: 71px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    margin: 0 -20px 30px;
-    padding: 0 20px;
-  }
-  h4 {
-    margin-bottom: 0;
-  }
-
-  ${FieldWrap} {
-    border: 2px solid #f0f0f0;
-    padding: 5px 10px;
-    border-radius: 5px;
-
-    input {
-      border: 0;
-      border-bottom: 1px solid #ddd;
-      border-radius: 2px;
-      width: 100%;
+    header {
+        height: 71px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        margin: 0 -20px 30px;
+        padding: 0 20px;
     }
-  }
+    h4 {
+        margin-bottom: 0;
+    }
 
-  ${media.tablet`
+    ${FieldWrap} {
+        border: 2px solid #f0f0f0;
+        padding: 5px 10px;
+        border-radius: 5px;
+
+        input {
+            border: 0;
+            border-bottom: 1px solid #ddd;
+            border-radius: 2px;
+            width: 100%;
+        }
+    }
+
+    ${media.tablet`
     padding: 0 41px 30px;
     border-radius: 10px;
     border: 1px solid #ddd;
@@ -127,11 +127,11 @@ const DetailsForm = styled.div`
 `;
 
 const InlineFields = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 
-  ${media.tablet`
+    ${media.tablet`
     flex-direction: row;
     > div:nth-child(1) {
       flex-grow: 1;
@@ -144,40 +144,40 @@ const InlineFields = styled.div`
 `;
 
 const MobileToolbar = styled.div`
-  position: fixed;
-  display: flex;
-  bottom: 0;
-  background-color: #fff;
-  height: 60px;
-  padding: 0 20px;
-  box-shadow: 0 0 27px rgba(0, 0, 0, 0.3);
-  width: 100%;
-  z-index: 110;
-  left: 0;
-  justify-content: flex-end;
-  align-items: center;
-
-  ${CTAButtons} {
+    position: fixed;
+    display: flex;
+    bottom: 0;
+    background-color: #fff;
+    height: 60px;
+    padding: 0 20px;
+    box-shadow: 0 0 27px rgba(0, 0, 0, 0.3);
     width: 100%;
+    z-index: 110;
+    left: 0;
+    justify-content: flex-end;
     align-items: center;
-  }
 
-  ${Button}:not(${TextButton}) {
-    padding: 7px 22px;
-    height: 37px;
-    line-height: 23px;
-    box-shadow: 0 0 8px #06c987;
-
-    &[disabled] {
-      box-shadow: 0 0 8px #a0a0a0;
+    ${CTAButtons} {
+        width: 100%;
+        align-items: center;
     }
-  }
+
+    ${Button}:not(${TextButton}) {
+        padding: 7px 22px;
+        height: 37px;
+        line-height: 23px;
+        box-shadow: 0 0 8px #06c987;
+
+        &[disabled] {
+            box-shadow: 0 0 8px #a0a0a0;
+        }
+    }
 `;
 
 const AddressSection = styled.div`
-  border-top: 3px solid #fafafa;
-  margin-top: 23px;
-  padding-top: 17px;
+    border-top: 3px solid #fafafa;
+    margin-top: 23px;
+    padding-top: 17px;
 `;
 
 export default function AppointmentPage({ shop }) {
@@ -202,11 +202,9 @@ export default function AppointmentPage({ shop }) {
       top: 0,
       behavior: "smooth",
     });
-    const fieldsToValidate = {
-      0: ["time", "service"],
-      1: ["name", "email", "tel"],
-    };
-    if (Object.keys(fieldsToValidate).includes(step)) {
+
+
+    if (step === 0) {
       await appointmentForm.actions.validateField({
         name: ["time", "service"],
       });
@@ -223,6 +221,52 @@ export default function AppointmentPage({ shop }) {
 
         return;
       }
+    }
+
+    if (step === 1) {
+      const reviewData = {
+        form: appointmentForm.state.values,
+        shop,
+        service: serviceFetcher.selector(store.ref.getState()).result,
+        brand: brandFetcher.selector(store.ref.getState()).result,
+        device: deviceFetcher.selector(store.ref.getState()).result,
+        model: modelFetcher.selector(store.ref.getState()).result,
+      };
+
+      try {
+        await appointmentForm.actions.submit();
+        appointmentConfirmation.actions
+          .open({
+            type: "success",
+            message: "Afspraak succesvol gemaakt! ",
+            description:
+              "We hebben een bevestiging email naar je verzonden (kan in je spam zitten!)",
+            buttonLabel: "Bekijk afspraak gegevens",
+          })
+          .then(() => {
+            appointmentReview.actions.open(reviewData);
+            router.router.push("/");
+          });
+      } catch (err) {
+        if (err.validationErrors) {
+          appointmentConfirmation.actions.open({
+            type: "warning",
+            message:
+              "Je lijkt niet alle informatie te hebben ingevuld, even checken?",
+            description:
+              "We hebben al je informatie nodig om een afspraak te maken",
+            buttonLabel: "Probeer het nog een keer",
+          });
+          return;
+        }
+        appointmentConfirmation.actions.open({
+          type: "error",
+          message: "Oops!",
+          description: "Er is iets fout gegaan",
+          buttonLabel: "Probeer het nog eens",
+        });
+      }
+      return;
     }
 
     if (step === 2) {
@@ -280,11 +324,13 @@ export default function AppointmentPage({ shop }) {
           buttonLabel: "Probeer het nog eens",
         });
       }
-
       return;
     }
+
     updateStep((state) => state + 1);
   });
+
+
 
   function renderAddressFields() {
     if (appointmentForm.state?.values?.location === "in-store") {
@@ -313,15 +359,22 @@ export default function AppointmentPage({ shop }) {
           aria-label="Terug naar vorige stap"
           onClick={() => updateStep((state) => state - 1)}
         >
-          <FontAwesomeIcon icon={faArrowLeft} /> Terug naar vorige stap
+          <FontAwesomeIcon icon={faArrowLeft} /> Terug naar vorige
+          stap
         </TextButton>
       ) : (
         <span />
       )}
       <OnMobile only>
-        <Button onClick={onNext} aria-label="Volgende">
-          Volgende <FontAwesomeIcon icon={faArrowRight} />
-        </Button>
+        {step > 0 ? (
+          <Button onClick={onNext} aria-label="Volgende">
+            Bevestig
+          </Button>
+        ) : (
+          <Button onClick={onNext} aria-label="Volgende">
+            Volgende <FontAwesomeIcon icon={faArrowRight} />
+          </Button>
+        )}
       </OnMobile>
     </CTAButtons>
   );
@@ -331,7 +384,7 @@ export default function AppointmentPage({ shop }) {
       <MainWrap>
         <MaxConstraints>
           <OnMobile only>
-            <BookingInfoMobile shop={shop} />
+            <BookingInfoMobile shop={shop} step={step} />
           </OnMobile>
           <FormWrap>
             <Steps currentStep={step} updateStep={updateStep} />
@@ -340,7 +393,10 @@ export default function AppointmentPage({ shop }) {
                 <Switch.Case value={0}>
                   <LocationFieldWrap>
                     <SubTitle>Maak je keuze</SubTitle>
-                    <Field name="location" as={LocationSelector} />
+                    <Field
+                      name="location"
+                      as={LocationSelector}
+                    />
                   </LocationFieldWrap>
                   <DateAndTime />
                 </Switch.Case>
@@ -366,7 +422,10 @@ export default function AppointmentPage({ shop }) {
                   </DetailsForm>
                 </Switch.Case>
                 <Switch.Case value={2}>
-                  <Field name="paymentType" as={PaymentSelector} />
+                  <Field
+                    name="paymentType"
+                    as={PaymentSelector}
+                  />
                 </Switch.Case>
               </Switch>
             </Form>
@@ -376,7 +435,11 @@ export default function AppointmentPage({ shop }) {
             </OnMobile>
           </FormWrap>
           <OnMobile show={false}>
-            <BookingInfo shop={shop} nextStep={onNext} />
+            <BookingInfo
+              shop={shop}
+              step={step}
+              nextStep={onNext}
+            />
           </OnMobile>
           <ConfirmationModal module={appointmentConfirmation} />
         </MaxConstraints>
@@ -387,7 +450,9 @@ export default function AppointmentPage({ shop }) {
 
 export async function getServerSideProps(ctx) {
   const shopId = ctx.query["shopId][api"];
-  const shopProfileServerInfo = await getShopProfileByInformationServer(shopId);
+  const shopProfileServerInfo = await getShopProfileByInformationServer(
+    shopId
+  );
   return {
     props: {
       shop:

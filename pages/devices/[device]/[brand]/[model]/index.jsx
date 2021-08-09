@@ -187,7 +187,7 @@ function MobileAppointmentButton({ searchUrlData }) {
   return (
     <OnMobile only>
       <MobileToolbar>
-        <Link href={`/search-results?${urlData}`}>
+        <Link href={`/zoek-een-reparateur?${urlData}`}>
           <Button disabled={!service} as="a">Bekijk reparateurs</Button>
         </Link>
       </MobileToolbar>
@@ -235,7 +235,7 @@ export default function ModelPage({ data, reparations }) {
               <price>&euro;{data?.price?.[0]}</price>
             </div>
           ) : null}
-          <Link href={`/search-results?${urlData}`}>
+          <Link href={`/zoek-een-reparateur?${urlData}`}>
             <Button as="a">
               <FontAwesomeIcon icon={faArrowRight} />
             </Button>
@@ -256,7 +256,7 @@ export default function ModelPage({ data, reparations }) {
               <H2>{data.model_name}</H2>
               <p>{data.model_serie_number}</p>
               <info>
-                <FontAwesomeIcon icon={faCalendar} /> Released on{" "}
+                <FontAwesomeIcon icon={faCalendar} /> Released op{" "}
                 {moment(data.model_year).format("DD-MM-YYYY")}
               </info>
               <DescriptionWrap>{data.model_info}</DescriptionWrap>
@@ -266,7 +266,7 @@ export default function ModelPage({ data, reparations }) {
       </WhiteBackground>
       <ServicesSection>
         <MaxConstraints>
-          <SubTitle>ALLE {data.model_name} REPARATIES</SubTitle>
+          <SubTitle>ALLE {data.brand.brand_name} {data.model_name} REPARATIES</SubTitle>
           <Form module={appointmentFormModule}>
             <Field name="service" as={RadioGroup}>
               {reparations.map(renderReparation)}

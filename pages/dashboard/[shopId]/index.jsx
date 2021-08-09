@@ -273,7 +273,7 @@ const ShopDashboard = (routerProps) => {
     setPhone(el.device.id);
     setBrand(el.brand.id);
     setModel(el.model.id);
-    setReparation(el.reparation.reparation_name);
+    setReparation(el.reparation.id);
     setShowModal(true);
     setSelectRepId(el.id);
     setGuarantee(el.guarnantee);
@@ -705,7 +705,7 @@ const ShopDashboard = (routerProps) => {
                                   >
                                     Bewerk reparatie
                                   </Button>
-				    {/*{el.status === -1 && (
+				   {/*{el.status === -1 && (
                                     <Popconfirm
                                       title="Weet je zeker dat je de afspraak wilt annuleren?"
                                       onConfirm={() => {
