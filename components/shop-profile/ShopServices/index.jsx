@@ -36,6 +36,7 @@ import { SubTitle, SubTitleDescription } from "@/components/styled/text";
 import Image from "next/image";
 import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
 import { store } from "@/configureStore";
+import { ContactButton } from "../ShopHeader";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
   loading: Loader,
@@ -144,6 +145,8 @@ const MobileToolbar = styled.div`
         text-align: right;
         margin: 0;
         white-space: nowrap;
+        padding: 0;
+        border: 0;
     }
 
     ${Button} {
@@ -619,7 +622,7 @@ export default function ShopServices({ shop }) {
         <OnMobile>{apointmentButton}</OnMobile>
         <OnMobile only>
           <MobileToolbar>
-            {/*<NextSlot id={shop.id} />*/}
+            <ContactButton secondary />
             {apointmentButton}
           </MobileToolbar>
         </OnMobile>

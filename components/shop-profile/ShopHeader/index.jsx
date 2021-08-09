@@ -244,13 +244,14 @@ const ADVANTAGES = [
   },
 ];
 
-function ContactButton() {
+export function ContactButton(...props) {
   const router = useRouter()
   const nextLocation = `/${router.query["city"]}/${router.query["shopId][api"]}/${router.query["street"]}/contact`;
 
   return (
     <Link href={nextLocation}>
       <Button
+        {...props}
         aria-label="Book service"
       >
         <FontAwesomeIcon icon={faAddressBook} /> Contact
@@ -319,7 +320,9 @@ export default function ShopHeader({ shop }) {
           <FontAwesomeIcon icon={faShare} />
         </Button>
       </Popover>
-      <ContactButton />
+      <OnMobile show={false}>
+        <ContactButton />
+      </OnMobile>
     </DetailButtonsWrap>
   );
 

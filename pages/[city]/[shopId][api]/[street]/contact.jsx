@@ -229,23 +229,6 @@ export default function AppointmentPage({ shop }) {
     }
   });
 
-  function renderAddressFields() {
-    return (
-      <AddressSection>
-        <SubTitle>Address Information (Optional)</SubTitle>
-        <Field
-          name="address"
-          label="Street Address"
-          autoComplete="street-address"
-        />
-        <InlineFields>
-          <Field name="city" label="City" />
-          <Field name="state" label="State" />
-          <Field name="zip" label="Zip" autoComplete="postal-code" />
-        </InlineFields>
-      </AddressSection>
-    );
-  }
 
   const ctaButtons = (
     <CTAButtons>
@@ -290,7 +273,6 @@ export default function AppointmentPage({ shop }) {
                   name="enquiry"
                   label="Enquiry"
                 />
-                {renderAddressFields()}
               </DetailsForm>
             </Form>
             <OnMobile show={false}>{ctaButtons}</OnMobile>
