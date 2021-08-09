@@ -244,7 +244,6 @@ export const invalidTimeFetcher = dataFetcher({
 });
 
 export function payForAppointment({appointment, shop, service}) {
-  console.log(appointment, shop, service)
   return api.post(`${API_PATH.PAYMENT}`, {
     appointment,
     shop: shop.id,
