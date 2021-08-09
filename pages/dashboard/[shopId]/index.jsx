@@ -1,6 +1,7 @@
 import { DatePicker, TimePicker } from "antd";
 import get from "lodash/get";
 import React, { useCallback, useEffect } from "react";
+import styled from "styled-components";
 
 import {
   appointmentForm,
@@ -14,12 +15,13 @@ import {
   reparationsList,
   servicesFetcher,
 } from "@/components/dashboard/modules";
+import Notifications from "@/components/dashboard/Notifications";
+import Stats from "@/components/dashboard/Stats";
 import DefaultLayout from "@/components/layouts/Dashboard";
 import { SubTitle } from "@/components/styled/text";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
-import { store } from "@/configureStore";
 import { createSelectComponent } from "@/modules/dataFetcher";
 import Form, { useFormContext } from "@/modules/forms";
 import { Field, parseNativeEvent } from "@/modules/forms/Blocks";
@@ -28,6 +30,16 @@ import { Table } from "@/modules/list/Blocks";
 import { Drawer } from "@/modules/modal";
 
 //
+
+const PanelsWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  > div:nth-child(2) {
+    margin-top: -50px;
+  }
+`;
 
 const columns = [
   {
@@ -220,6 +232,10 @@ export default function DashboardPage({ auth_user }) {
   return (
     <DefaultLayout>
       <h1>Welcome Back!</h1>
+      <PanelsWrap>
+        <Stats />
+        <Notifications />
+      </PanelsWrap>
       <Button
         onClick={() => {
           createAppointmentFormModal.actions.open();
