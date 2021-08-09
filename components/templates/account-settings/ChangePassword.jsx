@@ -20,7 +20,7 @@ export const ChangePassword = ({ changePasswordForm }) => {
         </div>
         <Divider />
         <Row>
-          <Col xxl={{ span: 12 }} lg={{ span: 24 }}>
+          <Col xxl={{ span: 12 }} md={{ span: 16 }}>
             <BoxWrapperContent>
               <Field
                 adminInput
@@ -48,7 +48,7 @@ export const ChangePassword = ({ changePasswordForm }) => {
               />
             </BoxWrapperContent>
           </Col>
-          <Col xxl={{ span: 12 }} lg={{ span: 24 }}></Col>
+          <Col xxl={{ span: 12 }} md={{ span: 8 }}></Col>
         </Row>
         <Divider />
         <ButtonsWrapper>
