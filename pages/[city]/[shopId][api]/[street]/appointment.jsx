@@ -202,9 +202,11 @@ export default function AppointmentPage({ shop }) {
       top: 0,
       behavior: "smooth",
     });
-
-
-    if (step === 0) {
+    const fieldsToValidate = {
+      0: ["time", "service"],
+      1: ["name", "email", "tel"],
+    };
+    if (Object.keys(fieldsToValidate).includes(step)) {
       await appointmentForm.actions.validateField({
         name: ["time", "service"],
       });
@@ -218,58 +220,10 @@ export default function AppointmentPage({ shop }) {
             "We hebben al je informatie nodig om een afspraak te maken",
           buttonLabel: "Probeer het nog een keer",
         });
-
-        return;
       }
     }
 
     if (step === 1) {
-      const reviewData = {
-        form: appointmentForm.state.values,
-        shop,
-        service: serviceFetcher.selector(store.ref.getState()).result,
-        brand: brandFetcher.selector(store.ref.getState()).result,
-        device: deviceFetcher.selector(store.ref.getState()).result,
-        model: modelFetcher.selector(store.ref.getState()).result,
-      };
-
-      try {
-        await appointmentForm.actions.submit();
-        appointmentConfirmation.actions
-          .open({
-            type: "success",
-            message: "Afspraak succesvol gemaakt! ",
-            description:
-              "We hebben een bevestiging email naar je verzonden (kan in je spam zitten!)",
-            buttonLabel: "Bekijk afspraak gegevens",
-          })
-          .then(() => {
-            appointmentReview.actions.open(reviewData);
-            router.router.push("/");
-          });
-      } catch (err) {
-        if (err.validationErrors) {
-          appointmentConfirmation.actions.open({
-            type: "warning",
-            message:
-              "Je lijkt niet alle informatie te hebben ingevuld, even checken?",
-            description:
-              "We hebben al je informatie nodig om een afspraak te maken",
-            buttonLabel: "Probeer het nog een keer",
-          });
-          return;
-        }
-        appointmentConfirmation.actions.open({
-          type: "error",
-          message: "Oops!",
-          description: "Er is iets fout gegaan",
-          buttonLabel: "Probeer het nog eens",
-        });
-      }
-      return;
-    }
-
-    if (step === 2) {
       const reviewData = {
         form: appointmentForm.state.values,
         shop,
@@ -324,12 +278,12 @@ export default function AppointmentPage({ shop }) {
           buttonLabel: "Probeer het nog eens",
         });
       }
+
       return;
     }
 
     updateStep((state) => state + 1);
   });
-
 
 
   function renderAddressFields() {
