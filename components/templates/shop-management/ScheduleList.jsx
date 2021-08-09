@@ -81,16 +81,15 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
 
   const onSaveClick = useCallback(() => {
     const savingTimeObject = {};
-    workingHours.forEach(
-      (day) =>
-        (savingTimeObject[day.key] =
-          day.start && day.end
-            ? `${moment(day.start, "HH:mm").format("HH:mm")}-${moment(
-                day.end,
-                "HH:mm"
-              ).format("HH:mm")}`
-            : "")
-    );
+    workingHours.forEach((day) => {
+      if (day.start && day.end) {
+        savingTimeObject[day.key] = `${moment(day.start, "HH:mm").format(
+          "HH:mm"
+        )}-${moment(day.end, "HH:mm").format("HH:mm")}`;
+      } else {
+        savingTimeObject[day.key] = "";
+      }
+    });
     onSave(JSON.stringify(savingTimeObject));
     setEditingRow(null);
   }, [workingHours]);

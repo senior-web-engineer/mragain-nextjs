@@ -1,5 +1,4 @@
 import { Button, Col, Divider, Row, Switch, Tag } from "antd";
-import { cloneDeep } from "lodash";
 import { find } from "lodash";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -12,7 +11,6 @@ import { Field } from "@/modules/forms/Blocks";
 import {
   currentUser,
   getBrands,
-  getDevices,
   getReparations,
   shopManagementAdditionalForm,
 } from "@/service/shop-management/modules";
@@ -47,7 +45,6 @@ export const AdditionalInfo = ({ shopData }) => {
       shopManagementAdditionalForm.actions.initialize(user.account_id);
       const fetchedBrands = await getBrands.fetch();
       setReparations(await getReparations.fetch());
-      console.log(await getDevices.fetch());
       setBrands(fetchedBrands);
     };
     fetchData();
@@ -55,7 +52,6 @@ export const AdditionalInfo = ({ shopData }) => {
 
   useEffect(() => {
     if (shopData) {
-      console.log("SHOP DATA", shopData);
       setSelectedDevices(shopData.replacementDevices);
     }
   }, [shopData]);
@@ -65,20 +61,17 @@ export const AdditionalInfo = ({ shopData }) => {
   }
 
   const onDeviceSelected = (id, value) => {
-    console.log(value);
-    let newSelectedDevices = cloneDeep(selectedDevices);
+    let newSelectedDevices = [...selectedDevices];
     if (newSelectedDevices.includes(id) && value === false) {
       newSelectedDevices.splice(newSelectedDevices.indexOf(id), 1);
     } else if (!newSelectedDevices.includes(id)) {
       newSelectedDevices = [...newSelectedDevices, id];
     }
-    console.log(newSelectedDevices);
     shopManagementAdditionalForm.actions.batchChange({
       updates: {
         devices: newSelectedDevices,
       },
     });
-    console.log(shopManagementAdditionalForm.state.values);
     setSelectedDevices(newSelectedDevices);
   };
 

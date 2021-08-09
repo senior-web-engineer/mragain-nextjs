@@ -20,6 +20,33 @@ import {
   TransferWrapper,
 } from "./styles";
 
+const RenderModelItem = ({
+  item,
+  targetKeys,
+  onChange,
+  onEditModelReparations,
+  editing,
+  selectedDevice,
+}) => (
+  <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
+    <ModelWrapper>
+      <Text.Body style={{ margin: 0 }} size="12">
+        {item.model}
+      </Text.Body>
+      {editing ? (
+        <Checkbox
+          defaultChecked={targetKeys.includes(item.key)}
+          onChange={() => onChange(item.key)}
+        />
+      ) : (
+        <Button onClick={() => onEditModelReparations(selectedDevice, item)}>
+          <EditOutlined />
+        </Button>
+      )}
+    </ModelWrapper>
+  </Col>
+);
+
 export const ModelTransfer = ({
   shopId,
   targetKeys,
@@ -33,16 +60,20 @@ export const ModelTransfer = ({
 }) => {
   const [selected, setSelected] = useState([]);
   const [search, setSearch] = useState("");
-  const [editing, setEditing] = useState(false);
-  const [selectedBrandTitle, setSelectedBrandTitle] = useState("");
-  const [selectedBrandImage, setSelectedBrandImage] = useState("");
+  const [selectedBrandItem, setSelectedBrandItem] = useState({
+    title: "",
+    image: "",
+  });
   const [selectedDevice, setSelectedDevice] = useState();
+  const [editing, setEditing] = useState(false);
   const [exportBtnLoading, setExportBtnLoading] = useState(false);
   const [importBtnLoading, setImportBtnLoading] = useState(false);
 
   const onSelect = (selectedKeys, event) => {
-    setSelectedBrandTitle(event.selectedNodes[0].props.title);
-    setSelectedBrandImage(event.selectedNodes[0].props.image);
+    setSelectedBrandItem({
+      title: event.selectedNodes[0].props.title,
+      image: event.selectedNodes[0].props.image,
+    });
     onBrandSelected(event.selectedNodes[0].props.id);
     setSelectedDevice(selectedKeys[0].split("-")[0]);
     setSelected([selectedKeys[0].split("-")[0], selectedKeys[0]]);
@@ -55,9 +86,11 @@ export const ModelTransfer = ({
 
   useEffect(() => {
     if (selectedBrand) {
-      console.log(selectedBrand);
       setSelected([selectedBrand.key.split("-")[0], selectedBrand.key]);
-      setSelectedBrandTitle(selectedBrand.key.split("-")[1]);
+      setSelectedBrandItem({
+        ...selectedBrandItem,
+        title: selectedBrand.key.split("-")[1],
+      });
       onBrandSelected(selectedBrand.id);
       setSelectedDevice(selectedBrand.key.split("-")[0]);
     }
@@ -93,26 +126,26 @@ export const ModelTransfer = ({
   const onExportCsv = async () => {
     setExportBtnLoading(true);
 
-    getExportReparationAndGuaranteeCSV({
+    const result = await getExportReparationAndGuaranteeCSV({
       deviceId: selected[0],
       shopId: shopId,
-    })
-      .then((result) => {
-        const a = document.createElement("a");
-        const blob = new Blob([result.data], { type: "octet/stream" }),
-          url = window.URL.createObjectURL(blob);
-        a.href = url;
-        a.download = "MrAgain_reparatiebeheer.csv";
-        a.click();
-        window.URL.revokeObjectURL(url);
-        setExportBtnLoading(false);
-      })
-      .catch((err) => {
-        setExportBtnLoading(false);
-        alert(
-          "Er is een fout opgetreden bij het exporteren, probeer het later nog eens."
-        );
-      });
+    });
+
+    try {
+      const a = document.createElement("a");
+      const blob = new Blob([result.data], { type: "octet/stream" }),
+        url = window.URL.createObjectURL(blob);
+      a.href = url;
+      a.download = "MrAgain_reparatiebeheer.csv";
+      a.click();
+      window.URL.revokeObjectURL(url);
+      setExportBtnLoading(false);
+    } catch (err) {
+      setExportBtnLoading(false);
+      alert(
+        "Er is een fout opgetreden bij het exporteren, probeer het later nog eens."
+      );
+    }
   };
 
   return (
@@ -135,9 +168,9 @@ export const ModelTransfer = ({
           <RowActionsWrapper type="flex" justify="space-between">
             <Col>
               <Row align="middle">
-                <BrandImage src={selectedBrandImage} />
+                <BrandImage src={selectedBrandItem.image} />
                 <Text.Headline weight="normal" style={{ margin: 0 }}>
-                  {selectedBrandTitle}
+                  {selectedBrandItem.title}
                 </Text.Headline>
               </Row>
             </Col>
@@ -145,7 +178,6 @@ export const ModelTransfer = ({
               <Row type="flex" gutter={[16, 16]}>
                 <Col>
                   <Input
-                    size="large"
                     value={search}
                     placeholder="Zoek model"
                     onChange={(event) => setSearch(event.target.value)}
@@ -157,38 +189,26 @@ export const ModelTransfer = ({
                     target="_blank"
                     download
                   >
-                    <Button size="large" type="dashed">
-                      Download Instructies
-                    </Button>
+                    <Button type="dashed">Download Instructies</Button>
                   </a>
                 </Col>
                 <Col>
                   <Upload {...uploadCSV}>
-                    <Button size="large" loading={importBtnLoading}>
-                      Import
-                    </Button>
+                    <Button loading={importBtnLoading}>Import</Button>
                   </Upload>
                 </Col>
                 <Col>
-                  <Button
-                    loading={exportBtnLoading}
-                    size="large"
-                    onClick={onExportCsv}
-                  >
+                  <Button loading={exportBtnLoading} onClick={onExportCsv}>
                     Export
                   </Button>
                 </Col>
                 <Col>
                   {editing ? (
-                    <Button size="large" type="primary" onClick={onSave}>
+                    <Button type="primary" onClick={onSave}>
                       Opslaan
                     </Button>
                   ) : (
-                    <Button
-                      size="large"
-                      type="primary"
-                      onClick={() => setEditing(true)}
-                    >
+                    <Button type="primary" onClick={() => setEditing(true)}>
                       Wijzigen
                     </Button>
                   )}
@@ -206,7 +226,8 @@ export const ModelTransfer = ({
               ).length === 0 ? (
               <NoItemsSelected>
                 <Text.Headline>
-                  Je hebt nog geen modellen geselecteerd. Klik op wijzigen en voeg ze toe!
+                  Je hebt nog geen modellen geselecteerd. Klik op wijzigen en
+                  voeg ze toe!
                 </Text.Headline>
               </NoItemsSelected>
             ) : (
@@ -219,27 +240,15 @@ export const ModelTransfer = ({
                 )
                 .map((item) => {
                   return (
-                    <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
-                      <ModelWrapper>
-                        <Text.Body style={{ margin: 0 }} size="12">
-                          {item.model}
-                        </Text.Body>
-                        {editing ? (
-                          <Checkbox
-                            defaultChecked={targetKeys.includes(item.key)}
-                            onChange={() => onChange(item.key)}
-                          />
-                        ) : (
-                          <Button
-                            onClick={() =>
-                              onEditModelReparations(selectedDevice, item)
-                            }
-                          >
-                            <EditOutlined />
-                          </Button>
-                        )}
-                      </ModelWrapper>
-                    </Col>
+                    <RenderModelItem
+                      key={`model-item-${item.key}`}
+                      item={item}
+                      targetKeys={targetKeys}
+                      onChange={onChange}
+                      onEditModelReparations={onEditModelReparations}
+                      editing={editing}
+                      selectedDevice={selectedDevice}
+                    />
                   );
                 })
             )}

@@ -35,6 +35,15 @@ const DURATION_OPTIONS = [
   },
 ];
 
+const LOCATIONS_OPTIONS = [
+  { label: "Fysieke werkplaats", value: "0" },
+  {
+    label: "Mobiele werkplaats (reparatie op locatie)",
+    value: "1",
+  },
+  { label: "Allebei", value: "2" },
+];
+
 export const MyAddresses = ({ basicSettingsForm }) => {
   return (
     <BoxWrapper>
@@ -66,14 +75,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                     label="Locatie type"
                     size="small"
                     customLabel
-                    options={[
-                      { label: "Fysieke werkplaats", value: "0" },
-                      {
-                        label: "Mobiele werkplaats (reparatie op locatie)",
-                        value: "1",
-                      },
-                      { label: "Allebei", value: "2" },
-                    ]}
+                    options={LOCATIONS_OPTIONS}
                   />
                 </Col>
               </Row>

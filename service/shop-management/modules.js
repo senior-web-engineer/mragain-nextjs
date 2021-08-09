@@ -145,18 +145,6 @@ export const shopManagementGeneralForm = createFormModule({
   },
 });
 
-// const test = {
-//   payMethod: "1,2",
-//   repairOption: "1,2",
-//   services: "services text 1234",
-//   waitingArea: 0,
-//   parkingArea: "1,2,3",
-//   insurance: 0,
-//   devices: [1, 2, 3],
-//   brands: [1, 2, 3],
-//   purchases: [1, 2, 3],
-// };
-
 export const shopManagementAdditionalForm = createFormModule({
   guid: "saveAdditionalInfo",
   async init(shopId) {

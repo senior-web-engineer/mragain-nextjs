@@ -1,7 +1,7 @@
 import { format } from "date-fns";
-import { flatten } from "lodash";
+import { find, flatten } from "lodash";
 import * as moment from "moment";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { DateRange } from "react-date-range";
 import styled from "styled-components";
 
@@ -32,11 +32,18 @@ const CalendarRangeWrapper = styled.div`
   .rdrInRange,
   .rdrStartEdge,
   .rdrEndEdge {
-    /* background: #ed5556; */
   }
 `;
 
-export const CalendarRange = ({ onChange, disabledDates, repeatingList }) => {
+const ExtraLine = styled.div`
+  height: 5px;
+  width: 100%;
+  position: absolute;
+  top: -5px;
+  left: 0;
+`;
+
+export const CalendarRange = ({ onChange, disabledDates }) => {
   const [comparedDates, setComparedDates] = useState([]);
   const [state, setState] = useState([
     {
@@ -81,40 +88,25 @@ export const CalendarRange = ({ onChange, disabledDates, repeatingList }) => {
     return dateArray;
   };
 
-  const customDayContent = (day, dates) => {
-    let extraDot = null;
-    let disabledDay = null;
-    dates
-      .map((item) => ({
-        ...item,
-        dates: item.dates.map((date) => moment(date).format("YYYY-MM-DD")),
-      }))
-      .forEach((item) => {
-        if (item.dates.includes(moment(day).format("YYYY-MM-DD"))) {
-          disabledDay = item;
-        }
+  const renderCustomDayContent = useCallback(
+    (day) => {
+      let disabledDay = find(comparedDates, (item) => {
+        return item.dates
+          .map((date) => moment(date).format("YYYY-MM-DD"))
+          .includes(moment(day).format("YYYY-MM-DD"));
       });
-    if (disabledDay) {
-      extraDot = (
-        <div
-          style={{
-            height: "5px",
-            width: "100%",
-            background: dateType(disabledDay.type),
-            position: "absolute",
-            top: "-5px",
-            left: 0,
-          }}
-        />
+
+      return (
+        <div>
+          {disabledDay && (
+            <ExtraLine style={{ background: dateType(disabledDay.type) }} />
+          )}
+          <span>{format(day, "d")}</span>
+        </div>
       );
-    }
-    return (
-      <div>
-        {extraDot}
-        <span>{format(day, "d")}</span>
-      </div>
-    );
-  };
+    },
+    [comparedDates]
+  );
 
   return (
     <CalendarRangeWrapper>
@@ -128,7 +120,7 @@ export const CalendarRange = ({ onChange, disabledDates, repeatingList }) => {
             flatten(getDates(date.startDate, date.endDate))
           )
         )}
-        dayContentRenderer={(day) => customDayContent(day, comparedDates)}
+        dayContentRenderer={(day) => renderCustomDayContent(day)}
       />
     </CalendarRangeWrapper>
   );

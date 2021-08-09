@@ -1,9 +1,10 @@
+import { notification } from "antd";
+
 import { store } from "@/configureStore";
 import { API_PATH } from "@/constants";
 import dataFetcher from "@/modules/dataFetcher";
-import api, { privateApi } from "@/utils/api";
 import { createFormModule } from "@/modules/forms";
-import { notification } from "antd";
+import api, { privateApi } from "@/utils/api";
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],
@@ -50,36 +51,17 @@ export const basicSettingsForm = createFormModule({
     const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
     const auth = currentUser.selector(store.ref.getState())?.result?.id;
     const promise = privateApi.put(`${API_PATH.ACCOUNTSETTING}/${auth}/`, {
-      address: data.address,
-      allow_appointment: data.allow_appointment,
-      city: data.city,
-      country: data.country,
-      phone_number: data.phone_number,
-      btw: data.btw,
-      email: data.email,
-      geo_lat: data.geo_lat,
-      geo_long: data.geo_long,
-      iban: data.iban,
-      kvk: data.kvk,
-      name: data.name,
-      ptype: data.ptype,
-      shop_active: data.shop_active,
-      shop_type: data.shop_type,
-      site_url: data.site_url,
-      status_app_email: data.status_app_email,
-      street: data.street,
-      zipcode: data.zipcode,
-      intervals: data.intervals,
-      ///// non existing form fields
+      ...data,
       double_appointment: true,
-      /////
       shop,
       auth,
     });
 
-    notification.success({
-      message: "General info saved successfully",
-    });
+    if (promise) {
+      notification.success({
+        message: "General info saved successfully",
+      });
+    }
 
     return promise;
   },

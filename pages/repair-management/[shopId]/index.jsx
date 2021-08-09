@@ -114,9 +114,7 @@ export default function RepairManagementPage() {
       setTargetKeys(selectedModels);
       setSelectedModels(filter(models, ["brand_id", firstModel.id]));
 
-      setTimeout(() => {
-        setSelectedBrand(firstModel);
-      }, 500);
+      setSelectedBrand(firstModel);
     }
 
     loadData();
@@ -128,8 +126,6 @@ export default function RepairManagementPage() {
   };
 
   const onChange = (key) => {
-    console.log(key);
-
     if (targetKeys.includes(key)) {
       const newTargetKeys = [...targetKeys];
       newTargetKeys.splice(newTargetKeys.indexOf(key), 1);
@@ -140,7 +136,6 @@ export default function RepairManagementPage() {
   };
 
   const onEditModelReparations = async (deviceId, item) => {
-    console.log(item);
     setSelectedModel(item);
     setShopReparations(
       await saveModelReparations.fetch({

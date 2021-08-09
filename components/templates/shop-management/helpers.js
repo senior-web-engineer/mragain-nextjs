@@ -103,42 +103,6 @@ export const additionalInfoOptions = {
   ],
 };
 
-export const paymentMethods = (method) => {
-  let image;
-  switch (method.trim().toLocaleLowerCase()) {
-    case "cash":
-      return (
-        <PaymentImageWrapper>
-          <Image width="34" height="24" src={Mastercard} />
-        </PaymentImageWrapper>
-      );
-    case "pin":
-      return (
-        <PaymentImageWrapper>
-          <Image width="34" height="24" src={PayPal} />
-        </PaymentImageWrapper>
-      );
-    case "stripe":
-      return (
-        <PaymentImageWrapper>
-          <Image width="34" height="24" src={Stripe} />
-        </PaymentImageWrapper>
-      );
-    case "visa":
-      return (
-        <PaymentImageWrapper>
-          <Image width="34" height="24" src={Visa} />
-        </PaymentImageWrapper>
-      );
-    case "amex":
-      return (
-        <PaymentImageWrapper>
-          <Image width="34" height="24" src={Amex} />
-        </PaymentImageWrapper>
-      );
-  }
-};
-
 export const repeatingList = [
   {
     value: 0,

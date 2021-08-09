@@ -1,13 +1,13 @@
 import { Button, Col, Divider, Row, Switch, Table } from "antd";
 import { cloneDeep } from "lodash";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import Input from "@/components/ui/Input";
 import { Drawer } from "@/modules/modal";
 
 import { HeaderSmallText, RowWrapperMargin } from "./styles";
 
-const columns = (items) => [
+const columns = (onChange) => [
   {
     title: "Reparatie",
     dataIndex: "reparation.reparation_name",
@@ -20,7 +20,7 @@ const columns = (items) => [
       return (
         <Input
           defaultValue={price}
-          onChange={(value) => (items[index].price = value)}
+          onChange={(value) => onChange(index, "price", value)}
           addonBefore="$"
           type="number"
         />
@@ -35,7 +35,7 @@ const columns = (items) => [
       return (
         <Input
           defaultValue={guarantee_time}
-          onChange={(value) => (items[index].guarantee_time = value)}
+          onChange={(value) => onChange(index, "guarantee_time", value)}
           type="number"
           addonAfter="maanden"
         />
@@ -50,7 +50,7 @@ const columns = (items) => [
       return (
         <Input
           defaultValue={reparation_time}
-          onChange={(value) => (items[index].reparation_time = value)}
+          onChange={(value) => onChange(index, "reparation_time", value)}
           addonAfter="minuten"
           type="number"
         />
@@ -64,7 +64,7 @@ const columns = (items) => [
       return (
         <Switch
           defaultChecked={active}
-          onChange={(value) => (items[index].active = value)}
+          onChange={(value) => onChange(index, "active", value)}
         />
       );
     },
@@ -78,9 +78,23 @@ export const EditModal = ({ item, data, editRepairModelModal, onSave }) => {
   }, [data]);
 
   const onClose = () => {
-    console.log("onCLOSE");
     setItems([]);
   };
+
+  const onChange = useCallback(
+    (index, obj, value) => {
+      const newItems = [...items];
+      newItems.map((item, itemIndex) => {
+        if (itemIndex === index) {
+          item[obj] = value;
+        }
+
+        return item;
+      });
+      setItems(newItems);
+    },
+    [items]
+  );
 
   return (
     <Drawer
@@ -114,7 +128,7 @@ export const EditModal = ({ item, data, editRepairModelModal, onSave }) => {
         style={{ minHeight: `calc(100vh - 360px)` }}
         scroll={{ y: `calc(100vh - 420px)` }}
         dataSource={cloneDeep(items)}
-        columns={columns(items)}
+        columns={columns(onChange)}
         pagination={false}
       />
       <RowWrapperMargin type="flex" justify="space-between" align="center">
