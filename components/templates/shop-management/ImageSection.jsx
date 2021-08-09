@@ -22,11 +22,11 @@ export const ImageSection = ({ shopData, authUser }) => {
         formData.append("image", info.fileList[0].originFileObj);
         formData.append("shop_id", authUser.id);
         uploadImage(formData).then(() => {
-          message.success(`${info.file.name} file uploaded successfully`);
+          message.success(`${info.file.name} is succesvol opgeslagen`);
           setPreviewCover(URL.createObjectURL(info.fileList[0].originFileObj));
         });
       } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
+        message.error(`${info.file.name} kon niet worden opgeslagen`);
       }
     },
   };
