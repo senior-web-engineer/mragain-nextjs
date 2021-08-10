@@ -132,6 +132,8 @@ export const appointmentForm = createFormModule({
       datetime:
         data.type === "contact" ? undefined : `${formatedDate} - ${data.time}`,
       appointmentData: {
+        date: data.type === "contact" ? undefined: formatedDate,
+        time: data.type === "contact" ? undefined: data.time,
         appointment_type: data.type === "contact" ? 3 : data.location === "in-store" ? 2 : 1,
         reparation: reparationId || 54,
         client_name: data.name,
