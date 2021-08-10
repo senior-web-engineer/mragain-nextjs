@@ -111,21 +111,25 @@ export const appointmentForm = createFormModule({
       };
     }
 
+    let client_address;
+    if (data.location !== "in-store") {
+      client_address = [data.address, data.city, data.state, data.zip].filter(Boolean).join(', ')
+    }
+
     const payload = {
       name: data.shopName,
       address: data.shopAddress,
       datetime:
         data.type === "contact" ? undefined : `${formatedDate} - ${data.time}`,
       appointmentData: {
-        date: data.type === "contact" ? undefined : formatedDate,
-        time: data.type === "contact" ? undefined : data.time,
-        appointment_type: data.type === "contact" ? 3 : 1,
+        appointment_type: data.type === "contact" ? 3 : data.location === "in-store" ? 2 : 1,
         reparation: reparationId || 54,
         client_name: data.name,
         client_email: data.email,
         client_phone: data.tel,
         shop: data.shop,
         appointment_comment: data.enquiry,
+        client_address,
         active: true,
       },
       repairSeviceData,
@@ -248,3 +252,12 @@ export const invalidTimeFetcher = dataFetcher({
     return JSON.parse(data?.[0]?.invalid_day_time || "[]");
   },
 });
+
+export function payForAppointment({appointment, shop, service}) {
+  return api.post(`${API_PATH.PAYMENT}`, {
+    appointment,
+    shop: shop.id,
+    price: `${service.price}.00`,
+    title: `${shop.name} appointment payment`
+  })
+}

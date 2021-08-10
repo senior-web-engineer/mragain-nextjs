@@ -13,9 +13,9 @@ const DEFAULT_OPTIONS = [
   },
   {
     label: "Reparatie op locatie",
+    // @pim fix this description and remove this line once it's done
     description: "Coming soon",
     icon: faHome,
-    disabled: true,
     value: "home",
   },
   {

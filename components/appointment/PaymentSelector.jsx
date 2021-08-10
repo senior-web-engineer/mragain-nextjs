@@ -17,8 +17,6 @@ const DEFAULT_OPTIONS = [
     description: "Create an apointment to visit our store",
     icon: faCreditCard,
     value: "credit-card",
-    disabled: true,
-    value: "home",
   },
   {
     label: "Paypal",
