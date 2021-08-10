@@ -286,6 +286,7 @@ export default function AppointmentPage({ shop }) {
               step={step}
               showPrices={false}
               nextStep={onNext}
+              title="Contact gegevens"
             />
           </OnMobile>
           <ConfirmationModal module={appointmentConfirmation} />

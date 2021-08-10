@@ -20,7 +20,7 @@ import { SubTitle } from "@/components/styled/text";
 import { Field } from "@/modules/forms/Blocks";
 import LocationSelector from "@/components/appointment/LocationSelector";
 import PaymentSelector from "@/components/appointment/PaymentSelector";
-import Form from "@/modules/forms";
+import Form, { useFormContext } from "@/modules/forms";
 import DateAndTime from "@/components/appointment/DateAndTime";
 import Steps from "@/components/appointment/Steps";
 import Switch from "@/components/common/Switch";
@@ -180,6 +180,11 @@ const AddressSection = styled.div`
     padding-top: 17px;
 `;
 
+function ConnectedDateAndTime() {
+  const { state } = useFormContext();
+  return <DateAndTime required={state?.values?.location !== "home"} />
+}
+
 export default function AppointmentPage({ shop }) {
   const [step, updateStep] = useState(0);
 
@@ -204,11 +209,12 @@ export default function AppointmentPage({ shop }) {
     });
     const fieldsToValidate = {
       0: ["time", "service"],
-      1: ["name", "email", "tel"],
+      1: ["name", "email", "tel", "address", "city", "zip"],
     };
-    if (Object.keys(fieldsToValidate).includes(step)) {
+
+    if (Object.keys(fieldsToValidate).includes(`${step}`)) {
       await appointmentForm.actions.validateField({
-        name: ["time", "service"],
+        name: fieldsToValidate[step],
       });
       const { errors } = appointmentForm.state;
       if (Object.keys(errors).length) {
@@ -220,6 +226,8 @@ export default function AppointmentPage({ shop }) {
             "We hebben al je informatie nodig om een afspraak te maken",
           buttonLabel: "Probeer het nog een keer",
         });
+
+        return;
       }
     }
 
@@ -297,7 +305,6 @@ export default function AppointmentPage({ shop }) {
         />
         <InlineFields>
           <Field name="city" label="City" />
-          <Field name="state" label="State" />
           <Field name="zip" label="Zip" autoComplete="postal-code" />
         </InlineFields>
       </AddressSection>
@@ -350,7 +357,7 @@ export default function AppointmentPage({ shop }) {
                       as={LocationSelector}
                     />
                   </LocationFieldWrap>
-                  <DateAndTime />
+                  <ConnectedDateAndTime />
                 </Switch.Case>
                 <Switch.Case value={1}>
                   <DetailsForm>

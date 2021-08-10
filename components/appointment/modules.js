@@ -23,20 +23,30 @@ const DEFAULT_SERVICE = {
   reparation: 54,
 };
 
+const requiredAddress = yup.string().when("location", {
+  is: "home",
+  then: yup.string().required()
+})
+
 // NOTE: when adding address validation
 // use the when method (https://github.com/jquense/yup#mixedwhenkeys-string--arraystring-builder-object--value-schema-schema-schema)
 const validator = yup.object({
   name: yup.string().required(),
   email: yup.string().required().email(),
   tel: yup.string().required(),
-  time: yup.string().when("type", {
-    is: "contact",
+  time: yup.string().when(["type", "location"], {
+    is(type, location) {
+      return type === "contact" || location === "home"
+    },
     otherwise: yup.string().required(),
   }),
   enquiry: yup.string().when("type", {
     is: "contact",
     then: yup.string().required(),
   }),
+  address: requiredAddress,
+  city: requiredAddress,
+  zip: requiredAddress
 });
 
 export const appointmentForm = createFormModule({

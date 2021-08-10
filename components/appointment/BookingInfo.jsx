@@ -171,7 +171,7 @@ const ModelName = withData({
   },
 });
 
-export default function BookingInfo({ shop, step, nextStep, showPrices = true }) {
+export default function BookingInfo({ shop, step, nextStep, showPrices = true, title = "Afspraak gegevens" }) {
   const location = [shop.street || "", shop.city || ""]
     .filter(Boolean)
     .join(", ");
@@ -181,7 +181,7 @@ export default function BookingInfo({ shop, step, nextStep, showPrices = true })
   return (
     <MainWrap>
       <header>
-        <SubTitle>Afspraak gegevens</SubTitle>
+        <SubTitle>{title}</SubTitle>
       </header>
       <label>Reparateur informatie</label>
       <ShopDetails>
@@ -241,7 +241,7 @@ export default function BookingInfo({ shop, step, nextStep, showPrices = true })
           <span>Bevestig</span>
         ) : (
           <>
-            Enquiry <FontAwesomeIcon icon={faArrowRight} />
+            <FontAwesomeIcon icon={faArrowRight} />
           </>
         )}
       </ButtonWrapper>
