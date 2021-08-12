@@ -283,7 +283,7 @@ export const AdditionalInfo = ({ shopData }) => {
               <div>
                 {reparations
                   .filter((shopPurchase) =>
-                    shopData?.ShopPurchase.includes(shopPurchase.id.toString())
+                    shopData?.ShopPurchase.includes(shopPurchase.id)
                   )
                   .map((shopPurchase) => (
                     <Tag color="green">{shopPurchase.reparation_name}</Tag>
