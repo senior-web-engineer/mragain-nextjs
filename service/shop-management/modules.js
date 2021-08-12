@@ -172,15 +172,15 @@ export const shopManagementAdditionalForm = createFormModule({
     const promise = privateApi.put(
       `${API_PATH.UPDATESHOPGENERALINFO}/${shop}/`,
       {
-        payMethod: data.payMethod.map((id) => +id) || [],
-        repairOption: data.repairOption.map((id) => +id) || [],
+        payMethod: data.payMethod.map((id) => +id),
+        repairOption: data.reparationOption,
         services: "",
-        waitingArea: data.waitingArea ? 1 : 0 || 0,
+        waitingArea: data.waitingArea ? 1 : 0,
         parkingArea: [1, 2],
         insurance: 0,
-        devices: data.devices.map((id) => +id) || [],
-        brands: data.brands.map((id) => +id) || [],
-        purchases: data.purchases.map((id) => +id) || [],
+        devices: data.devices.map((id) => +id),
+        brands: data.brands.map((id) => +id),
+        purchases: data.purchases.map((id) => +id),
       }
     );
 
