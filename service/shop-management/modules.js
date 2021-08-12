@@ -171,44 +171,16 @@ export const shopManagementAdditionalForm = createFormModule({
     const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
     const promise = privateApi.put(
       `${API_PATH.UPDATESHOPGENERALINFO}/${shop}/`,
-      // {
-      //   devices: data.devices,
-      //   brands: data.brands,
-      //   payMethod: data.payMethod,
-      //   locationOptions: data.locationOptions,
-      //   storePurchases: data.storePurchases,
-      //   temporaryReplacement: data.temporaryReplacement,
-      //   waitingArea: data.waitingArea,
-      //   repairOption: data.repairOption,
-      //   services: data.services,
-      //   purchases: data.purchases,
-      //   parkingArea: data.parkingArea,
-      //   insurance: data.insurance,
-      //   shop,
-      // }
-      // {
-      //   payMethod: data.payMethod.join(",") || "",
-      //   repairOption: "1,2",
-      //   reparationOption: "1,2",
-      //   services: data.services.join(",") || "",
-      //   waitingArea: data.waitingArea || false,
-      //   parkingArea: "1,2",
-      //   insurance: 0,
-      //   devices: data.devices || [],
-      //   brands: data.brands || [],
-      //   purchases: data.purchases || [],
-      // }
       {
-        payMethod: "1,2",
-        repairOption: "1,2",
-        services: "1,2",
-        waitingArea: 0,
-        parkingArea: "1,2,3",
+        payMethod: data.payMethod.map((id) => +id) || [],
+        repairOption: data.repairOption.map((id) => +id) || [],
+        services: "",
+        waitingArea: data.waitingArea ? 1 : 0 || 0,
+        parkingArea: [1, 2],
         insurance: 0,
-        devices: data.devices || [],
-        // brands: data.brands.map((id) => +id) || [],
-        brands: [1, 2, 3],
-        purchases: [1, 2, 3],
+        devices: data.devices.map((id) => +id) || [],
+        brands: data.brands.map((id) => +id) || [],
+        purchases: data.purchases.map((id) => +id) || [],
       }
     );
 

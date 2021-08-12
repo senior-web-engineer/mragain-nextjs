@@ -178,27 +178,15 @@ export const AdditionalInfo = ({ shopData }) => {
                 as={MultiSelect}
                 name="payMethod"
                 options={additionalInfoOptions.paymentMethods}
-                value={shopData.paymentMethod
-                  .split(",")
-                  .map(
-                    (id) =>
-                      find(additionalInfoOptions.paymentMethods, [
-                        "id",
-                        id.toLowerCase().replace(/\s/g, ""),
-                      ])?.value
-                  )}
+                value={shopData.paymentMethod}
               />
             ) : (
               <div>
-                {shopData.paymentMethod
-                  .split(",")
-                  .map(
-                    (id) =>
-                      find(additionalInfoOptions.paymentMethods, [
-                        "id",
-                        id.toLowerCase().replace(/\s/g, ""),
-                      ])?.value
-                  )}
+                {additionalInfoOptions.paymentMethods
+                  .filter((item) => shopData.paymentMethod.includes(item.value))
+                  .map((item) => (
+                    <Tag color="blue">{item.label}</Tag>
+                  ))}
               </div>
             )}
           </Col>
@@ -258,7 +246,7 @@ export const AdditionalInfo = ({ shopData }) => {
               <Field
                 adminInput
                 as={MultiSelect}
-                name="services"
+                name="purchases"
                 options={reparations.map((reparation) => ({
                   label: reparation.reparation_name,
                   value: reparation.id,
@@ -269,7 +257,7 @@ export const AdditionalInfo = ({ shopData }) => {
               <div>
                 {reparations
                   .filter((shopPurchase) =>
-                    shopData?.ShopPurchase.includes(shopPurchase.id)
+                    shopData?.ShopPurchase.includes(shopPurchase.id.toString())
                   )
                   .map((shopPurchase) => (
                     <Tag color="green">{shopPurchase.reparation_name}</Tag>
@@ -307,7 +295,13 @@ export const AdditionalInfo = ({ shopData }) => {
           </Col>
           <Col span={18}>
             {editing ? (
-              <Field adminInput simple as={Switch} name="waitingArea" />
+              <Field
+                adminInput
+                simple
+                as={Switch}
+                value={shopData.waitingArea === "No" ? false : true}
+                name="waitingArea"
+              />
             ) : (
               "Not available"
             )}
