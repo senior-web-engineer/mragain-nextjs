@@ -39,7 +39,8 @@ export default function ShopManagementPage() {
       setShopData(await shopManagementGeneralInfo.fetch());
       setNonWorkingDays(await getShopNonWorkingDays.fetch());
       setValidOpenTime(await getValidOpenTime.fetch());
-      if (shopInfo) {
+      console.log(shopInfo);
+      if (shopInfo.length !== 0) {
         setShopInfo(shopInfo[0]);
       }
       await shopManagementAdditionalForm.actions.initialize(user.account_id);

@@ -18,6 +18,21 @@ import {
 import { additionalInfoOptions } from "./helpers";
 import { HeaderSmallText, rowStyle } from "./styles";
 
+const reparationLocationOptions = [
+  {
+    value: 1,
+    label: "Reparatie in de winkel",
+  },
+  {
+    value: 2,
+    label: "Reparatie op locatie",
+  },
+  {
+    value: 3,
+    label: "Toestel opsturen",
+  },
+];
+
 const renderDevicesList = (devices, selectedDevices, onChange) => (
   <Row gutter={[16, 16]}>
     {devices.map((device, index) => (
@@ -201,7 +216,7 @@ export const AdditionalInfo = ({ shopData }) => {
           <Col span={18}>
             {editing ? (
               <Row gutter={[0, 16]}>
-                <Col span={24}>
+                {/* <Col span={24}>
                   <Field
                     adminInput
                     simple
@@ -227,10 +242,21 @@ export const AdditionalInfo = ({ shopData }) => {
                     name="locationOptions.doorToDoorDelivery"
                     title="Toestel opsturen"
                   />
-                </Col>
+                </Col> */}
+                <Field
+                  adminInput
+                  as={MultiSelect}
+                  name="reparationOption"
+                  options={reparationLocationOptions}
+                  value={shopData?.reparationOption.map((id) => id.toString())}
+                />
               </Row>
             ) : (
-              "LOCATIONS LIST"
+              shopData?.reparationOption.map((id) => (
+                <div>
+                  {find(reparationLocationOptions, ["value", +id])?.label}
+                </div>
+              ))
             )}
           </Col>
         </Row>
@@ -303,7 +329,7 @@ export const AdditionalInfo = ({ shopData }) => {
                 name="waitingArea"
               />
             ) : (
-              "Not available"
+              shopData?.waitingArea
             )}
           </Col>
         </Row>
