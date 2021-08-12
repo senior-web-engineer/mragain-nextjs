@@ -111,7 +111,7 @@ export const AdditionalInfo = ({ shopData }) => {
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
             <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-              Devices
+              Apparaten
             </Text.Body>
           </Col>
           <Col span={18}>
@@ -138,7 +138,7 @@ export const AdditionalInfo = ({ shopData }) => {
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
             <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-              Catered Brands
+              Merken
             </Text.Body>
           </Col>
           <Col span={18}>
@@ -168,7 +168,7 @@ export const AdditionalInfo = ({ shopData }) => {
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
             <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-              Payment Methods
+              Betaal methoden
             </Text.Body>
           </Col>
           <Col span={18}>
@@ -195,7 +195,7 @@ export const AdditionalInfo = ({ shopData }) => {
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
             <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-              Location Options
+              Locatie opties
             </Text.Body>
           </Col>
           <Col span={18}>
@@ -238,7 +238,7 @@ export const AdditionalInfo = ({ shopData }) => {
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
             <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-              Store Purchases
+              Aanvullende services
             </Text.Body>
           </Col>
           <Col span={18}>
@@ -270,7 +270,7 @@ export const AdditionalInfo = ({ shopData }) => {
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
             <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-              Temporary replacement
+              Vervangend toestel
             </Text.Body>
           </Col>
           <Col span={18}>
@@ -290,7 +290,7 @@ export const AdditionalInfo = ({ shopData }) => {
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
             <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-              Waiting Area
+              Wachtruimte
             </Text.Body>
           </Col>
           <Col span={18}>

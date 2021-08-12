@@ -138,7 +138,7 @@ export const shopManagementGeneralForm = createFormModule({
 
     createAppointmentFormModal.actions.close();
     notification.success({
-      message: "General info saved successfully",
+      message: "Je wijzigingen zijn succesvol opgeslagen",
     });
 
     return promise;
