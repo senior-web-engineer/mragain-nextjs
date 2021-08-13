@@ -32,7 +32,7 @@ import Form, { useFormContext } from "@/modules/forms";
 import List, { useListContext } from "@/modules/list";
 import Select from "@/components/ui/Select";
 import { createSelectComponent } from "@/modules/dataFetcher";
-import { Radio, Rate, Slider, Switch } from "antd";
+import { Checkbox, Radio, Rate, Slider, Switch } from "antd";
 import { MaxConstraints } from "@/components/styled/layout";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -92,6 +92,14 @@ const SidebarInnerWrap = styled.div`
 
   .ant-slider-mark {
     font-size: 10px;
+  }
+
+  .ant-checkbox-wrapper {
+    display: block;
+  }
+
+  .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+    margin: 0;
   }
 `;
 
@@ -714,7 +722,7 @@ function ShopItem({ item }) {
         <div>
           {tags ? tags.map(tag => {
             const value = Object.values(tag)[0];
-            const props = { [`data-${TAG_TO_COLOR[value]}`.replaceAll('#', '')]: true }
+            const props = { [`data-${TAG_TO_COLOR[value]}`.replace('#', '')]: true }
             return (<tag  {...props}>{value}</tag>);
           }) : null}
         </div>
@@ -995,9 +1003,9 @@ function RefineSearchForm() {
     <Form module={filtersFormModule}>
       <Field name="price" as={Slider} label="Maximum prijs" />
       <Field name="rate" as={Rate} label="Minimale rating" />
-      <Field name="shop_type_text" as={Radio.Group} label="Reparatie Type">
+      <Field name="shop_type_text" as={Checkbox.Group} label="Reparatie Type">
         {REPAIR_TYPES.map((type) => (
-          <Radio value={type.value} disabled={type.disabled}>{type.label}</Radio>
+          <Checkbox value={type.value} disabled={type.disabled}>{type.label}</Checkbox>
         ))}
       </Field>
       <Field
