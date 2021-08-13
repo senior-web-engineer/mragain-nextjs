@@ -171,7 +171,7 @@ const ModelName = withData({
   },
 });
 
-export default function BookingInfo({ shop, step, nextStep, showPrices = true, title = "Afspraak gegevens" }) {
+export default function BookingInfo({ shop, isLastStep, nextStep, showPrices = true, title = "Afspraak gegevens", finalButtonLabel = "Bevestig" }) {
   const location = [shop.street || "", shop.city || ""]
     .filter(Boolean)
     .join(", ");
@@ -237,8 +237,8 @@ export default function BookingInfo({ shop, step, nextStep, showPrices = true, t
         </>
       ) : null}
       <ButtonWrapper onClick={nextStep} aria-label="Next step">
-        {step !== 0 ? (
-          <span>Bevestig</span>
+        {isLastStep ? (
+          <span>{finalButtonLabel}</span>
         ) : (
           <>
             <FontAwesomeIcon icon={faArrowRight} />

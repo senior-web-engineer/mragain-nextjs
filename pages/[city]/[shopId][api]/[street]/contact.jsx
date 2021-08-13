@@ -283,10 +283,11 @@ export default function AppointmentPage({ shop }) {
           <OnMobile show={false}>
             <BookingInfo
               shop={shop}
-              step={step}
+              isLastStep={true}
               showPrices={false}
               nextStep={onNext}
               title="Contact gegevens"
+              finalButtonLabel="Confirm"
             />
           </OnMobile>
           <ConfirmationModal module={appointmentConfirmation} />

@@ -396,7 +396,7 @@ export default function AppointmentPage({ shop }) {
           <OnMobile show={false}>
             <BookingInfo
               shop={shop}
-              step={step}
+              isLastStep={step === 1}
               nextStep={onNext}
             />
           </OnMobile>

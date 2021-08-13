@@ -25,8 +25,8 @@ const DEFAULT_SERVICE = {
 
 const requiredAddress = yup.string().when("location", {
   is: "home",
-  then: yup.string().required()
-})
+  then: yup.string().required(),
+});
 
 // NOTE: when adding address validation
 // use the when method (https://github.com/jquense/yup#mixedwhenkeys-string--arraystring-builder-object--value-schema-schema-schema)
@@ -36,7 +36,7 @@ const validator = yup.object({
   tel: yup.string().required(),
   time: yup.string().when(["type", "location"], {
     is(type, location) {
-      return type === "contact" || location === "home"
+      return type === "contact" || location === "home";
     },
     otherwise: yup.string().required(),
   }),
@@ -46,7 +46,7 @@ const validator = yup.object({
   }),
   address: requiredAddress,
   city: requiredAddress,
-  zip: requiredAddress
+  zip: requiredAddress,
 });
 
 export const appointmentForm = createFormModule({
@@ -123,18 +123,20 @@ export const appointmentForm = createFormModule({
 
     let client_address;
     if (data.location !== "in-store") {
-      client_address = [data.address, data.city, data.state, data.zip].filter(Boolean).join(', ')
+      client_address = [data.address, data.city, data.state, data.zip]
+        .filter(Boolean)
+        .join(", ");
     }
 
     const payload = {
       name: data.shopName,
       address: data.shopAddress,
-      datetime:
-        data.type === "contact" ? undefined : `${formatedDate} - ${data.time}`,
+      datetime: data.type === "contact" ? "" : `${formatedDate} - ${data.time}`,
       appointmentData: {
-        date: data.type === "contact" ? undefined: formatedDate,
-        time: data.type === "contact" ? undefined: data.time,
-        appointment_type: data.type === "contact" ? 3 : data.location === "in-store" ? 2 : 1,
+        date: data.type === "contact" ? "" : formatedDate,
+        time: data.type === "contact" ? "" : data.time,
+        appointment_type:
+          data.type === "contact" ? 3 : data.location === "in-store" ? 2 : 1,
         reparation: reparationId || 54,
         client_name: data.name,
         client_email: data.email,
@@ -265,11 +267,11 @@ export const invalidTimeFetcher = dataFetcher({
   },
 });
 
-export function payForAppointment({appointment, shop, service}) {
+export function payForAppointment({ appointment, shop, service }) {
   return api.post(`${API_PATH.PAYMENT}`, {
     appointment,
     shop: shop.id,
     price: `${service.price}.00`,
-    title: `${shop.name} appointment payment`
-  })
+    title: `${shop.name} appointment payment`,
+  });
 }
