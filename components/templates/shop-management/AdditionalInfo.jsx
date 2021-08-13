@@ -166,7 +166,6 @@ export const AdditionalInfo = ({ shopData }) => {
                   value: item.id.toString(),
                   label: item.brand_name,
                 }))}
-                value={shopData?.cateredBrand.map((id) => id.toString())}
               />
             ) : (
               <div>
@@ -193,7 +192,6 @@ export const AdditionalInfo = ({ shopData }) => {
                 as={MultiSelect}
                 name="payMethod"
                 options={additionalInfoOptions.paymentMethods}
-                value={shopData.paymentMethod}
               />
             ) : (
               <div>
@@ -248,7 +246,6 @@ export const AdditionalInfo = ({ shopData }) => {
                   as={MultiSelect}
                   name="reparationOption"
                   options={reparationLocationOptions}
-                  value={shopData?.reparationOption.map((id) => id.toString())}
                 />
               </Row>
             ) : (
@@ -277,7 +274,6 @@ export const AdditionalInfo = ({ shopData }) => {
                   label: reparation.reparation_name,
                   value: reparation.id,
                 }))}
-                value={shopData.ShopPurchase.map((id) => id.toString())}
               />
             ) : (
               <div>
@@ -307,8 +303,10 @@ export const AdditionalInfo = ({ shopData }) => {
                 as={Switch}
                 name="temporaryReplacement"
               />
+            ) : shopData?.temporaryReplacement ? (
+              "No"
             ) : (
-              "Voor specifieke toestellen"
+              "Yes"
             )}
           </Col>
         </Row>

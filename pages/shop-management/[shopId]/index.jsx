@@ -97,7 +97,7 @@ export default function ShopManagementPage() {
           </TabPane>
           <TabPane tab="Openingstijden" key="operational-hours">
             <Row gutter={[40, 40]} type="flex">
-              <Col xxl={{ span: 14, order: 1 }} lg={{ span: 24, order: 2 }}>
+              <Col xxl={{ span: 14, order: 1 }} xs={{ span: 24, order: 2 }}>
                 {nonWorkingDays && (
                   <OperationalHoursCalendar
                     nonWorkingDays={nonWorkingDays}
@@ -108,7 +108,7 @@ export default function ShopManagementPage() {
               </Col>
               <Col
                 xxl={{ span: 10, order: 2 }}
-                lg={{ span: 24, order: 1 }}
+                xs={{ span: 24, order: 1 }}
                 style={{ height: "fit-content" }}
               >
                 <ScheduleList

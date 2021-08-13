@@ -83,10 +83,14 @@ export const ProfileWrapper = styled.div`
   border-radius: 10px;
   position: absolute;
   top: 170px;
-  left: 60px;
+  left: 3%;
   overflow: hidden;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   z-index: 10;
+
+  @media (max-width: 1300px) {
+    left: 0 !important;
+  }
 `;
 
 export const ProfileButtonWrapper = styled.div`
@@ -94,8 +98,14 @@ export const ProfileButtonWrapper = styled.div`
     position: absolute;
     width: 140px;
     top: 330px;
-    left: 60px;
+    left: 3%;
     z-index: 10;
+  }
+
+  @media (max-width: 1300px) {
+    button {
+      left: 0 !important;
+    }
   }
 `;
 

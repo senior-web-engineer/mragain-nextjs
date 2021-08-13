@@ -48,7 +48,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
   return (
     <BoxWrapper>
       <RowWrapper>
-        <Col span={6}>
+        <Col lg={6} xs={0}>
           <HoursEditor>
             <HeaderSmallText>Mijn locaties</HeaderSmallText>
             <Divider></Divider>
@@ -62,7 +62,7 @@ export const MyAddresses = ({ basicSettingsForm }) => {
             </BoxWrapperContent>
           </HoursEditor>
         </Col>
-        <Col span={18}>
+        <Col lg={18} xs={24}>
           <Form module={basicSettingsForm}>
             <BoxWrapperContent paddingY>
               <Row>

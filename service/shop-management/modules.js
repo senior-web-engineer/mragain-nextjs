@@ -151,21 +151,24 @@ export const shopManagementAdditionalForm = createFormModule({
     const shopInfoData = await privateApi.get(
       `${API_PATH.GETSHOPGENERALINFO}/${shopId}/`
     );
-    console.log(shopInfoData);
-    return {
-      devices: shopInfoData[0].devices || [],
-      brands: shopInfoData[0].brands || [],
-      payMethod: shopInfoData[0].payMethod || [],
-      locationOptions: shopInfoData[0].locationOptions || {},
-      storePurchases: shopInfoData[0].storePurchases || [],
-      temporaryReplacement: shopInfoData[0].temporaryReplacement || false,
-      waitingArea: shopInfoData[0].waitingArea || false,
-      repairOption: shopInfoData[0].repairOption || [],
-      services: shopInfoData[0].services || [],
-      purchases: shopInfoData[0].purchases || [],
-      parkingArea: shopInfoData[0].parkingArea || [],
-      insurance: shopInfoData[0].insurance || [],
-    };
+    if (shopInfoData.length !== 0) {
+      return {
+        devices: shopInfoData[0].replacementDevices || [],
+        brands: shopInfoData[0].cateredBrand.map((id) => id.toString()) || [],
+        payMethod: shopInfoData[0].paymentMethod || [],
+        purchases:
+          shopInfoData[0].ShopPurchase.map((id) => id.toString()) || [],
+        temporaryReplacement: !!shopInfoData[0].temporaryReplacement,
+        waitingArea: shopInfoData[0].waitingArea,
+        reparationOption:
+          shopInfoData[0].reparationOption.map((id) => id.toString()) || [],
+        services: shopInfoData[0].services || [],
+        parkingArea: shopInfoData[0].parkingArea || [],
+        insurance: shopInfoData[0].insurance || [],
+      };
+    }
+
+    return {};
   },
   submit(data) {
     console.log(data);
@@ -177,6 +180,7 @@ export const shopManagementAdditionalForm = createFormModule({
         repairOption: data.reparationOption,
         services: "",
         waitingArea: data.waitingArea ? 1 : 0,
+        temporaryReplacement: data.temporaryReplacement ? 1 : 0,
         parkingArea: [1, 2],
         insurance: 0,
         devices: data.devices.map((id) => +id),
