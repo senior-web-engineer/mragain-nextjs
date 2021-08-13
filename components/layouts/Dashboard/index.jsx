@@ -5,6 +5,7 @@ import React, { useState } from "react";
 
 import DashboardImage from "@/assets/icons/dashboard.svg";
 import Select from "@/components/ui/Select";
+import { OnMobile } from "@/utils/media";
 
 import Header from "./Header";
 import { ContentWrap, MainWrap, MenuWrap, PageContent } from "./menu-styles";
@@ -63,7 +64,9 @@ export default function DefaultLayout({ children, showSignup = false }) {
     <MainWrap>
       <Header showSignup={showSignup} />
       <ContentWrap>
-        <Menu />
+        <OnMobile show={false}>
+          <Menu />
+        </OnMobile>
         <PageContent>{children}</PageContent>
       </ContentWrap>
     </MainWrap>

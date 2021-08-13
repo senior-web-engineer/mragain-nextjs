@@ -1,31 +1,18 @@
-import {
-  Button,
-  Col,
-  Divider,
-  Icon,
-  Input as AntdInput,
-  Row,
-  Table,
-  Tag,
-} from "antd";
-import { find } from "lodash";
-import * as moment from "moment";
-import Image from "next/image";
+import { Col, Divider, Input as AntdInput, Row, Table } from "antd";
 import React, { useEffect, useState } from "react";
-import Highlighter from "react-highlight-words";
 import styled from "styled-components";
 
 import { Text } from "@/components/common/Text/Text";
-import { devicesFetcher } from "@/components/dashboard/modules";
 import DefaultLayout from "@/components/layouts/Dashboard";
+import { columns } from "@/components/templates/history/helpers";
+import { MobileList } from "@/components/templates/history/MobileLists";
 import { ViewRecord } from "@/components/templates/history/ViewRecord";
-import { additionalInfoOptions } from "@/components/templates/shop-management/helpers";
-import Price from "@/pages/prijs";
 import {
   currentUser,
   reparationsList,
   viewRecordModal,
 } from "@/service/history/modules";
+import { OnMobile } from "@/utils/media";
 
 const StyledTable = styled(Table)`
   .ant-table-head {
@@ -50,124 +37,9 @@ const StyledTable = styled(Table)`
   }
 `;
 
-const DeviceDetailsWrapper = styled.div`
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .brand-model {
-    margin-left: 16px;
-    display: flex;
-    flex-direction: column;
-  }
+const MobileContent = styled.div`
+  height: calc(100vh - 260px);
 `;
-
-const TagWrapper = styled(Tag)`
-  transform: scale(1.1);
-`;
-
-const getGuaranteeStatus = (date, guarantee) => {
-  return moment().isAfter(moment(date, "YYYY-MM-DD").add(guarantee, "months"))
-    ? "red"
-    : "green";
-};
-
-const columns = (viewDetails, search) => [
-  {
-    width: "120px",
-    title: "Date",
-    render(data) {
-      return data?.appointment?.date;
-    },
-  },
-  {
-    title: "Repair Type",
-    width: 150,
-    render(data) {
-      return <b>{data?.reparation?.reparation_name}</b>;
-    },
-  },
-  {
-    title: "Device details",
-    width: 300,
-    render(data) {
-      return (
-        <DeviceDetailsWrapper>
-          <div>
-            {find(additionalInfoOptions.devices, ["id", data?.device?.id])
-              ?.icon && (
-              <Image
-                width={40}
-                height={40}
-                src={
-                  find(additionalInfoOptions.devices, ["id", data?.device?.id])
-                    ?.icon || ""
-                }
-              />
-            )}
-          </div>
-          <div className="brand-model">
-            <div>
-              <b>{data?.model?.model_name}</b>
-            </div>
-            <div>{data?.brand?.brand_name}</div>
-          </div>
-        </DeviceDetailsWrapper>
-      );
-    },
-  },
-  {
-    title: "IMEI Number",
-    dataIndex: "serialnumber",
-    width: 180,
-    sorter: (a, b) => a.serialnumber - b.serialnumber,
-    render: (serialNumber) => (
-      <b>
-        <Highlighter
-          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-          searchWords={[search]}
-          autoEscape
-          textToHighlight={serialNumber ? serialNumber.toString() : ""}
-        />
-      </b>
-    ),
-  },
-  {
-    title: "Price",
-    dataIndex: "price",
-    width: 150,
-    render: (price) =>
-      new Intl.NumberFormat("de-DE", {
-        style: "currency",
-        currency: "EUR",
-      }).format(price),
-    sorter: (a, b) => +a.price - +b.price,
-  },
-  {
-    title: "Warranty",
-    width: 150,
-    render(data) {
-      return (
-        <TagWrapper
-          color={getGuaranteeStatus(data?.appointment.date, data?.guarantee)}
-        >{`${data?.guarantee} months`}</TagWrapper>
-      );
-    },
-    sorter: (a, b) => a.guarantee - b.guarantee,
-  },
-  {
-    title: "",
-    width: 50,
-    render(data) {
-      return (
-        <Button type="primary" onClick={() => viewDetails(data)}>
-          <Icon type="eye" />
-        </Button>
-      );
-    },
-  },
-];
 
 export default function HistoryPage({ auth_user }) {
   const [loading, setLoading] = useState(false);
@@ -179,7 +51,6 @@ export default function HistoryPage({ auth_user }) {
     async function loadData() {
       await currentUser.fetch();
       const { items } = await reparationsList.actions.initialize();
-      console.log(items);
       setHistoryItems(items);
       setLoading(false);
     }
@@ -189,17 +60,14 @@ export default function HistoryPage({ auth_user }) {
   }, []);
 
   const onSearch = (value) => {
-    console.log(value);
     setSearch(value);
   };
 
   const handleOnRowsSelected = (keys, items) => console.log(keys, items);
 
   const viewDetails = (data) => {
-    console.log(data);
     setSelectedItem(data);
     viewRecordModal.actions.open();
-    devicesFetcher.fetch();
   };
 
   return (
@@ -213,7 +81,7 @@ export default function HistoryPage({ auth_user }) {
         <Col />
       </Row>
       <Row>
-        <Col span={5}>
+        <Col lg={{ span: 5 }} md={{ span: 24 }}>
           <AntdInput
             placeholder="Search IMEI Number"
             size="large"
@@ -226,16 +94,28 @@ export default function HistoryPage({ auth_user }) {
         <Col></Col>
       </Row>
       <Divider />
-      <StyledTable
-        loading={loading}
-        dataSource={historyItems.filter((data) =>
-          data.serialnumber.includes(search)
-        )}
-        columns={columns(viewDetails, search)}
-        onRowsSelected={handleOnRowsSelected}
-        selection
-        pagination
-      />
+      <OnMobile only>
+        <MobileContent>
+          <MobileList
+            viewDetails={viewDetails}
+            data={historyItems.filter((data) =>
+              data.serialnumber.includes(search)
+            )}
+          />
+        </MobileContent>
+      </OnMobile>
+      <OnMobile show={false}>
+        <StyledTable
+          loading={loading}
+          dataSource={historyItems.filter((data) =>
+            data.serialnumber.includes(search)
+          )}
+          columns={columns(viewDetails, search)}
+          onRowsSelected={handleOnRowsSelected}
+          selection
+          pagination
+        />
+      </OnMobile>
       <ViewRecord data={selectedItem} viewRecordModal={viewRecordModal} />
     </DefaultLayout>
   );

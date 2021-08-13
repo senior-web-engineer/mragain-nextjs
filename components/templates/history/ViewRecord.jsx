@@ -2,19 +2,31 @@ import { Badge, Descriptions, Divider } from "antd";
 import moment from "moment";
 import Image from "next/image";
 import React from "react";
+import { useEffect, useState } from "react";
 
 import { Drawer } from "@/modules/modal";
 
 export const ViewRecord = ({ data, viewRecordModal }) => {
-  console.log(data);
+  const [screenSize, setScreenSize] = useState(800);
+
   const getGuaranteeStatus = (date, guarantee) => {
     return moment().isAfter(moment(date, "YYYY-MM-DD").add(guarantee, "months"))
       ? "error"
       : "processing";
   };
 
+  useEffect(() => {
+    function handleResize() {
+      setScreenSize(window.innerWidth < 450 ? "100%" : 800);
+    }
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <Drawer width="800px" module={viewRecordModal}>
+    <Drawer width={screenSize} module={viewRecordModal}>
       {data && (
         <div>
           <Descriptions title="Afspraak gegevens" bordered>

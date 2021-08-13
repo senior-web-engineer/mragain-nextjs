@@ -43,7 +43,7 @@ const Body = (props) => {
     props.size || "10",
     props.weight || "regular",
     props.spacing,
-    props.lineHeight || "24"
+    props.lineHeight || "16"
   );
   return (
     <p style={props.style} className={h4Preset}>

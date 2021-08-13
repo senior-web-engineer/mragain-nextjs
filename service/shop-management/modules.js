@@ -151,19 +151,20 @@ export const shopManagementAdditionalForm = createFormModule({
     const shopInfoData = await privateApi.get(
       `${API_PATH.GETSHOPGENERALINFO}/${shopId}/`
     );
+    console.log(shopInfoData);
     return {
-      devices: shopInfoData.devices || [],
-      brands: shopInfoData.brands || [],
-      payMethod: shopInfoData.payMethod || [],
-      locationOptions: shopInfoData.locationOptions || {},
-      storePurchases: shopInfoData.storePurchases || [],
-      temporaryReplacement: shopInfoData.temporaryReplacement || false,
-      waitingArea: shopInfoData.waitingArea || false,
-      repairOption: shopInfoData.repairOption || [],
-      services: shopInfoData.services || [],
-      purchases: shopInfoData.purchases || [],
-      parkingArea: shopInfoData.parkingArea || [],
-      insurance: shopInfoData.insurance || [],
+      devices: shopInfoData[0].devices || [],
+      brands: shopInfoData[0].brands || [],
+      payMethod: shopInfoData[0].payMethod || [],
+      locationOptions: shopInfoData[0].locationOptions || {},
+      storePurchases: shopInfoData[0].storePurchases || [],
+      temporaryReplacement: shopInfoData[0].temporaryReplacement || false,
+      waitingArea: shopInfoData[0].waitingArea || false,
+      repairOption: shopInfoData[0].repairOption || [],
+      services: shopInfoData[0].services || [],
+      purchases: shopInfoData[0].purchases || [],
+      parkingArea: shopInfoData[0].parkingArea || [],
+      insurance: shopInfoData[0].insurance || [],
     };
   },
   submit(data) {
