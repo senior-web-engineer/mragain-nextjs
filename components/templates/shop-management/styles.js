@@ -21,7 +21,7 @@ export const HeaderSmallText = styled.p`
   font-size: 12px;
   line-height: 10px;
   color: #3090b4;
-  margin: 25px 0 12px 12px;
+  margin: 0;
 `;
 
 export const HeaderText = styled.h1`

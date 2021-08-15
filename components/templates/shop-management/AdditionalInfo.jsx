@@ -90,9 +90,17 @@ export const AdditionalInfo = ({ shopData }) => {
     setSelectedDevices(newSelectedDevices);
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    shopManagementAdditionalForm.actions.submit(
+      shopManagementAdditionalForm.state.values
+    );
+    setEditing(false);
+  };
+
   return (
     <>
-      <Form module={shopManagementAdditionalForm}>
+      <Form module={shopManagementAdditionalForm} onSubmit={onSubmit}>
         <Row type="flex" justify="space-between" align="middle">
           <Col>
             <HeaderSmallText>Algemene informatie</HeaderSmallText>
@@ -102,21 +110,16 @@ export const AdditionalInfo = ({ shopData }) => {
               <>
                 <Button
                   style={{ marginRight: "10px" }}
-                  size="large"
                   onClick={() => setEditing(false)}
                 >
                   Annuleren
                 </Button>
-                <Button size="large" type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit">
                   Opslaan
                 </Button>
               </>
             ) : (
-              <Button
-                size="large"
-                type="primary"
-                onClick={() => setEditing(true)}
-              >
+              <Button type="primary" onClick={() => setEditing(true)}>
                 Wijzigen
               </Button>
             )}

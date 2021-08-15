@@ -136,11 +136,11 @@ export const shopManagementGeneralForm = createFormModule({
       shop,
     });
 
-    createAppointmentFormModal.actions.close();
-    notification.success({
-      message: "Je wijzigingen zijn succesvol opgeslagen",
-    });
-
+    if (promise) {
+      notification.success({
+        message: "Je wijzigingen zijn succesvol opgeslagen",
+      });
+    }
     return promise;
   },
 });
@@ -171,7 +171,6 @@ export const shopManagementAdditionalForm = createFormModule({
     return {};
   },
   submit(data) {
-    console.log(data);
     const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
     const promise = privateApi.put(
       `${API_PATH.UPDATESHOPGENERALINFO}/${shop}/`,
@@ -189,9 +188,11 @@ export const shopManagementAdditionalForm = createFormModule({
       }
     );
 
-    notification.success({
-      message: "Additional info saved successfully",
-    });
+    if (promise) {
+      notification.success({
+        message: "Additional info saved successfully",
+      });
+    }
 
     return promise;
   },

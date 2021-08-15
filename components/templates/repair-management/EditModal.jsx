@@ -133,15 +133,12 @@ export const EditModal = ({ item, data, editRepairModelModal, onSave }) => {
       />
       <RowWrapperMargin type="flex" justify="space-between" align="center">
         <Col>
-          <Button
-            size="large"
-            onClick={() => editRepairModelModal.actions.close()}
-          >
+          <Button onClick={() => editRepairModelModal.actions.close()}>
             Annuleer
           </Button>
         </Col>
         <Col>
-          <Button size="large" type="primary" onClick={() => onSave(items)}>
+          <Button type="primary" onClick={() => onSave(items)}>
             Opslaan
           </Button>
         </Col>

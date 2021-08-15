@@ -1,7 +1,7 @@
 import { Button, Col, Row } from "antd";
 import { Rate } from "antd";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Link from "@/assets/icons/link.svg";
 import MapMarker from "@/assets/icons/map-marker.svg";
@@ -16,7 +16,6 @@ import { shopManagementGeneralForm } from "@/service/shop-management/modules";
 import {
   AdvantagesWrap,
   ContactInfo,
-  HeaderText,
   PaddingWrapper,
   rowStyle,
 } from "./styles";
@@ -62,7 +61,11 @@ function renderAdvantage(advantage, index) {
 export const GeneralInfo = ({ shopData }) => {
   const [editing, setEditing] = useState(false);
 
-  const onSave = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
+    shopManagementGeneralForm.actions.submit(
+      shopManagementGeneralForm.state.values
+    );
     setEditing(false);
   };
 
@@ -75,7 +78,7 @@ export const GeneralInfo = ({ shopData }) => {
     <>
       {editing ? (
         <PaddingWrapper>
-          <Form module={shopManagementGeneralForm}>
+          <Form module={shopManagementGeneralForm} onSubmit={onSubmit}>
             <Row style={rowStyle} type="flex" justify="space-between">
               <Col span={6}>
                 <h3>About the company</h3>
@@ -98,9 +101,7 @@ export const GeneralInfo = ({ shopData }) => {
             <Row style={rowStyle} type="flex" justify="space-between">
               <Col span={6}>
                 <h3>Contact informatie</h3>
-                <p>
-                  Laat bezoekers weten hoe ze je kunnen bereiken.
-                </p>
+                <p>Laat bezoekers weten hoe ze je kunnen bereiken.</p>
               </Col>
               <Col span={18}>
                 <Field
@@ -132,17 +133,11 @@ export const GeneralInfo = ({ shopData }) => {
               <Col>
                 <Button
                   style={{ marginRight: "10px" }}
-                  size="large"
                   onClick={() => setEditing(false)}
                 >
                   Annuleren
                 </Button>
-                <Button
-                  size="large"
-                  type="primary"
-                  htmlType="submit"
-                  onClick={onSave}
-                >
+                <Button type="primary" htmlType="submit">
                   Opslaan
                 </Button>
               </Col>
@@ -157,7 +152,7 @@ export const GeneralInfo = ({ shopData }) => {
                 <Text.Headline>{shopData?.name}</Text.Headline>
               </Col>
               <Col>
-                <Button size="large" type="primary" onClick={onEdit}>
+                <Button type="primary" onClick={onEdit}>
                   Wijzig
                 </Button>
               </Col>

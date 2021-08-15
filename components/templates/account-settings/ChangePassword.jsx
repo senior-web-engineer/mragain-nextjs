@@ -53,7 +53,7 @@ export const ChangePassword = ({ changePasswordForm }) => {
         <Divider />
         <ButtonsWrapper>
           <div />
-          <Button size="large" type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit">
             Wachtwoord wijzigingen
           </Button>
         </ButtonsWrapper>

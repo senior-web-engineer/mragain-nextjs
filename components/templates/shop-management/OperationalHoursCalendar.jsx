@@ -222,15 +222,8 @@ export const OperationalHoursCalendar = ({
             </Col>
             <Divider />
             <Row type="flex" justify="space-between">
-              <Button size="large" onClick={onClear}>
-                Wis
-              </Button>
-              <Button
-                size="large"
-                type="primary"
-                onClick={onAdd}
-                disabled={isAddDisabled()}
-              >
+              <Button onClick={onClear}>Wis</Button>
+              <Button type="primary" onClick={onAdd} disabled={isAddDisabled()}>
                 Voeg toe
               </Button>
             </Row>

@@ -82,7 +82,7 @@ export const BasicProfile = ({ basicSettingsForm }) => {
         <Divider />
         <ButtonsWrapper>
           <div />
-          <Button size="large" type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit">
             Wijzigingen opslaan
           </Button>
         </ButtonsWrapper>
