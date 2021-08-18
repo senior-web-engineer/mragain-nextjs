@@ -141,6 +141,7 @@ export const AdditionalInfo = ({ shopData }) => {
               )
             ) : (
               <div>
+                {console.log("AAA", shopData)}
                 {additionalInfoOptions.devices
                   .filter((device) =>
                     shopData?.replacementDevices.includes(device.id)
@@ -199,7 +200,9 @@ export const AdditionalInfo = ({ shopData }) => {
             ) : (
               <div>
                 {additionalInfoOptions.paymentMethods
-                  .filter((item) => shopData.paymentMethod.includes(item.value))
+                  .filter((item) =>
+                    shopData?.paymentMethod.includes(item.value)
+                  )
                   .map((item) => (
                     <Tag color="blue">{item.label}</Tag>
                   ))}
