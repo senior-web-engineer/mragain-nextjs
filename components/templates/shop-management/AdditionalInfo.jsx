@@ -141,7 +141,6 @@ export const AdditionalInfo = ({ shopData }) => {
               )
             ) : (
               <div>
-                {console.log("AAA", shopData)}
                 {additionalInfoOptions.devices
                   .filter((device) =>
                     shopData?.replacementDevices.includes(device.id)
