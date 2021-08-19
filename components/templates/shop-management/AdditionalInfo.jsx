@@ -1,6 +1,5 @@
 import { Button, Col, Divider, Row, Switch, Tag } from "antd";
 import { find } from "lodash";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 import { MultiSelect } from "@/components/common/MultiSelect";
@@ -11,6 +10,7 @@ import { Field } from "@/modules/forms/Blocks";
 import {
   currentUser,
   getBrands,
+  getDevices,
   getReparations,
   shopManagementAdditionalForm,
 } from "@/service/shop-management/modules";
@@ -39,7 +39,7 @@ const renderDevicesList = (devices, selectedDevices, onChange) => (
       <Col span={12} key={`device-${index}`}>
         <SwitchGroup
           title={device.device_name}
-          description={device.description}
+          description={device.synonyms}
           defaultChecked={selectedDevices.includes(device.id)}
           onChange={(value) => onChange(device.id, value)}
         />
@@ -51,6 +51,7 @@ const renderDevicesList = (devices, selectedDevices, onChange) => (
 export const AdditionalInfo = ({ shopData }) => {
   const [editing, setEditing] = useState(false);
   const [brands, setBrands] = useState([]);
+  const [devices, setDevices] = useState([]);
   const [reparations, setReparations] = useState([]);
   const [selectedDevices, setSelectedDevices] = useState([]);
 
@@ -60,6 +61,7 @@ export const AdditionalInfo = ({ shopData }) => {
       shopManagementAdditionalForm.actions.initialize(user.account_id);
       const fetchedBrands = await getBrands.fetch();
       setReparations(await getReparations.fetch());
+      setDevices(await getDevices.fetch());
       setBrands(fetchedBrands);
     };
     fetchData();
@@ -134,20 +136,32 @@ export const AdditionalInfo = ({ shopData }) => {
           </Col>
           <Col span={18}>
             {editing ? (
-              renderDevicesList(
-                additionalInfoOptions.devices,
-                shopData.replacementDevices,
-                onDeviceSelected
-              )
+              <div>
+                {renderDevicesList(
+                  devices,
+                  shopData.replacementDevices,
+                  onDeviceSelected
+                )}
+              </div>
             ) : (
               <div>
-                {additionalInfoOptions.devices
+                {devices
                   .filter((device) =>
-                    shopData?.replacementDevices.includes(device.id)
+                    shopData?.replacementDevices.includes(device?.id || 0)
                   )
-                  .map((device) => (
-                    <Image width="40px" height="40px" src={device.icon} />
-                  ))}
+                  .map((device) => {
+                    if (device.device_image) {
+                      return (
+                        <img
+                          width="40px"
+                          height="40px"
+                          src={device?.device_image || ""}
+                        />
+                      );
+                    }
+
+                    return <></>;
+                  })}
               </div>
             )}
           </Col>
