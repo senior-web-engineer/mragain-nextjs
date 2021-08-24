@@ -199,10 +199,10 @@ export default function AppointmentPage({ shop }) {
       appointmentConfirmation.actions
         .open({
           type: "success",
-          message: "Afspraak succesvol gemaakt! ",
+          message: "Bericht verzonden",
           description:
-            "We hebben een bevestiging email naar je verzonden (kan in je spam zitten!)",
-          buttonLabel: "Bekijk afspraak gegevens",
+            "Je bericht is ontvangen, de reparateur neemt zo snel mogelijk contact met je op.",
+          buttonLabel: "Bekijk gegevens",
         })
         .then(() => {
           appointmentReview.actions.open(reviewData);
@@ -252,7 +252,7 @@ export default function AppointmentPage({ shop }) {
             <Form module={appointmentForm}>
               <DetailsForm>
                 <header>
-                  <SubTitle>Jouw gegevens</SubTitle>
+                  <SubTitle>Vul je gegevens in en neem contact op</SubTitle>
                 </header>
                 <Field name="name" label="Naam" />
                 <InlineFields>
@@ -271,7 +271,7 @@ export default function AppointmentPage({ shop }) {
                   as={TextArea}
                   rows={6}
                   name="enquiry"
-                  label="Enquiry"
+                  label="Bericht"
                 />
               </DetailsForm>
             </Form>
@@ -287,7 +287,7 @@ export default function AppointmentPage({ shop }) {
               showPrices={false}
               nextStep={onNext}
               title="Contact gegevens"
-              finalButtonLabel="Confirm"
+              finalButtonLabel="Verzenden"
             />
           </OnMobile>
           <ConfirmationModal module={appointmentConfirmation} />
