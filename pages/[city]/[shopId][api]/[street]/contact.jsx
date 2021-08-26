@@ -235,7 +235,7 @@ export default function AppointmentPage({ shop }) {
       <span />
       <OnMobile only>
         <Button onClick={onNext} aria-label="Volgende">
-          Enquiry <FontAwesomeIcon icon={faArrowRight} />
+          Verzenden <FontAwesomeIcon icon={faArrowRight} />
         </Button>
       </OnMobile>
     </CTAButtons>
