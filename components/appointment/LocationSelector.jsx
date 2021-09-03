@@ -4,12 +4,13 @@ import InlineSelector from "./InlineSelector";
 
 //
 
-const DEFAULT_OPTIONS = [
+export const LOCATION_OPTIONS = [
   {
     label: "Reparatie in de winkel",
     description: "Maak een afspraak en kom bij ons langs",
     icon: faStore,
     value: "in-store",
+    apiValue: "1"
   },
   {
     label: "Reparatie op locatie",
@@ -17,6 +18,7 @@ const DEFAULT_OPTIONS = [
     description: "Coming soon",
     icon: faHome,
     value: "home",
+    apiValue: "2"
   },
   {
     label: "Opsturen",
@@ -27,6 +29,10 @@ const DEFAULT_OPTIONS = [
   },
 ];
 
+export function getLocationOptions(shop) {
+  return LOCATION_OPTIONS.map(option => ({...option, disabled: !shop.shop_type.includes(option.apiValue)}))
+}
+
 export default function LocationSelector(props) {
-  return <InlineSelector options={DEFAULT_OPTIONS} {...props} />;
+  return <InlineSelector {...props} />;
 }

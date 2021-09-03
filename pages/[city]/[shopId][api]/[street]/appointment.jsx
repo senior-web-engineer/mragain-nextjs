@@ -18,7 +18,7 @@ import BookingInfo from "@/components/appointment/BookingInfo";
 import styled, { css } from "styled-components";
 import { SubTitle } from "@/components/styled/text";
 import { Field } from "@/modules/forms/Blocks";
-import LocationSelector from "@/components/appointment/LocationSelector";
+import LocationSelector, { getLocationOptions } from "@/components/appointment/LocationSelector";
 import PaymentSelector from "@/components/appointment/PaymentSelector";
 import Form, { useFormContext } from "@/modules/forms";
 import DateAndTime from "@/components/appointment/DateAndTime";
@@ -34,7 +34,7 @@ import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
 import Button from "@/components/ui/Button";
 import router from "next/router";
 import { store } from "@/configureStore";
-import api from "@/utils/api";
+import TextArea from "antd/lib/input/TextArea";
 
 const MainWrap = styled.div`
     padding-top: 1px;
@@ -184,6 +184,7 @@ function ConnectedDateAndTime() {
   const { state } = useFormContext();
   return <DateAndTime required={state?.values?.location !== "home"} />
 }
+
 
 export default function AppointmentPage({ shop }) {
   const [step, updateStep] = useState(0);
@@ -355,6 +356,7 @@ export default function AppointmentPage({ shop }) {
                     <Field
                       name="location"
                       as={LocationSelector}
+                      options={getLocationOptions(shop)}
                     />
                   </LocationFieldWrap>
                   <ConnectedDateAndTime />
@@ -377,6 +379,12 @@ export default function AppointmentPage({ shop }) {
                         autoComplete="tel"
                       />
                     </InlineFields>
+                    {appointmentForm.state?.values?.location === "home" ? <Field
+                      as={TextArea}
+                      rows={6}
+                      name="enquiry"
+                      label="Bericht"
+                    /> : null}
                     {renderAddressFields()}
                   </DetailsForm>
                 </Switch.Case>
