@@ -326,7 +326,7 @@ export default function DateAndTime({required = true}) {
   return (
     <DatePickerWrap>
       <header>
-        <SubTitle>Kies de datum die jou uitkomt {required ? '' : '(nog definitive)'}</SubTitle>
+        <SubTitle>Kies de datum die jou uitkomt {required ? '' : '(Dit kan wijzigen)'}</SubTitle>
       </header>
       <SchedueleContentWrap>
         <Field name="date" as={CalendarField} onChange={(value) => {
