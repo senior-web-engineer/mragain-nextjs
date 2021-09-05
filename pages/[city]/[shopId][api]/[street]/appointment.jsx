@@ -301,12 +301,12 @@ export default function AppointmentPage({ shop }) {
       <AddressSection>
         <Field
           name="address"
-          label="Street Address"
+          label="Straat & huisnummer"
           autoComplete="street-address"
         />
         <InlineFields>
-          <Field name="city" label="City" />
-          <Field name="zip" label="Zip" autoComplete="postal-code" />
+          <Field name="city" label="Stad" />
+          <Field name="zip" label="Postcode" autoComplete="postal-code" />
         </InlineFields>
       </AddressSection>
     );
