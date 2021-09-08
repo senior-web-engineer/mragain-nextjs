@@ -44,7 +44,7 @@ const SearchForm = (routerProps) => {
     };
     setSearchFilter(_filters);
     router.push(
-      `/zoek-resultaten?position=${loc}&device=${0}&brand=${0}&model=${0}&reparation=${0}`
+      `/zoek-een-reparateur?position=${loc}&device=${0}&brand=${0}&model=${0}&reparation=${0}`
     );
   }
 
