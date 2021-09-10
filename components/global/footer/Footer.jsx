@@ -37,7 +37,7 @@ const FooterView = (routerProps) => {
     splitUrl === "/bevestig-je-afspraak" ||
     splitUrl === "/over-ons" ||
     splitUrl === "/hoe-werkt-het" ||
-    splitUrl === "/contact" ||
+    splitUrl === "/contact-met-mragain" ||
     splitUrl === "/prijs" ||
     splitUrl === "/reparatie" ||
     splitUrl === "/maak-een-account-aan" ||
@@ -115,7 +115,7 @@ const FooterView = (routerProps) => {
                   </Link>
                 </li>
 	        <li>
-                  <Link prefetch={false} href="/contact">
+                  <Link prefetch={false} href="/contact-met-mragain">
                     Contact
                   </Link>
                 </li>
