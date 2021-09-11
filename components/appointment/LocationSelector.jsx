@@ -7,7 +7,7 @@ import InlineSelector from "./InlineSelector";
 export const LOCATION_OPTIONS = [
   {
     label: "Reparatie in de winkel",
-    description: "Maak een afspraak en kom bij ons langs",
+    description: "Kom bij ons langs voor je reparatie",
     icon: faStore,
     value: "in-store",
     apiValue: "1"
@@ -15,7 +15,7 @@ export const LOCATION_OPTIONS = [
   {
     label: "Reparatie op locatie",
     // @pim fix this description and remove this line once it's done
-    description: "Coming soon",
+    description: "Wij komen naar jou!",
     icon: faHome,
     value: "home",
     apiValue: "2"
