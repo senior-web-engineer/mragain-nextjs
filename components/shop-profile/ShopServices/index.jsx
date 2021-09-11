@@ -209,7 +209,7 @@ const SERVICE_COLUMNS = [
             colSpan: 3,
 
           },
-          children: <div style={{textAlign: "center", border: "1px solid #ddd"}}>on demand</div>
+          children: <div style={{textAlign: "center", border: "1px solid #ddd"}}>Prijs op aanvraag</div>
         }
       }
 
