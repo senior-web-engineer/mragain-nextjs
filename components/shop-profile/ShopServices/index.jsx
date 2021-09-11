@@ -201,21 +201,49 @@ const SERVICE_COLUMNS = [
   },
   {
     title: "Garantie",
-    dataIndex: "guarantee_time",
     key: "guarantee_time",
-    render: (data) => `${data} maanden`,
+    render: (data) => {
+      if (data.guarantee_time === 0 && data.price === 0 && data.reparation_time === "0") {
+        return {
+          props: {
+            colSpan: 3,
+
+          },
+          children: <div style={{textAlign: "center", border: "1px solid #ddd"}}>on demand</div>
+        }
+      }
+
+      return `${data.guarantee_time} maanden`
+    },
   },
   {
     title: "Reparatie tijd",
-    dataIndex: "reparation_time",
     key: "reparation_time",
-    render: (data) => `${data} minuten`,
+    render: (data) => {
+      if (data.guarantee_time === 0 && data.price === 0 && data.reparation_time === "0") {
+        return {
+          props: {
+            colSpan: 0
+          }
+        }
+      }
+
+      return `${data.reparation_time} minuten`;
+    },
   },
   {
     title: "Prijs",
-    dataIndex: "price",
     key: "price",
-    render: (text) => <span>&euro;{text}</span>,
+    render: (data) => {
+      if (data.guarantee_time === 0 && data.price === 0 && data.reparation_time === "0") {
+        return {
+          props: {
+            colSpan: 0
+          }
+        }
+      }
+      return <span>&euro;{data.price}</span>
+    },
   },
 ];
 
