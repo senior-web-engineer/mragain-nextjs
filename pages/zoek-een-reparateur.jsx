@@ -32,7 +32,7 @@ import Form, { useFormContext } from "@/modules/forms";
 import List, { useListContext } from "@/modules/list";
 import Select from "@/components/ui/Select";
 import { createSelectComponent } from "@/modules/dataFetcher";
-import { Radio, Rate, Slider, Switch } from "antd";
+import { Checkbox, Radio, Rate, Slider, Switch } from "antd";
 import { MaxConstraints } from "@/components/styled/layout";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -92,6 +92,14 @@ const SidebarInnerWrap = styled.div`
 
   .ant-slider-mark {
     font-size: 10px;
+  }
+
+  .ant-checkbox-wrapper {
+    display: block;
+  }
+
+  .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+    margin: 0;
   }
 `;
 
@@ -450,11 +458,7 @@ const ShopDetails = styled.div`
     display: inline-block;
     font-size: 8px;
     height: 26px;
-    ${(props) =>
-    props.tagColor &&
-    css`
-        background-color: ${props.tagColor || "#ddd"};
-      `}
+    background-color: #ddd;
     color: #fff;
     line-height: 26px;
     padding: 0 10px;
@@ -462,7 +466,14 @@ const ShopDetails = styled.div`
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     text-transform: uppercase;
-    margin-bottom: 14px;
+    margin: 0 1px 14px 1px;
+
+    &[data-ffd342] {
+      background-color: #ffd342;
+    }
+    &[data-c90648] {
+      background-color: #c90648;
+    }
 
     ${media.tablet`
       position: static;
@@ -669,7 +680,7 @@ function ShopItem({ item }) {
     return <ShopDetails.Service>{service.device_name}</ShopDetails.Service>;
   }
 
-  const tag = item.shop.tag;
+  const tags = item.shop_type_text;
   const formState = filtersFormModule.state.values;
   // API changed does not include the city any longer?
   // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
@@ -707,8 +718,14 @@ function ShopItem({ item }) {
         />
         <d-def>{item.shop.distance} km</d-def>
       </ShopImageWrap>
-      <ShopDetails tagColor={TAG_TO_COLOR[tag]}>
-        <div>{tag ? <tag>{tag}</tag> : null}</div>
+      <ShopDetails>
+        <div>
+          {tags ? tags.map(tag => {
+            const value = Object.values(tag)[0];
+            const props = { [`data-${TAG_TO_COLOR[value]}`.replace('#', '')]: true }
+            return (<tag  {...props}>{value}</tag>);
+          }) : null}
+        </div>
         <ShopDetails.SecondRow>
           <ShopDetails.NameWrap>
             <h3>{item.shop.name}</h3>
@@ -828,16 +845,17 @@ const ServiceSelector = AppendIdentifier({
 
 const REPAIR_TYPES = [
   {
-    label: "In-store",
-    value: "in-store",
+    label: "Repair on shop",
+    value: 1,
   },
   {
-    label: "Home service",
-    value: "home-service",
+    label: "Repair on location",
+    value: 2,
   },
   {
     label: "Delivery",
     value: "delivery",
+    disabled: true
   },
 ];
 
@@ -985,13 +1003,11 @@ function RefineSearchForm() {
     <Form module={filtersFormModule}>
       <Field name="price" as={Slider} label="Maximum prijs" />
       <Field name="rate" as={Rate} label="Minimale rating" />
-      {false && (
-        <Field name="repairType" as={Radio.Group} label="Reparatie Type">
-          {REPAIR_TYPES.map((type) => (
-            <Radio value={type.value}>{type.label}</Radio>
-          ))}
-        </Field>
-      )}
+      <Field name="shop_type_text" as={Checkbox.Group} label="Reparatie Type">
+        {REPAIR_TYPES.map((type) => (
+          <Checkbox value={type.value} disabled={type.disabled}>{type.label}</Checkbox>
+        ))}
+      </Field>
       <Field
         name="guarantee"
         as={Slider}
