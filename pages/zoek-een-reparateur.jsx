@@ -845,17 +845,12 @@ const ServiceSelector = AppendIdentifier({
 
 const REPAIR_TYPES = [
   {
-    label: "Repair on shop",
+    label: "Fysieke winkel",
     value: 1,
   },
   {
-    label: "Repair on location",
+    label: "Reparatie op locatie",
     value: 2,
-  },
-  {
-    label: "Delivery",
-    value: "delivery",
-    disabled: true
   },
 ];
 
@@ -906,12 +901,12 @@ const WARRANTIES = {
   3: "",
   6: "",
   9: "",
-  12: "12 maanden",
+  12: "12",
 };
 
 function warrantyLabel(value) {
   const mapping = {
-    3: "3 maand garantie",
+    3: "3 maanden garantie",
     6: "6 maanden garantie",
     9: "9 maanden garantie",
     12: "12 maanden garantie",
@@ -1012,7 +1007,7 @@ function RefineSearchForm() {
         name="guarantee"
         as={Slider}
         marks={WARRANTIES}
-        label="Minimale garantie"
+        label="Minimale garantie (maanden)"
         tipFormatter={warrantyLabel}
         min={0}
         max={12}
