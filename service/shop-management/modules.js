@@ -176,7 +176,7 @@ export const shopManagementAdditionalForm = createFormModule({
       `${API_PATH.UPDATESHOPGENERALINFO}/${shop}/`,
       {
         payMethod: data.payMethod.map((id) => +id),
-        repairOption: data.reparationOption,
+        repairOption: data.purchases.map((id) => +id),
         services: "",
         waitingArea: data.waitingArea ? 1 : 0,
         temporaryReplacement: data.temporaryReplacement ? 1 : 0,
@@ -184,7 +184,7 @@ export const shopManagementAdditionalForm = createFormModule({
         insurance: 0,
         devices: data.devices.map((id) => +id),
         brands: data.brands.map((id) => +id),
-        purchases: data.purchases.map((id) => +id),
+        purchases: [],
       }
     );
 

@@ -30,6 +30,18 @@ export default function RepairManagementPage() {
     loadData();
   }, []);
 
+  const onLocationUpdate = (data) => {
+    console.log("DATA", data);
+    basicSettingsForm.actions.batchChange({
+      updates: {
+        street: data.street,
+        zipcode: data.zip,
+        city: data.city,
+        country: data.country,
+      },
+    });
+  };
+
   const onTabChange = async (tab) => {
     setActiveTab(tab);
   };
@@ -64,6 +76,7 @@ export default function RepairManagementPage() {
             basicSettingsForm={basicSettingsForm}
             discardChanges={console.log}
             onSave={console.log}
+            onLocationUpdate={onLocationUpdate}
           />
         </TabPane>
       </Tabs>

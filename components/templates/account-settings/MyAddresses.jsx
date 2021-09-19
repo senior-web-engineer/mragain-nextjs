@@ -1,4 +1,5 @@
 import { Button, Checkbox, Col, Divider, Row } from "antd";
+import axios from "axios";
 import React from "react";
 
 import GooglePlaces from "@/components/common/GooglePlaces";
@@ -44,7 +45,39 @@ const LOCATIONS_OPTIONS = [
   { label: "Allebei", value: "2" },
 ];
 
-export const MyAddresses = ({ basicSettingsForm }) => {
+export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
+  const handleOnLocationSelected = (geo) => {
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${geo.lat},${geo.long}&key=AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE`
+      )
+      .then((res) => {
+        if (res.data.results.length !== 0) {
+          const data = {
+            street: "",
+            city: "",
+            country: "",
+            zip: "",
+          };
+          res.data.results[0].address_components.forEach((comp) => {
+            if (comp.types.includes("street_number")) {
+              data.street = comp.long_name;
+            }
+            if (comp.types.includes("locality")) {
+              data.city = comp.long_name;
+            }
+            if (comp.types.includes("country")) {
+              data.country = comp.long_name;
+            }
+            if (comp.types.includes("postal_code")) {
+              data.zip = comp.long_name;
+            }
+          });
+          onLocationUpdate(data);
+        }
+      });
+  };
+
   return (
     <BoxWrapper>
       <RowWrapper>
@@ -83,42 +116,58 @@ export const MyAddresses = ({ basicSettingsForm }) => {
                 <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
                   <Field
                     adminInput
-                    name="street"
                     as={GooglePlaces}
-                    label="Straat en huisnummer"
+                    label="Address"
+                    onLocationSelected={handleOnLocationSelected}
                     customLabel
                     size="small"
                   />
+                  {/* <GooglePlaces
+                    placeholder="Address"
+                    onLocationSelected={handleOnLocationSelected}
+                  /> */}
                 </Col>
               </Row>
               <Col>
                 <Row gutter={[16, 0]}>
-                  <Col lg={{ span: 12 }} md={{ span: 24 }}>
+                  <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
                     <Field
                       adminInput
                       name="city"
-                      as={GooglePlaces}
-                      placeholder="Stad"
-                      label="Stad"
+                      as={Input}
+                      disabled
+                      label="City"
+                      customLabel
                       size="small"
                     />
                   </Col>
-                  <Col xxl={{ span: 6 }} lg={{ span: 12 }} md={{ span: 24 }}>
+                  <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
                     <Field
                       adminInput
                       name="country"
-                      as={GooglePlaces}
-                      placeholder="Land"
-                      label="Land"
+                      as={Input}
+                      disabled
+                      label="Country"
+                      customLabel
                       size="small"
                     />
                   </Col>
-                  <Col xxl={{ span: 6 }} lg={{ span: 12 }} md={{ span: 24 }}>
+                  <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
                     <Field
                       adminInput
                       name="zipcode"
                       as={Input}
                       label="Postcode"
+                      customLabel
+                      size="small"
+                    />
+                  </Col>
+                  <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
+                    <Field
+                      adminInput
+                      name="street"
+                      as={Input}
+                      label="STRAAT"
                       customLabel
                       size="small"
                     />
