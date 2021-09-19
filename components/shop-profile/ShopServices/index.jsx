@@ -209,7 +209,7 @@ const SERVICE_COLUMNS = [
             colSpan: 3,
 
           },
-          children: <div style={{textAlign: "center", border: "1px solid #ddd"}}>Prijs op aanvraag</div>
+          children: <div style={{ textAlign: "center", border: "1px solid #ddd" }}>Prijs op aanvraag</div>
         }
       }
 
@@ -253,6 +253,14 @@ const ServiceMobileListing = styled.div`
     padding: 0 20px;
 `;
 
+const PriceOnDemand = styled.div`
+  font-Size: 13px;
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 5px 7px;
+  color: #555;
+`
+
 const ServiceMobileItemWrap = styled.div`
     padding: 26px 0;
     border-bottom: 1px solid #ddd;
@@ -291,10 +299,10 @@ function MobileServiceItem({ item }) {
     <ServiceMobileItemWrap>
       <ServiceMobileItemWrap.FirstColumn>
         {firstColumn}
-        <d-def>{item.guarantee_time} maanden garantie</d-def>
+        {item.guarantee_time ? <d-def>{item.guarantee_time} maanden garantie</d-def> : null}
       </ServiceMobileItemWrap.FirstColumn>
       <price>
-        <span>&euro;{item.price}</span>
+        {item.price ? <span>&euro;{item.price}</span> : <PriceOnDemand>Prijs op aanvraag</PriceOnDemand>}
       </price>
     </ServiceMobileItemWrap>
   );
@@ -520,7 +528,6 @@ export default function ShopServices({ shop }) {
 
   const onDeviceChange = useCallback(async (ev) => {
     const value = parseNativeEvent(ev);
-    console.log(value);
     const brands = await brandFetcher.key(value).fetch();
     filtersFormModule.actions.batchChange({
       updates: {
