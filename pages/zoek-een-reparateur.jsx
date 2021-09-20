@@ -680,7 +680,7 @@ function ShopItem({ item }) {
     return <ShopDetails.Service>{service.device_name}</ShopDetails.Service>;
   }
 
-  const tags = item.shop_type_text;
+  const tags = item.shop_type;
   const formState = filtersFormModule.state.values;
   // API changed does not include the city any longer?
   // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
@@ -998,7 +998,7 @@ function RefineSearchForm() {
     <Form module={filtersFormModule}>
       <Field name="price" as={Slider} label="Maximum prijs" />
       <Field name="rate" as={Rate} label="Minimale rating" />
-      <Field name="shop_type_text" as={Checkbox.Group} label="Reparatie Type">
+      <Field name="shop_type" as={Checkbox.Group} label="Reparatie Type">
         {REPAIR_TYPES.map((type) => (
           <Checkbox value={type.value} disabled={type.disabled}>{type.label}</Checkbox>
         ))}
