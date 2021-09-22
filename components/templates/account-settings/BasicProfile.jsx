@@ -1,44 +1,51 @@
+import { Button, Col, Divider, Row } from "antd";
+
 import Input from "@/components/ui/Input";
-import {
-  BoxWrapper,
-  HeaderSmallText,
-  BoxWrapperContent,
-  ButtonsWrapper,
-} from "./styles";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
-import { Button, Divider, Row, Col } from "antd";
+
+import {
+  BoxWrapper,
+  BoxWrapperContent,
+  ButtonsWrapper,
+  HeaderSmallText,
+} from "./styles";
 
 export const BasicProfile = ({ basicSettingsForm }) => {
   return (
     <Form module={basicSettingsForm}>
       <BoxWrapper>
         <div>
-          <HeaderSmallText>Basic Profile</HeaderSmallText>
+          <HeaderSmallText>Algemene gegevens</HeaderSmallText>
         </div>
         <Divider />
         <Row>
-          <Col span={12}>
+          <Col xxl={{ span: 12 }} md={{ span: 16 }}>
             <BoxWrapperContent>
               <Field
                 adminInput
                 as={Input}
+                size="small"
                 name="name"
-                label="Company Name"
+                label="Bedrijfsnaam"
+                disabled={true}
                 customLabel
               />
               <Field
                 adminInput
                 as={Input}
+                size="small"
                 name="email"
-                label="Company Email Address"
+                label="Emailadres"
+                disabled={true}
                 customLabel
               />
               <Field
                 adminInput
                 as={Input}
+                size="small"
                 name="kvk"
-                label="Chamber of Commerce #"
+                label="kvk nummer"
                 addonBefore="NL -KVK - "
                 type="number"
                 customLabel
@@ -46,8 +53,9 @@ export const BasicProfile = ({ basicSettingsForm }) => {
               <Field
                 adminInput
                 as={Input}
+                size="small"
                 name="phone_number"
-                label="Contact Number"
+                label="Telefoon nummer"
                 addonBefore="+31 "
                 number
                 formatter={(value) =>
@@ -61,28 +69,21 @@ export const BasicProfile = ({ basicSettingsForm }) => {
               <Field
                 adminInput
                 as={Input}
-                name="vat"
-                label="VAT Number"
-                type="number"
-                customLabel
-              />
-              <Field
-                adminInput
-                as={Input}
                 name="iban"
-                label="IBAN Account"
+                label="IBAN"
                 type="number"
+                size="small"
                 customLabel
               />
             </BoxWrapperContent>
           </Col>
-          <Col span={12}></Col>
+          <Col xxl={{ span: 12 }} md={{ span: 8 }}></Col>
         </Row>
         <Divider />
         <ButtonsWrapper>
           <div />
-          <Button size="large" type="primary" htmlType="submit">
-            Save Changes
+          <Button type="primary" htmlType="submit">
+            Wijzigingen opslaan
           </Button>
         </ButtonsWrapper>
       </BoxWrapper>

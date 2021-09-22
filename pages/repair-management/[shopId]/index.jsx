@@ -1,37 +1,58 @@
-import React, { useEffect, useState } from "react";
+import { Col, Divider, Row } from "antd";
+import { filter, uniqBy } from "lodash";
+import { find } from "lodash";
+import Image from "next/image";
+import React, { useCallback, useEffect, useState } from "react";
+import styled from "styled-components";
 
-import { currentUser } from "@/service/repair-management/modules";
+import { Text } from "@/components/common/Text/Text";
 import DefaultLayout from "@/components/layouts/Dashboard";
-import { Tabs, Row, Col } from "antd";
-import { useRouter } from "next/router";
-const { TabPane } = Tabs;
-import { ModelTransfer } from "@/components/templates/repair-management/ModelTransfer";
 import { EditModal } from "@/components/templates/repair-management/EditModal";
+import { ModelTransfer } from "@/components/templates/repair-management/ModelTransfer";
+import { additionalInfoOptions } from "@/components/templates/shop-management/helpers";
 import {
+  currentUser,
   editRepairModelModal,
+  getAllModels,
   getRepairBrandModel,
   getRepairDevices,
-  getAllModels,
-  saveSelectedModels,
   saveModelReparations,
+  saveSelectedModels,
+  saveShopReparations,
 } from "@/service/repair-management/modules";
-import { uniqBy, filter } from "lodash";
+
+const DeviceItemWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  .device-info {
+    margin-left: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .synonyms {
+    font-weight: lighter;
+    font-size: 12px;
+  }
+`;
 
 export default function RepairManagementPage() {
-  const router = useRouter();
   const [targetKeys, setTargetKeys] = useState([]);
   const [devices, setDevices] = useState([]);
   const [models, setModels] = useState([]);
   const [selectedModels, setSelectedModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState();
   const [selectedBrand, setSelectedBrand] = useState();
+  const [selectedBrandId, setSelectedBrandId] = useState();
+  const [user, setUser] = useState();
   const [shopReparations, setShopReparations] = useState([]);
-
-  const [activeTab, setActiveTab] = useState("device-manager");
 
   useEffect(() => {
     async function loadData() {
       const user = await currentUser.fetch();
+      setUser(user);
       const fetchedDevices = await getRepairDevices.fetch();
       const allModels = await getAllModels.fetch();
       const firstModel = {
@@ -42,7 +63,26 @@ export default function RepairManagementPage() {
       const currentModels = await getRepairBrandModel.fetch();
       setDevices(
         fetchedDevices.map((device) => ({
-          title: device.device_name,
+          title: (
+            <DeviceItemWrapper>
+              <div className="device-icon">
+                <Image
+                  width={40}
+                  height={40}
+                  src={
+                    find(additionalInfoOptions.devices, ["id", device.id])
+                      ?.icon || ""
+                  }
+                />
+              </div>
+              <div className="device-info">
+                <div>
+                  <b>{device.device_name}</b>
+                </div>
+                <div className="synonyms">{device?.synonyms}</div>
+              </div>
+            </DeviceItemWrapper>
+          ),
           key: device.id,
           id: device.id,
           selectable: false,
@@ -53,6 +93,7 @@ export default function RepairManagementPage() {
                 key: `${device.id}-${model.brand.brand_name}`,
                 title: model.brand.brand_name,
                 id: model.brand.id,
+                image: model.brand.brand_image,
               })),
             "key"
           ),
@@ -73,20 +114,15 @@ export default function RepairManagementPage() {
       setTargetKeys(selectedModels);
       setSelectedModels(filter(models, ["brand_id", firstModel.id]));
 
-      setTimeout(() => {
-        setSelectedBrand(firstModel);
-      }, 500);
+      setSelectedBrand(firstModel);
     }
 
     loadData();
   }, []);
 
   const handleOnBrandSelected = async (brandId) => {
+    setSelectedBrandId(brandId);
     setSelectedModels(filter(models, ["brand_id", brandId]));
-  };
-
-  const onTabChange = async (tab) => {
-    setActiveTab(tab);
   };
 
   const onChange = (key) => {
@@ -100,10 +136,9 @@ export default function RepairManagementPage() {
   };
 
   const onEditModelReparations = async (deviceId, item) => {
-    console.log("SITEM", item);
-    setSelectedModel(item.model);
+    setSelectedModel(item);
     setShopReparations(
-      await saveModelReparations.actions.initialize({
+      await saveModelReparations.fetch({
         deviceId: deviceId,
         brandId: item.brand_id,
         modelId: item.id,
@@ -113,51 +148,50 @@ export default function RepairManagementPage() {
   };
 
   const onRepairModelSaved = (items) => {
-    console.log("ABC", items);
-    saveModelReparations.actions.submit(items);
+    saveShopReparations(items);
   };
 
-  const handleOnModelsSaved = (selectedDevice) => {
-    const savingData = [
-      {
-        brand_id: selectedBrand.id,
-        models: selectedModels
-          .filter((item) => targetKeys.includes(item.key))
-          .map((item) => item.id),
-      },
-    ];
-    const payload = {
-      brand: savingData,
-      device_id: selectedDevice,
-    };
-    console.log(payload);
-    saveSelectedModels.fetch(payload);
-  };
+  const handleOnModelsSaved = useCallback(
+    (selectedDevice) => {
+      const savingData = [
+        {
+          brand_id: selectedBrandId,
+          models: selectedModels
+            .filter((item) => targetKeys.includes(item.key))
+            .map((item) => item.id),
+        },
+      ];
+      const payload = {
+        brand: savingData,
+        device_id: selectedDevice,
+      };
+      saveSelectedModels(payload);
+    },
+    [selectedModels, selectedBrandId, targetKeys]
+  );
 
   return (
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
         <Col span={24}>
-          <h1>Repair Management</h1>
+          <Text.Headline>Reparatie beheer</Text.Headline>
         </Col>
       </Row>
-      <Tabs defaultActiveKey={activeTab} onChange={onTabChange}>
-        <TabPane tab="Device Manager" key="device-manager">
-          <ModelTransfer
-            data={selectedModels}
-            targetKeys={targetKeys}
-            onChange={onChange}
-            menuItems={devices}
-            onBrandSelected={handleOnBrandSelected}
-            selectedBrand={selectedBrand}
-            onEditModelReparations={onEditModelReparations}
-            onModelsSaved={handleOnModelsSaved}
-          />
-        </TabPane>
-      </Tabs>
+      <Divider />
+      <ModelTransfer
+        shopId={user?.id}
+        data={selectedModels}
+        targetKeys={targetKeys}
+        onChange={onChange}
+        menuItems={devices}
+        onBrandSelected={handleOnBrandSelected}
+        selectedBrand={selectedBrand}
+        onEditModelReparations={onEditModelReparations}
+        onModelsSaved={handleOnModelsSaved}
+      />
       <EditModal
         editRepairModelModal={editRepairModelModal}
-        model={selectedModel}
+        item={selectedModel}
         data={shopReparations}
         onSave={onRepairModelSaved}
       />

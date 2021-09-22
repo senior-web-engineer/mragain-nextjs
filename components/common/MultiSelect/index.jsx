@@ -1,4 +1,3 @@
-import "./styles.less";
 import { Select } from "antd";
 import styled from "styled-components";
 
@@ -46,15 +45,13 @@ const MultiSelectWrapper = styled.div`
   }
 `;
 
-export const MultiSelect = ({ placeholder, onChange, value, options }) => {
-  const renderChildren = (optionItems) => {
-    const children = [];
-    optionItems.forEach((option) => {
-      children.push(<Option key={option.value}>{option.label}</Option>);
-    });
-    return children;
-  };
+const renderChildren = (optionItems) => {
+  return optionItems.map((option) => (
+    <Option key={option.value}>{option.label}</Option>
+  ));
+};
 
+export const MultiSelect = ({ placeholder, onChange, value, options }) => {
   return (
     <MultiSelectWrapper>
       <Select

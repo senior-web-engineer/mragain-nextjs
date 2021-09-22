@@ -5,6 +5,7 @@ import { API_PATH } from "@/constants";
 import dataFetcher from "@/modules/dataFetcher";
 import { createListModule } from "@/modules/list";
 import { createModalModule } from "@/modules/modal";
+import { privateApi } from "@/utils/api";
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],

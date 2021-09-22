@@ -1,22 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { Button, Row, Col } from "antd";
+import { Button, Col, Row } from "antd";
 import { Rate } from "antd";
-import Input from "@/components/ui/Input";
-import {
-  HeaderText,
-  ContactInfo,
-  AdvantagesWrap,
-  PaddingWrapper,
-  rowStyle,
-} from "./styles";
 import Image from "next/image";
+import React, { useState } from "react";
+
 import Link from "@/assets/icons/link.svg";
 import MapMarker from "@/assets/icons/map-marker.svg";
 import Phone from "@/assets/icons/phone.svg";
+import GooglePlaces from "@/components/common/GooglePlaces";
+import { Text } from "@/components/common/Text/Text";
+import Input from "@/components/ui/Input";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
 import { shopManagementGeneralForm } from "@/service/shop-management/modules";
-import GooglePlaces from "@/components/common/GooglePlaces";
+
+import {
+  AdvantagesWrap,
+  ContactInfo,
+  PaddingWrapper,
+  rowStyle,
+} from "./styles";
 
 const ADVANTAGES = [
   {
@@ -59,19 +61,24 @@ function renderAdvantage(advantage, index) {
 export const GeneralInfo = ({ shopData }) => {
   const [editing, setEditing] = useState(false);
 
-  useEffect(async () => {
-    await shopManagementGeneralForm.actions.initialize();
-  }, []);
-
-  const onSave = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
+    shopManagementGeneralForm.actions.submit(
+      shopManagementGeneralForm.state.values
+    );
     setEditing(false);
+  };
+
+  const onEdit = async () => {
+    setEditing(true);
+    await shopManagementGeneralForm.actions.initialize();
   };
 
   return (
     <>
       {editing ? (
         <PaddingWrapper>
-          <Form module={shopManagementGeneralForm}>
+          <Form module={shopManagementGeneralForm} onSubmit={onSubmit}>
             <Row style={rowStyle} type="flex" justify="space-between">
               <Col span={6}>
                 <h3>About the company</h3>
@@ -87,16 +94,14 @@ export const GeneralInfo = ({ shopData }) => {
                   customLabel
                   textarea
                   name="about_us"
-                  label="About"
+                  label="Over ons"
                 />
               </Col>
             </Row>
             <Row style={rowStyle} type="flex" justify="space-between">
               <Col span={6}>
-                <h3>External links</h3>
-                <p>
-                  Let people visit you on other platforms you have available
-                </p>
+                <h3>Contact informatie</h3>
+                <p>Laat bezoekers weten hoe ze je kunnen bereiken.</p>
               </Col>
               <Col span={18}>
                 <Field
@@ -104,21 +109,21 @@ export const GeneralInfo = ({ shopData }) => {
                   as={Input}
                   customLabel
                   name="phone_number"
-                  label="Phone"
+                  label="Telefoonnummer"
                 />
                 <Field
                   adminInput
                   as={Input}
                   customLabel
                   name="site_url"
-                  label="Web Site"
+                  label="Website"
                 />
                 <Field
                   adminInput
                   as={GooglePlaces}
                   customLabel
                   name="street"
-                  label="Address"
+                  label="Adres"
                 />
               </Col>
             </Row>
@@ -126,16 +131,14 @@ export const GeneralInfo = ({ shopData }) => {
             <Row type="flex" justify="space-between" align="middle">
               <Col />
               <Col>
-                <Button size="large" onClick={() => setEditing(false)}>
-                  Discard Changes
-                </Button>
                 <Button
-                  size="large"
-                  type="primary"
-                  htmlType="submit"
-                  onClick={onSave}
+                  style={{ marginRight: "10px" }}
+                  onClick={() => setEditing(false)}
                 >
-                  Save Changes
+                  Annuleren
+                </Button>
+                <Button type="primary" htmlType="submit">
+                  Opslaan
                 </Button>
               </Col>
             </Row>
@@ -146,15 +149,11 @@ export const GeneralInfo = ({ shopData }) => {
           <PaddingWrapper>
             <Row type="flex" justify="space-between" align="middle">
               <Col>
-                <HeaderText>{shopData?.name}</HeaderText>
+                <Text.Headline>{shopData?.name}</Text.Headline>
               </Col>
               <Col>
-                <Button
-                  size="large"
-                  type="primary"
-                  onClick={() => setEditing(true)}
-                >
-                  Edit
+                <Button type="primary" onClick={onEdit}>
+                  Wijzig
                 </Button>
               </Col>
             </Row>
@@ -165,15 +164,21 @@ export const GeneralInfo = ({ shopData }) => {
               <ContactInfo>
                 <span>
                   <Image width="24px" height="24px" src={Phone} />
-                  {shopData?.phone_number}
+                  <Text.Body size="12" style={{ margin: 0 }}>
+                    {shopData?.phone_number}
+                  </Text.Body>
                 </span>
                 <span>
                   <Image width="24px" height="24px" src={Link} />
-                  {shopData?.site_url}
+                  <Text.Body size="12" style={{ margin: 0 }}>
+                    {shopData?.site_url}
+                  </Text.Body>
                 </span>
                 <span>
                   <Image width="24px" height="24px" src={MapMarker} />
-                  {shopData?.street}
+                  <Text.Body size="12" style={{ margin: 0 }}>
+                    {shopData?.street}
+                  </Text.Body>
                 </span>
               </ContactInfo>
             </Row>

@@ -1,24 +1,18 @@
-import {
-  Button,
-  Col,
-  Divider,
-  Icon,
-  Input as AntdInput,
-  Row,
-  Table,
-} from "antd";
+import { Col, Divider, Input as AntdInput, Row, Table } from "antd";
 import React, { useEffect, useState } from "react";
-import Highlighter from "react-highlight-words";
 import styled from "styled-components";
 
-import { devicesFetcher } from "@/components/dashboard/modules";
+import { Text } from "@/components/common/Text/Text";
 import DefaultLayout from "@/components/layouts/Dashboard";
+import { columns } from "@/components/templates/history/helpers";
+import { MobileList } from "@/components/templates/history/MobileLists";
 import { ViewRecord } from "@/components/templates/history/ViewRecord";
 import {
   currentUser,
   reparationsList,
   viewRecordModal,
 } from "@/service/history/modules";
+import { OnMobile } from "@/utils/media";
 
 const StyledTable = styled(Table)`
   .ant-table-head {
@@ -31,6 +25,11 @@ const StyledTable = styled(Table)`
     border-bottom: 0;
   }
 
+  .ant-table-tbody > tr > td {
+    font-size: 12px;
+    font-weight: 400;
+  }
+
   .ant-table-tbody {
     border-radius: 10px;
     overflow: hidden;
@@ -38,66 +37,9 @@ const StyledTable = styled(Table)`
   }
 `;
 
-const columns = (viewDetails, search) => [
-  {
-    width: "120px",
-    title: "Date",
-    render(data) {
-      return data?.appointment?.date;
-    },
-  },
-  {
-    title: "Repair Type",
-    render(data) {
-      return data?.reparation?.reparation_name;
-    },
-  },
-  {
-    title: "Device details",
-    render(data) {
-      return `${data?.device?.device_name} /  ${data?.brand?.brand_name} / ${data?.model?.model_name}`;
-    },
-  },
-  {
-    title: "IMEI Number",
-    dataIndex: "serialnumber",
-    width: 180,
-    sorter: (a, b) => a.serialnumber - b.serialnumber,
-    render: (serialNumber) => (
-      <Highlighter
-        highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-        searchWords={[search]}
-        autoEscape
-        textToHighlight={serialNumber ? serialNumber.toString() : ""}
-      />
-    ),
-  },
-  {
-    title: "Price",
-    dataIndex: "price",
-    width: 150,
-    sorter: (a, b) => +a.price - +b.price,
-  },
-  {
-    title: "Warranty",
-    width: 150,
-    render(data) {
-      return `${data?.guarantee} months`;
-    },
-    sorter: (a, b) => a.guarantee - b.guarantee,
-  },
-  {
-    title: "",
-    width: 50,
-    render(data) {
-      return (
-        <Button type="primary" onClick={() => viewDetails(data)}>
-          <Icon type="eye" />
-        </Button>
-      );
-    },
-  },
-];
+const MobileContent = styled.div`
+  height: calc(100vh - 260px);
+`;
 
 export default function HistoryPage({ auth_user }) {
   const [loading, setLoading] = useState(false);
@@ -109,7 +51,6 @@ export default function HistoryPage({ auth_user }) {
     async function loadData() {
       await currentUser.fetch();
       const { items } = await reparationsList.actions.initialize();
-      console.log(items);
       setHistoryItems(items);
       setLoading(false);
     }
@@ -119,52 +60,63 @@ export default function HistoryPage({ auth_user }) {
   }, []);
 
   const onSearch = (value) => {
-    console.log(value);
     setSearch(value);
   };
 
   const handleOnRowsSelected = (keys, items) => console.log(keys, items);
 
   const viewDetails = (data) => {
-    console.log(data);
     setSelectedItem(data);
     viewRecordModal.actions.open();
-    devicesFetcher.fetch();
   };
 
   return (
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
         <Col>
-          <h1>History</h1>
+          <Text.Headline style={{ marginBottom: "20px" }}>
+            History
+          </Text.Headline>
         </Col>
         <Col />
       </Row>
       <Row>
-        <Col span={5}>
+        <Col lg={{ span: 5 }} md={{ span: 24 }}>
           <AntdInput
-            small
             placeholder="Search IMEI Number"
             size="large"
             allowClear
             value={search}
+            style={{ fontSize: "12px" }}
             onChange={(event) => onSearch(event.target.value)}
           />
         </Col>
         <Col></Col>
       </Row>
       <Divider />
-      <StyledTable
-        loading={loading}
-        dataSource={historyItems.filter((data) =>
-          data.serialnumber.includes(search)
-        )}
-        columns={columns(viewDetails, search)}
-        onRowsSelected={handleOnRowsSelected}
-        selection
-        pagination
-      />
+      <OnMobile only>
+        <MobileContent>
+          <MobileList
+            viewDetails={viewDetails}
+            data={historyItems.filter((data) =>
+              data.serialnumber.includes(search)
+            )}
+          />
+        </MobileContent>
+      </OnMobile>
+      <OnMobile show={false}>
+        <StyledTable
+          loading={loading}
+          dataSource={historyItems.filter((data) =>
+            data.serialnumber.includes(search)
+          )}
+          columns={columns(viewDetails, search)}
+          onRowsSelected={handleOnRowsSelected}
+          selection
+          pagination
+        />
+      </OnMobile>
       <ViewRecord data={selectedItem} viewRecordModal={viewRecordModal} />
-    </DefaultLayout>
+    </DefaultLayout >
   );
 }

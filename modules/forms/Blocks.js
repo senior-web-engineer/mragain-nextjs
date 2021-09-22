@@ -1,11 +1,13 @@
-import { useEffect, useCallback } from "react";
+import get from "lodash/get";
+import { useCallback, useEffect } from "react";
+
 import {
+  ErrorWrap,
   FieldWrap,
   FieldWrapAdmin,
-  ErrorWrap,
 } from "@/components/styled/Forms";
+
 import { useFormContext } from ".";
-import get from "lodash/get";
 
 export function parseNativeEvent(ev) {
   if (!ev?.target) {
@@ -74,7 +76,12 @@ export function Field({
 
   if (adminInput) {
     return (
-      <FieldWrapAdmin noBorder={noBorder} flexRow={flexRow} style={style}>
+      <FieldWrapAdmin
+        disabled={disabled}
+        noBorder={noBorder}
+        flexRow={flexRow}
+        style={style}
+      >
         {label ? (
           <label>
             {label}
@@ -85,6 +92,7 @@ export function Field({
           value={value}
           onChange={onChange}
           onBlur={onBlur}
+          disabled={disabled}
           children={children}
           {...rest}
         />

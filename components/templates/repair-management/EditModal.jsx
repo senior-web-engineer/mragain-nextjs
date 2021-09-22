@@ -1,25 +1,26 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Drawer } from "@/modules/modal";
-import { Row, Col, Divider, Switch, Table, Button } from "antd";
-import Form from "@/modules/forms";
-import { RowWrapperMargin } from "./styles";
-import Input from "@/components/ui/Input";
+import { Button, Col, Divider, Row, Switch, Table } from "antd";
 import { cloneDeep } from "lodash";
+import React, { useCallback, useEffect, useState } from "react";
 
-const columns = (items) => [
+import Input from "@/components/ui/Input";
+import { Drawer } from "@/modules/modal";
+
+import { HeaderSmallText, RowWrapperMargin } from "./styles";
+
+const columns = (onChange) => [
   {
-    title: "Reparation Type",
+    title: "Reparatie",
     dataIndex: "reparation.reparation_name",
   },
   {
-    title: "Price",
+    title: "Prijs",
     dataIndex: "price",
     width: 150,
     render(price, record, index) {
       return (
         <Input
           defaultValue={price}
-          onChange={(value) => (items[index].price = value)}
+          onChange={(value) => onChange(index, "price", value)}
           addonBefore="$"
           type="number"
         />
@@ -27,87 +28,118 @@ const columns = (items) => [
     },
   },
   {
-    title: "Guarantee Time",
+    title: "Garantie",
     dataIndex: "guarantee_time",
     width: 200,
     render(guarantee_time, record, index) {
       return (
         <Input
           defaultValue={guarantee_time}
-          onChange={(value) => (items[index].guarantee_time = value)}
+          onChange={(value) => onChange(index, "guarantee_time", value)}
           type="number"
-          addonAfter="months"
+          addonAfter="maanden"
         />
       );
     },
   },
   {
-    title: "Reparation Time",
+    title: "Reparatie tijd",
     dataIndex: "reparation_time",
     width: 200,
     render(reparation_time, record, index) {
       return (
         <Input
           defaultValue={reparation_time}
-          onChange={(value) => (items[index].reparation_time = value)}
-          addonAfter="minutes"
+          onChange={(value) => onChange(index, "reparation_time", value)}
+          addonAfter="minuten"
           type="number"
         />
       );
     },
   },
   {
-    title: "Active",
+    title: "Actief",
     dataIndex: "active",
     render(active, record, index) {
       return (
         <Switch
           defaultChecked={active}
-          onChange={(value) => (items[index].active = value)}
+          onChange={(value) => onChange(index, "active", value)}
         />
       );
     },
   },
 ];
 
-export const EditModal = ({ model, data, editRepairModelModal, onSave }) => {
+export const EditModal = ({ item, data, editRepairModelModal, onSave }) => {
   let [items, setItems] = useState([]);
   useEffect(() => {
     setItems(cloneDeep(data));
   }, [data]);
 
+  const onClose = () => {
+    setItems([]);
+  };
+
+  const onChange = useCallback(
+    (index, obj, value) => {
+      const newItems = [...items];
+      newItems.map((item, itemIndex) => {
+        if (itemIndex === index) {
+          item[obj] = value;
+        }
+
+        return item;
+      });
+      setItems(newItems);
+    },
+    [items]
+  );
+
   return (
-    <Drawer width="1000px" module={editRepairModelModal}>
-      <h2>Model information</h2>
+    <Drawer
+      width="1000px"
+      module={editRepairModelModal}
+      destroyOnClose
+      onClose={onClose}
+    >
+      <h2 style={{ marginBottom: "30px" }}>Model information</h2>
+      <HeaderSmallText>Device</HeaderSmallText>
       <Divider />
-      <p>Device</p>
-      <h4>{model}</h4>
+      <Row type="flex" justify="space-between">
+        <Col>
+          <h3>
+            <b>{item?.model}</b>
+          </h3>
+        </Col>
+        <Col>
+          <Button>Bekijk model</Button>
+        </Col>
+      </Row>
       <Divider />
       <RowWrapperMargin type="flex" justify="space-between" align="center">
         <Col>
-          <h3>Services</h3>
+          <HeaderSmallText>Reparaties</HeaderSmallText>
         </Col>
         <Col></Col>
       </RowWrapperMargin>
+      <Divider />
       <Table
-        bordered
+        style={{ minHeight: `calc(100vh - 360px)` }}
         scroll={{ y: `calc(100vh - 420px)` }}
-        dataSource={items}
-        columns={columns(items)}
+        dataSource={cloneDeep(items)}
+        columns={columns(onChange)}
         pagination={false}
       />
       <RowWrapperMargin type="flex" justify="space-between" align="center">
         <Col>
-          <Button
-            size="large"
-            onClick={() => editRepairModelModal.actions.close()}
-          >
-            Cancel
+          <Button onClick={() => editRepairModelModal.actions.close()}>
+            Annuleer
           </Button>
         </Col>
         <Col>
-          <Button size="large" type="primary" onClick={() => onSave(items)}>
-            Save
+          <Button type="primary" onClick={() => onSave(items)}>
+            Opslaan
           </Button>
         </Col>
       </RowWrapperMargin>

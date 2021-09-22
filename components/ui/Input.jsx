@@ -7,6 +7,10 @@ export const StyledInput = styled.div`
   border: none;
   background: transparent !important;
 
+  * {
+    font-size: 12px !important;
+  }
+
   input,
   textarea {
     background: transparent !important;

@@ -1,20 +1,22 @@
+import Image from "next/image";
 import React from "react";
-import MobilePhone from "@/assets/icons/mobile-phone.svg";
-import Tablets from "@/assets/icons/headphones.svg";
-import Wearables from "@/assets/icons/headphones.svg";
-import Laundry from "@/assets/icons/headphones.svg";
-import GamingConsoles from "@/assets/icons/headphones.svg";
-import Computers from "@/assets/icons/computer.svg";
-import SoundSystems from "@/assets/icons/headphones.svg";
-import Earphones from "@/assets/icons/computer.svg";
+import styled from "styled-components";
+
+import GamingConsoles from "@/assets/icons/devices/console.png";
+import Earphones from "@/assets/icons/devices/headset.png";
+import SoundSystems from "@/assets/icons/devices/microphone.png";
+import Computers from "@/assets/icons/devices/pc.png";
+import MobilePhone from "@/assets/icons/devices/smartphone.png";
+import Wearables from "@/assets/icons/devices/smartwatch.png";
+import Tablets from "@/assets/icons/devices/tablet.png";
+import TV from "@/assets/icons/devices/tv.png";
+import Laundry from "@/assets/icons/devices/washingmachine.png";
 // PAYMENT METHODS
+import Amex from "@/assets/icons/Method-Amex.svg";
 import Mastercard from "@/assets/icons/Method-Mastercard.svg";
 import PayPal from "@/assets/icons/Method-PayPal.svg";
 import Stripe from "@/assets/icons/Method-Stripe.svg";
 import Visa from "@/assets/icons/Method-Visa.svg";
-import Amex from "@/assets/icons/Method-Amex.svg";
-import Image from "next/image";
-import styled from "styled-components";
 
 const PaymentImageWrapper = styled.span`
   margin-right: 10px;
@@ -25,32 +27,32 @@ export const additionalInfoOptions = {
     {
       id: 1,
       icon: MobilePhone,
-      device_name: "Mobile Phones",
-      description: "smartphones, feature phones",
+      device_name: "Smartphones",
+      description: "Smartphones, Mobiele telefoons",
     },
     {
       id: 2,
       icon: Tablets,
       device_name: "Tablets",
-      description: "tablet phones, graphic tablet",
+      description: "Tablets, Ipads",
     },
     {
       id: 3,
+      icon: Earphones,
+      device_name: "Headphones",
+      description: "Hoofdtelefoons, Oordoppen",
+    },
+    {
+      id: 10,
       icon: Wearables,
-      device_name: "Wearables",
+      device_name: "Smart watches",
       description: "smartwatch, fitness tracker",
     },
     {
-      id: 4,
-      icon: Laundry,
-      device_name: "Laundry",
-      description: "washing machine, dryer",
-    },
-    {
-      id: 5,
+      id: 9,
       icon: GamingConsoles,
-      device_name: "Gaming Consoles",
-      description: "home, portable consoles",
+      device_name: "Game consoles",
+      description: "Nintendos, Playstation",
     },
     {
       id: 6,
@@ -60,74 +62,61 @@ export const additionalInfoOptions = {
     },
     {
       id: 7,
+      icon: TV,
+      device_name: "TV",
+      description: "Televisies",
+    },
+    {
+      id: 9,
       icon: SoundSystems,
-      device_name: "Sound Systems",
-      description: "speakers, microphones",
+      device_name: "Audio",
+      description: "Speakers, Radio, LP spelers",
     },
     {
       id: 8,
-      icon: Earphones,
-      device_name: "Earphones",
-      description: "earphones, earbuds, headsets",
+      icon: Laundry,
+      device_name: "Was machines",
+      description: "Was machines, Drogers",
     },
   ],
-
-  brands: [
+  paymentMethods: [
     {
-      value: "asus",
-      label: "Asus",
+      value: "1",
+      id: "cash",
+      label: "Cash",
     },
     {
-      value: "samsung",
-      label: "Samsung",
+      value: "2",
+      id: "pin",
+      label: "PIN",
     },
     {
-      value: "xiaomi",
-      label: "Xiaomi",
+      value: "3",
+      id: "creditcard",
+      label: "CreditCard",
     },
     {
-      value: "apple",
-      label: "Apple",
-    },
-    {
-      value: "sony",
-      label: "Sony",
+      value: "4",
+      id: "klarna/afterpay",
+      label: "Klarna/Afterpay",
     },
   ],
 };
 
-export const paymentMethods = (method) => {
-  let image;
-  switch (method.trim().toLocaleLowerCase()) {
-    case "cash":
-      return (
-        <PaymentImageWrapper>
-          <Image width="34" height="24" src={Mastercard} />
-        </PaymentImageWrapper>
-      );
-    case "pin":
-      return (
-        <PaymentImageWrapper>
-          <Image width="34" height="24" src={PayPal} />
-        </PaymentImageWrapper>
-      );
-    case "stripe":
-      return (
-        <PaymentImageWrapper>
-          <Image width="34" height="24" src={Stripe} />
-        </PaymentImageWrapper>
-      );
-    case "visa":
-      return (
-        <PaymentImageWrapper>
-          <Image width="34" height="24" src={Visa} />
-        </PaymentImageWrapper>
-      );
-    case "amex":
-      return (
-        <PaymentImageWrapper>
-          <Image width="34" height="24" src={Amex} />
-        </PaymentImageWrapper>
-      );
-  }
-};
+export const repeatingList = [
+  {
+    value: 0,
+    label: "Elk jaar",
+    color: "green",
+  },
+  {
+    value: 1,
+    label: "Elke maand",
+    color: "blue",
+  },
+  {
+    value: 2,
+    label: "Elke week",
+    color: "red",
+  },
+];

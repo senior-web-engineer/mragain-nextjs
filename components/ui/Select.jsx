@@ -6,6 +6,10 @@ import styled from "styled-components";
 const StyledSelect = styled(AntdSelect)`
   display: block;
 
+  * {
+    font-size: 12px !important;
+  }
+
   .ant-select {
     &:focus {
       outline: none;

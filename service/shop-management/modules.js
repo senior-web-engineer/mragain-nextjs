@@ -1,10 +1,11 @@
+import { notification } from "antd";
+
 import { store } from "@/configureStore";
 import { API_PATH } from "@/constants";
 import dataFetcher from "@/modules/dataFetcher";
-import api, { privateApi } from "@/utils/api";
 import { createFormModule } from "@/modules/forms";
 import { createListModule } from "@/modules/list";
-import { notification } from "antd";
+import api, { privateApi } from "@/utils/api";
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],
@@ -23,7 +24,7 @@ export const getDevices = dataFetcher({
 export const getBrands = dataFetcher({
   selectors: [""],
   fetchData() {
-    return privateApi.get(`${API_PATH.GETBRANDS}/?device=1`);
+    return privateApi.get(`${API_PATH.GETACTIVEBRANDS}/`);
   },
 });
 
@@ -48,6 +49,29 @@ export const shopInfoFetcher = dataFetcher({
   },
 });
 
+export const getShopNonWorkingDays = dataFetcher({
+  selectors: [],
+  async fetchData() {
+    const shopId = currentUser.selector(store.ref.getState())?.result?.id;
+    const data = await privateApi.get(`${API_PATH.GETINVALIDTIME}/${shopId}/`);
+    return data;
+  },
+});
+
+export const saveShopNonWorkingDays = (data) => {
+  const shopId = currentUser.selector(store.ref.getState())?.result?.account_id;
+  const promise = privateApi.post(
+    `${API_PATH.SAVEINVALIDTIME}/${shopId}`,
+    data
+  );
+
+  notification.success({
+    message: "Saved successfully",
+  });
+
+  return promise;
+};
+
 export const shopManagementGeneralInfo = dataFetcher({
   selectors: [],
   async fetchData() {
@@ -57,6 +81,36 @@ export const shopManagementGeneralInfo = dataFetcher({
   },
 });
 
+export const getValidOpenTime = dataFetcher({
+  selectors: [],
+  async fetchData() {
+    const id = currentUser.selector(store.ref.getState())?.result?.id;
+    const data = await privateApi.get(`${API_PATH.GETVALIDOPENTIME}/${id}/`);
+    return data;
+  },
+});
+
+export const saveValidOpenTime = async (payload) => {
+  const id = currentUser.selector(store.ref.getState())?.result?.id;
+  const data = await privateApi.put(`${API_PATH.UPDATEVALIDOPENTIME}/${id}/`, {
+    id: id,
+    shop: id,
+    valid_day_time: payload,
+  });
+  return data;
+};
+
+export const deleteNonRegularHours = async (id) => {
+  const shopId = currentUser.selector(store.ref.getState())?.result?.id;
+  const data = await privateApi.post(
+    `${API_PATH.DELETEINVALIDTIME}/${shopId}/`,
+    {
+      id,
+    }
+  );
+  return data;
+};
+
 export const shopManagementGeneralForm = createFormModule({
   guid: "saveGeneralInfo",
   async init() {
@@ -64,6 +118,7 @@ export const shopManagementGeneralForm = createFormModule({
     const fetchedData = await privateApi.get(
       `${API_PATH.ACCOUNTSETTING}/${id}`
     );
+    console.log("FD", fetchedData);
     return {
       about_us: fetchedData.about_us || "",
       phone_number: fetchedData.phone_number || "",
@@ -81,26 +136,14 @@ export const shopManagementGeneralForm = createFormModule({
       shop,
     });
 
-    createAppointmentFormModal.actions.close();
-    notification.success({
-      message: "General info saved successfully",
-    });
-
+    if (promise) {
+      notification.success({
+        message: "Je wijzigingen zijn succesvol opgeslagen",
+      });
+    }
     return promise;
   },
 });
-
-// const test = {
-//   payMethod: "1,2",
-//   repairOption: "1,2",
-//   services: "services text 1234",
-//   waitingArea: 0,
-//   parkingArea: "1,2,3",
-//   insurance: 0,
-//   devices: [1, 2, 3],
-//   brands: [1, 2, 3],
-//   purchases: [1, 2, 3],
-// };
 
 export const shopManagementAdditionalForm = createFormModule({
   guid: "saveAdditionalInfo",
@@ -108,56 +151,48 @@ export const shopManagementAdditionalForm = createFormModule({
     const shopInfoData = await privateApi.get(
       `${API_PATH.GETSHOPGENERALINFO}/${shopId}/`
     );
-    return {
-      devices: shopInfoData.devices || [],
-      brands: shopInfoData.brands || [],
-      payMethod: shopInfoData.payMethod || [],
-      locationOptions: shopInfoData.locationOptions || {},
-      storePurchases: shopInfoData.storePurchases || [],
-      temporaryReplacement: shopInfoData.temporaryReplacement || false,
-      waitingArea: shopInfoData.waitingArea || false,
-      repairOption: shopInfoData.repairOption || [],
-      services: shopInfoData.services || [],
-      purchases: shopInfoData.purchases || [],
-      parkingArea: shopInfoData.parkingArea || [],
-      insurance: shopInfoData.insurance || [],
-    };
+    if (shopInfoData.length !== 0) {
+      return {
+        devices: shopInfoData[0].replacementDevices || [],
+        brands: shopInfoData[0].cateredBrand.map((id) => id.toString()) || [],
+        payMethod: shopInfoData[0].paymentMethod || [],
+        purchases:
+          shopInfoData[0].ShopPurchase.map((id) => id.toString()) || [],
+        temporaryReplacement: !!shopInfoData[0].temporaryReplacement,
+        waitingArea: shopInfoData[0].waitingArea,
+        reparationOption:
+          shopInfoData[0].reparationOption.map((id) => id.toString()) || [],
+        services: shopInfoData[0].services || [],
+        parkingArea: shopInfoData[0].parkingArea || [],
+        insurance: shopInfoData[0].insurance || [],
+      };
+    }
+
+    return {};
   },
   submit(data) {
     const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
     const promise = privateApi.put(
       `${API_PATH.UPDATESHOPGENERALINFO}/${shop}/`,
-      // {
-      //   devices: data.devices,
-      //   brands: data.brands,
-      //   payMethod: data.payMethod,
-      //   locationOptions: data.locationOptions,
-      //   storePurchases: data.storePurchases,
-      //   temporaryReplacement: data.temporaryReplacement,
-      //   waitingArea: data.waitingArea,
-      //   repairOption: data.repairOption,
-      //   services: data.services,
-      //   purchases: data.purchases,
-      //   parkingArea: data.parkingArea,
-      //   insurance: data.insurance,
-      //   shop,
-      // }
       {
-        payMethod: data.payMethod || "",
-        repairOption: data.repairOption || "",
-        services: data.services || "",
-        waitingArea: data.waitingArea || 0,
-        parkingArea: data.parkingArea || "",
-        insurance: data.insurance || 0,
-        devices: data.devices || [],
-        brands: data.brands || [],
-        purchases: data.purchases || [],
+        payMethod: data.payMethod.map((id) => +id),
+        repairOption: data.purchases.map((id) => +id),
+        services: "",
+        waitingArea: data.waitingArea ? 1 : 0,
+        temporaryReplacement: data.temporaryReplacement ? 1 : 0,
+        parkingArea: [1, 2],
+        insurance: 0,
+        devices: data.devices.map((id) => +id),
+        brands: data.brands.map((id) => +id),
+        purchases: [],
       }
     );
 
-    notification.success({
-      message: "Additional info saved successfully",
-    });
+    if (promise) {
+      notification.success({
+        message: "Additional info saved successfully",
+      });
+    }
 
     return promise;
   },

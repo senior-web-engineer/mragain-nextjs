@@ -1,16 +1,17 @@
+import { Col, Row, Tabs } from "antd";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
+import { Text } from "@/components/common/Text/Text";
+import DefaultLayout from "@/components/layouts/Dashboard";
+import { BasicProfile } from "@/components/templates/account-settings/BasicProfile";
+import { ChangePassword } from "@/components/templates/account-settings/ChangePassword";
+import { MyAddresses } from "@/components/templates/account-settings/MyAddresses";
 import {
   basicSettingsForm,
   changePasswordForm,
   currentUser,
 } from "@/service/account-settings/modules";
-import DefaultLayout from "@/components/layouts/Dashboard";
-import { BasicProfile } from "@/components/templates/account-settings/BasicProfile";
-import { ChangePassword } from "@/components/templates/account-settings/ChangePassword";
-import { MyAddresses } from "@/components/templates/account-settings/MyAddresses";
-import { Tabs, Row, Col } from "antd";
-import { useRouter } from "next/router";
 const { TabPane } = Tabs;
 
 export default function RepairManagementPage() {
@@ -29,6 +30,18 @@ export default function RepairManagementPage() {
     loadData();
   }, []);
 
+  const onLocationUpdate = (data) => {
+    console.log("DATA", data);
+    basicSettingsForm.actions.batchChange({
+      updates: {
+        street: data.street,
+        zipcode: data.zip,
+        city: data.city,
+        country: data.country,
+      },
+    });
+  };
+
   const onTabChange = async (tab) => {
     setActiveTab(tab);
   };
@@ -37,13 +50,13 @@ export default function RepairManagementPage() {
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
         <Col span={24}>
-          <h1>Account Settings</h1>
+          <Text.Headline>Account gegevens</Text.Headline>
         </Col>
       </Row>
       <Tabs defaultActiveKey={activeTab} onChange={onTabChange}>
-        <TabPane tab="General" key="general">
+        <TabPane tab="Algemeen" key="general">
           <Row>
-            <Col span={16}>
+            <Col xxl={{ span: 16 }} lg={{ span: 24 }}>
               <BasicProfile
                 basicSettingsForm={basicSettingsForm}
                 discardChanges={console.log}
@@ -55,14 +68,15 @@ export default function RepairManagementPage() {
                 onSave={console.log}
               />
             </Col>
-            <Col span={8}></Col>
+            <Col xxl={{ span: 8 }} lg={{ span: 0 }}></Col>
           </Row>
         </TabPane>
-        <TabPane tab="My Address" key="my-address">
+        <TabPane tab="Locaties" key="my-address">
           <MyAddresses
             basicSettingsForm={basicSettingsForm}
             discardChanges={console.log}
             onSave={console.log}
+            onLocationUpdate={onLocationUpdate}
           />
         </TabPane>
       </Tabs>

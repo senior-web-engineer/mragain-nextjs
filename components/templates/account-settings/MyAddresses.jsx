@@ -1,18 +1,21 @@
+import { Button, Checkbox, Col, Divider, Row } from "antd";
+import axios from "axios";
 import React from "react";
+
+import GooglePlaces from "@/components/common/GooglePlaces";
 import Input from "@/components/ui/Input";
-import {
-  BoxWrapper,
-  BoxWrapperContent,
-  RowWrapper,
-  HoursEditor,
-  ButtonsWrapper,
-  HeaderSmallText,
-} from "./styles";
-import { Row, Col, Divider, Button, Checkbox } from "antd";
 import Select from "@/components/ui/Select";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
-import GooglePlaces from "@/components/common/GooglePlaces";
+
+import {
+  BoxWrapper,
+  BoxWrapperContent,
+  ButtonsWrapper,
+  HeaderSmallText,
+  HoursEditor,
+  RowWrapper,
+} from "./styles";
 
 const DURATION_OPTIONS = [
   {
@@ -33,118 +36,153 @@ const DURATION_OPTIONS = [
   },
 ];
 
-export const MyAddresses = ({ basicSettingsForm }) => {
+const LOCATIONS_OPTIONS = [
+  { label: "Fysieke werkplaats", value: "0" },
+  {
+    label: "Mobiele werkplaats (reparatie op locatie)",
+    value: "1",
+  },
+  { label: "Allebei", value: "2" },
+];
+
+export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
+  const handleOnLocationSelected = (geo) => {
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${geo.lat},${geo.long}&key=AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE`
+      )
+      .then((res) => {
+        if (res.data.results.length !== 0) {
+          const data = {
+            street: "",
+            city: "",
+            country: "",
+            zip: "",
+          };
+          res.data.results[0].address_components.forEach((comp) => {
+            if (comp.types.includes("street_number")) {
+              data.street = comp.long_name;
+            }
+            if (comp.types.includes("locality")) {
+              data.city = comp.long_name;
+            }
+            if (comp.types.includes("country")) {
+              data.country = comp.long_name;
+            }
+            if (comp.types.includes("postal_code")) {
+              data.zip = comp.long_name;
+            }
+          });
+          onLocationUpdate(data);
+        }
+      });
+  };
+
   return (
     <BoxWrapper>
       <RowWrapper>
-        <Col span={6}>
+        <Col lg={6} xs={0}>
           <HoursEditor>
-            <HeaderSmallText>My Addresses</HeaderSmallText>
+            <HeaderSmallText>Mijn locaties</HeaderSmallText>
             <Divider></Divider>
             <BoxWrapperContent>
               <Row>
                 <Col>
-                  <h4>Main Store</h4>
-                  <p>PHYSICAL STORE</p>
+                  <h4>Hoofd locatie</h4>
+                  <p>Fysieke winkel</p>
                 </Col>
               </Row>
             </BoxWrapperContent>
           </HoursEditor>
         </Col>
-        <Col span={18}>
+        <Col lg={18} xs={24}>
           <Form module={basicSettingsForm}>
             <BoxWrapperContent paddingY>
               <Row>
-                <Col span={8}>
-                  <Field
-                    adminInput
-                    name="address"
-                    as={GooglePlaces}
-                    label="Address"
-                    customLabel
-                    size="large"
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Field
-                    adminInput
-                    name="shop_active"
-                    noBorder
-                    flexRow
-                    as={Checkbox}
-                    label="Primary Branch"
-                  />
-                </Col>
-                <Col span={8}>
+                <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
                   <Field
                     adminInput
                     name="address_type"
                     as={Select}
                     placeholder="Select Address Type"
-                    label="Address Type"
-                    size="large"
+                    label="Locatie type"
+                    size="small"
                     customLabel
-                    options={[
-                      { label: "Test2", value: "test2" },
-                      { label: "Test", value: "test" },
-                    ]}
+                    options={LOCATIONS_OPTIONS}
                   />
                 </Col>
               </Row>
-              <Col>
-                <Field
-                  adminInput
-                  name="shop_type"
-                  as={Input}
-                  label="Address Line (House No, Building)"
-                  size="large"
-                />
-              </Col>
+              <Row>
+                <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
+                  <Field
+                    adminInput
+                    as={GooglePlaces}
+                    label="Address"
+                    onLocationSelected={handleOnLocationSelected}
+                    customLabel
+                    size="small"
+                  />
+                  {/* <GooglePlaces
+                    placeholder="Address"
+                    onLocationSelected={handleOnLocationSelected}
+                  /> */}
+                </Col>
+              </Row>
               <Col>
                 <Row gutter={[16, 0]}>
-                  <Col span={12}>
+                  <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
                     <Field
                       adminInput
                       name="city"
-                      as={GooglePlaces}
-                      placeholder="City"
-                      label="Select City"
-                      size="large"
+                      as={Input}
+                      disabled
+                      label="City"
+                      customLabel
+                      size="small"
                     />
                   </Col>
-                  <Col span={6}>
+                  <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
                     <Field
                       adminInput
                       name="country"
-                      as={GooglePlaces}
-                      placeholder="State"
-                      label="Select State"
-                      size="large"
+                      as={Input}
+                      disabled
+                      label="Country"
+                      customLabel
+                      size="small"
                     />
                   </Col>
-                  <Col span={6}>
+                  <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
                     <Field
                       adminInput
                       name="zipcode"
                       as={Input}
-                      label="Zip Code"
+                      label="Postcode"
                       customLabel
-                      size="large"
+                      size="small"
+                    />
+                  </Col>
+                  <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
+                    <Field
+                      adminInput
+                      name="street"
+                      as={Input}
+                      label="STRAAT"
+                      customLabel
+                      size="small"
                     />
                   </Col>
                 </Row>
               </Col>
               <Row>
-                <Col span={8}>
+                <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
                   <Field
                     adminInput
                     name="intervals"
                     as={Select}
                     defaultValue={basicSettingsForm.state.values.intervals}
-                    label="Appointment Blocking"
-                    size="large"
+                    label="Tijd per afspraak"
+                    size="small"
                     options={DURATION_OPTIONS}
                     allowClear
                   />
@@ -154,8 +192,8 @@ export const MyAddresses = ({ basicSettingsForm }) => {
             <Divider />
             <ButtonsWrapper>
               <div />
-              <Button size="large" type="primary" htmlType="submit">
-                Save Changes
+              <Button type="primary" htmlType="submit">
+                Wijzigingen opslaan
               </Button>
             </ButtonsWrapper>
           </Form>

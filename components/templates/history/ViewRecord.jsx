@@ -1,26 +1,54 @@
-import React from "react";
-import { Descriptions, Badge, Divider } from "antd";
-import { Drawer } from "@/modules/modal";
-import Image from "next/image";
+import { Badge, Descriptions, Divider } from "antd";
 import moment from "moment";
+import Image from "next/image";
+import React from "react";
+import { useEffect, useState } from "react";
+
+import { Drawer } from "@/modules/modal";
 
 export const ViewRecord = ({ data, viewRecordModal }) => {
-  console.log(data);
+  const [screenSize, setScreenSize] = useState(800);
+
   const getGuaranteeStatus = (date, guarantee) => {
     return moment().isAfter(moment(date, "YYYY-MM-DD").add(guarantee, "months"))
       ? "error"
       : "processing";
   };
 
+  useEffect(() => {
+    function handleResize() {
+      setScreenSize(window.innerWidth < 450 ? "100%" : 800);
+    }
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <Drawer width="800px" module={viewRecordModal}>
+    <Drawer width={screenSize} module={viewRecordModal}>
       {data && (
         <div>
-          <Descriptions title="General Info" layout="vertical" bordered>
-            <Descriptions.Item label="IMEI Number">
-              {data?.serialnumber}
+          <Descriptions title="Afspraak gegevens" bordered>
+            <Descriptions.Item label="Type" span={3}>
+              {data?.device.device_name}
             </Descriptions.Item>
-            <Descriptions.Item label="Guaranty">
+            <Descriptions.Item label="Merk" span={3}>
+              {data?.brand.brand_name}
+            </Descriptions.Item>
+            <Descriptions.Item label="Model" span={3}>
+              {data?.model.model_name}
+            </Descriptions.Item>
+            <Descriptions.Item label="Reparatie" span={3}>
+              {data?.reparation.reparation_name}
+            </Descriptions.Item>
+            <Descriptions.Item label="Datum" span={3}>
+              {data?.appointment.date}
+            </Descriptions.Item>
+            <Descriptions.Item label="Prijs" span={3}>
+              {data?.price}
+            </Descriptions.Item>
+            <Descriptions.Item label="Garantie" span={3}>
               <Badge
                 status={getGuaranteeStatus(
                   data?.appointment.date,
@@ -29,57 +57,31 @@ export const ViewRecord = ({ data, viewRecordModal }) => {
                 text={data?.guarantee}
               />
             </Descriptions.Item>
-            <Descriptions.Item label="Reparation active">
-              {data?.reparation.repair_active ? "YES" : "NO"}
+          </Descriptions>
+          <Divider />
+
+          <Descriptions title="Reparatie data" bordered>
+            <Descriptions.Item label="IMEI nummer" span={3}>
+              {data?.serialnumber}
             </Descriptions.Item>
-            <Descriptions.Item label="Reparation Type">
-              {data?.reparation.reparation_name}
+            <Descriptions.Item label="Notities" span={3}>
+              {data?.reparation.comments}
             </Descriptions.Item>
-            <Descriptions.Item label="Description">
-              {data?.reparation.description}
+            <Descriptions.Item label="Fotos" span={3}>
+              <img src={data?.images}></img>
             </Descriptions.Item>
           </Descriptions>
           <Divider />
-          <Descriptions title="Appointment Info" layout="vertical" bordered>
-            <Descriptions.Item label="Client name">
+
+          <Descriptions title="Klant gegevens" bordered>
+            <Descriptions.Item label="Naam" span={3}>
               {data?.appointment.client_name}
             </Descriptions.Item>
-            <Descriptions.Item label="Client email">
+            <Descriptions.Item label="Emailadres" span={3}>
               {data?.appointment.client_email}
             </Descriptions.Item>
-            <Descriptions.Item label="Client phone">
+            <Descriptions.Item label="Telefoon nummer" span={3}>
               {data?.appointment.client_phone}
-            </Descriptions.Item>
-            <Descriptions.Item label="Client Address">
-              {data?.appointment.client_address}
-            </Descriptions.Item>
-            <Descriptions.Item label="Client Active">
-              <Badge
-                status={data?.appointment.active ? "success" : "error"}
-                text={data?.appointment.active ? "YES" : "NO"}
-              />
-            </Descriptions.Item>
-            <Descriptions.Item label="Appointment Date">
-              {data?.appointment.date}
-            </Descriptions.Item>
-            <Descriptions.Item label="Appointment Time">
-              {data?.appointment.time}
-            </Descriptions.Item>
-          </Descriptions>
-          <Divider />
-          <Descriptions title="Device Info" layout="vertical" bordered>
-            <Descriptions.Item label="Type" span={3}>
-              {data?.device.device_name}
-            </Descriptions.Item>
-            <Descriptions.Item label="Brand">
-              {data?.brand.brand_name}
-            </Descriptions.Item>
-            <Descriptions.Item label="Model">
-              {data?.model.model_name}
-            </Descriptions.Item>
-            <Descriptions.Item label="Memory">{data?.memory}</Descriptions.Item>
-            <Descriptions.Item label="Model info" span={3}>
-              {data?.model.model_info}
             </Descriptions.Item>
           </Descriptions>
         </div>

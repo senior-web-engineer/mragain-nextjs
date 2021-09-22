@@ -2,7 +2,6 @@ import { DownOutlined } from "@ant-design/icons";
 import { Tree } from "antd";
 import Image from "next/image";
 
-import FinanceImage from "@/assets/icons/finance.svg";
 import HistoryImage from "@/assets/icons/history.svg";
 import ServicesImage from "@/assets/icons/services.svg";
 import ShopImage from "@/assets/icons/shop.svg";
@@ -11,38 +10,22 @@ import { MenuHeader } from "../menu-styles";
 
 const managementMenuItems = (shopId) => [
   {
-    title: "History",
-    key: `history/${shopId}`,
+    title: "Afgeronde reparaties",
+    key: "history",
     icon: <Image width="24" height="24" src={HistoryImage} />,
     selectable: true,
   },
   {
-    title: "Shop Management",
+    title: "Profiel beheer",
     key: "shop-management",
     icon: <Image width="24" height="24" src={ShopImage} />,
-    selectable: false,
-    children: [
-      {
-        title: "Profile Settings",
-        key: `shop-management/${shopId}?tab=profile-settings`,
-      },
-      {
-        title: "Operational Hours",
-        key: `shop-management/${shopId}?tab=operational-hours`,
-      },
-    ],
-  },
-  {
-    title: "Repair Management",
-    key: "repair-management/device-manager",
-    icon: <Image width="24" height="24" src={ServicesImage} />,
     selectable: true,
   },
   {
-    title: "Finance",
-    key: "finance",
-    icon: <Image width="24" height="24" src={FinanceImage} />,
-    selectable: false,
+    title: "Reparatie management",
+    key: "repair-management",
+    icon: <Image width="24" height="24" src={ServicesImage} />,
+    selectable: true,
   },
 ];
 

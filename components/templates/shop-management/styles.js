@@ -1,6 +1,5 @@
-import React from "react";
+import { Row, Table, Tag } from "antd";
 import styled from "styled-components";
-import { Row } from "antd";
 
 export const rowStyle = {
   marginBottom: "24px",
@@ -22,7 +21,7 @@ export const HeaderSmallText = styled.p`
   font-size: 12px;
   line-height: 10px;
   color: #3090b4;
-  margin: 25px 0 12px 12px;
+  margin: 0;
 `;
 
 export const HeaderText = styled.h1`
@@ -73,7 +72,7 @@ export const CoverWrapper = styled.div`
 
   button {
     position: absolute;
-    bottom: 24px;
+    bottom: 38px;
     right: 24px;
   }
 `;
@@ -84,10 +83,14 @@ export const ProfileWrapper = styled.div`
   border-radius: 10px;
   position: absolute;
   top: 170px;
-  left: 60px;
+  left: 3%;
   overflow: hidden;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   z-index: 10;
+
+  @media (max-width: 1300px) {
+    left: 0 !important;
+  }
 `;
 
 export const ProfileButtonWrapper = styled.div`
@@ -95,8 +98,14 @@ export const ProfileButtonWrapper = styled.div`
     position: absolute;
     width: 140px;
     top: 330px;
-    left: 60px;
+    left: 3%;
     z-index: 10;
+  }
+
+  @media (max-width: 1300px) {
+    button {
+      left: 0 !important;
+    }
   }
 `;
 
@@ -120,6 +129,10 @@ export const HoursEditor = styled.div`
   width: 100%;
   height: 100%;
   padding: 15px;
+
+  input {
+    font-size: 12px !important;
+  }
 `;
 
 export const HoursEditorTitle = styled.div`
@@ -127,8 +140,9 @@ export const HoursEditorTitle = styled.div`
   padding: 26px 0 10px 0;
   margin: 0;
   letter-spacing: 0.05em;
+  font-size: 14px;
   text-transform: uppercase;
-  color: #c0c0c0;
+  color: #707070;
 `;
 
 export const PaddingWrapper = styled.div`
@@ -156,4 +170,18 @@ export const ListItemWrapper = styled.div`
   p {
     margin: 0;
   }
+`;
+
+export const TableWrapper = styled(Table)`
+  .ant-table-tbody {
+    background: white;
+  }
+`;
+
+export const TagWrapper = styled(Tag)`
+  transform: scale(1.1);
+`;
+
+export const Action = styled.a`
+  color: #0077cc;
 `;

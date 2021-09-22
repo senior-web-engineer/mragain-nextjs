@@ -1,10 +1,10 @@
+import { notification } from "antd";
+
 import { store } from "@/configureStore";
 import { API_PATH } from "@/constants";
 import dataFetcher from "@/modules/dataFetcher";
-import api, { privateApi } from "@/utils/api";
-import { createFormModule } from "@/modules/forms";
 import { createModalModule } from "@/modules/modal";
-import { notification } from "antd";
+import { privateApi } from "@/utils/api";
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],
@@ -59,9 +59,9 @@ export const getShopReparations = dataFetcher({
   },
 });
 
-export const saveModelReparations = createFormModule({
-  guid: "saveModelReparations",
-  async init(data) {
+export const saveModelReparations = dataFetcher({
+  selectors: [],
+  async fetchData(selectors, data) {
     const shopId = currentUser.selector(store.ref.getState())?.result
       .account_id;
     const fetchedData = await privateApi.get(
@@ -69,49 +69,33 @@ export const saveModelReparations = createFormModule({
     );
     return fetchedData;
   },
-  submit(data) {
-    console.log("DT CHECK", data);
-    const shopId = currentUser.selector(store.ref.getState())?.result
-      ?.account_id;
-    const promise = privateApi.put(`${API_PATH.SHOPGUARANTEE}/`, {
-      payload: data,
-      shop_id: shopId,
-    });
-
-    editRepairModelModal.actions.close();
-    notification.success({
-      message: "Saved successfully",
-    });
-
-    return promise;
-  },
 });
 
-export const saveSelectedModels = dataFetcher({
-  selectors: [],
-  async fetchData(payload) {
-    console.log("PYLD", payload);
-    const shopId = currentUser.selector(store.ref.getState())?.result
-      ?.account_id;
-    const data = await privateApi.post(`${API_PATH.GUARANTEEMODELS}/`, {
-      payload,
-      shop_id: shopId,
-    });
-    return data;
-  },
-});
+export const saveSelectedModels = async (payload) => {
+  console.log("PYLD", payload);
+  const shopId = currentUser.selector(store.ref.getState())?.result?.account_id;
+  const data = await privateApi.post(`${API_PATH.GUARANTEEMODELS}/`, {
+    payload,
+    shop_id: shopId,
+  });
+  editRepairModelModal.actions.close();
+  notification.success({
+    message: "Saved successfully",
+  });
+  return data;
+};
 
-export const saveShopReparations = dataFetcher({
-  selectors: [],
-  async fetchData(payload) {
-    const shopId = currentUser.selector(store.ref.getState())?.result
-      ?.account_id;
-    const data = await privateApi.put(`${API_PATH.GETSHOPREPAIRATION}/`, {
-      payload: payload,
-      shopId,
-    });
-    return data;
-  },
-});
+export const saveShopReparations = async (payload) => {
+  const shopId = currentUser.selector(store.ref.getState())?.result?.account_id;
+  const data = await privateApi.put(`${API_PATH.SHOPGUARANTEE}/`, {
+    payload: payload,
+    shop_id: shopId,
+  });
+  editRepairModelModal.actions.close();
+  notification.success({
+    message: "Saved successfully",
+  });
+  return data;
+};
 
 export const editRepairModelModal = createModalModule();

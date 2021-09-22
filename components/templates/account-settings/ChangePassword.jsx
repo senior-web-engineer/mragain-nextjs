@@ -1,55 +1,60 @@
-import {
-  HeaderSmallText,
-  BoxWrapper,
-  BoxWrapperContent,
-  ButtonsWrapper,
-} from "./styles";
-import { Button, Divider, Row, Col } from "antd";
+import { Button, Col, Divider, Row } from "antd";
+
 import Input from "@/components/ui/Input";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
+
+import {
+  BoxWrapper,
+  BoxWrapperContent,
+  ButtonsWrapper,
+  HeaderSmallText,
+} from "./styles";
 
 export const ChangePassword = ({ changePasswordForm }) => {
   return (
     <Form module={changePasswordForm}>
       <BoxWrapper>
         <div>
-          <HeaderSmallText>Basic Profile</HeaderSmallText>
+          <HeaderSmallText>Wachtwoord</HeaderSmallText>
         </div>
         <Divider />
         <Row>
-          <Col span={12}>
+          <Col xxl={{ span: 12 }} md={{ span: 16 }}>
             <BoxWrapperContent>
               <Field
                 adminInput
                 as={Input}
                 name="oldPassword"
-                label="Old Password"
+                label="Huidig wachtwoord"
                 type="password"
+                size="small"
               />
               <Field
                 adminInput
                 as={Input}
                 name="newPassword"
-                label="New Password"
+                label="Nieuw wachtwoord"
                 type="password"
+                size="small"
               />
               <Field
                 adminInput
                 as={Input}
                 name="confirmPassword"
-                label="Confirm Password"
+                label="Bevestig nieuw wachtwoord"
                 type="password"
+                size="small"
               />
             </BoxWrapperContent>
           </Col>
-          <Col span={12}></Col>
+          <Col xxl={{ span: 12 }} md={{ span: 8 }}></Col>
         </Row>
         <Divider />
         <ButtonsWrapper>
           <div />
-          <Button size="large" type="primary" htmlType="submit">
-            Save Changes
+          <Button type="primary" htmlType="submit">
+            Wachtwoord wijzigingen
           </Button>
         </ButtonsWrapper>
       </BoxWrapper>
