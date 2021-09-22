@@ -2,37 +2,19 @@ import { DownOutlined } from "@ant-design/icons";
 import { Tree } from "antd";
 import Image from "next/image";
 
-import FinanceImage from "@/assets/icons/finance.png";
-import HistoryImage from "@/assets/icons/history.png";
-import ServicesImage from "@/assets/icons/services.png";
-import ShopImage from "@/assets/icons/shop.png";
+import FinanceImage from "@/assets/icons/finance.svg";
+import HistoryImage from "@/assets/icons/history.svg";
+import ServicesImage from "@/assets/icons/services.svg";
+import ShopImage from "@/assets/icons/shop.svg";
 
 import { MenuHeader } from "../menu-styles";
 
 const managementMenuItems = (shopId) => [
   {
     title: "History",
-    key: "history",
+    key: `history/${shopId}`,
     icon: <Image width="24" height="24" src={HistoryImage} />,
-    selectable: false,
-    children: [
-      {
-        title: "All",
-        key: `history/${shopId}?tab=all`,
-      },
-      {
-        title: "Completed",
-        key: `history/${shopId}?tab=completed`,
-      },
-      {
-        title: "Canceled",
-        key: `history/${shopId}?tab=canceled`,
-      },
-      {
-        title: "On-Hold",
-        key: `history/${shopId}?tab=on-hold`,
-      },
-    ],
+    selectable: true,
   },
   {
     title: "Shop Management",
@@ -42,29 +24,19 @@ const managementMenuItems = (shopId) => [
     children: [
       {
         title: "Profile Settings",
-        key: "shop-management/profile-settings",
+        key: `shop-management/${shopId}?tab=profile-settings`,
       },
       {
         title: "Operational Hours",
-        key: "shop-management/operational-hours",
+        key: `shop-management/${shopId}?tab=operational-hours`,
       },
     ],
   },
   {
     title: "Repair Management",
-    key: "repair-management",
+    key: "repair-management/device-manager",
     icon: <Image width="24" height="24" src={ServicesImage} />,
-    selectable: false,
-    children: [
-      {
-        title: "Device Manager",
-        key: "repair-management/device-manager",
-      },
-      {
-        title: "Rules",
-        key: "repair-management/rules",
-      },
-    ],
+    selectable: true,
   },
   {
     title: "Finance",

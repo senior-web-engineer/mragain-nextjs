@@ -6,6 +6,12 @@ import styled from "styled-components";
 const StyledSelect = styled(AntdSelect)`
   display: block;
 
+  .ant-select {
+    &:focus {
+      outline: none;
+    }
+  }
+
   .ant-select-selection {
     border: 0;
   }

@@ -3,7 +3,7 @@ import { Tree } from "antd";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-import DashboardImage from "@/assets/icons/dashboard.png";
+import DashboardImage from "@/assets/icons/dashboard.svg";
 import Select from "@/components/ui/Select";
 
 import Header from "./Header";
@@ -31,11 +31,9 @@ function Menu() {
       const pathname = `/${lastSelectedKey.split("?")[0]}`;
       console.log(query, pathname);
       if (query.length === 2) {
-        router.push(pathname, `${pathname}?${[query[0]]}=${query[1]}`, {
-          shallow: true,
-        });
+        router.push(`${pathname}?${[query[0]]}=${query[1]}`);
       } else {
-        router.push(pathname, undefined, { shallow: true });
+        router.push(pathname);
       }
     }
   };
@@ -54,6 +52,7 @@ function Menu() {
         selectedKeys={selected}
         onSelect={onSelect}
         multiple
+        blockNode
         treeData={[
           {
             title: "Dashboard",

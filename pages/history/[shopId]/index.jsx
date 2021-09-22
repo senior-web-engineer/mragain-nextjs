@@ -1,21 +1,44 @@
-import { Button, Col, Divider, Row, Tabs } from "antd";
-import get from "lodash/get";
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import {
+  Button,
+  Col,
+  Divider,
+  Icon,
+  Input as AntdInput,
+  Row,
+  Table,
+} from "antd";
+import React, { useEffect, useState } from "react";
+import Highlighter from "react-highlight-words";
+import styled from "styled-components";
 
+import { devicesFetcher } from "@/components/dashboard/modules";
+import DefaultLayout from "@/components/layouts/Dashboard";
+import { ViewRecord } from "@/components/templates/history/ViewRecord";
 import {
   currentUser,
-  historyFetcher,
   reparationsList,
-} from "@/components/history/modules";
-import DefaultLayout from "@/components/layouts/Dashboard";
-import Input from "@/components/ui/Input";
-import List from "@/modules/list";
-import { Table } from "@/modules/list/Blocks";
-const { TabPane } = Tabs;
-//
+  viewRecordModal,
+} from "@/service/history/modules";
 
-const columns = [
+const StyledTable = styled(Table)`
+  .ant-table-head {
+    background: #fafafa;
+  }
+  .ant-table-thead > tr > th {
+    font-size: 12px;
+    color: #909090;
+    font-weight: 400;
+    border-bottom: 0;
+  }
+
+  .ant-table-tbody {
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+  }
+`;
+
+const columns = (viewDetails, search) => [
   {
     width: "120px",
     title: "Date",
@@ -26,132 +49,122 @@ const columns = [
   {
     title: "Repair Type",
     render(data) {
-      return data?.appointment?.repair_time;
+      return data?.reparation?.reparation_name;
     },
   },
   {
     title: "Device details",
     render(data) {
-      return `${data?.device?.device_name} /  ${data?.brand.brand_name} / ${data?.model.model_name}`;
+      return `${data?.device?.device_name} /  ${data?.brand?.brand_name} / ${data?.model?.model_name}`;
     },
   },
   {
     title: "IMEI Number",
-    render(data) {
-      return `${data?.reparation?.imei_number}`;
-    },
-  },
-  {
-    title: "Locked",
-    render(data) {
-      return `${data?.locked}`;
-    },
+    dataIndex: "serialnumber",
+    width: 180,
+    sorter: (a, b) => a.serialnumber - b.serialnumber,
+    render: (serialNumber) => (
+      <Highlighter
+        highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+        searchWords={[search]}
+        autoEscape
+        textToHighlight={serialNumber ? serialNumber.toString() : ""}
+      />
+    ),
   },
   {
     title: "Price",
-    render(data) {
-      return `${data?.price}`;
-    },
+    dataIndex: "price",
+    width: 150,
+    sorter: (a, b) => +a.price - +b.price,
   },
   {
     title: "Warranty",
+    width: 150,
     render(data) {
-      return `${data?.warranty}`;
+      return `${data?.guarantee} months`;
     },
-  },
-];
-
-function parseOptions(arr, labelKey, idKey = "id") {
-  return arr.map((item) => ({
-    value: get(item, idKey),
-    label: get(item, labelKey),
-  }));
-}
-
-const FILTER_OPTIONS = [
-  {
-    label: "All",
-    value: "all",
+    sorter: (a, b) => a.guarantee - b.guarantee,
   },
   {
-    label: "Completed",
-    value: "completed",
-  },
-  {
-    label: "Canceled",
-    value: "canceled",
-  },
-  {
-    label: "On Hold",
-    value: "on-hold",
+    title: "",
+    width: 50,
+    render(data) {
+      return (
+        <Button type="primary" onClick={() => viewDetails(data)}>
+          <Icon type="eye" />
+        </Button>
+      );
+    },
   },
 ];
 
 export default function HistoryPage({ auth_user }) {
-  const router = useRouter();
-  const { shopId } = router.query;
+  const [loading, setLoading] = useState(false);
+  const [historyItems, setHistoryItems] = useState([]);
+  const [search, setSearch] = useState("");
+  const [selectedItem, setSelectedItem] = useState();
 
   useEffect(() => {
     async function loadData() {
       await currentUser.fetch();
-      const repList = reparationsList.actions.initialize();
-      const history = historyFetcher.fetch();
-      console.log(repList, history);
+      const { items } = await reparationsList.actions.initialize();
+      console.log(items);
+      setHistoryItems(items);
+      setLoading(false);
     }
 
+    setLoading(true);
     loadData();
   }, []);
 
-  const onTabChange = async (tab) => {
-    console.log(tab);
-    router.push(`/history/${shopId}`, `/history/${shopId}?tab=${tab}`, {
-      shallow: true,
-    });
-    const history = await historyFetcher.fetch();
-    console.log(history);
-  };
-
   const onSearch = (value) => {
     console.log(value);
+    setSearch(value);
+  };
+
+  const handleOnRowsSelected = (keys, items) => console.log(keys, items);
+
+  const viewDetails = (data) => {
+    console.log(data);
+    setSelectedItem(data);
+    viewRecordModal.actions.open();
+    devicesFetcher.fetch();
   };
 
   return (
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
-        <Col span={4}>
+        <Col>
           <h1>History</h1>
         </Col>
-        <Col span={3}>
-          <Row type="flex" justify="space-around" align="middle">
-            <Button size="large" onClick={console.log}>
-              Import
-            </Button>
-            <Button size="large" onClick={console.log}>
-              Export
-            </Button>
-          </Row>
-        </Col>
+        <Col />
       </Row>
-      <Tabs defaultActiveKey="1" onChange={onTabChange}>
-        {FILTER_OPTIONS.map((option) => (
-          <TabPane tab={option.label} key={option.value} />
-        ))}
-      </Tabs>
       <Row>
         <Col span={5}>
-          <Input
-            placeholder="Search"
+          <AntdInput
+            small
+            placeholder="Search IMEI Number"
             size="large"
             allowClear
-            onChange={onSearch}
+            value={search}
+            onChange={(event) => onSearch(event.target.value)}
           />
         </Col>
         <Col></Col>
       </Row>
       <Divider />
-      <List module={reparationsList}>
-        <Table columns={columns} />
-      </List>
+      <StyledTable
+        loading={loading}
+        dataSource={historyItems.filter((data) =>
+          data.serialnumber.includes(search)
+        )}
+        columns={columns(viewDetails, search)}
+        onRowsSelected={handleOnRowsSelected}
+        selection
+        pagination
+      />
+      <ViewRecord data={selectedItem} viewRecordModal={viewRecordModal} />
     </DefaultLayout>
   );
 }

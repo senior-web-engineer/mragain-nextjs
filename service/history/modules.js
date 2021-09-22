@@ -4,7 +4,7 @@ import { store } from "@/configureStore";
 import { API_PATH } from "@/constants";
 import dataFetcher from "@/modules/dataFetcher";
 import { createListModule } from "@/modules/list";
-import api, { privateApi } from "@/utils/api";
+import { createModalModule } from "@/modules/modal";
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],
@@ -16,11 +16,12 @@ export const currentUser = dataFetcher({
 export const reparationsList = createListModule({
   guid: "shop-reprations",
   async fetchData(query = {}) {
-    const userId = currentUser.selector(store.ref.getState())?.result?.id;
+    const shopId = currentUser.selector(store.ref.getState())?.result
+      ?.account_id;
 
     try {
       const data = await privateApi.get(
-        `${API_PATH.GETAPPOINTMENTS}/${userId}/`,
+        `${API_PATH.GETAPPOINTMENTS}/${shopId}/`,
         query
       );
       return {
@@ -39,8 +40,11 @@ export const reparationsList = createListModule({
 export const historyFetcher = dataFetcher({
   selectors: [],
   async fetchData() {
-    const shop = currentUser.selector(store.ref.getState())?.result?.id;
-    const data = await api.get(`${API_PATH.GETAPPOINTMENTS}/${shop}`);
+    const shopId = currentUser.selector(store.ref.getState())?.result
+      ?.account_id;
+    const data = await privateApi.get(`${API_PATH.GETAPPOINTMENTS}/${shopId}/`);
     return data.map(({ item }) => item);
   },
 });
+
+export const viewRecordModal = createModalModule();

@@ -2,6 +2,7 @@ import { DatePicker, TimePicker } from "antd";
 import get from "lodash/get";
 import React, { useCallback, useEffect } from "react";
 
+import { Popover } from "@/components/common/Popover";
 import {
   appointmentForm,
   brandFetcher,
@@ -50,7 +51,7 @@ const columns = [
   {
     title: "Device details",
     render(data) {
-      return `${data?.device?.device_name} /  ${data?.brand.brand_name} / ${data?.model.model_name}`;
+      return `${data?.device?.device_name} /  ${data?.brand?.brand_name} / ${data?.model?.model_name}`;
     },
   },
   {
@@ -68,7 +69,7 @@ const columns = [
   {
     title: "Status",
     render(data) {
-      return `${data?.status}`;
+      return <Popover />;
     },
   },
 ];
@@ -226,7 +227,7 @@ export default function DashboardPage({ auth_user }) {
         Create appointment
       </Button>
       <List module={reparationsList}>
-        <Table columns={columns} />
+        <Table columns={columns} pagination />
       </List>
       <Drawer width="500px" module={createAppointmentFormModal}>
         <Form module={appointmentForm}>
