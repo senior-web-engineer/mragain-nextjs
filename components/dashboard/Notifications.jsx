@@ -22,6 +22,8 @@ const Wrap = styled.div`
 
 const MessagesWrap = styled.div`
   padding: 5px 24px;
+  max-height: 200px;
+  overflow-y: auto;
 `;
 
 const MessageWrap = styled.div`
