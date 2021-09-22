@@ -3,8 +3,9 @@ import { Tree } from "antd";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-import DashboardImage from "@/assets/icons/dashboard.png";
+import DashboardImage from "@/assets/icons/dashboard.svg";
 import Select from "@/components/ui/Select";
+import { OnMobile } from "@/utils/media";
 
 import Header from "./Header";
 import { ContentWrap, MainWrap, MenuWrap, PageContent } from "./menu-styles";
@@ -21,22 +22,10 @@ function Menu() {
   ]);
 
   const onSelect = (selectedKeys) => {
-    if (selectedKeys[selectedKeys.length - 1].includes("/")) {
+    if (selectedKeys.length !== 0) {
       const lastSelectedKey = selectedKeys[selectedKeys.length - 1];
-      setSelected([lastSelectedKey.split("/")[0], lastSelectedKey]);
-      let query = [];
-      if (lastSelectedKey.split("?").length === 2) {
-        query = lastSelectedKey.split("?")[1].split("=");
-      }
-      const pathname = `/${lastSelectedKey.split("?")[0]}`;
-      console.log(query, pathname);
-      if (query.length === 2) {
-        router.push(pathname, `${pathname}?${[query[0]]}=${query[1]}`, {
-          shallow: true,
-        });
-      } else {
-        router.push(pathname, undefined, { shallow: true });
-      }
+      setSelected([lastSelectedKey]);
+      router.push(`/${lastSelectedKey}/${shopId}`);
     }
   };
 
@@ -54,17 +43,18 @@ function Menu() {
         selectedKeys={selected}
         onSelect={onSelect}
         multiple
+        blockNode
         treeData={[
           {
             title: "Dashboard",
-            key: `dashboard/${shopId}`,
+            key: "dashboard",
             icon: <img src={DashboardImage} />,
             selectable: true,
           },
         ]}
       />
       <ManagementMenu shopId={shopId} selected={selected} onSelect={onSelect} />
-      <AccountMenu selected={selected} onSelect={onSelect} />
+      <AccountMenu shopId={shopId} selected={selected} onSelect={onSelect} />
     </MenuWrap>
   );
 }
@@ -74,7 +64,9 @@ export default function DefaultLayout({ children, showSignup = false }) {
     <MainWrap>
       <Header showSignup={showSignup} />
       <ContentWrap>
-        <Menu />
+        <OnMobile show={false}>
+          <Menu />
+        </OnMobile>
         <PageContent>{children}</PageContent>
       </ContentWrap>
     </MainWrap>

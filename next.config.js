@@ -19,6 +19,9 @@ module.exports = withLess(
         modifyVars: themeVariables, // make your antd custom effective
         outputStyle: "compressed",
       },
+      eslint: {
+        dirs: ["pages", "utils", "components", "modules"],
+      },
       sassLoaderOptions: {
         outputStyle: "compressed",
       },

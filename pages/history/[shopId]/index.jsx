@@ -1,157 +1,122 @@
-import { Button, Col, Divider, Row, Tabs } from "antd";
-import get from "lodash/get";
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import { Col, Divider, Input as AntdInput, Row, Table } from "antd";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
+import { Text } from "@/components/common/Text/Text";
+import DefaultLayout from "@/components/layouts/Dashboard";
+import { columns } from "@/components/templates/history/helpers";
+import { MobileList } from "@/components/templates/history/MobileLists";
+import { ViewRecord } from "@/components/templates/history/ViewRecord";
 import {
   currentUser,
-  historyFetcher,
   reparationsList,
-} from "@/components/history/modules";
-import DefaultLayout from "@/components/layouts/Dashboard";
-import Input from "@/components/ui/Input";
-import List from "@/modules/list";
-import { Table } from "@/modules/list/Blocks";
-const { TabPane } = Tabs;
-//
+  viewRecordModal,
+} from "@/service/history/modules";
+import { OnMobile } from "@/utils/media";
 
-const columns = [
-  {
-    width: "120px",
-    title: "Date",
-    render(data) {
-      return data?.appointment?.date;
-    },
-  },
-  {
-    title: "Repair Type",
-    render(data) {
-      return data?.appointment?.repair_time;
-    },
-  },
-  {
-    title: "Device details",
-    render(data) {
-      return `${data?.device?.device_name} /  ${data?.brand.brand_name} / ${data?.model.model_name}`;
-    },
-  },
-  {
-    title: "IMEI Number",
-    render(data) {
-      return `${data?.reparation?.imei_number}`;
-    },
-  },
-  {
-    title: "Locked",
-    render(data) {
-      return `${data?.locked}`;
-    },
-  },
-  {
-    title: "Price",
-    render(data) {
-      return `${data?.price}`;
-    },
-  },
-  {
-    title: "Warranty",
-    render(data) {
-      return `${data?.warranty}`;
-    },
-  },
-];
+const StyledTable = styled(Table)`
+  .ant-table-head {
+    background: #fafafa;
+  }
+  .ant-table-thead > tr > th {
+    font-size: 12px;
+    color: #909090;
+    font-weight: 400;
+    border-bottom: 0;
+  }
 
-function parseOptions(arr, labelKey, idKey = "id") {
-  return arr.map((item) => ({
-    value: get(item, idKey),
-    label: get(item, labelKey),
-  }));
-}
+  .ant-table-tbody > tr > td {
+    font-size: 12px;
+    font-weight: 400;
+  }
 
-const FILTER_OPTIONS = [
-  {
-    label: "All",
-    value: "all",
-  },
-  {
-    label: "Completed",
-    value: "completed",
-  },
-  {
-    label: "Canceled",
-    value: "canceled",
-  },
-  {
-    label: "On Hold",
-    value: "on-hold",
-  },
-];
+  .ant-table-tbody {
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+  }
+`;
+
+const MobileContent = styled.div`
+  height: calc(100vh - 260px);
+`;
 
 export default function HistoryPage({ auth_user }) {
-  const router = useRouter();
-  const { shopId } = router.query;
+  const [loading, setLoading] = useState(false);
+  const [historyItems, setHistoryItems] = useState([]);
+  const [search, setSearch] = useState("");
+  const [selectedItem, setSelectedItem] = useState();
 
   useEffect(() => {
     async function loadData() {
       await currentUser.fetch();
-      const repList = reparationsList.actions.initialize();
-      const history = historyFetcher.fetch();
-      console.log(repList, history);
+      const { items } = await reparationsList.actions.initialize();
+      setHistoryItems(items);
+      setLoading(false);
     }
 
+    setLoading(true);
     loadData();
   }, []);
 
-  const onTabChange = async (tab) => {
-    console.log(tab);
-    router.push(`/history/${shopId}`, `/history/${shopId}?tab=${tab}`, {
-      shallow: true,
-    });
-    const history = await historyFetcher.fetch();
-    console.log(history);
+  const onSearch = (value) => {
+    setSearch(value);
   };
 
-  const onSearch = (value) => {
-    console.log(value);
+  const handleOnRowsSelected = (keys, items) => console.log(keys, items);
+
+  const viewDetails = (data) => {
+    setSelectedItem(data);
+    viewRecordModal.actions.open();
   };
 
   return (
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
-        <Col span={4}>
-          <h1>History</h1>
+        <Col>
+          <Text.Headline style={{ marginBottom: "20px" }}>
+            History
+          </Text.Headline>
         </Col>
-        <Col span={3}>
-          <Row type="flex" justify="space-around" align="middle">
-            <Button size="large" onClick={console.log}>
-              Import
-            </Button>
-            <Button size="large" onClick={console.log}>
-              Export
-            </Button>
-          </Row>
-        </Col>
+        <Col />
       </Row>
-      <Tabs defaultActiveKey="1" onChange={onTabChange}>
-        {FILTER_OPTIONS.map((option) => (
-          <TabPane tab={option.label} key={option.value} />
-        ))}
-      </Tabs>
       <Row>
-        <Col span={5}>
-          <Input
-            placeholder="Search"
+        <Col lg={{ span: 5 }} md={{ span: 24 }}>
+          <AntdInput
+            placeholder="Search IMEI Number"
             size="large"
             allowClear
-            onChange={onSearch}
+            value={search}
+            style={{ fontSize: "12px" }}
+            onChange={(event) => onSearch(event.target.value)}
           />
         </Col>
         <Col></Col>
       </Row>
       <Divider />
-      <List module={reparationsList}>
-        <Table columns={columns} />
-      </List>
-    </DefaultLayout>
+      <OnMobile only>
+        <MobileContent>
+          <MobileList
+            viewDetails={viewDetails}
+            data={historyItems.filter((data) =>
+              data.serialnumber.includes(search)
+            )}
+          />
+        </MobileContent>
+      </OnMobile>
+      <OnMobile show={false}>
+        <StyledTable
+          loading={loading}
+          dataSource={historyItems.filter((data) =>
+            data.serialnumber.includes(search)
+          )}
+          columns={columns(viewDetails, search)}
+          onRowsSelected={handleOnRowsSelected}
+          selection
+          pagination
+        />
+      </OnMobile>
+      <ViewRecord data={selectedItem} viewRecordModal={viewRecordModal} />
+    </DefaultLayout >
   );
 }

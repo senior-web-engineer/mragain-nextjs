@@ -2,75 +2,30 @@ import { DownOutlined } from "@ant-design/icons";
 import { Tree } from "antd";
 import Image from "next/image";
 
-import FinanceImage from "@/assets/icons/finance.png";
-import HistoryImage from "@/assets/icons/history.png";
-import ServicesImage from "@/assets/icons/services.png";
-import ShopImage from "@/assets/icons/shop.png";
+import HistoryImage from "@/assets/icons/history.svg";
+import ServicesImage from "@/assets/icons/services.svg";
+import ShopImage from "@/assets/icons/shop.svg";
 
 import { MenuHeader } from "../menu-styles";
 
 const managementMenuItems = (shopId) => [
   {
-    title: "History",
+    title: "Afgeronde reparaties",
     key: "history",
     icon: <Image width="24" height="24" src={HistoryImage} />,
-    selectable: false,
-    children: [
-      {
-        title: "All",
-        key: `history/${shopId}?tab=all`,
-      },
-      {
-        title: "Completed",
-        key: `history/${shopId}?tab=completed`,
-      },
-      {
-        title: "Canceled",
-        key: `history/${shopId}?tab=canceled`,
-      },
-      {
-        title: "On-Hold",
-        key: `history/${shopId}?tab=on-hold`,
-      },
-    ],
+    selectable: true,
   },
   {
-    title: "Shop Management",
+    title: "Profiel beheer",
     key: "shop-management",
     icon: <Image width="24" height="24" src={ShopImage} />,
-    selectable: false,
-    children: [
-      {
-        title: "Profile Settings",
-        key: "shop-management/profile-settings",
-      },
-      {
-        title: "Operational Hours",
-        key: "shop-management/operational-hours",
-      },
-    ],
+    selectable: true,
   },
   {
-    title: "Repair Management",
+    title: "Reparatie management",
     key: "repair-management",
     icon: <Image width="24" height="24" src={ServicesImage} />,
-    selectable: false,
-    children: [
-      {
-        title: "Device Manager",
-        key: "repair-management/device-manager",
-      },
-      {
-        title: "Rules",
-        key: "repair-management/rules",
-      },
-    ],
-  },
-  {
-    title: "Finance",
-    key: "finance",
-    icon: <Image width="24" height="24" src={FinanceImage} />,
-    selectable: false,
+    selectable: true,
   },
 ];
 

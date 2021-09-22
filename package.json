@@ -7,7 +7,8 @@
     "build": "NODE_ENV=production next build",
     "postbuild": "next-sitemap",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
@@ -64,7 +65,9 @@
     "react-share": "^4.4.0",
     "react-slick": "^0.27.14",
     "react-switch": "^5.0.1",
+    "react-virtualized-auto-sizer": "^1.0.5",
     "react-waypoint": "^9.0.3",
+    "react-window": "^1.8.6",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",

@@ -8,7 +8,7 @@ export const MainWrap = styled.div`
 `;
 
 export const ContentWrap = styled.div`
-  background-color: #fafafa;
+  background-color: #f3f3f3;
   flex: 1;
   display: flex;
 `;
@@ -16,6 +16,8 @@ export const ContentWrap = styled.div`
 export const PageContent = styled.div`
   padding: 24px 32px 24px 48px;
   flex: 1;
+  height: calc(100vh - 68px);
+  overflow: auto;
 `;
 
 export const MenuWrap = styled.div`
@@ -26,7 +28,7 @@ export const MenuWrap = styled.div`
   color: #909090;
   font-size: 12px !important;
   height: calc(100vh - 68px);
-  overflow: scroll;
+  overflow: auto;
 
   .ant-tree > li {
     position: relative;

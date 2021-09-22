@@ -3,6 +3,7 @@ import get from "lodash/get";
 import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 
+import { Popover } from "@/components/common/Popover";
 import {
   appointmentForm,
   appointmentStats,
@@ -44,37 +45,37 @@ const PanelsWrap = styled.div`
 const columns = [
   {
     width: "120px",
-    title: "Date",
+    title: "Datum",
     render(data) {
       return data?.appointment?.date;
     },
   },
   {
-    title: "Time",
+    title: "Tijd",
     render(data) {
       return data?.appointment?.time;
     },
   },
   {
-    title: "Customer information",
+    title: "Klant informatie",
     render(data) {
       return `${data?.appointment?.client_name} / ${data?.appointment?.client_phone}`;
     },
   },
   {
-    title: "Device details",
+    title: "Model gegevens",
     render(data) {
-      return `${data?.device?.device_name} /  ${data?.brand.brand_name} / ${data?.model.model_name}`;
+      return `${data?.device?.device_name} /  ${data?.brand?.brand_name} / ${data?.model?.model_name}`;
     },
   },
   {
-    title: "Reparation",
+    title: "Reparatie",
     render(data) {
       return `${data?.reparation?.reparation_name}`;
     },
   },
   {
-    title: "Price",
+    title: "Prijs",
     render(data) {
       return `${data?.price}`;
     },
@@ -82,7 +83,7 @@ const columns = [
   {
     title: "Status",
     render(data) {
-      return `${data?.status}`;
+      return <div>status</div>;
     },
   },
 ];
@@ -246,7 +247,7 @@ export default function DashboardPage({ auth_user }) {
         Create appointment
       </Button>
       <List module={reparationsList}>
-        <Table columns={columns} />
+        <Table columns={columns} pagination />
       </List>
       <Drawer width="500px" module={createAppointmentFormModal}>
         <Form module={appointmentForm}>

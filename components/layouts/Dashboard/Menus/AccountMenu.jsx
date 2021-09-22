@@ -2,51 +2,20 @@ import { DownOutlined } from "@ant-design/icons";
 import { Tree } from "antd";
 import Image from "next/image";
 
-import MessagesImage from "@/assets/icons/messages.png";
-import NotificationsImage from "@/assets/icons/notifications.png";
-import SettingsImage from "@/assets/icons/settings.png";
+import SettingsImage from "@/assets/icons/settings.svg";
 
 import { MenuHeader } from "../menu-styles";
 
-const accountMenuItems = [
+const accountMenuItems = (shopId) => [
   {
-    title: "Messages",
-    key: "messages",
-    icon: <Image width="24" height="24" src={MessagesImage} />,
-    selectable: false,
-    children: [
-      {
-        title: "All",
-        key: "messages/all",
-        isLeaf: true,
-        children: [],
-      },
-    ],
-  },
-  {
-    title: "Notifications",
-    key: "notifications/all",
-    icon: <Image width="24" height="24" src={NotificationsImage} />,
-  },
-  {
-    title: "Account Settings",
+    title: "Account gegevens",
     key: "account-settings",
     icon: <Image width="24" height="24" src={SettingsImage} />,
-    selectable: false,
-    children: [
-      {
-        title: "General",
-        key: "account-settings/general",
-      },
-      {
-        title: "My Address",
-        key: "account-settings/my-address",
-      },
-    ],
+    selectable: true,
   },
 ];
 
-export const AccountMenu = ({ selected, onSelect }) => (
+export const AccountMenu = ({ selected, onSelect, shopId }) => (
   <>
     <MenuHeader>ACCOUNT</MenuHeader>
     <Tree
@@ -57,7 +26,7 @@ export const AccountMenu = ({ selected, onSelect }) => (
       onSelect={onSelect}
       multiple
       blockNode
-      treeData={accountMenuItems}
+      treeData={accountMenuItems(shopId)}
     />
   </>
 );
