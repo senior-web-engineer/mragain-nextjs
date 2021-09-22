@@ -1,227 +1,174 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./login.less";
-
-import { message } from "antd";
-import classnames from "classnames";
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
-import { connect } from "react-redux";
-import { resetAuthError } from "service/account/action.js";
-import { login } from "service/account/operations.js";
+import Image from "next/image";
+import DefaultLayout from "../components/layouts/Homepage";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { notification } from "antd";
+import axios from "axios";
+import { API_PATH } from "../constants";
+import wave from "../public/images/login/wave.svg";
+import drawing from "../public/images/login/drawing.svg";
+import Link from "next/link";
+import {
+  FormTitle,
+  FormText,
+  FormBox,
+  Label,
+  TextInput,
+  Button,
+  LabelWrapper,
+  MainWrapper,
+  FormWrapper,
+  RightSide,
+  WaveWrapper,
+  EyeWrapper,
+  BottomTextATag,
+  BottomText,
+  Gradient,
+  DrawingWrapper,
+  ForgotPass,
+  ButtonWrapper,
+} from "../styled-components/Login.style";
+import Form from "@/modules/forms";
+import { loginModule } from "../components/login/modules";
+import { Field } from "@/modules/forms/Blocks";
+import { useRouter } from "next/router";
+import { useScreenSize } from "@/utils/media";
 
-import { Layout } from "../components/global";
-import { FRONT_END_URL } from "../constants";
+const Login = () => {
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
 
-function Login(routerProps) {
-  const [state, setstate] = useState({ email: "", password: "" });
-  const [errors, seterrors] = useState({
-    error_email: null,
-    error_password: null,
-  });
-
-  const {
-    signin,
-    isLogged,
-    isAuthenticated,
-    resetAuthError,
-    auth_error,
-    auth_user,
-  } = routerProps;
+  const smallScreenSizes = ["tablet", "desktop", "mobile"];
+  const { size } = useScreenSize();
   const router = useRouter();
 
   useEffect(() => {
-    if (auth_error !== null) {
-      message.error(auth_error, [2.5]);
-      setTimeout(() => {
-        resetAuthError();
-      }, 2000);
-    }
     if (localStorage.getItem("auth-token") !== null) {
-      console.log("object-1");
       const user = JSON.parse(localStorage.getItem("auth-user"));
       router.push(`/dashboard/${user.name.replaceAll(" ", "-")}`);
     }
-    if (isLogged === true) {
-      console.log("object-2");
-      console.log(auth_user);
-      if (auth_user.id !== undefined) {
-        router.push(`/dashboard/${auth_user.name.replaceAll(" ", "-")}`);
+
+    async function loadData() {
+      await loginModule.actions.initialize();
+    }
+    loadData();
+  }, []);
+
+  const tokenConfig1 = (token) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    if (token) {
+      config.headers["Authorization"] = `Token ${token}`;
+    }
+    return config;
+  };
+
+  async function sendLogin() {
+    try {
+      let res = await loginModule.actions.submit();
+      let token = await res.key;
+      localStorage.setItem("auth-token", token);
+      axios
+        .get(`${API_PATH.GETAUTHUSER}/`, tokenConfig1(token))
+        .then((res) => {
+          let obj = Object.assign({}, res.data);
+          delete obj.is_super;
+          localStorage.setItem("auth-user", JSON.stringify(obj));
+          router.push(`/dashboard/${res.data.name.replaceAll(" ", "-")}`);
+        })
+        .catch((err) => console.log(err));
+    } catch (error) {
+      const { errors } = loginModule.state;
+      if (Object.keys(errors).length) {
+        return;
+      }
+      if (error !== "") {
+        notification.error({
+          message: "Bad Credentials, please try again ",
+        });
       }
     }
-    console.log("isAuthenticated" + isAuthenticated);
-  });
-
-  const onHandleInputChange = (e) => {
-    const value = e.target.value;
-    setstate({
-      ...state,
-      [e.target.name]: value,
-    });
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    let validationFlag = true;
-    let errEmail = null;
-    let errPassword = null;
-    const data = new FormData(event.target);
-    if (ValidateEmail(data.get("email")) === false) {
-      errEmail = true;
-      message.error("You have entered an invalid email address!", [2.5]);
-      console.log("errEmail");
-    }
-    if (state.password.length === 0) {
-      errPassword = true;
-      message.error("You have entered an invalid password!", [2.5]);
-      console.log("errPassword");
-    }
-
-    if (errEmail === true || errPassword === true) {
-      validationFlag = false;
-      seterrors({
-        error_email: errEmail,
-        error_password: errPassword,
-      });
-    } else {
-      validationFlag = true;
-
-      seterrors({
-        error_email: false,
-        error_password: false,
-      });
-    }
-    if (validationFlag === true) {
-      const user = {
-        email: data.get("email"),
-        password: data.get("password"),
-      };
-      signin(user);
-    }
-  };
-
-  function ValidateEmail(mail) {
-    if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
-      return true;
-    }
-    return false;
   }
 
   return (
-    <Layout>
-      <div className="user-login-container">
-        <Head>
-          <title>Over Mr Again - Inloggen</title>
-          <meta
-            name="Keywords"
-            content="Login Mr-again, mr-Again-login, telefoon reparateur, MrAgain"
-          />
-          <meta
-            name="description"
-            content="Log in op je reparateur dashboard bij MrAgain"
-          />
-          <link rel="canonical" href={FRONT_END_URL + "/login"} />
+    <>
+      <DefaultLayout showSignup={false}>
+        <MainWrapper>
+          <FormWrapper>
+            {smallScreenSizes.includes(size) && (
+              <WaveWrapper>
+                <Image src={wave} layout="fill" objectFit="cover" />
+                <DrawingWrapper>
+                  <Image src={drawing} width={242} height={160} />
+                </DrawingWrapper>
+              </WaveWrapper>
+            )}
 
-          {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
-          <meta property="og:type" content="website" />
-          <meta name="og_title" property="og:title" content="Inloggen" />
-          <meta
-            property="og:description"
-            content="Vind de beste reparateur bij jou in de buurt"
-          />
-          <meta name="og:url" content={FRONT_END_URL + "/login"} />
-          <meta property="og:image" content="" />
-          <meta
-            name="og_site_name"
-            property="og:site_name"
-            content="Mr Again"
-          />
+            <FormTitle>Welkom terug!</FormTitle>
+            <FormText>Log in op je account</FormText>
 
-          <meta name="theme-color" content="#ffffff" />
-        </Head>
-        <div className="user-login-container-wrap">
-          <div className="user-login-title">Inloggen</div>
-          <div className="user-login-form">
-            <Form onSubmit={handleSubmit}>
-              <Form.Control
-                className={classnames(
-                  "user-login-input",
-                  {
-                    "is-invalid":
-                      errors.error_email === true || isAuthenticated === false,
-                  },
-                  {
-                    "is-valid": errors.error_email === false || isAuthenticated,
-                  }
-                )}
-                type="text"
-                name="email"
-                placeholder="Emailadres"
-                onChange={(e) => {
-                  onHandleInputChange(e);
+            <FormBox>
+              <Form
+                module={loginModule}
+                onSubmit={(ev) => {
+                  ev.preventDefault();
+                  sendLogin();
                 }}
-                value={state.email}
-              />
-              <Form.Control
-                className={classnames(
-                  "user-login-input",
-                  {
-                    "is-invalid":
-                      errors.error_password === true ||
-                      isAuthenticated === false,
-                  },
-                  {
-                    "is-valid":
-                      errors.error_password === false || isAuthenticated,
-                  }
-                )}
-                name="password"
-                type="password"
-                placeholder="Wachtwoord"
-                onChange={(e) => {
-                  onHandleInputChange(e);
-                }}
-                value={state.password}
-              />
-              <div className="login-form-forgot">
-                <Link
-                  href="/reset-je-wachtwoord"
-                  className="login-form-forgot-btn"
-                >
-                  Wachtwoord vergeten?
-                </Link>
-              </div>
-              <Button className="user-login-btn" type="submit">
-                Login
-              </Button>
-            </Form>
+              >
+                <LabelWrapper>
+                  <Label>Emailadres</Label>
+
+                  <Field name="email" as={TextInput} />
+                </LabelWrapper>
+                <LabelWrapper>
+                  <Label>Wachtwoord</Label>
+
+                  <Field
+                    name="password"
+                    as={TextInput}
+                    type={passwordShown ? "text" : "password"}
+                  />
+
+                  <EyeWrapper>
+                    <FontAwesomeIcon
+                      icon={faEye}
+                      onClick={togglePasswordVisiblity}
+                      style={{ color: "lightgrey" }}
+                    />
+                  </EyeWrapper>
+                </LabelWrapper>
+                <ButtonWrapper>
+                  <Button type="submit">Log in</Button>{" "}
+                  <Link href="/reset-je-wachtwoord">
+                    <ForgotPass>Wachtwoord vergeten?</ForgotPass>
+                  </Link>
+                </ButtonWrapper>
+              </Form>
+            </FormBox>
+            <BottomText>
+              Nog geen lid?{" "}
+              <Link href="/meld-je-aan-als-reparateur">
+                <BottomTextATag>Meld je aan!</BottomTextATag>
+              </Link>
+            </BottomText>
+          </FormWrapper>
+
+          <div
+            style={{ display: "flex", flexDirection: "column", flex: "2.5" }}
+          >
+            <Gradient />
+            <RightSide />
           </div>
-        </div>
-      </div>
-    </Layout>
+        </MainWrapper>
+      </DefaultLayout>
+    </>
   );
-}
-
-const mapStateToProps = (state) => ({
-  //Maps state to redux store as props
-  isLogged: state.account.isLogged,
-  auth_error: state.account.auth_error,
-  auth_user: state.account.auth_user,
-  isAuthenticated: state.account.isAuthenticated,
-});
-
-const mapDispatchToProps = (dispatch) => {
-  // Action
-  return {
-    signin: (data) => {
-      login(data, dispatch);
-    },
-    resetAuthError: () => {
-      dispatch(resetAuthError());
-    },
-  };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

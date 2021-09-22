@@ -94,11 +94,7 @@ export default class MyDocument extends Document {
           </noscript>
           {isProduction ? (
             <>
-              <script
-                async
-                custom-element="amp-analytics"
-                src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"
-              />
+              <script async custom-element="amp-analytics" src="https://www.googletagmanager.com/gtm.js?id=" />
               <script dangerouslySetInnerHTML={{ __html: gaScript }} />
               <script dangerouslySetInnerHTML={{ __html: hotJarScript }} />
               <script dangerouslySetInnerHTML={{ __html: facebookScript }} />
@@ -111,9 +107,8 @@ export default class MyDocument extends Document {
           {isProduction ? (
             <>
               <amp-analytics
-                config="https://www.googletagmanager.com/amp.json?id=GTM-T4WQQ47&gtm.url=SOURCE_URL"
-                data-credentials="include"
-              />
+                config="https://www.googletagmanager.com/ns.html?id=GTM-PVDCX7L"
+                data-credentials="include" />
             </>
           ) : null}
         </body>

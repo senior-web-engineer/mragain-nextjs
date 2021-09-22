@@ -1,5 +1,9 @@
+import React from "react";
+import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
+import { MaxConstraints } from "@/components/styled/layout";
+import Button from "@/components/ui/Button";
 import {
-  faInfo,
+  faAddressBook,
   faLink,
   faMapMarkerAlt,
   faPhone,
@@ -8,31 +12,27 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Popover, Rate } from "antd";
 import Image from "next/image";
-import React, { useCallback, useEffect } from "react";
-import {
-  FacebookIcon,
-  FacebookShareButton,
-  LinkedinIcon,
-  LinkedinShareButton,
-  TwitterIcon,
-  TwitterShareButton,
-  WhatsappIcon,
-  WhatsappShareButton,
-} from "react-share";
 import styled, { css } from "styled-components";
 
-import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
 import {
-  openTimeFetcher,
   reviewsFetcher,
-  shopInfo,
 } from "@/components/shop-profile/modules";
-import { MaxConstraints } from "@/components/styled/layout";
-import Button from "@/components/ui/Button";
 import { useFetcher } from "@/modules/dataFetcher";
 import media, { OnMobile } from "@/utils/media";
 
+import {
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  LinkedinIcon,
+  WhatsappIcon,
+  TwitterIcon,
+} from "react-share";
 import DetailsModal from "./DetailsModal";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Wallpaper = styled.div`
   height: 260px;
@@ -89,8 +89,36 @@ const ShopMeta = styled.div`
 `;
 
 ShopMeta.FirstRow = styled.div`
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+
+    > div {
+        display: flex;
+    }
+
+    h1 {
+        font-size: 30px;
+        color: #0d3244;
+        font-weight: 500;
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    tag {
+        margin-left: 31px;
+        display: inline-block;
+        height: 31px;
+        ${(props) =>
+    props.tagColor &&
+    css`
+                background-color: ${props.tagColor || "#ddd"};
+            `}
+        color: #fff;
+        line-height: 31px;
+        padding: 0 10px;
+        border-radius: 15px;
+        text-transform: uppercase;
+    }
 
   > div {
     display: flex;
@@ -109,8 +137,8 @@ ShopMeta.FirstRow = styled.div`
     display: inline-block;
     height: 31px;
     ${(props) =>
-      props.tagColor &&
-      css`
+    props.tagColor &&
+    css`
         background-color: ${props.tagColor || "#ddd"};
       `}
     color: #fff;
@@ -195,19 +223,19 @@ const AdvantagesWrap = styled.div`
 `;
 
 const DetailButtonsWrap = styled.div`
-  top: 12px;
-  position: absolute;
-  right: 0;
-  z-index: 100;
-  ${Button} {
-    margin-left: 10px;
-    height: 35px;
-    line-height: 11px;
-    min-width: 35px;
-    border-radius: 35px;
-  }
+    top: 12px;
+    position: absolute;
+    right: 0;
+    z-index: 100;
+    ${Button} {
+      margin-left: 10px;
+      height: 35px;
+      line-height: 11px;
+      min-width: 35px;
+      border-radius: 35px;
+    }
 
-  ${media.tablet`
+    ${media.tablet`
     position: static;
 
     ${Button} {
@@ -223,7 +251,8 @@ const ADVANTAGES = [
   {
     title: "Cashback op je reparatie",
     logo: "/images/shop/wallet.png",
-    description: "Ontvang 5 euro cashback na het achterlaten van een review",
+    description:
+      "Ontvang 5 euro cashback na het achterlaten van een review",
   },
   {
     title: "Altijd de beste garantie",
@@ -242,6 +271,22 @@ const ADVANTAGES = [
     description: "Door een afspraak te maken weten we dat je komt",
   },
 ];
+
+export function ContactButton(...props) {
+  const router = useRouter()
+  const nextLocation = `/${router.query["city"]}/${router.query["shopId][api"]}/${router.query["street"]}/contact`;
+
+  return (
+    <Link href={nextLocation}>
+      <Button
+        {...props}
+        aria-label="Book service"
+      >
+        <FontAwesomeIcon icon={faAddressBook} /> Contact
+      </Button>
+    </Link>
+  )
+}
 
 export default function ShopHeader({ shop }) {
   const tag = shop.tag;
@@ -272,6 +317,7 @@ export default function ShopHeader({ shop }) {
     Ik heb  "${shop.name}" gevonden via MrAgain. Heb je een kapot apparaat? Bij MrAgain vind je de beste reparateur bij jou in de buurt
   `.trim();
   const shopURL = typeof window !== "undefined" ? window.location.href : "";
+
   const detailButtons = (
     <DetailButtonsWrap>
       <DetailsModal shop={shop} />
@@ -302,6 +348,9 @@ export default function ShopHeader({ shop }) {
           <FontAwesomeIcon icon={faShare} />
         </Button>
       </Popover>
+      <OnMobile show={false}>
+        <ContactButton />
+      </OnMobile>
     </DetailButtonsWrap>
   );
 
@@ -355,7 +404,10 @@ export default function ShopHeader({ shop }) {
                   {shop.phone_number ? (
                     <>
                       <d-term>
-                        <FontAwesomeIcon title="phone" icon={faPhone} />
+                        <FontAwesomeIcon
+                          title="phone"
+                          icon={faPhone}
+                        />
                       </d-term>
                       <d-def>{shop.phone_number}</d-def>
                     </>
@@ -363,7 +415,10 @@ export default function ShopHeader({ shop }) {
                   {shop.site_url ? (
                     <>
                       <d-term>
-                        <FontAwesomeIcon title="website" icon={faLink} />
+                        <FontAwesomeIcon
+                          title="website"
+                          icon={faLink}
+                        />
                       </d-term>
                       <d-def>{shop.site_url}</d-def>
                     </>
@@ -372,14 +427,19 @@ export default function ShopHeader({ shop }) {
                 {location ? (
                   <>
                     <d-term>
-                      <FontAwesomeIcon title="location" icon={faMapMarkerAlt} />
+                      <FontAwesomeIcon
+                        title="location"
+                        icon={faMapMarkerAlt}
+                      />
                     </d-term>
                     <d-def>{location}</d-def>
                   </>
                 ) : null}
               </d-list>
             </ShopMeta.ThirdRow>
-            <AdvantagesWrap>{ADVANTAGES.map(renderAdvantage)}</AdvantagesWrap>
+            <AdvantagesWrap>
+              {ADVANTAGES.map(renderAdvantage)}
+            </AdvantagesWrap>
           </ShopMeta>
         </ContentWrap>
       </MaxConstraints>

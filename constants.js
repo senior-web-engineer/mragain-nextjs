@@ -100,6 +100,8 @@ export const API_PATH = {
   SAVEINVALIDTIME: `${API_URL}/save-invalid-time`,
   GETINVALIDTIME: `${API_URL}/get-shop-invalid-time`,
   DELETEINVALIDTIME: `${API_URL}/delete-invalid-time`,
+  PAYMENT: `${API_URL}/payment/`,
+  GETPAYMENT: (id) => `${API_URL}/payment-status/${id}/`,
 };
 
 export default {

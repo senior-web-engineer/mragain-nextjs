@@ -44,8 +44,20 @@ export const shopServicesListModule = createListModule({
         `${API_PATH.GETSHOPREPARATIONDETAILS}/`,
         query
       );
+      const sorted = [...data].sort((item1, item2) => {
+        if (
+          item2.guarantee_time === 0 &&
+          item2.price === 0 &&
+          item2.reparation_time === "0"
+        ) {
+          return -1;
+        }
+
+        return 0;
+      });
+
       return {
-        items: data,
+        items: sorted,
       };
     } catch (err) {
       notification.error({

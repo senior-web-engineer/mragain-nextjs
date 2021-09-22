@@ -167,7 +167,7 @@ const ModelName = withData({
   },
 });
 
-export default function BookingInfoMobile({ shop, step }) {
+export default function BookingInfoMobile({ shop, showPrices = true }) {
   const location = [shop.street || "", shop.city || ""]
     .filter(Boolean)
     .join(", ");
@@ -210,14 +210,15 @@ export default function BookingInfoMobile({ shop, step }) {
         </ServiceDetailsWrap>
       ) : null}
       <Form module={appointmentForm}>
-        <UserInfo />
+        <UserInfo showDate={appointmentForm.state?.values?.type !== "contact"} />
       </Form>
-      {service ? (
+      {(showPrices && service) ? (
         <ServiceCostWrap>
           <item>{service?.reparation?.reparation_name}</item>
           <price>&euro;{service?.price}</price>
         </ServiceCostWrap>
-      ) : null}
+      ) : null
+      }
     </>
   );
 
@@ -245,7 +246,7 @@ export default function BookingInfoMobile({ shop, step }) {
             <location>{location}</location>
           </ShopDetails>
         </ShopWrap>
-        {service?.price ? (
+        {(showPrices && service?.price) ? (
           <TotalWrap>
             <label>Te betalen bij reparateur</label>
             <price>&euro;{service.price}</price>
@@ -253,6 +254,6 @@ export default function BookingInfoMobile({ shop, step }) {
           </TotalWrap>
         ) : null}
       </MainWrap>
-    </Popover>
+    </Popover >
   );
 }

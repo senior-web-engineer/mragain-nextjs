@@ -63,22 +63,6 @@ const MainWrap = styled.div`
   }
 `;
 
-const ShopDetails = styled.section`
-  font-size: 12px;
-  color: #707070;
-  font-weight: 400;
-  padding-bottom: 22px;
-  border-bottom: 3px solid #fafafa;
-  margin-bottom: 17px;
-
-  h3 {
-    font-size: 15px;
-    color: #303030;
-    font-weight: 500;
-    margin: 0;
-  }
-`;
-
 const ServiceDetails = styled.section`
   strong {
     font-size: 12px;
@@ -173,7 +157,7 @@ const ModelName = withData({
   },
 });
 
-export default function BookingInfo({ shop, step, nextStep }) {
+export default function BookingInfo({ shop, isLastStep, nextStep, showPrices = true, title = "Afspraak gegevens", finalButtonLabel = "Bevestig" }) {
   const location = [shop.street || "", shop.city || ""]
     .filter(Boolean)
     .join(", ");
@@ -183,7 +167,7 @@ export default function BookingInfo({ shop, step, nextStep }) {
   return (
     <MainWrap>
       <header>
-        <SubTitle>Afspraak gegevens</SubTitle>
+        <SubTitle>{title}</SubTitle>
       </header>
       <label>Reparateur informatie</label>
       <ShopDetails>
@@ -224,9 +208,9 @@ export default function BookingInfo({ shop, step, nextStep }) {
         </ServiceDetailsWrap>
       ) : null}
       <Form module={appointmentForm}>
-        <UserInfo />
+        <UserInfo showDate={appointmentForm.state?.values?.type !== "contact"} />
       </Form>
-      {service ? (
+      {showPrices && service ? (
         <>
           <ServiceCostWrap>
             <item>{service?.reparation?.reparation_name}</item>
@@ -239,10 +223,12 @@ export default function BookingInfo({ shop, step, nextStep }) {
         </>
       ) : null}
       <ButtonWrapper onClick={nextStep} aria-label="Next step">
-        {step !== 0 ? (
-          <span>Bevestig</span>
+        {isLastStep ? (
+          <span>{finalButtonLabel}</span>
         ) : (
-          <FontAwesomeIcon icon={faArrowRight} />
+          <>
+            <FontAwesomeIcon icon={faArrowRight} />
+          </>
         )}
       </ButtonWrapper>
     </MainWrap>

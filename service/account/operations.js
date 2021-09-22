@@ -130,9 +130,9 @@ export function login(data, dispatch) {
       password: data.password,
     })
     .then((res) => {
-      dispatch(authenticated(null));
+      // dispatch(authenticated(null));
       let token = res.data.key;
-      dispatch(registerAuthToken(token));
+      // dispatch(registerAuthToken(token));
       axios
         .get(`${API_PATH.GETAUTHUSER}/`, tokenConfig1(token))
         .then((res) => {
@@ -162,7 +162,7 @@ export function loginAsUser(token) {
     });
 }
 
-export function logout(dispatch) {
+export async function logout(dispatch) {
   axios
     .get(`${API_PATH.LOGOUT}/`, tokenConfig())
     .then((res) => {
@@ -298,7 +298,6 @@ export async function updateAccountSettings(id, data, dispatch) {
     .then((res) => {
       let user = JSON.parse(localStorage.getItem("auth-user"));
       user.name = data.name;
-      console.log("local Storage=>", user);
       localStorage.setItem("auth-user", JSON.stringify(user));
       dispatch(fetchAccountSettings(res.data));
 
@@ -435,12 +434,9 @@ export function getAccountProfile(id, str, dispatch) {
                     reviews = [];
                   }
                   if (str === true) {
-                    console.log("profile data");
                     dispatch(initShopAccountProfile(profile));
-                    console.log("true string");
                   } else {
                     dispatch(initAccountProfile(profile));
-                    console.log("false string");
                   }
                   dispatch(initAccountValidTime(validTime));
                   dispatch(initAccountInvalidTime(invalidTime));
@@ -542,7 +538,6 @@ export function updateAccountProfile(id, data, dispatch) {
   axios
     .post(`${API_PATH.UPDATEACCOUNTDETAIL}`, data, tokenConfig())
     .then((res) => {
-      console.log("updateAccountProfile -> res", res);
       return res;
     })
     .catch((err) => {
@@ -554,7 +549,6 @@ export function updateValidOpenTime(id, data, dispatch) {
   axios
     .put(`${API_PATH.UPDATEVALIDOPENTIME}/${id}/`, data, tokenConfig())
     .then((res) => {
-      console.log("updateValidOpenTime -> res", res);
       dispatch(setUpdateScheduleTime(true));
       return res;
     })
@@ -587,11 +581,10 @@ export function createRepairDevice(data, dispatch) {
   axios
     .post(`${API_PATH.REPAIRDEVICES}/`, data, tokenConfig())
     .then((res) => {
-      console.log("object1");
       axios
         .get(`${API_PATH.REPAIRDEVICES}/`, tokenConfig())
         .then((res) => {
-          console.log("object2");
+
 
           dispatch(fetchRepairDevices(res.data));
         })
