@@ -3,7 +3,6 @@ import get from "lodash/get";
 import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 
-import { Popover } from "@/components/common/Popover";
 import {
   appointmentForm,
   appointmentStats,

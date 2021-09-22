@@ -60,44 +60,45 @@ export default function RepairManagementPage() {
         key: `${fetchedDevices[0].id}-${allModels[0].brand.brand_name}`,
       };
 
+
       const currentModels = await getRepairBrandModel.fetch();
       setDevices(
-        fetchedDevices.map((device) => ({
-          title: (
-            <DeviceItemWrapper>
-              <div className="device-icon">
-                <Image
-                  width={40}
-                  height={40}
-                  src={
-                    find(additionalInfoOptions.devices, ["id", device.id])
-                      ?.icon || ""
-                  }
-                />
-              </div>
-              <div className="device-info">
-                <div>
-                  <b>{device.device_name}</b>
+        fetchedDevices.map((device) => {
+          const icon = find(additionalInfoOptions.devices, ["id", device.id])
+          return {
+            title: (
+              <DeviceItemWrapper>
+                <div className="device-icon">
+                  {icon ? <Image
+                    width={40}
+                    height={40}
+                    src={icon.icon}
+                  /> : null}
                 </div>
-                <div className="synonyms">{device?.synonyms}</div>
-              </div>
-            </DeviceItemWrapper>
-          ),
-          key: device.id,
-          id: device.id,
-          selectable: false,
-          children: uniqBy(
-            allModels
-              .filter((model) => model.brand.device_id === device.id)
-              .map((model) => ({
-                key: `${device.id}-${model.brand.brand_name}`,
-                title: model.brand.brand_name,
-                id: model.brand.id,
-                image: model.brand.brand_image,
-              })),
-            "key"
-          ),
-        }))
+                <div className="device-info">
+                  <div>
+                    <b>{device.device_name}</b>
+                  </div>
+                  <div className="synonyms">{device?.synonyms}</div>
+                </div>
+              </DeviceItemWrapper>
+            ),
+            key: device.id,
+            id: device.id,
+            selectable: false,
+            children: uniqBy(
+              allModels
+                .filter((model) => model.brand.device_id === device.id)
+                .map((model) => ({
+                  key: `${device.id}-${model.brand.brand_name}`,
+                  title: model.brand.brand_name,
+                  id: model.brand.id,
+                  image: model.brand.brand_image,
+                })),
+              "key"
+            )
+          }
+        })
       );
 
       const selectedModels = currentModels.map((model) =>
