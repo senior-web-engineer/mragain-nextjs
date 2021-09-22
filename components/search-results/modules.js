@@ -40,7 +40,7 @@ export const filtersFormModule = createFormModule({
       price: query.price || "-1",
       sort: parseInt(query.sort) || 0,
       long: query.long || 0,
-      shop_type_text: [],
+      shop_type: 0,
       lat: query.lat || 0,
       limit: 100,
     };

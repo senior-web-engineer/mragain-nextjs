@@ -845,6 +845,10 @@ const ServiceSelector = AppendIdentifier({
 
 const REPAIR_TYPES = [
   {
+    label: "Alle",
+    value: 0,
+  },
+  {
     label: "Repair on shop",
     value: 1,
   },
@@ -1003,9 +1007,9 @@ function RefineSearchForm() {
     <Form module={filtersFormModule}>
       <Field name="price" as={Slider} label="Maximum prijs" />
       <Field name="rate" as={Rate} label="Minimale rating" />
-      <Field name="shop_type_text" as={Checkbox.Group} label="Reparatie Type">
+      <Field name="shop_type" as={Radio.Group} label="Reparatie Type">
         {REPAIR_TYPES.map((type) => (
-          <Checkbox value={type.value} disabled={type.disabled}>{type.label}</Checkbox>
+          <Radio value={type.value} disabled={type.disabled}>{type.label}</Radio>
         ))}
       </Field>
       <Field
