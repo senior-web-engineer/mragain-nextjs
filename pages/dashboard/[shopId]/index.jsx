@@ -1,18 +1,23 @@
 import { DatePicker, TimePicker } from "antd";
 import get from "lodash/get";
 import React, { useCallback, useEffect } from "react";
+import styled from "styled-components";
 
 import { Popover } from "@/components/common/Popover";
 import {
   appointmentForm,
+  appointmentStats,
   brandFetcher,
   createAppointmentFormModal,
   currentUser,
   devicesFetcher,
   modelFetcher,
+  recentActivity,
   reparationsList,
   servicesFetcher,
 } from "@/components/dashboard/modules";
+import Notifications from "@/components/dashboard/Notifications";
+import Stats from "@/components/dashboard/Stats";
 import DefaultLayout from "@/components/layouts/Dashboard";
 import { SubTitle } from "@/components/styled/text";
 import Button from "@/components/ui/Button";
@@ -26,6 +31,16 @@ import { Table } from "@/modules/list/Blocks";
 import { Drawer } from "@/modules/modal";
 
 //
+
+const PanelsWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  > div:nth-child(2) {
+    margin-top: -50px;
+  }
+`;
 
 const columns = [
   {
@@ -151,6 +166,8 @@ export default function DashboardPage({ auth_user }) {
   useEffect(() => {
     async function loadData() {
       await currentUser.fetch();
+      recentActivity.fetch();
+      appointmentStats.fetch();
       reparationsList.actions.initialize();
     }
 
@@ -168,7 +185,7 @@ export default function DashboardPage({ auth_user }) {
       },
     });
     brandFetcher.key(`${value}`).fetch();
-  });
+  }, []);
 
   const onBandChange = useCallback((value) => {
     appointmentForm.actions.batchChange({
@@ -179,7 +196,7 @@ export default function DashboardPage({ auth_user }) {
       },
     });
     modelFetcher.key(`${value}`).fetch();
-  });
+  }, []);
 
   const onModelChange = useCallback((value) => {
     appointmentForm.actions.batchChange({
@@ -189,7 +206,7 @@ export default function DashboardPage({ auth_user }) {
       },
     });
     servicesFetcher.key(`${value}`).fetch();
-  });
+  }, []);
 
   const onReparationChange = useCallback(async (value) => {
     appointmentForm.actions.batchChange({
@@ -211,11 +228,15 @@ export default function DashboardPage({ auth_user }) {
         },
       });
     }
-  });
+  }, []);
 
   return (
     <DefaultLayout>
       <h1>Welcome Back!</h1>
+      <PanelsWrap>
+        <Stats />
+        <Notifications />
+      </PanelsWrap>
       <Button
         onClick={() => {
           createAppointmentFormModal.actions.open();

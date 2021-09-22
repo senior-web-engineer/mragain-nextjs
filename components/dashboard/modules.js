@@ -15,6 +15,30 @@ export const currentUser = dataFetcher({
   },
 });
 
+export const recentActivity = dataFetcher({
+  selectors: [
+    "dashboard-recent-activity",
+    (state) => {
+      return currentUser.selector(state)?.result?.id;
+    },
+  ],
+  fetchData([_, shopId]) {
+    return privateApi.get(`${API_PATH.GETALLNOTIFICATIONS}/${shopId}/`);
+  },
+});
+
+export const appointmentStats = dataFetcher({
+  selectors: [
+    "dashboard-appointment-stats",
+    (state) => {
+      return currentUser.selector(state)?.result?.id;
+    },
+  ],
+  fetchData([_, shopId]) {
+    return privateApi.get(`${API_PATH.GETDASHSTATS}/${shopId}/`);
+  },
+});
+
 export const reparationsList = createListModule({
   guid: "shop-reprations",
   async fetchData(query = {}) {
