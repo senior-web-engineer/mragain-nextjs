@@ -45,6 +45,10 @@ function ssrReducer(state, action) {
       forms: {
         ...state.forms,
         ...action.payload.forms,
+      },
+      modal: {
+        ...state.modal,
+        ...action.payload.modal,
       }
     };
   }

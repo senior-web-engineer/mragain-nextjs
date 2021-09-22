@@ -1,67 +1,70 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./reset-je-wachtwoord.less";
-
-import { message } from "antd";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import Head from "next/head";
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
-import { connect } from "react-redux";
-import { resetAuthError } from "service/account/action.js";
-import { resetPasswordEmail } from "service/account/operations.js";
+import DefaultLayout from "../components/layouts/Homepage";
+import { notification } from "antd";
+import wave from "../public/images/login/wave.svg";
+import drawing from "../public/images/login/drawing.svg";
+import {
+  FormTitle,
+  FormText,
+  FormBox,
+  Label,
+  TextInput,
+  Button,
+  LabelWrapper,
+  MainWrapper,
+  FormWrapper,
+  RightSide,
+  WaveWrapper,
+  Gradient,
+  DrawingWrapper,
+  ButtonWrapper,
+} from "../styled-components/reset-password";
+import Form from "@/modules/forms";
+import { resetPasswordModule } from "../components/resetPassword/modules";
+import { useScreenSize } from "@/utils/media";
+import { Field } from "@/modules/forms/Blocks";
 
-import { Layout } from "@/components/global";
-
-function PasswordResetEmail(routerProps) {
-  const [validated, setValidated] = React.useState(false);
-  const { resetPasswordEmail, resetAuthError, auth_error } = routerProps;
-  const [email, setEmail] = useState("");
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    const form = event.currentTarget;
-    if (form.checkValidity() === true) {
-      const data = new FormData(event.target);
-      if (ValidateEmail(data.get("email")) === false) {
-        message.error("Je hebt een ongeldig emailadres ingevuld.", [2.5]);
-        return;
-      }
-
-      // console.log(data.get("email").set);
-      setValidated(true);
-      resetPasswordEmail({ email: data.get("email") });
-      message.success(
-        "We hebben je een email verzonden waarmee je je wachtwoord kunt wijzigen.",
-        [2.5]
-      );
-      setValidated(false);
-
-      setEmail("");
-    }
-  };
+const ResetPass = () => {
+  const [disable, setDisable] = useState(false);
+  const smallScreenSizes = ["tablet", "desktop", "mobile"];
+  const { size } = useScreenSize();
 
   useEffect(() => {
-    if (auth_error !== null) {
-      message.error(auth_error, [2.5]);
-      setTimeout(() => {
-        resetAuthError();
-      }, 2000);
+    async function loadData() {
+      await resetPasswordModule.actions.initialize();
     }
-  });
+    loadData();
+  }, []);
 
-  const onHandleChange = (e) => {
-    setEmail(e.target.value);
-  };
-  function ValidateEmail(mail) {
-    if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
-      return true;
+  async function sendResetData() {
+    try {
+      await resetPasswordModule.actions.submit();
+      notification.success({
+        description:
+          "We hebben je een email verzonden waarmee je je wachtwoord kunt wijzigen.",
+        duration: 2.5,
+      });
+      setDisable(false);
+      const updates = resetPasswordModule.state.initialValues;
+      resetPasswordModule.actions.batchChange({ updates });
+    } catch (error) {
+      const { errors } = loginModule.state;
+      if (Object.keys(errors).length) {
+        return;
+      }
+      if (error !== "") {
+        notification.error({
+          message: "Er is wat fout gegaan, klopt je emailadres?",
+        });
+      }
     }
-    return false;
   }
 
   return (
-    <Layout>
-      <div className="user-login-container">
+    <>
+      <DefaultLayout showSignup={false}>
         <Head>
           <title itemProp="name">Mr Again - Reset je wachtwoord</title>
           <meta
@@ -93,46 +96,54 @@ function PasswordResetEmail(routerProps) {
           />
           <meta name="theme-color" content="#ffffff" />
         </Head>
-        <div className="user-login-container-wrap">
-          <div className="user-login-title">Reset je wachtwoord</div>
-          <div className="user-reset-email-form">
-            <Form noValidate validated={validated} onSubmit={handleSubmit}>
-              <Form.Control
-                className="user-login-input"
-                type="text"
-                name="email"
-                onChange={(e) => onHandleChange(e)}
-                placeholder="Je emailadres"
-                value={email}
-                required
-              />
+        <MainWrapper>
+          <FormWrapper>
+            {smallScreenSizes.includes(size) && (
+              <WaveWrapper>
+                <Image src={wave} layout="fill" objectFit="cover" />
+                <DrawingWrapper>
+                  <Image src={drawing} width={242} height={160} />
+                </DrawingWrapper>
+              </WaveWrapper>
+            )}
 
-              <Button className="user-login-btn" type="submit">
-                Reset wachtwoord
-              </Button>
-            </Form>
+            <FormTitle>Reset je wachtwoord</FormTitle>
+            <FormText>Vul je emailadres in:</FormText>
+
+            <FormBox>
+              <Form
+                module={resetPasswordModule}
+                onSubmit={(ev) => {
+                  ev.preventDefault();
+                  sendResetData();
+                  setDisable(true);
+                }}
+              >
+                <LabelWrapper>
+                  <Label>Emailadres</Label>
+
+                  <Field name="email" as={TextInput} />
+                </LabelWrapper>
+
+                <ButtonWrapper>
+                  <Button type="submit" disabled={disable}>
+                    Reset wachtwoord
+                  </Button>{" "}
+                </ButtonWrapper>
+              </Form>
+            </FormBox>
+          </FormWrapper>
+
+          <div
+            style={{ display: "flex", flexDirection: "column", flex: "2.5" }}
+          >
+            <Gradient />
+            <RightSide />
           </div>
-        </div>
-      </div>
-    </Layout>
+        </MainWrapper>
+      </DefaultLayout>
+    </>
   );
-}
-
-const mapStateToProps = (state) => ({
-  //Maps state to redux store as props
-  auth_error: state.account.auth_error,
-});
-
-const mapDispatchToProps = (dispatch) => {
-  // Action
-  return {
-    resetPasswordEmail: (_data) => {
-      resetPasswordEmail(_data, dispatch);
-    },
-    resetAuthError: () => {
-      dispatch(resetAuthError());
-    },
-  };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PasswordResetEmail);
+export default ResetPass;

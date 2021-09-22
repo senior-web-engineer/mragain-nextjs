@@ -1,43 +1,40 @@
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Checkbox, Radio } from "antd";
-import moment from "moment";
-import dynamic from "next/dynamic";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useCallback, useEffect } from "react";
-import styled, { css } from "styled-components";
-
-import Loader from "@/components/common/Loader";
-import ConfirmationModal from "@/components/common/modals/ConfirmationModal";
-import { continueWitoutServiceModal } from "@/components/shop-profile/modules";
-import { MaxConstraints } from "@/components/styled/layout";
-import { SubTitle, SubTitleDescription } from "@/components/styled/text";
-import Button from "@/components/ui/Button";
-import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
-import Select from "@/components/ui/Select";
-import { store } from "@/configureStore";
 import { createSelectComponent, useFetcher } from "@/modules/dataFetcher";
+import React, { useCallback, useEffect } from "react";
+import {
+  brandFetcher,
+  deviceFetcher,
+  filtersFormModule,
+  shopServicesListModule,
+  modelFetcher,
+  serviceFormModule,
+  nextSlotFetcher,
+} from "../modules";
 import Form, { useFormContext } from "@/modules/forms";
 import {
   Field,
   parseNativeEvent,
   SyncFormValues,
 } from "@/modules/forms/Blocks";
+import Select from "@/components/ui/Select";
 import List from "@/modules/list";
 import { Listing, Table } from "@/modules/list/Blocks";
-import media, { OnMobile, useScreenSize } from "@/utils/media";
+import styled, { css } from "styled-components";
+import { MaxConstraints } from "@/components/styled/layout";
+import { Checkbox, Radio } from "antd";
+import moment from "moment";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-import {
-  brandFetcher,
-  deviceFetcher,
-  filtersFormModule,
-  modelFetcher,
-  nextSlotFetcher,
-  serviceFormModule,
-  shopServicesListModule,
-} from "../modules";
+import Loader from "@/components/common/Loader";
+import ConfirmationModal from "@/components/common/modals/ConfirmationModal";
+import { continueWitoutServiceModal } from "@/components/shop-profile/modules";
+import { SubTitle, SubTitleDescription } from "@/components/styled/text";
+import Button from "@/components/ui/Button";
+import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
+import { store } from "@/configureStore";
+import { ContactButton } from "../ShopHeader";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
   loading: Loader,
@@ -129,35 +126,37 @@ const NextStepWrap = styled.div`
 `;
 
 const MobileToolbar = styled.div`
-  position: fixed;
-  display: flex;
-  bottom: 0;
-  background-color: #fff;
-  height: 60px;
-  padding: 0 20px;
-  box-shadow: 0 0 27px rgba(0, 0, 0, 0.3);
-  width: 100%;
-  z-index: 110;
-  left: 0;
-  justify-content: space-between;
-  align-items: center;
+    position: fixed;
+    display: flex;
+    bottom: 0;
+    background-color: #fff;
+    height: 60px;
+    padding: 0 20px;
+    box-shadow: 0 0 27px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    z-index: 110;
+    left: 0;
+    justify-content: space-between;
+    align-items: center;
 
-  ${NextStepWrap} {
-    text-align: right;
-    margin: 0;
-    white-space: nowrap;
-  }
-
-  ${Button} {
-    padding: 7px 22px;
-    height: 37px;
-    line-height: 23px;
-    box-shadow: 0 0 8px #06c987;
-
-    &[disabled] {
-      box-shadow: 0 0 8px #a0a0a0;
+    ${NextStepWrap} {
+        text-align: right;
+        margin: 0;
+        white-space: nowrap;
+        padding: 0;
+        border: 0;
     }
-  }
+
+    ${Button} {
+        padding: 7px 22px;
+        height: 37px;
+        line-height: 23px;
+        box-shadow: 0 0 8px #06c987;
+
+        &[disabled] {
+            box-shadow: 0 0 8px #a0a0a0;
+        }
+    }
 
   ${nextSlotCss}
 `;
@@ -166,7 +165,7 @@ const SERVICE_COLUMNS = [
   {
     title: "Reparatie",
     key: "reparation_name",
-    render: function ReparationName(item) {
+    render: (item) => {
       if (false) {
         return (
           <ReparationCell>
@@ -200,22 +199,48 @@ const SERVICE_COLUMNS = [
   },
   {
     title: "Garantie",
-    dataIndex: "guarantee_time",
     key: "guarantee_time",
-    render: (data) => `${data} maanden`,
+    render: (data) => {
+      if (data.guarantee_time === 0 && data.price === 0 && data.reparation_time === "0") {
+        return {
+          props: {
+            colSpan: 3,
+
+          },
+          children: <div style={{ textAlign: "center", border: "1px solid #ddd" }}>Prijs op aanvraag</div>
+        }
+      }
+
+      return `${data.guarantee_time} maanden`
+    },
   },
   {
     title: "Reparatie tijd",
-    dataIndex: "reparation_time",
     key: "reparation_time",
-    render: (data) => `${data} minuten`,
+    render: (data) => {
+      if (data.guarantee_time === 0 && data.price === 0 && data.reparation_time === "0") {
+        return {
+          props: {
+            colSpan: 0
+          }
+        }
+      }
+
+      return `${data.reparation_time} minuten`;
+    },
   },
   {
     title: "Prijs",
-    dataIndex: "price",
     key: "price",
-    render: function Price(text) {
-      return <span>&euro;{text}</span>;
+    render: (data) => {
+      if (data.guarantee_time === 0 && data.price === 0 && data.reparation_time === "0") {
+        return {
+          props: {
+            colSpan: 0
+          }
+        }
+      }
+      return <span>&euro;{data.price}</span>
     },
   },
 ];
@@ -225,6 +250,14 @@ const ServiceMobileListing = styled.div`
   margin: 0 -24px;
   padding: 0 20px;
 `;
+
+const PriceOnDemand = styled.div`
+  font-Size: 13px;
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 5px 7px;
+  color: #555;
+`
 
 const ServiceMobileItemWrap = styled.div`
   padding: 26px 0;
@@ -264,12 +297,12 @@ function MobileServiceItem({ item }) {
     <ServiceMobileItemWrap>
       <ServiceMobileItemWrap.FirstColumn>
         {firstColumn}
-        <d-def>{item.guarantee_time} maanden garantie</d-def>
+        {item.guarantee_time ? <d-def>{item.guarantee_time} maanden garantie</d-def> : null}
       </ServiceMobileItemWrap.FirstColumn>
       <price>
-        <span>&euro;{item.price}</span>
+        {item.price ? <span>&euro;{item.price}</span> : <PriceOnDemand>Prijs op aanvraag</PriceOnDemand>}
       </price>
-    </ServiceMobileItemWrap>
+    </ServiceMobileItemWrap >
   );
 }
 
@@ -358,7 +391,7 @@ const Panel = styled.div`
 `;
 
 function AppendIdentifier({ Component, name }) {
-  return function IdentifiedComponent(props) {
+  return function (props) {
     const { state } = useFormContext();
     return <Component identifier={`${state?.values?.[name]}`} {...props} />;
   };
@@ -380,7 +413,7 @@ const ModelSelector = AppendIdentifier({
     parseOptions(items = []) {
       return parseOptions(items || [], "model_name");
     },
-    Component: function ModelSelectorComponent(props) {
+    Component: (props) => {
       const { state } = useFormContext();
       return <Field {...props} identifier={state?.values?.brand} />;
     },
@@ -415,7 +448,7 @@ function AppointmentButton() {
             }
           }}
         >
-          Contact & afspraak maken <FontAwesomeIcon icon={faArrowRight} />{" "}
+          Afspraak maken <FontAwesomeIcon icon={faArrowRight} />
         </Button>
       </Link>
     </NextStepWrap>
@@ -468,8 +501,12 @@ export default function ShopServices({ shop }) {
             device: `${devices[0].id}`,
           },
         });
-        const brands = await brandFetcher.key(`${devices[0].id}`).fetch();
-        const models = await modelFetcher.key(`${brands[0].id}`).fetch();
+        const brands = await brandFetcher
+          .key(`${devices[0].id}`)
+          .fetch();
+        const models = await modelFetcher
+          .key(`${brands[0].id}`)
+          .fetch();
         const updates = {
           device: devices.length > 0 ? `${devices[0].id}` : `0`,
           brand: brands.length > 0 ? `${brands[0].id}` : `0`,
@@ -529,11 +566,12 @@ export default function ShopServices({ shop }) {
     <MaxConstraints>
       <Panel>
         <SubTitle>
-          Selecteer je apparaat, merk en model & bekijk onze reparaties
+          Selecteer je apparaat, merk en model & bekijk onze
+          reparaties
         </SubTitle>
         <SubTitleDescription>
-          Staat je model of reparatie er niet tussen? Waarschijnlijk kunnen we
-          je wel helpen, maak een afspraak en we kijken er naar!
+          Staat je model of reparatie er niet tussen?
+          Waarschijnlijk kunnen we je wel helpen, maak een afspraak en we kijken er naar!
         </SubTitleDescription>
         <Form module={filtersFormModule}>
           <OnMobile only>
@@ -579,12 +617,18 @@ export default function ShopServices({ shop }) {
             onChange={(data) => {
               // TODO (V.T leave explanation)
               const models =
-                modelFetcher.key(data.brand).selector(store.ref.getState())
-                  ?.result || [];
+                modelFetcher
+                  .key(data.brand)
+                  .selector(store.ref.getState())?.result ||
+                [];
               if (
-                models.find((model) => +model.id === +data.model) !== undefined
+                models.find(
+                  (model) => +model.id === +data.model
+                ) !== undefined
               ) {
-                shopServicesListModule.actions.updateQuery(data);
+                shopServicesListModule.actions.updateQuery(
+                  data
+                );
                 if (!serviceFormModule.state) {
                   return;
                 }
@@ -611,12 +655,12 @@ export default function ShopServices({ shop }) {
         <OnMobile>{apointmentButton}</OnMobile>
         <OnMobile only>
           <MobileToolbar>
-            {/*<NextSlot id={shop.id} />*/}
+            <ContactButton secondary />
             {apointmentButton}
           </MobileToolbar>
         </OnMobile>
         <ConfirmationModal module={continueWitoutServiceModal} />
-      </Panel>
-    </MaxConstraints>
+      </Panel >
+    </MaxConstraints >
   );
 }
