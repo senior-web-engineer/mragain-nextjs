@@ -18,9 +18,9 @@ import BookingInfo from "@/components/appointment/BookingInfo";
 import styled, { css } from "styled-components";
 import { SubTitle } from "@/components/styled/text";
 import { Field } from "@/modules/forms/Blocks";
-import LocationSelector from "@/components/appointment/LocationSelector";
+import LocationSelector, { getLocationOptions } from "@/components/appointment/LocationSelector";
 import PaymentSelector from "@/components/appointment/PaymentSelector";
-import Form from "@/modules/forms";
+import Form, { useFormContext } from "@/modules/forms";
 import DateAndTime from "@/components/appointment/DateAndTime";
 import Steps from "@/components/appointment/Steps";
 import Switch from "@/components/common/Switch";
@@ -34,7 +34,7 @@ import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
 import Button from "@/components/ui/Button";
 import router from "next/router";
 import { store } from "@/configureStore";
-import api from "@/utils/api";
+import TextArea from "antd/lib/input/TextArea";
 
 const MainWrap = styled.div`
     padding-top: 1px;
@@ -180,12 +180,18 @@ const AddressSection = styled.div`
     padding-top: 17px;
 `;
 
+function ConnectedDateAndTime() {
+  const { state } = useFormContext();
+  return <DateAndTime required={state?.values?.location !== "home"} />
+}
+
+
 export default function AppointmentPage({ shop }) {
   const [step, updateStep] = useState(0);
 
   useEffect(() => {
     async function loadData() {
-      await appointmentForm.actions.initialize(shop);
+      await appointmentForm.actions.initialize({ shop });
       deviceFetcher.fetch();
       brandFetcher.fetch();
       modelFetcher.fetch();
@@ -204,11 +210,12 @@ export default function AppointmentPage({ shop }) {
     });
     const fieldsToValidate = {
       0: ["time", "service"],
-      1: ["name", "email", "tel"],
+      1: ["name", "email", "tel", "address", "city", "zip"],
     };
-    if (Object.keys(fieldsToValidate).includes(step)) {
+
+    if (Object.keys(fieldsToValidate).includes(`${step}`)) {
       await appointmentForm.actions.validateField({
-        name: ["time", "service"],
+        name: fieldsToValidate[step],
       });
       const { errors } = appointmentForm.state;
       if (Object.keys(errors).length) {
@@ -220,6 +227,8 @@ export default function AppointmentPage({ shop }) {
             "We hebben al je informatie nodig om een afspraak te maken",
           buttonLabel: "Probeer het nog een keer",
         });
+
+        return;
       }
     }
 
@@ -281,10 +290,8 @@ export default function AppointmentPage({ shop }) {
 
       return;
     }
-
     updateStep((state) => state + 1);
   });
-
 
   function renderAddressFields() {
     if (appointmentForm.state?.values?.location === "in-store") {
@@ -294,13 +301,12 @@ export default function AppointmentPage({ shop }) {
       <AddressSection>
         <Field
           name="address"
-          label="Street Address"
+          label="Straat & huisnummer"
           autoComplete="street-address"
         />
         <InlineFields>
-          <Field name="city" label="City" />
-          <Field name="state" label="State" />
-          <Field name="zip" label="Zip" autoComplete="postal-code" />
+          <Field name="city" label="Stad" />
+          <Field name="zip" label="Postcode" autoComplete="postal-code" />
         </InlineFields>
       </AddressSection>
     );
@@ -350,9 +356,10 @@ export default function AppointmentPage({ shop }) {
                     <Field
                       name="location"
                       as={LocationSelector}
+                      options={getLocationOptions(shop)}
                     />
                   </LocationFieldWrap>
-                  <DateAndTime />
+                  <ConnectedDateAndTime />
                 </Switch.Case>
                 <Switch.Case value={1}>
                   <DetailsForm>
@@ -372,6 +379,12 @@ export default function AppointmentPage({ shop }) {
                         autoComplete="tel"
                       />
                     </InlineFields>
+                    {appointmentForm.state?.values?.location === "home" ? <Field
+                      as={TextArea}
+                      rows={6}
+                      name="enquiry"
+                      label="Bericht"
+                    /> : null}
                     {renderAddressFields()}
                   </DetailsForm>
                 </Switch.Case>
@@ -391,7 +404,7 @@ export default function AppointmentPage({ shop }) {
           <OnMobile show={false}>
             <BookingInfo
               shop={shop}
-              step={step}
+              isLastStep={step === 1}
               nextStep={onNext}
             />
           </OnMobile>

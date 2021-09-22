@@ -23,33 +23,50 @@ const DEFAULT_SERVICE = {
   reparation: 54,
 };
 
+const requiredAddress = yup.string().when("location", {
+  is: "home",
+  then: yup.string().required(),
+});
+
 // NOTE: when adding address validation
 // use the when method (https://github.com/jquense/yup#mixedwhenkeys-string--arraystring-builder-object--value-schema-schema-schema)
 const validator = yup.object({
   name: yup.string().required(),
   email: yup.string().required().email(),
   tel: yup.string().required(),
-  time: yup.string().required(),
+  time: yup.string().when(["type", "location"], {
+    is(type, location) {
+      return type === "contact" || location === "home";
+    },
+    otherwise: yup.string().required(),
+  }),
+  enquiry: yup.string().when("type", {
+    is: "contact",
+    then: yup.string().required(),
+  }),
+  address: requiredAddress,
+  city: requiredAddress,
+  zip: requiredAddress,
 });
 
 export const appointmentForm = createFormModule({
   validator,
-  async init(shop) {
+  async init({ shop, type = "appointment" }) {
     const fromAddressBar = router.router.query;
 
     function getDefaultValue(type, defaultValue) {
-      const value = fromAddressBar[type]
+      const value = fromAddressBar[type];
       if (["undefined", "null"].includes(value)) {
         return defaultValue;
       }
 
-      return value
+      return value;
     }
 
     const address = [shop.street || "", shop.city || ""]
       .filter(Boolean)
       .join(", ");
-    return {
+    const values = {
       shop: shop.id,
       shopAddress: address,
       shopName: shop.name,
@@ -60,7 +77,7 @@ export const appointmentForm = createFormModule({
       service: getDefaultValue("service", DEFAULT_SERVICE.reparation),
       location: "in-store",
       paymentType: "cash",
-      date: new Date().toString(),
+      type,
       time: "",
       name: "",
       email: "",
@@ -69,7 +86,10 @@ export const appointmentForm = createFormModule({
       city: "",
       zip: "",
       state: "",
+      date: new Date().toString(),
     };
+
+    return values;
   },
 
   async submit(data) {
@@ -103,22 +123,26 @@ export const appointmentForm = createFormModule({
 
     let client_address;
     if (data.location !== "in-store") {
-      client_address = [data.address, data.city, data.state, data.zip].filter(Boolean).join(', ')
+      client_address = [data.address, data.city, data.state, data.zip]
+        .filter(Boolean)
+        .join(", ");
     }
 
     const payload = {
       name: data.shopName,
       address: data.shopAddress,
-      datetime: `${formatedDate} - ${data.time}`,
+      datetime: data.type === "contact" ? "" : `${formatedDate} - ${data.time}`,
       appointmentData: {
-        appointment_type: data.location === "in-store" ? 2 : 1,
-        date: formatedDate,
-        time: data.time,
+        date: data.type === "contact" ? "" : formatedDate,
+        time: data.type === "contact" ? "" : data.time,
+        appointment_type:
+          data.type === "contact" ? 3 : data.location === "in-store" ? 1 : 2,
         reparation: reparationId || 54,
         client_name: data.name,
         client_email: data.email,
         client_phone: data.tel,
         shop: data.shop,
+        appointment_comment: data.enquiry,
         client_address,
         active: true,
       },
@@ -243,11 +267,11 @@ export const invalidTimeFetcher = dataFetcher({
   },
 });
 
-export function payForAppointment({appointment, shop, service}) {
+export function payForAppointment({ appointment, shop, service }) {
   return api.post(`${API_PATH.PAYMENT}`, {
     appointment,
     shop: shop.id,
     price: `${service.price}.00`,
-    title: `${shop.name} appointment payment`
-  })
+    title: `${shop.name} appointment payment`,
+  });
 }

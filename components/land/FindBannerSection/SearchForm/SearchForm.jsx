@@ -51,7 +51,7 @@ const SearchForm = (routerProps) => {
       setSearchFilter(_filters);
       findShopbyFilter(filter);
     }
-    router.push("/zoek-resultaten");
+    router.push("/zoek-een-reparateur");
   }
 
   const [show, setShow] = useState(false);

@@ -43,8 +43,20 @@ export const shopServicesListModule = createListModule({
         `${API_PATH.GETSHOPREPARATIONDETAILS}/`,
         query
       );
+      const sorted = [...data].sort((item1, item2) => {
+        if (
+          item2.guarantee_time === 0 &&
+          item2.price === 0 &&
+          item2.reparation_time === "0"
+        ) {
+          return -1;
+        }
+
+        return 0;
+      });
+
       return {
-        items: data,
+        items: sorted,
       };
     } catch (err) {
       notification.error({
@@ -62,7 +74,9 @@ export const shopServicesListModule = createListModule({
 export const nextSlotFetcher = keyedDataFetcher({
   selectors: ["shops", "nextSlot"],
   async fetchData([_1, _2, shopId]) {
-    return api.post(`${API_PATH.NEXT_SLOTS}/`, {shops: shopId}).then(data => data[0]);
+    return api
+      .post(`${API_PATH.NEXT_SLOTS}/`, { shops: shopId })
+      .then((data) => data[0]);
   },
 });
 
@@ -115,12 +129,12 @@ export const openTimeFetcher = dataFetcher({
     const response = await api.get(`${API_PATH.GETVALIDOPENTIME}/${shop}/`);
     try {
       return JSON.parse(response?.[0]?.valid_day_time || "");
-    } catch(err) {
+    } catch (err) {
       return null;
     }
   },
-})
+});
 
-export const reviewsModal = createModalModule()
-export const shopInfo = createModalModule()
-export const continueWitoutServiceModal = createModalModule()
+export const reviewsModal = createModalModule();
+export const shopInfo = createModalModule();
+export const continueWitoutServiceModal = createModalModule();

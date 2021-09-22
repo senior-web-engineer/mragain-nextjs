@@ -83,11 +83,11 @@ function Section({ fields, showTitle }) {
   );
 }
 
-export default function UserInfo() {
+export default function UserInfo({showDate = true}) {
   return (
     <>
       <Section fields={USER_FIELDS} showTitle />
-      <Section fields={DATE_FIELDS} />
+      {showDate ? <Section fields={DATE_FIELDS} /> : null}
     </>
   );
 }

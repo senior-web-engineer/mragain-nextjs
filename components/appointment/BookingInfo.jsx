@@ -8,11 +8,11 @@ import styled from "styled-components";
 import { SubTitle } from "../styled/text";
 import Button from "../ui/Button";
 import {
-    appointmentForm,
-    brandFetcher,
-    deviceFetcher,
-    modelFetcher,
-    serviceFetcher,
+  appointmentForm,
+  brandFetcher,
+  deviceFetcher,
+  modelFetcher,
+  serviceFetcher,
 } from "./modules";
 import UserInfo from "./UserInfo";
 
@@ -85,7 +85,7 @@ const ServiceDetails = styled.section`
         margin-left: 4px;
     }
 
-    label {
+    > div > label {
         margin: 0;
     }
 
@@ -151,98 +151,100 @@ const ButtonWrapper = styled(Button)`
 `;
 
 const DeviceName = withData({
-    dataFetcher: deviceFetcher,
-    Component({ data }) {
-        return data?.device_name || null;
-    },
+  dataFetcher: deviceFetcher,
+  Component({ data }) {
+    return data?.device_name || null;
+  },
 });
 
 const BrandName = withData({
-    dataFetcher: brandFetcher,
-    Component({ data }) {
-        return data?.brand_name || null;
-    },
+  dataFetcher: brandFetcher,
+  Component({ data }) {
+    return data?.brand_name || null;
+  },
 });
 
 const ModelName = withData({
-    dataFetcher: modelFetcher,
-    Component({ data }) {
-        return data?.model_name || null;
-    },
+  dataFetcher: modelFetcher,
+  Component({ data }) {
+    return data?.model_name || null;
+  },
 });
 
-export default function BookingInfo({ shop, step, nextStep }) {
-    const location = [shop.street || "", shop.city || ""]
-        .filter(Boolean)
-        .join(", ");
+export default function BookingInfo({ shop, isLastStep, nextStep, showPrices = true, title = "Afspraak gegevens", finalButtonLabel = "Bevestig" }) {
+  const location = [shop.street || "", shop.city || ""]
+    .filter(Boolean)
+    .join(", ");
 
-    const { data: service } = useFetcher({ dataFetcher: serviceFetcher });
+  const { data: service } = useFetcher({ dataFetcher: serviceFetcher });
 
-    return (
-        <MainWrap>
-            <header>
-                <SubTitle>Afspraak gegevens</SubTitle>
-            </header>
-            <label>Reparateur informatie</label>
-            <ShopDetails>
-                <h3>{shop.name}</h3>
-                <location>{location}</location>
-            </ShopDetails>
-            {service ? (
-                <ServiceDetailsWrap>
-                    <ServiceImage>
-                        {service?.reparation?.repair_image ? (
-                            <Image
-                                layout="fill"
-                                objectFit="contain"
-                                src={service.reparation.repair_image}
-                            />
-                        ) : null}
-                    </ServiceImage>
-                    <ServiceDetails>
-                        <div>
-                            <label>Apparaat:</label>
-                            <strong>
-                                <DeviceName />
-                            </strong>
-                        </div>
-                        <div>
-                            <label>Merk:</label>
-                            <strong>
-                                <BrandName />
-                            </strong>
-                        </div>
-                        <div>
-                            <label>Model:</label>
-                            <strong>
-                                <ModelName />
-                            </strong>
-                        </div>
-                    </ServiceDetails>
-                </ServiceDetailsWrap>
+  return (
+    <MainWrap>
+      <header>
+        <SubTitle>{title}</SubTitle>
+      </header>
+      <label>Reparateur informatie</label>
+      <ShopDetails>
+        <h3>{shop.name}</h3>
+        <location>{location}</location>
+      </ShopDetails>
+      {service ? (
+        <ServiceDetailsWrap>
+          <ServiceImage>
+            {service?.reparation?.repair_image ? (
+              <Image
+                layout="fill"
+                objectFit="contain"
+                src={service.reparation.repair_image}
+              />
             ) : null}
-            <Form module={appointmentForm}>
-                <UserInfo />
-            </Form>
-            {service ? (
-                <>
-                    <ServiceCostWrap>
-                        <item>{service?.reparation?.reparation_name}</item>
-                        <price>&euro;{service?.price}</price>
-                    </ServiceCostWrap>
-                    <TotalWrap>
-                        <label>Te betalen bij reparateur</label>
-                        <price>&euro;{service?.price}</price>
-                    </TotalWrap>
-                </>
-            ) : null}
-            <ButtonWrapper onClick={nextStep} aria-label="Next step">
-                {step !== 0 ? (
-                    <span>Bevestig</span>
-                ) : (
-                    <FontAwesomeIcon icon={faArrowRight} />
-                )}
-            </ButtonWrapper>
-        </MainWrap>
-    );
+          </ServiceImage>
+          <ServiceDetails>
+            <div>
+              <label>Apparaat:</label>
+              <strong>
+                <DeviceName />
+              </strong>
+            </div>
+            <div>
+              <label>Merk:</label>
+              <strong>
+                <BrandName />
+              </strong>
+            </div>
+            <div>
+              <label>Model:</label>
+              <strong>
+                <ModelName />
+              </strong>
+            </div>
+          </ServiceDetails>
+        </ServiceDetailsWrap>
+      ) : null}
+      <Form module={appointmentForm}>
+        <UserInfo showDate={appointmentForm.state?.values?.type !== "contact"} />
+      </Form>
+      {showPrices && service ? (
+        <>
+          <ServiceCostWrap>
+            <item>{service?.reparation?.reparation_name}</item>
+            <price>&euro;{service?.price}</price>
+          </ServiceCostWrap>
+          <TotalWrap>
+            <label>Te betalen bij reparateur</label>
+            <price>&euro;{service?.price}</price>
+          </TotalWrap>
+        </>
+      ) : null}
+      <ButtonWrapper onClick={nextStep} aria-label="Next step">
+        {isLastStep ? (
+          <span>{finalButtonLabel}</span>
+        ) : (
+          <>
+            <FontAwesomeIcon icon={faArrowRight} />
+          </>
+        )}
+      </ButtonWrapper>
+    </MainWrap>
+  );
 }
