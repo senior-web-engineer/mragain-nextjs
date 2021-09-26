@@ -10,7 +10,7 @@ import styled, { css } from "styled-components";
 
 const MainWrap = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: 0 -10px;
   flex-direction: column;
 
@@ -93,11 +93,12 @@ export default function InlineSelector({
 }) {
   function renderOption(option) {
     const isSelected = option.value === value;
+    const isDisabled = option.disabled;
     return (
       <>
-      {isSelected && 
+      {!isDisabled &&
       <OptionWrap
-        disabled={option.disabled}
+        disabled={isDisabled}
         isSelected={isSelected}
         onClick={() => onChange(option.value)}
       >
