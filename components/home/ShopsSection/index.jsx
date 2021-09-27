@@ -22,6 +22,8 @@ export const TAG_TO_COLOR = {
   new: "#c90648",
   populair: "#ffd342",
   "best price": "#0076a3",
+  'Repair on location': '#06c987',
+  'Repair on shop': '#c90648',
 };
 
 const ShopWrap = styled.div`

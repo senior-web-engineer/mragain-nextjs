@@ -4,12 +4,6 @@ import {
   appointmentConfirmation,
   appointmentForm,
   appointmentReview,
-  brandFetcher,
-  deviceFetcher,
-  invalidTimeFetcher,
-  modelFetcher,
-  openTimeFetcher,
-  serviceFetcher,
 } from "@/components/appointment/modules";
 import { getShopProfileByInformationServer } from "@/service/account/operations";
 import React, { useCallback, useEffect, useState } from "react";
@@ -19,7 +13,7 @@ import { SubTitle } from "@/components/styled/text";
 import { Field } from "@/modules/forms/Blocks";
 import Form from "@/modules/forms";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { TextButton } from "@/components/ui/Button";
 import { FieldWrap } from "@/components/styled/Forms";
 import ConfirmationModal from "@/components/common/ConfirmationModal";
@@ -27,7 +21,6 @@ import media, { OnMobile } from "@/utils/media";
 import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
 import Button from "@/components/ui/Button";
 import router from "next/router";
-import { store } from "@/configureStore";
 import TextArea from "antd/lib/input/TextArea";
 
 const MainWrap = styled.div`
@@ -168,12 +161,6 @@ export default function AppointmentPage({ shop }) {
   useEffect(() => {
     async function loadData() {
       await appointmentForm.actions.initialize({ shop, type: "contact" });
-      deviceFetcher.fetch();
-      brandFetcher.fetch();
-      modelFetcher.fetch();
-      serviceFetcher.fetch();
-      invalidTimeFetcher.fetch();
-      openTimeFetcher.fetch();
     }
 
     loadData();
@@ -184,16 +171,7 @@ export default function AppointmentPage({ shop }) {
       top: 0,
       behavior: "smooth",
     });
-
-    const reviewData = {
-      form: appointmentForm.state.values,
-      shop,
-      service: serviceFetcher.selector(store.ref.getState()).result,
-      brand: brandFetcher.selector(store.ref.getState()).result,
-      device: deviceFetcher.selector(store.ref.getState()).result,
-      model: modelFetcher.selector(store.ref.getState()).result,
-    };
-
+  
     try {
       await appointmentForm.actions.submit();
       appointmentConfirmation.actions
