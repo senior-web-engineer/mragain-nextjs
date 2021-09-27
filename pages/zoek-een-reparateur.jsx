@@ -92,15 +92,7 @@ const SidebarInnerWrap = styled.div`
 
   .ant-slider-mark {
     font-size: 10px;
-  }
-
-  .ant-checkbox-wrapper {
-    display: block;
-  }
-
-  .ant-checkbox-wrapper + .ant-checkbox-wrapper {
-    margin: 0;
-  }
+  }   
 `;
 
 const MapTriggerWrap = styled(FieldWrap)`
@@ -652,6 +644,22 @@ ShopDetails.AppointmentInfo = styled.div`
   `}
 `;
 
+const Options = styled.div`
+    display: flex;
+    flex-direction: column;
+    font-family: "Montserrat";
+    font-size: 10px !important;
+    letter-spacing: 0.06em !important;
+    font-weight: 400;
+    text-transform: uppercase;
+    & > label {
+      margin-left: 0px !important;
+      font-size: 10px !important;
+      color: #808080 !important;
+      margin-bottom:5px;
+    }
+  `;
+
 const shopRefs = {};
 const ShopBridgeContext = createContext();
 
@@ -999,9 +1007,11 @@ function RefineSearchForm() {
       <Field name="price" as={Slider} label="Maximum prijs" />
       <Field name="rate" as={Rate} label="Minimale rating" />
       <Field name="shop_type" as={Checkbox.Group} label="Reparatie Type">
-        {REPAIR_TYPES.map((type) => (
-          <Checkbox value={type.value} disabled={type.disabled}>{type.label}</Checkbox>
+        <Options>
+        {REPAIR_TYPES.map((type, i) => (
+          <Checkbox key={i} value={type.value} disabled={type.disabled}>{type.label}</Checkbox>
         ))}
+        </Options>
       </Field>
       <Field
         name="guarantee"
