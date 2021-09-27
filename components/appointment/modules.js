@@ -170,7 +170,7 @@ export const deviceFetcher = dataFetcher({
   ],
   async fetchData([_1, _2, shopId, deviceId]) {
     const data = await api.get(`${API_PATH.GETSHOPDEVICES}/`, { shop: shopId });
-
+  
     return data
       .map(({ device }) => device)
       .find((device) => `${device.id}` === deviceId);
