@@ -1,6 +1,6 @@
-import { Button, Checkbox, Col, Divider, Row } from "antd";
+import { Button, Col, Divider, Row } from "antd";
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 
 import GooglePlaces from "@/components/common/GooglePlaces";
 import Input from "@/components/ui/Input";
@@ -46,6 +46,8 @@ const LOCATIONS_OPTIONS = [
 ];
 
 export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
+  const [location, setLocation] = useState()
+
   const handleOnLocationSelected = (geo) => {
     axios
       .get(
@@ -63,9 +65,9 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
             if (comp.types.includes("street_number")) {
               data.street = comp.long_name;
             }
-            if (comp.types.includes("locality")) {
-              data.city = comp.long_name;
-            }
+            // if (comp.types.includes("locality")) {
+            //   data.city = comp.long_name;
+            // }
             if (comp.types.includes("country")) {
               data.country = comp.long_name;
             }
@@ -73,7 +75,10 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
               data.zip = comp.long_name;
             }
           });
+          console.log(res.data.results[0])
+          setLocation(res.data.results[0].geometry.location)
           onLocationUpdate(data);
+          console.log(basicSettingsForm.value?.city);
         }
       });
   };
@@ -112,52 +117,52 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                   />
                 </Col>
               </Row>
-              <Row>
-                <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
+              <Row gutter={[16, 0]}>
+                <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
                   <Field
                     adminInput
+                    name="city"
                     as={GooglePlaces}
-                    label="Address"
+                    label="City"
                     onLocationSelected={handleOnLocationSelected}
                     customLabel
+                    searchOptions={{
+                      componentRestrictions: {
+                        country: ["nl", "be"],
+                      },
+                      types: ['(cities)']
+                    }}
                     size="small"
                   />
-                  {/* <GooglePlaces
-                    placeholder="Address"
-                    onLocationSelected={handleOnLocationSelected}
-                  /> */}
                 </Col>
+                <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
+                  <Field
+                    name="street"
+                    adminInput
+                    as={GooglePlaces}
+                    label="Street"
+                    customLabel
+                    disabled={!basicSettingsForm.state?.values?.city}
+                    searchOptions={{
+                      componentRestrictions: {
+                        country: ["nl", "be"],
+                      },
+                      types: ['address']
+                    }}
+                    size="small"
+                  />
+                </Col>
+                                 
               </Row>
               <Col>
                 <Row gutter={[16, 0]}>
                   <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
                     <Field
                       adminInput
-                      name="city"
-                      as={Input}
-                      disabled
-                      label="City"
-                      customLabel
-                      size="small"
-                    />
-                  </Col>
-                  <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
-                    <Field
-                      adminInput
-                      name="country"
-                      as={Input}
-                      disabled
-                      label="Country"
-                      customLabel
-                      size="small"
-                    />
-                  </Col>
-                  <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
-                    <Field
-                      adminInput
                       name="zipcode"
                       as={Input}
                       label="Postcode"
+                      disabled={!basicSettingsForm.state?.values?.street}
                       customLabel
                       size="small"
                     />
@@ -165,9 +170,10 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                   <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
                     <Field
                       adminInput
-                      name="street"
+                      name="streetNumber"
                       as={Input}
-                      label="STRAAT"
+                      disabled={!basicSettingsForm.state?.values?.zipcode}
+                      label="STRAAT Number"
                       customLabel
                       size="small"
                     />
