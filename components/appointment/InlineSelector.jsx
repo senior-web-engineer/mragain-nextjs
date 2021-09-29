@@ -90,10 +90,16 @@ export default function InlineSelector({
   options = [],
   onChange,
   value,
-}) {
+}) 
+{
+  const newOptions = options.filter(option => option.disabled === false)
+  newOptions[0].value = value
+  
   function renderOption(option) {
+
     const isSelected = option.value === value;
     const isDisabled = option.disabled;
+
     return (
       <>
       {!isDisabled &&
@@ -113,6 +119,5 @@ export default function InlineSelector({
       </>
     );
   }
-
-  return <MainWrap>{options.map(renderOption)}</MainWrap>;
+  return <MainWrap>{newOptions.map(renderOption)}</MainWrap>;
 }
