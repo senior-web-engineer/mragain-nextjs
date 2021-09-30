@@ -35,7 +35,7 @@ export default function DetailsModal({ shop }) {
         footer={null}
         title={<SubTitle as="h3">{shop.name}</SubTitle>}
       >
-        <p>Not available yet, use the contact button!</p>
+        <p>Komt zeer binnenkort, gebruik voor nu de "contact" button!</p>
       </Modal>
     </>
   );
