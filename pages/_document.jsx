@@ -92,13 +92,13 @@ export default class MyDocument extends Document {
             />
           </noscript>
           {isProduction ? (
-            <>
-              <script async custom-element="amp-analytics" src="https://www.googletagmanager.com/gtm.js?id="/>
+            <> 
+              <script async custom-element="amp-analytics" src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}/>
               <script dangerouslySetInnerHTML={{ __html: gaScript }} />
               <script dangerouslySetInnerHTML={{ __html: hotJarScript }} />
               <script dangerouslySetInnerHTML={{ __html: facebookScript }} />
             </>
-          ) : null}
+          ) : null}                 
         </HeadWithoutPreload>
         <body>
           <Main />

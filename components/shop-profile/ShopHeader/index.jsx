@@ -28,6 +28,7 @@ import {
   TwitterIcon,
 } from "react-share";
 import DetailsModal from "./DetailsModal";
+import WhatsAppModal from "./WhatsAppModal"
 import media, { OnMobile } from "@/utils/media";
 import { useFetcher } from "@/modules/dataFetcher";
 import Form from "@/modules/forms";
@@ -199,6 +200,7 @@ const DetailButtonsWrap = styled.div`
     position: absolute;
     right: 0;
     z-index: 100;
+    display: flex;
     ${Button} {
       margin-left: 10px;
       height: 35px;
@@ -291,9 +293,11 @@ export default function ShopHeader({ shop }) {
   const shopURL = typeof window !== "undefined" ? window.location.href : "";
 
   const detailButtons = (
+  
     <DetailButtonsWrap>
       <DetailsModal shop={shop} />
-      <Popover
+      <WhatsAppModal shop={shop} />
+      {/* <Popover
         overlayClassName="share-popover"
         content={
           <>
@@ -315,15 +319,16 @@ export default function ShopHeader({ shop }) {
             </TwitterShareButton>
           </>
         }
-      >
+      > 
         <Button>
           <FontAwesomeIcon icon={faShare} />
         </Button>
-      </Popover>
+      </Popover>*/}
       <OnMobile show={false}>
         <ContactButton />
       </OnMobile>
     </DetailButtonsWrap>
+    
   );
 
   return (
