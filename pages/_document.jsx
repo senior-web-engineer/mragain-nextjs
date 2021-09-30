@@ -82,7 +82,7 @@ export default class MyDocument extends Document {
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-          ></script>
+          </script>
 	  <!-- Google Tag Manager -->
 	  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 		    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
