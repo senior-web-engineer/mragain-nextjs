@@ -15,16 +15,17 @@ const hotJarScript = `
 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 `;
 
-const gaScript = `
+/*Tasos this part is for Google Analytics I think and without we end up with console errors. 
+const ga2Script = `
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${GA_TRACKING_ID}', {
   page_path: window.location.pathname,
 });
-`;
+`;*/
 
-const gaHeadScript = `
+const gaScript = `
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
