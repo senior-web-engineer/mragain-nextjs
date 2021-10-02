@@ -11,12 +11,6 @@ import {
   appointmentConfirmation,
   appointmentForm,
   appointmentReview,
-  brandFetcher,
-  deviceFetcher,
-  invalidTimeFetcher,
-  modelFetcher,
-  openTimeFetcher,
-  serviceFetcher,
 } from "@/components/appointment/modules";
 import ConfirmationModal from "@/components/common/modals/ConfirmationModal";
 import DefaultLayout from "@/components/layouts/Homepage";
@@ -25,10 +19,8 @@ import { MaxConstraints } from "@/components/styled/layout";
 import { SubTitle } from "@/components/styled/text";
 import { TextButton } from "@/components/ui/Button";
 import Button from "@/components/ui/Button";
-import { store } from "@/configureStore";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
-import { getShopProfileByInformationServer } from "@/service/account/operations";
 import media, { OnMobile } from "@/utils/media";
 
 const MainWrap = styled.div`
@@ -169,12 +161,6 @@ export default function AppointmentPage({ shop }) {
   useEffect(() => {
     async function loadData() {
       await appointmentForm.actions.initialize({ shop, type: "contact" });
-      deviceFetcher.fetch();
-      brandFetcher.fetch();
-      modelFetcher.fetch();
-      serviceFetcher.fetch();
-      invalidTimeFetcher.fetch();
-      openTimeFetcher.fetch();
     }
 
     loadData();
@@ -185,15 +171,6 @@ export default function AppointmentPage({ shop }) {
       top: 0,
       behavior: "smooth",
     });
-
-    const reviewData = {
-      form: appointmentForm.state.values,
-      shop,
-      service: serviceFetcher.selector(store.ref.getState()).result,
-      brand: brandFetcher.selector(store.ref.getState()).result,
-      device: deviceFetcher.selector(store.ref.getState()).result,
-      model: modelFetcher.selector(store.ref.getState()).result,
-    };
 
     try {
       await appointmentForm.actions.submit();

@@ -21,16 +21,14 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
-import styled, { css } from "styled-components";
 
-import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
-import { reviewsFetcher } from "@/components/shop-profile/modules";
 import { MaxConstraints } from "@/components/styled/layout";
 import Button from "@/components/ui/Button";
 import { useFetcher } from "@/modules/dataFetcher";
 import media, { OnMobile } from "@/utils/media";
 
 import DetailsModal from "./DetailsModal";
+import WhatsAppModal from "./WhatsAppModal";
 
 const Wallpaper = styled.div`
   height: 260px;
@@ -225,6 +223,7 @@ const DetailButtonsWrap = styled.div`
   position: absolute;
   right: 0;
   z-index: 100;
+  display: flex;
   ${Button} {
     margin-left: 10px;
     height: 35px;
@@ -247,9 +246,9 @@ const DetailButtonsWrap = styled.div`
 
 const ADVANTAGES = [
   {
-    title: "Cashback op je reparatie",
+    title: "Scherpe reparatie prijzen",
     logo: "/images/shop/wallet.png",
-    description: "Ontvang 5 euro cashback na het achterlaten van een review",
+    description: "Transparante prijzen en ook op aanvraag",
   },
   {
     title: "Altijd de beste garantie",
@@ -315,7 +314,8 @@ export default function ShopHeader({ shop }) {
   const detailButtons = (
     <DetailButtonsWrap>
       <DetailsModal shop={shop} />
-      <Popover
+      <WhatsAppModal shop={shop} />
+      {/* <Popover
         overlayClassName="share-popover"
         content={
           <>
@@ -341,7 +341,7 @@ export default function ShopHeader({ shop }) {
         <Button>
           <FontAwesomeIcon icon={faShare} />
         </Button>
-      </Popover>
+      </Popover>*/}
       <OnMobile show={false}>
         <ContactButton />
       </OnMobile>
