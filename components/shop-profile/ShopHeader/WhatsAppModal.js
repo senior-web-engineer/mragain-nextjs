@@ -4,12 +4,13 @@ import Modal from "@/modules/modal";
 import { WhatsappIcon } from "react-share";
 import { whatsAppModal } from "../modules";
 import styled from "styled-components";
-import Button from "@/components/ui/Button";
+import {TextButton} from "@/components/ui/Button";
 import { useScreenSize } from "@/utils/media";
 import { event } from "../../../lib/gtag"
 
-const ButtonExtend = styled(Button)`
+const ButtonExtend = styled(TextButton)`
   height: 52px;
+  padding: 0;
 `;
 const WhatsAppIconWrapper = styled.div`
   position: absolute;
@@ -26,9 +27,7 @@ export default function DetailsModal({ shop }) {
   return (
     <>
       <ButtonExtend onClick={whatsAppMod} id="whatsAppButton">
-        <WhatsAppIconWrapper>
-          <WhatsappIcon size={iconSIze} round />
-        </WhatsAppIconWrapper>
+          <WhatsappIcon size={iconSIze} round enableBackground={false} />
       </ButtonExtend>
       <Modal
         module={whatsAppModal}
