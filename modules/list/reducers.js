@@ -41,6 +41,6 @@ export function UPDATE_LIST_QUERY(nextState, { guid, filters }) {
   nextState[guid].isLoading = true;
 }
 
-export function REFRESH_ITEMS(nextState, {guid, items}) {
-  nextState[guid].items = items
+export function REFRESH_ITEMS(nextState, { guid, items }) {
+  nextState[guid].items = items;
 }
