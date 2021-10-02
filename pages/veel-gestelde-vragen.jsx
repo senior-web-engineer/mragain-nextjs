@@ -66,11 +66,11 @@ const Faq = () => {
       ],
     },
     {
-      title: 'Cashback',
+      title: 'Review',
       faq: [
 	{
-          question: 'Hoe werkt het met de cashback als ik een review achterlaat?',
-          answer: 'Heel simpel: na het versturen van een review stuur je ons een betaalverzoek!',
+          question: 'Hoe kan ik een review achterlaten?',
+          answer: 'Heel simpel: nadat je reparateur je reparatie heeft afgerond sturen we je een een review verzoek per email.',
 	},
       ],
     },	    

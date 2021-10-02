@@ -18,9 +18,10 @@ import { H2, SubTitle } from "@/components/styled/text";
 const ADVANTAGES = [
   {
     icon: faClock,
-    title: "Korting & snelheid",
-    1: "5 euro cashback als je een review achterlaat",
-    2: "Direct geholpen doordat de reparateur weet dat je komt",
+    title: "Snelheid & beste prijs",
+    1: "Reparateurs beheren hun  prijzen op MrAgain, hierdoor krijg je altijd de beste prijs"	  
+    2: "Veel reparateurs komen ook op locatie, chill!",
+    3: "Je wordt direct geholpen doordat de reparateur weet dat je komt",
   },
   {
     icon: faReceipt,

@@ -223,10 +223,10 @@ const DetailButtonsWrap = styled.div`
 
 const ADVANTAGES = [
   {
-    title: "Cashback op je reparatie",
+    title: "Scherpe reparatie prijzen",
     logo: "/images/shop/wallet.png",
     description:
-      "Ontvang 5 euro cashback na het achterlaten van een review",
+      "Transparante prijzen en ook op aanvraag",
   },
   {
     title: "Altijd de beste garantie",

@@ -300,7 +300,7 @@ export function Reviews({ shop }) {
                 <NoReview>
                     <strong>
                         Deze reparateur heeft nog geen reviews.
-                        Schrijf jij de eerste? Dan krijg je 7,50 euro cashback.
+		        Help jij ze aan de eerste op MrAgain? Maak dan een afspraak bij ze:)
                     </strong>
                 </NoReview>
             ) : (
