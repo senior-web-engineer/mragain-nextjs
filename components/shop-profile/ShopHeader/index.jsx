@@ -21,6 +21,7 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
+import styled from "styled-components";
 
 import { MaxConstraints } from "@/components/styled/layout";
 import Button from "@/components/ui/Button";
