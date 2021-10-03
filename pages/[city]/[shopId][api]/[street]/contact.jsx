@@ -22,7 +22,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { TextButton } from "@/components/ui/Button";
 import { FieldWrap } from "@/components/styled/Forms";
-import ConfirmationModal from "@/components/common/ConfirmationModal";
 import media, { OnMobile } from "@/utils/media";
 import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
 import Button from "@/components/ui/Button";

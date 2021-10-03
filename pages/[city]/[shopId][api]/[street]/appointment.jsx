@@ -31,6 +31,7 @@ import Button from "@/components/ui/Button";
 import router from "next/router";
 import { store } from "@/configureStore";
 import TextArea from "antd/lib/input/TextArea";
+import media from "@/utils/media";
 
 const MainWrap = styled.div`
   padding-top: 1px;

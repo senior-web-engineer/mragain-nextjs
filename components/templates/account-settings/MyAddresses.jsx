@@ -46,8 +46,6 @@ const LOCATIONS_OPTIONS = [
 ];
 
 export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
-  const [location, setLocation] = useState()
-
   const handleOnLocationSelected = (geo) => {
     axios
       .get(
@@ -65,9 +63,6 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
             if (comp.types.includes("street_number")) {
               data.street = comp.long_name;
             }
-            // if (comp.types.includes("locality")) {
-            //   data.city = comp.long_name;
-            // }
             if (comp.types.includes("country")) {
               data.country = comp.long_name;
             }
@@ -75,10 +70,7 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
               data.zip = comp.long_name;
             }
           });
-          console.log(res.data.results[0])
-          setLocation(res.data.results[0].geometry.location)
           onLocationUpdate(data);
-          console.log(basicSettingsForm.value?.city);
         }
       });
   };
