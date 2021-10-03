@@ -65,6 +65,9 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
             if (comp.types.includes("country")) {
               data.country = comp.long_name;
             }
+            if (comp.types.includes("locality")) {
+              data.city = comp.long_name;
+            }
             if (comp.types.includes("postal_code")) {
               data.zip = comp.long_name;
             }
