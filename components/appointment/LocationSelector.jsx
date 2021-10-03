@@ -20,13 +20,13 @@ export const LOCATION_OPTIONS = [
     value: "home",
     apiValue: "1"
   },
-  {
-    label: "Opsturen",
-    description: "Coming soon",
-    icon: faBox,
-    disabled: true,
-    value: "delivery",
-  },
+  // {
+  //   label: "Opsturen",
+  //   description: "Coming soon",
+  //   icon: faBox,
+  //   disabled: true,
+  //   value: "delivery",
+  // },
 ];
 
 export function getLocationOptions(shop) {
