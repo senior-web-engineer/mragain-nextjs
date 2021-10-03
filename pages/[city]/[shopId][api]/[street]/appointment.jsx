@@ -1,5 +1,15 @@
-import DefaultLayout from "@/components/layouts/Homepage";
-import { MaxConstraints } from "@/components/styled/layout";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import TextArea from "antd/lib/input/TextArea";
+import router from "next/router";
+import React, { useCallback, useEffect, useState } from "react";
+import styled, { css } from "styled-components";
+
+import BookingInfo from "@/components/appointment/BookingInfo";
+import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
+import DateAndTime from "@/components/appointment/DateAndTime";
+import LocationSelector, {
+  getLocationOptions,
+} from "@/components/appointment/LocationSelector";
 import {
   appointmentConfirmation,
   appointmentForm,
@@ -12,26 +22,22 @@ import {
   payForAppointment,
   serviceFetcher,
 } from "@/components/appointment/modules";
-import { getShopProfileByInformationServer } from "@/service/account/operations";
-import React, { useCallback, useEffect, useState } from "react";
-import styled, { css } from "styled-components";
-import { SubTitle } from "@/components/styled/text";
-import { Field } from "@/modules/forms/Blocks";
-import LocationSelector, { getLocationOptions } from "@/components/appointment/LocationSelector";
 import PaymentSelector from "@/components/appointment/PaymentSelector";
-import Form, { useFormContext } from "@/modules/forms";
-import DateAndTime from "@/components/appointment/DateAndTime";
 import Steps from "@/components/appointment/Steps";
 import ConfirmationModal from "@/components/common/modals/ConfirmationModal";
 import Switch from "@/components/common/Switch";
 import { appointmentFormModule } from "@/components/devices/modules";
+import DefaultLayout from "@/components/layouts/Homepage";
 import { FieldWrap } from "@/components/styled/Forms";
+import { MaxConstraints } from "@/components/styled/layout";
+import { SubTitle } from "@/components/styled/text";
 import { TextButton } from "@/components/ui/Button";
 import Button from "@/components/ui/Button";
-import router from "next/router";
 import { store } from "@/configureStore";
-import TextArea from "antd/lib/input/TextArea";
-import media from "@/utils/media";
+import Form, { useFormContext } from "@/modules/forms";
+import { Field } from "@/modules/forms/Blocks";
+import { getShopProfileByInformationServer } from "@/service/account/operations";
+import media, { OnMobile } from "@/utils/media";
 
 const MainWrap = styled.div`
   padding-top: 1px;
@@ -179,9 +185,8 @@ const AddressSection = styled.div`
 
 function ConnectedDateAndTime() {
   const { state } = useFormContext();
-  return <DateAndTime required={state?.values?.location !== "home"} />
+  return <DateAndTime required={state?.values?.location !== "home"} />;
 }
-
 
 export default function AppointmentPage({ shop }) {
   const [step, updateStep] = useState(0);
@@ -252,7 +257,10 @@ export default function AppointmentPage({ shop }) {
             message: "Afspraak succesvol gemaakt! ",
             description:
               "We hebben een bevestiging email naar je verzonden (kan in je spam zitten!)",
-            buttonLabel: appointmentForm.state.values.paymentType === "credit-card" ? "Pay now" : "Bekijk afspraak gegevens",
+            buttonLabel:
+              appointmentForm.state.values.paymentType === "credit-card"
+                ? "Pay now"
+                : "Bekijk afspraak gegevens",
           })
           .then(async () => {
             if (appointmentForm.state.values.paymentType === "credit-card") {
@@ -316,8 +324,7 @@ export default function AppointmentPage({ shop }) {
           aria-label="Terug naar vorige stap"
           onClick={() => updateStep((state) => state - 1)}
         >
-          <FontAwesomeIcon icon={faArrowLeft} /> Terug naar vorige
-          stap
+          <FontAwesomeIcon icon={faArrowLeft} /> Terug naar vorige stap
         </TextButton>
       ) : (
         <span />
@@ -376,20 +383,19 @@ export default function AppointmentPage({ shop }) {
                         autoComplete="tel"
                       />
                     </InlineFields>
-                    {appointmentForm.state?.values?.location === "home" ? <Field
-                      as={TextArea}
-                      rows={6}
-                      name="enquiry"
-                      label="Bericht"
-                    /> : null}
+                    {appointmentForm.state?.values?.location === "home" ? (
+                      <Field
+                        as={TextArea}
+                        rows={6}
+                        name="enquiry"
+                        label="Bericht"
+                      />
+                    ) : null}
                     {renderAddressFields()}
                   </DetailsForm>
                 </Switch.Case>
                 <Switch.Case value={2}>
-                  <Field
-                    name="paymentType"
-                    as={PaymentSelector}
-                  />
+                  <Field name="paymentType" as={PaymentSelector} />
                 </Switch.Case>
               </Switch>
             </Form>
@@ -414,9 +420,7 @@ export default function AppointmentPage({ shop }) {
 
 export async function getServerSideProps(ctx) {
   const shopId = ctx.query["shopId][api"];
-  const shopProfileServerInfo = await getShopProfileByInformationServer(
-    shopId
-  );
+  const shopProfileServerInfo = await getShopProfileByInformationServer(shopId);
   return {
     props: {
       shop:

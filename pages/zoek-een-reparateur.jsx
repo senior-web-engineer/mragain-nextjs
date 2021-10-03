@@ -4,7 +4,7 @@ import {
   faStore,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Radio, Rate, Slider, Switch } from "antd";
+import { Checkbox, Rate, Slider, Switch } from "antd";
 import isEqual from "fast-deep-equal";
 import moment from "moment";
 import Head from "next/head";
@@ -51,10 +51,9 @@ import {
   SyncFormValues,
 } from "@/modules/forms/Blocks";
 import List, { useListContext } from "@/modules/list";
-import { Listing, NoResults } from "@/modules/list/Blocks";
-import Modal from "@/modules/modal";
-import media, { OnMobile } from "@/utils/media";
-import { getShopLogo, getShopRoute } from "@/utils/shop";
+import { Listing, NoResults } from "@/modules/list/Blocks.js";
+import Modal from "@/modules/modal/index.js";
+import media, { OnMobile } from "@/utils/media.js";
 
 import { FRONT_END_URL } from "../constants.js";
 
@@ -450,11 +449,7 @@ const ShopDetails = styled.div`
     display: inline-block;
     font-size: 8px;
     height: 26px;
-    ${(props) =>
-    props.tagColor &&
-    css`
-        background-color: ${props.tagColor || "#ddd"};
-      `}
+    background-color: #ddd;
     color: #fff;
     line-height: 26px;
     padding: 0 10px;
@@ -462,7 +457,14 @@ const ShopDetails = styled.div`
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     text-transform: uppercase;
-    margin-bottom: 14px;
+    margin: 0 1px 14px 1px;
+
+    &[data-ffd342] {
+      background-color: #ffd342;
+    }
+    &[data-c90648] {
+      background-color: #c90648;
+    }
 
     ${media.tablet`
       position: static;
@@ -641,6 +643,22 @@ ShopDetails.AppointmentInfo = styled.div`
   `}
 `;
 
+const Options = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat";
+  font-size: 10px !important;
+  letter-spacing: 0.06em !important;
+  font-weight: 400;
+  text-transform: uppercase;
+  & > label {
+    margin-left: 0px !important;
+    font-size: 10px !important;
+    color: #808080 !important;
+    margin-bottom: 5px;
+  }
+`;
+
 const shopRefs = {};
 const ShopBridgeContext = createContext();
 
@@ -667,7 +685,7 @@ function ShopItem({ item }) {
     return <ShopDetails.Service>{service.device_name}</ShopDetails.Service>;
   }
 
-  const tag = item.shop.tag;
+  const tags = item.shop_type;
   const formState = filtersFormModule.state.values;
   // API changed does not include the city any longer?
   // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
@@ -705,8 +723,18 @@ function ShopItem({ item }) {
         />
         <d-def>{item.shop.distance} km</d-def>
       </ShopImageWrap>
-      <ShopDetails tagColor={TAG_TO_COLOR[tag]}>
-        <div>{tag ? <tag>{tag}</tag> : null}</div>
+      <ShopDetails>
+        <div>
+          {tags
+            ? tags.map((tag) => {
+              const value = Object.values(tag)[0];
+              const props = {
+                [`data-${TAG_TO_COLOR[value]}`.replace("#", "")]: true,
+              };
+              return <tag {...props}>{value}</tag>;
+            })
+            : null}
+        </div>
         <ShopDetails.SecondRow>
           <ShopDetails.NameWrap>
             <h3>{item.shop.name}</h3>
@@ -826,16 +854,12 @@ const ServiceSelector = AppendIdentifier({
 
 const REPAIR_TYPES = [
   {
-    label: "In-store",
-    value: "in-store",
+    label: "Fysieke winkel",
+    value: 1,
   },
   {
-    label: "Home service",
-    value: "home-service",
-  },
-  {
-    label: "Delivery",
-    value: "delivery",
+    label: "Reparatie op locatie",
+    value: 2,
   },
 ];
 
@@ -886,12 +910,12 @@ const WARRANTIES = {
   3: "",
   6: "",
   9: "",
-  12: "12 maanden",
+  12: "12",
 };
 
 function warrantyLabel(value) {
   const mapping = {
-    3: "3 maand garantie",
+    3: "3 maanden garantie",
     6: "6 maanden garantie",
     9: "9 maanden garantie",
     12: "12 maanden garantie",
@@ -983,18 +1007,20 @@ function RefineSearchForm() {
     <Form module={filtersFormModule}>
       <Field name="price" as={Slider} label="Maximum prijs" />
       <Field name="rate" as={Rate} label="Minimale rating" />
-      {false && (
-        <Field name="repairType" as={Radio.Group} label="Reparatie Type">
-          {REPAIR_TYPES.map((type) => (
-            <Radio value={type.value}>{type.label}</Radio>
+      <Field name="shop_type" as={Checkbox.Group} label="Reparatie Type">
+        <Options>
+          {REPAIR_TYPES.map((type, i) => (
+            <Checkbox key={i} value={type.value} disabled={type.disabled}>
+              {type.label}
+            </Checkbox>
           ))}
-        </Field>
-      )}
+        </Options>
+      </Field>
       <Field
         name="guarantee"
         as={Slider}
         marks={WARRANTIES}
-        label="Minimale garantie"
+        label="Minimale garantie (maanden)"
         tipFormatter={warrantyLabel}
         min={0}
         max={12}

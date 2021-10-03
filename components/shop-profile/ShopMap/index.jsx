@@ -263,29 +263,88 @@ export function Reviews({ shop }) {
 
   function renderReview(review) {
     return (
-      <ModalReviewWrap>
-        <div>
-          <h4>{review.client_name}</h4>
-          <date>{moment(review.created_at).format("DD MMMM YYYY")}</date>
-          <p>{review.testmonial}</p>
-        </div>
-        <div>
-          {REVIEW_MARKS.map((key) => (
-            <ReviewWrap key={key}>
-              <span>{REVIEW_MARK_TO_LABEL[key]}</span>
+      <ReviewsWrap>
+        <SubTitle as="h2">Reviews {shop?.name}</SubTitle>
+        {checkIfScoresExist(scores, REVIEW_MARKS) ? (
+          <NoReview>
+            <strong>
+              Deze reparateur heeft nog geen reviews. Help jij ze aan de eerste
+              op MrAgain? Maak dan een afspraak bij ze:)
+            </strong>
+          </NoReview>
+        ) : (
+          <>
+            <ReviewWrap>
+              <strong>Gemiddelde rating</strong>
               <div>
                 <Rate
                   disabled
                   style={{ fontSize: "13px" }}
-                  value={review[key]}
+                  value={scores.overall}
                   onChange={null}
                 />{" "}
-                {formatNumber(review[key])}
+                {formatNumber(scores.overall)}
               </div>
             </ReviewWrap>
-          ))}
-        </div>
-      </ModalReviewWrap>
+            {REVIEW_MARKS.map((key) => (
+              <ReviewWrap>
+                {REVIEW_MARK_TO_LABEL[key]}
+                <div>
+                  <Rate
+                    disabled
+                    style={{ fontSize: "13px" }}
+                    value={scores[key]}
+                    onChange={null}
+                  />{" "}
+                  {formatNumber(scores[key])}
+                </div>
+              </ReviewWrap>
+            ))}
+            <ReviewWrap>
+              <strong>Aanbevelingspercentage</strong>
+              <div>
+                <Slider
+                  readOnly
+                  value={(recomandations / optionsCount) * 100}
+                />{" "}
+              </div>
+            </ReviewWrap>
+
+            <Button
+              onClick={reviewsModal.actions.open}
+              aria-label="Meer reviews"
+            >
+              Bekijk reviews <FontAwesomeIcon icon={faArrowRight} />
+            </Button>
+          </>
+        )}
+        <Modal
+          module={reviewsModal}
+          footer={null}
+          title={<SubTitle>Onze reviews</SubTitle>}
+        >
+          <OverallWrap>
+            <h2>Gemiddelde rating</h2>
+            <OverallContent>
+              <d-list>
+                <d-term>{formatNumber(scores.overall)}</d-term>
+                <d-def>van 5 sterren</d-def>
+              </d-list>
+              <hr />
+              <div>
+                <Rate
+                  disabled
+                  style={{ fontSize: "13px" }}
+                  value={scores.overall}
+                  onChange={null}
+                />
+                <div>van {optionsCount} reviews</div>
+              </div>
+            </OverallContent>
+          </OverallWrap>
+          {(options || []).map(renderReview)}
+        </Modal>
+      </ReviewsWrap>
     );
   }
 
