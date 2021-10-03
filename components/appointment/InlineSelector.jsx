@@ -92,13 +92,12 @@ export default function InlineSelector({
   value,
 })
 {
+
   function renderOption(option) {
     const isSelected = option.value === value;
     const isDisabled = option.disabled;
 
     return (
-      <>
-      {!isDisabled &&
       <OptionWrap
         disabled={isDisabled}
         isSelected={isSelected}
@@ -111,8 +110,6 @@ export default function InlineSelector({
         </div>
         {isSelected ? <FontAwesomeIcon icon={faCheckCircle} /> : null}
       </OptionWrap>
-  }
-      </>
     );
   }
   return <MainWrap>{options.map(renderOption)}</MainWrap>;
