@@ -55,7 +55,7 @@ export const appointmentForm = createFormModule({
   async init({ shop, type = "appointment" }) {
     const fromAddressBar = router.router.query;
 
-    const locations = getLocationOptions(shop)
+    const locations = getLocationOptions(shop).filter(option => !option.disabled);
 
     function getDefaultValue(type, defaultValue) {
       const value = fromAddressBar[type];
