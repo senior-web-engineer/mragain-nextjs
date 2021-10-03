@@ -55,7 +55,6 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
         if (res.data.results.length !== 0) {
           const data = {
             street: "",
-            city: "",
             country: "",
             zip: "",
           };
@@ -122,29 +121,27 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                       componentRestrictions: {
                         country: ["nl", "be"],
                       },
-                      types: ['(cities)']
+                      types: ["(cities)"],
                     }}
                     size="small"
                   />
                 </Col>
                 <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
                   <Field
-                    name="street"
+                    name="streetAddress"
                     adminInput
                     as={GooglePlaces}
                     label="Street"
                     customLabel
-                    disabled={!basicSettingsForm.state?.values?.city}
                     searchOptions={{
                       componentRestrictions: {
                         country: ["nl", "be"],
                       },
-                      types: ['address']
+                      types: ["address"],
                     }}
                     size="small"
                   />
                 </Col>
-                                 
               </Row>
               <Col>
                 <Row gutter={[16, 0]}>
@@ -154,7 +151,6 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                       name="zipcode"
                       as={Input}
                       label="Postcode"
-                      disabled={!basicSettingsForm.state?.values?.street}
                       customLabel
                       size="small"
                     />
@@ -162,7 +158,7 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                   <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
                     <Field
                       adminInput
-                      name="streetNumber"
+                      name="street"
                       as={Input}
                       disabled={!basicSettingsForm.state?.values?.zipcode}
                       label="STRAAT Number"
@@ -178,7 +174,6 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                     adminInput
                     name="intervals"
                     as={Select}
-                    defaultValue={basicSettingsForm.state.values.intervals}
                     label="Tijd per afspraak"
                     size="small"
                     options={DURATION_OPTIONS}

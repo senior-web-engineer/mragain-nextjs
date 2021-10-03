@@ -36,7 +36,6 @@ export default function RepairManagementPage() {
       updates: {
         street: data.street,
         zipcode: data.zip,
-        city: data.city,
         country: data.country,
       },
     });
