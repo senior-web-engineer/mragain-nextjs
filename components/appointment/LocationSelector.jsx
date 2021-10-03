@@ -10,7 +10,7 @@ export const LOCATION_OPTIONS = [
     description: "Kom bij ons langs voor je reparatie",
     icon: faStore,
     value: "in-store",
-    apiValue: "1",
+    apiValue: "2",
   },
   {
     label: "Reparatie op locatie",
@@ -18,7 +18,7 @@ export const LOCATION_OPTIONS = [
     description: "Wij komen naar jou!",
     icon: faHome,
     value: "home",
-    apiValue: "2"
+    apiValue: "1"
   },
   // {
   //   label: "Opsturen",
