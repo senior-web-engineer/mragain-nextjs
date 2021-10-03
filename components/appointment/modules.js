@@ -7,6 +7,7 @@ import api from "@/utils/api";
 import moment from "moment";
 import router from "next/router";
 import * as yup from "yup";
+import { getLocationOptions } from "./LocationSelector";
 
 //
 
@@ -54,6 +55,8 @@ export const appointmentForm = createFormModule({
   async init({ shop, type = "appointment" }) {
     const fromAddressBar = router.router.query;
 
+    const locations = getLocationOptions(shop)
+
     function getDefaultValue(type, defaultValue) {
       const value = fromAddressBar[type];
       if (["undefined", "null"].includes(value)) {
@@ -75,7 +78,7 @@ export const appointmentForm = createFormModule({
       brand: getDefaultValue("brand", DEFAULT_SERVICE.brand),
       model: getDefaultValue("model", DEFAULT_SERVICE.model),
       service: getDefaultValue("service", DEFAULT_SERVICE.reparation),
-      location: "in-store",
+      location: locations?.[0]?.value || "in-store",
       paymentType: "cash",
       type,
       time: "",
@@ -170,7 +173,7 @@ export const deviceFetcher = dataFetcher({
   ],
   async fetchData([_1, _2, shopId, deviceId]) {
     const data = await api.get(`${API_PATH.GETSHOPDEVICES}/`, { shop: shopId });
-  
+
     return data
       .map(({ device }) => device)
       .find((device) => `${device.id}` === deviceId);
