@@ -90,7 +90,7 @@ const Login = () => {
       }
       if (error !== "") {
         notification.error({
-          message: "Bad Credentials, please try again ",
+          message: "Je wachtwoord en/of emailadres lijken niet te kloppen",
         });
       }
     }

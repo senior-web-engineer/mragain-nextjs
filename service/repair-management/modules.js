@@ -80,7 +80,7 @@ export const saveSelectedModels = async (payload) => {
   });
   editRepairModelModal.actions.close();
   notification.success({
-    message: "Saved successfully",
+    message: "Succesvol opgeslagen",
   });
   return data;
 };
@@ -93,7 +93,7 @@ export const saveShopReparations = async (payload) => {
   });
   editRepairModelModal.actions.close();
   notification.success({
-    message: "Saved successfully",
+    message: "Succesvol opgeslagen",
   });
   return data;
 };

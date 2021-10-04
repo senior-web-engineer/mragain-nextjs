@@ -117,7 +117,7 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                     adminInput
                     name="city"
                     as={GooglePlaces}
-                    label="City"
+                    label="Stad"
                     onLocationSelected={handleOnLocationSelected}
                     customLabel
                     searchOptions={{
@@ -134,7 +134,7 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                     name="streetAddress"
                     adminInput
                     as={GooglePlaces}
-                    label="Street"
+                    label="Straat"
                     customLabel
                     searchOptions={{
                       componentRestrictions: {
@@ -164,7 +164,7 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                       name="street"
                       as={Input}
                       disabled={!basicSettingsForm.state?.values?.zipcode}
-                      label="STRAAT Number"
+                      label="Huisnummer"
                       customLabel
                       size="small"
                     />
