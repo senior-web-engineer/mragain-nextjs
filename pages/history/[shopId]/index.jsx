@@ -83,7 +83,7 @@ export default function HistoryPage({ auth_user }) {
       <Row>
         <Col lg={{ span: 5 }} md={{ span: 24 }}>
           <AntdInput
-            placeholder="Search IMEI Number"
+            placeholder="Zoek op IMEI / referentie"
             size="large"
             allowClear
             value={search}
