@@ -33,7 +33,7 @@ function Menu() {
     <MenuWrap>
       <Select
         className="mb-4"
-        options={[{ label: "Main branch", value: "0" }]}
+        options={[{ label: "Hoofd locatie", value: "0" }]}
         value="0"
       />
       <Tree
