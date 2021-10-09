@@ -162,7 +162,7 @@ export const appointmentForm = createFormModule({
     })
 
     emailServiceData.appointment = appointment.appointment_id
-    const email_req = await api.post(`${API_PATH.APPOINTMENTEMAIL}/`, emailServiceData)
+    api.post(`${API_PATH.APPOINTMENTEMAIL}/`, emailServiceData)
 
     return create_repair_service
   },
