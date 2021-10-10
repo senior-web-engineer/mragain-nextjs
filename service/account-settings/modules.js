@@ -59,7 +59,7 @@ export const basicSettingsForm = createFormModule({
 
     if (promise) {
       notification.success({
-        message: "General info saved successfully",
+        message: "Je gegevens zijn succesvol opgeslagen",
       });
     }
 
@@ -87,7 +87,7 @@ export const changePasswordForm = createFormModule({
     });
 
     notification.success({
-      message: "Password updated successfully",
+      message: "Je wachtwoord is gewijzigd",
     });
 
     return promise;

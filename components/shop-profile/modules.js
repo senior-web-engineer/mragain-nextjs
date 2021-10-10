@@ -61,7 +61,7 @@ export const shopServicesListModule = createListModule({
       };
     } catch (err) {
       notification.error({
-        message: "Something went wrong while getting the list of shops",
+        message: "Er gaat iets fout, neem contact met ons op als dit probleem zich blijft voordoen",
       });
 
       return { items: [] };

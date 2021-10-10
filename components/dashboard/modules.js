@@ -54,7 +54,7 @@ export const reparationsList = createListModule({
       };
     } catch (err) {
       notification.error({
-        message: "Something went wrong while getting the list of shops",
+        message: "Er gaat iets fout, neem contact met ons op als dit probleem zich blijft voordoen",
       });
 
       return { items: [] };
@@ -106,7 +106,7 @@ export const appointmentForm = createFormModule({
 
     createAppointmentFormModal.actions.close();
     notification.success({
-      message: "Appointment created successfully",
+      message: "Afspraak is succesvol aangemaakt!",
     });
 
     return promise;

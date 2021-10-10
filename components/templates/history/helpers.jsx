@@ -57,25 +57,25 @@ const getGuaranteeStatus = (date, guarantee) => {
 export const columns = (viewDetails, search) => [
   {
     width: "120px",
-    title: "Date",
+    title: "Datum",
     render(data) {
       return data?.appointment?.date;
     },
   },
   {
-    title: "Repair Type",
+    title: "Reparatie",
     width: 150,
     render(data) {
       return <b>{data?.reparation?.reparation_name}</b>;
     },
   },
   {
-    title: "Device details",
+    title: "Device",
     width: 300,
     render: (data) => renderDeviceDetails(data),
   },
   {
-    title: "IMEI Number",
+    title: "IMEI/referentie",
     dataIndex: "serialnumber",
     width: 180,
     sorter: (a, b) => a.serialnumber - b.serialnumber,
@@ -91,7 +91,7 @@ export const columns = (viewDetails, search) => [
     ),
   },
   {
-    title: "Price",
+    title: "Prijs",
     dataIndex: "price",
     width: 150,
     render: (price) =>
@@ -102,13 +102,13 @@ export const columns = (viewDetails, search) => [
     sorter: (a, b) => +a.price - +b.price,
   },
   {
-    title: "Warranty",
+    title: "Garantie",
     width: 150,
     render(data) {
       return (
         <TagWrapper
           color={getGuaranteeStatus(data?.appointment.date, data?.guarantee)}
-        >{`${data?.guarantee} months`}</TagWrapper>
+        >{`${data?.guarantee} maanden`}</TagWrapper>
       );
     },
     sorter: (a, b) => a.guarantee - b.guarantee,
