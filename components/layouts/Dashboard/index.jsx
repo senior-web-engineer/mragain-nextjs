@@ -25,7 +25,7 @@ function Menu() {
     if (selectedKeys.length !== 0) {
       const lastSelectedKey = selectedKeys[selectedKeys.length - 1];
       setSelected([lastSelectedKey]);
-      router.push(`/${lastSelectedKey}/${shopId}`);
+      router.push(`/${lastSelectedKey}`);
     }
   };
 
