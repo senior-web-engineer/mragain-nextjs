@@ -42,6 +42,7 @@ export default function Home({ shopList }) {
       <DefaultLayout showSignup>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+	  <meta name="facebook-domain-verification" content="zqky7oob5ldpel0x222ta9kelsl5xh" />
           <title>
             De beste telefoon reparateur bij jou in de buurt | Mr Again{" "}
           </title>
