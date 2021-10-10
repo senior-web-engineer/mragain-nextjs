@@ -191,7 +191,7 @@ const ShopAppointment = (routerProps) => {
   const handleSuccessClose = () => {
     if (manual === true) {
       const shopName = shop_account_profile.name.replaceAll(" ", "-");
-      router.push(`/dashboard/${shopName}`);
+      router.push(`/dashboard`);
     } else {
       router.push("/");
     }
