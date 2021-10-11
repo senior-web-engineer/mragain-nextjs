@@ -230,7 +230,7 @@ export default function AppointmentPage({ shop }) {
             <Form module={appointmentForm}>
               <DetailsForm>
                 <header>
-                  <SubTitle>Vul je gegevens in en neem contact op</SubTitle>
+                  <SubTitle>Laat ons weten waarmee we je kunnen helpen en we nemen zo snel mogelijk contact met je op</SubTitle>
                 </header>
                 <Field name="name" label="Naam" />
                 <InlineFields>
