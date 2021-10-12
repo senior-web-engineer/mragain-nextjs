@@ -299,8 +299,8 @@ export function Reviews({ shop }) {
             {checkIfScoresExist(scores, REVIEW_MARKS) ? (
                 <NoReview>
                     <strong>
-                        Deze reparateur heeft nog geen reviews.
-		        Help jij ze aan de eerste op MrAgain? Maak dan een afspraak bij ze:)
+                        Oops! Nog niemand heeft een review geschreven.
+		        Schrijf de eerste en krijg 10 euro cashback van MrAgain!
                     </strong>
                 </NoReview>
             ) : (
