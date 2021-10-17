@@ -25,6 +25,8 @@ export const TAG_TO_COLOR = {
   "best price": "#0076a3",
   "Repair on location": "#0076a3",
   "Repair on shop": "#c90648",
+  "Reparatie op locatie": "#0076a3",
+  "Fysieke winkel": "#c90648",
 };
 
 const ShopWrap = styled.div`
