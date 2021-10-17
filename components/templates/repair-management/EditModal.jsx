@@ -21,7 +21,7 @@ const columns = (onChange) => [
         <Input
           defaultValue={price}
           onChange={(value) => onChange(index, "price", value)}
-          addonBefore="$"
+          addonBefore="€"
           type="number"
         />
       );

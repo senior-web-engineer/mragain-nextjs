@@ -25,7 +25,7 @@ function Menu() {
     if (selectedKeys.length !== 0) {
       const lastSelectedKey = selectedKeys[selectedKeys.length - 1];
       setSelected([lastSelectedKey]);
-      router.push(`/${lastSelectedKey}/${shopId}`);
+      router.push(`/${lastSelectedKey}`);
     }
   };
 
@@ -33,7 +33,7 @@ function Menu() {
     <MenuWrap>
       <Select
         className="mb-4"
-        options={[{ label: "Main branch", value: "0" }]}
+        options={[{ label: "Hoofd locatie", value: "0" }]}
         value="0"
       />
       <Tree

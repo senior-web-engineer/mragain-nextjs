@@ -30,7 +30,7 @@ export const reparationsList = createListModule({
       };
     } catch (err) {
       notification.error({
-        message: "Something went wrong while getting the list of shops",
+        message: "Er gaat iets fout, neem contact met ons op als het zich blijft voordoen",
       });
 
       return { items: [] };

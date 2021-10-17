@@ -66,7 +66,7 @@ export const saveShopNonWorkingDays = (data) => {
   );
 
   notification.success({
-    message: "Saved successfully",
+    message: "Succesvol opgeslagen",
   });
 
   return promise;
@@ -190,7 +190,7 @@ export const shopManagementAdditionalForm = createFormModule({
 
     if (promise) {
       notification.success({
-        message: "Additional info saved successfully",
+        message: "Je gegevens zijn opgeslagen",
       });
     }
 

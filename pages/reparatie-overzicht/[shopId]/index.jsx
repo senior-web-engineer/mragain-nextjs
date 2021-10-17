@@ -337,7 +337,7 @@ const ReparationOverView = (routerProps) => {
                   className="calendar-icon"
                   icon={["fas", "calendar"]}
                 />
-                <Link prefetch={false} href={"/dashboard/" + url_shopId}>
+                <Link prefetch={false} href={"/dashboard"}>
                   Dashboard
                 </Link>
               </div>

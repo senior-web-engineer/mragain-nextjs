@@ -104,6 +104,7 @@ export default function GooglePlaces({
   size,
   placeholder = "Postcode of stad",
   onLocationSelected,
+  disabled,
   searchOptions = {
     componentRestrictions: {
       country: ["nl", "be"],
@@ -162,6 +163,7 @@ export default function GooglePlaces({
                 text: suggestion.description,
                 value: suggestion.description,
               }))}
+              disabled={disabled}
               value={searchTerm}
               size={size || "small"}
               placeholder={placeholder}
@@ -169,7 +171,7 @@ export default function GooglePlaces({
               allowClear={true}
               dropdownStyle={{ minWidth: "320px" }}
               onSelect={(description) => {
-                getLongAndLat(description).then((res) => onLocationSelected(res));
+                getLongAndLat(description).then((res) => onLocationSelected && onLocationSelected(res));
                 setSearchTerm(description);
                 onChange(description);
               }}

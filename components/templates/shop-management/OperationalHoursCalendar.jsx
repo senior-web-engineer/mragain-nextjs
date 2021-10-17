@@ -106,6 +106,7 @@ export const OperationalHoursCalendar = ({
         },
       },
     });
+    onClear();
   }, [nonRegularHours, onNonWorkingDaysSaved]);
 
   const isAddDisabled = useCallback(() => {
@@ -129,7 +130,6 @@ export const OperationalHoursCalendar = ({
   };
 
   const handelOnDelete = (item) => {
-    console.log("DELETE", item);
     onDeleteNonWorkingDays(item.id);
   };
 

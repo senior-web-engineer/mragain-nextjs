@@ -119,4 +119,9 @@ export const repeatingList = [
     label: "Elke week",
     color: "red",
   },
+  {
+    value: 3,
+    label: "Niet herhalend",
+    color: "gray",
+  },
 ];
