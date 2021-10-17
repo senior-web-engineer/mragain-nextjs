@@ -315,7 +315,6 @@ export default function ShopHeader({ shop }) {
   const detailButtons = (
     <DetailButtonsWrap>
       <DetailsModal shop={shop} />
-      <WhatsAppModal shop={shop} />
       {/* <Popover
         overlayClassName="share-popover"
         content={
@@ -346,6 +345,7 @@ export default function ShopHeader({ shop }) {
       <OnMobile show={false}>
         <ContactButton />
       </OnMobile>
+      <WhatsAppModal shop={shop} />
     </DetailButtonsWrap>
   );
 

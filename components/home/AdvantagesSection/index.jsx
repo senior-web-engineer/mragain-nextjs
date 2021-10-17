@@ -17,10 +17,10 @@ import media from "@/utils/media";
 const ADVANTAGES = [
   {
     icon: faClock,
-    title: "Snelheid & beste prijs",
+    title: "Cashback & beste prijs",
     1: "Reparateurs beheren hun  prijzen op MrAgain, hierdoor krijg je altijd de beste prijs",	  
     2: "Veel reparateurs komen ook op locatie, chill!",
-    3: "Je wordt direct geholpen doordat de reparateur weet dat je komt",
+    3: "Reparateur zonder review? Schrijf de eerste en krijg €10 cashback!",
   },
   {
     icon: faReceipt,
