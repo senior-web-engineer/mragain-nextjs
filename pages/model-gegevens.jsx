@@ -1,24 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import Link from "next/link"
-import { useRouter } from "next/router";
-import { Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Input, Button } from "antd";
-import Switch from "react-switch";
+import "./model-gegevens.less";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    deleteShopGuarantee,
-    // getShopBrandModel,
-    getShopRepairation,
-    updateShopModalGuarantees,
-} from "service/account/operations";
+import { Button, Input } from "antd";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { Table } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
+import { connect } from "react-redux";
+import Switch from "react-switch";
 import { setLoadPBM, setSelectShopGuarantee } from "service/account/action";
 import { setGuaranteeDevice } from "service/account/action.js";
+import {
+  deleteShopGuarantee,
+  // getShopBrandModel,
+  getShopRepairation,
+  updateShopModalGuarantees,
+} from "service/account/operations";
+
 import { Layout } from "@/components/global";
-import "./model-gegevens.less";
 
 const DetailPerPhone = (routerProps) => {
   const [update, setUpdate] = useState(true);
@@ -47,8 +49,8 @@ const DetailPerPhone = (routerProps) => {
   const router = useRouter();
   const params = router.query;
 
-//   if (load === false) {
-//   }
+  //   if (load === false) {
+  //   }
 
   const handleGuaranteeActiveChange = (checked, id) => {
     let glist = [...guaranteeList];
@@ -128,7 +130,7 @@ const DetailPerPhone = (routerProps) => {
         model: parseInt(params.modelId),
         brand: parseInt(params.brandId),
       };
-    //   getShopBrandModel(data);
+      //   getShopBrandModel(data);
       getShopRepairation(data).then((res) => {
         console.log(res);
         setGuaranteeList(res.data);
@@ -178,7 +180,12 @@ const DetailPerPhone = (routerProps) => {
                 {params.modelName} overzicht
               </div>
               <div className="main-container-content">
-                <Table striped bordered hover className="detail-per-phone-table ">
+                <Table
+                  striped
+                  bordered
+                  hover
+                  className="detail-per-phone-table "
+                >
                   <thead className="detail-per-phone-table-header">
                     <tr>
                       <th>Type reparatie</th>
@@ -189,8 +196,8 @@ const DetailPerPhone = (routerProps) => {
                     </tr>
                   </thead>
                   <tbody>
-                      {/* {selectedShopGuarantee.map((el) => { */}
-                      {guaranteeList.map((el, i) => {
+                    {/* {selectedShopGuarantee.map((el) => { */}
+                    {guaranteeList.map((el, i) => {
                       return (
                         <tr key={el.id}>
                           <td>{el.reparation.reparation_name}</td>
@@ -356,7 +363,7 @@ const mapDispatchToProps = (dispatch) => {
     //   getShopBrandModel(data, dispatch);
     // },
     getShopRepairation: (data) => {
-        getShopRepairation(data, dispatch);
+      getShopRepairation(data, dispatch);
     },
     setSelectShopGuarantee: (data) => {
       dispatch(setSelectShopGuarantee(data));
@@ -373,7 +380,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DetailPerPhone);
+export default connect(mapStateToProps, mapDispatchToProps)(DetailPerPhone);

@@ -1,22 +1,25 @@
-import React from "react";
+import "./modelDetails.css";
+import "../../components/global/StarRatingInfo/StarRatingInfo.less";
+
+import { Rate } from "antd";
 import { Layout } from "components/global";
-import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
 import Head from "next/head";
-import { API_PATH, FRONT_END_URL } from "../../constants.js";
+import React from "react";
 import { useState } from "react";
 // import ReactImageMagnify from "react-image-magnify";
 import { SideBySideMagnifier } from "react-image-magnifiers";
 import Slider from "react-slick";
-import "./modelDetails.css";
-import { Rate } from "antd";
-import "../../components/global/StarRatingInfo/StarRatingInfo.less";
+
+import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
+
 import batteryIssue from "../../assets/icons/Problems - Battery.svg";
-import crackIssue from "../../assets/icons/Problems - Crack.svg";
-import signalIssue from "../../assets/icons/Problems - Signal.svg";
-import locationIssue from "../../assets/icons/Problems - Location.svg";
 import connectivityIssue from "../../assets/icons/Problems - Connectivity.svg";
+import crackIssue from "../../assets/icons/Problems - Crack.svg";
+import locationIssue from "../../assets/icons/Problems - Location.svg";
+import signalIssue from "../../assets/icons/Problems - Signal.svg";
 import releasedDate from "../../assets/icons/Specifications - Date.svg";
-export default function index() {
+import { API_PATH, FRONT_END_URL } from "../../constants.js";
+export default function Index() {
   const [modelImages, setmodelImages] = useState([
     "https://cdn-0.idownloadblog.com/wp-content/uploads/2019/09/iPhone-11-Pro-Max-Midnight-Green-Mockup-with-AR72014-iDownloadBlog-scaled.jpeg",
     "https://www.iphonehacks.com/wp-content/uploads/2019/10/iphone-11-pro-max-teardown.jpg",

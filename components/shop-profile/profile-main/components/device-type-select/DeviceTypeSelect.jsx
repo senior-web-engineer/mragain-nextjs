@@ -1,12 +1,13 @@
+import "./DeviceTypeSelect.less";
+
+import { Select } from "antd";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Select } from "antd";
 import { getBrandModels, getDeviceBrands } from "service/search/operations.js";
 import {
   getReparationModelDetails,
   getShopDevices,
 } from "service/search/operations.js";
-import "./DeviceTypeSelect.less";
 
 const { Option } = Select;
 

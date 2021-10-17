@@ -1,10 +1,10 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const TestimonialSectionArea = styled.div`
   color: #000;
   width: 100%;
-    
+
   padding-top: 115px;
   padding-bottom: 105px;
-  background-color: #f8f8f8;  
-`
+  background-color: #f8f8f8;
+`;

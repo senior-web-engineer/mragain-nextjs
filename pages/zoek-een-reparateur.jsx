@@ -1,3 +1,16 @@
+import {
+  faMapMarkerAlt,
+  faSortAmountDown,
+  faStore,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Checkbox, Rate, Slider, Switch } from "antd";
+import isEqual from "fast-deep-equal";
+import moment from "moment";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import React, {
   createContext,
   useCallback,
@@ -6,12 +19,13 @@ import React, {
   useRef,
   useState,
 } from "react";
-import styled, { css } from "styled-components";
-import isEqual from "fast-deep-equal";
 import { Waypoint } from "react-waypoint";
-import { store, wrapper } from "@/configureStore";
+import styled, { css } from "styled-components";
 
+import GooglePlaces, { loadScript } from "@/components/common/GooglePlaces";
+import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
 import DefaultLayout from "@/components/layouts/Homepage";
+import Map from "@/components/search-results/Map";
 import {
   brandFetcher,
   deviceFetcher,
@@ -21,42 +35,28 @@ import {
   serviceFetcher,
   shopListModule,
 } from "@/components/search-results/modules";
-
+import { FieldWrap } from "@/components/styled/Forms";
+import { MaxConstraints } from "@/components/styled/layout";
+import { SubTitle } from "@/components/styled/text";
+import Button from "@/components/ui/Button";
+import { TextButton } from "@/components/ui/Button";
+import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
+import Select from "@/components/ui/Select";
+import { store, wrapper } from "@/configureStore";
+import { createSelectComponent } from "@/modules/dataFetcher";
+import Form, { useFormContext } from "@/modules/forms";
 import {
   Field,
   parseNativeEvent,
   SyncFormValues,
 } from "@/modules/forms/Blocks";
-import { Listing, NoResults } from "@/modules/list/Blocks";
-import Form, { useFormContext } from "@/modules/forms";
 import List, { useListContext } from "@/modules/list";
-import Select from "@/components/ui/Select";
-import { createSelectComponent } from "@/modules/dataFetcher";
-import { Checkbox, Radio, Rate, Slider, Switch } from "antd";
-import { MaxConstraints } from "@/components/styled/layout";
-import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMapMarkerAlt,
-  faSortAmountDown,
-  faStore,
-} from "@fortawesome/free-solid-svg-icons";
-import Button from "@/components/ui/Button";
-import { FieldWrap } from "@/components/styled/Forms";
-import Map from "@/components/search-results/Map";
-import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
-import { SubTitle } from "@/components/styled/text";
-import { TextButton } from "@/components/ui/Button";
-import media, { OnMobile } from "@/utils/media";
-import Modal from "@/modules/modal";
-import { useRouter } from "next/router";
-import GooglePlaces, { loadScript } from "@/components/common/GooglePlaces";
-import moment from "moment";
-import Head from 'next/head'
-import { FRONT_END_URL } from '../constants.js'
+import { Listing, NoResults } from "@/modules/list/Blocks.js";
+import Modal from "@/modules/modal/index.js";
+import media, { OnMobile } from "@/utils/media.js";
 import { getShopLogo, getShopRoute } from "@/utils/shop";
-import Link from "next/link";
-import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
+
+import { FRONT_END_URL } from "../constants.js";
 
 //
 
@@ -92,7 +92,7 @@ const SidebarInnerWrap = styled.div`
 
   .ant-slider-mark {
     font-size: 10px;
-  }   
+  }
 `;
 
 const MapTriggerWrap = styled(FieldWrap)`
@@ -645,20 +645,20 @@ ShopDetails.AppointmentInfo = styled.div`
 `;
 
 const Options = styled.div`
-    display: flex;
-    flex-direction: column;
-    font-family: "Montserrat";
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat";
+  font-size: 10px !important;
+  letter-spacing: 0.06em !important;
+  font-weight: 400;
+  text-transform: uppercase;
+  & > label {
+    margin-left: 0px !important;
     font-size: 10px !important;
-    letter-spacing: 0.06em !important;
-    font-weight: 400;
-    text-transform: uppercase;
-    & > label {
-      margin-left: 0px !important;
-      font-size: 10px !important;
-      color: #808080 !important;
-      margin-bottom:5px;
-    }
-  `;
+    color: #808080 !important;
+    margin-bottom: 5px;
+  }
+`;
 
 const shopRefs = {};
 const ShopBridgeContext = createContext();
@@ -681,9 +681,7 @@ function ShopItem({ item }) {
   const router = useRouter();
   const { selectedShop, updateSelectedShop, showMap } =
     useContext(ShopBridgeContext);
-  const location = [item.shop.city || ""]
-    .filter(Boolean)
-    .join(", ");
+  const location = [item.shop.city || ""].filter(Boolean).join(", ");
   function renderService(service) {
     return <ShopDetails.Service>{service.device_name}</ShopDetails.Service>;
   }
@@ -693,8 +691,9 @@ function ShopItem({ item }) {
   // API changed does not include the city any longer?
   // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
 
-  const shopRoute = `${getShopRoute(item.shop)}?device=${formState.device
-    }&brand=${formState.brand}&model=${formState.model}`;
+  const shopRoute = `${getShopRoute(item.shop)}?device=${
+    formState.device
+  }&brand=${formState.brand}&model=${formState.model}`;
 
   function onClick() {
     if (!showMap) {
@@ -728,11 +727,15 @@ function ShopItem({ item }) {
       </ShopImageWrap>
       <ShopDetails>
         <div>
-          {tags ? tags.map(tag => {
-            const value = Object.values(tag)[0];
-            const props = { [`data-${TAG_TO_COLOR[value]}`.replace('#', '')]: true }
-            return (<tag  {...props}>{value}</tag>);
-          }) : null}
+          {tags
+            ? tags.map((tag) => {
+                const value = Object.values(tag)[0];
+                const props = {
+                  [`data-${TAG_TO_COLOR[value]}`.replace("#", "")]: true,
+                };
+                return <tag {...props}>{value}</tag>;
+              })
+            : null}
         </div>
         <ShopDetails.SecondRow>
           <ShopDetails.NameWrap>
@@ -815,7 +818,7 @@ const MobileDeviceSelector = createSelectComponent({
 });
 
 function AppendIdentifier({ Component, name }) {
-  return function (props) {
+  return function IdentifiedComponent(props) {
     const { state } = useFormContext();
     return <Component identifier={`${state?.values?.[name]}`} {...props} />;
   };
@@ -1008,9 +1011,11 @@ function RefineSearchForm() {
       <Field name="rate" as={Rate} label="Minimale rating" />
       <Field name="shop_type" as={Checkbox.Group} label="Reparatie Type">
         <Options>
-        {REPAIR_TYPES.map((type, i) => (
-          <Checkbox key={i} value={type.value} disabled={type.disabled}>{type.label}</Checkbox>
-        ))}
+          {REPAIR_TYPES.map((type, i) => (
+            <Checkbox key={i} value={type.value} disabled={type.disabled}>
+              {type.label}
+            </Checkbox>
+          ))}
         </Options>
       </Field>
       <Field
@@ -1035,7 +1040,12 @@ function RefineSearchForm() {
   );
 }
 
-function ModelFieldsComponent({ showMap, updateShowMap, setShowMobileSearch, showMobileSearch }) {
+function ModelFieldsComponent({
+  showMap,
+  updateShowMap,
+  setShowMobileSearch,
+  showMobileSearch,
+}) {
   const { state } = useFormContext();
   const onDeviceChange = useCallback((ev) => {
     const value = parseNativeEvent(ev);
@@ -1157,13 +1167,10 @@ function ModelFieldsComponent({ showMap, updateShowMap, setShowMobileSearch, sho
       </OnMobile>
       <MapTriggerWrap>
         <label>Kaart</label>
-        <Switch
-          checked={showMap}
-          onChange={(val) => updateShowMap(val)}
-        />
+        <Switch checked={showMap} onChange={(val) => updateShowMap(val)} />
       </MapTriggerWrap>
     </ModelFields>
-  )
+  );
 }
 
 function ResultCount() {
@@ -1225,30 +1232,31 @@ export default function SearchResults() {
         <Head>
           <title>Zoek een telefoon reparateur | Mr Again</title>
           <meta
-            name='Keywords'
-            content='Zoek een telefoon reparateur, telefoon maken, telefoon reparateur, telefoon reparatie, scherm maken, Mr Again'
+            name="Keywords"
+            content="Zoek een telefoon reparateur, telefoon maken, telefoon reparateur, telefoon reparatie, scherm maken, Mr Again"
           />
           <meta
-            name='description'
-            content='Telefoon maken of telefoon reparatie? Bekijk de zoek resultaten bij MrAgain'
+            name="description"
+            content="Telefoon maken of telefoon reparatie? Bekijk de zoek resultaten bij MrAgain"
           />
-          <link
-            rel='canonical'
-            href={FRONT_END_URL + '/zoek-een-reparateur'}
-          />
+          <link rel="canonical" href={FRONT_END_URL + "/zoek-een-reparateur"} />
           {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
-          <meta property='og:type' content='website' />
-          <meta name='og_title' property='og:title' content='Zoek een telefoon reparateur' />
+          <meta property="og:type" content="website" />
           <meta
-            property='og:description'
-            content='Zoek een telefoon reparateur'
+            name="og_title"
+            property="og:title"
+            content="Zoek een telefoon reparateur"
           />
-          <meta name='og:url' content={FRONT_END_URL} />
-          <meta property='og:image' content='' />
           <meta
-            name='og_site_name'
-            property='og:site_name'
-            content='Mr Again'
+            property="og:description"
+            content="Zoek een telefoon reparateur"
+          />
+          <meta name="og:url" content={FRONT_END_URL} />
+          <meta property="og:image" content="" />
+          <meta
+            name="og_site_name"
+            property="og:site_name"
+            content="Mr Again"
           />
         </Head>
         <MainWrap>

@@ -1,18 +1,18 @@
-import React from "react";
+import dynamic from "next/dynamic";
+import Head from "next/head";
 import { useRouter } from "next/router";
+import React from "react";
+import { getShopProfileByInformationServer } from "service/account/operations";
 import styled from "styled-components";
 
-import Head from "next/head";
-import { FRONT_END_URL } from "@/constants";
-import { getShopProfileByInformationServer } from "service/account/operations";
+import Loader from "@/components/common/Loader";
 import DefaultLayout from "@/components/layouts/Homepage";
+import ShopDetails from "@/components/shop-profile/ShopDetails";
 import ShopHeader from "@/components/shop-profile/ShopHeader";
 import ShopServices from "@/components/shop-profile/ShopServices";
-import ShopDetails from "@/components/shop-profile/ShopDetails";
-import { OnMobile } from "@/utils/media";
-import Loader from "@/components/common/Loader";
-import dynamic from "next/dynamic";
 import { wrapper } from "@/configureStore";
+import { FRONT_END_URL } from "@/constants";
+import { OnMobile } from "@/utils/media";
 
 const LoadableReviews = dynamic(
   () =>
@@ -38,11 +38,8 @@ const MainWrap = styled.div`
 `;
 
 const ShopProfile = (routerProps) => {
-  const {
-    shop_account_profile,
-    shopProfileServerInfo,
-    shopDevices,
-  } = routerProps;
+  const { shop_account_profile, shopProfileServerInfo, shopDevices } =
+    routerProps;
 
   const router = useRouter();
 
@@ -78,7 +75,9 @@ const ShopProfile = (routerProps) => {
       "telephone": "${shopAccountProfile.phone_number}",
       "url": "${shopAccountProfile.site_url}"
     }
-  `.split(`\n`).join('');
+  `
+    .split(`\n`)
+    .join("");
 
   return (
     <DefaultLayout>
@@ -119,7 +118,7 @@ const ShopProfile = (routerProps) => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async(ctx) => {
+export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
   const shopId = ctx.query["shopId][api"];
   const shopProfileServerInfo = await getShopProfileByInformationServer(shopId);
   return {
@@ -130,6 +129,6 @@ export const getServerSideProps = wrapper.getServerSideProps(async(ctx) => {
           : shopProfileServerInfo,
     },
   };
-})
+});
 
 export default ShopProfile;

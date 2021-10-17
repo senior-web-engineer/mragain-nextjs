@@ -1,6 +1,7 @@
 import React from "react";
-import { BenefitText, Wrapper } from "./Benefit.style";
+
 import ResolveSVG from "../../assets/js/ResolveSVG";
+import { BenefitText, Wrapper } from "./Benefit.style";
 
 const Benefit = ({ svgName, text }) => {
   return (

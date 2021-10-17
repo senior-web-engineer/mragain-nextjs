@@ -1,13 +1,15 @@
-import React from "react";
-import { HowSectionArea, HowContainer } from "../How.style";
-import {
-  HowContent,
-  HowArticle,
-  HowArticleTitle,
-  HowArticleContent,
-} from "./HowSection.style.jsx";
 import "./HowSection.style.less";
+
+import React from "react";
+
 import { BACK_END_URL } from "../../../constants.js";
+import { HowContainer, HowSectionArea } from "../How.style";
+import {
+  HowArticle,
+  HowArticleContent,
+  HowArticleTitle,
+  HowContent,
+} from "./HowSection.style.jsx";
 
 const HowSection = () => (
   <HowSectionArea className="how-area">
@@ -90,9 +92,9 @@ const HowSection = () => (
                   Model & Reparatie beheer. Klik op het apparaat waarvoor je
                   modellen wilt gaan toevoegen.
                   <br></br>
-                  Klik op "Wijzig modellen" en selecteer de modellen die je
-                  repareert. Sla deze vervolgens op en wacht totdat je ziet dat
-                  dit gelukt is.
+                  Klik op &quot;Wijzig modellen&quot; en selecteer de modellen
+                  die je repareert. Sla deze vervolgens op en wacht totdat je
+                  ziet dat dit gelukt is.
                 </div>
                 <div className="col-md-6">
                   <img
@@ -115,9 +117,9 @@ const HowSection = () => (
                   1) Je klikt op het model waarvoor je je reparaties wilt
                   beheren en update deze.
                   <br></br>
-                  2) Je klikt op "Exporteren" en download een csv file met al je
-                  modellen en reparaties. Je vult deze in en importeert deze
-                  vervolgens met "Importeren".
+                  2) Je klikt op &quot;Exporteren&quot; en download een csv file
+                  met al je modellen en reparaties. Je vult deze in en
+                  importeert deze vervolgens met &quot;Importeren&quot;.
                   <br></br>
                   <br></br>
                   Als je alles voor de eerste keer inregelt werkt het
@@ -190,8 +192,8 @@ const HowSection = () => (
                 de reparatie niet meer bewerken en zodra je een reparatie hebt
                 afgerond ontvangt je klant een review verzoek.
                 <br></br>
-                Ook verplaatst de reparatie naar "reparatie overzicht" waardoor
-                je deze altijd makkelijk kunt terugvinden.
+                Ook verplaatst de reparatie naar &quot;reparatie overzicht&quot;
+                waardoor je deze altijd makkelijk kunt terugvinden.
               </div>
               <br />
               <br />

@@ -1,8 +1,9 @@
-import { createSelector } from "reselect";
-import { connect, useSelector } from "react-redux";
-import { Field } from "@/modules/forms/Blocks";
-import { store } from "@/configureStore";
 import { useMemo } from "react";
+import { connect, useSelector } from "react-redux";
+import { createSelector } from "reselect";
+
+import { store } from "@/configureStore";
+import { Field } from "@/modules/forms/Blocks";
 
 const SEPARATOR = "~";
 

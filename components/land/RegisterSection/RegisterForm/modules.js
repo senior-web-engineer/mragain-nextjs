@@ -1,8 +1,9 @@
+import * as yup from "yup";
+
 import { API_PATH } from "@/constants";
 import { createFormModule } from "@/modules/forms";
 import { createModalModule } from "@/modules/modal";
 import api from "@/utils/api";
-import * as yup from "yup";
 
 const validator = yup.object({
   companyName: yup.string().required(),
@@ -64,5 +65,4 @@ export const registerFormModule = createFormModule({
   },
 });
 
-
-export const agrementModal = createModalModule()
+export const agrementModal = createModalModule();

@@ -1,8 +1,11 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./MakeAppointment.module.css";
+
+import { Button, DatePicker, Divider, Input, Select } from "antd";
 import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { Modal } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, DatePicker, Input, Select, Divider } from "antd";
+import { connect } from "react-redux";
 import { Label } from "semantic-ui-react";
 import {
   getBrands,
@@ -11,8 +14,8 @@ import {
   getReparationDetails,
   getReparations,
 } from "service/search/operations";
-import { connect } from "react-redux";
-import "./MakeAppointment.module.css";
+
+const Option = Select.Option;
 
 const MakeAppointment = (routerProps) => {
   const {

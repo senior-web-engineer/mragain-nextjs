@@ -1,7 +1,9 @@
-import { Footer } from "@/components/global";
 import React from "react";
-import Header from "./Header";
 import styled from "styled-components";
+
+import { Footer } from "@/components/global";
+
+import Header from "./Header";
 
 const ContentWrap = styled.div`
   background-color: #fafafa;
@@ -12,7 +14,7 @@ export default function DefaultLayout({ children, showSignup = false }) {
   return (
     <>
       <Header showSignup={showSignup} />
-        <ContentWrap>{children}</ContentWrap>
+      <ContentWrap>{children}</ContentWrap>
       <Footer />
     </>
   );

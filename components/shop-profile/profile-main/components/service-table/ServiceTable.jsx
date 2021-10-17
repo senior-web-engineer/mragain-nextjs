@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { Table } from "antd";
 import "./ServiceTable.less";
+
+import { Table } from "antd";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import { setLoadService } from "service/search/action.js";
 
 const ServiceTable = (routerProps) => {

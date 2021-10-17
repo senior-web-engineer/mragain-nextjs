@@ -1,22 +1,27 @@
-import React, { useEffect, useMemo } from "react";
-import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
+import moment from "moment";
 import Head from "next/head";
-import { API_PATH, API_URL, FRONT_END_URL } from "../../constants.js";
-import DefaultLayout from "@/components/layouts/Homepage/index.jsx";
-import { MaxConstraints } from "@/components/styled/layout.jsx";
-import styled from "styled-components";
-import { SubTitle } from "@/components/styled/text.js";
-import Slider from "react-slick";
-import Button from "@/components/ui/Button.jsx";
 import Image from "next/image";
 import Link from "next/link";
-import moment from "moment";
-import media, { OnMobile } from "@/utils/media.js";
-import Form, { createFormModule, useFormContext } from "@/modules/forms/index.js";
-import { Field } from "@/modules/forms/Blocks.js";
-import Input from "@/components/ui/Input.jsx";
-import api from "@/utils/api/index.js";
+import React, { useEffect, useMemo } from "react";
+import Slider from "react-slick";
+import styled from "styled-components";
 import * as yup from "yup";
+
+import DefaultLayout from "@/components/layouts/Homepage/index.jsx";
+import { MaxConstraints } from "@/components/styled/layout.jsx";
+import { SubTitle } from "@/components/styled/text.js";
+import Button from "@/components/ui/Button.jsx";
+import Input from "@/components/ui/Input.jsx";
+import { Field } from "@/modules/forms/Blocks.js";
+import Form, {
+  createFormModule,
+  useFormContext,
+} from "@/modules/forms/index.js";
+import { Main } from "@/styled-components/reparatie-en-service.style.jsx";
+import api from "@/utils/api/index.js";
+import media, { OnMobile } from "@/utils/media.js";
+
+import { API_PATH, API_URL, FRONT_END_URL } from "../../constants.js";
 
 const HeroWrap = styled.div`
   display: flex;
@@ -264,10 +269,10 @@ function NullRenderer() {
 }
 
 function SubscribeForm() {
-  const {submitted} = useFormContext().state;
+  const { submitted } = useFormContext().state;
 
   if (submitted) {
-    return <success>Thank you for subscribing</success>
+    return <success>Thank you for subscribing</success>;
   }
 
   return (

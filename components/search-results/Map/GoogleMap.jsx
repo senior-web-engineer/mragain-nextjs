@@ -1,8 +1,9 @@
-import React, { useMemo, useState } from "react";
 import GoogleMapReact from "google-map-react";
+import React, { useMemo } from "react";
 const googleMapsApiKey = "AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE";
-import colors from "./map-colors.json";
 import styled, { css } from "styled-components";
+
+import colors from "./map-colors.json";
 
 const ShopMarkerWrap = styled.div`
   position: relative;
@@ -68,6 +69,7 @@ function MapComponent({
     >
       {shopList.map((shop) => (
         <ShopMarker
+          key={shop.id}
           selected={shop.id === selectedShopId}
           lat={shop.geo_lat}
           lng={shop.geo_long}

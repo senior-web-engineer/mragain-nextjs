@@ -1,6 +1,7 @@
 import { faPaypal } from "@fortawesome/free-brands-svg-icons";
 import { faCreditCard, faMoneyBill } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
+
 import InlineSelector from "./InlineSelector";
 
 //

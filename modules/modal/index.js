@@ -1,6 +1,8 @@
-import { v4 as uuid } from "uuid";
-import { connect } from "react-redux";
+import { Drawer as AntDrawer } from "antd";
 import Dialog from "rc-dialog";
+import { connect } from "react-redux";
+import { v4 as uuid } from "uuid";
+
 import { store } from "@/configureStore";
 export function createModalModule() {
   const guid = uuid();
@@ -12,7 +14,7 @@ export function createModalModule() {
   return {
     guid,
     actions: {
-      resolve(){},
+      resolve() {},
       open(payload) {
         store.ref.dispatch({ type: "OPEN_MODAL", guid, payload });
 
@@ -59,7 +61,16 @@ const Modal = connect((state, ownProps) => ({
   visible: ownProps.module.selectors.isVisible,
   onClose: ownProps.module.actions.close,
 }))(function ({ module, footer = DEFAULT_BUTTONS, ...rest }) {
-  return <Dialog className="custom-modal" {...rest} footer={footer?.({ module })} />;
+  return (
+    <Dialog className="custom-modal" {...rest} footer={footer?.({ module })} />
+  );
+});
+
+export const Drawer = connect((state, ownProps) => ({
+  visible: ownProps.module.selectors.isVisible,
+  onClose: ownProps.module.actions.close,
+}))(function ({ module, ...rest }) {
+  return <AntDrawer className="custom-drawer" {...rest} />;
 });
 
 export default Modal;
