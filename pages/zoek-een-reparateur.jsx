@@ -54,6 +54,7 @@ import List, { useListContext } from "@/modules/list";
 import { Listing, NoResults } from "@/modules/list/Blocks.js";
 import Modal from "@/modules/modal/index.js";
 import media, { OnMobile } from "@/utils/media.js";
+import { getShopLogo, getShopRoute } from "@/utils/shop";
 
 import { FRONT_END_URL } from "../constants.js";
 
@@ -690,8 +691,9 @@ function ShopItem({ item }) {
   // API changed does not include the city any longer?
   // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
 
-  const shopRoute = `${getShopRoute(item.shop)}?device=${formState.device
-    }&brand=${formState.brand}&model=${formState.model}`;
+  const shopRoute = `${getShopRoute(item.shop)}?device=${
+    formState.device
+  }&brand=${formState.brand}&model=${formState.model}`;
 
   function onClick() {
     if (!showMap) {
@@ -727,12 +729,12 @@ function ShopItem({ item }) {
         <div>
           {tags
             ? tags.map((tag) => {
-              const value = Object.values(tag)[0];
-              const props = {
-                [`data-${TAG_TO_COLOR[value]}`.replace("#", "")]: true,
-              };
-              return <tag {...props}>{value}</tag>;
-            })
+                const value = Object.values(tag)[0];
+                const props = {
+                  [`data-${TAG_TO_COLOR[value]}`.replace("#", "")]: true,
+                };
+                return <tag {...props}>{value}</tag>;
+              })
             : null}
         </div>
         <ShopDetails.SecondRow>

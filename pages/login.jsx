@@ -48,7 +48,7 @@ const Login = () => {
   useEffect(() => {
     if (localStorage.getItem("auth-token") !== null) {
       const user = JSON.parse(localStorage.getItem("auth-user"));
-      router.push(`/dashboard/${user.name.replaceAll(" ", "-")}`);
+      router.push(`/dashboard`);
     }
 
     async function loadData() {
@@ -80,7 +80,7 @@ const Login = () => {
           let obj = Object.assign({}, res.data);
           delete obj.is_super;
           localStorage.setItem("auth-user", JSON.stringify(obj));
-          router.push(`/dashboard/${res.data.name.replaceAll(" ", "-")}`);
+          router.push(`/dashboard`);
         })
         .catch((err) => console.log(err));
     } catch (error) {
@@ -90,7 +90,7 @@ const Login = () => {
       }
       if (error !== "") {
         notification.error({
-          message: "Bad Credentials, please try again ",
+          message: "Je wachtwoord en/of emailadres lijken niet te kloppen",
         });
       }
     }

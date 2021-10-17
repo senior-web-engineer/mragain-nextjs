@@ -1,6 +1,6 @@
-import { Button, Checkbox, Col, Divider, Row } from "antd";
+import { Button, Col, Divider, Row } from "antd";
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 
 import GooglePlaces from "@/components/common/GooglePlaces";
 import Input from "@/components/ui/Input";
@@ -55,7 +55,6 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
         if (res.data.results.length !== 0) {
           const data = {
             street: "",
-            city: "",
             country: "",
             zip: "",
           };
@@ -63,11 +62,11 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
             if (comp.types.includes("street_number")) {
               data.street = comp.long_name;
             }
-            if (comp.types.includes("locality")) {
-              data.city = comp.long_name;
-            }
             if (comp.types.includes("country")) {
               data.country = comp.long_name;
+            }
+            if (comp.types.includes("locality")) {
+              data.city = comp.long_name;
             }
             if (comp.types.includes("postal_code")) {
               data.zip = comp.long_name;
@@ -112,46 +111,43 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                   />
                 </Col>
               </Row>
-              <Row>
-                <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
+              <Row gutter={[16, 0]}>
+                <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
                   <Field
                     adminInput
+                    name="city"
                     as={GooglePlaces}
-                    label="Address"
+                    label="Stad"
                     onLocationSelected={handleOnLocationSelected}
                     customLabel
+                    searchOptions={{
+                      componentRestrictions: {
+                        country: ["nl", "be"],
+                      },
+                      types: ["(cities)"],
+                    }}
                     size="small"
                   />
-                  {/* <GooglePlaces
-                    placeholder="Address"
-                    onLocationSelected={handleOnLocationSelected}
-                  /> */}
+                </Col>
+                <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
+                  <Field
+                    name="streetAddress"
+                    adminInput
+                    as={GooglePlaces}
+                    label="Straat"
+                    customLabel
+                    searchOptions={{
+                      componentRestrictions: {
+                        country: ["nl", "be"],
+                      },
+                      types: ["address"],
+                    }}
+                    size="small"
+                  />
                 </Col>
               </Row>
               <Col>
                 <Row gutter={[16, 0]}>
-                  <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
-                    <Field
-                      adminInput
-                      name="city"
-                      as={Input}
-                      disabled
-                      label="City"
-                      customLabel
-                      size="small"
-                    />
-                  </Col>
-                  <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
-                    <Field
-                      adminInput
-                      name="country"
-                      as={Input}
-                      disabled
-                      label="Country"
-                      customLabel
-                      size="small"
-                    />
-                  </Col>
                   <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
                     <Field
                       adminInput
@@ -167,7 +163,8 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                       adminInput
                       name="street"
                       as={Input}
-                      label="STRAAT"
+                      disabled={!basicSettingsForm.state?.values?.zipcode}
+                      label="Huisnummer"
                       customLabel
                       size="small"
                     />
@@ -180,7 +177,6 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                     adminInput
                     name="intervals"
                     as={Select}
-                    defaultValue={basicSettingsForm.state.values.intervals}
                     label="Tijd per afspraak"
                     size="small"
                     options={DURATION_OPTIONS}

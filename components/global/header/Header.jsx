@@ -149,19 +149,7 @@ const HeaderView = (routerProps) => {
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <Link
-            prefetch={false}
-            href={
-              "/dashboard/" +
-              (auth_user.account_id === undefined && adminName !== null
-                ? admin_Id
-                : adminName)
-            }
-            // onClick={() => {
-            //   handleGetSimpleAccount();
-            //   handleGetAppointments();
-            // }}
-          >
+          <Link prefetch={false} href={"/dashboard"}>
             Dashboard
           </Link>
         </Menu.Item>

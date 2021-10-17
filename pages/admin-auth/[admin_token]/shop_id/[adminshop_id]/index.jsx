@@ -30,7 +30,7 @@ const AdminLoginAsUser = (routerProps) => {
   useEffect(() => {
     if (Object.keys(authUser).length > 0) {
       localStorage.setItem("auth-user", JSON.stringify(authUser));
-      router.push(`/dashboard/${adminshop_id}`);
+      router.push(`/dashboard`);
     }
   }, [authUser]);
 
