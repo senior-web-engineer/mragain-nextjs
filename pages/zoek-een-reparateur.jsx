@@ -691,9 +691,8 @@ function ShopItem({ item }) {
   // API changed does not include the city any longer?
   // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
 
-  const shopRoute = `${getShopRoute(item.shop)}?device=${
-    formState.device
-  }&brand=${formState.brand}&model=${formState.model}`;
+  const shopRoute = `${getShopRoute(item.shop)}?device=${formState.device
+    }&brand=${formState.brand}&model=${formState.model}`;
 
   function onClick() {
     if (!showMap) {
@@ -729,12 +728,12 @@ function ShopItem({ item }) {
         <div>
           {tags
             ? tags.map((tag) => {
-                const value = Object.values(tag)[0];
-                const props = {
-                  [`data-${TAG_TO_COLOR[value]}`.replace("#", "")]: true,
-                };
-                return <tag {...props}>{value}</tag>;
-              })
+              const value = Object.values(tag)[0];
+              const props = {
+                [`data-${TAG_TO_COLOR[value]}`.replace("#", "")]: true,
+              };
+              return <tag {...props}>{value}</tag>;
+            })
             : null}
         </div>
         <ShopDetails.SecondRow>
@@ -855,6 +854,10 @@ const ServiceSelector = AppendIdentifier({
 });
 
 const REPAIR_TYPES = [
+  {
+    label: "Alle",
+    value: 0,
+  },
   {
     label: "Fysieke winkel",
     value: 1,
@@ -1009,12 +1012,10 @@ function RefineSearchForm() {
     <Form module={filtersFormModule}>
       <Field name="price" as={Slider} label="Maximum prijs" />
       <Field name="rate" as={Rate} label="Minimale rating" />
-      <Field name="shop_type" as={Checkbox.Group} label="Reparatie Type">
+      <Field name="shop_type" as={Radio.Group} label="Reparatie Type">
         <Options>
           {REPAIR_TYPES.map((type, i) => (
-            <Checkbox key={i} value={type.value} disabled={type.disabled}>
-              {type.label}
-            </Checkbox>
+            <Checkbox key={i} value={type.value} disabled={type.disabled}>{type.label}</Checkbox>
           ))}
         </Options>
       </Field>
