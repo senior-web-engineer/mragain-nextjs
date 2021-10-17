@@ -4,7 +4,7 @@ import {
   faStore,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Checkbox, Rate, Slider, Switch } from "antd";
+import { Radio, Rate, Slider, Switch } from "antd";
 import isEqual from "fast-deep-equal";
 import moment from "moment";
 import Head from "next/head";
@@ -466,6 +466,13 @@ const ShopDetails = styled.div`
     &[data-c90648] {
       background-color: #c90648;
     }
+    &[data-06c987] {
+      background-color: #06c987;
+    }
+
+    &[data-0076a3] {
+      background-color: #0076a3;
+    }
 
     ${media.tablet`
       position: static;
@@ -686,7 +693,8 @@ function ShopItem({ item }) {
     return <ShopDetails.Service>{service.device_name}</ShopDetails.Service>;
   }
 
-  const tags = item.shop_type;
+  const tags = item.shop_type_text;
+  console.log(item);
   const formState = filtersFormModule.state.values;
   // API changed does not include the city any longer?
   // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
@@ -1015,7 +1023,9 @@ function RefineSearchForm() {
       <Field name="shop_type" as={Radio.Group} label="Reparatie Type">
         <Options>
           {REPAIR_TYPES.map((type, i) => (
-            <Checkbox key={i} value={type.value} disabled={type.disabled}>{type.label}</Checkbox>
+            <Radio key={i} value={type.value} disabled={type.disabled}>
+              {type.label}
+            </Radio>
           ))}
         </Options>
       </Field>
