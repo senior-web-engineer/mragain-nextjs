@@ -1,3 +1,4 @@
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TextArea from "antd/lib/input/TextArea";
 import router from "next/router";
