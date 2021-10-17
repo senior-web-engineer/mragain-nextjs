@@ -135,7 +135,6 @@ const CheckoutReview = (routerProps) => {
             </div>
             <div className="checkout-review-board">
               <div className="checkout-review-board-title">
-                {console.log(typeof shopInfo.avatar !== "undefined")}
                 <img
                   src={
                     typeof shopInfo.avatar !== "undefined"

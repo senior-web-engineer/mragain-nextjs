@@ -23,8 +23,8 @@ export const TAG_TO_COLOR = {
   new: "#c90648",
   populair: "#ffd342",
   "best price": "#0076a3",
-  'Repair on location': '#06c987',
-  'Repair on shop': '#c90648',
+  "Repair on location": "#0076a3",
+  "Repair on shop": "#c90648",
 };
 
 const ShopWrap = styled.div`
@@ -133,8 +133,8 @@ const ShopImageWrap = styled.div`
     display: inline-block;
     height: 31px;
     ${(props) =>
-      props.tagColor &&
-      css`
+    props.tagColor &&
+    css`
         background-color: ${props.tagColor || "#ddd"};
       `}
     color: #fff;
