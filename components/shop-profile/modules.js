@@ -1,10 +1,11 @@
+import { notification } from "antd";
+import router from "next/router";
+
 import { API_PATH } from "@/constants";
 import dataFetcher, { keyedDataFetcher } from "@/modules/dataFetcher";
 import { createListModule } from "@/modules/list";
 import { createModalModule } from "@/modules/modal";
 import api from "@/utils/api";
-import { notification } from "antd";
-import router from "next/router";
 const { createFormModule } = require("@/modules/forms");
 
 export const filtersFormModule = createFormModule({
@@ -60,7 +61,7 @@ export const shopServicesListModule = createListModule({
       };
     } catch (err) {
       notification.error({
-        message: "Something went wrong while getting the list of shops",
+        message: "Er gaat iets fout, neem contact met ons op als dit probleem zich blijft voordoen",
       });
 
       return { items: [] };
@@ -138,3 +139,4 @@ export const openTimeFetcher = dataFetcher({
 export const reviewsModal = createModalModule();
 export const shopInfo = createModalModule();
 export const continueWitoutServiceModal = createModalModule();
+export const whatsAppModal = createModalModule();

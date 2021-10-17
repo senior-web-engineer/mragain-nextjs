@@ -1,12 +1,13 @@
-import { H2, SubTitle } from "@/components/styled/text";
-import { StyledInput } from "@/components/ui/Input";
-import media from "@/utils/media";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Icon } from "antd";
 import Link from "next/link";
 import React, { useMemo } from "react";
 import styled, { css } from "styled-components";
+
+import { H2, SubTitle } from "@/components/styled/text";
+import { StyledInput } from "@/components/ui/Input";
+import media from "@/utils/media";
 
 const SearchWrap = styled.div`
   padding: 80px 0 40px;

@@ -1,18 +1,23 @@
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AutoComplete, Input } from "antd";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
+import styled from "styled-components";
 
 const googleMapsApiKey = "AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE";
 
 const MainWrap = styled.div`
   .ant-select-selection__placeholder {
     padding-left: 22px;
+  }
+
+  * {
+    font-size: 12px !important;
   }
 
   .ant-select {
@@ -80,11 +85,13 @@ export async function getLongAndLat(location) {
   try {
     await loadScript();
     const [result] = await geocodeByAddress(location);
-    const { lng, lat } = await getLatLng(result);
+    const res = await getLatLng(result);
+    const { lng, lat } = res;
 
     return {
       long: lng,
       lat,
+      res,
     };
   } catch (err) {
     return {};
@@ -96,6 +103,8 @@ export default function GooglePlaces({
   onChange,
   size,
   placeholder = "Postcode of stad",
+  onLocationSelected,
+  disabled,
   searchOptions = {
     componentRestrictions: {
       country: ["nl", "be"],
@@ -154,13 +163,15 @@ export default function GooglePlaces({
                 text: suggestion.description,
                 value: suggestion.description,
               }))}
+              disabled={disabled}
               value={searchTerm}
-              size={size}
+              size={size || "small"}
               placeholder={placeholder}
               loading={loading}
               allowClear={true}
               dropdownStyle={{ minWidth: "320px" }}
               onSelect={(description) => {
+                getLongAndLat(description).then((res) => onLocationSelected && onLocationSelected(res));
                 setSearchTerm(description);
                 onChange(description);
               }}

@@ -1,16 +1,15 @@
-import media, { useScreenSize } from "@/utils/media";
-import {
-  faCheckCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styled, { css } from "styled-components";
+
+import media, { useScreenSize } from "@/utils/media";
 
 //
 
 const MainWrap = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: 0 -10px;
   flex-direction: column;
 
@@ -85,29 +84,34 @@ const OptionWrap = styled.div`
   }
 `;
 
+export default function InlineSelector({ options = [], onChange, value }) {
+  const newOptions = options.filter((option) => option.disabled === false);
+  newOptions[0].value = value;
 
-export default function InlineSelector({
-  options = [],
-  onChange,
-  value,
-}) {
-  function renderOption(option) {
-    const isSelected = option.value === value;
-    return (
-      <OptionWrap
-        disabled={option.disabled}
-        isSelected={isSelected}
-        onClick={() => onChange(option.value)}
-      >
-        <FontAwesomeIcon icon={option.icon} />
-        <div>
-          {option.label}
-          <p>{option.description}</p>
-        </div>
-        {isSelected ? <FontAwesomeIcon icon={faCheckCircle} /> : null}
-      </OptionWrap>
-    );
+  export default function InlineSelector({
+    options = [],
+    onChange,
+    value,
+  }) {
+
+    function renderOption(option) {
+      const isSelected = option.value === value;
+      const isDisabled = option.disabled;
+
+      return (
+        <OptionWrap
+          disabled={isDisabled}
+          isSelected={isSelected}
+          onClick={() => onChange(option.value)}
+        >
+          <FontAwesomeIcon icon={option.icon} />
+          <div>
+            {option.label}
+            <p>{option.description}</p>
+          </div>
+          {isSelected ? <FontAwesomeIcon icon={faCheckCircle} /> : null}
+        </OptionWrap>
+      );
+    }
+    return <MainWrap>{options.map(renderOption)}</MainWrap>;
   }
-
-  return <MainWrap>{options.map(renderOption)}</MainWrap>;
-}

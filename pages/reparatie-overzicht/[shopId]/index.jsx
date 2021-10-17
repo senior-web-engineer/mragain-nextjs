@@ -1,37 +1,39 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { useRouter } from "next/router";
-import moment from "moment";
-import { Input, Button, Avatar, Checkbox, Select } from "antd";
-import { Label } from "semantic-ui-react";
-import { Table, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ImagePicker from "react-image-picker";
 import "react-image-picker/dist/index.css";
 import "./index.less";
-import menu_icon from "../../../assets/images/menu.png";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Avatar, Button, Checkbox, Input, Select } from "antd";
+import moment from "moment";
+import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { Modal, Table } from "react-bootstrap";
+import ImagePicker from "react-image-picker";
+import { connect } from "react-redux";
+import { Label } from "semantic-ui-react";
 import {
-  getSearchFilterField,
-  getSearchFilterFieldExt,
-} from "service/search/operations.js";
-import { setLoadService } from "service/search/action.js";
+  getShopIdByInformation,
+  getSimpleAccountInformation,
+  uploadImage,
+} from "service/account/operations.js";
 import { setLoadAppointment } from "service/appointments/action.js";
 import {
   CancelAppointment,
   getAppointments,
 } from "service/appointments/operations.js";
-import { RepairSingleImage } from "@/styled-components/reparatie-overzicht.style";
+import { setLoadService } from "service/search/action.js";
 import {
-  uploadImage,
-  getSimpleAccountInformation,
-  getShopIdByInformation,
-} from "service/account/operations.js";
+  getSearchFilterField,
+  getSearchFilterFieldExt,
+} from "service/search/operations.js";
 
-import Head from "next/head";
-import { FRONT_END_URL } from "../../../constants.js";
 import { Layout } from "@/components/global";
+import { RepairSingleImage } from "@/styled-components/reparatie-overzicht.style";
+
+import menu_icon from "../../../assets/images/menu.png";
+import { FRONT_END_URL } from "../../../constants.js";
 
 const { Option } = Select;
 
@@ -335,14 +337,19 @@ const ReparationOverView = (routerProps) => {
                   className="calendar-icon"
                   icon={["fas", "calendar"]}
                 />
-                <Link prefetch={false} href={"/dashboard/" + url_shopId}>Dashboard</Link>
+                <Link prefetch={false} href={"/dashboard"}>
+                  Dashboard
+                </Link>
               </div>
               <div className="widget-shop-appointment">
                 <FontAwesomeIcon
                   className="over-icon"
                   icon={["fas", "chalkboard-teacher"]}
                 />
-                <Link prefetch={false} href={"/reparatie-overzicht/" + url_shopId}>
+                <Link
+                  prefetch={false}
+                  href={"/reparatie-overzicht/" + url_shopId}
+                >
                   Reparatie Overzicht
                 </Link>
               </div>
@@ -360,7 +367,9 @@ const ReparationOverView = (routerProps) => {
                   className="calendar-icon"
                   icon={["fas", "user"]}
                 />
-                <Link prefetch={false} href={"/profiel-beheer/" + url_shopId}>Profiel</Link>
+                <Link prefetch={false} href={"/profiel-beheer/" + url_shopId}>
+                  Profiel
+                </Link>
               </div>
               <div className="widget-shop-appointment">
                 <FontAwesomeIcon
@@ -397,14 +406,19 @@ const ReparationOverView = (routerProps) => {
                   className="calendar-icon"
                   icon={["fas", "calendar"]}
                 />
-                <Link prefetch={false} href={"/dashboard/" + url_shopId}>Dashboard</Link>
+                <Link prefetch={false} href={"/dashboard/" + url_shopId}>
+                  Dashboard
+                </Link>
               </div>
               <div className="widget-shop-appointment">
                 <FontAwesomeIcon
                   className="over-icon"
                   icon={["fas", "chalkboard-teacher"]}
                 />
-                <Link prefetch={false} href={"/reparatie-overzicht/" + url_shopId}>
+                <Link
+                  prefetch={false}
+                  href={"/reparatie-overzicht/" + url_shopId}
+                >
                   Reparatie Overzicht
                 </Link>
               </div>
@@ -422,7 +436,9 @@ const ReparationOverView = (routerProps) => {
                   className="calendar-icon"
                   icon={["fas", "user"]}
                 />
-                <Link prefetch={false} href={"/profiel-beheer/" + url_shopId}>Profiel</Link>
+                <Link prefetch={false} href={"/profiel-beheer/" + url_shopId}>
+                  Profiel
+                </Link>
               </div>
               <div className="widget-shop-appointment">
                 <FontAwesomeIcon

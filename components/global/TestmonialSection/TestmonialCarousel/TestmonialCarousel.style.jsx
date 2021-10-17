@@ -1,4 +1,3 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-export const CarouselDescription = styled.div`
-`
+export const CarouselDescription = styled.div``;

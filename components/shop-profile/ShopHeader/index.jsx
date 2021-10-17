@@ -1,7 +1,3 @@
-import React from "react";
-import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
-import { MaxConstraints } from "@/components/styled/layout";
-import Button from "@/components/ui/Button";
 import {
   faAddressBook,
   faLink,
@@ -12,50 +8,51 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Popover, Rate } from "antd";
 import Image from "next/image";
-import styled, { css } from "styled-components";
-import {
-  reviewsFetcher,
-} from "@/components/shop-profile/modules";
-
-import {
-  FacebookShareButton,
-  LinkedinShareButton,
-  TwitterShareButton,
-  WhatsappShareButton,
-  FacebookIcon,
-  LinkedinIcon,
-  WhatsappIcon,
-  TwitterIcon,
-} from "react-share";
-import DetailsModal from "./DetailsModal";
-import media, { OnMobile } from "@/utils/media";
-import { useFetcher } from "@/modules/dataFetcher";
-import Form from "@/modules/forms";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import React from "react";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from "react-share";
+import styled from "styled-components";
+
+import { MaxConstraints } from "@/components/styled/layout";
+import Button from "@/components/ui/Button";
+import { useFetcher } from "@/modules/dataFetcher";
+import media, { OnMobile } from "@/utils/media";
+
+import DetailsModal from "./DetailsModal";
+import WhatsAppModal from "./WhatsAppModal";
 
 const Wallpaper = styled.div`
-    height: 260px;
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    background-color: #e0e0e0;
+  height: 260px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background-color: #e0e0e0;
 
-    ${media.tablet`
+  ${media.tablet`
     height: 500px;
   `}
 `;
 
 const ShopLogo = styled.div`
-    width: 100px;
-    height: 100px;
-    background-color: #fff;
-    border-radius: 10px;
-    position: relative;
-    top: -55px;
-    overflow: hidden;
+  width: 100px;
+  height: 100px;
+  background-color: #fff;
+  border-radius: 10px;
+  position: relative;
+  top: -55px;
+  overflow: hidden;
 
-    ${media.tablet`
+  ${media.tablet`
     top: -105px;
     width: 210px;
     height: 210px;
@@ -63,25 +60,25 @@ const ShopLogo = styled.div`
 `;
 
 const ContentWrap = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 
-    ${media.tablet`
+  ${media.tablet`
     flex-direction: row;
     align-items: flex-start;
   `}
 `;
 
 const ShopMeta = styled.div`
-    flex-grow: 1;
-    margin-top: -40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  flex-grow: 1;
+  margin-top: -40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    ${media.tablet`
+  ${media.tablet`
     margin-left: 50px;
     margin-top: 50px;
     align-items: stretch;
@@ -89,38 +86,66 @@ const ShopMeta = styled.div`
 `;
 
 ShopMeta.FirstRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  > div {
     display: flex;
-    justify-content: space-between;
+  }
 
-    > div {
-        display: flex;
-    }
+  h1 {
+    font-size: 30px;
+    color: #0d3244;
+    font-weight: 500;
+    margin-bottom: 0;
+    text-align: center;
+  }
 
-    h1 {
-        font-size: 30px;
-        color: #0d3244;
-        font-weight: 500;
-        margin-bottom: 0;
-        text-align: center;
-    }
-
-    tag {
-        margin-left: 31px;
-        display: inline-block;
-        height: 31px;
-        ${(props) =>
+  tag {
+    margin-left: 31px;
+    display: inline-block;
+    height: 31px;
+    ${(props) =>
     props.tagColor &&
     css`
-                background-color: ${props.tagColor || "#ddd"};
-            `}
-        color: #fff;
-        line-height: 31px;
-        padding: 0 10px;
-        border-radius: 15px;
-        text-transform: uppercase;
-    }
+        background-color: ${props.tagColor || "#ddd"};
+      `}
+    color: #fff;
+    line-height: 31px;
+    padding: 0 10px;
+    border-radius: 15px;
+    text-transform: uppercase;
+  }
 
-    ${media.tablet`
+  > div {
+    display: flex;
+  }
+
+  h1 {
+    font-size: 30px;
+    color: #0d3244;
+    font-weight: 500;
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  tag {
+    margin-left: 31px;
+    display: inline-block;
+    height: 31px;
+    ${(props) =>
+    props.tagColor &&
+    css`
+        background-color: ${props.tagColor || "#ddd"};
+      `}
+    color: #fff;
+    line-height: 31px;
+    padding: 0 10px;
+    border-radius: 15px;
+    text-transform: uppercase;
+  }
+
+  ${media.tablet`
     h1 {
       text-align: left;
     }
@@ -128,86 +153,87 @@ ShopMeta.FirstRow = styled.div`
 `;
 
 ShopMeta.SecondRow = styled.div`
-    display: flex;
-    margin-top: 3px;
+  display: flex;
+  margin-top: 3px;
 
-    .ant-rate-star:not(:last-child) {
-        margin-right: 3px;
-    }
+  .ant-rate-star:not(:last-child) {
+    margin-right: 3px;
+  }
 
-    span {
-        margin-left: 10px;
-    }
+  span {
+    margin-left: 10px;
+  }
 `;
 
 ShopMeta.ThirdRow = styled.div`
-    font-size: 11px;
-    color: #303030;
-    font-weight: 400;
-    margin-top: 13px;
+  font-size: 11px;
+  color: #303030;
+  font-weight: 400;
+  margin-top: 13px;
 
-    d-list {
-        display: flex;
-        margin: 0 -10px;
+  d-list {
+    display: flex;
+    margin: 0 -10px;
+  }
+
+  d-term {
+    display: block;
+    margin-left: 10px;
+    color: #ccc;
+
+    .svg-inline--fa {
+      margin-right: 5px;
     }
+  }
 
-    d-term {
-        display: block;
-        margin-left: 10px;
-        color: #ccc;
-
-        .svg-inline--fa {
-            margin-right: 5px;
-        }
-    }
-
-    ${media.tablet`
+  ${media.tablet`
     display: flex;
   `}
 `;
 
 const AdvantagesWrap = styled.div`
-    font-size: 11px;
-    color: #707070;
-    font-weight: 400;
-    margin-top: 40px;
-    display: none;
+  font-size: 11px;
+  color: #707070;
+  font-weight: 400;
+  margin-top: 40px;
+  display: none;
 
-    h3 {
-        font-size: 12px;
-        color: #0d3244;
-        font-weight: 500;
-    }
+  h3 {
+    font-size: 12px;
+    color: #0d3244;
+    font-weight: 500;
+  }
 
-    image-wrap {
-        min-width: 31px;
-        margin-right: 10px;
-    }
+  image-wrap {
+    min-width: 31px;
+    margin-right: 10px;
+  }
 
-    advantage {
-        display: flex;
-        max-width: 160px;
-    }
+  advantage {
+    display: flex;
+    max-width: 160px;
+  }
 
-    ${media.tablet`
+  ${media.tablet`
     display: flex;
   `}
 `;
 
 const DetailButtonsWrap = styled.div`
-    top: 12px;
-    position: absolute;
-    right: 0;
-    z-index: 100;
-    ${Button} {
-      margin-left: 10px;
-      height: 35px;
-      line-height: 11px;
-      min-width: 35px;
-      border-radius: 35px;
-    }
+  top: 12px;
+  position: absolute;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  ${Button} {
+    margin-left: 10px;
+    height: 35px;
+    line-height: 11px;
+    min-width: 35px;
+    border-radius: 35px;
+  }
 
-    ${media.tablet`
+  ${media.tablet`
     position: static;
 
     ${Button} {
@@ -221,10 +247,9 @@ const DetailButtonsWrap = styled.div`
 
 const ADVANTAGES = [
   {
-    title: "Cashback op je reparatie",
+    title: "Scherpe reparatie prijzen",
     logo: "/images/shop/wallet.png",
-    description:
-      "Ontvang 5 euro cashback na het achterlaten van een review",
+    description: "Transparante prijzen en ook op aanvraag",
   },
   {
     title: "Altijd de beste garantie",
@@ -245,19 +270,16 @@ const ADVANTAGES = [
 ];
 
 export function ContactButton(...props) {
-  const router = useRouter()
+  const router = useRouter();
   const nextLocation = `/${router.query["city"]}/${router.query["shopId][api"]}/${router.query["street"]}/contact`;
 
   return (
     <Link href={nextLocation}>
-      <Button
-        {...props}
-        aria-label="Book service"
-      >
+      <Button {...props} aria-label="Book service">
         <FontAwesomeIcon icon={faAddressBook} /> Contact
       </Button>
     </Link>
-  )
+  );
 }
 
 export default function ShopHeader({ shop }) {
@@ -293,7 +315,7 @@ export default function ShopHeader({ shop }) {
   const detailButtons = (
     <DetailButtonsWrap>
       <DetailsModal shop={shop} />
-      <Popover
+      {/* <Popover
         overlayClassName="share-popover"
         content={
           <>
@@ -319,10 +341,11 @@ export default function ShopHeader({ shop }) {
         <Button>
           <FontAwesomeIcon icon={faShare} />
         </Button>
-      </Popover>
+      </Popover>*/}
       <OnMobile show={false}>
         <ContactButton />
       </OnMobile>
+      <WhatsAppModal shop={shop} />
     </DetailButtonsWrap>
   );
 
@@ -376,10 +399,7 @@ export default function ShopHeader({ shop }) {
                   {shop.phone_number ? (
                     <>
                       <d-term>
-                        <FontAwesomeIcon
-                          title="phone"
-                          icon={faPhone}
-                        />
+                        <FontAwesomeIcon title="phone" icon={faPhone} />
                       </d-term>
                       <d-def>{shop.phone_number}</d-def>
                     </>
@@ -387,10 +407,7 @@ export default function ShopHeader({ shop }) {
                   {shop.site_url ? (
                     <>
                       <d-term>
-                        <FontAwesomeIcon
-                          title="website"
-                          icon={faLink}
-                        />
+                        <FontAwesomeIcon title="website" icon={faLink} />
                       </d-term>
                       <d-def>{shop.site_url}</d-def>
                     </>
@@ -399,19 +416,14 @@ export default function ShopHeader({ shop }) {
                 {location ? (
                   <>
                     <d-term>
-                      <FontAwesomeIcon
-                        title="location"
-                        icon={faMapMarkerAlt}
-                      />
+                      <FontAwesomeIcon title="location" icon={faMapMarkerAlt} />
                     </d-term>
                     <d-def>{location}</d-def>
                   </>
                 ) : null}
               </d-list>
             </ShopMeta.ThirdRow>
-            <AdvantagesWrap>
-              {ADVANTAGES.map(renderAdvantage)}
-            </AdvantagesWrap>
+            <AdvantagesWrap>{ADVANTAGES.map(renderAdvantage)}</AdvantagesWrap>
           </ShopMeta>
         </ContentWrap>
       </MaxConstraints>

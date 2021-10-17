@@ -1,12 +1,12 @@
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
 
-import media from "@/utils/media";
 import SliderOnMobile from "@/components/common/SliderOnMobile";
 import { H2, SubTitle } from "@/components/styled/text";
-import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import media from "@/utils/media";
 
 //
 
@@ -88,8 +88,8 @@ const STEPS = [
     image: "/images/appointment.png",
   },
   {
-    title: "Cashback",
-    description: `Laat een review achter en ontvang 5 euro cashback`,
+    title: "Review",
+    description: `Laat een review achter en laat anderen weten hoe je ervaring was`,
     image: "/images/guarantee.png",
   },
 ];

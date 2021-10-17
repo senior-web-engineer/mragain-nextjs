@@ -1,11 +1,13 @@
-import { useFetcher, withData } from "@/modules/dataFetcher";
-import Form from "@/modules/forms";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Popover } from "antd";
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
+
+import { useFetcher, withData } from "@/modules/dataFetcher";
+import Form from "@/modules/forms";
+
 import { SubTitle } from "../styled/text";
 import Button from "../ui/Button";
 import {
@@ -20,128 +22,128 @@ import UserInfo from "./UserInfo";
 //
 
 const MainWrap = styled.div`
+  display: flex;
+  margin: 0 -20px;
+  padding: 0 20px;
+  background-color: #f7f7f7;
+  height: 117px;
+  align-items: center;
+  justify-content: space-between;
+
+  h5 {
+    font-size: 12px;
+    color: #707070;
+    font-weight: 300;
+    margin-bottom: 14px;
+  }
+
+  header {
+    height: 71px;
     display: flex;
-    margin: 0 -20px;
-    padding: 0 20px;
-    background-color: #f7f7f7;
-    height: 117px;
     align-items: center;
-    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    margin: 0 -41px 30px;
+    padding: 0 41px;
+  }
 
-    h5 {
-        font-size: 12px;
-        color: #707070;
-        font-weight: 300;
-        margin-bottom: 14px;
-    }
+  label {
+    display: block;
+    font-size: 12px;
+    color: #707070;
+    font-weight: 300;
+    margin: 0;
+  }
 
-    header {
-        height: 71px;
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid #ddd;
-        margin: 0 -41px 30px;
-        padding: 0 41px;
-    }
-
-    label {
-        display: block;
-        font-size: 12px;
-        color: #707070;
-        font-weight: 300;
-        margin: 0;
-    }
-
-    ${Button} {
-        min-width: 51px;
-        position: absolute;
-        bottom: -25px;
-        left: 41px;
-    }
+  ${Button} {
+    min-width: 51px;
+    position: absolute;
+    bottom: -25px;
+    left: 41px;
+  }
 `;
 
 const ShopImageWrap = styled.div`
-    min-width: 60px;
-    height: 60px;
-    border-radius: 5px;
-    background-color: #f0f0f0;
-    position: relative;
-    overflow: hidden;
-    margin-right: 10px;
+  min-width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  position: relative;
+  overflow: hidden;
+  margin-right: 10px;
 `;
 
 const ShopWrap = styled.div`
-    display: flex;
+  display: flex;
 `;
 
 const ShopDetails = styled.section`
-    font-size: 12px;
-    color: #707070;
-    font-weight: 400;
+  font-size: 12px;
+  color: #707070;
+  font-weight: 400;
 
-    h3 {
-        font-size: 15px;
-        letter-spacing: 0px;
-        color: #0d3244;
-        font-weight: 600;
-    }
+  h3 {
+    font-size: 15px;
+    letter-spacing: 0px;
+    color: #0d3244;
+    font-weight: 600;
+  }
 `;
 
 const ServiceDetails = styled.section`
-    strong {
-        font-size: 12px;
-        color: #303030;
-        font-weight: 500;
-        margin-left: 4px;
-    }
+  strong {
+    font-size: 12px;
+    color: #303030;
+    font-weight: 500;
+    margin-left: 4px;
+  }
 
-    label {
-        margin: 0;
-    }
+  label {
+    margin: 0;
+  }
 
-    > div {
-        display: flex;
-    }
+  > div {
+    display: flex;
+  }
 `;
 
 const ServiceCostWrap = styled.div`
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    letter-spacing: 0px;
-    color: #303030;
-    font-weight: 300;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  letter-spacing: 0px;
+  color: #303030;
+  font-weight: 300;
 `;
 
 const ServiceDetailsWrap = styled.div`
-    display: flex;
-    padding-bottom: 22px;
-    border-bottom: 3px solid #fafafa;
-    margin-bottom: 17px;
+  display: flex;
+  padding-bottom: 22px;
+  border-bottom: 3px solid #fafafa;
+  margin-bottom: 17px;
 `;
 
 const ServiceImage = styled.div`
-    width: 51px;
-    height: 51px;
-    border-radius: 3px;
-    padding: 4px;
-    border-radius: 4px;
-    background-color: #ddd;
-    margin-right: 13px;
-    position: relative;
+  width: 51px;
+  height: 51px;
+  border-radius: 3px;
+  padding: 4px;
+  border-radius: 4px;
+  background-color: #ddd;
+  margin-right: 13px;
+  position: relative;
 `;
 
 const TotalWrap = styled.div`
-    position: relative;
-    padding-right: 15px;
+  position: relative;
+  padding-right: 15px;
 
-    .svg-inline--fa {
-        font-size: 16px;
-        position: absolute;
-        top: 50%;
-        right: 0;
-        color: #06c987;
-    }
+  .svg-inline--fa {
+    font-size: 16px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    color: #06c987;
+  }
 `;
 
 const DeviceName = withData({
@@ -215,7 +217,8 @@ export default function BookingInfoMobile({ shop, showPrices = true }) {
           <item>{service?.reparation?.reparation_name}</item>
           <price>&euro;{service?.price}</price>
         </ServiceCostWrap>
-      ) : null}
+      ) : null
+      }
     </>
   );
 
@@ -251,6 +254,6 @@ export default function BookingInfoMobile({ shop, showPrices = true }) {
           </TotalWrap>
         ) : null}
       </MainWrap>
-    </Popover>
+    </Popover >
   );
 }

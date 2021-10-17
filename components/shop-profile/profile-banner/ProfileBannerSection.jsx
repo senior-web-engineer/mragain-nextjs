@@ -1,9 +1,12 @@
+import "./ProfileBannerSection.less";
+
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import "./ProfileBannerSection.less";
-import StarRatingInfo from "@/components/global/StarRatingInfo/StarRatingInfo";
-import { ProfileBannerContainer } from "./ProfileBannerSection.style";
 import { setLoadedProfile } from "service/account/action.js";
+
+import StarRatingInfo from "@/components/global/StarRatingInfo/StarRatingInfo";
+
+import { ProfileBannerContainer } from "./ProfileBannerSection.style";
 
 const ProfileBannerSection = (routerProps) => {
   const {

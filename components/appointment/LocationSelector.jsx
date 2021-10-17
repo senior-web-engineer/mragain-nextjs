@@ -1,5 +1,6 @@
 import { faBox, faHome, faStore } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
+
 import InlineSelector from "./InlineSelector";
 
 //
@@ -10,7 +11,7 @@ export const LOCATION_OPTIONS = [
     description: "Kom bij ons langs voor je reparatie",
     icon: faStore,
     value: "in-store",
-    apiValue: "1"
+    apiValue: "1",
   },
   {
     label: "Reparatie op locatie",
@@ -20,13 +21,13 @@ export const LOCATION_OPTIONS = [
     value: "home",
     apiValue: "2"
   },
-  {
-    label: "Opsturen",
-    description: "Coming soon",
-    icon: faBox,
-    disabled: true,
-    value: "delivery",
-  },
+  // {
+  //   label: "Opsturen",
+  //   description: "Coming soon",
+  //   icon: faBox,
+  //   disabled: true,
+  //   value: "delivery",
+  // },
 ];
 
 export function getLocationOptions(shop) {

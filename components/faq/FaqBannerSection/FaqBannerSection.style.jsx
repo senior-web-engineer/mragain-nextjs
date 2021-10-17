@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const FaqBannerTitle = styled.div`
   width: 400px;
@@ -8,4 +8,4 @@ export const FaqBannerTitle = styled.div`
   line-height: 38px;
   font-weight: bold;
   color: #fff;
-`
+`;
