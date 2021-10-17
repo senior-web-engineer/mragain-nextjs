@@ -1013,9 +1013,11 @@ function RefineSearchForm() {
       <Field name="price" as={Slider} label="Maximum prijs" />
       <Field name="rate" as={Rate} label="Minimale rating" />
       <Field name="shop_type" as={Radio.Group} label="Reparatie Type">
-        {REPAIR_TYPES.map((type) => (
-          <Radio value={type.value} disabled={type.disabled}>{type.label}</Radio>
-        ))}
+        <Options>
+          {REPAIR_TYPES.map((type, i) => (
+            <Checkbox key={i} value={type.value} disabled={type.disabled}>{type.label}</Checkbox>
+          ))}
+        </Options>
       </Field>
       <Field
         name="guarantee"
