@@ -23,11 +23,13 @@ import {
 } from "react-share";
 import styled from "styled-components";
 
+import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
 import { MaxConstraints } from "@/components/styled/layout";
 import Button from "@/components/ui/Button";
 import { useFetcher } from "@/modules/dataFetcher";
 import media, { OnMobile } from "@/utils/media";
 
+import { reviewsFetcher } from "../modules";
 import DetailsModal from "./DetailsModal";
 import WhatsAppModal from "./WhatsAppModal";
 
