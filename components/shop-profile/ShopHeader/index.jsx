@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
 import { MaxConstraints } from "@/components/styled/layout";
 import Button from "@/components/ui/Button";
@@ -326,7 +326,13 @@ export default function ShopHeader({ shop }) {
       <OnMobile show={false}>
         <ContactButton />
       </OnMobile>
-      <WhatsAppModal shop={shop} />
+      <WhatsAppModal number={shop.phone_number} />
+      {/* <WhatsappShareButton url={"/?phone=6979332681"}>
+          <WhatsappIcon size={52} round />
+      </WhatsappShareButton> */}
+      {/* <WhatsAppClick number={shop.phone_number}>
+        <WhatsappIcon size={52} round />
+      </WhatsAppClick> */}
     </DetailButtonsWrap>
 
   );
@@ -423,3 +429,5 @@ export default function ShopHeader({ shop }) {
     </div>
   );
 }
+
+

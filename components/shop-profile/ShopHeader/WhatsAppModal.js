@@ -1,41 +1,55 @@
 import React, { useCallback } from "react";
-import { SubTitle } from "@/components/styled/text";
-import Modal from "@/modules/modal";
 import { WhatsappIcon } from "react-share";
-import { whatsAppModal } from "../modules";
 import styled from "styled-components";
-import {TextButton} from "@/components/ui/Button";
+import { TextButton } from "@/components/ui/Button";
 import { useScreenSize } from "@/utils/media";
-import { event } from "../../../lib/gtag"
+import Link from "next/link";
 
 const ButtonExtend = styled(TextButton)`
   height: 52px;
   padding: 0;
 `;
-const WhatsAppIconWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
 
-export default function DetailsModal({ shop }) {
+export default function DetailsModal({ number }) {
   const isMobile = useScreenSize().size === "mobile";
   const iconSIze = isMobile ? 35 : 52;
-  const whatsAppMod = useCallback(() => {
-    whatsAppModal.actions.open();
-  });
   return (
     <>
-      <ButtonExtend onClick={whatsAppMod} id="whatsAppButton">
+      <ButtonExtend id="whatsAppButton">
+        <WhatsAppClick number={number}>
           <WhatsappIcon size={iconSIze} round enableBackground={false} />
+        </WhatsAppClick>
       </ButtonExtend>
-      <Modal
-        module={whatsAppModal}
-        footer={null}
-        title={<SubTitle as="h3">{shop.name}</SubTitle>}
-      >
-        <p>Komt zeer binnenkort, gebruik voor nu de "contact" button!</p>
-      </Modal>
     </>
   );
 }
+
+const WhatsAppClick = ({ children, number }) => {
+  if (typeof number !== "string") {
+    number = number.toString();
+  }
+
+  const isMobile = useScreenSize().size === "mobile";
+
+  // https://faq.whatsapp.com/general/chats/how-to-use-click-to-chat/?lang=en
+  number =
+    number.startsWith("00") || number.startsWith("+")
+      ? number.slice(2)
+      : number;
+
+  function whatsappLink() {
+    return (
+      "https://" +
+      (isMobile ? "api" : "web") +
+      `.whatsapp.com/send/?phone=${number}`
+    );
+  }
+
+  return (
+    <>
+      <Link href={whatsappLink()}>
+        <a target="_blank">{children}</a>
+      </Link>
+    </>
+  );
+};
