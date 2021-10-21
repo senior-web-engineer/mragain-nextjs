@@ -263,6 +263,7 @@ export function ContactButton(...props) {
 }
 
 export default function ShopHeader({ shop }) {
+  console.log(shop.phone_number)
   const tag = shop.tag;
   const location = [shop.street, shop.city, shop.zipcode]
     .filter(Boolean)

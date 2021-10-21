@@ -32,16 +32,25 @@ const WhatsAppClick = ({ children, number }) => {
   const isMobile = useScreenSize().size === "mobile";
 
   // https://faq.whatsapp.com/general/chats/how-to-use-click-to-chat/?lang=en
-  number =
-    number.startsWith("00") || number.startsWith("+")
-      ? number.slice(2)
-      : number;
+  // remove zeros or +
+  function stripeNumber (number) {
+    if ( number.startsWith("00")) {
+      return number.slice(2)
+    } 
+    if (number.startsWith("0")) {
+      return "31" + number.slice(1)
+    }
+    if (number.startsWith("+")) {
+      return number.slice(1)
+    }
+    return number
+  }
 
   function whatsappLink() {
     return (
       "https://" +
       (isMobile ? "api" : "web") +
-      `.whatsapp.com/send/?phone=${number}`
+      `.whatsapp.com/send/?phone=${stripeNumber(number)}`
     );
   }
 
