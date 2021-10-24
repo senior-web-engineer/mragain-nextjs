@@ -16,7 +16,7 @@ import ConfirmationModal from '@/components/common/ConfirmationModal'
 import media, { OnMobile } from '@/utils/media'
 import BookingInfoMobile from '@/components/appointment/BookingInfoMobile'
 import Button from '@/components/ui/Button'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import TextArea from 'antd/lib/input/TextArea'
 
 const MainWrap = styled.div`
@@ -145,14 +145,9 @@ const MobileToolbar = styled.div`
   }
 `
 
-const AddressSection = styled.div`
-  border-top: 3px solid #fafafa;
-  margin-top: 23px;
-  padding-top: 17px;
-`
-
 export default function AppointmentPage({ shop }) {
   const [step, updateStep] = useState(0)
+  const router = useRouter()
 
   useEffect(() => {
     async function loadData() {
@@ -169,7 +164,7 @@ export default function AppointmentPage({ shop }) {
     })
 
     try {
-      await appointmentForm.actions.submit()
+      const data = await appointmentForm.actions.submit()
       appointmentConfirmation.actions
         .open({
           type: 'success',
@@ -178,8 +173,12 @@ export default function AppointmentPage({ shop }) {
           buttonLabel: 'Bekijk gegevens',
         })
         .then(() => {
-          appointmentReview.actions.open(reviewData)
-          router.router.push('/')
+          console.log('here2')
+          router.push(
+            `/${shop.city}/${shop.name.replaceAll(' ', '-')}/${shop.street.replaceAll(' ', '-')}/${data.appointment}`
+          )
+
+          // appointmentReview.actions.open(reviewData)
         })
     } catch (err) {
       if (err.validationErrors) {

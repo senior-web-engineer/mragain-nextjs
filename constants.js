@@ -62,9 +62,11 @@ export const API_PATH = {
   SHOPGUARANTEE: `${API_URL}/shop-guarantee-reparation`,
   GUARANTEEMODELS: `${API_URL}/shop-guarantee-reparation`,
   GETAPPOINTMENTS: `${API_URL}/get-appointments`,
+  GETSINGLEAPPOINTMENT: `${API_URL}/get-appointment`,
   UPDATEAPPOINTMENT: `${API_URL}/update-appointment`,
   CANCELAPPOINTMENT: `${API_URL}/cancel-appointment`,
   FILTERREPARATION: `${API_URL}/filter-appointment`,
+  APPOINTMENTEMAIL: `${API_URL}/appointment-emails`,
   REPAIRCOLSEAUTUEMAIL: `${API_URL}/repair-close-auto-email`,
   CHECKREVIEWPAGE: `${API_URL}/check-review-page`,
   CREATEREVIEW: `${API_URL}/create-review`,
@@ -94,7 +96,6 @@ export const API_PATH = {
   GETALLBRANDSMODELS: `${API_URL}/get-brandmodel`,
   PAYMENT: `${API_URL}/payment/`,
   GETPAYMENT: (id) => `${API_URL}/payment-status/${id}/`,
-  APPOINTMENTEMAIL: `${API_URL}/appointment-emails`,
 }
 
 export default {
