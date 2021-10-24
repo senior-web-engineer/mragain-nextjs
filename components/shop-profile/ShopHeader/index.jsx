@@ -297,43 +297,10 @@ export default function ShopHeader({ shop }) {
 
     <DetailButtonsWrap>
       <DetailsModal shop={shop} />
-      {/* <Popover
-        overlayClassName="share-popover"
-        content={
-          <>
-            <FacebookShareButton url={shopURL} quote={shareText}>
-              <FacebookIcon size={40} round />
-            </FacebookShareButton>
-            <LinkedinShareButton
-              url={shopURL}
-              title={shop.name}
-              summary={shareText}
-            >
-              <LinkedinIcon size={40} round />
-            </LinkedinShareButton>
-            <WhatsappShareButton url={shopURL} title={shareText}>
-              <WhatsappIcon size={40} round />
-            </WhatsappShareButton>
-            <TwitterShareButton url={shopURL} title={shareText}>
-              <TwitterIcon size={40} round />
-            </TwitterShareButton>
-          </>
-        }
-      >
-        <Button>
-          <FontAwesomeIcon icon={faShare} />
-        </Button>
-      </Popover>*/}
       <OnMobile show={false}>
         <ContactButton />
       </OnMobile>
-      <WhatsAppModal number={shop.phone_number} />
-      {/* <WhatsappShareButton url={"/?phone=6979332681"}>
-          <WhatsappIcon size={52} round />
-      </WhatsappShareButton> */}
-      {/* <WhatsAppClick number={shop.phone_number}>
-        <WhatsappIcon size={52} round />
-      </WhatsAppClick> */}
+      {shop.phone_number && <WhatsAppModal number={shop.phone_number} />}
     </DetailButtonsWrap>
 
   );
