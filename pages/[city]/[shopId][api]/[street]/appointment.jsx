@@ -355,9 +355,7 @@ export default function AppointmentPage({ shop }) {
 
 export async function getServerSideProps(ctx) {
   const shopId = ctx.query['shopId][api']
-  console.log('shopId', shopId)
   const shopProfileServerInfo = await getShopProfileByInformationServer(shopId)
-  console.log('shopProfileServerInfo', shopProfileServerInfo)
   return {
     props: {
       shop: shopProfileServerInfo && shopProfileServerInfo[0] ? shopProfileServerInfo[0] : shopProfileServerInfo,

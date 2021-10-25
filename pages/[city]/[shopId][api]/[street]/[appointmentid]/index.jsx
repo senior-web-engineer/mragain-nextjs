@@ -24,10 +24,6 @@ const index = (props) => {
     fetchAppointment(appointmentid)
   }, [])
 
-  useEffect(() => {
-    console.log('appointment', appointment)
-  }, [appointment])
-
   return (
     <>
       <DefaultLayout style={{ padding: '0' }}>
