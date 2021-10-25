@@ -32,7 +32,7 @@ import ConfirmationModal from '@/components/common/ConfirmationModal'
 import media, { OnMobile } from '@/utils/media'
 import BookingInfoMobile from '@/components/appointment/BookingInfoMobile'
 import Button from '@/components/ui/Button'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import { store } from '@/configureStore'
 import TextArea from 'antd/lib/input/TextArea'
 
@@ -186,7 +186,14 @@ function ConnectedDateAndTime() {
 }
 
 export default function AppointmentPage({ shop }) {
+  const [data, setData] = useState({
+    city: '',
+    street: '',
+    name: '',
+    aptId: '',
+  })
   const [step, updateStep] = useState(0)
+  const router = useRouter()
 
   useEffect(() => {
     async function loadData() {
@@ -239,54 +246,19 @@ export default function AppointmentPage({ shop }) {
         model: modelFetcher.selector(store.ref.getState()).result,
       }
 
-      function onAppointmentConfirmed() {
-        appointmentReview.actions.open(reviewData)
-        router.router.push('/')
-      }
-
-      try {
-        console.log('on next')
-        const appointmentData = await appointmentForm.actions.submit()
-        appointmentConfirmation.actions
-          .open({
-            type: 'success',
-            message: 'Afspraak succesvol gemaakt! ',
-            description: 'We hebben een bevestiging email naar je verzonden (kan in je spam zitten!)',
-            buttonLabel:
-              appointmentForm.state.values.paymentType === 'credit-card' ? 'Pay now' : 'Bekijk afspraak gegevens',
-          })
-          .then(async () => {
-            if (appointmentForm.state.values.paymentType === 'credit-card') {
-              const paymentGatewayResponse = await payForAppointment({
-                ...appointmentData,
-                ...reviewData,
-              })
-              window.location.href = paymentGatewayResponse.data
-              return
-            }
-            onAppointmentConfirmed()
-          })
-      } catch (err) {
-        if (err.validationErrors) {
-          appointmentConfirmation.actions.open({
-            type: 'warning',
-            message: 'Je lijkt niet alle informatie te hebben ingevuld, even checken?',
-            description: 'We hebben al je informatie nodig om een afspraak te maken',
-            buttonLabel: 'Probeer het nog een keer',
-          })
-          return
-        }
-        appointmentConfirmation.actions.open({
-          type: 'error',
-          message: 'Oops!',
-          description: 'Er is iets fout gegaan',
-          buttonLabel: 'Probeer het nog eens',
-        })
-      }
-
-      return
+      const appointmentData = await appointmentForm.actions.submit()
+      const { city, street, name } = reviewData.shop
+      let namefixed = name.replaceAll(' ', '-')
+      let streetfixed = street.replaceAll(' ', '-')
+      let aptId = appointmentData.appointment
+      setData({ ...data, city, street: streetfixed, name: namefixed, aptId })
     }
-    updateStep((state) => state + 1)
+    if (step === 2) {
+      router.push(`/${data.city}/${data.name}/${data.street}/${data.aptId}`)
+    }
+    if (step < 2) {
+      updateStep((state) => state + 1)
+    }
   })
 
   function renderAddressFields() {
