@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const CommonText = styled.div`
   color: #fff;
@@ -7,4 +7,4 @@ export const CommonText = styled.div`
   font-size: 50px;
   font-weight: bold;
   text-align: center;
-`
+`;

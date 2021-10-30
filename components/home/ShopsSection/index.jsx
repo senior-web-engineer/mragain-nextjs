@@ -1,8 +1,3 @@
-import SliderOnMobile from "@/components/common/SliderOnMobile";
-import { H2, SubTitle } from "@/components/styled/text";
-import Button from "@/components/ui/Button";
-import media from "@/utils/media";
-import { getShopLogo, getShopRoute } from "@/utils/shop";
 import {
   faArrowRight,
   faMapMarkerAlt,
@@ -14,6 +9,12 @@ import Link from "next/link";
 import React from "react";
 import styled, { css } from "styled-components";
 
+import SliderOnMobile from "@/components/common/SliderOnMobile";
+import { H2, SubTitle } from "@/components/styled/text";
+import Button from "@/components/ui/Button";
+import media from "@/utils/media";
+import { getShopLogo, getShopRoute } from "@/utils/shop";
+
 const ShopList = styled.div`
   margin: 0 -15px;
 `;
@@ -22,8 +23,10 @@ export const TAG_TO_COLOR = {
   new: "#c90648",
   populair: "#ffd342",
   "best price": "#0076a3",
-  'Repair on location': '#06c987',
-  'Repair on shop': '#c90648',
+  "Repair on location": "#0076a3",
+  "Repair on shop": "#c90648",
+  "Reparatie op locatie": "#0076a3",
+  "Fysieke winkel": "#c90648",
 };
 
 const ShopWrap = styled.div`
@@ -132,8 +135,8 @@ const ShopImageWrap = styled.div`
     display: inline-block;
     height: 31px;
     ${(props) =>
-      props.tagColor &&
-      css`
+    props.tagColor &&
+    css`
         background-color: ${props.tagColor || "#ddd"};
       `}
     color: #fff;
@@ -179,17 +182,17 @@ export function ShopCard({ shop, onClick }) {
     .join(", ");
 
   const shopUrl = getShopRoute(shop);
-  const shopLogo = getShopLogo(shop.logo_photo)
+  const shopLogo = getShopLogo(shop.logo_photo);
 
   return (
     <ShopWrap key={shop.id} onClick={onClick}>
       <ShopImageWrap tagColor={TAG_TO_COLOR[shop.tag]}>
-          <Image
-            loading="lazy"
-            src={shopLogo}
-            layout="fill"
-            objectFit="contained"
-          />
+        <Image
+          loading="lazy"
+          src={shopLogo}
+          layout="fill"
+          objectFit="contained"
+        />
         <d-def>
           {shop.rating !== undefined ? (
             <rating>

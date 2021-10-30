@@ -1,15 +1,15 @@
-import styled from 'styled-components'
-import { sizes } from 'utils/media'
+import styled from "styled-components";
+import { sizes } from "utils/media";
 
 export const Main = styled.div`
   height: 80px;
   background: #ffffff;
-`
+`;
 
 export const OuterContainer = styled.div`
   background: #f1f0f0;
   position: relative;
-`
+`;
 
 export const InnerContainer = styled.div`
   max-width: 1130px;
@@ -28,7 +28,7 @@ export const InnerContainer = styled.div`
       padding-bottom: 30px;
     }
   }
-`
+`;
 
 export const Title = styled.div`
   position: relative;
@@ -41,7 +41,7 @@ export const Title = styled.div`
     margin: 0 auto;
     margin-bottom: 30px;
   }
-`
+`;
 
 export const Underline = styled.span`
   position: absolute;
@@ -52,7 +52,7 @@ export const Underline = styled.span`
   @media (max-width: ${sizes.mobile}px) {
     width: 322px;
   }
-`
+`;
 
 export const TitleText = styled.span`
   width: auto;
@@ -60,23 +60,23 @@ export const TitleText = styled.span`
   font-size: 15px;
   color: #303030;
   font-weight: 600;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   line-height: 30px;
   z-index: 2;
   @media (max-width: ${sizes.mobile}px) {
     font-size: 13px;
   }
-`
+`;
 
 export const Content = styled.div`
   width: 100%;
   padding-bottom: 20px;
-`
+`;
 
 export const QuestionContainer = styled.div`
   font-size: 15px;
   color: #303030;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   background-color: white;
   height: 80px;
   border-radius: 5px 5px 0px 0px;
@@ -92,7 +92,7 @@ export const QuestionContainer = styled.div`
     height: 50px;
     margin: 9px auto 0 auto;
   }
-`
+`;
 
 export const BlockText = styled.div`
   margin-left: 30px;
@@ -100,12 +100,12 @@ export const BlockText = styled.div`
   top: 50%;
   transform: translateY(-50%);
   max-width: 75%;
-`
+`;
 
 export const AnswerContainer = styled.div`
   font-size: 15px;
   color: #303030;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   position: relative;
   background-color: #e5e5e5;
   width: 900px;
@@ -121,7 +121,7 @@ export const AnswerContainer = styled.div`
     height: 50px;
     margin: 0 auto;
   }
-`
+`;
 
 export const PlusMinusButton = styled.div`
   position: absolute;
@@ -130,4 +130,4 @@ export const PlusMinusButton = styled.div`
   @media (max-width: ${sizes.mobile}px) {
     top: 20px;
   }
-`
+`;

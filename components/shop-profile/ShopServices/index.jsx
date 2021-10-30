@@ -1,41 +1,43 @@
-import { createSelectComponent, useFetcher } from "@/modules/dataFetcher";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Checkbox, Radio } from "antd";
+import moment from "moment";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useCallback, useEffect } from "react";
-import {
-  brandFetcher,
-  deviceFetcher,
-  filtersFormModule,
-  shopServicesListModule,
-  modelFetcher,
-  serviceFormModule,
-  nextSlotFetcher,
-} from "../modules";
+import styled, { css } from "styled-components";
+
+import Loader from "@/components/common/Loader";
+import ConfirmationModal from "@/components/common/modals/ConfirmationModal";
+import { continueWitoutServiceModal } from "@/components/shop-profile/modules";
+import { MaxConstraints } from "@/components/styled/layout";
+import { SubTitle, SubTitleDescription } from "@/components/styled/text";
+import Button from "@/components/ui/Button";
+import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
+import Select from "@/components/ui/Select";
+import { store } from "@/configureStore";
+import { createSelectComponent, useFetcher } from "@/modules/dataFetcher";
 import Form, { useFormContext } from "@/modules/forms";
 import {
   Field,
   parseNativeEvent,
   SyncFormValues,
 } from "@/modules/forms/Blocks";
-import Select from "@/components/ui/Select";
 import List from "@/modules/list";
 import { Listing, Table } from "@/modules/list/Blocks";
-import styled, { css } from "styled-components";
-import { MaxConstraints } from "@/components/styled/layout";
-import { Checkbox, Radio } from "antd";
-import Link from "next/link";
-import Button from "@/components/ui/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import media, { OnMobile, useScreenSize } from "@/utils/media";
-import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
-import Loader from "@/components/common/Loader";
-import moment from "moment";
-import ConfirmationModal from "@/components/common/ConfirmationModal";
-import { continueWitoutServiceModal } from "@/components/shop-profile/modules";
-import { SubTitle, SubTitleDescription } from "@/components/styled/text";
-import Image from "next/image";
-import { MobileRadioButtons } from "@/components/ui/MobileRadioButtons";
-import { store } from "@/configureStore";
+
+import {
+  brandFetcher,
+  deviceFetcher,
+  filtersFormModule,
+  modelFetcher,
+  nextSlotFetcher,
+  serviceFormModule,
+  shopServicesListModule,
+} from "../modules";
 import { ContactButton } from "../ShopHeader";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
@@ -44,25 +46,25 @@ const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
 });
 
 const nextSlotCss = css`
-    next-slot {
-        display: flex;
-        white-space: nowrap;
-        font-size: 12px;
-        line-height: 18px;
-        margin-right: 10px;
+  next-slot {
+    display: flex;
+    white-space: nowrap;
+    font-size: 12px;
+    line-height: 18px;
+    margin-right: 10px;
 
-        > div:first-child {
-            display: none !important;
-        }
-
-        label {
-            color: #c0c0c0;
-            display: block;
-            margin: 0;
-        }
+    > div:first-child {
+      display: none !important;
     }
 
-    ${media.tablet`
+    label {
+      color: #c0c0c0;
+      display: block;
+      margin: 0;
+    }
+  }
+
+  ${media.tablet`
     next-slot {
       > div:first-child {
         width: 40px;
@@ -76,91 +78,91 @@ const nextSlotCss = css`
 `;
 
 const ModelFields = styled.div`
-    display: flex;
-    align-items: center;
-    margin: 19px -24px;
-    padding: 0 10px;
+  display: flex;
+  align-items: center;
+  margin: 19px -24px;
+  padding: 0 10px;
 
-    > div {
-        width: 100%;
-        margin-top: 0 !important;
-        margin: 0 5px;
-        background-color: #fff;
-        border: 1px solid #f0f0f0;
-        border-radius: 4px;
+  > div {
+    width: 100%;
+    margin-top: 0 !important;
+    margin: 0 5px;
+    background-color: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 4px;
 
-        .ant-select {
-            width: 100%;
-        }
-        > label {
-            margin: 11px 11px 2px 11px;
-        }
+    .ant-select {
+      width: 100%;
     }
+    > label {
+      margin: 11px 11px 2px 11px;
+    }
+  }
 
-    ${media.tablet`
+  ${media.tablet`
     padding: 0 24px;
   `}
 
-    ${nextSlotCss}
+  ${nextSlotCss}
 `;
 
 const ReparationCell = styled.div`
-    > div {
-        display: flex;
-    }
-    .ant-checkbox-wrapper,
-    .ant-radio-wrapper {
-        font-size: 15px;
-        color: #303030;
-        font-weight: 500;
-        text-transform: none;
-    }
-    .ant-radio,
-    .ant-checkbox {
-        margin-right: 36px;
-    }
+  > div {
+    display: flex;
+  }
+  .ant-checkbox-wrapper,
+  .ant-radio-wrapper {
+    font-size: 15px;
+    color: #303030;
+    font-weight: 500;
+    text-transform: none;
+  }
+  .ant-radio,
+  .ant-checkbox {
+    margin-right: 36px;
+  }
 `;
 
 const NextStepWrap = styled.div`
-    margin: 20px -24px 0;
-    padding: 15px 24px;
-    border-top: 1px solid #ddd;
+  margin: 20px -24px 0;
+  padding: 15px 24px;
+  border-top: 1px solid #ddd;
 `;
 
 const MobileToolbar = styled.div`
-    position: fixed;
-    display: flex;
-    bottom: 0;
-    background-color: #fff;
-    height: 60px;
-    padding: 0 20px;
-    box-shadow: 0 0 27px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    z-index: 110;
-    left: 0;
-    justify-content: space-between;
-    align-items: center;
+  position: fixed;
+  display: flex;
+  bottom: 0;
+  background-color: #fff;
+  height: 60px;
+  padding: 0 20px;
+  box-shadow: 0 0 27px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  z-index: 110;
+  left: 0;
+  justify-content: space-between;
+  align-items: center;
 
-    ${NextStepWrap} {
-        text-align: right;
-        margin: 0;
-        white-space: nowrap;
-        padding: 0;
-        border: 0;
+  ${NextStepWrap} {
+    text-align: right;
+    margin: 0;
+    white-space: nowrap;
+    padding: 0;
+    border: 0;
+  }
+
+  ${Button} {
+    padding: 7px 22px;
+    height: 37px;
+    line-height: 23px;
+    box-shadow: 0 0 8px #06c987;
+
+    &[disabled] {
+      box-shadow: 0 0 8px #a0a0a0;
     }
+  }
 
-    ${Button} {
-        padding: 7px 22px;
-        height: 37px;
-        line-height: 23px;
-        box-shadow: 0 0 8px #06c987;
-
-        &[disabled] {
-            box-shadow: 0 0 8px #a0a0a0;
-        }
-    }
-
-    ${nextSlotCss}
+  ${nextSlotCss}
 `;
 
 const SERVICE_COLUMNS = [
@@ -203,29 +205,40 @@ const SERVICE_COLUMNS = [
     title: "Garantie",
     key: "guarantee_time",
     render: (data) => {
-      if (data.guarantee_time === 0 && data.price === 0 && data.reparation_time === "0") {
+      if (
+        data.guarantee_time === 0 &&
+        data.price === 0 &&
+        data.reparation_time === "0"
+      ) {
         return {
           props: {
             colSpan: 3,
-
           },
-          children: <div style={{ textAlign: "center", border: "1px solid #ddd" }}>Prijs op aanvraag</div>
-        }
+          children: (
+            <div style={{ textAlign: "center", border: "1px solid #ddd" }}>
+              Prijs op aanvraag
+            </div>
+          ),
+        };
       }
 
-      return `${data.guarantee_time} maanden`
+      return `${data.guarantee_time} maanden`;
     },
   },
   {
     title: "Reparatie tijd",
     key: "reparation_time",
     render: (data) => {
-      if (data.guarantee_time === 0 && data.price === 0 && data.reparation_time === "0") {
+      if (
+        data.guarantee_time === 0 &&
+        data.price === 0 &&
+        data.reparation_time === "0"
+      ) {
         return {
           props: {
-            colSpan: 0
-          }
-        }
+            colSpan: 0,
+          },
+        };
       }
 
       return `${data.reparation_time} minuten`;
@@ -235,62 +248,66 @@ const SERVICE_COLUMNS = [
     title: "Prijs",
     key: "price",
     render: (data) => {
-      if (data.guarantee_time === 0 && data.price === 0 && data.reparation_time === "0") {
+      if (
+        data.guarantee_time === 0 &&
+        data.price === 0 &&
+        data.reparation_time === "0"
+      ) {
         return {
           props: {
-            colSpan: 0
-          }
-        }
+            colSpan: 0,
+          },
+        };
       }
-      return <span>&euro;{data.price}</span>
+      return <span>&euro;{data.price}</span>;
     },
   },
 ];
 
 const ServiceMobileListing = styled.div`
-    background-color: #fafafa;
-    margin: 0 -24px;
-    padding: 0 20px;
+  background-color: #fafafa;
+  margin: 0 -24px;
+  padding: 0 20px;
 `;
 
 const PriceOnDemand = styled.div`
-  font-Size: 13px;
+  font-size: 13px;
   text-align: center;
   border: 1px solid #ddd;
   padding: 5px 7px;
   color: #555;
-`
+`;
 
 const ServiceMobileItemWrap = styled.div`
-    padding: 26px 0;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
+  padding: 26px 0;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
 
-    .ant-radio,
-    .ant-checkbox {
-        margin-right: 10px;
-    }
+  .ant-radio,
+  .ant-checkbox {
+    margin-right: 10px;
+  }
 
-    span {
-        font-size: 13px;
-        letter-spacing: 0px;
-        color: #0d3244;
-        font-weight: 600;
-    }
+  span {
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #0d3244;
+    font-weight: 600;
+  }
 
-    &:last-child {
-        border: 0;
-    }
+  &:last-child {
+    border: 0;
+  }
 `;
 
 ServiceMobileItemWrap.FirstColumn = styled.div`
-    color: #a0a0a0;
-    font-size: 11px;
-    > d-def {
-        display: block;
-        margin-left: 34px;
-    }
+  color: #a0a0a0;
+  font-size: 11px;
+  > d-def {
+    display: block;
+    margin-left: 34px;
+  }
 `;
 
 function MobileServiceItem({ item }) {
@@ -299,10 +316,16 @@ function MobileServiceItem({ item }) {
     <ServiceMobileItemWrap>
       <ServiceMobileItemWrap.FirstColumn>
         {firstColumn}
-        {item.guarantee_time ? <d-def>{item.guarantee_time} maanden garantie</d-def> : null}
+        {item.guarantee_time ? (
+          <d-def>{item.guarantee_time} maanden garantie</d-def>
+        ) : null}
       </ServiceMobileItemWrap.FirstColumn>
       <price>
-        {item.price ? <span>&euro;{item.price}</span> : <PriceOnDemand>Prijs op aanvraag</PriceOnDemand>}
+        {item.price ? (
+          <span>&euro;{item.price}</span>
+        ) : (
+          <PriceOnDemand>Prijs op aanvraag</PriceOnDemand>
+        )}
       </price>
     </ServiceMobileItemWrap>
   );
@@ -331,63 +354,63 @@ const MobileDeviceSelector = createSelectComponent({
 });
 
 const MobileDeviceSelectorWrap = styled.div`
-    background-color: #fff;
-    margin: 5px -24px;
-    padding: 5px 10px;
+  background-color: #fff;
+  margin: 5px -24px;
+  padding: 5px 10px;
 
-    .ant-radio-group {
-        width: 100%;
+  .ant-radio-group {
+    width: 100%;
+  }
+
+  .menu-wrapper {
+    min-width: 100%;
+  }
+
+  .ant-radio-button-wrapper {
+    background-color: transparent;
+    color: #c0c0c0;
+    border: 0 !important;
+    padding: 0 11px;
+    border-radius: 7px !important;
+
+    &.ant-radio-button-wrapper-checked {
+      color: #fff !important;
+      background-color: #06c987;
     }
-
-    .menu-wrapper {
-        min-width: 100%;
-    }
-
-    .ant-radio-button-wrapper {
-        background-color: transparent;
-        color: #c0c0c0;
-        border: 0 !important;
-        padding: 0 11px;
-        border-radius: 7px !important;
-
-        &.ant-radio-button-wrapper-checked {
-            color: #fff !important;
-            background-color: #06c987;
-        }
-    }
+  }
 `;
 
 const Panel = styled.div`
-    background: #ffffff;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1px 24px 0;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  margin-top: 40px;
+  overflow: hidden;
+
+  .ant-table-wrapper {
+    border: 1px solid #f0f0f0;
     border-radius: 8px;
-    padding: 1px 24px 0;
-    margin-bottom: 40px;
-    margin-top: 40px;
-    margin-top: 40px;
     overflow: hidden;
+  }
 
-    .ant-table-wrapper {
-        border: 1px solid #f0f0f0;
-        border-radius: 8px;
-        overflow: hidden;
-    }
+  .ant-table-thead tr th {
+    background: #fafafa;
+  }
 
-    .ant-table-thead tr th {
-        background: #fafafa;
-    }
+  ${SubTitle} {
+    margin: 0 -24px;
+    padding: 15px 24px 0 24px;
+  }
 
-    ${SubTitle} {
-        margin: 0 -24px;
-        padding: 15px 24px 0 24px;
-    }
+  ${SubTitleDescription} {
+    margin: 0 -24px;
+    padding: 15px 24px;
+    border-bottom: 1px solid #ddd;
+  }
 
-    ${SubTitleDescription} {
-        margin: 0 -24px;
-        padding: 15px 24px;
-        border-bottom: 1px solid #ddd;
-    }
-
-    ${media.tablet`
+  ${media.tablet`
     margin-top: 0;
   `}
 `;
@@ -503,12 +526,8 @@ export default function ShopServices({ shop }) {
             device: `${devices[0].id}`,
           },
         });
-        const brands = await brandFetcher
-          .key(`${devices[0].id}`)
-          .fetch();
-        const models = await modelFetcher
-          .key(`${brands[0].id}`)
-          .fetch();
+        const brands = await brandFetcher.key(`${devices[0].id}`).fetch();
+        const models = await modelFetcher.key(`${brands[0].id}`).fetch();
         const updates = {
           device: devices.length > 0 ? `${devices[0].id}` : `0`,
           brand: brands.length > 0 ? `${brands[0].id}` : `0`,
@@ -568,12 +587,11 @@ export default function ShopServices({ shop }) {
     <MaxConstraints>
       <Panel>
         <SubTitle>
-          Selecteer je apparaat, merk en model & bekijk onze
-          reparaties
+          Selecteer je apparaat, merk en model & bekijk onze reparaties
         </SubTitle>
         <SubTitleDescription>
-          Staat je model of reparatie er niet tussen?
-          Waarschijnlijk kunnen we je wel helpen, maak een afspraak en we kijken er naar!
+          Staat je model of reparatie er niet tussen? Waarschijnlijk kunnen we
+          je wel helpen, maak een afspraak en we kijken er naar!
         </SubTitleDescription>
         <Form module={filtersFormModule}>
           <OnMobile only>
@@ -619,18 +637,12 @@ export default function ShopServices({ shop }) {
             onChange={(data) => {
               // TODO (V.T leave explanation)
               const models =
-                modelFetcher
-                  .key(data.brand)
-                  .selector(store.ref.getState())?.result ||
-                [];
+                modelFetcher.key(data.brand).selector(store.ref.getState())
+                  ?.result || [];
               if (
-                models.find(
-                  (model) => +model.id === +data.model
-                ) !== undefined
+                models.find((model) => +model.id === +data.model) !== undefined
               ) {
-                shopServicesListModule.actions.updateQuery(
-                  data
-                );
+                shopServicesListModule.actions.updateQuery(data);
                 if (!serviceFormModule.state) {
                   return;
                 }

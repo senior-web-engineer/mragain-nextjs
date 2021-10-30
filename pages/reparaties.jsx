@@ -1,32 +1,35 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { connect } from "react-redux";
-import { useRouter } from "next/router";
-import { Row, Col, Button, Modal } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import BrandModelCard from "@/components/phone-repair/brand-model-card/BrandModelCard";
 import "./reparaties.less";
 import "./reparaties_css.less";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button, Col, Modal, Row } from "antd";
 import classnames from "classnames";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import React, { Fragment, useEffect, useState } from "react";
+import { useRef } from "react";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import LoadingOverlay from "react-loading-overlay";
+import { connect } from "react-redux";
 import {
+  setBrandModel,
   setGuaranteeDevice,
   setLoadPBM,
-  setBrandModel,
 } from "service/account/action";
 import {
   createGuaranteeModels,
-  deleteGuaranteeModels,
-  getShopBrandModel,
-  getExportReparationAndGuaranteeCSV,
   createImportReparationAndGuaranteeCSV,
+  deleteGuaranteeModels,
+  getExportReparationAndGuaranteeCSV,
+  getShopBrandModel,
 } from "service/account/operations";
 import { getSearchFilterField } from "service/search/operations.js";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Head from "next/head";
-import { FRONT_END_URL } from "../constants.js";
-import LoadingOverlay from "react-loading-overlay";
-import { useRef } from "react";
+
+import BrandModelCard from "@/components/phone-repair/brand-model-card/BrandModelCard";
+
 import { Layout } from "../components/global";
+import { FRONT_END_URL } from "../constants.js";
 
 function showNotification(...args) {
   return import("sweetalert").then((module) => {
@@ -327,10 +330,12 @@ const PhoneRepair = (routerProps) => {
         console.log(err.response);
 
         // showNotification("Error!", "Error occurred, Please try again later", "error").then(
-        showNotification("Error!", err.response.data.error, "error").then((value) => {
-          setShowImportModal(false);
-          setImportBtnLoading(false);
-        });
+        showNotification("Error!", err.response.data.error, "error").then(
+          (value) => {
+            setShowImportModal(false);
+            setImportBtnLoading(false);
+          }
+        );
       });
   };
 

@@ -1,18 +1,19 @@
-import React from "react";
-import { connect } from "react-redux";
-import { useRouter } from "next/router";
-import { Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { CardInfo } from "./ShopInfoCard.style.jsx";
+import "./ShopInfoCard.style.less";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "antd";
-import "./ShopInfoCard.style.less";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React from "react";
+import { Card } from "react-bootstrap";
+import { connect } from "react-redux";
+
 import StarRatingInfo from "../StarRatingInfo/StarRatingInfo";
-import Image from 'next/image';
-import Link from 'next/link'
+import { CardInfo } from "./ShopInfoCard.style.jsx";
 const ShopInfoCard = (routerProps) => {
-  const {
-  } = routerProps;
+  const {} = routerProps;
   const router = useRouter();
   const onProfilePage = (shop_name, city, street) => {
     let shop = shop_name;
@@ -31,7 +32,7 @@ const ShopInfoCard = (routerProps) => {
 
     // router.push(`/profiel/${shop}--${cityName}--${streetName}`);
     // router.push(routerData);
-      return routerData;
+    return routerData;
   };
 
   function onMakeAppointment(shop_id) {
@@ -71,28 +72,33 @@ const ShopInfoCard = (routerProps) => {
 
   return (
     <Card>
-      <Link href={onProfilePage(
+      <Link
+        href={onProfilePage(
           routerProps.shop_name,
           routerProps.city,
           routerProps.street
-      )}
-            passHref={true}
-            prefetch={false}
-      ><a ><Image
-          width={240}
-          height={162}
-          className={'card-img-top'}
-          variant="top"
-        src={routerProps.image}
-        alt="Reparateur-profielfoto"
-        // onClick={() =>
-        //   onProfilePage(
-        //     routerProps.shop_name,
-        //     routerProps.city,
-        //     routerProps.street
-        //   )
-        // }
-      /></a></Link>
+        )}
+        passHref={true}
+        prefetch={false}
+      >
+        <a>
+          <Image
+            width={240}
+            height={162}
+            className={"card-img-top"}
+            variant="top"
+            src={routerProps.image}
+            alt="Reparateur-profielfoto"
+            // onClick={() =>
+            //   onProfilePage(
+            //     routerProps.shop_name,
+            //     routerProps.city,
+            //     routerProps.street
+            //   )
+            // }
+          />
+        </a>
+      </Link>
       <Card.Body>
         <Card.Title>
           {routerProps.title}

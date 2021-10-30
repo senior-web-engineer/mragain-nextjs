@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { connect } from "react-redux";
+import "./ReviewCheckOut.less";
+
 import { Button, Progress, Rate } from "antd";
 import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { Modal } from "react-bootstrap";
+import { connect } from "react-redux";
+
 import StarRatingInfo from "@/components/global/StarRatingInfo/StarRatingInfo";
-import "./ReviewCheckOut.less";
 
 const ReviewCheckOut = (routerProps) => {
   const [price_mark, setPriceMark] = useState(0);

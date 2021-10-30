@@ -1,9 +1,10 @@
-import React from "react";
-import { Button } from "antd";
-import Link from "next/link"
 import "./CreateAccountCard.less";
 
-const CreateAccountCard = params => {
+import { Button } from "antd";
+import Link from "next/link";
+import React from "react";
+
+const CreateAccountCard = (params) => {
   return (
     <div className="trial-month">
       <div className={"trial-month-title bgcolor-" + params.color}>
@@ -22,7 +23,7 @@ const CreateAccountCard = params => {
           <p>printing and typesetting</p>
           <p>industry. Lorem Ipsum</p>
           <p>has been the</p>
-          <p>Industry's standard</p>
+          <p>Industry&apos;s standard</p>
           <p>dummy text ever since the</p>
           <Link prefetch={false} href="/maak-een-account-aan">
             <Button className={"price-page-btn bgcolor-" + params.color}>

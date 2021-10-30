@@ -1,16 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
-import { connect } from "react-redux";
-import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { message } from "antd";
-import { useRouter } from "next/router";
-import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./AccountCreate2.less";
 
-import { registerUser } from "service/account/operations.js";
-import { resetAuthError } from "service/account/action.js";
+import { message } from "antd";
+import { useRouter } from "next/router";
+import React, { useEffect, useRef, useState } from "react";
+import { Button, Form } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
+import { connect } from "react-redux";
 import { signupSuccessDelete } from "service/account/action";
+import { resetAuthError } from "service/account/action.js";
+import { registerUser } from "service/account/operations.js";
 
 function AccountCreate2(routerProps) {
   const [validated, setValidated] = useState(false);
@@ -186,7 +186,8 @@ function AccountCreate2(routerProps) {
           </Form>
         </div>
         <h1 className="account-create-title2">
-          Lever jij de beste kwaliteit telefoon reparaties en wil je online gevonden worden?<br></br>
+          Lever jij de beste kwaliteit telefoon reparaties en wil je online
+          gevonden worden?<br></br>
           Met een gratis account sta je binnen 5 minuten online!{" "}
         </h1>
       </div>

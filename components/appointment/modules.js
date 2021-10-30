@@ -1,12 +1,14 @@
+import moment from "moment";
+import router from "next/router";
+import * as yup from "yup";
+
 import { store } from "@/configureStore";
 import { API_PATH } from "@/constants";
 import dataFetcher from "@/modules/dataFetcher";
 import { createFormModule } from "@/modules/forms";
 import { createModalModule } from "@/modules/modal";
 import api from "@/utils/api";
-import moment from "moment";
-import router from "next/router";
-import * as yup from "yup";
+
 import { getLocationOptions } from "./LocationSelector";
 
 //
@@ -55,7 +57,9 @@ export const appointmentForm = createFormModule({
   async init({ shop, type = "appointment" }) {
     const fromAddressBar = router.router.query;
 
-    const locations = getLocationOptions(shop).filter(option => !option.disabled);
+    const locations = getLocationOptions(shop).filter(
+      (option) => !option.disabled
+    );
 
     function getDefaultValue(type, defaultValue) {
       const value = fromAddressBar[type];

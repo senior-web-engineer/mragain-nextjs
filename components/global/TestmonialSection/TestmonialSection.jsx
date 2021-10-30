@@ -1,14 +1,16 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./TestmonialSection.style.less";
+
 import React from "react";
 import { Container, Row } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { TestmonialSectionArea } from "./TestmonialSection.style";
-import TestmonialCarousel from "./TestmonialCarousel/TestmonialCarousel.jsx";
+
 import {
   AdvantageSectionTitle,
-  SectionModel,
   DotDevider,
+  SectionModel,
 } from "../component.style.jsx";
-import "./TestmonialSection.style.less";
+import TestmonialCarousel from "./TestmonialCarousel/TestmonialCarousel.jsx";
+import { TestmonialSectionArea } from "./TestmonialSection.style";
 
 const TestmonialSection = () => (
   <TestmonialSectionArea>
@@ -18,8 +20,8 @@ const TestmonialSection = () => (
           Wat onze bezoekers zeggen
         </h2>
       </Row>
-       <Row>
-	<SectionModel>
+      <Row>
+        <SectionModel>
           <DotDevider color={"#f8f8f8"} />
         </SectionModel>
       </Row>

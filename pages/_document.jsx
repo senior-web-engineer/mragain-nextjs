@@ -1,8 +1,9 @@
+import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
-import Document, { Head, Main, NextScript, Html } from "next/document";
 import { ServerStyleSheet } from "styled-components";
-import HeadWithoutPreload from "./HeadWithoutPreload";
+
 import { GA_TRACKING_ID } from "../lib/gtag";
+import HeadWithoutPreload from "./HeadWithoutPreload";
 
 const hotJarScript = `
 (function(h,o,t,j,a,r){
@@ -15,7 +16,7 @@ const hotJarScript = `
 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 `;
 
-/*Tasos this part is for Google Analytics I think and without we end up with console errors. 
+/*Tasos this part is for Google Analytics I think and without we end up with console errors.
 const ga2Script = `
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
@@ -36,7 +37,7 @@ const gaScript = `
 const gaBodyScript = `
   <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PVDCX7L"
   height="0" width="0" style="display:none;visibility:hidden"></iframe>
-`
+`;
 
 const facebookScript = `
 !function(f,b,e,v,n,t,s)
@@ -106,13 +107,17 @@ export default class MyDocument extends Document {
             />
           </noscript>
           {isProduction ? (
-            <> 
-              <script async custom-element="amp-analytics" src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}/>
+            <>
+              <script
+                async
+                custom-element="amp-analytics"
+                src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+              />
               <script dangerouslySetInnerHTML={{ __html: gaScript }} />
               <script dangerouslySetInnerHTML={{ __html: hotJarScript }} />
               <script dangerouslySetInnerHTML={{ __html: facebookScript }} />
             </>
-          ) : null}                 
+          ) : null}
         </HeadWithoutPreload>
         <body>
           <Main />
@@ -122,7 +127,8 @@ export default class MyDocument extends Document {
               <noscript dangerouslySetInnerHTML={{ __html: gaBodyScript }} />
               <amp-analytics
                 config="https://www.googletagmanager.com/ns.html?id=GTM-PVDCX7L"
-                data-credentials="include" />
+                data-credentials="include"
+              />
             </>
           ) : null}
         </body>

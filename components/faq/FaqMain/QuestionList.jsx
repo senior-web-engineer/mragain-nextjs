@@ -1,15 +1,17 @@
-import React from 'react'
-import Question from './Question'
-import { OuterContainer } from '@/components/faq/FaqMain/Faq.style'
+import React from "react";
+
+import { OuterContainer } from "@/components/faq/FaqMain/Faq.style";
+
+import Question from "./Question";
 
 const QuestionList = ({ data }) => {
   return (
     <OuterContainer>
       {data.map((item, index) => {
-        return <Question key={index} data={item} />
+        return <Question key={index} data={item} />;
       })}
     </OuterContainer>
-  )
-}
+  );
+};
 
-export default QuestionList
+export default QuestionList;

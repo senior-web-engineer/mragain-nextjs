@@ -26,7 +26,7 @@ export async function getServerSideProps() {
         permanent: false,
         destination: `/devices/${firstDevice}`,
       },
-    }
+    };
   }
 
   return {

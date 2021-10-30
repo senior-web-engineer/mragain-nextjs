@@ -1,20 +1,22 @@
+import Head from "next/head";
 import React, { useEffect } from "react";
-import {
-  Main,
-  Wrapper,
-  Box,
-  Title,
-  SubTitle,
-  ContactTitle,
-  ContactInfo,
-  BoxInfoWrap,
-  Space,
-  FormWrapper,
-} from "@/styled-components/contact.style.jsx";
+
 import ContactForm from "@/components/contact/ContactMainSection/ContactForm/ContactForm";
 import ContactMap from "@/components/contact/ContactMainSection/ContactMap/ContactMap";
 import DefaultLayout from "@/components/layouts/Homepage";
-import Head from "next/head";
+import {
+  Box,
+  BoxInfoWrap,
+  ContactInfo,
+  ContactTitle,
+  FormWrapper,
+  Main,
+  Space,
+  SubTitle,
+  Title,
+  Wrapper,
+} from "@/styled-components/contact.style.jsx";
+
 import { FRONT_END_URL } from "../constants.js";
 
 const Contact = ({}) => {
@@ -74,7 +76,7 @@ const Contact = ({}) => {
             <BoxInfoWrap>
               <ContactTitle>Adres</ContactTitle>
               <ContactInfo>MrAgain</ContactInfo>
-	  {/*<ContactInfo>Maartensdijk</ContactInfo>*/}
+              {/*<ContactInfo>Maartensdijk</ContactInfo>*/}
               <ContactInfo>Utrecht</ContactInfo>
               <ContactInfo>3561 LD</ContactInfo>
               <ContactInfo>Nederland</ContactInfo>
