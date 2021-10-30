@@ -174,7 +174,9 @@ export default function AppointmentPage({ shop }) {
         })
         .then(() => {
           router.push(
-            `/${shop.city}/${shop.name.replaceAll(' ', '-')}/${shop.street.replaceAll(' ', '-')}/${data.appointment}`
+            `/${shop.city}/${shop.name.replaceAll(' ', '-')}/${shop.street.replaceAll(' ', '-')}/success/${
+              data.appointment
+            }`
           )
 
           // appointmentReview.actions.open(reviewData)
