@@ -33,6 +33,7 @@ const index = (props) => {
               <Image src={'/images/notifications/appointment.png'} width={200} height={200} />
             </ImageContainer>
             <Title>Afspraak details</Title>
+            <Subtitle>Je afspraak is succesvol gemaakt, we hebben een bevestigingsmail naar je verzonden </Subtitle>
             {!!appointment && (
               <Details>
                 <Row>
@@ -123,6 +124,15 @@ const Title = styled.div`
   font-weight: 500;
   margin: 25px 0;
 `
+const Subtitle = styled.div`
+  font-size: 20px;
+  color: #06c987;
+  font-weight: 500;
+  margin: 5px 0;
+  padding: 0 50px;
+  text-align: center;
+`
+
 const Details = styled.div`
   margin: 50px auto 10px;
   font-size: 13px;
