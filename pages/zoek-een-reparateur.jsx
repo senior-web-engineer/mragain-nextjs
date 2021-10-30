@@ -4,7 +4,7 @@ import {
   faStore,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Checkbox, Rate, Slider, Switch } from "antd";
+import { Radio, Rate, Slider, Switch } from "antd";
 import isEqual from "fast-deep-equal";
 import moment from "moment";
 import Head from "next/head";
@@ -466,6 +466,13 @@ const ShopDetails = styled.div`
     &[data-c90648] {
       background-color: #c90648;
     }
+    &[data-06c987] {
+      background-color: #06c987;
+    }
+
+    &[data-0076a3] {
+      background-color: #0076a3;
+    }
 
     ${media.tablet`
       position: static;
@@ -686,14 +693,14 @@ function ShopItem({ item }) {
     return <ShopDetails.Service>{service.device_name}</ShopDetails.Service>;
   }
 
-  const tags = item.shop_type;
+  const tags = item.shop_type_text;
+  console.log(item);
   const formState = filtersFormModule.state.values;
   // API changed does not include the city any longer?
   // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
 
-  const shopRoute = `${getShopRoute(item.shop)}?device=${
-    formState.device
-  }&brand=${formState.brand}&model=${formState.model}`;
+  const shopRoute = `${getShopRoute(item.shop)}?device=${formState.device
+    }&brand=${formState.brand}&model=${formState.model}`;
 
   function onClick() {
     if (!showMap) {
@@ -729,12 +736,12 @@ function ShopItem({ item }) {
         <div>
           {tags
             ? tags.map((tag) => {
-                const value = Object.values(tag)[0];
-                const props = {
-                  [`data-${TAG_TO_COLOR[value]}`.replace("#", "")]: true,
-                };
-                return <tag {...props}>{value}</tag>;
-              })
+              const value = Object.values(tag)[0];
+              const props = {
+                [`data-${TAG_TO_COLOR[value]}`.replace("#", "")]: true,
+              };
+              return <tag {...props}>{value}</tag>;
+            })
             : null}
         </div>
         <ShopDetails.SecondRow>
@@ -855,6 +862,10 @@ const ServiceSelector = AppendIdentifier({
 });
 
 const REPAIR_TYPES = [
+  {
+    label: "Alle",
+    value: 0,
+  },
   {
     label: "Fysieke winkel",
     value: 1,
@@ -1009,12 +1020,12 @@ function RefineSearchForm() {
     <Form module={filtersFormModule}>
       <Field name="price" as={Slider} label="Maximum prijs" />
       <Field name="rate" as={Rate} label="Minimale rating" />
-      <Field name="shop_type" as={Checkbox.Group} label="Reparatie Type">
+      <Field name="shop_type" as={Radio.Group} label="Reparatie Type">
         <Options>
           {REPAIR_TYPES.map((type, i) => (
-            <Checkbox key={i} value={type.value} disabled={type.disabled}>
+            <Radio key={i} value={type.value} disabled={type.disabled}>
               {type.label}
-            </Checkbox>
+            </Radio>
           ))}
         </Options>
       </Field>

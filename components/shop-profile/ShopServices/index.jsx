@@ -1,3 +1,4 @@
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Checkbox, Radio } from "antd";
 import moment from "moment";
@@ -26,7 +27,7 @@ import {
 } from "@/modules/forms/Blocks";
 import List from "@/modules/list";
 import { Listing, Table } from "@/modules/list/Blocks";
-import media, { OnMobile } from "@/utils/media";
+import media, { OnMobile, useScreenSize } from "@/utils/media";
 
 import {
   brandFetcher,

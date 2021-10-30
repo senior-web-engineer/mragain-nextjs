@@ -10,7 +10,7 @@ import { Popover, Rate } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { Children } from "react";
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -23,11 +23,13 @@ import {
 } from "react-share";
 import styled from "styled-components";
 
+import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
 import { MaxConstraints } from "@/components/styled/layout";
 import Button from "@/components/ui/Button";
 import { useFetcher } from "@/modules/dataFetcher";
 import media, { OnMobile } from "@/utils/media";
 
+import { reviewsFetcher } from "../modules";
 import DetailsModal from "./DetailsModal";
 import WhatsAppModal from "./WhatsAppModal";
 
@@ -106,8 +108,8 @@ ShopMeta.FirstRow = styled.div`
     display: inline-block;
     height: 31px;
     ${(props) =>
-    props.tagColor &&
-    css`
+      props.tagColor &&
+      css`
         background-color: ${props.tagColor || "#ddd"};
       `}
     color: #fff;
@@ -134,8 +136,8 @@ ShopMeta.FirstRow = styled.div`
     display: inline-block;
     height: 31px;
     ${(props) =>
-    props.tagColor &&
-    css`
+      props.tagColor &&
+      css`
         background-color: ${props.tagColor || "#ddd"};
       `}
     color: #fff;
@@ -311,41 +313,13 @@ export default function ShopHeader({ shop }) {
     Ik heb  "${shop.name}" gevonden via MrAgain. Heb je een kapot apparaat? Bij MrAgain vind je de beste reparateur bij jou in de buurt
   `.trim();
   const shopURL = typeof window !== "undefined" ? window.location.href : "";
-
   const detailButtons = (
     <DetailButtonsWrap>
       <DetailsModal shop={shop} />
-      {/* <Popover
-        overlayClassName="share-popover"
-        content={
-          <>
-            <FacebookShareButton url={shopURL} quote={shareText}>
-              <FacebookIcon size={40} round />
-            </FacebookShareButton>
-            <LinkedinShareButton
-              url={shopURL}
-              title={shop.name}
-              summary={shareText}
-            >
-              <LinkedinIcon size={40} round />
-            </LinkedinShareButton>
-            <WhatsappShareButton url={shopURL} title={shareText}>
-              <WhatsappIcon size={40} round />
-            </WhatsappShareButton>
-            <TwitterShareButton url={shopURL} title={shareText}>
-              <TwitterIcon size={40} round />
-            </TwitterShareButton>
-          </>
-        }
-      >
-        <Button>
-          <FontAwesomeIcon icon={faShare} />
-        </Button>
-      </Popover>*/}
       <OnMobile show={false}>
         <ContactButton />
       </OnMobile>
-      <WhatsAppModal shop={shop} />
+      {shop.whatsapp_number && <WhatsAppModal number={shop.whatsapp_number} />}
     </DetailButtonsWrap>
   );
 
