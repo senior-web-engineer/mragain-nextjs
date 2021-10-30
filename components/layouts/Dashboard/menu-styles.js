@@ -14,7 +14,7 @@ export const ContentWrap = styled.div`
 `;
 
 export const PageContent = styled.div`
-  padding: 24px 32px 24px 48px;
+  padding: 24px 24px 24px 24px;
   flex: 1;
   height: calc(100vh - 68px);
   overflow: auto;

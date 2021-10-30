@@ -54,7 +54,8 @@ export const reparationsList = createListModule({
       };
     } catch (err) {
       notification.error({
-        message: "Er gaat iets fout, neem contact met ons op als dit probleem zich blijft voordoen",
+        message:
+          "Er gaat iets fout, neem contact met ons op als dit probleem zich blijft voordoen",
       });
 
       return { items: [] };
