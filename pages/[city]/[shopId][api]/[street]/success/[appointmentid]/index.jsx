@@ -138,9 +138,10 @@ const Details = styled.div`
   font-size: 13px;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 450px;
 `
 const Row = styled.div`
-  width: 450px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
