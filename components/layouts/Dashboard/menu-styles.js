@@ -21,7 +21,6 @@ export const PageContent = styled.div`
 `;
 
 export const MenuWrap = styled.div`
-  width: 254px;
   height: 100%;
   background-color: #fff;
   padding: 16px;
