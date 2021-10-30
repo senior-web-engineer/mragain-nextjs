@@ -236,6 +236,8 @@ export default function AppointmentPage({ shop }) {
       }
     }
 
+    console.log('step', step)
+
     if (step === 1) {
       const reviewData = {
         form: appointmentForm.state.values,
@@ -252,11 +254,11 @@ export default function AppointmentPage({ shop }) {
       let streetfixed = street.replaceAll(' ', '-')
       let aptId = appointmentData.appointment
       setData({ ...data, city, street: streetfixed, name: namefixed, aptId })
+      router.push(`/${city}/${namefixed}/${streetfixed}/success/${aptId}`)
     }
-    if (step === 2) {
-      router.push(`/${data.city}/${data.name}/${data.street}/${data.aptId}`)
-    }
-    if (step < 2) {
+    // if (step === 2) {
+    // }
+    if (step < 1) {
       updateStep((state) => state + 1)
     }
   })
