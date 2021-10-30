@@ -263,7 +263,6 @@ export function ContactButton(...props) {
 }
 
 export default function ShopHeader({ shop }) {
-  console.log(shop.phone_number)
   const tag = shop.tag;
   const location = [shop.street, shop.city, shop.zipcode]
     .filter(Boolean)
@@ -292,7 +291,6 @@ export default function ShopHeader({ shop }) {
     Ik heb  "${shop.name}" gevonden via MrAgain. Heb je een kapot apparaat? Bij MrAgain vind je de beste reparateur bij jou in de buurt
   `.trim();
   const shopURL = typeof window !== "undefined" ? window.location.href : "";
-
   const detailButtons = (
 
     <DetailButtonsWrap>
@@ -300,7 +298,7 @@ export default function ShopHeader({ shop }) {
       <OnMobile show={false}>
         <ContactButton />
       </OnMobile>
-      {shop.phone_number && <WhatsAppModal number={shop.phone_number} />}
+      {shop.whatsapp_number && <WhatsAppModal number={shop.whatsapp_number} />}
     </DetailButtonsWrap>
 
   );
