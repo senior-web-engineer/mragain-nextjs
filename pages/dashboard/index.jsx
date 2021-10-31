@@ -444,9 +444,9 @@ export default function DashboardPage() {
         module={createAppointmentFormModal}
       >
         <Form module={appointmentForm}>
-          <FormSectionTitle>Klant</FormSectionTitle>
+          <FormSectionTitle>Klant gegevens</FormSectionTitle>
           <FieldWrapAdmin>
-            <Field as={Input} name="customerName" label="Klant" />
+            <Field as={Input} name="customerName" label="Naam" />
           </FieldWrapAdmin>
           <FieldWrapAdmin>
             <Field as={Input} name="email" label="E-mailadres" />
