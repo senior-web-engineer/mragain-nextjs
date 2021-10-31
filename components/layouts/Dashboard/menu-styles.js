@@ -51,6 +51,7 @@ export const MenuWrap = styled.div`
 
   .ant-tree-icon__customize {
     margin-right: 10px !important;
+    color: #ddd;
   }
 
   .ant-tree > li > span:first-child {

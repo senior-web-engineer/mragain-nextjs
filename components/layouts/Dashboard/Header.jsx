@@ -6,6 +6,7 @@ import styled, { css } from "styled-components";
 
 import media from "@/utils/media";
 
+import { Modals } from ".";
 import Menu from "./Menu";
 
 const HeaderWrap = styled.div`
@@ -111,30 +112,32 @@ export function MobileMenu({ children }) {
         icon={faBars}
         onClick={() => updateMenuVisibility((state) => !state)}
       />
-      <MobileMenuCloseMask
-        visible={isMenuVisible}
-        onClick={() => updateMenuVisibility(false)}
-      />
-      <MobileMenuWrapper shouldExpand={isMenuVisible}>
-        <MobileMenuHeader>
-          <a className="logo" href="/">
-            <Image
-              quality={100}
-              loading={"eager"}
-              priority={true}
-              width={104}
-              height={40}
-              src="/images/mragain.svg"
-              alt="Logo Mr Again"
+      <Modals.Source multiple>
+        <MobileMenuCloseMask
+          visible={isMenuVisible}
+          onClick={() => updateMenuVisibility(false)}
+        />
+        <MobileMenuWrapper shouldExpand={isMenuVisible}>
+          <MobileMenuHeader>
+            <a className="logo" href="/">
+              <Image
+                quality={100}
+                loading={"eager"}
+                priority={true}
+                width={104}
+                height={40}
+                src="/images/mragain.svg"
+                alt="Logo Mr Again"
+              />
+            </a>
+            <FontAwesomeIcon
+              icon={faTimes}
+              onClick={() => updateMenuVisibility(false)}
             />
-          </a>
-          <FontAwesomeIcon
-            icon={faTimes}
-            onClick={() => updateMenuVisibility(false)}
-          />
-        </MobileMenuHeader>
-        <MobileMenuLinks>{children}</MobileMenuLinks>
-      </MobileMenuWrapper>
+          </MobileMenuHeader>
+          <MobileMenuLinks>{children}</MobileMenuLinks>
+        </MobileMenuWrapper>
+      </Modals.Source>
     </HamburgerWrap>
   );
 }

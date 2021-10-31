@@ -1,39 +1,41 @@
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import DefaultLayout from "../components/layouts/Homepage";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { notification } from "antd";
 import axios from "axios";
-import { API_PATH } from "../constants";
-import wave from "../public/images/login/wave.svg";
-import drawing from "../public/images/login/drawing.svg";
+import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+
+import Form from "@/modules/forms";
+import { Field } from "@/modules/forms/Blocks";
+import { useScreenSize } from "@/utils/media";
+
+import DefaultLayout from "../components/layouts/Homepage";
+import { loginModule } from "../components/login/modules";
+import { API_PATH } from "../constants";
+import drawing from "../public/images/login/drawing.svg";
+import wave from "../public/images/login/wave.svg";
 import {
-  FormTitle,
-  FormText,
-  FormBox,
-  Label,
-  TextInput,
+  BottomText,
+  BottomTextATag,
   Button,
+  ButtonWrapper,
+  DrawingWrapper,
+  EyeWrapper,
+  ForgotPass,
+  FormBox,
+  FormText,
+  FormTitle,
+  FormWrapper,
+  Gradient,
+  Label,
   LabelWrapper,
   MainWrapper,
-  FormWrapper,
   RightSide,
+  TextInput,
   WaveWrapper,
-  EyeWrapper,
-  BottomTextATag,
-  BottomText,
-  Gradient,
-  DrawingWrapper,
-  ForgotPass,
-  ButtonWrapper,
 } from "../styled-components/Login.style";
-import Form from "@/modules/forms";
-import { loginModule } from "../components/login/modules";
-import { Field } from "@/modules/forms/Blocks";
-import { useRouter } from "next/router";
-import { useScreenSize } from "@/utils/media";
 
 const Login = () => {
   const [passwordShown, setPasswordShown] = useState(false);

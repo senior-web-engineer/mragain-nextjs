@@ -77,6 +77,8 @@ const StatsNumbers = styled.div`
 
   ${media.desktop`
     padding: 30px 40px;
+    margin: 0;
+    overflow-x: auto;
 
     stat {
       border-radius: 0;

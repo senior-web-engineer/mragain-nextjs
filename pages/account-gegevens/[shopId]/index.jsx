@@ -25,7 +25,6 @@ const { Option } = Select;
 
 const AccountSetting = (routerProps) => {
   const {
-    match,
     acc_settings,
     auth_error,
     getAccountSettings,
@@ -34,9 +33,6 @@ const AccountSetting = (routerProps) => {
     resetAuthError,
     deleteAccount,
     logOut,
-    isLoggedIn,
-    account_profile,
-    getShopIdByInformation,
   } = routerProps;
 
   const router = useRouter();

@@ -167,3 +167,4 @@ export const servicesFetcher = keyedDataFetcher({
 });
 
 export const createAppointmentFormModal = createModalModule();
+export const notificationsModal = createModalModule();

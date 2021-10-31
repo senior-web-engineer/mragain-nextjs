@@ -1,3 +1,5 @@
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, DatePicker, Icon, Row, TimePicker } from "antd";
 import get from "lodash/get";
 import moment from "moment";
@@ -20,6 +22,7 @@ import {
 import Notifications from "@/components/dashboard/Notifications";
 import Stats from "@/components/dashboard/Stats";
 import DefaultLayout from "@/components/layouts/Dashboard";
+import { FieldWrapAdmin } from "@/components/styled/Forms";
 import { SubTitle } from "@/components/styled/text";
 import {
   BoxContent,
@@ -37,7 +40,7 @@ import { Field, parseNativeEvent } from "@/modules/forms/Blocks";
 import List from "@/modules/list";
 import { Listing, Table } from "@/modules/list/Blocks";
 import { Drawer } from "@/modules/modal";
-import { OnMobile } from "@/utils/media";
+import media, { OnMobile, useScreenSize } from "@/utils/media";
 //
 
 const PageTitle = styled.h1`
@@ -46,18 +49,40 @@ const PageTitle = styled.h1`
   font-weight: bold;
   font-size: 20px;
   line-height: 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const PanelsWrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  overflow-x: auto;
   padding-bottom: 10px;
 
   > div:nth-child(2) {
     margin-top: -50px;
   }
+`;
+
+const TableCellContent = styled.div`
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: -0.02em;
+  color: #505050;
+  em {
+    display: block;
+    font-style: normal;
+    font-weight: normal;
+    color: #909090;
+  }
+`;
+
+const FormSectionTitle = styled(SubTitle)`
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 11px;
+  margin-bottom: 24px;
 `;
 
 export const CreateButton = styled(Button)`
@@ -77,42 +102,68 @@ const CenterText = styled.div`
   }
 `;
 
+const InlineFields = styled.div`
+  ${media.desktop`
+    display: flex;
+    margin-right: -10px;
+    > * {
+      flex-grow: 1;
+      margin-right: 10px;
+    }
+  `}
+`;
+
 const columns = [
   {
     width: "120px",
     title: "Datum",
     render(data) {
-      return data?.appointment?.date;
+      return moment(data?.appointment?.date).format("DD-MM-YY");
     },
   },
   {
     title: "Tijd",
     render(data) {
-      return data?.appointment?.time;
+      const timeParts = data?.appointment?.time.split(":");
+      timeParts.pop();
+
+      return timeParts.join(":");
     },
   },
   {
     title: "Klant informatie",
     render(data) {
-      return `${data?.appointment?.client_name} / ${data?.appointment?.client_phone}`;
+      return (
+        <TableCellContent>
+          {data?.appointment?.client_name}
+          <em>{data?.appointment?.client_phone}</em>
+        </TableCellContent>
+      );
     },
   },
   {
     title: "Model gegevens",
     render(data) {
-      return `${data?.device?.device_name} /  ${data?.brand?.brand_name} / ${data?.model?.model_name}`;
+      return (
+        <TableCellContent>
+          {data?.model?.model_name}
+          <em>{data?.brand?.brand_name}</em>
+        </TableCellContent>
+      );
     },
   },
   {
     title: "Reparatie",
     render(data) {
-      return `${data?.reparation?.reparation_name}`;
+      return (
+        <TableCellContent>{data?.reparation?.reparation_name}</TableCellContent>
+      );
     },
   },
   {
     title: "Prijs",
     render(data) {
-      return `${data?.price}`;
+      return <TableCellContent>&euro;{data?.price}</TableCellContent>;
     },
   },
   {
@@ -197,7 +248,7 @@ const DURATION_OPTIONS = [
   },
 ];
 
-export default function DashboardPage({ auth_user }) {
+export default function DashboardPage() {
   useEffect(() => {
     async function loadData() {
       await currentUser.fetch();
@@ -208,6 +259,8 @@ export default function DashboardPage({ auth_user }) {
 
     loadData();
   }, []);
+
+  const { size } = useScreenSize();
 
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -269,7 +322,12 @@ export default function DashboardPage({ auth_user }) {
 
   return (
     <DefaultLayout>
-      <PageTitle>Welcome Back!</PageTitle>
+      <PageTitle>
+        Welcome Back!{" "}
+        <OnMobile only>
+          <Notifications />
+        </OnMobile>
+      </PageTitle>
       <PanelsWrap>
         <Stats />
         <OnMobile show={false}>
@@ -283,7 +341,7 @@ export default function DashboardPage({ auth_user }) {
           devicesFetcher.fetch();
         }}
       >
-        Create appointment
+        <FontAwesomeIcon icon={faPlus} /> New appointment
       </CreateButton>
       <List module={reparationsList}>
         <OnMobile show={false}>
@@ -381,54 +439,85 @@ export default function DashboardPage({ auth_user }) {
           />
         </OnMobile>
       </List>
-      <Drawer width="500px" module={createAppointmentFormModal}>
+      <Drawer
+        width={size === "mobile" ? "90%" : "600px"}
+        module={createAppointmentFormModal}
+      >
         <Form module={appointmentForm}>
-          <SubTitle>Customer information</SubTitle>
-          <Field as={Input} name="customerName" label="Customer name" />
-          <Field as={Input} name="email" label="Email address" />
-          <Field as={Input} name="contactNumber" label="Contact number" />
-          <SubTitle>Device information</SubTitle>
-          <DeviceSelector
-            as={Select}
-            label="Device"
-            name="device"
-            onChange={onDeviceChange}
-          />
-          <BrandSelector
-            as={Select}
-            label="Brand"
-            name="brand"
-            onChange={onBandChange}
-          />
-          <ModelSelector
-            as={Select}
-            label="Model"
-            name="model"
-            onChange={onModelChange}
-          />
-          <ServiceSelector
-            as={Select}
-            label="Reparation"
-            name="reparation"
-            onChange={onReparationChange}
-          />
-          <SubTitle>Appointment schedule</SubTitle>
-          <Field as={DatePicker} label="Date" name="date" />
-          <Field
-            as={TimePicker}
-            label="Time"
-            name="time"
-            format="HH:mm"
-            minuteStep={15}
-          />
-          <Field
-            as={Select}
-            label="Duration"
-            name="duration"
-            options={DURATION_OPTIONS}
-          />
-          <Field as={Input} name="price" label="Price" />
-          <Field as={Input} name="guarantee_time" label="Guarantee" />
+          <FormSectionTitle>Customer information</FormSectionTitle>
+          <FieldWrapAdmin>
+            <Field as={Input} name="customerName" label="Customer name" />
+          </FieldWrapAdmin>
+          <FieldWrapAdmin>
+            <Field as={Input} name="email" label="Email address" />
+          </FieldWrapAdmin>
+          <FieldWrapAdmin>
+            <Field as={Input} name="contactNumber" label="Contact number" />
+          </FieldWrapAdmin>
+          <FormSectionTitle>Device information</FormSectionTitle>
+          <InlineFields>
+            <FieldWrapAdmin>
+              <DeviceSelector
+                as={Select}
+                label="Device"
+                name="device"
+                onChange={onDeviceChange}
+              />
+            </FieldWrapAdmin>
+            <FieldWrapAdmin>
+              <BrandSelector
+                as={Select}
+                label="Brand"
+                name="brand"
+                onChange={onBandChange}
+              />
+            </FieldWrapAdmin>
+            <FieldWrapAdmin>
+              <ModelSelector
+                as={Select}
+                label="Model"
+                name="model"
+                onChange={onModelChange}
+              />
+            </FieldWrapAdmin>
+          </InlineFields>
+          <FieldWrapAdmin>
+            <ServiceSelector
+              as={Select}
+              label="Reparation"
+              name="reparation"
+              onChange={onReparationChange}
+            />
+          </FieldWrapAdmin>
+          <FormSectionTitle>Appointment schedule</FormSectionTitle>
+          <InlineFields>
+            <FieldWrapAdmin>
+              <Field as={DatePicker} label="Date" name="date" />
+            </FieldWrapAdmin>
+            <FieldWrapAdmin>
+              <Field
+                as={TimePicker}
+                label="Time"
+                name="time"
+                format="HH:mm"
+                minuteStep={15}
+              />
+            </FieldWrapAdmin>
+          </InlineFields>
+          <FieldWrapAdmin>
+            <Field
+              as={Select}
+              label="Duration"
+              name="duration"
+              options={DURATION_OPTIONS}
+            />
+          </FieldWrapAdmin>
+          <FieldWrapAdmin>
+            <Field as={Input} name="price" label="Price" />
+          </FieldWrapAdmin>
+          <FieldWrapAdmin>
+            <Field as={Input} name="guarantee_time" label="Guarantee" />
+          </FieldWrapAdmin>
           <Button>Create appointment</Button>
         </Form>
       </Drawer>
