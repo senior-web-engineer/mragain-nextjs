@@ -323,7 +323,7 @@ export default function DashboardPage() {
   return (
     <DefaultLayout>
       <PageTitle>
-        Welcome Back!{" "}
+        Welkom terug!{" "}
         <OnMobile only>
           <Notifications />
         </OnMobile>
@@ -341,7 +341,7 @@ export default function DashboardPage() {
           devicesFetcher.fetch();
         }}
       >
-        <FontAwesomeIcon icon={faPlus} /> New appointment
+        <FontAwesomeIcon icon={faPlus} /> Nieuwe afspraak
       </CreateButton>
       <List module={reparationsList}>
         <OnMobile show={false}>
@@ -398,7 +398,7 @@ export default function DashboardPage() {
                     <Row>
                       <Col span={12}>
                         <Text.Body lineHeight="16" upperCase>
-                          Date & Time
+                          Datum & tijd
                         </Text.Body>
                         <Text.Body lineHeight="16">
                           {moment(item.appointment.date).format("DD-MM-YY")}
@@ -407,7 +407,7 @@ export default function DashboardPage() {
                       </Col>
                       <Col span={12}>
                         <Text.Body lineHeight="16" upperCase>
-                          Price
+                          Prijs
                         </Text.Body>
                         <Text.Body lineHeight="16">
                           &euro; {item.price}
@@ -417,7 +417,7 @@ export default function DashboardPage() {
                     <Row type="flex" justify="center">
                       <Col span={12}>
                         <Text.Body lineHeight="16" upperCase>
-                          Device details
+                          Details
                         </Text.Body>
                         <Text.Body lineHeight="16">
                           {item.brand.brand_name} {item.model.model_name}
@@ -425,7 +425,7 @@ export default function DashboardPage() {
                       </Col>
                       <Col span={12}>
                         <Text.Body lineHeight="16" upperCase>
-                          Reparation type
+                          Reparatie
                         </Text.Body>
                         <Text.Body lineHeight="16">
                           {item.reparation.reparation_name}
@@ -444,22 +444,22 @@ export default function DashboardPage() {
         module={createAppointmentFormModal}
       >
         <Form module={appointmentForm}>
-          <FormSectionTitle>Customer information</FormSectionTitle>
+          <FormSectionTitle>Klant</FormSectionTitle>
           <FieldWrapAdmin>
-            <Field as={Input} name="customerName" label="Customer name" />
+            <Field as={Input} name="customerName" label="Klant" />
           </FieldWrapAdmin>
           <FieldWrapAdmin>
-            <Field as={Input} name="email" label="Email address" />
+            <Field as={Input} name="email" label="E-mailadres" />
           </FieldWrapAdmin>
           <FieldWrapAdmin>
-            <Field as={Input} name="contactNumber" label="Contact number" />
+            <Field as={Input} name="contactNumber" label="Telefoon nummer" />
           </FieldWrapAdmin>
-          <FormSectionTitle>Device information</FormSectionTitle>
+          <FormSectionTitle>Reparatie details</FormSectionTitle>
           <InlineFields>
             <FieldWrapAdmin>
               <DeviceSelector
                 as={Select}
-                label="Device"
+                label="Apparaat"
                 name="device"
                 onChange={onDeviceChange}
               />
@@ -467,7 +467,7 @@ export default function DashboardPage() {
             <FieldWrapAdmin>
               <BrandSelector
                 as={Select}
-                label="Brand"
+                label="Merk"
                 name="brand"
                 onChange={onBandChange}
               />
@@ -484,20 +484,20 @@ export default function DashboardPage() {
           <FieldWrapAdmin>
             <ServiceSelector
               as={Select}
-              label="Reparation"
+              label="Reparatie"
               name="reparation"
               onChange={onReparationChange}
             />
           </FieldWrapAdmin>
-          <FormSectionTitle>Appointment schedule</FormSectionTitle>
+          <FormSectionTitle>Datum & Tijd</FormSectionTitle>
           <InlineFields>
             <FieldWrapAdmin>
-              <Field as={DatePicker} label="Date" name="date" />
+              <Field as={DatePicker} label="Datum" name="date" />
             </FieldWrapAdmin>
             <FieldWrapAdmin>
               <Field
                 as={TimePicker}
-                label="Time"
+                label="Tijd"
                 name="time"
                 format="HH:mm"
                 minuteStep={15}
@@ -507,18 +507,18 @@ export default function DashboardPage() {
           <FieldWrapAdmin>
             <Field
               as={Select}
-              label="Duration"
+              label="Duur"
               name="duration"
               options={DURATION_OPTIONS}
             />
           </FieldWrapAdmin>
           <FieldWrapAdmin>
-            <Field as={Input} name="price" label="Price" />
+            <Field as={Input} name="price" label="Prijs" />
           </FieldWrapAdmin>
           <FieldWrapAdmin>
-            <Field as={Input} name="guarantee_time" label="Guarantee" />
+            <Field as={Input} name="guarantee_time" label="Garantie" />
           </FieldWrapAdmin>
-          <Button>Create appointment</Button>
+          <Button>Maak afspraak</Button>
         </Form>
       </Drawer>
     </DefaultLayout>
