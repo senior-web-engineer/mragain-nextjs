@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
-import { useRouter } from "next/router";
-import { connect } from "react-redux";
-import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { message } from "antd";
 import "./index.less";
-import { resetPasswordConfirmEmail } from "service/account/operations.js";
+
+import { message } from "antd";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import { Button, Form } from "react-bootstrap";
+import { connect } from "react-redux";
 import { resetAuthError } from "service/account/action.js";
+import { resetPasswordConfirmEmail } from "service/account/operations.js";
+
 import { Layout } from "@/components/global";
 
 function PasswordResetConfirm(routerProps) {

@@ -1,26 +1,29 @@
-import React, { useEffect } from "react";
-import logo from "@/assets/images/logo.png";
-import Image from "next/image";
-import Form from "@/modules/forms";
-import { agrementModal, registerFormModule } from "./modules";
-import router from "next/router";
-import { notification, Checkbox } from "antd";
-import {
-  RegisterFormArea,
-  AccountTitle,
-  AccountSubTitle,
-  FormWrap,
-  ChamberInputWrap,
-  InputWrap,
-  CheckboxWrap,
-} from "./RegisterForm.style";
 import "./RegisterForm.style.less";
-import { Field, parseNativeEvent } from "@/modules/forms/Blocks";
-import Button from "@/components/ui/Button";
-import Modal from "@/modules/modal";
-import { AGREEMENT_TEXT } from "@/constants";
-import { SubTitle } from "@/components/styled/text";
+
+import { Checkbox, notification } from "antd";
+import Image from "next/image";
+import router from "next/router";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+
+import logo from "@/assets/images/logo.png";
+import { SubTitle } from "@/components/styled/text";
+import Button from "@/components/ui/Button";
+import { AGREEMENT_TEXT } from "@/constants";
+import Form from "@/modules/forms";
+import { Field, parseNativeEvent } from "@/modules/forms/Blocks";
+import Modal from "@/modules/modal";
+
+import { agrementModal, registerFormModule } from "./modules";
+import {
+  AccountSubTitle,
+  AccountTitle,
+  ChamberInputWrap,
+  CheckboxWrap,
+  FormWrap,
+  InputWrap,
+  RegisterFormArea,
+} from "./RegisterForm.style";
 
 const ChamberInput = ({ value, onChange }) => {
   return (
@@ -39,7 +42,7 @@ const ChamberInput = ({ value, onChange }) => {
 
 const AgreeSection = styled.div`
   display: flex;
-`
+`;
 
 const TermCheckbox = ({ value, onChange }) => {
   return (
@@ -106,9 +109,7 @@ const RegisterForm = () => {
   return (
     <RegisterFormArea>
       <AccountTitle className="row">Laten we beginnen!</AccountTitle>
-      <AccountSubTitle>
-        Registreer nu je gratis account
-      </AccountSubTitle>
+      <AccountSubTitle>Registreer nu je gratis account</AccountSubTitle>
       <div className="row">
         <div className="account-create-container2">
           <div className="account-create-container2-wrap">
@@ -180,6 +181,5 @@ const RegisterForm = () => {
     </RegisterFormArea>
   );
 };
-
 
 export default RegisterForm;

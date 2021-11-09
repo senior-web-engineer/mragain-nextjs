@@ -1,33 +1,32 @@
+import {
+  faCheck,
+  faClock,
+  faReceipt,
+  faTree,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styled from "styled-components";
 
-import {
-  faReceipt,
-  faClock,
-  faTree,
-  faCheck,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import SliderOnMobile from "@/components/common/SliderOnMobile";
-import media from "@/utils/media";
 import { H2, SubTitle } from "@/components/styled/text";
+import media from "@/utils/media";
 
 //
 
 const ADVANTAGES = [
   {
     icon: faClock,
-    title: "Snelheid & beste prijs",
+    title: "Cashback & beste prijs",
     1: "Reparateurs beheren hun  prijzen op MrAgain, hierdoor krijg je altijd de beste prijs",	  
     2: "Veel reparateurs komen ook op locatie, chill!",
-    3: "Je wordt direct geholpen doordat de reparateur weet dat je komt",
+    3: "Reparateur zonder review? Schrijf de eerste en krijg €10 cashback!",
   },
   {
     icon: faReceipt,
     title: "Vooraf duidelijkheid",
     1: "Direct inzicht in reparatiekosten en garantie die je krijgt",
-    2: "Authentieke reviews van klanten die je voorgingen",	  
+    2: "Authentieke reviews van klanten die je voorgingen",
   },
   {
     icon: faTree,
@@ -109,11 +108,11 @@ export default function AdvantagesSection() {
       <AdvantageWrap key={title}>
         <FontAwesomeIcon icon={icon} />
         <h3>{title}</h3>
-          {Object.keys(rest).map((perk, index) => (
-            <d-item key={index}>
-              <FontAwesomeIcon icon={faCheck} /> {rest[perk]}
-            </d-item>
-          ))}
+        {Object.keys(rest).map((perk, index) => (
+          <d-item key={index}>
+            <FontAwesomeIcon icon={faCheck} /> {rest[perk]}
+          </d-item>
+        ))}
       </AdvantageWrap>
     );
   }
@@ -123,7 +122,15 @@ export default function AdvantagesSection() {
       <SubTitle>mragain.nl</SubTitle>
       <H2>Jouw voordelen</H2>
       <AdvantagesWrap>
-        <SliderOnMobile tabletConfig={{slidesToShow: 2,  centerMode: true, centerPadding: "40px",}}>{ADVANTAGES.map(renderAdvantage)}</SliderOnMobile>
+        <SliderOnMobile
+          tabletConfig={{
+            slidesToShow: 2,
+            centerMode: true,
+            centerPadding: "40px",
+          }}
+        >
+          {ADVANTAGES.map(renderAdvantage)}
+        </SliderOnMobile>
       </AdvantagesWrap>
     </>
   );

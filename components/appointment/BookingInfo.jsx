@@ -1,14 +1,24 @@
-import { useFetcher, withData } from '@/modules/dataFetcher'
-import Form from '@/modules/forms'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Image from 'next/image'
-import React from 'react'
-import styled from 'styled-components'
-import { SubTitle } from '../styled/text'
-import Button from '../ui/Button'
-import { appointmentForm, brandFetcher, deviceFetcher, modelFetcher, serviceFetcher } from './modules'
-import UserInfo from './UserInfo'
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
+import React from "react";
+import styled from "styled-components";
+
+import { useFetcher, withData } from "@/modules/dataFetcher";
+import Form from "@/modules/forms";
+
+import { SubTitle } from "../styled/text";
+import Button from "../ui/Button";
+import {
+  appointmentForm,
+  brandFetcher,
+  deviceFetcher,
+  modelFetcher,
+  serviceFetcher,
+} from "./modules";
+import UserInfo from "./UserInfo";
+
+//
 
 const MainWrap = styled.div`
   max-width: 364px;
@@ -51,7 +61,7 @@ const MainWrap = styled.div`
     bottom: -25px;
     left: 41px;
   }
-`
+`;
 
 const ShopDetails = styled.section`
   font-size: 12px;
@@ -67,7 +77,7 @@ const ShopDetails = styled.section`
     font-weight: 500;
     margin: 0;
   }
-`
+`;
 
 const ServiceDetails = styled.section`
   strong {
@@ -77,14 +87,14 @@ const ServiceDetails = styled.section`
     margin-left: 4px;
   }
 
-  > div > label {
+  label {
     margin: 0;
   }
 
   > div {
     display: flex;
   }
-`
+`;
 
 const ServiceCostWrap = styled.div`
   display: flex;
@@ -93,14 +103,14 @@ const ServiceCostWrap = styled.div`
   letter-spacing: 0px;
   color: #303030;
   font-weight: 300;
-`
+`;
 
 const ServiceDetailsWrap = styled.div`
   display: flex;
   padding-bottom: 22px;
   border-bottom: 3px solid #fafafa;
   margin-bottom: 17px;
-`
+`;
 
 const ServiceImage = styled.div`
   width: 51px;
@@ -111,7 +121,7 @@ const ServiceImage = styled.div`
   background-color: #ddd;
   margin-right: 13px;
   position: relative;
-`
+`;
 
 const TotalWrap = styled.div`
   background-color: #f0f0f0;
@@ -136,44 +146,46 @@ const TotalWrap = styled.div`
     color: #000000;
     font-weight: 500;
   }
-`
+`;
 
 const ButtonWrapper = styled(Button)`
   padding: 0 14px;
-`
+`;
 
 const DeviceName = withData({
   dataFetcher: deviceFetcher,
   Component({ data }) {
-    return data?.device_name || null
+    return data?.device_name || null;
   },
-})
+});
 
 const BrandName = withData({
   dataFetcher: brandFetcher,
   Component({ data }) {
-    return data?.brand_name || null
+    return data?.brand_name || null;
   },
-})
+});
 
 const ModelName = withData({
   dataFetcher: modelFetcher,
   Component({ data }) {
-    return data?.model_name || null
+    return data?.model_name || null;
   },
-})
+});
 
 export default function BookingInfo({
   shop,
   isLastStep,
   nextStep,
   showPrices = true,
-  title = 'Afspraak gegevens',
-  finalButtonLabel = 'Bevestig',
+  title = "Afspraak gegevens",
+  finalButtonLabel = "Bevestig",
 }) {
-  const location = [shop.street || '', shop.city || ''].filter(Boolean).join(', ')
+  const location = [shop.street || "", shop.city || ""]
+    .filter(Boolean)
+    .join(", ");
 
-  const { data: service } = useFetcher({ dataFetcher: serviceFetcher })
+  const { data: service } = useFetcher({ dataFetcher: serviceFetcher });
 
   return (
     <MainWrap>
@@ -189,7 +201,11 @@ export default function BookingInfo({
         <ServiceDetailsWrap>
           <ServiceImage>
             {service?.reparation?.repair_image ? (
-              <Image layout='fill' objectFit='contain' src={service.reparation.repair_image} />
+              <Image
+                layout="fill"
+                objectFit="contain"
+                src={service.reparation.repair_image}
+              />
             ) : null}
           </ServiceImage>
           <ServiceDetails>
@@ -215,7 +231,9 @@ export default function BookingInfo({
         </ServiceDetailsWrap>
       ) : null}
       <Form module={appointmentForm}>
-        <UserInfo showDate={appointmentForm.state?.values?.type !== 'contact'} />
+        <UserInfo
+          showDate={appointmentForm.state?.values?.type !== "contact"}
+        />
       </Form>
       {showPrices && service ? (
         <>
@@ -229,7 +247,7 @@ export default function BookingInfo({
           </TotalWrap>
         </>
       ) : null}
-      <ButtonWrapper onClick={nextStep} aria-label='Next step'>
+      <ButtonWrapper onClick={nextStep} aria-label="Next step">
         {isLastStep ? (
           <span>{finalButtonLabel}</span>
         ) : (
@@ -239,5 +257,5 @@ export default function BookingInfo({
         )}
       </ButtonWrapper>
     </MainWrap>
-  )
+  );
 }

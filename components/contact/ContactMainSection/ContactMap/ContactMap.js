@@ -1,5 +1,5 @@
-import React from "react";
 import GoogleMapReact from "google-map-react";
+import React from "react";
 
 const googleMapsApiKey = "AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE";
 const COORDIANTES = {

@@ -1,3 +1,14 @@
+import { faArrowRight, faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Radio } from "antd";
+import RadioGroup from "antd/lib/radio/group";
+import moment from "moment";
+import Image from "next/image";
+import Link from "next/link";
+import querystring from "querystring";
+import React, { useEffect } from "react";
+import styled, { css } from "styled-components";
+
 import { ModelImages } from "@/components/devices/ModelImages";
 import {
   appointmentFormModule,
@@ -8,19 +19,9 @@ import DefaultLayout from "@/components/layouts/Homepage";
 import { MaxConstraints } from "@/components/styled/layout";
 import { H2, SubTitle } from "@/components/styled/text";
 import Button from "@/components/ui/Button";
-import { faArrowRight, faCalendar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Image from "next/image";
-import Link from "next/link";
-import React, { useEffect } from "react";
-import styled, { css } from "styled-components";
-import querystring from "querystring";
-import media, { OnMobile } from "@/utils/media";
-import moment from "moment";
 import Form, { useFormContext } from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
-import { Radio } from "antd";
-import RadioGroup from "antd/lib/radio/group";
+import media, { OnMobile } from "@/utils/media";
 
 const WhiteBackground = styled.div`
   background-color: #fff;
@@ -188,7 +189,9 @@ function MobileAppointmentButton({ searchUrlData }) {
     <OnMobile only>
       <MobileToolbar>
         <Link href={`/zoek-een-reparateur?${urlData}`}>
-          <Button disabled={!service} as="a">Bekijk reparateurs</Button>
+          <Button disabled={!service} as="a">
+            Bekijk reparateurs
+          </Button>
         </Link>
       </MobileToolbar>
     </OnMobile>
@@ -266,7 +269,9 @@ export default function ModelPage({ data, reparations }) {
       </WhiteBackground>
       <ServicesSection>
         <MaxConstraints>
-          <SubTitle>ALLE {data.brand.brand_name} {data.model_name} REPARATIES</SubTitle>
+          <SubTitle>
+            ALLE {data.brand.brand_name} {data.model_name} REPARATIES
+          </SubTitle>
           <Form module={appointmentFormModule}>
             <Field name="service" as={RadioGroup}>
               {reparations.map(renderReparation)}

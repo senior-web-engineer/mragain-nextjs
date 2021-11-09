@@ -1,20 +1,22 @@
-import { API_PATH } from "@/constants";
-import dataFetcher, { keyedDataFetcher } from "@/modules/dataFetcher";
-import { createListModule } from "@/modules/list";
-import api from "@/utils/api";
 import { notification } from "antd";
 import router from "next/router";
-import { createFormModule } from "@/modules/forms";
-import { createModalModule } from "@/modules/modal";
 import querystring from "querystring";
+
+import { API_PATH } from "@/constants";
+import dataFetcher, { keyedDataFetcher } from "@/modules/dataFetcher";
+import { createFormModule } from "@/modules/forms";
+import { createListModule } from "@/modules/list";
+import { createModalModule } from "@/modules/modal";
+import api from "@/utils/api";
+
 import { getLongAndLat } from "../common/GooglePlaces";
 
 //
 
-export async function prepareData({location, ...data}) {
+export async function prepareData({ location, ...data }) {
   let parsedData = { lat: 0, long: 0, ...data };
   try {
-    const locationMetadata = await getLongAndLat(location)
+    const locationMetadata = await getLongAndLat(location);
 
     parsedData = {
       ...parsedData,
@@ -40,11 +42,11 @@ export const filtersFormModule = createFormModule({
       price: query.price || "-1",
       sort: parseInt(query.sort) || 0,
       long: query.long || 0,
-      shop_type: [],
+      shop_type: 0,
       lat: query.lat || 0,
       limit: 100,
     };
-  }
+  },
 });
 
 export const shopListModule = createListModule({
@@ -113,7 +115,8 @@ export const shopListModule = createListModule({
       };
     } catch (err) {
       notification.error({
-        message: "We hebben geen resultaten gevonden, heb je je locatie en apparaat ingevuld?",
+        message:
+          "We hebben geen resultaten gevonden, heb je je locatie en apparaat ingevuld?",
       });
 
       return { items: [] };

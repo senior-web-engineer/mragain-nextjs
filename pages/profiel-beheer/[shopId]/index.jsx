@@ -1,37 +1,40 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { useRouter } from "next/router";
-import moment from "moment";
-import {
-  TimePicker,
-  Select,
-  message,
-  Checkbox,
-  Button,
-  Divider,
-  Modal,
-  Input,
-} from "antd";
-import { Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
-import {
-  getShopProfileAccount,
-  updateValidOpenTime,
-  updateInvalidOpenTime,
-  getShopIdByInformation,
-} from "service/account/operations.js";
-import {
-  uploadImage,
-  updateAccountProfile,
-} from "service/account/operations.js";
-import { setLoadedProfile } from "service/account/action.js";
 import "./index.less";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  Button,
+  Checkbox,
+  Divider,
+  Input,
+  message,
+  Modal,
+  Select,
+  TimePicker,
+} from "antd";
+import moment from "moment";
 import Head from "next/head";
-import { FRONT_END_URL } from "../../../constants.js";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { Table } from "react-bootstrap";
+import DayPicker from "react-day-picker";
+import { connect } from "react-redux";
+import { setLoadedProfile } from "service/account/action.js";
+import {
+  getShopIdByInformation,
+  getShopProfileAccount,
+  updateInvalidOpenTime,
+  updateValidOpenTime,
+} from "service/account/operations.js";
+import {
+  updateAccountProfile,
+  uploadImage,
+} from "service/account/operations.js";
+
 import { Layout } from "@/components/global";
+
+import { FRONT_END_URL } from "../../../constants.js";
 // import { getPublishProfies } from "../../../lib/getPublishProfiles";
 
 const { TextArea } = Input;
@@ -1266,6 +1269,5 @@ const mapDispatchToProps = (dispatch) => {
 //     },
 //   };
 // }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileManage);

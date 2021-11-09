@@ -1,10 +1,9 @@
-import media, { useScreenSize } from "@/utils/media";
-import {
-  faCheckCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styled, { css } from "styled-components";
+
+import media, { useScreenSize } from "@/utils/media";
 
 //
 
@@ -85,14 +84,7 @@ const OptionWrap = styled.div`
   }
 `;
 
-
-export default function InlineSelector({
-  options = [],
-  onChange,
-  value,
-})
-{
-
+export default function InlineSelector({ options = [], onChange, value }) {
   function renderOption(option) {
     const isSelected = option.value === value;
     const isDisabled = option.disabled;

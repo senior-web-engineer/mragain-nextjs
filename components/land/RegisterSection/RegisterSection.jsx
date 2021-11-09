@@ -1,15 +1,13 @@
 import React from "react";
 
-import { RegisterSectionArea } from './RegisterSection.style';
-
-import Quote from './Quote/Quote';
-import RegisterForm from './RegisterForm/RegisterForm';
+import Quote from "./Quote/Quote";
+import RegisterForm from "./RegisterForm/RegisterForm";
+import { RegisterSectionArea } from "./RegisterSection.style";
 
 const RegisterSection = () => {
-
   return (
     <RegisterSectionArea>
-      <div class="container">
+      <div className="container">
         <div className="row">
           <div className="col-md-7 col-sm-12">
             <Quote />

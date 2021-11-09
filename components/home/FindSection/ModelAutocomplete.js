@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { StyledInput } from "@/components/ui/Input";
-import { Field } from "@/modules/forms/Blocks";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { API_PATH } from "@/constants";
-import { AutoComplete } from "antd";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AutoComplete } from "antd";
+import React, { useEffect, useMemo, useState } from "react";
+
+import { StyledInput } from "@/components/ui/Input";
+import { API_PATH } from "@/constants";
+import { Field } from "@/modules/forms/Blocks";
 import api from "@/utils/api";
 
 export default function ModelAutocomplete() {

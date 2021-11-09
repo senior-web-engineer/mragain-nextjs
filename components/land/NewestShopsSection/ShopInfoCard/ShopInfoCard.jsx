@@ -1,9 +1,11 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./ShopInfoCard.style.less";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Card } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import { CardInfo } from "./ShopInfoCard.style.jsx";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./ShopInfoCard.style.less";
 
 const ShopInfoCard = (params) => (
   <Card className="shop-infor-card">

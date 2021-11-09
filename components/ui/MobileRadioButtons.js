@@ -1,5 +1,6 @@
 import { Radio } from "antd";
 import dynamic from "next/dynamic";
+
 import Loader from "@/components/common/Loader";
 
 const Menu = dynamic(() => import("react-horizontal-scrolling-menu"), {
@@ -13,12 +14,14 @@ export function MobileRadioButtons({ options, value, ...rest }) {
       {option.label}
     </Radio.Button>
   ));
-  return <Radio.Group value={value} {...rest}>
-    <Menu
-      alignCenter={false}
-      data={menuData}
-      selected={value}
-      hideArrows={true}
-    />
-  </Radio.Group>
+  return (
+    <Radio.Group value={value} {...rest}>
+      <Menu
+        alignCenter={false}
+        data={menuData}
+        selected={value}
+        hideArrows={true}
+      />
+    </Radio.Group>
+  );
 }

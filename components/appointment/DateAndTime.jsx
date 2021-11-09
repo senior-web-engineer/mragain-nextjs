@@ -1,13 +1,15 @@
-import { useFetcher } from "@/modules/dataFetcher";
-import { Field } from "@/modules/forms/Blocks";
-import { DAYS_OF_WEEK } from "@/utils/date";
-import media from "@/utils/media";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Calendar, Tooltip } from "antd";
 import moment from "moment";
 import React, { useMemo } from "react";
 import styled, { css } from "styled-components";
+
+import { useFetcher } from "@/modules/dataFetcher";
+import { Field } from "@/modules/forms/Blocks";
+import { DAYS_OF_WEEK } from "@/utils/date";
+import media from "@/utils/media";
+
 import { SubTitle } from "../styled/text";
 import {
   appointmentForm,
@@ -72,7 +74,8 @@ const DatePickerWrap = styled.div`
     font-size: 13px;
   }
 
-  .ant-fullcalendar-next-month-btn-day:not(.ant-fullcalendar-disabled-cell) .ant-fullcalendar-value {
+  .ant-fullcalendar-next-month-btn-day:not(.ant-fullcalendar-disabled-cell)
+    .ant-fullcalendar-value {
     color: rgba(0, 0, 0, 0.65);
   }
 
@@ -329,10 +332,14 @@ export default function DateAndTime({required = true}) {
         <SubTitle>Kies een dag en tijd voor je reparatie {required ? '' : '(Let op: dit kan nog wijzigen)'}</SubTitle>
       </header>
       <SchedueleContentWrap>
-        <Field name="date" as={CalendarField} onChange={(value) => {
-          appointmentForm.actions.onFieldChange({name: "date", value})
-          appointmentForm.actions.onFieldChange({name: "time", value: ""})
-        }}/>
+        <Field
+          name="date"
+          as={CalendarField}
+          onChange={(value) => {
+            appointmentForm.actions.onFieldChange({ name: "date", value });
+            appointmentForm.actions.onFieldChange({ name: "time", value: "" });
+          }}
+        />
         <Field name="time" as={TimePicker} />
       </SchedueleContentWrap>
     </DatePickerWrap>

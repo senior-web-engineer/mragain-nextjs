@@ -1,30 +1,32 @@
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import Head from "next/head";
-import DefaultLayout from "../components/layouts/Homepage";
 import { notification } from "antd";
-import wave from "../public/images/login/wave.svg";
+import Head from "next/head";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+
+import Form from "@/modules/forms";
+import { Field } from "@/modules/forms/Blocks";
+import { useScreenSize } from "@/utils/media";
+
+import DefaultLayout from "../components/layouts/Homepage";
+import { resetPasswordModule } from "../components/resetPassword/modules";
 import drawing from "../public/images/login/drawing.svg";
+import wave from "../public/images/login/wave.svg";
 import {
-  FormTitle,
-  FormText,
-  FormBox,
-  Label,
-  TextInput,
   Button,
+  ButtonWrapper,
+  DrawingWrapper,
+  FormBox,
+  FormText,
+  FormTitle,
+  FormWrapper,
+  Gradient,
+  Label,
   LabelWrapper,
   MainWrapper,
-  FormWrapper,
   RightSide,
+  TextInput,
   WaveWrapper,
-  Gradient,
-  DrawingWrapper,
-  ButtonWrapper,
 } from "../styled-components/reset-password";
-import Form from "@/modules/forms";
-import { resetPasswordModule } from "../components/resetPassword/modules";
-import { useScreenSize } from "@/utils/media";
-import { Field } from "@/modules/forms/Blocks";
 
 const ResetPass = () => {
   const [disable, setDisable] = useState(false);
