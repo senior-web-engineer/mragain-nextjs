@@ -54,7 +54,8 @@ export const reparationsList = createListModule({
       };
     } catch (err) {
       notification.error({
-        message: "Er gaat iets fout, neem contact met ons op als dit probleem zich blijft voordoen",
+        message:
+          "Er gaat iets fout, neem contact met ons op als dit probleem zich blijft voordoen",
       });
 
       return { items: [] };
@@ -124,7 +125,7 @@ export const devicesFetcher = dataFetcher({
 
 export const brandFetcher = keyedDataFetcher({
   selectors: ["dashboard", "brands"],
-  async fetchData([_1, _2, device]) {
+  async fetchData([_, __, device]) {
     const shop = currentUser.selector(store.ref.getState())?.result?.id;
     const data = await api.get(`${API_PATH.GETDEVICEBRANDS}/?`, {
       device,
@@ -136,7 +137,7 @@ export const brandFetcher = keyedDataFetcher({
 
 export const modelFetcher = keyedDataFetcher({
   selectors: ["dashboard", "brands", () => appointmentForm.state.values.device],
-  async fetchData([_1, _2, device, brand]) {
+  async fetchData([_, __, device, brand]) {
     const shop = currentUser.selector(store.ref.getState())?.result?.id;
     const data = await api.get(`${API_PATH.GETBRANDMODELS}/`, {
       device,
