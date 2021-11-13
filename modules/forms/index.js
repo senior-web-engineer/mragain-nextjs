@@ -1,10 +1,13 @@
+import "./rules";
+
+import { createContext, useContext, useEffect } from "react";
 import { connect } from "react-redux";
 import { v4 as uuid } from "uuid";
+
 import Loader from "@/components/common/Loader";
-import { useRef, useEffect, createContext, useContext } from "react";
-import "./rules";
-import FormActions from "./actions";
 import { store } from "@/configureStore";
+
+import FormActions from "./actions";
 
 export function createFormModule({
   init,
@@ -47,7 +50,6 @@ const Form = connect((state, ownProps) => ({
     if (moduleState.isLoading) {
       return;
     }
-
   }, [moduleState, module]);
 
   if (!moduleState || !module) {

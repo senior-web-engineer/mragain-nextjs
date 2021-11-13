@@ -52,8 +52,12 @@ export function createModalModule() {
 
 function DEFAULT_BUTTONS({ module }) {
   return [
-    <button onClick={() => module.actions.close()}>Cancel</button>,
-    <button onClick={() => module.actions.resolve?.()}>Submit</button>,
+    <button key="cancel" onClick={() => module.actions.close()}>
+      Cancel
+    </button>,
+    <button key="submit" onClick={() => module.actions.resolve?.()}>
+      Submit
+    </button>,
   ];
 }
 
@@ -69,7 +73,7 @@ const Modal = connect((state, ownProps) => ({
 export const Drawer = connect((state, ownProps) => ({
   visible: ownProps.module.selectors.isVisible,
   onClose: ownProps.module.actions.close,
-}))(function ({ module, ...rest }) {
+}))(function ({ ...rest }) {
   return <AntDrawer className="custom-drawer" {...rest} />;
 });
 

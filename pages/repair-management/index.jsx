@@ -60,20 +60,17 @@ export default function RepairManagementPage() {
         key: `${fetchedDevices[0].id}-${allModels[0].brand.brand_name}`,
       };
 
-
       const currentModels = await getRepairBrandModel.fetch();
       setDevices(
         fetchedDevices.map((device) => {
-          const icon = find(additionalInfoOptions.devices, ["id", device.id])
+          const icon = find(additionalInfoOptions.devices, ["id", device.id]);
           return {
             title: (
               <DeviceItemWrapper>
                 <div className="device-icon">
-                  {icon ? <Image
-                    width={40}
-                    height={40}
-                    src={icon.icon}
-                  /> : null}
+                  {icon ? (
+                    <Image width={40} height={40} src={icon.icon} />
+                  ) : null}
                 </div>
                 <div className="device-info">
                   <div>
@@ -96,8 +93,8 @@ export default function RepairManagementPage() {
                   image: model.brand.brand_image,
                 })),
               "key"
-            )
-          }
+            ),
+          };
         })
       );
 
