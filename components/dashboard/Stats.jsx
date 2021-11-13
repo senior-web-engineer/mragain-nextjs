@@ -110,22 +110,22 @@ export default function Stats() {
       <StatsNumbers>
         <stat>
           <count>{data.today}</count>
-          <label>Today's Appointments</label>
+          <label>Afspraken vandaag</label>
         </stat>
         <Divider />
         <stat>
           <count>{data.new}</count>
-          <label>New Appointments</label>
+          <label>Nieuwe afspraken</label>
         </stat>
         <Divider />
         <stat>
           <count>{data.upcoming}</count>
-          <label>Upcoming Appointments</label>
+          <label>Komende afspraken</label>
         </stat>
         <Divider />
         <stat>
           <count>{data.completed}</count>
-          <label>Completed Appointments</label>
+          <label>Afgeronde afspraken</label>
         </stat>
       </StatsNumbers>
     );
@@ -133,7 +133,7 @@ export default function Stats() {
 
   return (
     <Wrap>
-      <SubTitle>Quick stats</SubTitle>
+      <SubTitle>Statistieken</SubTitle>
       {renderContent()}
     </Wrap>
   );

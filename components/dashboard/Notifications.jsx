@@ -76,8 +76,8 @@ const NotificationsBell = styled.div`
 `;
 
 const NTYPE_TO_TITLE = {
-  "New appointment": "Translate me: new appointment in dutch",
-  "New inquiry": "Translate me: new inquiry in dutch",
+  "New appointment": "Nieuwe afspraak",
+  "New inquiry": "Nieuw bericht",
 };
 
 export default function Notifications() {
@@ -112,13 +112,13 @@ export default function Notifications() {
           <FontAwesomeIcon icon={faBell} />
         </NotificationsBell>
         <Drawer width="100%" module={notificationsModal}>
-          <SubTitle>Notifications</SubTitle>
+          <SubTitle>Notificaties</SubTitle>
           {renderContent()}
         </Drawer>
       </OnMobile>
       <OnMobile show={false}>
         <Wrap>
-          <SubTitle>Recent activity</SubTitle>
+          <SubTitle>Notificaties</SubTitle>
           {renderContent()}
         </Wrap>
       </OnMobile>
