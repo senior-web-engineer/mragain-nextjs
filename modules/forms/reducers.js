@@ -31,11 +31,11 @@ export function UPDATE_FORM_ERRORS(nextState, { guid, errors }) {
   nextState[guid].errors = errors;
 }
 
-export function SUBMIT_FORM_REQUEST(nextState, { guid, name, value }) {
+export function SUBMIT_FORM_REQUEST(nextState, { guid }) {
   nextState[guid].isSubmitting = true;
 }
 
-export function SUBMIT_FORM_SUCCESS(nextState, { guid, name, value }) {
+export function SUBMIT_FORM_SUCCESS(nextState, { guid }) {
   nextState[guid].isSubmitting = false;
   nextState[guid].submitted = true;
 }

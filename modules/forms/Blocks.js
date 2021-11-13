@@ -31,7 +31,6 @@ export function Field({
   simple,
   adminInput = false,
   optional = false,
-  showError = true,
   children,
   as = "input",
   style,
@@ -53,24 +52,17 @@ export function Field({
     [name, onFieldChange]
   );
 
-  const onBlur = useCallback(
-    (ev) => {
-      validateField({ name });
-    },
-    [name, validateField]
-  );
+  const onBlur = useCallback(() => {
+    validateField({ name });
+  }, [name, validateField]);
 
   const Component = as;
 
   if (simple) {
     return (
-      <Component
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        children={children}
-        {...rest}
-      />
+      <Component value={value} onChange={onChange} onBlur={onBlur} {...rest}>
+        {children}
+      </Component>
     );
   }
 
@@ -93,9 +85,10 @@ export function Field({
           onChange={onChange}
           onBlur={onBlur}
           disabled={disabled}
-          children={children}
           {...rest}
-        />
+        >
+          {children}
+        </Component>
         {error ? <ErrorWrap>{error}</ErrorWrap> : null}
       </FieldWrapAdmin>
     );
@@ -114,9 +107,10 @@ export function Field({
         disabled={disabled}
         onChange={onChange}
         onBlur={onBlur}
-        children={children}
         {...rest}
-      />
+      >
+        {children}
+      </Component>
       {error ? <ErrorWrap>{error}</ErrorWrap> : null}
     </FieldWrap>
   );

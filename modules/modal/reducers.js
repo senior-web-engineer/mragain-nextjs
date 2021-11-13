@@ -1,8 +1,8 @@
-export function OPEN_MODAL(nextState, {guid, payload}) {
+export function OPEN_MODAL(nextState, { guid, payload }) {
   nextState[guid] = {
-    payload
-  }
+    payload,
+  };
 }
-export function CLOSE_MODAL(nextState, {guid}){
+export function CLOSE_MODAL(nextState, { guid }) {
   delete nextState[guid];
 }

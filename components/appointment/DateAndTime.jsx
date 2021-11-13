@@ -329,7 +329,7 @@ export default function DateAndTime({required = true}) {
   return (
     <DatePickerWrap>
       <header>
-        <SubTitle>Kies de datum die jou uitkomt {required ? '' : '(Dit kan wijzigen)'}</SubTitle>
+        <SubTitle>Kies een dag en tijd voor je reparatie {required ? '' : '(Let op: dit kan nog wijzigen)'}</SubTitle>
       </header>
       <SchedueleContentWrap>
         <Field
