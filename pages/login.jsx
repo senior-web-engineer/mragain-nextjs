@@ -48,7 +48,10 @@ const Login = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (localStorage.getItem("auth-token") !== "null") {
+    if (
+      localStorage.getItem("auth-token") &&
+      localStorage.getItem("auth-token") !== "null"
+    ) {
       const user = JSON.parse(localStorage.getItem("auth-user"));
       router.push(`/dashboard`);
     }

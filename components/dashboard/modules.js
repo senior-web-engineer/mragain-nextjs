@@ -90,12 +90,13 @@ export const appointmentForm = createFormModule({
     const promise = privateApi.post(`${API_PATH.CREATEAPPOINTMENTMANUALLY}/`, {
       appointmentData: {
         active: true,
+        appointment_type: 1,
         client_email: data.email,
         client_name: data.customerName,
         client_phone: data.contactNumber,
         reparation: data.reparation,
         shop,
-        date: moment(data.date).format("MM-DD-YYYY"),
+        date: moment(data.date).format("YYYY-MM-DD"),
         time: moment(data.time).format("HH:mm"),
       },
       repairSeviceData: {
@@ -104,7 +105,7 @@ export const appointmentForm = createFormModule({
         model: data.model,
         reparation: data.reparation,
         status: -1,
-        price: `€${data.price}`,
+        price: data.price,
         guarantee: data.guarantee_time,
       },
     });
