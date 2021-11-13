@@ -5,6 +5,7 @@ import React from "react";
 import styled from "styled-components";
 
 import OrderReview from "@/components/appointment/OrderReview.jsx";
+import ContentBlocks from "@/components/content-blocks/ContentBlocks";
 import AdvantagesSection from "@/components/home/AdvantagesSection/index.jsx";
 import FindSection from "@/components/home/FindSection/index.jsx";
 import { searchForm } from "@/components/home/modules.js";
@@ -18,7 +19,6 @@ import { getNewestShopList } from "@/service/search/operations";
 import media from "@/utils/media.js";
 
 import { FRONT_END_URL } from "../constants.js";
-
 const HeroWrap = styled.div`
   overflow: hidden;
 `;
@@ -89,6 +89,11 @@ export default function Home({ shopList }) {
       <Section>
         <MaxConstraints>
           <StepsSection />
+        </MaxConstraints>
+      </Section>
+      <Section>
+        <MaxConstraints>
+          <ContentBlocks />
         </MaxConstraints>
       </Section>
       <TestimonialSectionWrap>
