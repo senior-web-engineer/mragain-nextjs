@@ -350,92 +350,98 @@ export default function DashboardPage() {
         <OnMobile only>
           <Listing
             columns={columns}
-            Item={({ item }) => (
-              <BoxElement
-                style={{ height: selectedItem === item.id ? 300 : 80 }}
-              >
-                <MoreIcon>
-                  <Icon type="eye" />
-                </MoreIcon>
-                <BoxHeader
-                  selected={selectedItem === item.id}
-                  onClick={() => setSelectedItem(item.id)}
+            Item={({ item }) => {
+              const timeParts = item?.appointment?.time.split(":");
+              timeParts.pop();
+
+              const time = timeParts.join(":");
+              return (
+                <BoxElement
+                  style={{ height: selectedItem === item.id ? 300 : 80 }}
                 >
-                  <Row
-                    type="flex"
-                    justify="space-arround"
-                    style={{ height: "80px" }}
+                  <MoreIcon>
+                    <Icon type="eye" />
+                  </MoreIcon>
+                  <BoxHeader
+                    selected={selectedItem === item.id}
+                    onClick={() => setSelectedItem(item.id)}
                   >
-                    <Col span={10}>
-                      <CenterText>
-                        <Text.Body lineHeight="16" weight="bold">
-                          {moment(item.appointment.date).format("DD-MM-YY")}
-                        </Text.Body>
-                        <Text.Body lineHeight="16">
-                          <div>{item.appointment.time}</div>
-                        </Text.Body>
-                      </CenterText>
-                    </Col>
-                    <Col span={2}>
-                      <Separator></Separator>
-                    </Col>
-                    <Col span={10}>
-                      <CenterText>
-                        <Text.Body weight="bold">
-                          <div>{item.appointment.client_name}</div>
-                        </Text.Body>
-                        <Text.Body lineHeight="16">
-                          <div>{item.appointment.client_phone}</div>
-                        </Text.Body>
-                      </CenterText>
-                    </Col>
-                  </Row>
-                </BoxHeader>
-                <BoxContent
-                  style={{ height: selectedItem === item.id ? 200 : 0 }}
-                >
-                  <div style={{ padding: "30px 20px 20px 20px" }}>
-                    <Row>
-                      <Col span={12}>
-                        <Text.Body lineHeight="16" upperCase>
-                          Datum & tijd
-                        </Text.Body>
-                        <Text.Body lineHeight="16">
-                          {moment(item.appointment.date).format("DD-MM-YY")}
-                          <div>{item.appointment.time}</div>
-                        </Text.Body>
+                    <Row
+                      type="flex"
+                      justify="space-arround"
+                      style={{ height: "80px" }}
+                    >
+                      <Col span={10}>
+                        <CenterText>
+                          <Text.Body lineHeight="16" weight="bold">
+                            {moment(item.appointment.date).format("DD-MM-YY")}
+                          </Text.Body>
+                          <Text.Body lineHeight="16">
+                            <div>{time}</div>
+                          </Text.Body>
+                        </CenterText>
                       </Col>
-                      <Col span={12}>
-                        <Text.Body lineHeight="16" upperCase>
-                          Prijs
-                        </Text.Body>
-                        <Text.Body lineHeight="16">
-                          &euro; {item.price}
-                        </Text.Body>
+                      <Col span={2}>
+                        <Separator></Separator>
+                      </Col>
+                      <Col span={10}>
+                        <CenterText>
+                          <Text.Body weight="bold">
+                            <div>{item.appointment.client_name}</div>
+                          </Text.Body>
+                          <Text.Body lineHeight="16">
+                            <div>{item.appointment.client_phone}</div>
+                          </Text.Body>
+                        </CenterText>
                       </Col>
                     </Row>
-                    <Row type="flex" justify="center">
-                      <Col span={12}>
-                        <Text.Body lineHeight="16" upperCase>
-                          Details
-                        </Text.Body>
-                        <Text.Body lineHeight="16">
-                          {item.brand.brand_name} {item.model.model_name}
-                        </Text.Body>
-                      </Col>
-                      <Col span={12}>
-                        <Text.Body lineHeight="16" upperCase>
-                          Reparatie
-                        </Text.Body>
-                        <Text.Body lineHeight="16">
-                          {item.reparation.reparation_name}
-                        </Text.Body>
-                      </Col>
-                    </Row>
-                  </div>
-                </BoxContent>
-              </BoxElement>
-            )}
+                  </BoxHeader>
+                  <BoxContent
+                    style={{ height: selectedItem === item.id ? 200 : 0 }}
+                  >
+                    <div style={{ padding: "30px 20px 20px 20px" }}>
+                      <Row>
+                        <Col span={12}>
+                          <Text.Body lineHeight="16" upperCase>
+                            Datum & tijd
+                          </Text.Body>
+                          <Text.Body lineHeight="16">
+                            {moment(item.appointment.date).format("DD-MM-YY")}
+                            <div>{time}</div>
+                          </Text.Body>
+                        </Col>
+                        <Col span={12}>
+                          <Text.Body lineHeight="16" upperCase>
+                            Prijs
+                          </Text.Body>
+                          <Text.Body lineHeight="16">
+                            &euro; {item.price}
+                          </Text.Body>
+                        </Col>
+                      </Row>
+                      <Row type="flex" justify="center">
+                        <Col span={12}>
+                          <Text.Body lineHeight="16" upperCase>
+                            Details
+                          </Text.Body>
+                          <Text.Body lineHeight="16">
+                            {item.brand.brand_name} {item.model.model_name}
+                          </Text.Body>
+                        </Col>
+                        <Col span={12}>
+                          <Text.Body lineHeight="16" upperCase>
+                            Reparatie
+                          </Text.Body>
+                          <Text.Body lineHeight="16">
+                            {item.reparation.reparation_name}
+                          </Text.Body>
+                        </Col>
+                      </Row>
+                    </div>
+                  </BoxContent>
+                </BoxElement>
+              );
+            }}
           />
         </OnMobile>
       </List>

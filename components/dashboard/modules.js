@@ -1,4 +1,5 @@
 import { notification } from "antd";
+import moment from "moment";
 
 import { store } from "@/configureStore";
 import { API_PATH } from "@/constants";
@@ -22,8 +23,11 @@ export const recentActivity = dataFetcher({
       return currentUser.selector(state)?.result?.id;
     },
   ],
-  fetchData([_, shopId]) {
-    return privateApi.get(`${API_PATH.GETALLNOTIFICATIONS}/${shopId}/`);
+  async fetchData([_, shopId]) {
+    const data = await privateApi.get(
+      `${API_PATH.GETALLNOTIFICATIONS}/${shopId}/`
+    );
+    return data.reverse();
   },
 });
 
@@ -88,19 +92,19 @@ export const appointmentForm = createFormModule({
         active: true,
         client_email: data.email,
         client_name: data.customerName,
-        cient_phone: data.contactNumber,
+        client_phone: data.contactNumber,
         reparation: data.reparation,
         shop,
-        date: data.date,
-        time: data.time,
+        date: moment(data.date).format("MM-DD-YYYY"),
+        time: moment(data.time).format("HH:mm"),
       },
       repairSeviceData: {
         device: data.device,
         brand: data.brand,
         model: data.model,
         reparation: data.reparation,
-        status: "-1",
-        price: data.price,
+        status: -1,
+        price: `€${data.price}`,
         guarantee: data.guarantee_time,
       },
     });

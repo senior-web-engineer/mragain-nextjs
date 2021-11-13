@@ -42,6 +42,7 @@ export const AccountMenu = ({ selected, onSelect, shopId }) => {
         onSelect={async () => {
           await api.get(`${API_PATH.LOGOUT}`);
           localStorage.setItem("auth-user", null);
+          localStorage.setItem("auth-token", null);
           router.push("/");
         }}
         treeData={[

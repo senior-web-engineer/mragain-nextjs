@@ -3,14 +3,15 @@ import styled from "styled-components";
 
 import Loader from "@/components/common/Loader";
 import { useFetcher } from "@/modules/dataFetcher";
-import media from "@/utils/media";
+import media, { OnMobile } from "@/utils/media";
 
+import SliderOnMobile from "../common/SliderOnMobile";
 import { SubTitle } from "../styled/text";
 import { appointmentStats } from "./modules";
 
 const Wrap = styled.div`
   border-radius: 10px;
-
+  width: 100%;
   ${SubTitle} {
     display: none;
     border-bottom: 1px solid #ddd;
@@ -39,17 +40,13 @@ const Divider = styled.div`
 `;
 
 const StatsNumbers = styled.div`
-  display: flex;
-  margin: 0 -16px;
-  max-width: 100%;
-
   stat {
     background: #ffffff;
     border-radius: 10px;
     flex: none;
     order: 0;
     flex-grow: 0;
-    margin: 0px 16px;
+    margin: 0px;
     width: 136px;
     height: 136px;
     padding: 15px 30px;
@@ -75,7 +72,10 @@ const StatsNumbers = styled.div`
     color: #909090;
   }
 
-  ${media.desktop`
+  ${media.tablet`
+    display: flex;
+    margin: 0 -16px;
+    max-width: 100%;
     padding: 30px 40px;
     margin: 0;
     overflow-x: auto;
@@ -107,27 +107,57 @@ export default function Stats() {
     }
 
     return (
-      <StatsNumbers>
-        <stat>
-          <count>{data.today}</count>
-          <label>Afspraken vandaag</label>
-        </stat>
-        <Divider />
-        <stat>
-          <count>{data.new}</count>
-          <label>Nieuwe afspraken</label>
-        </stat>
-        <Divider />
-        <stat>
-          <count>{data.upcoming}</count>
-          <label>Komende afspraken</label>
-        </stat>
-        <Divider />
-        <stat>
-          <count>{data.completed}</count>
-          <label>Afgeronde afspraken</label>
-        </stat>
-      </StatsNumbers>
+      <>
+        <OnMobile only>
+          <StatsNumbers>
+            <SliderOnMobile
+              slidesToShow={2}
+              slidesToScroll={2}
+              centerPadding="20px"
+            >
+              <stat>
+                <count>{data.today}</count>
+                <label>Afspraken vandaag</label>
+              </stat>
+              <stat>
+                <count>{data.new}</count>
+                <label>Nieuwe afspraken</label>
+              </stat>
+              <stat>
+                <count>{data.upcoming}</count>
+                <label>Komende afspraken</label>
+              </stat>
+              <stat>
+                <count>{data.completed}</count>
+                <label>Afgeronde afspraken</label>
+              </stat>
+            </SliderOnMobile>
+          </StatsNumbers>
+        </OnMobile>
+        <OnMobile show={false}>
+          <StatsNumbers>
+            <stat>
+              <count>{data.today}</count>
+              <label>Afspraken vandaag</label>
+            </stat>
+            <Divider />
+            <stat>
+              <count>{data.new}</count>
+              <label>Nieuwe afspraken</label>
+            </stat>
+            <Divider />
+            <stat>
+              <count>{data.upcoming}</count>
+              <label>Komende afspraken</label>
+            </stat>
+            <Divider />
+            <stat>
+              <count>{data.completed}</count>
+              <label>Afgeronde afspraken</label>
+            </stat>
+          </StatsNumbers>
+        </OnMobile>
+      </>
     );
   }
 
