@@ -14,11 +14,11 @@
 // export const FRONT_END_URL = isProduct
 //   ? "https://mragain.nl"
 //   : "https://develop.mragain.nl";
-export const API_URL = process.env.NEXT_PUBLIC_API_URL
-export const BACK_END_URL = process.env.NEXT_PUBLIC_BACK_END_URL
-export const FRONT_END_URL = process.env.NEXT_PUBLIC_FRONT_END_URL
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;
+export const BACK_END_URL = process.env.NEXT_PUBLIC_BACK_END_URL;
+export const FRONT_END_URL = process.env.NEXT_PUBLIC_FRONT_END_URL;
 
-console.log('API_URL', API_URL)
+console.log("API_URL", API_URL);
 export const API_PATH = {
   ALL_MODELS: `${API_URL}/getAlldevBrndModel`,
   SEARCH: `${API_URL}/searchshop`,
@@ -106,14 +106,14 @@ export const API_PATH = {
   DELETEINVALIDTIME: `${API_URL}/delete-invalid-time`,
   PAYMENT: `${API_URL}/payment/`,
   GETPAYMENT: (id) => `${API_URL}/payment-status/${id}/`,
-}
+};
 
 export default {
   API_URL,
   API_PATH,
   FRONT_END_URL,
   BACK_END_URL,
-}
+};
 
 export const AGREEMENT_TEXT = `
 Algemene voorwaarden van: Mr Again V.O.F. Faustdreef 153 3561 LD
@@ -657,4 +657,4 @@ gebruiker. 5. Indien de wederpartij gevestigd is buiten Nederland, mag
 de gebruiker er voor kiezen het geschil voor te leggen aan de bevoegde
 rechter in het land of de staat waar de wederpartij gevestigd is.
 Datum: 4 September 2020
-`
+`;

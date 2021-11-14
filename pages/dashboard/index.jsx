@@ -1,6 +1,8 @@
+import { DownOutlined } from "@ant-design/icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, DatePicker, Icon, Row, TimePicker } from "antd";
+import { Dropdown, Menu } from "antd";
 import get from "lodash/get";
 import moment from "moment";
 import React, { useCallback, useEffect, useState } from "react";
@@ -169,7 +171,37 @@ const columns = [
   {
     title: "Status",
     render(data) {
-      return <div>status</div>;
+      return <div>{data.status}</div>;
+    },
+  },
+  {
+    title: "",
+    render(data) {
+      const menu = (
+        <Menu>
+          <Menu.Item
+            onClick={async () => {
+              createAppointmentFormModal.actions.open({ id: data.id });
+              await appointmentForm.actions.initialize();
+              devicesFetcher.fetch();
+              brandFetcher
+                .key(`${appointmentForm.state.values.device}`)
+                .fetch();
+              modelFetcher.key(`${appointmentForm.state.values.brand}`).fetch();
+              servicesFetcher
+                .key(`${appointmentForm.state.values.model}`)
+                .fetch();
+            }}
+          >
+            Edit
+          </Menu.Item>
+        </Menu>
+      );
+      return (
+        <Dropdown overlay={menu} trigger="click">
+          <DownOutlined />
+        </Dropdown>
+      );
     },
   },
 ];
