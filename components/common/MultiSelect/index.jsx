@@ -61,7 +61,7 @@ export const MultiSelect = ({ placeholder, onChange, value, options }) => {
         showArrow
         defaultValue={value}
         style={{ width: "100%" }}
-        placeholder={placeholder || "Selecteer je reparaties"}
+        placeholder={placeholder || "Maak je keuze"}
         onChange={onChange}
         tokenSeparators={[","]}
       >
