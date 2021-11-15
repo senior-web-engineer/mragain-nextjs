@@ -280,7 +280,7 @@ export const AdditionalInfo = ({ shopData }) => {
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
             <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-              Aanvullende services
+              Beschikbare reparaties
             </Text.Body>
           </Col>
           <Col span={18}>
@@ -323,9 +323,9 @@ export const AdditionalInfo = ({ shopData }) => {
                 name="temporaryReplacement"
               />
             ) : shopData?.temporaryReplacement ? (
-              "No"
+              "Nee"
             ) : (
-              "Yes"
+              "Ja"
             )}
           </Col>
         </Row>
