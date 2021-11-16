@@ -320,9 +320,12 @@ export const AdditionalInfo = ({ shopData }) => {
                 adminInput
                 simple
                 as={Switch}
+                defaultChecked={
+                  shopData?.temporaryReplacement === 1 ? true : false
+                }
                 name="temporaryReplacement"
               />
-            ) : shopData?.temporaryReplacement ? (
+            ) : shopData?.temporaryReplacement === 0 ? (
               "Nee"
             ) : (
               "Ja"
@@ -342,7 +345,7 @@ export const AdditionalInfo = ({ shopData }) => {
                 adminInput
                 simple
                 as={Switch}
-                value={shopData.waitingArea === "No" ? false : true}
+                defaultChecked={shopData.waitingArea === "No" ? false : true}
                 name="waitingArea"
               />
             ) : (
