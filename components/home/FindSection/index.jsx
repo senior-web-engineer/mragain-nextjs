@@ -165,7 +165,6 @@ function SearchButton() {
 
 export default function FindSection() {
   const [devices, setDevices] = useState([]);
-
   useEffect(() => {
     async function loadData() {
       const data = await api.get(`${API_PATH.GETDEVICES}/`);
