@@ -1,4 +1,5 @@
 import { notification } from "antd";
+import moment from "moment";
 
 import { store } from "@/configureStore";
 import { API_PATH } from "@/constants";
@@ -22,8 +23,11 @@ export const recentActivity = dataFetcher({
       return currentUser.selector(state)?.result?.id;
     },
   ],
-  fetchData([_, shopId]) {
-    return privateApi.get(`${API_PATH.GETALLNOTIFICATIONS}/${shopId}/`);
+  async fetchData([_, shopId]) {
+    const data = await privateApi.get(
+      `${API_PATH.GETALLNOTIFICATIONS}/${shopId}/`
+    );
+    return data.reverse();
   },
 });
 
@@ -66,6 +70,29 @@ export const reparationsList = createListModule({
 export const appointmentForm = createFormModule({
   guid: "createAppointment",
   async init() {
+    const data = createAppointmentFormModal.selectors.data;
+    if (data?.id) {
+      const reparations = reparationsList.selectors.getItems(
+        store.ref.getState()
+      );
+      const reparation = reparations.find((r) => r.id === data.id);
+      if (reparation) {
+        return {
+          customerName: reparation.appointment.client_name,
+          email: reparation.appointment.client_email,
+          contactNumber: reparation.appointment.client_phone,
+          device: reparation.device.id,
+          model: reparation.model.id,
+          brand: reparation.brand.id,
+          reparation: reparation.reparation.id,
+          date: moment(reparation.appointment.date),
+          time: moment(reparation.appointment.time, "HH:mm:ss"),
+          price: reparation.price,
+          id: reparation.id,
+          guarantee_time: reparation.guarantee,
+        };
+      }
+    }
     return {
       customerName: "",
       email: "",
@@ -78,32 +105,51 @@ export const appointmentForm = createFormModule({
       time: "",
       duration: "60minutes",
       price: "0",
-      guarantee: "0",
+      guarantee_time: "0",
     };
   },
   submit(data) {
     const shop = currentUser.selector(store.ref.getState())?.result?.id;
-    const promise = privateApi.post(`${API_PATH.CREATEAPPOINTMENTMANUALLY}/`, {
-      appointmentData: {
-        active: true,
-        client_email: data.email,
-        client_name: data.customerName,
-        cient_phone: data.contactNumber,
-        reparation: data.reparation,
-        shop,
-        date: data.date,
-        time: data.time,
-      },
-      repairSeviceData: {
-        device: data.device,
-        brand: data.brand,
-        model: data.model,
-        reparation: data.reparation,
-        status: "-1",
-        price: data.price,
-        guarantee: data.guarantee_time,
-      },
-    });
+
+    let promise = null;
+
+    if (data?.id) {
+      promise = privateApi.post(`${API_PATH.SAVESHOPREPARATION}`, {
+        repaData: {
+          device: data.device,
+          brand: data.brand,
+          model: data.model,
+          shop,
+          reparation: data.reparation,
+          price: data.price,
+          guarantee_time: parseInt(data.guarantee_time),
+        },
+      });
+    } else {
+      promise = privateApi.post(`${API_PATH.CREATEAPPOINTMENTMANUALLY}/`, {
+        appointmentData: {
+          active: true,
+          appointment_type: 1,
+          client_email: data.email,
+          client_name: data.customerName,
+          client_phone: data.contactNumber,
+          reparation: data.reparation,
+          shop,
+          date: moment(data.date).format("YYYY-MM-DD"),
+          time: moment(data.time).format("HH:mm"),
+        },
+        repairSeviceData: {
+          device: data.device,
+          brand: data.brand,
+          model: data.model,
+          reparation: data.reparation,
+          status: -1,
+          price: data.price,
+          guarantee_time: data.guarantee_time,
+          guarantee: data.guarantee_time,
+        },
+      });
+    }
 
     createAppointmentFormModal.actions.close();
     notification.success({
@@ -167,3 +213,4 @@ export const servicesFetcher = keyedDataFetcher({
 });
 
 export const createAppointmentFormModal = createModalModule();
+export const notificationsModal = createModalModule();

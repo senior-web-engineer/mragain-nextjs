@@ -14,14 +14,13 @@ export const ContentWrap = styled.div`
 `;
 
 export const PageContent = styled.div`
-  padding: 24px 32px 24px 48px;
+  padding: 24px 24px 24px 24px;
   flex: 1;
   height: calc(100vh - 68px);
   overflow: auto;
 `;
 
 export const MenuWrap = styled.div`
-  width: 254px;
   height: 100%;
   background-color: #fff;
   padding: 16px;
@@ -52,6 +51,7 @@ export const MenuWrap = styled.div`
 
   .ant-tree-icon__customize {
     margin-right: 10px !important;
+    color: #ddd;
   }
 
   .ant-tree > li > span:first-child {
