@@ -212,12 +212,21 @@ function SearchButton() {
   );
 }
 
+<<<<<<< Updated upstream
 export default function CitySearch() {
   return (
     <FindWrap>
       <SearchWrap>
         <h3>Premium Partner</h3>
         <h1>All shops in Emmeloord</h1>
+=======
+export default function CitySearch({ title, headline }) {
+  return (
+    <FindWrap>
+      <SearchWrap>
+        <h3>{headline}</h3>
+        <h1>{title}</h1>
+>>>>>>> Stashed changes
         <Form module={searchForm}>
           <SearchBar>
             <div>

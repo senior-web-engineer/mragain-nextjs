@@ -74,7 +74,14 @@ export default function City({ cityInfo }) {
         <meta name="theme-color" content="#ffffff" />
       </Head>
       <section className="search">
+<<<<<<< Updated upstream
         <CitySearch />
+=======
+        <CitySearch
+          title={cityContent?.search_title}
+          headline={cityContent?.search_headline}
+        />
+>>>>>>> Stashed changes
       </section>
       <section className="categories">
         <div className="wrapper">
