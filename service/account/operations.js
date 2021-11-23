@@ -4,7 +4,7 @@ import Axios from "axios";
 import router from "next/router";
 
 import { registerFormModule } from "@/components/land/RegisterSection/RegisterForm/modules";
-
+import { API_PATH } from "../../constants";
 import {
   authenticated,
   fetchAccountSettings,
