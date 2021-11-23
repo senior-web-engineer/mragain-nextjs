@@ -115,6 +115,15 @@ export const appointmentForm = createFormModule({
       guarantee: service?.guarantee_time,
       reparation: reparationId,
     };
+    let emailServiceData = {
+      appointment: 389,
+      device: parseInt(data.device),
+      brand: parseInt(data.brand),
+      model: parseInt(data.model),
+      price: service?.price,
+      guarantee: service?.guarantee_time,
+      reparation: reparationId,
+    };
 
     if (!reparationId) {
       repairSeviceData = {
@@ -125,6 +134,15 @@ export const appointmentForm = createFormModule({
         model: 748,
         status: -1,
         reparation: 54,
+      };
+      emailServiceData = {
+        appointment: 389,
+        device: 1,
+        brand: 1,
+        model: 1,
+        price: 25,
+        guarantee: 12,
+        reparation: 2,
       };
     }
 
@@ -160,11 +178,18 @@ export const appointmentForm = createFormModule({
       `${API_PATH.CREATEAPPOINTMENT}/`,
       payload
     );
+    const create_repair_service = await api.post(
+      `${API_PATH.CREATESHOPREPAIRSERVICE}/`,
+      {
+        appointment: appointment.appointment_id,
+        ...repairSeviceData,
+      }
+    );
 
-    return api.post(`${API_PATH.CREATESHOPREPAIRSERVICE}/`, {
-      appointment: appointment.appointment_id,
-      ...repairSeviceData,
-    });
+    emailServiceData.appointment = appointment.appointment_id;
+    api.post(`${API_PATH.APPOINTMENTEMAIL}/`, emailServiceData);
+
+    return create_repair_service;
   },
 });
 

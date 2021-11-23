@@ -1,16 +1,5 @@
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TextArea from "antd/lib/input/TextArea";
-import router from "next/router";
-import React, { useCallback, useEffect, useState } from "react";
-import styled, { css } from "styled-components";
-
-import BookingInfo from "@/components/appointment/BookingInfo";
-import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
-import DateAndTime from "@/components/appointment/DateAndTime";
-import LocationSelector, {
-  getLocationOptions,
-} from "@/components/appointment/LocationSelector";
+import DefaultLayout from "@/components/layouts/Homepage";
+import { MaxConstraints } from "@/components/styled/layout";
 import {
   appointmentConfirmation,
   appointmentForm,
@@ -23,22 +12,31 @@ import {
   payForAppointment,
   serviceFetcher,
 } from "@/components/appointment/modules";
-import PaymentSelector from "@/components/appointment/PaymentSelector";
-import Steps from "@/components/appointment/Steps";
-import ConfirmationModal from "@/components/common/modals/ConfirmationModal";
-import Switch from "@/components/common/Switch";
-import { appointmentFormModule } from "@/components/devices/modules";
-import DefaultLayout from "@/components/layouts/Homepage";
-import { FieldWrap } from "@/components/styled/Forms";
-import { MaxConstraints } from "@/components/styled/layout";
-import { SubTitle } from "@/components/styled/text";
-import { TextButton } from "@/components/ui/Button";
-import Button from "@/components/ui/Button";
-import { store } from "@/configureStore";
-import Form, { useFormContext } from "@/modules/forms";
-import { Field } from "@/modules/forms/Blocks";
 import { getShopProfileByInformationServer } from "@/service/account/operations";
+import React, { useCallback, useEffect, useState } from "react";
+import BookingInfo from "@/components/appointment/BookingInfo";
+import styled, { css } from "styled-components";
+import { SubTitle } from "@/components/styled/text";
+import { Field } from "@/modules/forms/Blocks";
+import LocationSelector, {
+  getLocationOptions,
+} from "@/components/appointment/LocationSelector";
+import PaymentSelector from "@/components/appointment/PaymentSelector";
+import Form, { useFormContext } from "@/modules/forms";
+import DateAndTime from "@/components/appointment/DateAndTime";
+import Steps from "@/components/appointment/Steps";
+import Switch from "@/components/common/Switch";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { TextButton } from "@/components/ui/Button";
+import { FieldWrap } from "@/components/styled/Forms";
+import ConfirmationModal from "@/components/common/ConfirmationModal";
 import media, { OnMobile } from "@/utils/media";
+import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
+import Button from "@/components/ui/Button";
+import { useRouter } from "next/router";
+import { store } from "@/configureStore";
+import TextArea from "antd/lib/input/TextArea";
 
 const MainWrap = styled.div`
   padding-top: 1px;
@@ -190,7 +188,14 @@ function ConnectedDateAndTime() {
 }
 
 export default function AppointmentPage({ shop }) {
+  const [data, setData] = useState({
+    city: "",
+    street: "",
+    name: "",
+    aptId: "",
+  });
   const [step, updateStep] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     async function loadData() {
@@ -235,6 +240,8 @@ export default function AppointmentPage({ shop }) {
       }
     }
 
+    console.log("step", step);
+
     if (step === 1) {
       const reviewData = {
         form: appointmentForm.state.values,
@@ -245,58 +252,19 @@ export default function AppointmentPage({ shop }) {
         model: modelFetcher.selector(store.ref.getState()).result,
       };
 
-      function onAppointmentConfirmed() {
-        appointmentReview.actions.open(reviewData);
-        router.router.push("/");
-      }
-
-      try {
-        const appointmentData = await appointmentForm.actions.submit();
-        appointmentConfirmation.actions
-          .open({
-            type: "success",
-            message: "Afspraak succesvol gemaakt! ",
-            description:
-              "We hebben een bevestiging email naar je verzonden (kan in je spam zitten!)",
-            buttonLabel:
-              appointmentForm.state.values.paymentType === "credit-card"
-                ? "Pay now"
-                : "Bekijk afspraak gegevens",
-          })
-          .then(async () => {
-            if (appointmentForm.state.values.paymentType === "credit-card") {
-              const paymentGatewayResponse = await payForAppointment({
-                ...appointmentData,
-                ...reviewData,
-              });
-              window.location.href = paymentGatewayResponse.data;
-              return;
-            }
-            onAppointmentConfirmed();
-          });
-      } catch (err) {
-        if (err.validationErrors) {
-          appointmentConfirmation.actions.open({
-            type: "warning",
-            message:
-              "Je lijkt niet alle informatie te hebben ingevuld, even checken?",
-            description:
-              "We hebben al je informatie nodig om een afspraak te maken",
-            buttonLabel: "Probeer het nog een keer",
-          });
-          return;
-        }
-        appointmentConfirmation.actions.open({
-          type: "error",
-          message: "Oops!",
-          description: "Er is iets fout gegaan",
-          buttonLabel: "Probeer het nog eens",
-        });
-      }
-
-      return;
+      const appointmentData = await appointmentForm.actions.submit();
+      const { city, street, name } = reviewData.shop;
+      let namefixed = name.replaceAll(" ", "-");
+      let streetfixed = street.replaceAll(" ", "-");
+      let aptId = appointmentData.appointment;
+      setData({ ...data, city, street: streetfixed, name: namefixed, aptId });
+      router.push(`/${city}/${namefixed}/${streetfixed}/success/${aptId}`);
     }
-    updateStep((state) => state + 1);
+    // if (step === 2) {
+    // }
+    if (step < 1) {
+      updateStep((state) => state + 1);
+    }
   });
 
   function renderAddressFields() {
@@ -333,7 +301,7 @@ export default function AppointmentPage({ shop }) {
       <OnMobile only>
         {step > 0 ? (
           <Button onClick={onNext} aria-label="Volgende">
-            Bevestig
+            Bevestigw
           </Button>
         ) : (
           <Button onClick={onNext} aria-label="Volgende">

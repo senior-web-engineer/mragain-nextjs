@@ -1,27 +1,27 @@
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TextArea from "antd/lib/input/TextArea";
-import router from "next/router";
-import React, { useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
-
-import BookingInfo from "@/components/appointment/BookingInfo";
-import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
+import DefaultLayout from "@/components/layouts/Homepage";
+import { MaxConstraints } from "@/components/styled/layout";
 import {
   appointmentConfirmation,
   appointmentForm,
   appointmentReview,
 } from "@/components/appointment/modules";
-import ConfirmationModal from "@/components/common/modals/ConfirmationModal";
-import DefaultLayout from "@/components/layouts/Homepage";
-import { FieldWrap } from "@/components/styled/Forms";
-import { MaxConstraints } from "@/components/styled/layout";
+import { getShopProfileByInformationServer } from "@/service/account/operations";
+import React, { useCallback, useEffect, useState } from "react";
+import BookingInfo from "@/components/appointment/BookingInfo";
+import styled from "styled-components";
 import { SubTitle } from "@/components/styled/text";
-import { TextButton } from "@/components/ui/Button";
-import Button from "@/components/ui/Button";
-import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
+import Form from "@/modules/forms";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { TextButton } from "@/components/ui/Button";
+import { FieldWrap } from "@/components/styled/Forms";
+import ConfirmationModal from "@/components/common/ConfirmationModal";
 import media, { OnMobile } from "@/utils/media";
+import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
+import Button from "@/components/ui/Button";
+import { useRouter } from "next/router";
+import TextArea from "antd/lib/input/TextArea";
 
 const MainWrap = styled.div`
   padding-top: 1px;
@@ -149,14 +149,9 @@ const MobileToolbar = styled.div`
   }
 `;
 
-const AddressSection = styled.div`
-  border-top: 3px solid #fafafa;
-  margin-top: 23px;
-  padding-top: 17px;
-`;
-
 export default function AppointmentPage({ shop }) {
   const [step, updateStep] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     async function loadData() {
@@ -173,7 +168,7 @@ export default function AppointmentPage({ shop }) {
     });
 
     try {
-      await appointmentForm.actions.submit();
+      const data = await appointmentForm.actions.submit();
       appointmentConfirmation.actions
         .open({
           type: "success",
@@ -183,8 +178,14 @@ export default function AppointmentPage({ shop }) {
           buttonLabel: "Bekijk gegevens",
         })
         .then(() => {
-          appointmentReview.actions.open(reviewData);
-          router.router.push("/");
+          router.push(
+            `/${shop.city}/${shop.name.replaceAll(
+              " ",
+              "-"
+            )}/${shop.street.replaceAll(" ", "-")}/success/${data.appointment}`
+          );
+
+          // appointmentReview.actions.open(reviewData)
         });
     } catch (err) {
       if (err.validationErrors) {
@@ -229,7 +230,10 @@ export default function AppointmentPage({ shop }) {
             <Form module={appointmentForm}>
               <DetailsForm>
                 <header>
-                  <SubTitle>Vul je gegevens in en neem contact op</SubTitle>
+                  <SubTitle>
+                    Laat ons weten waarmee we je kunnen helpen en we nemen zo
+                    snel mogelijk contact met je op
+                  </SubTitle>
                 </header>
                 <Field name="name" label="Naam" />
                 <InlineFields>

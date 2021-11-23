@@ -8,22 +8,25 @@ import styled from "styled-components";
 import { Text } from "@/components/common/Text/Text";
 import { renderDeviceDetails } from "@/components/templates/history/helpers";
 
-const BoxElement = styled.div`
+export const BoxElement = styled.div`
   border-radius: 10px;
   overflow: hidden;
   position: relative;
+  z-index: 1;
+  margin: 5px 0;
 `;
 
-const BoxHeader = styled.div`
+export const BoxHeader = styled.div`
   background: white;
   height: fit-content;
-  border: 1px solid #06c987;
+  border: ${(props) =>
+    props.selected ? "1px solid #06c987" : "1px solid #ddd"};
   border-radius: 10px;
   height: 80px;
   overflow: hidden;
 `;
 
-const BoxContent = styled.div`
+export const BoxContent = styled.div`
   position: absolute;
   background: #fafafa;
   z-index: -1;
@@ -35,7 +38,7 @@ const BoxContent = styled.div`
   border-bottom-right-radius: 10px;
 `;
 
-const Separator = styled.div`
+export const Separator = styled.div`
   width: 2px;
   height: 80px;
   background: #f0f0f0;
@@ -75,7 +78,7 @@ const Center = styled.div`
   }
 `;
 
-const MoreIcon = styled.div`
+export const MoreIcon = styled.div`
   position: absolute;
   right: 10px;
   top: 28px;
@@ -115,6 +118,7 @@ const ListItem = ({
         <Icon type="eye" />
       </MoreIcon>
       <BoxHeader
+        selected={selectedItem === index}
         onClick={() =>
           setSelectedItem(selectedItem === index ? undefined : index)
         }

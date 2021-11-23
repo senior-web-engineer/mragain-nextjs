@@ -1,5 +1,6 @@
+import { get, set } from "lodash";
+
 import { store } from "@/configureStore";
-import { set, get } from "lodash";
 
 function yupToFormErrors(yupError) {
   let errors = {};

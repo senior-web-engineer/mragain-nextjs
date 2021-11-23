@@ -18,9 +18,8 @@ import crackIssue from "../../assets/icons/Problems - Crack.svg";
 import locationIssue from "../../assets/icons/Problems - Location.svg";
 import signalIssue from "../../assets/icons/Problems - Signal.svg";
 import releasedDate from "../../assets/icons/Specifications - Date.svg";
-import { API_PATH, FRONT_END_URL } from "../../constants.js";
 export default function Index() {
-  const [modelImages, setmodelImages] = useState([
+  const [modelImages] = useState([
     "https://cdn-0.idownloadblog.com/wp-content/uploads/2019/09/iPhone-11-Pro-Max-Midnight-Green-Mockup-with-AR72014-iDownloadBlog-scaled.jpeg",
     "https://www.iphonehacks.com/wp-content/uploads/2019/10/iphone-11-pro-max-teardown.jpg",
     "https://misterminit.co/wp-content/uploads/2016/10/iphone-screen-repair-sydney.jpg",
@@ -31,7 +30,7 @@ export default function Index() {
 
   const [currentImage, setcurrentImage] = useState(modelImages[0]);
 
-  const [issueData, setissueData] = useState([
+  const [issueData] = useState([
     {
       image: crackIssue,
       title: "Damaged Screen",
@@ -54,7 +53,7 @@ export default function Index() {
     },
   ]);
 
-  const [allServices, setAllServices] = useState([
+  const [allServices] = useState([
     { icon: "fas fa-bolt", serviceName: "Scherm vervangen", price: "49.33" },
     {
       icon: "fas fa-battery-quarter",

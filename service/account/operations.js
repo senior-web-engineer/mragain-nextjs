@@ -4,8 +4,6 @@ import Axios from "axios";
 import router from "next/router";
 
 import { registerFormModule } from "@/components/land/RegisterSection/RegisterForm/modules";
-import filterObjectKeys from "@/scripts/filterObjectKeys";
-
 import { API_PATH } from "../../constants";
 import {
   authenticated,
@@ -20,7 +18,6 @@ import {
   initUserLoginChange,
   loginFail,
   logoutA,
-  registerAuthToken,
   registerAuthUser,
   resetPasswordFail,
   resetPasswordSuccess,
@@ -31,7 +28,6 @@ import {
   setSuccessData,
   setUpdateScheduleTime,
   signupFail,
-  signupSuccess,
 } from "./action";
 
 export const tokenConfig = () => {
@@ -584,8 +580,6 @@ export function createRepairDevice(data, dispatch) {
       axios
         .get(`${API_PATH.REPAIRDEVICES}/`, tokenConfig())
         .then((res) => {
-
-
           dispatch(fetchRepairDevices(res.data));
         })
         .catch((err) => {
