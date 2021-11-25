@@ -81,7 +81,7 @@ export default function City({ cityInfo }) {
       </section>
       <section className="categories">
         <div className="wrapper">
-          <h6>Category label</h6>
+          <h6>Lees meer over</h6>
           <h2>{cityContent?.headline}</h2>
           <div className="blocks-wrapper">
             <div className="subheadline-blocks">

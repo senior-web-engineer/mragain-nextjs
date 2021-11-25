@@ -223,7 +223,7 @@ export default function CitySearch({ title, headline }) {
             <div>
               <Field
                 as={GooglePlaces}
-                placeholder="Search another locations here"
+                placeholder="Zoek op jouw locatie"
                 name="zip"
                 isPrefix={false}
               />
