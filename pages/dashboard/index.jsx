@@ -6,6 +6,7 @@ import { Dropdown, Menu } from "antd";
 import get from "lodash/get";
 import moment from "moment";
 import React, { useCallback, useEffect, useState } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 
 import { Text } from "@/components/common/Text/Text";
@@ -43,6 +44,8 @@ import List from "@/modules/list";
 import { Listing, Table } from "@/modules/list/Blocks";
 import { Drawer } from "@/modules/modal";
 import media, { OnMobile, useScreenSize } from "@/utils/media";
+
+import PicturesWall from "./PictureWall";
 //
 
 const PageTitle = styled.h1`
@@ -280,7 +283,7 @@ const DURATION_OPTIONS = [
   },
 ];
 
-export default function DashboardPage() {
+function DashboardPage({ isEditMode }) {
   useEffect(() => {
     async function loadData() {
       await currentUser.fetch();
@@ -556,9 +559,30 @@ export default function DashboardPage() {
           <FieldWrapAdmin>
             <Field as={Input} name="guarantee_time" label="Garantie" />
           </FieldWrapAdmin>
-          <Button>Maak afspraak</Button>
+          {isEditMode ? (
+            <>
+              <FormSectionTitle>Remarks</FormSectionTitle>
+              <FieldWrapAdmin>
+                <Field as={Input} textarea name="comments" label="Comments" />
+              </FieldWrapAdmin>
+
+              <FieldWrapAdmin>
+                <Field
+                  as={PicturesWall}
+                  textarea
+                  name="images"
+                  label="Images"
+                />
+              </FieldWrapAdmin>
+            </>
+          ) : null}
+          <Button>{isEditMode ? "Update afspraak" : "Maak afspraak"}</Button>
         </Form>
       </Drawer>
     </DefaultLayout>
   );
 }
+
+export default connect(() => ({
+  isEditMode: !!createAppointmentFormModal.selectors.data?.id,
+}))(DashboardPage);

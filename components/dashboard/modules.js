@@ -1,8 +1,9 @@
 import { notification } from "antd";
+import { uniqueId } from "lodash";
 import moment from "moment";
 
 import { store } from "@/configureStore";
-import { API_PATH } from "@/constants";
+import { API_PATH, BACK_END_URL } from "@/constants";
 import dataFetcher, { keyedDataFetcher } from "@/modules/dataFetcher";
 import { createFormModule } from "@/modules/forms";
 import { createListModule } from "@/modules/list";
@@ -43,27 +44,31 @@ export const appointmentStats = dataFetcher({
   },
 });
 
+async function fetchReparations(query = {}) {
+  const userId = currentUser.selector(store.ref.getState())?.result?.id;
+
+  try {
+    const data = await privateApi.get(
+      `${API_PATH.GETAPPOINTMENTS}/${userId}/`,
+      query
+    );
+    return {
+      items: data,
+    };
+  } catch (err) {
+    notification.error({
+      message:
+        "Er gaat iets fout, neem contact met ons op als dit probleem zich blijft voordoen",
+    });
+
+    return { items: [] };
+  }
+}
+
 export const reparationsList = createListModule({
   guid: "shop-reprations",
   async fetchData(query = {}) {
-    const userId = currentUser.selector(store.ref.getState())?.result?.id;
-
-    try {
-      const data = await privateApi.get(
-        `${API_PATH.GETAPPOINTMENTS}/${userId}/`,
-        query
-      );
-      return {
-        items: data,
-      };
-    } catch (err) {
-      notification.error({
-        message:
-          "Er gaat iets fout, neem contact met ons op als dit probleem zich blijft voordoen",
-      });
-
-      return { items: [] };
-    }
+    return fetchReparations(query);
   },
 });
 
@@ -90,6 +95,12 @@ export const appointmentForm = createFormModule({
           price: reparation.price,
           id: reparation.id,
           guarantee_time: reparation.guarantee,
+          comments: reparation.comments,
+          appointmentId: reparation.appointment.id,
+          images: JSON.parse(reparation.images).map((url) => ({
+            url: url.startsWith("/") ? BACK_END_URL + url : url,
+            uid: uniqueId(),
+          })),
         };
       }
     }
@@ -108,7 +119,7 @@ export const appointmentForm = createFormModule({
       guarantee_time: "0",
     };
   },
-  submit(data) {
+  async submit(data) {
     const shop = currentUser.selector(store.ref.getState())?.result?.id;
 
     let promise = null;
@@ -125,6 +136,22 @@ export const appointmentForm = createFormModule({
           guarantee_time: parseInt(data.guarantee_time),
         },
       });
+      promise = Promise.all([
+        promise,
+        api.put(`${API_PATH.UPDATEAPPOINTMENT}/${data.id}/`, {
+          device: data.device,
+          brand: data.brand,
+          model: data.model,
+          reparation: data.reparation,
+          images: JSON.stringify(
+            (data.images || []).map(
+              (file) =>
+                file.url?.replace(BACK_END_URL, "") || file?.response?.file
+            )
+          ),
+          comments: data.comments,
+        }),
+      ]);
     } else {
       promise = privateApi.post(`${API_PATH.CREATEAPPOINTMENTMANUALLY}/`, {
         appointmentData: {
@@ -150,6 +177,13 @@ export const appointmentForm = createFormModule({
         },
       });
     }
+
+    await promise;
+
+    promise.then(async () => {
+      const { items } = await fetchReparations();
+      reparationsList.actions.refreshItems({ 0: items });
+    });
 
     createAppointmentFormModal.actions.close();
     notification.success({
