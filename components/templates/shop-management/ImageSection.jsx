@@ -41,9 +41,12 @@ export const ImageSection = ({ shopData, authUser }) => {
         formData.append("shop_id", authUser.id);
         uploadLogoImage(formData).then(() => {
           message.success(`${info.file.name} Foto succesvol opgeslagen`);
-          setPreviewLogo(URL.createObjectURL(info.fileList[0].originFileObj));
+          setPreviewLogo(
+            URL.createObjectURL(
+              info.fileList[info.fileList.length - 1].originFileObj
+            )
+          );
         });
-        onUploadCompleted();
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} foto opslaan mislukt`);
       }
@@ -55,13 +58,17 @@ export const ImageSection = ({ shopData, authUser }) => {
       <Col span={24}>
         <ImageWrapper>
           <CoverWrapper>
-            <img width="100%" src={previewCover || shopData?.bg_photo} />
+            {shopData?.bg_photo && (
+              <img width="100%" src={previewCover || shopData?.bg_photo} />
+            )}
             <Upload {...uploadPhotoProps}>
               <Button>Foto wijzigen</Button>
             </Upload>
           </CoverWrapper>
           <ProfileWrapper>
-            <img height="100%" src={previewLogo || shopData?.logo_photo} />
+            {shopData?.logo_photo && (
+              <img height="100%" src={previewLogo || shopData?.logo_photo} />
+            )}
           </ProfileWrapper>
           <ProfileButtonWrapper>
             <Upload {...uploadLogoPhotoProps}>

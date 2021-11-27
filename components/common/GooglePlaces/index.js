@@ -101,6 +101,7 @@ export async function getLongAndLat(location) {
 export default function GooglePlaces({
   value,
   onChange,
+  isPrefix = true,
   size,
   placeholder = "Postcode of stad",
   onLocationSelected,
@@ -115,21 +116,21 @@ export default function GooglePlaces({
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    if (value !== searchTerm) {
-      setSearchTerm(value);
-    }
-  }, [value]);
-
-  useEffect(() => {
     const loadScriptAction = async () => {
       await loadScript();
-      setScriptLoaded(true);
+      await setScriptLoaded(true);
     };
 
     if (!scriptLoaded) {
       loadScriptAction();
     }
   }, []);
+
+  useEffect(() => {
+    if (value !== searchTerm) {
+      setSearchTerm(value);
+    }
+  }, [value]);
 
   if (!scriptLoaded) {
     return (
@@ -171,7 +172,9 @@ export default function GooglePlaces({
               allowClear={true}
               dropdownStyle={{ minWidth: "320px" }}
               onSelect={(description) => {
-                getLongAndLat(description).then((res) => onLocationSelected && onLocationSelected(res));
+                getLongAndLat(description).then(
+                  (res) => onLocationSelected && onLocationSelected(res)
+                );
                 setSearchTerm(description);
                 onChange(description);
               }}
@@ -182,10 +185,12 @@ export default function GooglePlaces({
               }}
               onSearch={(value) => onSearch({ target: { value } })}
             >
-              <Input
-                prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
-                aria-label={"Postcode of stad"}
-              />
+              {isPrefix && (
+                <Input
+                  prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />}
+                  aria-label={"Postcode of stad"}
+                />
+              )}
             </AutoComplete>
           );
         }}

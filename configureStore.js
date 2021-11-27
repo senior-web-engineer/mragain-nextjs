@@ -49,7 +49,7 @@ function ssrReducer(state, action) {
       modal: {
         ...state.modal,
         ...action.payload.modal,
-      }
+      },
     };
   }
 

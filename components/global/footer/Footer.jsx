@@ -330,66 +330,42 @@ const FooterView = (routerProps) => {
               <FooterSitemapTitle>Steden</FooterSitemapTitle>
               <ul>
                 <li>
-                  <Link
-                    prefetch={false}
-                    href="/zoek-een-reparateur?zip=Amsterdam,%20Nederland&device=0&long=4.9041389&lat=52.3675734&distance=30&sort=8"
-                  >
+                  <Link prefetch={false} href="/amsterdam" as="/amsterdam">
                     Amsterdam
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    prefetch={false}
-                    href="/zoek-een-reparateur?zip=Rotterdam,%20Nederland&device=0&long=4.4777326&lat=51.9244201&distance=30&sort=8"
-                  >
+                  <Link prefetch={false} href="/rotterdam">
                     Rotterdam
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    prefetch={false}
-                    href="/zoek-een-reparateur?zip=Den%20Haag,%20Nederland&device=0&long=4.3006999&lat=52.0704978&distance=30&sort=8"
-                  >
+                  <Link prefetch={false} href="/den-haag">
                     Den Haag
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    prefetch={false}
-                    href="/zoek-een-reparateur?zip=Utrecht,%20Nederland&device=0&long=5.1214201&lat=52.09073739999999&distance=30&sort=8"
-                  >
+                  <Link prefetch={false} href="/utrecht">
                     Utrecht
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    prefetch={false}
-                    href="/zoek-een-reparateur?zip=Groningen,%20Nederland&device=0&long=6.5665017&lat=53.2193835&distance=30&sort=8"
-                  >
+                  <Link prefetch={false} href="/groningen">
                     Groningen
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    prefetch={false}
-                    href="/zoek-een-reparateur?zip=Den%20Bosch,%20Nederland&device=0&long=5.3036748&lat=51.6978162&distance=30&sort=8"
-                  >
+                  <Link prefetch={false} href="/den-bosch">
                     Den Bosch
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    prefetch={false}
-                    href="/zoek-een-reparateur?zip=Tilburg,%20Nederland&device=0&long=5.0919143&lat=51.560596&distance=30&sort=8"
-                  >
+                  <Link prefetch={false} href="/tilburg">
                     Tilburg
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    prefetch={false}
-                    href="/zoek-een-reparateur?zip=Maastricht,%20Nederland&device=0&long=5.6909725&lat=50.8513682&distance=30&sort=8"
-                  >
+                  <Link prefetch={false} href="/maastricht">
                     Maastricht
                   </Link>
                 </li>
