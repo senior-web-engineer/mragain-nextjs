@@ -47,7 +47,7 @@ export const reparationsList = createListModule({
   guid: "shop-reprations",
   async fetchData(query = {}) {
     const userId = currentUser.selector(store.ref.getState())?.result
-      ?.account_account_id;
+      ?.account_id;
 
     try {
       const data = await privateApi.get(
