@@ -1,7 +1,6 @@
 import React from "react";
 
-import headersData from "../../assets/content/header";
-import posts from "../../assets/content/posts";
+import { headers, posts } from "../../assets/content/Landing/posts";
 import {
   Category,
   Content,
@@ -14,7 +13,7 @@ import {
 } from "./ContentBlocks.style";
 
 const Section = () => {
-  const { category, headline } = headersData;
+  const { category, headline } = headers;
   return (
     <>
       <Wrapper>

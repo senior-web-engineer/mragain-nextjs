@@ -29,4 +29,9 @@ const posts = [
   },
 ];
 
-export default posts;
+const headers = {
+  category: "Smartphones",
+  headline: "Latest News",
+};
+
+export { posts, headers };

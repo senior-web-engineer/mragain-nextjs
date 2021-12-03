@@ -11,7 +11,7 @@ export const HeaderContainer = styled.div`
   margin-bottom: 48px;
 `;
 
-export const Category = styled.div`
+export const Category = styled.h6`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
@@ -22,7 +22,7 @@ export const Category = styled.div`
   margin-bottom: 18px;
 `;
 
-export const Headline = styled.div`
+export const Headline = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
@@ -38,7 +38,7 @@ export const PostsContainer = styled.div`
 
 export const Post = styled.div``;
 
-export const PostTitle = styled.div`
+export const PostTitle = styled.h4`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
