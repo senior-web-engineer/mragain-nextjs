@@ -1,6 +1,5 @@
 import React from "react";
 
-import { headers, posts } from "../../assets/content/Landing/posts";
 import {
   Category,
   Content,
@@ -12,7 +11,7 @@ import {
   Wrapper,
 } from "./ContentBlocks.style";
 
-const Section = () => {
+const Section = ({ headers, posts }) => {
   const { category, headline } = headers;
   return (
     <>
