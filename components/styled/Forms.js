@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const FieldWrapAdmin = styled.div`
   margin-bottom: 32px;
@@ -9,10 +9,10 @@ export const FieldWrapAdmin = styled.div`
 
   ${({ flexRow }) =>
     flexRow &&
-    `
+    css`
       display: flex;
       flex-direction: row-reverse;
-          justify-content: flex-end;
+      justify-content: flex-end;
     `}
 
   label {
@@ -25,6 +25,16 @@ export const FieldWrapAdmin = styled.div`
     padding: ${(props) => (props.flexRow ? "0 8px" : "0")};
   }
 
+  .ant-calendar-picker,
+  .ant-time-picker {
+    width: 100%;
+
+    > div > .ant-calendar-picker-input.ant-input,
+    > input {
+      padding: 0 !important;
+    }
+  }
+
   input,
   select {
     border: none !important;
@@ -33,7 +43,6 @@ export const FieldWrapAdmin = styled.div`
       outline: none !important;
       box-shadow: none !important;
       border: none !important;
-      webkit-box-shadow: none !important;
       border-color: none !important;
     }
   }

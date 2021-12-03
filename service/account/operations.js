@@ -1,11 +1,7 @@
-import { notification } from "antd";
-import axios from "axios";
-import Axios from "axios";
-import router from "next/router";
-
 import { registerFormModule } from "@/components/land/RegisterSection/RegisterForm/modules";
-import filterObjectKeys from "@/scripts/filterObjectKeys";
-
+import { notification } from "antd";
+import { default as axios, default as Axios } from "axios";
+import router from "next/router";
 import { API_PATH } from "../../constants";
 import {
   authenticated,
@@ -20,7 +16,6 @@ import {
   initUserLoginChange,
   loginFail,
   logoutA,
-  registerAuthToken,
   registerAuthUser,
   resetPasswordFail,
   resetPasswordSuccess,
@@ -30,9 +25,9 @@ import {
   setLoadPBM,
   setSuccessData,
   setUpdateScheduleTime,
-  signupFail,
-  signupSuccess,
+  signupFail
 } from "./action";
+
 
 export const tokenConfig = () => {
   const token = localStorage.getItem("auth-token");
@@ -244,6 +239,19 @@ export function getShopProfileByInformationServer(str) {
       return err;
     });
 }
+
+export function getGeneralShopInfoServer(shopId) {
+  return axios
+    .get(`${API_PATH.GETSHOPGENERALINFO}/${shopId}`)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err);
+      return err;
+    });
+}
+
 
 // for result search profiles
 export function getShopProfileByInformation(str, dispatch) {
@@ -584,8 +592,6 @@ export function createRepairDevice(data, dispatch) {
       axios
         .get(`${API_PATH.REPAIRDEVICES}/`, tokenConfig())
         .then((res) => {
-
-
           dispatch(fetchRepairDevices(res.data));
         })
         .catch((err) => {

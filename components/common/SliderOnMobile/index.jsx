@@ -69,9 +69,9 @@ const SliderWrap = styled.div`
   }
 `;
 
-export default function SliderOnMobile({ children, tabletConfig }) {
+export default function SliderOnMobile({ children, tabletConfig, ...rest }) {
   const { size } = useScreenSize();
-  let settings = defaultSettings;
+  let settings = { ...defaultSettings, ...rest };
 
   if (size === "tablet" && tabletConfig) {
     settings = {

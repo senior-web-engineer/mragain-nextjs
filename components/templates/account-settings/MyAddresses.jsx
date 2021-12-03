@@ -31,7 +31,7 @@ const DURATION_OPTIONS = [
     value: 90,
   },
   {
-    label: "1 day",
+    label: "1 dag",
     value: 1,
   },
 ];
@@ -103,7 +103,7 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                     adminInput
                     name="address_type"
                     as={Select}
-                    placeholder="Select Address Type"
+                    placeholder="Kies je locatie type"
                     label="Locatie type"
                     size="small"
                     customLabel

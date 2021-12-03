@@ -4,8 +4,7 @@ import { store } from "@/configureStore";
 import { API_PATH } from "@/constants";
 import dataFetcher from "@/modules/dataFetcher";
 import { createFormModule } from "@/modules/forms";
-import { createListModule } from "@/modules/list";
-import api, { privateApi } from "@/utils/api";
+import { privateApi } from "@/utils/api";
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],
@@ -41,7 +40,8 @@ export const getReparations = dataFetcher({
 export const shopInfoFetcher = dataFetcher({
   selectors: [],
   async fetchData() {
-    const shopId = currentUser.selector(store.ref.getState())?.result?.id;
+    const shopId = currentUser.selector(store.ref.getState())?.result
+      ?.account_id;
     const data = await privateApi.get(
       `${API_PATH.GETSHOPGENERALINFO}/${shopId}`
     );
@@ -52,7 +52,8 @@ export const shopInfoFetcher = dataFetcher({
 export const getShopNonWorkingDays = dataFetcher({
   selectors: [],
   async fetchData() {
-    const shopId = currentUser.selector(store.ref.getState())?.result?.id;
+    const shopId = currentUser.selector(store.ref.getState())?.result
+      ?.account_id;
     const data = await privateApi.get(`${API_PATH.GETINVALIDTIME}/${shopId}/`);
     return data;
   },
@@ -75,7 +76,7 @@ export const saveShopNonWorkingDays = (data) => {
 export const shopManagementGeneralInfo = dataFetcher({
   selectors: [],
   async fetchData() {
-    const id = currentUser.selector(store.ref.getState())?.result?.id;
+    const id = currentUser.selector(store.ref.getState())?.result?.account_id;
     const data = await privateApi.get(`${API_PATH.ACCOUNTSETTING}/${id}`);
     return data;
   },
@@ -84,14 +85,14 @@ export const shopManagementGeneralInfo = dataFetcher({
 export const getValidOpenTime = dataFetcher({
   selectors: [],
   async fetchData() {
-    const id = currentUser.selector(store.ref.getState())?.result?.id;
+    const id = currentUser.selector(store.ref.getState())?.result?.account_id;
     const data = await privateApi.get(`${API_PATH.GETVALIDOPENTIME}/${id}/`);
     return data;
   },
 });
 
 export const saveValidOpenTime = async (payload) => {
-  const id = currentUser.selector(store.ref.getState())?.result?.id;
+  const id = currentUser.selector(store.ref.getState())?.result?.account_id;
   const data = await privateApi.put(`${API_PATH.UPDATEVALIDOPENTIME}/${id}/`, {
     id: id,
     shop: id,
@@ -101,7 +102,7 @@ export const saveValidOpenTime = async (payload) => {
 };
 
 export const deleteNonRegularHours = async (id) => {
-  const shopId = currentUser.selector(store.ref.getState())?.result?.id;
+  const shopId = currentUser.selector(store.ref.getState())?.result?.account_id;
   const data = await privateApi.post(
     `${API_PATH.DELETEINVALIDTIME}/${shopId}/`,
     {
@@ -114,7 +115,7 @@ export const deleteNonRegularHours = async (id) => {
 export const shopManagementGeneralForm = createFormModule({
   guid: "saveGeneralInfo",
   async init() {
-    const id = currentUser.selector(store.ref.getState())?.result?.id;
+    const id = currentUser.selector(store.ref.getState())?.result?.account_id;
     const fetchedData = await privateApi.get(
       `${API_PATH.ACCOUNTSETTING}/${id}`
     );

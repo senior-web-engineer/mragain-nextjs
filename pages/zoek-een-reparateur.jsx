@@ -699,8 +699,9 @@ function ShopItem({ item }) {
   // API changed does not include the city any longer?
   // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
 
-  const shopRoute = `${getShopRoute(item.shop)}?device=${formState.device
-    }&brand=${formState.brand}&model=${formState.model}`;
+  const shopRoute = `${getShopRoute(item.shop)}?device=${
+    formState.device
+  }&brand=${formState.brand}&model=${formState.model}`;
 
   function onClick() {
     if (!showMap) {
@@ -736,12 +737,12 @@ function ShopItem({ item }) {
         <div>
           {tags
             ? tags.map((tag) => {
-              const value = Object.values(tag)[0];
-              const props = {
-                [`data-${TAG_TO_COLOR[value]}`.replace("#", "")]: true,
-              };
-              return <tag {...props}>{value}</tag>;
-            })
+                const value = Object.values(tag)[0];
+                const props = {
+                  [`data-${TAG_TO_COLOR[value]}`.replace("#", "")]: true,
+                };
+                return <tag {...props}>{value}</tag>;
+              })
             : null}
         </div>
         <ShopDetails.SecondRow>
@@ -1386,7 +1387,7 @@ export default function SearchResults() {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  async ({ req, query }) => {
+  async ({ query }) => {
     await filtersFormModule.actions.initialize(query);
     await shopListModule.actions.initialize();
     await deviceFetcher.fetch();

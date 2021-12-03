@@ -117,6 +117,6 @@ export default function HistoryPage({ auth_user }) {
         />
       </OnMobile>
       <ViewRecord data={selectedItem} viewRecordModal={viewRecordModal} />
-    </DefaultLayout >
+    </DefaultLayout>
   );
 }

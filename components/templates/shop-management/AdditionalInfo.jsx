@@ -280,7 +280,7 @@ export const AdditionalInfo = ({ shopData }) => {
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
             <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-              Aanvullende services
+              Beschikbare reparaties
             </Text.Body>
           </Col>
           <Col span={18}>
@@ -320,12 +320,15 @@ export const AdditionalInfo = ({ shopData }) => {
                 adminInput
                 simple
                 as={Switch}
+                defaultChecked={
+                  shopData?.temporaryReplacement === 1 ? true : false
+                }
                 name="temporaryReplacement"
               />
-            ) : shopData?.temporaryReplacement ? (
-              "No"
+            ) : shopData?.temporaryReplacement === 0 ? (
+              "Nee"
             ) : (
-              "Yes"
+              "Ja"
             )}
           </Col>
         </Row>
@@ -342,7 +345,7 @@ export const AdditionalInfo = ({ shopData }) => {
                 adminInput
                 simple
                 as={Switch}
-                value={shopData.waitingArea === "No" ? false : true}
+                defaultChecked={shopData.waitingArea === "No" ? false : true}
                 name="waitingArea"
               />
             ) : (
