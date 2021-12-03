@@ -34,6 +34,7 @@ export const Headline = styled.h2`
 export const PostsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  row-gap: 30px;
 `;
 
 export const Post = styled.div``;

@@ -93,11 +93,7 @@ export default function Home({ shopList }) {
           <StepsSection />
         </MaxConstraints>
       </Section>
-      <Section>
-        <MaxConstraints>
-          <ContentBlocks headers={headers} posts={posts} />
-        </MaxConstraints>
-      </Section>
+
       <TestimonialSectionWrap>
         <MaxConstraints>
           <TestimonialSection />
@@ -106,6 +102,11 @@ export default function Home({ shopList }) {
       <Section>
         <MaxConstraints>
           <ShopsSection shopList={shopList} />
+        </MaxConstraints>
+      </Section>
+      <Section>
+        <MaxConstraints>
+          <ContentBlocks headers={headers} posts={posts} />
         </MaxConstraints>
       </Section>
       <OrderReview />
