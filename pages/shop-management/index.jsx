@@ -1,7 +1,11 @@
-import { Col, Row, Tabs } from "antd";
-import React, { useEffect, useState } from "react";
-
+import { Text } from "@/components/common/Text/Text";
 import DefaultLayout from "@/components/layouts/Dashboard";
+import { AdditionalInfo } from "@/components/templates/shop-management/AdditionalInfo";
+import { GeneralInfo } from "@/components/templates/shop-management/GeneralInfo";
+import { ImageSection } from "@/components/templates/shop-management/ImageSection";
+import { OperationalHoursCalendar } from "@/components/templates/shop-management/OperationalHoursCalendar";
+import { ScheduleList } from "@/components/templates/shop-management/ScheduleList";
+import { BoxWrapper } from "@/components/templates/shop-management/styles";
 import {
   currentUser,
   deleteNonRegularHours,
@@ -11,17 +15,13 @@ import {
   saveValidOpenTime,
   shopInfoFetcher,
   shopManagementAdditionalForm,
-  shopManagementGeneralInfo,
+  shopManagementGeneralInfo
 } from "@/service/shop-management/modules";
 import { OnMobile } from "@/utils/media";
+import { Col, Row, Tabs } from "antd";
+import React, { useEffect, useState } from "react";
+
 const { TabPane } = Tabs;
-import { Text } from "@/components/common/Text/Text";
-import { AdditionalInfo } from "@/components/templates/shop-management/AdditionalInfo";
-import { GeneralInfo } from "@/components/templates/shop-management/GeneralInfo";
-import { ImageSection } from "@/components/templates/shop-management/ImageSection";
-import { OperationalHoursCalendar } from "@/components/templates/shop-management/OperationalHoursCalendar";
-import { ScheduleList } from "@/components/templates/shop-management/ScheduleList";
-import { BoxWrapper } from "@/components/templates/shop-management/styles";
 
 export default function ShopManagementPage() {
   const [activeTab, setActiveTab] = useState("profile-settings");
@@ -39,7 +39,6 @@ export default function ShopManagementPage() {
       setShopData(await shopManagementGeneralInfo.fetch());
       setNonWorkingDays(await getShopNonWorkingDays.fetch());
       setValidOpenTime(await getValidOpenTime.fetch());
-      console.log(shopInfo);
       if (shopInfo.length !== 0) {
         setShopInfo(shopInfo[0]);
       }
