@@ -18,7 +18,9 @@ import { wrapper } from "@/configureStore.js";
 import { getNewestShopList } from "@/service/search/operations";
 import media from "@/utils/media.js";
 
+import { headers, posts } from "../assets/content/Landing/data";
 import { FRONT_END_URL } from "../constants.js";
+
 const HeroWrap = styled.div`
   overflow: hidden;
 `;
@@ -91,11 +93,7 @@ export default function Home({ shopList }) {
           <StepsSection />
         </MaxConstraints>
       </Section>
-      <Section>
-        <MaxConstraints>
-          <ContentBlocks />
-        </MaxConstraints>
-      </Section>
+
       <TestimonialSectionWrap>
         <MaxConstraints>
           <TestimonialSection />
@@ -104,6 +102,11 @@ export default function Home({ shopList }) {
       <Section>
         <MaxConstraints>
           <ShopsSection shopList={shopList} />
+        </MaxConstraints>
+      </Section>
+      <Section>
+        <MaxConstraints>
+          <ContentBlocks headers={headers} posts={posts} />
         </MaxConstraints>
       </Section>
       <OrderReview />
