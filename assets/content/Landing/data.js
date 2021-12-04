@@ -1,61 +1,61 @@
 const posts = [
   {
     id: 1,
-    subheadline: "iPhone 12: Should you buy?",
+    subheadline: "Telefoon Reparatie ",
     description: [
       {
         content:
-          "The iPhone 12 and iPhone 12 mini are part of Apple's 2020 generation of smartphones, offering OLED displays, 5G connectivity, an A14 chip, improved cameras, and MagSafe, all in a squared-off design. Following the introduction of the iPhone 13 lineup in September 2021, the iPhone 12 and 12 mini remain available for purchase as lower-cost options.",
+      "Is je telefoon kapot? Goede kans dat je een telefoon reparatie kunt gebruiken. Gelukkig zijn er veel telefoon reparateurs die je hierbij kunnen helpen. Door te zoeken via MrAgain zie je snel wie je model kan repareren en vergelijk je makkelijk op prijs, garantie en reviews, wel zo makkelijk!"
       },
       {
         content:
-          "Announced in October of 2020, the iPhone 12 and iPhone 12 mini are now a year old and have been supplanted by the iPhone 13, but they remain a good value with solid performance. Apple tends to release new iPhone models every September, and despite the iPhone 12 and 12 mini launching a month later than usual in 2020, Apple returned to its normal schedule with the iPhone 13 launch in September 2021.",
+      "Als je scherm kapot is het verstandig om een telefoon scherm reparatie uit te laten voeren om erger te voorkomen. Telefoon maken is een vak apart en daardoor is het slim om raad te zoeken bij professionals."
       },
     ],
   },
   {
     id: 2,
-    subheadline: "iPhone 13: Should you buy?",
+    subheadline: "iPhone reparatie",
     description: [
       {
         content:
-          "The iPhone 13 and iPhone 13 mini are part of Apple's 2021 generation of smartphones, offering OLED displays, 5G connectivity, an A14 chip, improved cameras, and MagSafe, all in a squared-off design. Following the introduction of the iPhone 13 lineup in September 2021, the iPhone 13 and 13 mini remain available for purchase as lower-cost options.",
+      "Ook voor je iPhone reparatie zie je hier snel wat je opties zijn. Is je scherm kapot? Dan ben je geholpen met een iPhone scherm reparatie. Vaak hebben de reparateurs veel onderdelen op voorraad en kun je terecht voor vrijwel alles. Zo word je snel geholpen met een iPhone 7 reparatie, maar ook met een iPhone 12 reparatie. Net zoals andere smartphones is een iPhone maken een vak apart!" 
       },
     ],
   },
   {
     id: 3,
-    subheadline: "iPhone 14: Should you buy?",
+    subheadline: "Reparatie op locatie",
     description: [
       {
         content:
-          "The iPhone 14 and iPhone 14 mini are part of Apple's 2021 generation of smartphones, offering OLED displays, 5G connectivity, an A14 chip, improved cameras, and MagSafe, all in a squared-off design. Following the introduction of the iPhone 13 lineup in September 2021, the iPhone 13 and 13 mini remain available for purchase as lower-cost options.",
+          "Een kapotte telefoon maar geen tijd om naar de telefoonwinkel te gaan? Maak je geen zorgen: veel telefoon reparateurs bieden tegenwoordig reparatie op locatie aan. Een extra service waarbij de reparateur naar jou toekomt en je dus thuis kan blijven, en of kan blijven werken.",
       },
       {
         content:
-          "Announced in October of 2020, the iPhone 14 and iPhone 14 mini are now a year old and have been supplanted by the iPhone 13, but they remain a good value with solid performance. Apple tends to release new iPhone models every September, and despite the iPhone 13 and 13 mini launching a month later than usual in 2020, Apple returned to its normal schedule with the iPhone 13 launch in September 2021.",
+          "Mobiele telefoon reparatie of mobiele smartphone reparatie wordt dit ook wel genoemd. Door gebruik te maken van zoekfilters zie je snel wie bij jou op locatie komt.",
       },
     ],
   },
   {
     id: 4,
-    subheadline: "iPhone 15: Should you buy?",
+    subheadline: "Telefoon scherm reparatie",
     description: [
       {
         content:
-          "The iPhone 15 and iPhone 15 mini are part of Apple's 2021 generation of smartphones, offering OLED displays, 5G connectivity, an A14 chip, improved cameras, and MagSafe, all in a squared-off design. Following the introduction of the iPhone 13 lineup in September 2021, the iPhone 13 and 13 mini remain available for purchase as lower-cost options.",
+          "Als je telefoonscherm kapot is doe je er verstandig aan deze snel te laten vervangen. Hierdoor voorkom je verdere schade, bijvoorbeeld doordat er vuil je telefoon in komt. Voor telefoon scherm reparatie is het belangrijk dat je oplet met de kwaliteit van het scherm dat je koopt. In de regel geldt dat hoe duurder het scherm is, hoe beter de kwaliteit is.",
       },
       {
-        content:
-          "Announced in October of 2020, the iPhone 15 and iPhone 15 mini are now a year old and have been supplanted by the iPhone 13, but they remain a good value with solid performance. Apple tends to release new iPhone models every September, and despite the iPhone 13 and 13 mini launching a month later than usual in 2020, Apple returned to its normal schedule with the iPhone 13 launch in September 2021.",
+        content: 
+	  "Veel copy schermen zijn echter van zeer goede kwaliteit. Telefoonscherm vervangen is een reparatie die normaal snel uitgevoerd kan worden, dit geldt ook voor iPhone scherm reparatie.",
       },
     ],
   },
 ];
 
 const headers = {
-  category: "Smartphones",
-  headline: "Latest News",
+  category: "Telefoon reparatie en meer",
+  headline: "Lees meer",
 };
 
 export { posts, headers };
