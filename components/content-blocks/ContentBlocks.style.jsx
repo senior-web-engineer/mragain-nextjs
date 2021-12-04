@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-import media from "@/utils/media";
-
 export const Wrapper = styled.div`
-  padding: 0 50px;
   height: auto;
+  @media (max-width: 540px) {
+    padding: 0 20px;
+  }
 `;
 
 export const HeaderContainer = styled.div`
@@ -33,11 +33,22 @@ export const Headline = styled.h2`
 
 export const PostsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: 1fr 1fr;
   row-gap: 30px;
+  @media (max-width: 540px) {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
 `;
 
-export const Post = styled.div``;
+export const Post = styled.div`
+  padding-right: 60px;
+  @media (max-width: 800px) {
+    padding-right: 30px;
+  }
+  @media (max-width: 540px) {
+    padding-right: 0;
+  }
+`;
 
 export const PostTitle = styled.h4`
   font-family: Montserrat;
@@ -56,8 +67,4 @@ export const Content = styled.div`
   font-size: 14px;
   line-height: 24px;
   color: #404040;
-  padding-right: 100px;
-  ${media.mobile`
-  padding-right: 50px;
-`}
 `;
