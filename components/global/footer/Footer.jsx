@@ -369,6 +369,11 @@ const FooterView = (routerProps) => {
                     Maastricht
                   </Link>
                 </li>
+	        <li>
+	          <Link prefetch={false} href="/eindhoven">
+	            Eindhoven
+	          </Link>
+	        </li>
               </ul>
             </FooterSitemap>
           </FooterLinkArea>{" "}
