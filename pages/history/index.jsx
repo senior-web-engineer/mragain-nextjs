@@ -51,6 +51,7 @@ const AntdInput = styled(Input)`
   .arrow-svg{
     margin-left: 5px;
   }
+  font-size: 12px;
 `;
 
 
@@ -101,7 +102,6 @@ export default function HistoryPage({ auth_user }) {
             size="large"
             allowClear
             value={search}
-            style={{ fontSize: "12px" }}
             onChange={(event) => onSearch(event.target.value)}
             prefix={<SearchOutlined className="site-form-item-icon" />}
             suffix={<ArrowSVG searchInputFocus={searchInputFocus} />}
