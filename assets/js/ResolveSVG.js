@@ -1,12 +1,11 @@
 import React from "react";
-
 import {
   AdvantagesClock,
   AdvantagesThumb,
   AdvantagesWallet,
-  AdvantagesWarranty,
-  TestSvg,
+  AdvantagesWarranty, SearchIcon, TestSvg
 } from "../icons/SvgIcons";
+
 
 const ResolveSVG = ({ name }) => {
   return (
@@ -16,6 +15,7 @@ const ResolveSVG = ({ name }) => {
       {name === "wallet" && <AdvantagesWallet />}
       {name === "warranty" && <AdvantagesWarranty />}
       {name === "test" && <TestSvg />}
+      {name === "search" && <SearchIcon />}
     </>
   );
 };
