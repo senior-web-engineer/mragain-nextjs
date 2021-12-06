@@ -1,7 +1,7 @@
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, Row, Typography } from "antd";
 import moment from "moment";
-import React from "React";
+import React from "react";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
