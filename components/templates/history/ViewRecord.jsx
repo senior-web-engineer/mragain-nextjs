@@ -1,7 +1,7 @@
-import React from "React";
 import { ArrowLeftOutlined } from "@ant-design/icons";
-import { Col, Form, Input, Row, Typography, Button } from "antd";
+import { Button, Col, Form, Input, Row, Typography } from "antd";
 import moment from "moment";
+import React from "React";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -86,6 +86,7 @@ const DrawerStyled = styled(Drawer)`
     height: 81px;
     display: flex;
     align-items: center;
+    border-radius: 0;
     span {
       font-weight: 600;
       font-size: 20px;
@@ -93,6 +94,8 @@ const DrawerStyled = styled(Drawer)`
   }
   .ant-drawer-title {
     color: #fafafa;
+    display: flex;
+    justify-content: center;
   }
   .ant-drawer-close {
     color: #fafafa;
@@ -269,7 +272,6 @@ const RemarksForm = ({ data }) => {
 export const ViewRecord = ({ data, viewRecordModal }) => {
   console.log(data, viewRecordModal);
 
-
   const [visible, setVisible] = useState(false);
 
   const [screenSize, setScreenSize] = useState(800);
@@ -294,10 +296,15 @@ export const ViewRecord = ({ data, viewRecordModal }) => {
     <DrawerStyled
       title={
         <>
-          <ArrowLeftOutlined onClick={() => {
-              viewRecordModal.actions.close()
-            }} />
-          &nbsp;&nbsp;
+          <ArrowLeftOutlined
+            style={{
+              fontWeight: 700,
+            }}
+            onClick={() => {
+              viewRecordModal.actions.close();
+            }}
+          />
+          &nbsp;&nbsp;&nbsp;&nbsp;
           <span>Show details</span>
         </>
       }
@@ -319,9 +326,14 @@ export const ViewRecord = ({ data, viewRecordModal }) => {
           <RemarksForm data={data} />
 
           <Row type="flex" justify="end">
-            <Button type="primary" size="large" shape="round" onClick={() => {
-              viewRecordModal.actions.close()
-            }} >
+            <Button
+              type="primary"
+              size="large"
+              shape="round"
+              onClick={() => {
+                viewRecordModal.actions.close();
+              }}
+            >
               Go Back
             </Button>
           </Row>
