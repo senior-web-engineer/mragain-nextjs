@@ -1,5 +1,6 @@
+import React from "React";
 import { ArrowLeftOutlined } from "@ant-design/icons";
-import { Col, Form, Input, Row, Typography } from "antd";
+import { Col, Form, Input, Row, Typography, Button } from "antd";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -27,44 +28,7 @@ class PicturesWall extends React.Component {
     previewVisible: false,
     previewImage: "",
     previewTitle: "",
-    fileList: [
-      {
-        uid: "-1",
-        name: "image.png",
-        status: "done",
-        url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      },
-      {
-        uid: "-2",
-        name: "image.png",
-        status: "done",
-        url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      },
-      {
-        uid: "-3",
-        name: "image.png",
-        status: "done",
-        url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      },
-      {
-        uid: "-4",
-        name: "image.png",
-        status: "done",
-        url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      },
-      {
-        uid: "-xxx",
-        percent: 50,
-        name: "image.png",
-        status: "uploading",
-        url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      },
-      {
-        uid: "-5",
-        name: "image.png",
-        status: "error",
-      },
-    ],
+    fileList: [],
   };
 
   handleCancel = () => this.setState({ previewVisible: false });
@@ -133,9 +97,21 @@ const DrawerStyled = styled(Drawer)`
   .ant-drawer-close {
     color: #fafafa;
   }
+  .ant-upload-picture-card-wrapper {
+    padding: 5px;
+    background-color: #fafafa;
+  }
 `;
 
-const CustomerDetailsForm = () => {
+const FormItemStyled = styled(Form.Item)`
+  label {
+    color: #909090;
+    font-size: 14px;
+    line-height: 22px;
+  }
+`;
+
+const CustomerDetailsForm = ({ data }) => {
   // const [form] = Form.useForm();
   const [requiredMark, setRequiredMarkType] = useState("optional");
 
@@ -153,20 +129,29 @@ const CustomerDetailsForm = () => {
       onValuesChange={onRequiredTypeChange}
       requiredMark={requiredMark}
     >
-      <Form.Item label="Customer Name">
-        <Input placeholder="input placeholder" />
-      </Form.Item>
-      <Form.Item label="Email Address">
-        <Input placeholder="input placeholder" />
-      </Form.Item>
-      <Form.Item label="Contact Number">
-        <Input placeholder="input placeholder" />
-      </Form.Item>
+      <FormItemStyled label="Customer Name">
+        <Input
+          placeholder="input placeholder"
+          value={data?.appointment.client_name}
+        />
+      </FormItemStyled>
+      <FormItemStyled label="Email Address">
+        <Input
+          placeholder="input placeholder"
+          value={data?.appointment.client_email}
+        />
+      </FormItemStyled>
+      <FormItemStyled label="Contact Number">
+        <Input
+          placeholder="input placeholder"
+          value={data?.appointment.client_phone}
+        />
+      </FormItemStyled>
     </Form>
   );
 };
 
-const ReparationDetailsForm = () => {
+const ReparationDetailsForm = ({ data }) => {
   // const [form] = Form.useForm();
   const [requiredMark, setRequiredMarkType] = useState("optional");
 
@@ -186,49 +171,55 @@ const ReparationDetailsForm = () => {
     >
       <Row gutter={24}>
         <Col span={8}>
-          <Form.Item label="Customer Name">
-            <Input placeholder="input placeholder" />
-          </Form.Item>
+          <FormItemStyled label="Device Type">
+            <Input placeholder="Phone" value={data?.device.device_name} />
+          </FormItemStyled>
         </Col>
         <Col span={8}>
-          <Form.Item label="Email Address">
-            <Input placeholder="input placeholder" />
-          </Form.Item>
+          <FormItemStyled label="Brand">
+            <Input placeholder="Samsung" value={data?.device.brand_name} />
+          </FormItemStyled>
         </Col>
         <Col span={8}>
-          <Form.Item label="Contact Number">
-            <Input placeholder="input placeholder" />
-          </Form.Item>
+          <FormItemStyled label="Model">
+            <Input
+              placeholder="Galaxy S20 5G"
+              value={data?.device.model_name}
+            />
+          </FormItemStyled>
         </Col>
       </Row>
 
-      <Form.Item label="Customer Name">
-        <Input placeholder="input placeholder" />
-      </Form.Item>
-      <Form.Item label="Email Address">
-        <Input placeholder="input placeholder" />
-      </Form.Item>
-      <Form.Item label="Contact Number">
-        <Input placeholder="input placeholder" />
-      </Form.Item>
+      <FormItemStyled label="Reparation type">
+        <Input
+          placeholder="Battery replacement"
+          value={data?.reparation.reparation_name}
+        />
+      </FormItemStyled>
+      <FormItemStyled label="IMEI number">
+        <Input
+          placeholder="Type the IMEI number of the device"
+          value={data?.serialnumber}
+        />
+      </FormItemStyled>
 
       <Row gutter={24}>
         <Col span={12}>
-          <Form.Item label="Customer Name">
-            <Input placeholder="input placeholder" />
-          </Form.Item>
+          <FormItemStyled label="Date">
+            <Input type="date" placeholder="" value={data?.appointment.date} />
+          </FormItemStyled>
         </Col>
       </Row>
       <Row gutter={24}>
         <Col span={12}>
-          <Form.Item label="Customer Name">
-            <Input placeholder="input placeholder" />
-          </Form.Item>
+          <FormItemStyled label="Price">
+            <Input placeholder="£ 135,00" value={data?.price} />
+          </FormItemStyled>
         </Col>
         <Col span={12}>
-          <Form.Item label="Customer Name">
-            <Input placeholder="input placeholder" />
-          </Form.Item>
+          <FormItemStyled label="Guarantee">
+            <Input placeholder="3 months" value={data?.guarantee} />
+          </FormItemStyled>
         </Col>
       </Row>
     </Form>
@@ -236,11 +227,11 @@ const ReparationDetailsForm = () => {
 };
 
 const UploadPhotosWrapper = styled.div`
-  border: 1px dashed;
+  border: 2px dashed #e4e4e4;
   padding: 20px;
 `;
 
-const RemarksForm = () => {
+const RemarksForm = ({ data }) => {
   // const [form] = Form.useForm();
   const [requiredMark, setRequiredMarkType] = useState("optional");
 
@@ -259,19 +250,28 @@ const RemarksForm = () => {
       requiredMark={requiredMark}
     >
       <br />
-      <Form.Item label="Complaints and remarks">
-        <Input.TextArea placeholder="input placeholder" rows={4} />
-      </Form.Item>
-      <Form.Item label="Photos and videos of the device">
+      <FormItemStyled label="Complaints and remarks">
+        <Input.TextArea
+          placeholder="input placeholder"
+          rows={4}
+          value={data?.reparation.comments}
+        />
+      </FormItemStyled>
+      <FormItemStyled label="Photos and videos of the device">
         <UploadPhotosWrapper>
           <PicturesWall />
         </UploadPhotosWrapper>
-      </Form.Item>
+      </FormItemStyled>
     </Form>
   );
 };
 
 export const ViewRecord = ({ data, viewRecordModal }) => {
+  console.log(data, viewRecordModal);
+
+
+  const [visible, setVisible] = useState(false);
+
   const [screenSize, setScreenSize] = useState(800);
 
   const getGuaranteeStatus = (date, guarantee) => {
@@ -282,7 +282,7 @@ export const ViewRecord = ({ data, viewRecordModal }) => {
 
   useEffect(() => {
     function handleResize() {
-      setScreenSize(window.innerWidth < 450 ? "100%" : 800);
+      setScreenSize(window.innerWidth < 450 ? "100%" : 562);
     }
     // Add event listener
     window.addEventListener("resize", handleResize);
@@ -294,7 +294,9 @@ export const ViewRecord = ({ data, viewRecordModal }) => {
     <DrawerStyled
       title={
         <>
-          <ArrowLeftOutlined />
+          <ArrowLeftOutlined onClick={() => {
+              viewRecordModal.actions.close()
+            }} />
           &nbsp;&nbsp;
           <span>Show details</span>
         </>
@@ -306,15 +308,23 @@ export const ViewRecord = ({ data, viewRecordModal }) => {
         <div>
           <Title level={4}>Customer details</Title>
           <DrawerDivider />
-          <CustomerDetailsForm />
+          <CustomerDetailsForm data={data} />
 
           <Title level={4}>Reparation details</Title>
           <DrawerDivider />
-          <ReparationDetailsForm />
+          <ReparationDetailsForm data={data} />
 
           <Title level={4}>Remarks</Title>
           <DrawerDivider />
-          <RemarksForm />
+          <RemarksForm data={data} />
+
+          <Row type="flex" justify="end">
+            <Button type="primary" size="large" shape="round" onClick={() => {
+              viewRecordModal.actions.close()
+            }} >
+              Go Back
+            </Button>
+          </Row>
         </div>
       )}
     </DrawerStyled>
