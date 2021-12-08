@@ -46,7 +46,7 @@ export default function City({ cityInfo }) {
           name="description"
           content="Ben je op zoek naar een telefoon reparateur in" {cityContent?.name}"? Voor telefoon reparatie" {cityContent?.name}"vind je snel de beste reparateurs via MrAgain"
         />
-        <link rel="canonical" href={FRONT_END_URL}/{cityContent?.url} />
+        <link rel="canonical" href={FRONT_END_URL} />
         <meta property="og:type" content="website" />
         <meta
           name="og_title"
@@ -58,7 +58,7 @@ export default function City({ cityInfo }) {
           property="og:description"
           content="Vind de beste telefoon reparateur bij jou in de buurt"
         />
-        <meta name="og:url" property="og:url" content={FRONT_END_URL}/{cityContent?.url} />
+        <meta name="og:url" property="og:url" content={FRONT_END_URL} />
         <meta
           property="og:image"
           content={FRONT_END_URL + "/media/telefoon-reparatie.jpg"}
