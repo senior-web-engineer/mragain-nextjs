@@ -1,18 +1,21 @@
-import dynamic from "next/dynamic";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import React from "react";
-import { getShopProfileByInformationServer } from "service/account/operations";
-import styled from "styled-components";
-
 import Loader from "@/components/common/Loader";
 import DefaultLayout from "@/components/layouts/Homepage";
+import GeneralShopInfo from "@/components/shop-profile/GeneralShopInfo";
 import ShopDetails from "@/components/shop-profile/ShopDetails";
 import ShopHeader from "@/components/shop-profile/ShopHeader";
 import ShopServices from "@/components/shop-profile/ShopServices";
 import { wrapper } from "@/configureStore";
 import { FRONT_END_URL } from "@/constants";
 import { OnMobile } from "@/utils/media";
+import dynamic from "next/dynamic";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import React from "react";
+import { getGeneralShopInfoServer, getShopProfileByInformationServer } from "service/account/operations";
+import styled from "styled-components";
+
+
+
 
 const LoadableReviews = dynamic(
   () =>
@@ -38,7 +41,7 @@ const MainWrap = styled.div`
 `;
 
 const ShopProfile = (routerProps) => {
-  const { shop_account_profile, shopProfileServerInfo, shopDevices } =
+  const { shop_account_profile, shopProfileServerInfo, shopDevices, shopGeneralInfo } =
     routerProps;
 
   const router = useRouter();
@@ -113,6 +116,7 @@ const ShopProfile = (routerProps) => {
         </OnMobile>
         <ShopDetails shop={shopProfileServerInfo} />
         <LoadableMap shop={shopProfileServerInfo} />
+        {shopGeneralInfo && <GeneralShopInfo shopGeneralInfo={shopGeneralInfo} />}
       </MainWrap>
     </DefaultLayout>
   );
@@ -121,12 +125,15 @@ const ShopProfile = (routerProps) => {
 export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
   const shopId = ctx.query["shopId][api"];
   const shopProfileServerInfo = await getShopProfileByInformationServer(shopId);
+  const firstShopProfileServerInfo = shopProfileServerInfo && shopProfileServerInfo[0]
+    ? shopProfileServerInfo[0]
+    : shopProfileServerInfo;
+
+  const shopGeneralInfo = await getGeneralShopInfoServer(firstShopProfileServerInfo?.id);
   return {
     props: {
-      shopProfileServerInfo:
-        shopProfileServerInfo && shopProfileServerInfo[0]
-          ? shopProfileServerInfo[0]
-          : shopProfileServerInfo,
+      shopProfileServerInfo: firstShopProfileServerInfo,
+      shopGeneralInfo: shopGeneralInfo?.[0] || null
     },
   };
 });

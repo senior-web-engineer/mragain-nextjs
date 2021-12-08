@@ -5,6 +5,7 @@ import React from "react";
 import styled from "styled-components";
 
 import OrderReview from "@/components/appointment/OrderReview.jsx";
+import ContentBlocks from "@/components/content-blocks/ContentBlocks";
 import AdvantagesSection from "@/components/home/AdvantagesSection/index.jsx";
 import FindSection from "@/components/home/FindSection/index.jsx";
 import { searchForm } from "@/components/home/modules.js";
@@ -17,6 +18,7 @@ import { wrapper } from "@/configureStore.js";
 import { getNewestShopList } from "@/service/search/operations";
 import media from "@/utils/media.js";
 
+import { headers, posts } from "../assets/content/Landing/data";
 import { FRONT_END_URL } from "../constants.js";
 
 const HeroWrap = styled.div`
@@ -44,16 +46,11 @@ export default function Home({ shopList }) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>
-          De beste telefoon reparateur bij jou in de buurt | Mr Again{" "}
+          Telefoon reparatie nodig? Bij MrAgain vind je de beste telefoon reparateurs bij jou in de buurt | Mr Again{" "}
         </title>
-
-        <meta
-          name="Keywords"
-          content="Telefoon reparatie, Telefoon reparateurs, Scherm vervangen, Batterij vervangen, water schade, MrAgain, Tablet reparatie, Tablet reparateurs, telefoonscherm vervangen, scherm telefoon kapot, telefoonscherm kapot, waterschade telefoon, telefoon in water laten vallen, iphone 6 batterij vervangen, nieuwe batterij iphone 7, iphone reparateur, telefoon in wc gevallen, scherm reparatie, iphone glas vervangen, kapot scherm, iphone glas vervangen, scherm iphone 6, nieuw scherm iphone 6, iphone 6 glas vervangen, telefoonscherm reparatie, scherm ipad vervangen"
-        />
         <meta
           name="description"
-          content="Telefoon kapot? Bij MrAgain vind je snel en gemakkelijk de beste telefoon reparateurs bij jou in de buurt."
+          content="Telefoon kapot? Bij MrAgain vind je snel en gemakkelijk de beste telefoon reparateurs voor telefoon reparatie bij jou in de buurt."
         />
         <link rel="canonical" href={FRONT_END_URL} />
         <meta property="og:type" content="website" />
@@ -91,6 +88,7 @@ export default function Home({ shopList }) {
           <StepsSection />
         </MaxConstraints>
       </Section>
+
       <TestimonialSectionWrap>
         <MaxConstraints>
           <TestimonialSection />
@@ -99,6 +97,11 @@ export default function Home({ shopList }) {
       <Section>
         <MaxConstraints>
           <ShopsSection shopList={shopList} />
+        </MaxConstraints>
+      </Section>
+      <Section>
+        <MaxConstraints>
+          <ContentBlocks headers={headers} posts={posts} />
         </MaxConstraints>
       </Section>
       <OrderReview />
