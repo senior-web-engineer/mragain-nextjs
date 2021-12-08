@@ -112,9 +112,6 @@ export const EditModal = ({ item, data, editRepairModelModal, onSave }) => {
             <b>{item?.model}</b>
           </h3>
         </Col>
-        <Col>
-          <Button>Bekijk model</Button>
-        </Col>
       </Row>
       <Divider />
       <RowWrapperMargin type="flex" justify="space-between" align="center">
