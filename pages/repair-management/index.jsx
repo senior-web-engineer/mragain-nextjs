@@ -175,24 +175,31 @@ export default function RepairManagementPage() {
           <Text.Headline>Reparatie beheer</Text.Headline>
         </Col>
       </Row>
-      <Divider />
-      <ModelTransfer
-        shopId={user?.id}
-        data={selectedModels}
-        targetKeys={targetKeys}
-        onChange={onChange}
-        menuItems={devices}
-        onBrandSelected={handleOnBrandSelected}
-        selectedBrand={selectedBrand}
-        onEditModelReparations={onEditModelReparations}
-        onModelsSaved={handleOnModelsSaved}
-      />
-      <EditModal
-        editRepairModelModal={editRepairModelModal}
-        item={selectedModel}
-        data={shopReparations}
-        onSave={onRepairModelSaved}
-      />
+      <OnMobile only>
+	<h5>
+	  <b>Profiel beheer is nog niet beschikbaar op je mobiel.</b>
+	</h5>
+      </OnMobile>
+       <OnMobile show={false}>	  
+       <Divider />
+       <ModelTransfer
+         shopId={user?.id}
+         data={selectedModels}
+         targetKeys={targetKeys}
+         onChange={onChange}
+         menuItems={devices}
+         onBrandSelected={handleOnBrandSelected}
+         selectedBrand={selectedBrand}
+         onEditModelReparations={onEditModelReparations}
+         onModelsSaved={handleOnModelsSaved}
+       />
+       <EditModal
+         editRepairModelModal={editRepairModelModal}
+         item={selectedModel}
+         data={shopReparations}
+         onSave={onRepairModelSaved}
+       />
+      </OnMobile>	  
     </DefaultLayout>
   );
 }
