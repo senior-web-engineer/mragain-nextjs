@@ -41,24 +41,24 @@ export default function City({ cityInfo }) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>
-	Telefoon Reparatie {cityContent?.title} | Mr Again{" "}
+	Telefoon Reparatie {cityContent?.name} | Mr Again{" "}
         </title>
           name="description"
-          content="Telefoon kapot? Bij MrAgain vind je snel en gemakkelijk de beste telefoon reparateurs bij jou in de buurt."
+          content="Ben je op zoek naar een telefoon reparateur in" {cityContent?.name}"? Voor telefoon reparatie" {cityContent?.name}"vind je snel de beste reparateurs via MrAgain"
         />
-        <link rel="canonical" href={FRONT_END_URL} />
+        <link rel="canonical" href={FRONT_END_URL}/{cityContent?.url} />
         <meta property="og:type" content="website" />
         <meta
           name="og_title"
           property="og:title"
-          content="Bij MrAgain vind je de beste telefoon reparateurs bij jou in de buurt"
+          content="Telefoon Reparatie" {cityContent?.name}" | Mr Again{" "}
         />
 
         <meta
           property="og:description"
           content="Vind de beste telefoon reparateur bij jou in de buurt"
         />
-        <meta name="og:url" property="og:url" content={FRONT_END_URL} />
+        <meta name="og:url" property="og:url" content={FRONT_END_URL}/{cityContent?.url} />
         <meta
           property="og:image"
           content={FRONT_END_URL + "/media/telefoon-reparatie.jpg"}
