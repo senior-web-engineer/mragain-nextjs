@@ -51,7 +51,7 @@ export default function City({ cityInfo }) {
         <meta
           name="og_title"
           property="og:title"
-          content="Telefoon Reparatie" {cityContent?.name}" | Mr Again{" "}
+          content="Telefoon Reparatie" {cityContent?.name}" | Mr Again{" "}"
         />
 
         <meta
