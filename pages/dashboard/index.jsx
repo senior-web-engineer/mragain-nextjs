@@ -355,7 +355,6 @@ export default function DashboardPage() {
   return (
     <DefaultLayout>
       <PageTitle>
-        Welkom terug!{" "}
         <OnMobile only>
           <Notifications />
         </OnMobile>

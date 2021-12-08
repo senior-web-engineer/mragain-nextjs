@@ -103,7 +103,7 @@ export const EditModal = ({ item, data, editRepairModelModal, onSave }) => {
       destroyOnClose
       onClose={onClose}
     >
-      <h2 style={{ marginBottom: "30px" }}>Model information</h2>
+      <h2 style={{ marginBottom: "30px" }}>Model informatie</h2>
       <HeaderSmallText>Device</HeaderSmallText>
       <Divider />
       <Row type="flex" justify="space-between">
