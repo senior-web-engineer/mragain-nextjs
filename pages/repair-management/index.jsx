@@ -21,6 +21,7 @@ import {
   saveShopReparations,
 } from "@/service/repair-management/modules";
 
+import { OnMobile } from "@utils/media";
 const DeviceItemWrapper = styled.div`
   display: flex;
   align-items: center;
