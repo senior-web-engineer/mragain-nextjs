@@ -172,9 +172,6 @@ export default function RepairManagementPage() {
   return (
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
-        <Col span={24}>
-          <Text.Headline>Reparatie beheer</Text.Headline>
-        </Col>
       </Row>
       <OnMobile only>
 	<h5>

@@ -88,11 +88,6 @@ export default function HistoryPage({ auth_user }) {
   return (
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
-        <Col>
-          <Text.Headline style={{ marginBottom: "20px" }}>
-            Reparatie overzicht
-          </Text.Headline>
-        </Col>
         <Col />
       </Row>
       <Row type="flex" justify="end">

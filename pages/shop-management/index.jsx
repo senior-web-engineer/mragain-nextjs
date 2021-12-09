@@ -65,9 +65,6 @@ export default function ShopManagementPage() {
   return (
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
-        <Col span={24}>
-          <Text.Headline>Profiel beheer</Text.Headline>
-        </Col>
       </Row>
       <OnMobile only>
         <h5>
