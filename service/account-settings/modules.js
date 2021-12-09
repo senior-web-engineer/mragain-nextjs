@@ -1,10 +1,10 @@
-import { notification } from "antd";
-
 import { store } from "@/configureStore";
 import { API_PATH } from "@/constants";
 import dataFetcher from "@/modules/dataFetcher";
 import { createFormModule } from "@/modules/forms";
-import api, { privateApi } from "@/utils/api";
+import { privateApi } from "@/utils/api";
+import { notification } from "antd";
+
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],
@@ -76,20 +76,28 @@ export const changePasswordForm = createFormModule({
       confirmPassword: "",
     };
   },
-  submit(data) {
+  async submit(data) {
     const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
     const id = currentUser.selector(store.ref.getState())?.result?.id;
-    const promise = privateApi.post(`${API_PATH.RESETPASSWORDCONFIRM}/${id}`, {
+
+    const promise = privateApi.put(`${API_PATH.RESETPASSWORDCONFIRM}/`, {
       oldPassword: data.oldPassword,
       newPassword: data.newPassword,
       confirmPassword: data.confirmPassword,
       shop,
     });
 
-    notification.success({
-      message: "Je wachtwoord is gewijzigd",
-    });
-
+    promise.then((response) => {
+      notification.success({
+        message: "Je wachtwoord is gewijzigd",
+      });
+    }).catch((res) => {
+      for (let message of res.errors) {
+        notification.error({
+          message: message,
+        });
+      }
+    })
     return promise;
   },
 });

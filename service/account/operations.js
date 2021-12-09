@@ -1,9 +1,7 @@
-import { notification } from "antd";
-import axios from "axios";
-import Axios from "axios";
-import router from "next/router";
-
 import { registerFormModule } from "@/components/land/RegisterSection/RegisterForm/modules";
+import { notification } from "antd";
+import { default as axios, default as Axios } from "axios";
+import router from "next/router";
 import { API_PATH } from "../../constants";
 import {
   authenticated,
@@ -27,7 +25,7 @@ import {
   setLoadPBM,
   setSuccessData,
   setUpdateScheduleTime,
-  signupFail,
+  signupFail
 } from "./action";
 
 export const tokenConfig = () => {
@@ -178,7 +176,7 @@ export function resetPasswordEmail(_data, dispatch) {
 export async function resetPasswordConfirmEmail(_data, dispatch) {
   var url = API_PATH.RESETPASSWORDCONFIRMEMAIL;
   return await axios
-    .post(`${url}/`, _data)
+    .put(`${url}/`, _data)
     .then((res) => {
       return true;
     })
