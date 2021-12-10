@@ -26,3 +26,11 @@ export const H2 = styled.h2`
   font-weight: 400;
   font-family: "Montserrat";
 `;
+
+export const H1 = styled.h1`
+  font-size: 35px;
+  line-height: 35px;
+  color: #303030;
+  font-weight: 400;
+  font-family: "Montserrat";
+ `;
