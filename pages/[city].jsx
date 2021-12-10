@@ -11,10 +11,13 @@ import DefaultLayout from "@/components/layouts/Homepage";
 import { wrapper } from "@/configureStore";
 import { API_URL, FRONT_END_URL } from "@/constants";
 import api from "@/utils/api";
+import Head from "next/head";
 
 export default function City({ cityInfo }) {
   const cityContent = cityInfo?.[0];
   const router = useRouter();
+
+let canonical = `${FRONT_END_URL}/${cityContent?.url}`
 
   const renderBlocks = (block, index) => {
     return (
@@ -43,10 +46,10 @@ export default function City({ cityInfo }) {
         <title>
 	Telefoon Reparatie {cityContent?.name} | Mr Again{" "}
         </title>
-          name="description"
-          content="Ben je op zoek naar een telefoon reparateur in" {cityContent?.name}"? Voor telefoon reparatie" {cityContent?.name}"vind je snel de beste reparateurs via MrAgain"
+        <meta  name="description"
+         content="Ben je op zoek naar een telefoon reparateur in" {cityContent?.name}"? Voor telefoon reparatie" {cityContent?.name}"vind je snel de beste reparateurs via MrAgain"
         />
-        <link rel="canonical" href={FRONT_END_URL} />
+        <link rel="canonical" href={canonical} />
         <meta property="og:type" content="website" />
         <meta
           name="og_title"
