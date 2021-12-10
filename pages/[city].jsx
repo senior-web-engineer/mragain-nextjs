@@ -18,6 +18,8 @@ export default function City({ cityInfo }) {
 
 let canonical = `${FRONT_END_URL}/${cityContent?.url}`
 let description = `Ben je op zoek naar een telefoon reparateur in ${cityContent?.name}? Voor telefoon reparatie ${cityContent?.name} vind je snel de beste reparateurs via MrAgain`
+let title =`Telefoon Reparatie ${cityContent?.name} | Mr Again`
+let image_url = `${FRONT_END_URL}/media/telefoon-reparatie.jpg`
 
   const renderBlocks = (block, index) => {
     return (
@@ -43,24 +45,24 @@ let description = `Ben je op zoek naar een telefoon reparateur in ${cityContent?
     <DefaultLayout showSignup>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Telefoon Reparatie {cityContent?.name} | Mr Again{" "} </title>
+        <title>{title}</title>
         <meta  name="description" content={description}/>
         <link rel="canonical" href={canonical} />
         <meta property="og:type" content="website" />
         <meta
           name="og_title"
           property="og:title"
-          content="Telefoon Reparatie | Mr Again"
+          content={title}
         />
 
         <meta
           property="og:description"
-          content="Vind de beste telefoon reparateur bij jou in de buurt"
+          content={description}
         />
-        <meta name="og:url" property="og:url" content={FRONT_END_URL} />
+        <meta name="og:url" property="og:url" content={canonical} />
         <meta
           property="og:image"
-          content={FRONT_END_URL + "/media/telefoon-reparatie.jpg"}
+          content={image_url}
         />
         <meta name="og_site_name" property="og:site_name" content="Mr Again" />
 
