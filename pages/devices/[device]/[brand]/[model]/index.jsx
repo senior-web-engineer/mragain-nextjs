@@ -8,6 +8,8 @@ import Link from "next/link";
 import querystring from "querystring";
 import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
+import Head from "next/head";
+import { FRONT_END_URL} from "@/constants";
 
 import { ModelImages } from "@/components/devices/ModelImages";
 import {
@@ -184,6 +186,10 @@ function MobileAppointmentButton({ searchUrlData }) {
     ...searchUrlData,
     service,
   });
+
+let title = `${data.brand.brand_name} ${data.model_name} reparatie` 
+let description = `Ben je op zoek naar ${data.brand.brand_name} ${data.model_name} reparatie? Via MrAgain zie je direct wie hem voor je kan repareren en plan je direct een afspraak in.`
+
 
   return (
     <OnMobile only>
