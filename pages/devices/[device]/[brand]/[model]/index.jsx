@@ -256,6 +256,10 @@ export default function ModelPage({ data, reparations }) {
 
   return (
     <DefaultLayout>
+      <Head>
+        <title>{title}</title>
+	<meta name="description" content={description} />
+      </Head>  
       <WhiteBackground>
         <MaxConstraints>
           <IntroWrap>
