@@ -17,6 +17,7 @@ export default function City({ cityInfo }) {
   const router = useRouter();
 
 let canonical = `${FRONT_END_URL}/${cityContent?.url}`
+let description = `Ben je op zoek naar een telefoon reparateur in ${cityContent?.name}? Voor telefoon reparatie ${cityContent?.name} vind je snel de beste reparateurs via MrAgain`
 
   const renderBlocks = (block, index) => {
     return (
@@ -42,12 +43,8 @@ let canonical = `${FRONT_END_URL}/${cityContent?.url}`
     <DefaultLayout showSignup>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>
-	Telefoon Reparatie {cityContent?.name} | Mr Again{" "}
-        </title>
-        <meta  name="description"
-         content="Ben je op zoek naar een telefoon reparateur in" {cityContent?.name}"? Voor telefoon reparatie" {cityContent?.name}"vind je snel de beste reparateurs via MrAgain"
-        />
+        <title>Telefoon Reparatie {cityContent?.name} | Mr Again{" "} </title>
+        <meta  name="description" content={description}/>
         <link rel="canonical" href={canonical} />
         <meta property="og:type" content="website" />
         <meta
