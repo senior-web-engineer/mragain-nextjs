@@ -13,7 +13,18 @@ const Land = () => {
   }, []);
   return (
     <DefaultLayout showSignup>
-      <Main>
+          <Head>
+	          <meta name="viewport" content="width=device-width, initial-scale=1" />
+	          <title>
+	            Elektronica reparateur? Meld je aan bij MrAgain en word direct beter gevonden!
+	          </title>
+	          <meta
+	            name="description"
+	            content="Wil je als reparateur beter online gevonden worden? MrAgain is het platform voor elektronica reparateurs. Meld je aan en word direct beter gevonden!"
+	          />
+	          <link rel="canonical" href={FRONT_END_URL}/meld-je-aan-als-reparateur />
+	  </Head>
+	  <Main>
         <RegisterSection />
       </Main>
     </DefaultLayout>
