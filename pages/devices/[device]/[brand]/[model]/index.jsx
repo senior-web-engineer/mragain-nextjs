@@ -253,6 +253,7 @@ export default function ModelPage({ data, reparations }) {
 let title = `${data.brand.brand_name} ${data.model_name} reparatie`;
 let description = `Ben je op zoek naar ${data.brand.brand_name} ${data.model_name} reparatie? Via MrAgain zie je direct wie hem voor je kan
 repareren en plan je direct een afspraak in.`;
+let h1_header = `${data.model_name} reparatie`;
 
   return (
     <DefaultLayout>
@@ -266,7 +267,7 @@ repareren en plan je direct een afspraak in.`;
             <ModelImages data={data.model_photo} />
             <div>
               <SubTitle>{data.brand.brand_name}</SubTitle>
-              <H2>{data.model_name}</H2>
+              <H1>{h1_header}</H1>
               <p>{data.model_serie_number}</p>
               <info>
                 <FontAwesomeIcon icon={faCalendar} /> Released op{" "}
