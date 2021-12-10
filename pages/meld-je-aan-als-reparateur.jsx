@@ -11,6 +11,9 @@ const Land = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+let canonical = '/meld-je-aan-als-reparateur';
+
   return (
     <DefaultLayout showSignup>
           <Head>
@@ -22,7 +25,7 @@ const Land = () => {
 	            name="description"
 	            content="Wil je als reparateur beter online gevonden worden? MrAgain is het platform voor elektronica reparateurs. Meld je aan en word direct beter gevonden!"
 	          />
-	          <link rel="canonical" href={FRONT_END_URL} + "/meld-je-aan-als-reparateur" />
+	          <link rel="canonical" href={FRONT_END_URL} + {canonical} />
 	  </Head>
 	  <Main>
         <RegisterSection />
