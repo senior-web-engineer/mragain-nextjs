@@ -49,9 +49,6 @@ export default function RepairManagementPage() {
   return (
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
-        <Col span={24}>
-          <Text.Headline>Account gegevens</Text.Headline>
-        </Col>
       </Row>
       <Tabs defaultActiveKey={activeTab} onChange={onTabChange}>
         <TabPane tab="Algemeen" key="general">

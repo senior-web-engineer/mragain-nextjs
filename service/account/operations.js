@@ -28,6 +28,7 @@ import {
   signupFail
 } from "./action";
 
+
 export const tokenConfig = () => {
   const token = localStorage.getItem("auth-token");
   const config = {
@@ -238,6 +239,19 @@ export function getShopProfileByInformationServer(str) {
       return err;
     });
 }
+
+export function getGeneralShopInfoServer(shopId) {
+  return axios
+    .get(`${API_PATH.GETSHOPGENERALINFO}/${shopId}`)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err);
+      return err;
+    });
+}
+
 
 // for result search profiles
 export function getShopProfileByInformation(str, dispatch) {
