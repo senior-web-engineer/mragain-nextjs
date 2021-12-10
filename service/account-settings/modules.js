@@ -45,6 +45,7 @@ export const basicSettingsForm = createFormModule({
       street: fetchedData.street || "",
       zipcode: fetchedData.zipcode || "",
       intervals: fetchedData.intervals || 30,
+      st_number: fetchedData.st_number || "",
     };
   },
   submit(data) {
