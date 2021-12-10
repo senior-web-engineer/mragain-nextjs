@@ -19,7 +19,7 @@ import {
 } from "@/components/devices/modules";
 import DefaultLayout from "@/components/layouts/Homepage";
 import { MaxConstraints } from "@/components/styled/layout";
-import { H2, SubTitle } from "@/components/styled/text";
+import { H1, H2, SubTitle } from "@/components/styled/text";
 import Button from "@/components/ui/Button";
 import Form, { useFormContext } from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
