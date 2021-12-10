@@ -11,7 +11,6 @@ import DefaultLayout from "@/components/layouts/Homepage";
 import { wrapper } from "@/configureStore";
 import { API_URL, FRONT_END_URL } from "@/constants";
 import api from "@/utils/api";
-import Head from "next/head";
 
 export default function City({ cityInfo }) {
   const cityContent = cityInfo?.[0];
