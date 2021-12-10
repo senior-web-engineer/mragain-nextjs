@@ -1,10 +1,10 @@
-import { notification } from "antd";
-
 import { store } from "@/configureStore";
 import { API_PATH } from "@/constants";
 import dataFetcher from "@/modules/dataFetcher";
 import { createFormModule } from "@/modules/forms";
-import api, { privateApi } from "@/utils/api";
+import { privateApi } from "@/utils/api";
+import { notification } from "antd";
+
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],
@@ -50,7 +50,7 @@ export const basicSettingsForm = createFormModule({
   submit(data) {
     const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
     const auth = currentUser.selector(store.ref.getState())?.result?.id;
-    const promise = privateApi.put(`${API_PATH.ACCOUNTSETTING}/${auth}/`, {
+    const promise = privateApi.patch(`${API_PATH.ACCOUNTSETTING}/${auth}/`, {
       ...data,
       double_appointment: true,
       shop,
