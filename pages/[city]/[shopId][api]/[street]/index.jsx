@@ -57,8 +57,8 @@ const ShopProfile = (routerProps) => {
       ? shopProfileServerInfo
       : shop_account_profile;
 
-  let title = `${shopAccountProfile.name} ${shopAccountProfile.city} - ${devices} Reparatie - MrAgain.nl`;
-  let description = `${shopAccountProfile.name}, ${shopAccountProfile.street}, ${shopAccountProfile.zipcode}, ${shopAccountProfile.city}. Laat je telefoon repareren bij ${shopAccountProfile.name} via mragain.nl. Transparant, betrouwbaar en snel!`;
+  let title = `${shopAccountProfile.name} ${shopAccountProfile.city} - ${devices} Telefoon Reparatie - MrAgain.nl`;
+  let description = `${shopAccountProfile.name}, ${shopAccountProfile.street}, ${shopAccountProfile.zipcode}, ${shopAccountProfile.city}. Telefoon kapot? Laat je telefoon repareren bij ${shopAccountProfile.name} via mragain.nl. Transparant, betrouwbaar en snel!`;
 
   const shopSchema = `
     {
@@ -93,7 +93,7 @@ const ShopProfile = (routerProps) => {
         <meta property="og:type" content="website" />
         <meta name="og_title" property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta name="og:url" content={FRONT_END_URL} />
+        <meta name="og:url" content={FRONT_END_URL + router.asPath} />
         <meta
           property="og:image"
           content={
