@@ -45,25 +45,24 @@ export const appointmentStats = dataFetcher({
 });
 
 async function fetchReparations(query = {}) {
-  const userId = currentUser.selector(store.ref.getState())?.result
-      ?.account_id;
+  const userId = currentUser.selector(store.ref.getState())?.result?.account_id;
 
-    try {
-      const data = await privateApi.get(
-        `${API_PATH.GETAPPOINTMENTS}/${userId}/`,
-        query
-      );
-      return {
-        items: data,
-      };
-    } catch (err) {
-      notification.error({
-        message:
-          "Er gaat iets fout, neem contact met ons op als dit probleem zich blijft voordoen",
-      });
+  try {
+    const data = await privateApi.get(
+      `${API_PATH.GETAPPOINTMENTS}/${userId}/`,
+      query
+    );
+    return {
+      items: data,
+    };
+  } catch (err) {
+    notification.error({
+      message:
+        "Er gaat iets fout, neem contact met ons op als dit probleem zich blijft voordoen",
+    });
 
-      return { items: [] };
-    }
+    return { items: [] };
+  }
 }
 
 export const reparationsList = createListModule({
@@ -120,7 +119,7 @@ export const appointmentForm = createFormModule({
       guarantee_time: "0",
     };
   },
-  submit(data) {
+  async submit(data) {
     const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
 
     let promise = null;
