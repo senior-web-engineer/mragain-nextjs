@@ -132,19 +132,19 @@ const CustomerDetailsForm = ({ data }) => {
       onValuesChange={onRequiredTypeChange}
       requiredMark={requiredMark}
     >
-      <FormItemStyled label="Customer Name">
+      <FormItemStyled label="Naam">
         <Input
           placeholder="input placeholder"
           value={data?.appointment.client_name}
         />
       </FormItemStyled>
-      <FormItemStyled label="Email Address">
+      <FormItemStyled label="E-mail adres">
         <Input
           placeholder="input placeholder"
           value={data?.appointment.client_email}
         />
       </FormItemStyled>
-      <FormItemStyled label="Contact Number">
+      <FormItemStyled label="Telefoonnummer">
         <Input
           placeholder="input placeholder"
           value={data?.appointment.client_phone}
@@ -174,54 +174,54 @@ const ReparationDetailsForm = ({ data }) => {
     >
       <Row gutter={24}>
         <Col span={8}>
-          <FormItemStyled label="Device Type">
-            <Input placeholder="Phone" value={data?.device.device_name} />
+          <FormItemStyled label="Device">
+            <Input placeholder="Device" value={data?.device.device_name} />
           </FormItemStyled>
         </Col>
         <Col span={8}>
-          <FormItemStyled label="Brand">
-            <Input placeholder="Samsung" value={data?.device.brand_name} />
+          <FormItemStyled label="Merk">
+            <Input placeholder="Merk" value={data?.device.brand_name} />
           </FormItemStyled>
         </Col>
         <Col span={8}>
           <FormItemStyled label="Model">
             <Input
-              placeholder="Galaxy S20 5G"
+              placeholder="Model"
               value={data?.device.model_name}
             />
           </FormItemStyled>
         </Col>
       </Row>
 
-      <FormItemStyled label="Reparation type">
+      <FormItemStyled label="Reparatie">
         <Input
-          placeholder="Battery replacement"
+          placeholder="Reparatie"
           value={data?.reparation.reparation_name}
         />
       </FormItemStyled>
-      <FormItemStyled label="IMEI number">
+      <FormItemStyled label="IMEI/referentie">
         <Input
-          placeholder="Type the IMEI number of the device"
+          placeholder="IMEI of referentie"
           value={data?.serialnumber}
         />
       </FormItemStyled>
 
       <Row gutter={24}>
         <Col span={12}>
-          <FormItemStyled label="Date">
+          <FormItemStyled label="Datum">
             <Input type="date" placeholder="" value={data?.appointment.date} />
           </FormItemStyled>
         </Col>
       </Row>
       <Row gutter={24}>
         <Col span={12}>
-          <FormItemStyled label="Price">
-            <Input placeholder="£ 135,00" value={data?.price} />
+          <FormItemStyled label="Prijs">
+            <Input placeholder="Prijs" value={data?.price} />
           </FormItemStyled>
         </Col>
         <Col span={12}>
-          <FormItemStyled label="Guarantee">
-            <Input placeholder="3 months" value={data?.guarantee} />
+          <FormItemStyled label="Garantie">
+            <Input placeholder="Garantie" value={data?.guarantee} />
           </FormItemStyled>
         </Col>
       </Row>
@@ -253,14 +253,14 @@ const RemarksForm = ({ data }) => {
       requiredMark={requiredMark}
     >
       <br />
-      <FormItemStyled label="Complaints and remarks">
+      <FormItemStyled label="Opmerkingen">
         <Input.TextArea
-          placeholder="input placeholder"
+          placeholder="Aantekeningen"
           rows={4}
           value={data?.reparation.comments}
         />
       </FormItemStyled>
-      <FormItemStyled label="Photos and videos of the device">
+      <FormItemStyled label="Fotos">
         <UploadPhotosWrapper>
           <PicturesWall />
         </UploadPhotosWrapper>
@@ -305,7 +305,7 @@ export const ViewRecord = ({ data, viewRecordModal }) => {
             }}
           />
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <span>Show details</span>
+          <span>Reparatie details</span>
         </>
       }
       width={screenSize}
@@ -313,15 +313,15 @@ export const ViewRecord = ({ data, viewRecordModal }) => {
     >
       {data && (
         <div>
-          <Title level={4}>Customer details</Title>
+          <Title level={4}>Klant gegevens</Title>
           <DrawerDivider />
           <CustomerDetailsForm data={data} />
 
-          <Title level={4}>Reparation details</Title>
+          <Title level={4}>Reparatie</Title>
           <DrawerDivider />
           <ReparationDetailsForm data={data} />
 
-          <Title level={4}>Remarks</Title>
+          <Title level={4}>Opmerkingen</Title>
           <DrawerDivider />
           <RemarksForm data={data} />
 
@@ -334,7 +334,7 @@ export const ViewRecord = ({ data, viewRecordModal }) => {
                 viewRecordModal.actions.close();
               }}
             >
-              Go Back
+              Ga terug
             </Button>
           </Row>
         </div>
