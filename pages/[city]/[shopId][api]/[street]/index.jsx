@@ -57,8 +57,9 @@ const ShopProfile = (routerProps) => {
       ? shopProfileServerInfo
       : shop_account_profile;
 
-  let title = `${shopAccountProfile.name} ${shopAccountProfile.city} - ${devices} Reparatie - MrAgain.nl`;
-  let description = `${shopAccountProfile.name}, ${shopAccountProfile.street}, ${shopAccountProfile.zipcode}, ${shopAccountProfile.city}. Laat je telefoon repareren bij ${shopAccountProfile.name} via mragain.nl. Transparant, betrouwbaar en snel!`;
+  let title = `${shopAccountProfile.name} ${shopAccountProfile.city} - ${devices} Telefoon Reparatie - MrAgain.nl`;
+  let description = `${shopAccountProfile.name}, ${shopAccountProfile.street}, ${shopAccountProfile.zipcode}, ${shopAccountProfile.city}. Telefoon kapot? Laat je telefoon repareren bij ${shopAccountProfile.name} via mragain.nl. Transparant, betrouwbaar en snel!`;
+  let canonical = `${FRONT_END_URL}/${shopAccountProfile.name}/${shopAccountProfile.street}`;
 
   const shopSchema = `
     {
@@ -88,12 +89,12 @@ const ShopProfile = (routerProps) => {
         <title>{title}</title>
         <meta name="Keywords" content="Profiel, MrAgain, Telefoon Reparateur" />
         <meta name="description" content={description} />
-        <link rel="canonical" href={FRONT_END_URL + router.asPath} />
+        <link rel="canonical" href={canonical} />
         {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
         <meta property="og:type" content="website" />
         <meta name="og_title" property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta name="og:url" content={FRONT_END_URL} />
+        <meta name="og:url" content={canonical} />
         <meta
           property="og:image"
           content={
