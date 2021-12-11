@@ -1,10 +1,16 @@
 import { DownOutlined } from "@ant-design/icons";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faEdit,
+  faEllipsisV,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, DatePicker, Icon, Row, TimePicker } from "antd";
 import { Dropdown, Menu } from "antd";
 import get from "lodash/get";
 import moment from "moment";
+import Image from "next/image";
 import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
@@ -17,6 +23,8 @@ import {
   createAppointmentFormModal,
   currentUser,
   devicesFetcher,
+  markAppointmentAsDone,
+  markCompleteModal,
   modelFetcher,
   recentActivity,
   reparationsList,
@@ -42,7 +50,7 @@ import Form, { useFormContext } from "@/modules/forms";
 import { Field, parseNativeEvent } from "@/modules/forms/Blocks";
 import List from "@/modules/list";
 import { Listing, Table } from "@/modules/list/Blocks";
-import { Drawer } from "@/modules/modal";
+import Modal, { Drawer } from "@/modules/modal";
 import media, { OnMobile, useScreenSize } from "@/utils/media";
 
 import PicturesWall from "./PictureWall";
@@ -116,6 +124,14 @@ const InlineFields = styled.div`
       margin-right: 10px;
     }
   `}
+`;
+
+const AppointmentMenuWrap = styled.div`
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const columns = [
@@ -196,13 +212,25 @@ const columns = [
                 .fetch();
             }}
           >
-            Edit
+            <FontAwesomeIcon icon={faEdit} /> Edit appointment
+          </Menu.Item>
+          <Menu.Item
+            onClick={() =>
+              markAppointmentAsDone({
+                ...data,
+                email: data.appointment.client_email,
+              })
+            }
+          >
+            <FontAwesomeIcon icon={faCheck} /> Mark as complete
           </Menu.Item>
         </Menu>
       );
       return (
         <Dropdown overlay={menu} trigger="click">
-          <DownOutlined />
+          <AppointmentMenuWrap>
+            <FontAwesomeIcon icon={faEllipsisV} />
+          </AppointmentMenuWrap>
         </Dropdown>
       );
     },
@@ -578,6 +606,19 @@ function DashboardPage({ isEditMode }) {
           <Button>{isEditMode ? "Update afspraak" : "Maak afspraak"}</Button>
         </Form>
       </Drawer>
+      <Modal module={markCompleteModal} okText="Confirm">
+        <Image
+          src="/images/complete_repairment.png"
+          width={324}
+          height={103}
+          alt="decorative image"
+        />
+        <h2>Reparation completed</h2>
+        <p>
+          We will send an email letting your customer know that the reparation
+          is completed and ready to be picked. Would you like to confirm?
+        </p>
+      </Modal>
     </DefaultLayout>
   );
 }

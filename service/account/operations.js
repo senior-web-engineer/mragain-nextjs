@@ -113,6 +113,8 @@ export function getAuthUser(dispatch) {
       dispatch(registerAuthUser(res.data));
     })
     .catch((err) => {
+      localStorage.setItem("auth-token", null);
+      localStorage.setItem("auth-user", null);
       dispatch(logoutA());
     });
 }
@@ -163,6 +165,8 @@ export async function logout(dispatch) {
     .get(`${API_PATH.LOGOUT}/`, tokenConfig())
     .then((res) => {
       dispatch(logoutA());
+      localStorage.setItem("auth-token", null);
+      localStorage.setItem("auth-user", null);
     })
     .catch((err) => {});
 }

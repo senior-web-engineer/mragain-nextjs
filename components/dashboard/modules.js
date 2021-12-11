@@ -1,6 +1,7 @@
 import { notification } from "antd";
 import { uniqueId } from "lodash";
 import moment from "moment";
+import Router from "next/router";
 
 import { store } from "@/configureStore";
 import { API_PATH, BACK_END_URL } from "@/constants";
@@ -12,8 +13,18 @@ import api, { privateApi } from "@/utils/api";
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],
-  fetchData() {
-    return privateApi.get(`${API_PATH.GETAUTHUSER}/`);
+  async fetchData() {
+    let data = null;
+    try {
+      data = await privateApi.get(`${API_PATH.GETAUTHUSER}/`);
+    } catch (err) {
+      Router.router.push("/login");
+      localStorage.setItem("auth-token", null);
+      localStorage.setItem("auth-user", null);
+      return err;
+    }
+
+    return data;
   },
 });
 
@@ -53,7 +64,7 @@ async function fetchReparations(query = {}) {
       query
     );
     return {
-      items: data,
+      items: data.filter((reparation) => reparation.status !== 1),
     };
   } catch (err) {
     notification.error({
@@ -97,7 +108,7 @@ export const appointmentForm = createFormModule({
           guarantee_time: reparation.guarantee,
           comments: reparation.comments,
           appointmentId: reparation.appointment.id,
-          images: JSON.parse(reparation.images).map((url) => ({
+          images: JSON.parse(reparation.images || "[]").map((url) => ({
             url: url.startsWith("/") ? BACK_END_URL + url : url,
             uid: uniqueId(),
           })),
@@ -248,3 +259,45 @@ export const servicesFetcher = keyedDataFetcher({
 
 export const createAppointmentFormModal = createModalModule();
 export const notificationsModal = createModalModule();
+export const markCompleteModal = createModalModule();
+
+export function markAppointmentAsDone({ email, ...appointment }) {
+  const shop_id = currentUser.selector(store.ref.getState())?.result
+    ?.account_id;
+  markCompleteModal.actions.open().then(async () => {
+    const promise = api.put(
+      `${API_PATH.UPDATEAPPOINTMENT}/${appointment.id}/`,
+      {
+        status: 1,
+        reparation: appointment.reparation.id,
+        device: appointment.device.id,
+        model: appointment.model.id,
+        brand: appointment.brand.id,
+      }
+    );
+    try {
+      await promise;
+      notification.success({
+        message:
+          "Appointment marked as done. An email will be sent to the client",
+      });
+    } catch (err) {
+      notification.success({
+        message: "Something went wrong",
+        description: err?.message,
+      });
+    }
+    privateApi.post(`${API_PATH.REPAIRCOLSEAUTUEMAIL}/`, {
+      id: appointment.id,
+      email,
+      shop: shop_id,
+    });
+
+    promise.then(async () => {
+      const { items } = await fetchReparations();
+      reparationsList.actions.refreshItems({ 0: items });
+    });
+
+    return promise;
+  });
+}
