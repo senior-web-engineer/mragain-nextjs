@@ -1,11 +1,10 @@
 import { notification } from "antd";
-import axios from "axios";
-import Axios from "axios";
+import { default as Axios, default as axios } from "axios";
 import router from "next/router";
 
 import { registerFormModule } from "@/components/land/RegisterSection/RegisterForm/modules";
-import { API_PATH } from "@/constants";
 
+import { API_PATH } from "../../constants";
 import {
   authenticated,
   fetchAccountSettings,
@@ -179,7 +178,7 @@ export function resetPasswordEmail(_data, dispatch) {
 export async function resetPasswordConfirmEmail(_data, dispatch) {
   var url = API_PATH.RESETPASSWORDCONFIRMEMAIL;
   return await axios
-    .post(`${url}/`, _data)
+    .put(`${url}/`, _data)
     .then((res) => {
       return true;
     })
@@ -233,6 +232,18 @@ export function getShopIdByInformation(str, dispatch) {
 export function getShopProfileByInformationServer(str) {
   return axios
     .get(`${API_PATH.GETSHOPIDBYINFORMATION}/`, { params: { shop_info: str } })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err);
+      return err;
+    });
+}
+
+export function getGeneralShopInfoServer(shopId) {
+  return axios
+    .get(`${API_PATH.GETSHOPGENERALINFO}/${shopId}`)
     .then((res) => {
       return res.data;
     })

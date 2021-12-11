@@ -21,6 +21,7 @@ import {
   saveShopReparations,
 } from "@/service/repair-management/modules";
 
+import { OnMobile } from "@/utils/media";
 const DeviceItemWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -171,28 +172,32 @@ export default function RepairManagementPage() {
   return (
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
-        <Col span={24}>
-          <Text.Headline>Reparatie beheer</Text.Headline>
-        </Col>
       </Row>
-      <Divider />
-      <ModelTransfer
-        shopId={user?.id}
-        data={selectedModels}
-        targetKeys={targetKeys}
-        onChange={onChange}
-        menuItems={devices}
-        onBrandSelected={handleOnBrandSelected}
-        selectedBrand={selectedBrand}
-        onEditModelReparations={onEditModelReparations}
-        onModelsSaved={handleOnModelsSaved}
-      />
-      <EditModal
-        editRepairModelModal={editRepairModelModal}
-        item={selectedModel}
-        data={shopReparations}
-        onSave={onRepairModelSaved}
-      />
+      <OnMobile only>
+	<h5>
+	  <b>Profiel beheer is nog niet beschikbaar op je mobiel.</b>
+	</h5>
+      </OnMobile>
+       <OnMobile show={false}>	  
+       <Divider />
+       <ModelTransfer
+         shopId={user?.id}
+         data={selectedModels}
+         targetKeys={targetKeys}
+         onChange={onChange}
+         menuItems={devices}
+         onBrandSelected={handleOnBrandSelected}
+         selectedBrand={selectedBrand}
+         onEditModelReparations={onEditModelReparations}
+         onModelsSaved={handleOnModelsSaved}
+       />
+       <EditModal
+         editRepairModelModal={editRepairModelModal}
+         item={selectedModel}
+         data={shopReparations}
+         onSave={onRepairModelSaved}
+       />
+      </OnMobile>	  
     </DefaultLayout>
   );
 }

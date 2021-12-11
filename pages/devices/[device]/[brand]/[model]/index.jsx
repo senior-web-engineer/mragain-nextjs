@@ -8,6 +8,8 @@ import Link from "next/link";
 import querystring from "querystring";
 import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
+import Head from "next/head";
+import { FRONT_END_URL} from "@/constants";
 
 import { ModelImages } from "@/components/devices/ModelImages";
 import {
@@ -17,7 +19,7 @@ import {
 } from "@/components/devices/modules";
 import DefaultLayout from "@/components/layouts/Homepage";
 import { MaxConstraints } from "@/components/styled/layout";
-import { H2, SubTitle } from "@/components/styled/text";
+import { H1, H2, SubTitle } from "@/components/styled/text";
 import Button from "@/components/ui/Button";
 import Form, { useFormContext } from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
@@ -248,15 +250,24 @@ export default function ModelPage({ data, reparations }) {
     );
   }
 
+let title = `${data.brand.brand_name} ${data.model_name} reparatie`;
+let description = `Ben je op zoek naar ${data.brand.brand_name} ${data.model_name} reparatie? Via MrAgain zie je direct wie hem voor je kan
+repareren en plan je direct een afspraak in.`;
+let h1_header = `${data.model_name} reparatie`;
+
   return (
     <DefaultLayout>
+      <Head>
+        <title>{title}</title>
+	<meta name="description" content={description} />
+      </Head>  
       <WhiteBackground>
         <MaxConstraints>
           <IntroWrap>
             <ModelImages data={data.model_photo} />
             <div>
               <SubTitle>{data.brand.brand_name}</SubTitle>
-              <H2>{data.model_name}</H2>
+              <H1>{h1_header}</H1>
               <p>{data.model_serie_number}</p>
               <info>
                 <FontAwesomeIcon icon={faCalendar} /> Released op{" "}

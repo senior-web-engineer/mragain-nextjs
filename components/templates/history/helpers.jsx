@@ -71,7 +71,7 @@ export const columns = (viewDetails, search) => [
   },
   {
     title: "Device",
-    width: 300,
+    width: 150,
     render: (data) => renderDeviceDetails(data),
   },
   {

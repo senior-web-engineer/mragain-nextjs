@@ -103,7 +103,7 @@ export const EditModal = ({ item, data, editRepairModelModal, onSave }) => {
       destroyOnClose
       onClose={onClose}
     >
-      <h2 style={{ marginBottom: "30px" }}>Model information</h2>
+      <h2 style={{ marginBottom: "30px" }}>Model informatie</h2>
       <HeaderSmallText>Device</HeaderSmallText>
       <Divider />
       <Row type="flex" justify="space-between">
@@ -111,9 +111,6 @@ export const EditModal = ({ item, data, editRepairModelModal, onSave }) => {
           <h3>
             <b>{item?.model}</b>
           </h3>
-        </Col>
-        <Col>
-          <Button>Bekijk model</Button>
         </Col>
       </Row>
       <Divider />

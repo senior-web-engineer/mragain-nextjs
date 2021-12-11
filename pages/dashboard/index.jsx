@@ -66,7 +66,7 @@ const PanelsWrap = styled.div`
   padding-bottom: 10px;
 
   > div:nth-child(2) {
-    margin-top: -50px;
+    margin-top: px;
   }
 `;
 
@@ -358,7 +358,6 @@ function DashboardPage({ isEditMode }) {
   return (
     <DefaultLayout>
       <PageTitle>
-        Welkom terug!{" "}
         <OnMobile only>
           <Notifications />
         </OnMobile>

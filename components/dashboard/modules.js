@@ -21,7 +21,7 @@ export const recentActivity = dataFetcher({
   selectors: [
     "dashboard-recent-activity",
     (state) => {
-      return currentUser.selector(state)?.result?.id;
+      return currentUser.selector(state)?.result?.account_id;
     },
   ],
   async fetchData([_, shopId]) {
@@ -36,7 +36,7 @@ export const appointmentStats = dataFetcher({
   selectors: [
     "dashboard-appointment-stats",
     (state) => {
-      return currentUser.selector(state)?.result?.id;
+      return currentUser.selector(state)?.result?.account_id;
     },
   ],
   fetchData([_, shopId]) {
@@ -45,24 +45,25 @@ export const appointmentStats = dataFetcher({
 });
 
 async function fetchReparations(query = {}) {
-  const userId = currentUser.selector(store.ref.getState())?.result?.id;
+  const userId = currentUser.selector(store.ref.getState())?.result
+      ?.account_id;
 
-  try {
-    const data = await privateApi.get(
-      `${API_PATH.GETAPPOINTMENTS}/${userId}/`,
-      query
-    );
-    return {
-      items: data,
-    };
-  } catch (err) {
-    notification.error({
-      message:
-        "Er gaat iets fout, neem contact met ons op als dit probleem zich blijft voordoen",
-    });
+    try {
+      const data = await privateApi.get(
+        `${API_PATH.GETAPPOINTMENTS}/${userId}/`,
+        query
+      );
+      return {
+        items: data,
+      };
+    } catch (err) {
+      notification.error({
+        message:
+          "Er gaat iets fout, neem contact met ons op als dit probleem zich blijft voordoen",
+      });
 
-    return { items: [] };
-  }
+      return { items: [] };
+    }
 }
 
 export const reparationsList = createListModule({
@@ -119,8 +120,8 @@ export const appointmentForm = createFormModule({
       guarantee_time: "0",
     };
   },
-  async submit(data) {
-    const shop = currentUser.selector(store.ref.getState())?.result?.id;
+  submit(data) {
+    const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
 
     let promise = null;
 
@@ -197,7 +198,7 @@ export const appointmentForm = createFormModule({
 export const devicesFetcher = dataFetcher({
   selectors: ["dashboard", "devices"],
   async fetchData() {
-    const shop = currentUser.selector(store.ref.getState())?.result?.id;
+    const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
     const data = await api.get(`${API_PATH.GETSHOPDEVICES}/`, { shop });
     return data.map(({ device }) => device);
   },
@@ -206,7 +207,7 @@ export const devicesFetcher = dataFetcher({
 export const brandFetcher = keyedDataFetcher({
   selectors: ["dashboard", "brands"],
   async fetchData([_, __, device]) {
-    const shop = currentUser.selector(store.ref.getState())?.result?.id;
+    const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
     const data = await api.get(`${API_PATH.GETDEVICEBRANDS}/?`, {
       device,
       shop,
@@ -218,7 +219,7 @@ export const brandFetcher = keyedDataFetcher({
 export const modelFetcher = keyedDataFetcher({
   selectors: ["dashboard", "brands", () => appointmentForm.state.values.device],
   async fetchData([_, __, device, brand]) {
-    const shop = currentUser.selector(store.ref.getState())?.result?.id;
+    const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
     const data = await api.get(`${API_PATH.GETBRANDMODELS}/`, {
       device,
       shop,
@@ -236,7 +237,7 @@ export const servicesFetcher = keyedDataFetcher({
     () => appointmentForm.state.values.brand,
   ],
   fetchData([_1, _2, device, brand, model]) {
-    const shop = currentUser.selector(store.ref.getState())?.result?.id;
+    const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
     return api.get(`${API_PATH.GETSHOPREPARATIONDETAILS}/`, {
       device,
       model,

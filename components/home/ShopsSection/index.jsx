@@ -190,6 +190,7 @@ export function ShopCard({ shop, onClick }) {
         <Image
           loading="lazy"
           src={shopLogo}
+	  alt={shop.name}
           layout="fill"
           objectFit="contained"
         />

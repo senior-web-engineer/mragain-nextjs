@@ -1,4 +1,5 @@
-import { Col, Divider, Input as AntdInput, Row, Table } from "antd";
+import { SearchOutlined, UserOutlined } from "@ant-design/icons";
+import { Col, Divider, Input, Row, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -13,6 +14,8 @@ import {
   viewRecordModal,
 } from "@/service/history/modules";
 import { OnMobile } from "@/utils/media";
+
+import ArrowSVG from "../../assets/icons/ReactSVGIcons/ArrowSVG";
 
 const StyledTable = styled(Table)`
   .ant-table-head {
@@ -41,10 +44,22 @@ const MobileContent = styled.div`
   height: calc(100vh - 260px);
 `;
 
+const AntdInput = styled(Input)`
+  .ant-input-suffix{
+    right: 4px;
+  }
+  .arrow-svg{
+    margin-left: 5px;
+  }
+  font-size: 12px;
+`;
+
+
 export default function HistoryPage({ auth_user }) {
   const [loading, setLoading] = useState(false);
   const [historyItems, setHistoryItems] = useState([]);
   const [search, setSearch] = useState("");
+  const [searchInputFocus, setSearchInputFocus] = useState(false);
   const [selectedItem, setSelectedItem] = useState();
 
   useEffect(() => {
@@ -73,22 +88,24 @@ export default function HistoryPage({ auth_user }) {
   return (
     <DefaultLayout>
       <Row type="flex" justify="space-between" align="middle">
-        <Col>
-          <Text.Headline style={{ marginBottom: "20px" }}>
-            Reparatie overzicht
-          </Text.Headline>
-        </Col>
         <Col />
       </Row>
-      <Row>
-        <Col lg={{ span: 5 }} md={{ span: 24 }}>
+      <Row type="flex" justify="end">
+        <Col lg={{ span: 7 }} md={{ span: 24 }}>
           <AntdInput
             placeholder="Zoek op IMEI / referentie"
             size="large"
             allowClear
             value={search}
-            style={{ fontSize: "12px" }}
             onChange={(event) => onSearch(event.target.value)}
+            prefix={<SearchOutlined className="site-form-item-icon" />}
+            suffix={<ArrowSVG searchInputFocus={searchInputFocus} />}
+            onFocus={() => {
+              setSearchInputFocus(true);
+            }}
+            onBlur={() => {
+              setSearchInputFocus(false);
+            }}
           />
         </Col>
         <Col></Col>

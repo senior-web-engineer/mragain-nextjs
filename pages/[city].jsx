@@ -16,6 +16,11 @@ export default function City({ cityInfo }) {
   const cityContent = cityInfo?.[0];
   const router = useRouter();
 
+let canonical = `${FRONT_END_URL}/${cityContent?.url}`
+let description = `Ben je op zoek naar een telefoon reparateur in ${cityContent?.name}? Voor telefoon reparatie ${cityContent?.name} vind je snel de beste reparateurs via MrAgain`
+let title =`Telefoon Reparatie ${cityContent?.name} | Mr Again`
+let image_url = `${FRONT_END_URL}/media/telefoon-reparatie.jpg`
+
   const renderBlocks = (block, index) => {
     return (
       <div className="block" key={index}>
@@ -40,34 +45,24 @@ export default function City({ cityInfo }) {
     <DefaultLayout showSignup>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>
-          De beste telefoon reparateur bij jou in de buurt | Mr Again{" "}
-        </title>
-
-        <meta
-          name="Keywords"
-          content="Telefoon reparatie, Telefoon reparateurs, Scherm vervangen, Batterij vervangen, water schade, MrAgain, Tablet reparatie, Tablet reparateurs, telefoonscherm vervangen, scherm telefoon kapot, telefoonscherm kapot, waterschade telefoon, telefoon in water laten vallen, iphone 6 batterij vervangen, nieuwe batterij iphone 7, iphone reparateur, telefoon in wc gevallen, scherm reparatie, iphone glas vervangen, kapot scherm, iphone glas vervangen, scherm iphone 6, nieuw scherm iphone 6, iphone 6 glas vervangen, telefoonscherm reparatie, scherm ipad vervangen"
-        />
-        <meta
-          name="description"
-          content="Telefoon kapot? Bij MrAgain vind je snel en gemakkelijk de beste telefoon reparateurs bij jou in de buurt."
-        />
-        <link rel="canonical" href={FRONT_END_URL} />
+        <title>{title}</title>
+        <meta  name="description" content={description}/>
+        <link rel="canonical" href={canonical} />
         <meta property="og:type" content="website" />
         <meta
           name="og_title"
           property="og:title"
-          content="Bij MrAgain vind je de beste telefoon reparateurs bij jou in de buurt"
+          content={title}
         />
 
         <meta
           property="og:description"
-          content="Vind de beste telefoon reparateur bij jou in de buurt"
+          content={description}
         />
-        <meta name="og:url" property="og:url" content={FRONT_END_URL} />
+        <meta name="og:url" property="og:url" content={canonical} />
         <meta
           property="og:image"
-          content={FRONT_END_URL + "/media/telefoon-reparatie.jpg"}
+          content={image_url}
         />
         <meta name="og_site_name" property="og:site_name" content="Mr Again" />
 
