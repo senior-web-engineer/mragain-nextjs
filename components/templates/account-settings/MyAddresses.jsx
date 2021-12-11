@@ -161,17 +161,17 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                   <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
                     <Field
                       adminInput
-                      name="street"
+                      name="st_number"
                       as={Input}
                       disabled={!basicSettingsForm.state?.values?.zipcode}
-                      label="Huisnummer"
+                      label="Street Number"
                       customLabel
                       size="small"
                     />
                   </Col>
                 </Row>
               </Col>
-              <Row>
+              {/* <Row>
                 <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
                   <Field
                     adminInput
@@ -183,7 +183,7 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                     allowClear
                   />
                 </Col>
-              </Row>
+              </Row> */}
             </BoxWrapperContent>
             <Divider />
             <ButtonsWrapper>

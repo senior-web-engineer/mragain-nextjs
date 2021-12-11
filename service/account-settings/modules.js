@@ -45,12 +45,13 @@ export const basicSettingsForm = createFormModule({
       street: fetchedData.street || "",
       zipcode: fetchedData.zipcode || "",
       intervals: fetchedData.intervals || 30,
+      st_number: fetchedData.st_number || "",
     };
   },
   submit(data) {
     const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
     const auth = currentUser.selector(store.ref.getState())?.result?.id;
-    const promise = privateApi.put(`${API_PATH.ACCOUNTSETTING}/${auth}/`, {
+    const promise = privateApi.patch(`${API_PATH.ACCOUNTSETTING}/${auth}/`, {
       ...data,
       double_appointment: true,
       shop,
