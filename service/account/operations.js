@@ -1,7 +1,9 @@
-import { registerFormModule } from "@/components/land/RegisterSection/RegisterForm/modules";
 import { notification } from "antd";
-import { default as axios, default as Axios } from "axios";
+import { default as Axios, default as axios } from "axios";
 import router from "next/router";
+
+import { registerFormModule } from "@/components/land/RegisterSection/RegisterForm/modules";
+
 import { API_PATH } from "../../constants";
 import {
   authenticated,
@@ -25,9 +27,8 @@ import {
   setLoadPBM,
   setSuccessData,
   setUpdateScheduleTime,
-  signupFail
+  signupFail,
 } from "./action";
-
 
 export const tokenConfig = () => {
   const token = localStorage.getItem("auth-token");
@@ -112,6 +113,8 @@ export function getAuthUser(dispatch) {
       dispatch(registerAuthUser(res.data));
     })
     .catch((err) => {
+      localStorage.setItem("auth-token", null);
+      localStorage.setItem("auth-user", null);
       dispatch(logoutA());
     });
 }
@@ -162,6 +165,8 @@ export async function logout(dispatch) {
     .get(`${API_PATH.LOGOUT}/`, tokenConfig())
     .then((res) => {
       dispatch(logoutA());
+      localStorage.setItem("auth-token", null);
+      localStorage.setItem("auth-user", null);
     })
     .catch((err) => {});
 }
@@ -251,7 +256,6 @@ export function getGeneralShopInfoServer(shopId) {
       return err;
     });
 }
-
 
 // for result search profiles
 export function getShopProfileByInformation(str, dispatch) {

@@ -1,8 +1,10 @@
 import { notification } from "antd";
+import { uniqueId } from "lodash";
 import moment from "moment";
+import Router from "next/router";
 
 import { store } from "@/configureStore";
-import { API_PATH } from "@/constants";
+import { API_PATH, BACK_END_URL } from "@/constants";
 import dataFetcher, { keyedDataFetcher } from "@/modules/dataFetcher";
 import { createFormModule } from "@/modules/forms";
 import { createListModule } from "@/modules/list";
@@ -11,8 +13,18 @@ import api, { privateApi } from "@/utils/api";
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],
-  fetchData() {
-    return privateApi.get(`${API_PATH.GETAUTHUSER}/`);
+  async fetchData() {
+    let data = null;
+    try {
+      data = await privateApi.get(`${API_PATH.GETAUTHUSER}/`);
+    } catch (err) {
+      Router.router.push("/login");
+      localStorage.setItem("auth-token", null);
+      localStorage.setItem("auth-user", null);
+      return err;
+    }
+
+    return data;
   },
 });
 
@@ -43,28 +55,30 @@ export const appointmentStats = dataFetcher({
   },
 });
 
+async function fetchReparations(query = {}) {
+  const userId = currentUser.selector(store.ref.getState())?.result?.account_id;
+  try {
+    const data = await privateApi.get(
+      `${API_PATH.GETAPPOINTMENTS}/${userId}/`,
+      query
+    );
+    return {
+      items: data.filter((reparation) => reparation.status !== 1),
+    };
+  } catch (err) {
+    notification.error({
+      message:
+        "Er gaat iets fout, neem contact met ons op als dit probleem zich blijft voordoen",
+    });
+
+    return { items: [] };
+  }
+}
+
 export const reparationsList = createListModule({
   guid: "shop-reprations",
   async fetchData(query = {}) {
-    const userId = currentUser.selector(store.ref.getState())?.result
-      ?.account_id;
-
-    try {
-      const data = await privateApi.get(
-        `${API_PATH.GETAPPOINTMENTS}/${userId}/`,
-        query
-      );
-      return {
-        items: data,
-      };
-    } catch (err) {
-      notification.error({
-        message:
-          "Er gaat iets fout, neem contact met ons op als dit probleem zich blijft voordoen",
-      });
-
-      return { items: [] };
-    }
+    return fetchReparations(query);
   },
 });
 
@@ -91,6 +105,12 @@ export const appointmentForm = createFormModule({
           price: reparation.price,
           id: reparation.id,
           guarantee_time: reparation.guarantee,
+          comments: reparation.comments,
+          appointmentId: reparation.appointment.id,
+          images: JSON.parse(reparation.images || "[]").map((url) => ({
+            url: url.startsWith("/") ? BACK_END_URL + url : url,
+            uid: uniqueId(),
+          })),
         };
       }
     }
@@ -109,7 +129,7 @@ export const appointmentForm = createFormModule({
       guarantee_time: "0",
     };
   },
-  submit(data) {
+  async submit(data) {
     const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
 
     let promise = null;
@@ -126,6 +146,22 @@ export const appointmentForm = createFormModule({
           guarantee_time: parseInt(data.guarantee_time),
         },
       });
+      promise = Promise.all([
+        promise,
+        api.put(`${API_PATH.UPDATEAPPOINTMENT}/${data.id}/`, {
+          device: data.device,
+          brand: data.brand,
+          model: data.model,
+          reparation: data.reparation,
+          images: JSON.stringify(
+            (data.images || []).map(
+              (file) =>
+                file.url?.replace(BACK_END_URL, "") || file?.response?.file
+            )
+          ),
+          comments: data.comments,
+        }),
+      ]);
     } else {
       promise = privateApi.post(`${API_PATH.CREATEAPPOINTMENTMANUALLY}/`, {
         appointmentData: {
@@ -152,9 +188,18 @@ export const appointmentForm = createFormModule({
       });
     }
 
+    await promise;
+
+    promise.then(async () => {
+      const { items } = await fetchReparations();
+      reparationsList.actions.refreshItems({ 0: items });
+    });
+
     createAppointmentFormModal.actions.close();
     notification.success({
-      message: "Afspraak is succesvol aangemaakt!",
+      message: data?.id
+        ? "Appointment updated successfully"
+        : "Afspraak is succesvol aangemaakt!",
     });
 
     return promise;
@@ -215,3 +260,78 @@ export const servicesFetcher = keyedDataFetcher({
 
 export const createAppointmentFormModal = createModalModule();
 export const notificationsModal = createModalModule();
+export const markCompleteModal = createModalModule();
+export const cancelAppointmentModal = createModalModule();
+
+export function markAppointmentAsDone({ email, ...appointment }) {
+  const shop_id = currentUser.selector(store.ref.getState())?.result
+    ?.account_id;
+  markCompleteModal.actions.open().then(async () => {
+    const promise = api.put(
+      `${API_PATH.UPDATEAPPOINTMENT}/${appointment.id}/`,
+      {
+        status: 1,
+        reparation: appointment.reparation.id,
+        device: appointment.device.id,
+        model: appointment.model.id,
+        brand: appointment.brand.id,
+      }
+    );
+    try {
+      await promise;
+      notification.success({
+        message:
+          "Appointment marked as done. An email will be sent to the client",
+      });
+    } catch (err) {
+      notification.success({
+        message: "Something went wrong",
+        description: err?.message,
+      });
+    }
+    privateApi.post(`${API_PATH.REPAIRCOLSEAUTUEMAIL}/`, {
+      id: appointment.id,
+      email,
+      shop: shop_id,
+    });
+
+    promise.then(async () => {
+      const { items } = await fetchReparations();
+      reparationsList.actions.refreshItems({ 0: items });
+    });
+
+    return promise;
+  });
+}
+
+export function cancelAppointment({ id }) {
+  const shop_id = currentUser.selector(store.ref.getState())?.result
+    ?.account_id;
+  cancelAppointmentModal.actions.open().then(async () => {
+    const promise = privateApi.delete(
+      `${API_PATH.CANCELAPPOINTMENT}/${shop_id}/`,
+      {
+        appoint_id: id,
+      }
+    );
+
+    try {
+      await promise;
+      notification.success({
+        message: "Appointment is canceled",
+      });
+    } catch (err) {
+      notification.success({
+        message: "Something went wrong while canceling the appointment",
+        description: err?.message,
+      });
+    }
+
+    promise.then(async () => {
+      const { items } = await fetchReparations();
+      reparationsList.actions.refreshItems({ 0: items });
+    });
+
+    return promise;
+  });
+}
