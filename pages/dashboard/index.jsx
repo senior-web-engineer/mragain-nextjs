@@ -1,9 +1,9 @@
-import { DownOutlined } from "@ant-design/icons";
 import {
   faCheck,
   faEdit,
   faEllipsisV,
   faPlus,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, DatePicker, Icon, Row, TimePicker } from "antd";
@@ -20,6 +20,8 @@ import {
   appointmentForm,
   appointmentStats,
   brandFetcher,
+  cancelAppointment,
+  cancelAppointmentModal,
   createAppointmentFormModal,
   currentUser,
   devicesFetcher,
@@ -134,6 +136,20 @@ const AppointmentMenuWrap = styled.div`
   justify-content: center;
 `;
 
+const StatusWrap = styled.div`
+  padding: 4px 10px 5px;
+  background: #e1effe;
+  border-radius: 3px;
+  color: #1e429f;
+  font-size: 12px;
+`;
+
+const STATUS_TO_TEXT = {
+  "-1": "Pending",
+  "-2": "Canceled",
+  1: "Done",
+};
+
 const columns = [
   {
     width: "120px",
@@ -190,7 +206,11 @@ const columns = [
   {
     title: "Status",
     render(data) {
-      return <div>{data.status}</div>;
+      if (!STATUS_TO_TEXT[data.status]) {
+        return null;
+      }
+
+      return <StatusWrap>{STATUS_TO_TEXT[data.status]}</StatusWrap>;
     },
   },
   {
@@ -223,6 +243,9 @@ const columns = [
             }
           >
             <FontAwesomeIcon icon={faCheck} /> Mark as complete
+          </Menu.Item>
+          <Menu.Item danger onClick={() => cancelAppointment(data)}>
+            <FontAwesomeIcon icon={faTimes} /> Cancel Appointment
           </Menu.Item>
         </Menu>
       );
@@ -514,13 +537,28 @@ function DashboardPage({ isEditMode }) {
         <Form module={appointmentForm}>
           <FormSectionTitle>Klant gegevens</FormSectionTitle>
           <FieldWrapAdmin>
-            <Field as={Input} name="customerName" label="Naam" />
+            <Field
+              as={Input}
+              name="customerName"
+              label="Naam"
+              disabled={isEditMode}
+            />
           </FieldWrapAdmin>
           <FieldWrapAdmin>
-            <Field as={Input} name="email" label="E-mailadres" />
+            <Field
+              as={Input}
+              name="email"
+              label="E-mailadres"
+              disabled={isEditMode}
+            />
           </FieldWrapAdmin>
           <FieldWrapAdmin>
-            <Field as={Input} name="contactNumber" label="Telefoon nummer" />
+            <Field
+              as={Input}
+              name="contactNumber"
+              label="Telefoon nummer"
+              disabled={isEditMode}
+            />
           </FieldWrapAdmin>
           <FormSectionTitle>Reparatie details</FormSectionTitle>
           <InlineFields>
@@ -530,6 +568,7 @@ function DashboardPage({ isEditMode }) {
                 label="Apparaat"
                 name="device"
                 onChange={onDeviceChange}
+                dropdownStyle={{ minWidth: "200px" }}
               />
             </FieldWrapAdmin>
             <FieldWrapAdmin>
@@ -538,6 +577,7 @@ function DashboardPage({ isEditMode }) {
                 label="Merk"
                 name="brand"
                 onChange={onBandChange}
+                dropdownStyle={{ minWidth: "200px" }}
               />
             </FieldWrapAdmin>
             <FieldWrapAdmin>
@@ -546,6 +586,7 @@ function DashboardPage({ isEditMode }) {
                 label="Model"
                 name="model"
                 onChange={onModelChange}
+                dropdownStyle={{ minWidth: "200px" }}
               />
             </FieldWrapAdmin>
           </InlineFields>
@@ -560,7 +601,12 @@ function DashboardPage({ isEditMode }) {
           <FormSectionTitle>Datum & Tijd</FormSectionTitle>
           <InlineFields>
             <FieldWrapAdmin>
-              <Field as={DatePicker} label="Datum" name="date" />
+              <Field
+                as={DatePicker}
+                label="Datum"
+                name="date"
+                disabled={isEditMode}
+              />
             </FieldWrapAdmin>
             <FieldWrapAdmin>
               <Field
@@ -568,23 +614,26 @@ function DashboardPage({ isEditMode }) {
                 label="Tijd"
                 name="time"
                 format="HH:mm"
+                disabled={isEditMode}
                 minuteStep={15}
               />
             </FieldWrapAdmin>
           </InlineFields>
           <FieldWrapAdmin>
             <Field
-              as={Select}
-              label="Duur"
-              name="duration"
-              options={DURATION_OPTIONS}
+              as={Input}
+              name="price"
+              label="Prijs"
+              disabled={isEditMode}
             />
           </FieldWrapAdmin>
           <FieldWrapAdmin>
-            <Field as={Input} name="price" label="Prijs" />
-          </FieldWrapAdmin>
-          <FieldWrapAdmin>
-            <Field as={Input} name="guarantee_time" label="Garantie" />
+            <Field
+              as={Input}
+              name="guarantee_time"
+              label="Garantie"
+              disabled={isEditMode}
+            />
           </FieldWrapAdmin>
           {isEditMode ? (
             <>
@@ -617,6 +666,13 @@ function DashboardPage({ isEditMode }) {
         <p>
           We will send an email letting your customer know that the reparation
           is completed and ready to be picked. Would you like to confirm?
+        </p>
+      </Modal>
+      <Modal module={cancelAppointmentModal} okText="Confirm">
+        <h2>Cancel Reparation ?</h2>
+        <p>
+          You will need to notify the client that the reparation has been
+          canceled.
         </p>
       </Modal>
     </DefaultLayout>
