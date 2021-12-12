@@ -1,5 +1,4 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./model-gegevens.less";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
