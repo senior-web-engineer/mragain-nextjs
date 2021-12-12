@@ -95,6 +95,7 @@ const StyledDialog = styled(Dialog)`
     font-size: 17px;
     line-height: 16px;
     margin-bottom: 14px;
+    text-align: center;
   }
 
   p {

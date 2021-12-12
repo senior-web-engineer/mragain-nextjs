@@ -57,7 +57,6 @@ export const appointmentStats = dataFetcher({
 
 async function fetchReparations(query = {}) {
   const userId = currentUser.selector(store.ref.getState())?.result?.account_id;
-
   try {
     const data = await privateApi.get(
       `${API_PATH.GETAPPOINTMENTS}/${userId}/`,
@@ -198,7 +197,9 @@ export const appointmentForm = createFormModule({
 
     createAppointmentFormModal.actions.close();
     notification.success({
-      message: "Afspraak is succesvol aangemaakt!",
+      message: data?.id
+        ? "Appointment updated successfully"
+        : "Afspraak is succesvol aangemaakt!",
     });
 
     return promise;
@@ -260,6 +261,7 @@ export const servicesFetcher = keyedDataFetcher({
 export const createAppointmentFormModal = createModalModule();
 export const notificationsModal = createModalModule();
 export const markCompleteModal = createModalModule();
+export const cancelAppointmentModal = createModalModule();
 
 export function markAppointmentAsDone({ email, ...appointment }) {
   const shop_id = currentUser.selector(store.ref.getState())?.result
@@ -292,6 +294,38 @@ export function markAppointmentAsDone({ email, ...appointment }) {
       email,
       shop: shop_id,
     });
+
+    promise.then(async () => {
+      const { items } = await fetchReparations();
+      reparationsList.actions.refreshItems({ 0: items });
+    });
+
+    return promise;
+  });
+}
+
+export function cancelAppointment({ id }) {
+  const shop_id = currentUser.selector(store.ref.getState())?.result
+    ?.account_id;
+  cancelAppointmentModal.actions.open().then(async () => {
+    const promise = privateApi.delete(
+      `${API_PATH.CANCELAPPOINTMENT}/${shop_id}/`,
+      {
+        appoint_id: id,
+      }
+    );
+
+    try {
+      await promise;
+      notification.success({
+        message: "Appointment is canceled",
+      });
+    } catch (err) {
+      notification.success({
+        message: "Something went wrong while canceling the appointment",
+        description: err?.message,
+      });
+    }
 
     promise.then(async () => {
       const { items } = await fetchReparations();
