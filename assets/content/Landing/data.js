@@ -51,6 +51,20 @@ const posts = [
       },
     ],
   },
+  {
+    id: 5,
+    subheadline: "Telefoon scherm reparatie",
+    description: [
+      {
+	content:
+	  "Als je telefoonscherm kapot is doe je er verstandig aan deze snel te laten vervangen. Hierdoor voorkom je verdere schade, bijvoorbeeld doordat er vuil je telefoon in komt. Voor telefoon scherm reparatie is het belangrijk dat je oplet met de kwaliteit van het scherm dat je koopt. In de regel geldt dat hoe duurder het scherm is, hoe beter de kwaliteit is.",
+      },
+      {
+	content:
+	  "Veel copy schermen zijn echter van zeer goede kwaliteit. Telefoonscherm vervangen is een reparatie die normaal snel uitgevoerd kan worden, dit geldt ook voor iPhone scherm reparatie.",
+      },
+    ],
+  },
 ];
 
 const headers = {
