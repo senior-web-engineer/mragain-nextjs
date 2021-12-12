@@ -198,8 +198,8 @@ export const appointmentForm = createFormModule({
     createAppointmentFormModal.actions.close();
     notification.success({
       message: data?.id
-        ? "Appointment updated successfully"
-        : "Afspraak is succesvol aangemaakt!",
+        ? "Afspraak succesvol bewerkt"
+        : "Afspraak succesvol aangemaakt!",
     });
 
     return promise;

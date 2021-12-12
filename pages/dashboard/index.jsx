@@ -145,9 +145,9 @@ const StatusWrap = styled.div`
 `;
 
 const STATUS_TO_TEXT = {
-  "-1": "Pending",
-  "-2": "Canceled",
-  1: "Done",
+  "-1": "In behandeling",
+  "-2": "Gecancelled",
+  1: "Afgerond",
 };
 
 const columns = [
@@ -232,7 +232,7 @@ const columns = [
                 .fetch();
             }}
           >
-            <FontAwesomeIcon icon={faEdit} /> Edit appointment
+            <FontAwesomeIcon icon={faEdit} /> Bewerk afspraak
           </Menu.Item>
           <Menu.Item
             onClick={() =>
@@ -242,10 +242,10 @@ const columns = [
               })
             }
           >
-            <FontAwesomeIcon icon={faCheck} /> Mark as complete
+            <FontAwesomeIcon icon={faCheck} /> Afronden
           </Menu.Item>
           <Menu.Item hidden danger onClick={() => cancelAppointment(data)}>
-            <FontAwesomeIcon icon={faTimes} /> Cancel Appointment
+            <FontAwesomeIcon icon={faTimes} /> Annuleer afspraak
           </Menu.Item>
         </Menu>
       );
@@ -639,7 +639,7 @@ function DashboardPage({ isEditMode }) {
             <>
               <FormSectionTitle>Remarks</FormSectionTitle>
               <FieldWrapAdmin>
-                <Field as={Input} textarea name="comments" label="Comments" />
+                <Field as={Input} textarea name="comments" label="Opmerkingen" />
               </FieldWrapAdmin>
 
               <FieldWrapAdmin>
@@ -655,24 +655,23 @@ function DashboardPage({ isEditMode }) {
           <Button>{isEditMode ? "Update afspraak" : "Maak afspraak"}</Button>
         </Form>
       </Drawer>
-      <Modal module={markCompleteModal} okText="Confirm">
+      <Modal module={markCompleteModal} okText="Bevestig">
         <Image
           src="/images/complete_repairment.png"
           width={324}
           height={103}
           alt="decorative image"
         />
-        <h2>Reparation completed</h2>
+        <h2>Reparatie afgerond</h2>
         <p>
-          We will send an email letting your customer know that the reparation
-          is completed and ready to be picked. Would you like to confirm?
+          We sturen een email naar de klant om een review voor je achter te laten.
+          Wil je doorgaan en de reparatie afronden?
         </p>
       </Modal>
-      <Modal module={cancelAppointmentModal} okText="Confirm">
-        <h2>Cancel Reparation ?</h2>
+      <Modal module={cancelAppointmentModal} okText="Bevestig">
+        <h2>Afspraak annuleren ?</h2>
         <p>
-          You will need to notify the client that the reparation has been
-          canceled.
+          Laat de klant weten dat je de afspraak hebt geannuleerd. 
         </p>
       </Modal>
     </DefaultLayout>

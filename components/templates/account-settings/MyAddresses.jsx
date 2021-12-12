@@ -164,7 +164,7 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                       name="st_number"
                       as={Input}
                       disabled={!basicSettingsForm.state?.values?.zipcode}
-                      label="Street Number"
+                      label="Huisnummer"
                       customLabel
                       size="small"
                     />
