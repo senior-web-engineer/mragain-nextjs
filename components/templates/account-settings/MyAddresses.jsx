@@ -131,7 +131,7 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                 </Col>
                 <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
                   <Field
-                    name="streetAddress"
+                    name="street"
                     adminInput
                     as={GooglePlaces}
                     label="Straat"
