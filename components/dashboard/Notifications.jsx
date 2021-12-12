@@ -78,7 +78,7 @@ const NotificationsBell = styled.div`
 const NTYPE_TO_TITLE = {
   "New appointment": "Nieuwe afspraak",
   "New inquiry": "Nieuw bericht",
-  "New Review": "Nieuwe recensie",
+  "New Review": "Nieuwe review",
 };
 
 export default function Notifications() {
