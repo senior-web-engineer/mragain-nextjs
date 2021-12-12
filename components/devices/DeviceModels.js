@@ -53,11 +53,11 @@ export default function DeviceModels({
 
   function renderModel(model) {
     return (
-      <Link
+      <ModelLink
         href={`/devices/${model.device_name}/${model.brand_name}/${model.model_name}`}
       >
-        <ModelLink>{model.model_name}</ModelLink>
-      </Link>
+        {model.model_name}
+      </ModelLink>
     );
   }
 

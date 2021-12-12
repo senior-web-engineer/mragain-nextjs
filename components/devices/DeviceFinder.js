@@ -125,21 +125,25 @@ export function DeviceFinder({
 
   function renderDevice(brand) {
     return (
-      <Link href={`/devices/${brand.name}`}>
-        <DeviceWrap key={brand.id} isSelected={deviceName === brand.name}>
-          {brand.name}
-        </DeviceWrap>
-      </Link>
+      <DeviceWrap
+        href={`/devices/${brand.name}`}
+        key={brand.id}
+        isSelected={deviceName === brand.name}
+      >
+        {brand.name}
+      </DeviceWrap>
     );
   }
 
   function renderBrand(brand) {
     return (
-      <Link href={`/devices/${deviceName}/${brand.name}`}>
-        <BrandWrap key={brand.id} isSelected={brandName === brand.name}>
-          {brand.name}
-        </BrandWrap>
-      </Link>
+      <BrandWrap
+        href={`/devices/${deviceName}/${brand.name}`}
+        key={brand.id}
+        isSelected={brandName === brand.name}
+      >
+        {brand.name}
+      </BrandWrap>
     );
   }
 

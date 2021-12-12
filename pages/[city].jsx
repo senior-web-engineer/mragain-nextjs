@@ -16,10 +16,10 @@ export default function City({ cityInfo }) {
   const cityContent = cityInfo?.[0];
   const router = useRouter();
 
-let canonical = `${FRONT_END_URL}/${cityContent?.url}`
-let description = `Ben je op zoek naar een telefoon reparateur in ${cityContent?.name}? Voor telefoon reparatie ${cityContent?.name} vind je snel de beste reparateurs via MrAgain`
-let title =`Telefoon Reparatie ${cityContent?.name} | Mr Again`
-let image_url = `${FRONT_END_URL}/media/telefoon-reparatie.jpg`
+  let canonical = `${FRONT_END_URL}/${cityContent?.url}`;
+  let description = `Ben je op zoek naar een telefoon reparateur in ${cityContent?.name}? Voor telefoon reparatie ${cityContent?.name} vind je snel de beste reparateurs via MrAgain`;
+  let title = `Telefoon Reparatie ${cityContent?.name} | Mr Again`;
+  let image_url = `${FRONT_END_URL}/media/telefoon-reparatie.jpg`;
 
   const renderBlocks = (block, index) => {
     return (
@@ -46,24 +46,14 @@ let image_url = `${FRONT_END_URL}/media/telefoon-reparatie.jpg`
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{title}</title>
-        <meta  name="description" content={description}/>
+        <meta name="description" content={description} />
         <link rel="canonical" href={canonical} />
         <meta property="og:type" content="website" />
-        <meta
-          name="og_title"
-          property="og:title"
-          content={title}
-        />
+        <meta name="og_title" property="og:title" content={title} />
 
-        <meta
-          property="og:description"
-          content={description}
-        />
+        <meta property="og:description" content={description} />
         <meta name="og:url" property="og:url" content={canonical} />
-        <meta
-          property="og:image"
-          content={image_url}
-        />
+        <meta property="og:image" content={image_url} />
         <meta name="og_site_name" property="og:site_name" content="Mr Again" />
 
         <meta name="theme-color" content="#ffffff" />

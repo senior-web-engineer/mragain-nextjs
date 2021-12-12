@@ -266,17 +266,17 @@ const FooterView = (routerProps) => {
               <FooterSitemapTitle>Zoek je device</FooterSitemapTitle>
               <ul>
                 <li>
-                  <Link prefetch={false} href="/devices">
+                  <Link prefetch={false} href="/devices/Smartphones">
                     Smartphones
                   </Link>
                 </li>
                 <li>
-                  <Link prefetch={false} href="/devices">
+                  <Link prefetch={false} href="/devices/Tablets">
                     Tablets
                   </Link>
                 </li>
                 <li>
-                  <Link prefetch={false} href="/devices">
+                  <Link prefetch={false} href="/devices/Laptops">
                     Laptops
                   </Link>
                 </li>
@@ -369,11 +369,11 @@ const FooterView = (routerProps) => {
                     Maastricht
                   </Link>
                 </li>
-	        <li>
-	          <Link prefetch={false} href="/eindhoven">
-	            Eindhoven
-	          </Link>
-	        </li>
+                <li>
+                  <Link prefetch={false} href="/eindhoven">
+                    Eindhoven
+                  </Link>
+                </li>
               </ul>
             </FooterSitemap>
           </FooterLinkArea>{" "}
