@@ -61,7 +61,7 @@ const posts = [
       },
       {
 	content:
-	  "Veel copy schermen zijn echter van zeer goede kwaliteit. Telefoonscherm vervangen is een reparatie die normaal snel uitgevoerd kan worden, dit geldt ook voor iPhone scherm reparatie.",
+	  "Veel copy schermen zijn echter van zeer goede <a href=https://www.mragain.nl/Amsterdam/FixitNU/Rijnstraat-76>FixitNu</a> kwaliteit. Telefoonscherm vervangen is een reparatie die normaal snel uitgevoerd kan worden, dit geldt ook voor iPhone scherm reparatie.",
       },
     ],
   },
