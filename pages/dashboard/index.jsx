@@ -637,7 +637,7 @@ function DashboardPage({ isEditMode }) {
           </FieldWrapAdmin>
           {isEditMode ? (
             <>
-              <FormSectionTitle>Remarks</FormSectionTitle>
+              <FormSectionTitle>Extra informatie</FormSectionTitle>
               <FieldWrapAdmin>
                 <Field as={Input} textarea name="comments" label="Opmerkingen" />
               </FieldWrapAdmin>
@@ -647,7 +647,7 @@ function DashboardPage({ isEditMode }) {
                   as={PicturesWall}
                   textarea
                   name="images"
-                  label="Images"
+                  label="Foto's"
                 />
               </FieldWrapAdmin>
             </>
@@ -660,7 +660,7 @@ function DashboardPage({ isEditMode }) {
           src="/images/complete_repairment.png"
           width={324}
           height={103}
-          alt="decorative image"
+          alt="Afspraak afgerond logo"
         />
         <h2>Reparatie afgerond</h2>
         <p>
