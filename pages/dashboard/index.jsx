@@ -244,7 +244,7 @@ const columns = [
           >
             <FontAwesomeIcon icon={faCheck} /> Mark as complete
           </Menu.Item>
-          <Menu.Item danger onClick={() => cancelAppointment(data)}>
+          <Menu.Item hidden danger onClick={() => cancelAppointment(data)}>
             <FontAwesomeIcon icon={faTimes} /> Cancel Appointment
           </Menu.Item>
         </Menu>
