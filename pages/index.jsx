@@ -46,7 +46,7 @@ export default function Home({ shopList }) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>
-          Telefoon reparatie nodig? Bij MrAgain vind je de beste telefoon reparateurs bij jou in de buurt | Mr Again{" "}
+          Telefoon reparatie nodig? Vind snel een telefoon reparateur!
         </title>
         <meta
           name="description"
