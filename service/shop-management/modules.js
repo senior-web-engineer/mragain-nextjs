@@ -1,10 +1,10 @@
-import { notification } from "antd";
-
 import { store } from "@/configureStore";
 import { API_PATH } from "@/constants";
 import dataFetcher from "@/modules/dataFetcher";
 import { createFormModule } from "@/modules/forms";
 import { privateApi } from "@/utils/api";
+import { notification } from "antd";
+
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],
@@ -129,7 +129,7 @@ export const shopManagementGeneralForm = createFormModule({
   },
   submit(data) {
     const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
-    const promise = privateApi.post(`${API_PATH.CREATEAPPOINTMENTMANUALLY}/`, {
+    const promise = privateApi.patch(`${API_PATH.ACCOUNTSETTING}/${shop}/`, {
       about_us: data.about_us,
       phone_number: data.phone_number,
       site_url: data.site_url,
