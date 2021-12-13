@@ -32,6 +32,7 @@ module.exports = withLess(
           "mragainproduction.eu.pythonanywhere.com",
           "develop.mragain.nl",
           "mragain.nl",
+          "127.0.0.1",
         ],
       },
       env: {

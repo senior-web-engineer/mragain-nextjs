@@ -31,10 +31,10 @@ export default function RepairManagementPage() {
   }, []);
 
   const onLocationUpdate = (data) => {
-    console.log("DATA", data);
     basicSettingsForm.actions.batchChange({
       updates: {
         street: data.street,
+        st_number: data?.st_number,
         zipcode: data.zip,
         city: data.city,
         country: data.country,
