@@ -185,7 +185,7 @@ export default function FindSection() {
   return (
     <FindWrap>
       <SearchWrap>
-        <h1>Telefoon reparatie? Vind snel een reparateur bij jou in de buurt</h1>
+        <h1>Telefoon reparatie in een handomdraai</h1>
         <Form module={searchForm}>
           <SearchBar>
             <div>
