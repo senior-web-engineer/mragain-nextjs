@@ -72,7 +72,7 @@ const ShopProfile = (routerProps) => {
       },
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": "${shopAccountProfile.mark}",
+        "ratingValue": "${shopAccountProfile.mark}"
       },
       "name": "${shopAccountProfile.name}",
       "telephone": "${shopAccountProfile.phone_number}",
