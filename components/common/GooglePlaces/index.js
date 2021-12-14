@@ -103,7 +103,7 @@ export default function GooglePlaces({
   onChange,
   isPrefix = true,
   size,
-  placeholder = "",
+  placeholder = "Stad of postcode",
   onLocationSelected,
   disabled,
   searchOptions = {
