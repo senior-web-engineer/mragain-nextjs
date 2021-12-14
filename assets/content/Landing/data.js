@@ -135,7 +135,7 @@ const posts = [
       },	      
       {
 	content:
-	"<lu> <li> <a href=https://www.mragain.nl/amsterdam>Telefoon reparatie Amsterdam</a> </li> <li> <a href=https://www.mragain.nl/rotterdam>Telefoon reparatie Rotterdam</a> </li> <li> <a href=https://www.mragain.nl/den-haag>Telefoon reparatie Den Haag</a> </li> <li> <a href=https://www.mragain.nl/utrecht>Telefoon reparatie Utrecht</a> </li> <li> <a href=https://www.mragain.nl/groningen>Telefoon reparatie Groningen</a> </li> <li> <a href=https://www.mragain.nl/almere>Telefoon reparatie Almere</a> </li> <li> <a href=https://www.mragain.nl/apeldoorn>Telefoon reparatie Apeldoorn</a> </li> <li> <a href=https://www.mragain.nl/ede>Telefoon reparatie Ede</a> </li></lu>"     
+	"<ul> <li> <a href=https://www.mragain.nl/amsterdam>Telefoon reparatie Amsterdam</a> </li> <li> <a href=https://www.mragain.nl/rotterdam>Telefoon reparatie Rotterdam</a> </li> <li> <a href=https://www.mragain.nl/den-haag>Telefoon reparatie Den Haag</a> </li> <li> <a href=https://www.mragain.nl/utrecht>Telefoon reparatie Utrecht</a> </li> <li> <a href=https://www.mragain.nl/groningen>Telefoon reparatie Groningen</a> </li> <li> <a href=https://www.mragain.nl/almere>Telefoon reparatie Almere</a> </li> <li> <a href=https://www.mragain.nl/apeldoorn>Telefoon reparatie Apeldoorn</a> </li> <li> <a href=https://www.mragain.nl/ede>Telefoon reparatie Ede</a> </li></ul>"     
       },
     ],
   },
