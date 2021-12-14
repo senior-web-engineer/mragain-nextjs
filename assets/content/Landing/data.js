@@ -131,7 +131,7 @@ const posts = [
     description: [
       {
 	content:
-	"Via MrAgain vind je reparateurs door het hele land. Of je nu in de buurt van Maastricht, of Groningen op zoek bent, het maakt niet uit: overal is er een reparateur die je kan helpen. Klik hier snel door naar een overzicht van reparateurs in de grootste steden."
+	"Via MrAgain <a href=https://www.mragain.nl>MrAgain </a> vind je reparateurs door het hele land. Of je nu in de buurt van Maastricht, of Groningen op zoek bent, het maakt niet uit: overal is er een reparateur die je kan helpen. Klik hier snel door naar een overzicht van reparateurs in de grootste steden."
       },
     ],
   },
