@@ -30,7 +30,7 @@ const Section = ({ headers, posts }) => {
                 <Content>
                   {description.map((par, index) => {
                     const { content } = par;
-                    return <p key={index}> dangerouslySetInnerHTML={{__html: content}}</p>;
+                    return <p key={index} dangerouslySetInnerHTML={{__html: content}}></p>;
                   })}
                 </Content>
               </Post>
