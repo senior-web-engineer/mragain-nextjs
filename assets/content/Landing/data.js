@@ -135,7 +135,7 @@ const posts = [
       },	      
       {
 	content:
-	"<ul> <li> <a href=https://www.mragain.nl/amsterdam>Telefoon reparatie Amsterdam</a> </li> </ul>"     
+	"<a href=https://www.mragain.nl/amsterdam>Telefoon reparatie Amsterdam</a>"     
       },
     ],
   },
