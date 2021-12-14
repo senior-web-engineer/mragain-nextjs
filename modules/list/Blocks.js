@@ -1,10 +1,10 @@
+import Loader from "@/components/common/Loader";
 import { Table as AntTable } from "antd";
 import React, { useMemo } from "react";
 import styled from "styled-components";
-
-import Loader from "@/components/common/Loader";
-
 import { useListContext } from ".";
+
+
 
 const StyledTable = styled(AntTable)`
   .ant-table-head {
@@ -63,7 +63,8 @@ export function Listing({ Item }) {
 
 export function Table({ ...props }) {
   const { state } = useListContext();
-  const { items, pages } = state;
+  const { items, pages, isLoading, currentPage, filters } = state;
+
   const derivedItems = useMemo(() => {
     return pages.reduce((accumulator, page) => {
       return accumulator.concat(items[page]);
@@ -84,6 +85,7 @@ export function Table({ ...props }) {
     <StyledTable
       pagination={false}
       {...props}
+      loading={isLoading}
       dataSource={derivedItems}
       rowSelection={props.selection && rowSelection}
     />
