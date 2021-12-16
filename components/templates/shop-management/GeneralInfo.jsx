@@ -3,6 +3,10 @@ import { Rate } from "antd";
 import Image from "next/image";
 import React, { useState } from "react";
 
+
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import Link from "@/assets/icons/link.svg";
 import MapMarker from "@/assets/icons/map-marker.svg";
 import Phone from "@/assets/icons/phone.svg";
@@ -58,15 +62,22 @@ function renderAdvantage(advantage, index) {
   );
 }
 
-export const GeneralInfo = ({ shopData }) => {
+export const GeneralInfo = ({ shopData, setShopData }) => {
   const [editing, setEditing] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    shopManagementGeneralForm.actions.submit(
-      shopManagementGeneralForm.state.values
-    );
-    setEditing(false);
+    (async() => {
+      await shopManagementGeneralForm.actions.submit(
+        shopManagementGeneralForm.state.values
+      );
+      setShopData({
+        ...shopData,
+        ...shopManagementGeneralForm.state.values
+      });
+      setEditing(false);
+    })()
+    
   };
 
   const onEdit = async () => {
@@ -120,10 +131,9 @@ export const GeneralInfo = ({ shopData }) => {
                 />
                 <Field
                   adminInput
-                  as={GooglePlaces}
                   customLabel
-                  name="street"
-                  label="Adres"
+                  name="whatsapp_number"
+                  label="Whatsapp Number"
                 />
               </Col>
             </Row>
@@ -178,6 +188,12 @@ export const GeneralInfo = ({ shopData }) => {
                   <Image width="24px" height="24px" src={MapMarker} />
                   <Text.Body size="12" style={{ margin: 0 }}>
                     {shopData?.street}
+                  </Text.Body>
+                </span>
+                <span>
+                  <FontAwesomeIcon icon={faWhatsapp} />&nbsp;
+                  <Text.Body size="12" style={{ margin: 0 }}>
+                    {shopData?.whatsapp_number}
                   </Text.Body>
                 </span>
               </ContactInfo>

@@ -124,7 +124,7 @@ export const shopManagementGeneralForm = createFormModule({
       about_us: fetchedData.about_us || "",
       phone_number: fetchedData.phone_number || "",
       site_url: fetchedData.site_url || "",
-      street: fetchedData.street || "",
+      whatsapp_number: fetchedData.whatsapp_number || "",
     };
   },
   submit(data) {
@@ -133,7 +133,7 @@ export const shopManagementGeneralForm = createFormModule({
       about_us: data.about_us,
       phone_number: data.phone_number,
       site_url: data.site_url,
-      street: data.street,
+      whatsapp_number: data.whatsapp_number,
       shop,
     });
 
