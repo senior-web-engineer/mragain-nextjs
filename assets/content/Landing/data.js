@@ -131,7 +131,11 @@ const posts = [
     description: [
       {
 	content:
-	"Via MrAgain vind je reparateurs door het hele land. Of je nu in de buurt van Maastricht, of Groningen op zoek bent, het maakt niet uit: overal is er een reparateur die je kan helpen. Klik hier snel door naar een overzicht van reparateurs in de grootste steden."
+	"Via <a href=https://www.mragain.nl>MrAgain </a> vind je reparateurs door het hele land. Of je nu in de buurt van Maastricht, of Groningen op zoek bent, het maakt niet uit: overal is er een reparateur die je kan helpen. Klik hier snel door naar een overzicht van reparateurs in de grootste steden."
+      },	      
+      {
+	content:
+	"<a href=https://www.mragain.nl/enschede>Telefoon reparatie Enschede</a> , <a href=https://www.mragain.nl/almere>Telefoon reparatie Almere</a>, <a href=https://www.mragain.nl/utrecht>Telefoon reparatie Utrecht</a>. <a href=https://www.mragain.nl/den-haag>Telefoon reparatie Den Haag</a>, <a href=https://www.mragain.nl/amsterdam>Telefoon reparatie Amsterdam</a>, <a href=https://www.mragain.nl/rotterdam>Telefoon reparatie Rotterdam</a>, <a href=https://www.mragain.nl/apeldoorn>Telefoon reparatie Apeldoorn</a>, <a href=https://www.mragain.nl/groningen>Telefoon reparatie Groningen</a> ,<a href=https://www.mragain.nl/zoetermeer>Telefoon reparatie Zoetermeer</a>, <a href=https://www.mragain.nl/nijmegen>Telefoon reparatie Nijmegen</a>,<a href=https://www.mragain.nl/nijmegen>Telefoon reparatie Nijmegen</a>, <a href=https://www.mragain.nl/ede>Telefoon reparatie Ede</a>"     
       },
     ],
   },
