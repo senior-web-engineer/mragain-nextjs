@@ -85,7 +85,7 @@ const posts = [
     description: [
       {
 	content:
-	"Als je iPhone scherm kapot is, dan is het verstandig om deze zo snel mogelijk te laten vervangen. Een kapot scherm kan namelijk op meerdere manieren schade aanbrengen. Loszittende stukjes kunnen je verwonden, terwijl er ook vuil in je telefoon kan komen met mogelijk meer schade tot gevolg."
+	"<p>Als je iPhone scherm kapot is, dan is het verstandig om deze zo snel mogelijk te laten vervangen. Een kapot scherm kan namelijk op meerdere manieren schade aanbrengen. Loszittende stukjes kunnen je verwonden, terwijl er ook vuil in je telefoon kan komen met mogelijk meer schade tot gevolg.<br></p>"
       },
       {
 	content:
@@ -121,7 +121,7 @@ const posts = [
     description: [
       {
 	content:
-	"Ook voor laptop reparatie kun je via onze website de beste reparateurs vinden. Dat geldt ook voor Macbook reparatie en alles wat met laptops te maken heeft. De meest voorkomende laptop reparaties zijn het vervangen van het scherm, vergroten van het geheugen met extra RAM en natuurlijk het vervangen van accu's."   
+	"<p>Ook voor laptop reparatie kun je via onze website de beste reparateurs vinden. Dat geldt ook voor Macbook reparatie en alles wat met laptops te maken heeft. De meest voorkomende laptop reparaties zijn het vervangen van het scherm, vergroten van het geheugen met extra RAM en natuurlijk het vervangen van accu's.</p>"   
       },
     ],
   },
@@ -131,11 +131,11 @@ const posts = [
     description: [
       {
 	content:
-	"Via <a href=https://www.mragain.nl>MrAgain </a> vind je reparateurs door het hele land. Of je nu in de buurt van Maastricht, of Groningen op zoek bent, het maakt niet uit. Overal is er een reparateur die je kan helpen. Klik hier snel door naar een overzicht van reparateurs in de grootste steden."
+	"<p>Via <a href=https://www.mragain.nl>MrAgain </a> vind je reparateurs door het hele land. Of je nu in de buurt van Maastricht, of Groningen op zoek bent, het maakt niet uit. Overal is er een reparateur die je kan helpen. Klik hier snel door naar een overzicht van reparateurs in de grootste steden.</p>"
       },	      
       {
 	content:
-	"<ul><li><a href=https://www.mragain.nl/enschede>Telefoon reparatie Enschede</a></li> ,<li><a href=https://www.mragain.nl/almere>Telefoon reparatie Almere</a></li>,<li><a href=https://www.mragain.nl/utrecht>Telefoon reparatie Utrecht</a></li>,<li><a href=https://www.mragain.nl/den-haag>Telefoon reparatie Den Haag</a></li>,<li><a href=https://www.mragain.nl/amsterdam>Telefoon reparatie Amsterdam</a></li>,<li><a href=https://www.mragain.nl/rotterdam>Telefoon reparatie Rotterdam</a></li>,<li><a href=https://www.mragain.nl/apeldoorn>Telefoon reparatie Apeldoorn</a>>/li>, <li><a href=https://www.mragain.nl/groningen>Telefoon reparatie Groningen</a></li> ,<li><a href=https://www.mragain.nl/zoetermeer>Telefoon reparatie Zoetermeer</a></li>, <li><a href=https://www.mragain.nl/nijmegen>Telefoon reparatie Nijmegen</a></li>, <li><a href=https://www.mragain.nl/zwolle>Telefoon reparatie Zwolle</a></li>, <li><a href=https://www.mragain.nl/ede>Telefoon reparatie Ede</a></li></ul>"     
+	"<p><ul><li><a href=https://www.mragain.nl/enschede>Telefoon reparatie Enschede</a></li> <li><a href=https://www.mragain.nl/almere>Telefoon reparatie Almere</a></li> <li><a href=https://www.mragain.nl/utrecht>Telefoon reparatie Utrecht</a></li><li><a href=https://www.mragain.nl/den-haag>Telefoon reparatie Den Haag</a></li><li><a href=https://www.mragain.nl/amsterdam>Telefoon reparatie Amsterdam</a></li><li><a href=https://www.mragain.nl/rotterdam>Telefoon reparatie Rotterdam</a></li><li><a href=https://www.mragain.nl/apeldoorn>Telefoon reparatie Apeldoorn</a>>/li><li><a href=https://www.mragain.nl/groningen>Telefoon reparatie Groningen</a></li><li><a href=https://www.mragain.nl/zoetermeer>Telefoon reparatie Zoetermeer</a></li><li><a href=https://www.mragain.nl/nijmegen>Telefoon reparatie Nijmegen</a></li><li><a href=https://www.mragain.nl/zwolle>Telefoon reparatie Zwolle</a></li><li><a href=https://www.mragain.nl/ede>Telefoon reparatie Ede</a></li></ul></p>"     
       },
     ],
   },
