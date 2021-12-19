@@ -153,7 +153,7 @@ const posts = [
       },
       {	
 	content:   
-	"<p><ul><li>Repareren wanneer dat kan</li><li>Als je een nieuwe koopt, ga dan voor een refurbished telefoon</li><li>Toch geen refurbished, koop dan een Fairphone</li><li>Kan het echt niet anders? Dan maar een nieuwe iPhone</li></ul></p>      
+	"<p><ul><li>Repareren wanneer dat kan</li><li>Als je een nieuwe koopt, ga dan voor een refurbished telefoon</li><li>Toch geen refurbished, koop dan een Fairphone</li><li>Kan het echt niet anders? Dan maar een nieuwe iPhone</li></ul></p>"
       },
     ],
   },
