@@ -139,6 +139,66 @@ const posts = [
       },
     ],
   },
+  {
+    id: 9,
+    subheadline: "Telefoon repareren of een nieuwe kopen?",
+    description: [
+      {
+	content:
+	"<p>Je telefoon laten repareren of een nieuwe iPhone kopen? Veel mensen vragen zich dit af wanneer hun telefoon kapot gaat. Er zijn verschillende factoren om dan mee te wegen. Hoe oud is de telefoon en wat zijn de reparatiekosten? En hoe lang gaat hij nog mee na een reparatie?<br></p>"
+      },	      
+      {
+	content:
+	"<p>Op basis van die informatie kun je afgewogen keuze maken. Natuurlijk is het beter voor het milieu als je probeert om je telefoon zo lang mogelijk te gebruiken. We schreven er eerder een artikel over en beschreven wat je mogelijkheden zijn. voor wat betreft duurzaamheid zijn dit de beste opties:<br></p>"     
+      },
+      {	
+	content:   
+	"<p><ul><li>Repareren wanneer dat kan</li><li>Als je een nieuwe koopt, ga dan voor een refurbished telefoon</li><li>Toch geen refurbished, koop dan een Fairphone</li><li>Kan het echt niet anders? Dan maar een nieuwe iPhone</li></ul></p>      
+      },
+    ],
+  },
+  {
+    id: 10, 
+    subheadline: "Smartwatch reparatie",
+    description: [
+      {
+	content:
+	"<p>De smartwatch wint steeds meer aan terrein. Je kunt er inmiddels al vrijwel alles mee, berichten sturen, foto's maken en zelfs bellen. Het is dan ook niet verwonderlijk dat de meeste telefoon reparateurs ook smartwatches repareren.<br></p>"
+      },
+      {
+	content: 
+	"<p>De Iwatch of Apple Watch is een bekende, maar je hebt ook de Fitbit en Huawei en Samsung smart watches. Bij smartwatch reparaties zijn scherm reparatie en batterij vervangen veel voorkomend. Daarna ben je al snel aangewezen op een diagnose afspraak omdat de meeste andere defecten zich moeilijk laten raden.<br></p>"
+      },
+    ],
+  },
+  {
+    id: 11, 
+    subheadline: "Witgoed reparatie",
+    description: [
+      {
+	content:
+	"<p>Niets vervelenders dan een wasmachine of vaatwasser die het niet meer doet. Gelukkig zie je nu via MrAgain ook welke reparateur bij jou in de buurt kan langskomen en tegen welke kosten. Omdat het van de buitenkant vaak lastig te zien is wat er kapot is ben je vaak het beste af met een diagnose afspraak.<br></p>"
+      },
+      {
+	content: 
+	"<p>Normaal gesproken betaal je een vast bedrag voor de voorrijkosten en het eerste half uur aan onderzoekskosten. Het tarief daarna is afhankelijk van de tijd en de onderdelen die een reparateur nodig heeft.<br></p>"
+      },
+    ],
+  },
+  {
+    id: 12, 
+    subheadline: "Televisie reparatie",
+    description: [
+      {
+	content:
+	"<p>Het komt niet vaak voor, maar ook TV's gaan van tijd tot tijd kapot. In plaats van direct een nieuwe te kopen doe je er goed aan om hier ook je reparatiekosten te onderzoeken. Wellicht kan hij immers snel en goed gemaakt worden.<br></p>"
+      },
+      {
+	content: 
+	"<p>Bij een audio specialist ben je dan aan het juiste adres. Via deze pagina zie je direct welke reparateur jouw model repareert.<br></p>"
+      },
+    ],
+  },
 ];
 
 const headers = {
