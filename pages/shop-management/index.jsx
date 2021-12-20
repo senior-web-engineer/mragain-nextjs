@@ -85,7 +85,7 @@ export default function ShopManagementPage() {
                   </BoxWrapper>
 
                   <BoxWrapper padding>
-                    <AdditionalInfo shopData={shopInfo} />
+                    <AdditionalInfo shopData={shopInfo} setShopData={setShopData} />
                   </BoxWrapper>
                 </Col>
               </Row>

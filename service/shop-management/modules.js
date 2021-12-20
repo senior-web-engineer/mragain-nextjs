@@ -152,20 +152,22 @@ export const shopManagementAdditionalForm = createFormModule({
     const shopInfoData = await privateApi.get(
       `${API_PATH.GETSHOPGENERALINFO}/${shopId}/`
     );
+    console.log(shopInfoData);
     if (shopInfoData.length !== 0) {
       return {
         devices: shopInfoData[0].replacementDevices || [],
-        brands: shopInfoData[0].cateredBrand.map((id) => id.toString()) || [],
+        brands: shopInfoData[0].cateredBrand?.map((id) => id.toString()) || [],
+        cateredBrand: shopInfoData[0].cateredBrand?.map((id) => id.toString()) || [],
         payMethod: shopInfoData[0].paymentMethod || [],
         purchases:
-          shopInfoData[0].ShopPurchase.map((id) => id.toString()) || [],
+          shopInfoData[0]?.ShopPurchase?.map((id) => id.toString()) || [],
         temporaryReplacement: !!shopInfoData[0].temporaryReplacement,
         waitingArea: shopInfoData[0].waitingArea,
         reparationOption:
-          shopInfoData[0].reparationOption.map((id) => id.toString()) || [],
-        services: shopInfoData[0].services || [],
-        parkingArea: shopInfoData[0].parkingArea || [],
-        insurance: shopInfoData[0].insurance || [],
+          shopInfoData[0]?.reparationOption?.map((id) => id.toString()) || [],
+        services: shopInfoData[0]?.services || [],
+        parkingArea: shopInfoData[0]?.parkingArea || [],
+        insurance: shopInfoData[0]?.insurance || [],
       };
     }
 
@@ -185,6 +187,7 @@ export const shopManagementAdditionalForm = createFormModule({
         insurance: 0,
         devices: data.devices.map((id) => +id),
         brands: data.brands.map((id) => +id),
+        cateredBrand: data.brands.map((id) => +id),
         purchases: [],
       }
     );

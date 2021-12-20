@@ -48,7 +48,7 @@ const renderDevicesList = (devices, selectedDevices, onChange) => (
   </Row>
 );
 
-export const AdditionalInfo = ({ shopData }) => {
+export const AdditionalInfo = ({ shopData, setShopData }) => {
   const [editing, setEditing] = useState(false);
   const [brands, setBrands] = useState([]);
   const [devices, setDevices] = useState([]);
@@ -94,11 +94,26 @@ export const AdditionalInfo = ({ shopData }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    shopManagementAdditionalForm.actions.submit(
-      shopManagementAdditionalForm.state.values
-    );
-    setEditing(false);
+    (async() => {
+        await shopManagementAdditionalForm.actions.submit(
+          shopManagementAdditionalForm.state.values
+        );
+        
+        console.log(shopManagementAdditionalForm.state.values);
+        setShopData({
+          ...shopData,
+          ...shopManagementAdditionalForm.state.values
+        });
+        setEditing(false);
+    })();
   };
+
+  const onEdit = async () => {
+    setEditing(true);
+    await shopManagementAdditionalForm.actions.initialize();
+  };
+
+  console.log(shopData);
 
   return (
     <>
@@ -121,7 +136,7 @@ export const AdditionalInfo = ({ shopData }) => {
                 </Button>
               </>
             ) : (
-              <Button type="primary" onClick={() => setEditing(true)}>
+              <Button type="primary" onClick={onEdit}>
                 Wijzigen
               </Button>
             )}
@@ -224,7 +239,7 @@ export const AdditionalInfo = ({ shopData }) => {
           </Col>
         </Row>
 
-        <Row style={rowStyle} type="flex" justify="space-between">
+        {/* <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
             <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
               Locatie opties
@@ -232,7 +247,7 @@ export const AdditionalInfo = ({ shopData }) => {
           </Col>
           <Col span={18}>
             {editing ? (
-              <Row gutter={[0, 16]}>
+              <Row gutter={[0, 16]}> */}
                 {/* <Col span={24}>
                   <Field
                     adminInput
@@ -260,7 +275,7 @@ export const AdditionalInfo = ({ shopData }) => {
                     title="Toestel opsturen"
                   />
                 </Col> */}
-                <Field
+                {/* <Field
                   adminInput
                   as={MultiSelect}
                   name="reparationOption"
@@ -275,9 +290,9 @@ export const AdditionalInfo = ({ shopData }) => {
               ))
             )}
           </Col>
-        </Row>
+        </Row> */}
 
-        <Row style={rowStyle} type="flex" justify="space-between">
+        {/* <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
             <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
               Beschikbare reparaties
@@ -306,7 +321,7 @@ export const AdditionalInfo = ({ shopData }) => {
               </div>
             )}
           </Col>
-        </Row>
+        </Row> */}
 
         <Row style={rowStyle} type="flex" justify="space-between">
           <Col span={6}>
@@ -321,14 +336,14 @@ export const AdditionalInfo = ({ shopData }) => {
                 simple
                 as={Switch}
                 defaultChecked={
-                  shopData?.temporaryReplacement === 1 ? true : false
+                  shopData?.temporaryReplacement
                 }
                 name="temporaryReplacement"
               />
-            ) : shopData?.temporaryReplacement === 0 ? (
-              "Nee"
+            ) : shopData?.temporaryReplacement ? (
+              "Ja" 
             ) : (
-              "Ja"
+              "Nee"
             )}
           </Col>
         </Row>
@@ -349,8 +364,11 @@ export const AdditionalInfo = ({ shopData }) => {
                 name="waitingArea"
               />
             ) : (
-              shopData?.waitingArea
-            )}
+              shopData?.waitingArea ? (
+              "Yes"
+            ) : (
+              "No"
+            ))}
           </Col>
         </Row>
       </Form>
