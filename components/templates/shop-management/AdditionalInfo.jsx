@@ -95,22 +95,23 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     (async() => {
-        await shopManagementAdditionalForm.actions.submit(
-          shopManagementAdditionalForm.state.values
-        );
+      setShopData({
+        ...shopData,
+        ...shopManagementAdditionalForm.state.values
+      });
+        // await shopManagementAdditionalForm.actions.submit(
+        //   shopManagementAdditionalForm.state.values
+        // );
         
         console.log(shopManagementAdditionalForm.state.values);
-        setShopData({
-          ...shopData,
-          ...shopManagementAdditionalForm.state.values
-        });
+ 
         setEditing(false);
     })();
   };
 
   const onEdit = async () => {
     setEditing(true);
-    await shopManagementAdditionalForm.actions.initialize();
+    await shopManagementAdditionalForm.actions.initialize(shopData?.shop_id);
   };
 
   console.log(shopData);

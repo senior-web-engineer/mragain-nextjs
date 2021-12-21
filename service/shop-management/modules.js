@@ -152,6 +152,7 @@ export const shopManagementAdditionalForm = createFormModule({
     const shopInfoData = await privateApi.get(
       `${API_PATH.GETSHOPGENERALINFO}/${shopId}/`
     );
+    console.log("Here");
     console.log(shopInfoData);
     if (shopInfoData.length !== 0) {
       return {

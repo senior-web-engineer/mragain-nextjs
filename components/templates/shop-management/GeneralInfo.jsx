@@ -76,7 +76,7 @@ export const GeneralInfo = ({ shopData, setShopData }) => {
         ...shopManagementGeneralForm.state.values
       });
       setEditing(false);
-    })()
+    })();
     
   };
 

@@ -33,6 +33,7 @@ export default function ShopManagementPage() {
 
   useEffect(() => {
     async function loadData() {
+      console.log("here");
       const user = await currentUser.fetch();
       setUser(user);
       const shopInfo = await shopInfoFetcher.fetch();
@@ -47,6 +48,12 @@ export default function ShopManagementPage() {
 
     loadData();
   }, []);
+
+  useEffect(() => {
+    console.log(shopData);
+  }, [shopData]);
+
+  
 
   const onTabChange = async (tab) => {
     setActiveTab(tab);
