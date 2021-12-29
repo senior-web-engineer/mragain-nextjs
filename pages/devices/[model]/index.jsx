@@ -3,13 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Radio } from "antd";
 import RadioGroup from "antd/lib/radio/group";
 import moment from "moment";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import querystring from "querystring";
 import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
-import Head from "next/head";
-import { FRONT_END_URL} from "@/constants";
 
 import { ModelImages } from "@/components/devices/ModelImages";
 import {
@@ -21,6 +20,7 @@ import DefaultLayout from "@/components/layouts/Homepage";
 import { MaxConstraints } from "@/components/styled/layout";
 import { H1, H2, SubTitle } from "@/components/styled/text";
 import Button from "@/components/ui/Button";
+import { FRONT_END_URL } from "@/constants";
 import Form, { useFormContext } from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
 import media, { OnMobile } from "@/utils/media";
@@ -250,17 +250,17 @@ export default function ModelPage({ data, reparations }) {
     );
   }
 
-let title = `${data.brand.brand_name} ${data.model_name} reparatie`;
-let description = `Ben je op zoek naar ${data.brand.brand_name} ${data.model_name} reparatie? Via MrAgain zie je direct wie hem voor je kan
+  let title = `${data.brand.brand_name} ${data.model_name} reparatie`;
+  let description = `Ben je op zoek naar ${data.brand.brand_name} ${data.model_name} reparatie? Via MrAgain zie je direct wie hem voor je kan
 repareren en plan je direct een afspraak in.`;
-let h1_header = `${data.model_name} reparatie`;
+  let h1_header = `${data.model_name} reparatie`;
 
   return (
     <DefaultLayout>
       <Head>
         <title>{title}</title>
-	<meta name="description" content={description} />
-      </Head>  
+        <meta name="description" content={description} />
+      </Head>
       <WhiteBackground>
         <MaxConstraints>
           <IntroWrap>
