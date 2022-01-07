@@ -6,6 +6,7 @@ import { Text } from "@/components/common/Text/Text";
 
 import {
   Action,
+  HeaderLargeText,
   HeaderSmallText,
   ListItemWrapper,
   ScheduleListWrapper,
@@ -162,9 +163,15 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
     <ScheduleListWrapper>
       <List
         header={
-          <HeaderSmallText style={{ padding: "0 18px", margin: "12px 0" }}>
-            Openingstijden
-          </HeaderSmallText>
+          <>
+            <HeaderLargeText style={{ padding: "0 18px", margin: "12px 0" }}>
+              Set your regular schedule
+            </HeaderLargeText>
+            <HeaderSmallText style={{ padding: "0 18px", margin: "12px 0" }}>
+              Here you can configure the standard hours of operation for your
+              store
+            </HeaderSmallText>
+          </>
         }
         size="large"
         dataSource={workingHours}
@@ -176,28 +183,6 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
                   <b>{item.day}</b>
                 </Text.Headline>
               </Col>
-              <Col span="6">
-                {editingRow === index ? (
-                  <TimePicker
-                    value={item.start ? moment(item.start, "HH:mm") : null}
-                    format="HH:mm"
-                    onChange={(value) => setNewTime("start", index, value)}
-                  />
-                ) : (
-                  <p>{item.start || "..."}</p>
-                )}
-              </Col>
-              <Col span="6">
-                {editingRow === index ? (
-                  <TimePicker
-                    value={item.end ? moment(item.end, "HH:mm") : null}
-                    format="HH:mm"
-                    onChange={(value) => setNewTime("end", index, value)}
-                  />
-                ) : (
-                  <p>{item.end || "..."}</p>
-                )}
-              </Col>
               <Col span="4">
                 {editingRow === index ? (
                   <Switch
@@ -208,6 +193,40 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
                   <TagWrapper color={item.opened ? "green" : "red"}>
                     {item.opened ? `${Math.ceil(item.hours)} uur` : "Gesloten"}
                   </TagWrapper>
+                )}
+              </Col>
+              <Col
+                span="5"
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                {editingRow === index ? (
+                  <TimePicker
+                    value={item.start ? moment(item.start, "HH:mm") : null}
+                    format="HH:mm"
+                    onChange={(value) => setNewTime("start", index, value)}
+                  />
+                ) : (
+                  <p>{item.start || "..."}</p>
+                )}
+              </Col>
+              <Col
+                span="2"
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                To
+              </Col>
+              <Col
+                span="5"
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                {editingRow === index ? (
+                  <TimePicker
+                    value={item.end ? moment(item.end, "HH:mm") : null}
+                    format="HH:mm"
+                    onChange={(value) => setNewTime("end", index, value)}
+                  />
+                ) : (
+                  <p>{item.end || "..."}</p>
                 )}
               </Col>
               <Col span="4">
