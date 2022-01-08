@@ -64,6 +64,9 @@ const Login = () => {
     loadData();
   }, []);
 
+  let title = "Inloggen bij MrAgain | MrAgain";
+  let description = "Inloggen bij MrAgai? Snel en eenvoudig inzicht in al je reparaties | MrAgain";
+
   const tokenConfig1 = (token) => {
     const config = {
       headers: {
@@ -102,10 +105,6 @@ const Login = () => {
       }
     }
   }
-
- let title = "Inloggen bij MrAgain | MrAgain";
- let description = "Inloggen bij MrAgai? Snel en eenvoudig inzicht in al je reparaties | MrAgain";
-
 
   return (
     <>
