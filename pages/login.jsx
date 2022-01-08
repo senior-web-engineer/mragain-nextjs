@@ -101,10 +101,24 @@ const Login = () => {
     }
   }
 
+ let title = "Inloggen bij MrAgain | MrAgain";
+ let description = "Inloggen bij MrAgai? Snel en eenvoudig inzicht in al je reparaties | MrAgain";
+
+
   return (
     <>
       <DefaultLayout showSignup={false}>
-        <MainWrapper>
+        <Head>
+	   <title>{title}</title>
+	   <meta name="description" content={description} />
+	   <link rel="canonical" href={FRONT_END_URL}/login />
+	   {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
+	   <meta property="og:type" content="website" />
+	   <meta name="og_title" property="og:title" content={title} />
+	   <meta property="og:description" content={description} />
+	   <meta name="og:url" content={FRONT_END_URL}/login />
+	</Head>
+	  <MainWrapper>
           <FormWrapper>
             {smallScreenSizes.includes(size) && (
               <WaveWrapper>
