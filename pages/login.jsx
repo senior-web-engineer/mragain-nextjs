@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
+import Head from "next/head";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
 import { useScreenSize } from "@/utils/media";
