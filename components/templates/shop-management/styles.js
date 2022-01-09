@@ -143,7 +143,7 @@ export const HoursEditor = styled.div`
 
 export const HoursEditorTitle = styled.div`
   width: 100%;
-  padding: 26px 0 10px 0;
+  padding: 38px 0 20px 0;
   margin: 0;
   letter-spacing: 0.05em;
   font-size: 12px;
@@ -177,7 +177,18 @@ export const ListItemWrapper = styled.div`
   }
 `;
 
+export const TableSection = styled.div`
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+`;
+
 export const TableWrapper = styled(Table)`
+  .ant-table {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    overflow: hidden;
+  }
   .ant-table-tbody {
     background: white;
   }
@@ -203,7 +214,7 @@ export const ActionList = styled.a`
 
   &:hover {
     color: white;
-    background: #ed5556;
+    background: ${(props) => props.color || "#ed5556"};
   }
 `;
 

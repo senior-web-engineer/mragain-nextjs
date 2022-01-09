@@ -1,3 +1,4 @@
+import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import { Col, List, Switch, Tag, TimePicker } from "antd";
 import moment from "moment-timezone";
 import React, { useCallback, useEffect, useState } from "react";
@@ -5,7 +6,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Text } from "@/components/common/Text/Text";
 
 import {
-  Action,
+  ActionList,
   HeaderLargeText,
   HeaderSmallText,
   ListItemWrapper,
@@ -176,7 +177,12 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
         size="large"
         dataSource={workingHours}
         renderItem={(item, index) => (
-          <List.Item>
+          <List.Item
+            style={{
+              paddingTop: "10px",
+              paddingBottom: "10px",
+            }}
+          >
             <ListItemWrapper>
               <Col span="6">
                 <Text.Headline size="14" weight="regular" style={{ margin: 0 }}>
@@ -231,9 +237,19 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
               </Col>
               <Col span="4">
                 {editingRow === index ? (
-                  <Action onClick={() => onSaveClick(index)}>Opslaan</Action>
+                  <ActionList
+                    color="#52c41a"
+                    onClick={() => onSaveClick(index)}
+                  >
+                    <SaveOutlined />
+                  </ActionList>
                 ) : (
-                  <Action onClick={() => onEditClick(index)}>Wijzigen</Action>
+                  <ActionList
+                    color="#1890ff"
+                    onClick={() => onEditClick(index)}
+                  >
+                    <EditOutlined />
+                  </ActionList>
                 )}
               </Col>
             </ListItemWrapper>

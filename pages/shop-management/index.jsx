@@ -12,6 +12,8 @@ import { ScheduleList } from "@/components/templates/shop-management/ScheduleLis
 import {
   ActionList,
   BoxWrapper,
+  HeaderLargeText,
+  TableSection,
   TableWrapper,
 } from "@/components/templates/shop-management/styles";
 import {
@@ -42,7 +44,7 @@ const renderRepeat = (repeat) => {
 
 const renderAction = (item, onDelete) => (
   <div size="middle">
-    <ActionList onClick={() => onDelete(item)}>
+    <ActionList onClick={() => onDelete(item.id)}>
       <DeleteOutlined />
     </ActionList>
   </div>
@@ -183,10 +185,21 @@ export default function ShopManagementPage() {
             </Row>
             <Row style={{ marginTop: "40px" }}>
               <Col span={24}>
-                <TableWrapper
-                  columns={columns(onDeleteNonWorkingDays)}
-                  dataSource={nonWorkingDays}
-                />
+                <TableSection>
+                  <HeaderLargeText
+                    style={{
+                      width: "100%",
+                      padding: "20px 16px",
+                      background: "#fafafa",
+                    }}
+                  >
+                    Irregular schedule overview
+                  </HeaderLargeText>
+                  <TableWrapper
+                    columns={columns(onDeleteNonWorkingDays)}
+                    dataSource={nonWorkingDays}
+                  />
+                </TableSection>
               </Col>
             </Row>
           </TabPane>

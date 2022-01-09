@@ -1,12 +1,9 @@
-import { Col, DatePicker, Divider, Input, Modal, Row, TimePicker } from "antd";
-
-import Button from "@/components/ui/Button";
-const { RangePicker } = DatePicker;
-
+import { Col, Divider, Input, Modal, Row } from "antd";
 import moment from "moment";
 import React, { useCallback, useState } from "react";
 
 import { CalendarRange } from "@/components/common/Calendar/CalendarRange";
+import Button from "@/components/ui/Button";
 import Select from "@/components/ui/Select";
 
 import { repeatingList } from "./helpers";
@@ -27,8 +24,8 @@ export const OperationalHoursCalendar = ({
 }) => {
   const [nonRegularHours, setNonRegularHours] = useState({
     range: {
-      startDate: moment(moment.now()).toDate(),
-      endDate: moment(moment.now()).add(5, "days").toDate(),
+      startDate: moment(moment.now()).format("YYYY-MM-DD"),
+      endDate: moment(moment.now()).add(5, "days").format("YYYY-MM-DD"),
     },
     name: "",
     time: {
@@ -71,6 +68,10 @@ export const OperationalHoursCalendar = ({
     setNonRegularHours({
       ...nonRegularHours,
       name: "",
+      range: {
+        startDate: moment(moment.now()).format("YYYY-MM-DD"),
+        endDate: moment(moment.now()).add(5, "days").format("YYYY-MM-DD"),
+      },
       time: {
         startTime: moment("00:00", "HH:mm"),
         endTime: moment("23:59", "HH:mm"),
@@ -81,6 +82,23 @@ export const OperationalHoursCalendar = ({
 
   const handelOnDelete = (item) => {
     onDeleteNonWorkingDays(item.id);
+  };
+
+  const closeDatePicker = () => {
+    console.log("AAA");
+    setIsModalVisible(false);
+    setNonRegularHours({
+      ...nonRegularHours,
+      range: {
+        startDate: moment(moment.now()).format("YYYY-MM-DD"),
+        endDate: moment(moment.now()).add(5, "days").format("YYYY-MM-DD"),
+      },
+    });
+  };
+
+  const onConfirmDatePicker = (value) => {
+    setIsModalVisible(false);
+    console.log(value);
   };
 
   return (
@@ -117,18 +135,20 @@ export const OperationalHoursCalendar = ({
               <Row type="flex" justify="space-between">
                 <DateWrapper span={11} className="d-flex">
                   <DateText>From: </DateText>
-                  <DatePicker
+                  <Input
+                    onClick={() => setIsModalVisible(true)}
                     style={{ width: "80%" }}
                     size="large"
-                    onChange={console.log}
+                    value={nonRegularHours.range.startDate}
                   />
                 </DateWrapper>
                 <DateWrapper span={11} className="d-flex">
                   <DateText>To: </DateText>
-                  <DatePicker
+                  <Input
+                    onClick={() => setIsModalVisible(true)}
                     style={{ width: "80%" }}
                     size="large"
-                    onChange={console.log}
+                    value={nonRegularHours.range.endDate}
                   />
                 </DateWrapper>
               </Row>
@@ -167,7 +187,11 @@ export const OperationalHoursCalendar = ({
         </Col>
       </RowWrapper>
 
-      <Modal visible={isModalVisible}>
+      <Modal
+        visible={isModalVisible}
+        onCancel={closeDatePicker}
+        onOk={onConfirmDatePicker}
+      >
         <CalendarRange
           repeatingList={repeatingList}
           disabledDates={nonWorkingDays.map((item) => ({
