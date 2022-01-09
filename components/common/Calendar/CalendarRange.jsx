@@ -114,6 +114,8 @@ export const CalendarRange = ({ onChange, disabledDates }) => {
         editableDateInputs={false}
         onChange={onRangeSelect}
         moveRangeOnFirstSelection={false}
+        months={2}
+        direction="horizontal"
         ranges={state}
         disabledDates={flatten(
           disabledDates.map((date) =>
