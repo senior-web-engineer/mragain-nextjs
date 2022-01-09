@@ -191,6 +191,7 @@ export const OperationalHoursCalendar = ({
         visible={isModalVisible}
         onCancel={closeDatePicker}
         onOk={onConfirmDatePicker}
+        width={1000}
       >
         <CalendarRange
           repeatingList={repeatingList}
