@@ -133,22 +133,12 @@ export const OperationalHoursCalendar = ({
             <Col>
               <HoursEditorTitle>Select date and time</HoursEditorTitle>
               <Row type="flex" justify="space-between">
-                <DateWrapper span={11} className="d-flex">
-                  <DateText>From: </DateText>
+                <DateWrapper span={24}>
                   <Input
                     onClick={() => setIsModalVisible(true)}
-                    style={{ width: "80%" }}
+                    style={{ width: "100%" }}
                     size="large"
-                    value={nonRegularHours.range.startDate}
-                  />
-                </DateWrapper>
-                <DateWrapper span={11} className="d-flex">
-                  <DateText>To: </DateText>
-                  <Input
-                    onClick={() => setIsModalVisible(true)}
-                    style={{ width: "80%" }}
-                    size="large"
-                    value={nonRegularHours.range.endDate}
+                    value={`From ${nonRegularHours.range.startDate} - To: ${nonRegularHours.range.endDate}`}
                   />
                 </DateWrapper>
               </Row>

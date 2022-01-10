@@ -18,7 +18,8 @@ const CalendarRangeWrapper = styled.div`
   }
 
   .rdrDay {
-    height: 5em;
+    width: 55px;
+    height: 60px;
   }
   .rdrDayNumber {
     font-size: 16px;
@@ -29,9 +30,17 @@ const CalendarRangeWrapper = styled.div`
   }
 
   .rdrSelected,
-  .rdrInRange,
-  .rdrStartEdge,
+  .rdrInRange {
+    border-radius: 0;
+  }
+
+  .rdrStartEdge {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+  }
   .rdrEndEdge {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
   }
 `;
 
