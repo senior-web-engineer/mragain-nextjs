@@ -27,7 +27,7 @@ let url = `${FRONT_END_URL}/devices/${deviceName}`;
 	<meta name="og_title" property="og:title" content={title}/>
 	<meta property="og:description" content={description}/>
 	<meta name="og:url" property="og:url" content={url} />
-	<meta name="og_site_name" property="og:site_name" content="Mr Again"
+	<meta name="og_site_name" property="og:site_name" content="Mr Again"/>
 	<meta name="theme-color" content="#ffffff" />
     </Head>
       <MaxConstraints>
