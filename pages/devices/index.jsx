@@ -8,18 +8,20 @@ import api from "@/utils/api";
 import { FRONT_END_URL } from "@/constants";
 import Head from "next/head";
 
+let url = `${FRONT_END_URL}/devices`;
+
 export default function Devices({ models }) {
   return (
     <DefaultLayout>
      <Head>
 	<title>Alle apparaten voor elektronica reparatie | MrAgain </title>
 	<meta name="description" content="Op zoek naar reparatie voor je telefoon, tablet of laptop? Vind snel je model en reparateurs die je kunnen helpen"/>
-	<link rel="canonical" href={FRONT_END_URL}/devices />
+	<link rel="canonical" href={url} />
 	{/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
 	<meta property="og:type" content="website" />
 	<meta name="og_title" property="og:title" content="Alle apparaten voor elektronica reparatie | MrAgain" />
 	<meta property="og:description" content="Op zoek naar reparatie voor je telefoon, tablet of laptop? Vind snel je model en reparateurs die je kunnen helpen" />
-	<meta name="og:url" content={FRONT_END_URL}/devices />
+	<meta name="og:url" content={url}/>
 	<meta name="og_site_name" property="og:site_name" content="Mr Again" />
 	<meta name="theme-color" content="#ffffff" />
      </Head>
