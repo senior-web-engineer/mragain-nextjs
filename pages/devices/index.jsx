@@ -8,8 +8,16 @@ import api from "@/utils/api";
 import { FRONT_END_URL } from "@/constants";
 import Head from "next/head";
 import { headers, posts } from "../assets/content/Devices/data";
+import ContentBlocks from "@/components/content-blocks/ContentBlocks";
 
 let url = `${FRONT_END_URL}/devices`;
+
+const Section = styled.div`
+  margin-top: 100px;
+  h2 {
+	      margin-top: 15px;
+	    }
+   `;
 
 export default function Devices({ models }) {
   return (
