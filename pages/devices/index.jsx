@@ -20,8 +20,6 @@ export async function getServerSideProps() {
   const models = await api.get(`${API_PATH.ALL_MODELS}/`);
   const firstDevice = models?.[0]?.device_name;
 
-}
-
   return {
     props: {
       models,
