@@ -5,6 +5,8 @@ import DefaultLayout from "@/components/layouts/Homepage";
 import { MaxConstraints } from "@/components/styled/layout";
 import { API_PATH } from "@/constants";
 import api from "@/utils/api";
+import { FRONT_END_URL } from "@/constants";
+import Head from "next/head";
 
 export default function Devices({ models }) {
   return (
