@@ -7,6 +7,7 @@ import { API_PATH } from "@/constants";
 import api from "@/utils/api";
 import { FRONT_END_URL } from "@/constants";
 import Head from "next/head";
+import { headers, posts } from "../assets/content/Devices/data";
 
 let url = `${FRONT_END_URL}/devices`;
 
@@ -28,6 +29,11 @@ export default function Devices({ models }) {
       <MaxConstraints>
         <DeviceFinder models={models} />
       </MaxConstraints>
+      <Section>
+      <MaxConstraints>
+	 <ContentBlocks headers={headers} posts={posts} />
+      </MaxConstraints>
+      </Section>
     </DefaultLayout>
   );
 }
