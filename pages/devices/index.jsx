@@ -5,6 +5,7 @@ import DefaultLayout from "@/components/layouts/Homepage";
 import { MaxConstraints } from "@/components/styled/layout";
 import { API_PATH } from "@/constants";
 import api from "@/utils/api";
+import styled from "styled-components";
 import { FRONT_END_URL } from "@/constants";
 import Head from "next/head";
 import { headers, posts } from "../../assets/content/Devices/data";
