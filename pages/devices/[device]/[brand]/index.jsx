@@ -14,7 +14,7 @@ export default function Devices({ models, deviceName, brandName }) {
 
 let title = `${brandName} ${deviceName} reparatie | MrAgain`;
 let description = `Op zoek naar ${brandName} ${deviceName} Vind snel een reparateur via MrAgain en laat je ${deviceName} repareren via mragain.nl. Transparant, betrouwbaar en snel!`;
-let url = `${FRONT_END_URL}/${deviceName}/${brandName}`;
+let url = `${FRONT_END_URL}/devices/${deviceName}/${brandName}`;
 
   return (
     <DefaultLayout>
