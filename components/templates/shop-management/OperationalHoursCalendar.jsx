@@ -1,4 +1,4 @@
-import { Col, Divider, Input, Modal, Row } from "antd";
+import { Col, Divider, Input, Modal, Row, TimePicker } from "antd";
 import moment from "moment";
 import React, { useCallback, useState } from "react";
 
@@ -133,14 +133,42 @@ export const OperationalHoursCalendar = ({
             <Col>
               <HoursEditorTitle>Select date and time</HoursEditorTitle>
               <Row type="flex" justify="space-between">
-                <DateWrapper span={24}>
+                <Col span={12}>
                   <Input
                     onClick={() => setIsModalVisible(true)}
-                    style={{ width: "100%" }}
+                    style={{ width: "90%" }}
                     size="large"
                     value={`From ${nonRegularHours.range.startDate} - To: ${nonRegularHours.range.endDate}`}
                   />
-                </DateWrapper>
+                </Col>
+                <Col span={6}>
+                  <TimePicker
+                    size="large"
+                    value={nonRegularHours.time.startTime}
+                    format="HH:mm"
+                    style={{ width: "90%" }}
+                    onChange={(value) =>
+                      setNonRegularHours({
+                        ...nonRegularHours,
+                        time: { ...nonRegularHours.time, startTime: value },
+                      })
+                    }
+                  />
+                </Col>
+                <Col span={6}>
+                  <TimePicker
+                    size="large"
+                    style={{ width: "90%" }}
+                    value={nonRegularHours.time.endTime}
+                    format="HH:mm"
+                    onChange={(value) =>
+                      setNonRegularHours({
+                        ...nonRegularHours,
+                        time: { ...nonRegularHours.time, endTime: value },
+                      })
+                    }
+                  />
+                </Col>
               </Row>
             </Col>
             <Col>

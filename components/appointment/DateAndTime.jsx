@@ -325,11 +325,14 @@ function TimePicker({ value, onChange }) {
   );
 }
 
-export default function DateAndTime({required = true}) {
+export default function DateAndTime({ required = true }) {
   return (
     <DatePickerWrap>
       <header>
-        <SubTitle>Kies een dag en tijd voor je reparatie {required ? '' : '(Let op: dit kan nog wijzigen)'}</SubTitle>
+        <SubTitle>
+          Kies een dag en tijd voor je reparatie{" "}
+          {required ? "" : "(Let op: dit kan nog wijzigen)"}
+        </SubTitle>
       </header>
       <SchedueleContentWrap>
         <Field
