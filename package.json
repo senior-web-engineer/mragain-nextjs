@@ -8,7 +8,9 @@
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "win-dev": "SET NODE_ENV=development && next dev",
+    "win-build": "SET NODE_ENV=production && next build"
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
