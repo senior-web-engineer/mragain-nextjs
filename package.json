@@ -113,5 +113,10 @@
       "prettier --write",
       "npm run lint"
     ]
+  },
+  "babelMacros": {
+      "twin": {
+        "preset": "styled-components"
+      }
   }
 }
