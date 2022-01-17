@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
+import { FRONT_END_URL } from "@/constants";
+import Head from "next/head";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
 import { useScreenSize } from "@/utils/media";
@@ -62,6 +64,11 @@ const Login = () => {
     loadData();
   }, []);
 
+  let title = "Inloggen bij MrAgain | MrAgain";
+  let description = "Inloggen bij MrAgai? Snel en eenvoudig inzicht in al je reparaties | MrAgain";
+  let url = `${FRONT_END_URL}/login`;
+
+
   const tokenConfig1 = (token) => {
     const config = {
       headers: {
@@ -104,7 +111,17 @@ const Login = () => {
   return (
     <>
       <DefaultLayout showSignup={false}>
-        <MainWrapper>
+        <Head>
+	   <title>{title}</title>
+	   <meta name="description" content={description} />
+	   <link rel="canonical" href={url} />
+	   {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
+	   <meta property="og:type" content="website" />
+	   <meta name="og_title" property="og:title" content={title} />
+	   <meta property="og:description" content={description} />
+	   <meta name="og:url" content={url} />
+	</Head>
+	  <MainWrapper>
           <FormWrapper>
             {smallScreenSizes.includes(size) && (
               <WaveWrapper>

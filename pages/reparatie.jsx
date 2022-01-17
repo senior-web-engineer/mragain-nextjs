@@ -69,7 +69,7 @@ const Advantages = ({}) => {
             property="og:description"
             content="Reparatie via MrAgain en jouw voordelen"
           />
-          <meta name="og:url" content={FRONT_END_URL} />
+          <meta name="og:url" content={FRONT_END_URL + "/reparatie"} />
           <meta
             property="og:image"
             content={FRONT_END_URL + "media//telefoon-reparatie-mragain.jpg"}

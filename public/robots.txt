@@ -1,3 +1,7 @@
+# *
 User-agent: *
+Allow: /
+
+# Sitemaps
 Sitemap: https://www.mragain.nl/sitemap.xml
-Disallow:
+Sitemap: https://www.mragain.nl/dynamic-sitemap.xml

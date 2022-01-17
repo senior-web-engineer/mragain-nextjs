@@ -57,12 +57,12 @@ export default function Home({ shopList }) {
         <meta
           name="og_title"
           property="og:title"
-          content="Bij MrAgain vind je de beste telefoon reparateurs bij jou in de buurt"
+          content="Telefoon reparatie nodig? Vind snel een telefoon reparateur!"
         />
 
         <meta
           property="og:description"
-          content="Vind de beste telefoon reparateur bij jou in de buurt"
+          content="Telefoon kapot? Bij MrAgain vind je snel en gemakkelijk de beste telefoon reparateurs voor telefoon reparatie bij jou in de buurt."
         />
         <meta name="og:url" property="og:url" content={FRONT_END_URL} />
         <meta

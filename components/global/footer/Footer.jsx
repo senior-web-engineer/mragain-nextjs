@@ -266,17 +266,17 @@ const FooterView = (routerProps) => {
               <FooterSitemapTitle>Zoek je device</FooterSitemapTitle>
               <ul>
                 <li>
-                  <Link prefetch={false} href="/devices/Smartphones">
+                  <Link prefetch={false} href="/devices/smartphone">
                     Smartphones
                   </Link>
                 </li>
                 <li>
-                  <Link prefetch={false} href="/devices/Tablets">
+                  <Link prefetch={false} href="/devices/tablet">
                     Tablets
                   </Link>
                 </li>
                 <li>
-                  <Link prefetch={false} href="/devices/Laptops">
+                  <Link prefetch={false} href="/devices/laptop">
                     Laptops
                   </Link>
                 </li>

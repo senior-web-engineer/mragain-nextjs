@@ -63,7 +63,7 @@ const ShopProfile = (routerProps) => {
   const shopSchema = `
     {
       "@context": "https://schema.org",
-      "@type": "Shop",
+      "@type": "LocalBusiness",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "${shopAccountProfile.city}",
