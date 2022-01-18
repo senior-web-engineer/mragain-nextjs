@@ -1,3 +1,6 @@
+import { Col, Row, Tabs } from "antd";
+import React, { useEffect, useState } from "react";
+
 import { Text } from "@/components/common/Text/Text";
 import DefaultLayout from "@/components/layouts/Dashboard";
 import { AdditionalInfo } from "@/components/templates/shop-management/AdditionalInfo";
@@ -15,11 +18,9 @@ import {
   saveValidOpenTime,
   shopInfoFetcher,
   shopManagementAdditionalForm,
-  shopManagementGeneralInfo
+  shopManagementGeneralInfo,
 } from "@/service/shop-management/modules";
 import { OnMobile } from "@/utils/media";
-import { Col, Row, Tabs } from "antd";
-import React, { useEffect, useState } from "react";
 
 const { TabPane } = Tabs;
 
@@ -33,7 +34,6 @@ export default function ShopManagementPage() {
 
   useEffect(() => {
     async function loadData() {
-      console.log("here");
       const user = await currentUser.fetch();
       setUser(user);
       const shopInfo = await shopInfoFetcher.fetch();
@@ -83,16 +83,20 @@ export default function ShopManagementPage() {
           <TabPane tab="Profiel" key="profile-settings">
             <>
               <ImageSection shopData={shopData} authUser={user} />
-
               <Row>
                 <Col span={4}></Col>
                 <Col span={20}>
                   <BoxWrapper>
-                    <GeneralInfo shopData={shopData} setShopData={setShopData} />
+                    <GeneralInfo
+                      shopData={shopData}
+                      setShopData={setShopData}
+                    />
                   </BoxWrapper>
-
                   <BoxWrapper padding>
-                    <AdditionalInfo shopData={shopInfo} setShopData={setShopData} />
+                    <AdditionalInfo
+                      shopData={shopInfo}
+                      setShopData={setShopData}
+                    />
                   </BoxWrapper>
                 </Col>
               </Row>

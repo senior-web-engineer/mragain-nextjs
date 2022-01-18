@@ -54,6 +54,8 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
   const [devices, setDevices] = useState([]);
   const [reparations, setReparations] = useState([]);
   const [selectedDevices, setSelectedDevices] = useState([]);
+  const [additionalInfoShopData, setAdditionalInfoShopData] = useState({});
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -95,13 +97,13 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     (async() => {
-      setShopData({
-        ...shopData,
-        ...shopManagementAdditionalForm.state.values
-      });
-        // await shopManagementAdditionalForm.actions.submit(
-        //   shopManagementAdditionalForm.state.values
-        // );
+        setShopData({
+          ...shopData,
+          ...shopManagementAdditionalForm.state.values
+        });
+        await shopManagementAdditionalForm.actions.submit(
+          shopManagementAdditionalForm.state.values
+        );
         
         console.log(shopManagementAdditionalForm.state.values);
  
