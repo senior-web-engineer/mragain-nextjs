@@ -351,16 +351,12 @@ export default function AppointmentPage({ shop }) {
                         label="Telefoon nummer"
                         autoComplete="tel"
                       />
-                    </InlineFields>
-                    {appointmentForm.state?.values?.location === "home" ? (
                       <Field
                         as={TextArea}
                         rows={6}
                         name="enquiry"
                         label="Bericht"
                       />
-                    ) : null}
-                    {renderAddressFields()}
                   </DetailsForm>
                 </Switch.Case>
                 <Switch.Case value={2}>
