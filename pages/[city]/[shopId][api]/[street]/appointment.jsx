@@ -351,6 +351,7 @@ export default function AppointmentPage({ shop }) {
                         label="Telefoon nummer"
                         autoComplete="tel"
                       />
+	            </InlineFields>
                       <Field
                         as={TextArea}
                         rows={6}
