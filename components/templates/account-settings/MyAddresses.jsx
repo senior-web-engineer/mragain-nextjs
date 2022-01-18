@@ -37,12 +37,12 @@ const DURATION_OPTIONS = [
 ];
 
 const LOCATIONS_OPTIONS = [
-  { label: "Fysieke werkplaats", value: "0" },
+  { label: "Fysieke werkplaats", value: "1" },
   {
     label: "Mobiele werkplaats (reparatie op locatie)",
-    value: "1",
+    value: "2",
   },
-  { label: "Allebei", value: "2" },
+  { label: "Allebei", value: "1,2" },
 ];
 
 export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
@@ -108,7 +108,7 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                 <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
                   <Field
                     adminInput
-                    name="address_type"
+                    name="shop_type"
                     as={Select}
                     placeholder="Kies je locatie type"
                     label="Locatie type"

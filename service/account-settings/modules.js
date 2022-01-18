@@ -39,7 +39,7 @@ export const basicSettingsForm = createFormModule({
       name: fetchedData.name || "",
       ptype: fetchedData.ptype || 0,
       shop_active: fetchedData.shop_active || false,
-      shop_type: fetchedData.shop_type || [],
+      shop_type: fetchedData.shop_type ? fetchedData?.shop_type?.toString() : "1,2",
       site_url: fetchedData.site_url || "",
       status_app_email: fetchedData.status_app_email || false,
       street: fetchedData.street || "",
@@ -51,11 +51,14 @@ export const basicSettingsForm = createFormModule({
   submit(data) {
     const shop = currentUser.selector(store.ref.getState())?.result?.account_id;
     const auth = currentUser.selector(store.ref.getState())?.result?.id;
+
+
     const promise = privateApi.patch(`${API_PATH.ACCOUNTSETTING}/${auth}/`, {
       ...data,
       double_appointment: true,
       shop,
       auth,
+      shop_type: data.shop_type == "1,2" ? [1, 2] : [parseInt(data.shop_type),]
     });
 
     if (promise) {
