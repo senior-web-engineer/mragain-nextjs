@@ -119,7 +119,6 @@ export const shopManagementGeneralForm = createFormModule({
     const fetchedData = await privateApi.get(
       `${API_PATH.ACCOUNTSETTING}/${id}`
     );
-    console.log("FD", fetchedData);
     return {
       about_us: fetchedData.about_us || "",
       phone_number: fetchedData.phone_number || "",
@@ -152,8 +151,7 @@ export const shopManagementAdditionalForm = createFormModule({
     const shopInfoData = await privateApi.get(
       `${API_PATH.GETSHOPGENERALINFO}/${shopId}/`
     );
-    console.log("Here");
-    console.log(shopInfoData);
+
     if (shopInfoData.length !== 0) {
       return {
         devices: shopInfoData[0].replacementDevices || [],
@@ -168,7 +166,7 @@ export const shopManagementAdditionalForm = createFormModule({
           shopInfoData[0]?.reparationOption?.map((id) => id.toString()) || [],
         services: shopInfoData[0]?.services || [],
         parkingArea: shopInfoData[0]?.parkingArea || [],
-        insurance: shopInfoData[0]?.insurance || [],
+        insurance: shopInfoData[0]?.insurance,
       };
     }
 
@@ -180,16 +178,16 @@ export const shopManagementAdditionalForm = createFormModule({
       `${API_PATH.UPDATESHOPGENERALINFO}/${shop}/`,
       {
         payMethod: data.payMethod.map((id) => +id),
-        repairOption: data.purchases.map((id) => +id),
+        repairOption: data.reparationOption.map((id) => +id),
         services: "",
         waitingArea: data.waitingArea ? 1 : 0,
         temporaryReplacement: data.temporaryReplacement ? 1 : 0,
-        parkingArea: [1, 2],
-        insurance: 0,
+        parkingArea: data?.parkingArea?.map((id) => +id),
+        insurance: data?.insurance,
         devices: data.devices.map((id) => +id),
         brands: data.brands.map((id) => +id),
         cateredBrand: data.brands.map((id) => +id),
-        purchases: [],
+        purchases: data.purchases.map((id) => +id),
       }
     );
 

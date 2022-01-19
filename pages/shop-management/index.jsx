@@ -26,7 +26,7 @@ const { TabPane } = Tabs;
 
 export default function ShopManagementPage() {
   const [activeTab, setActiveTab] = useState("profile-settings");
-  const [shopInfo, setShopInfo] = useState();
+  const [shopInfo, setShopInfo] = useState(null);
   const [shopData, setShopData] = useState();
   const [nonWorkingDays, setNonWorkingDays] = useState();
   const [validOpenTime, setValidOpenTime] = useState();
@@ -36,24 +36,16 @@ export default function ShopManagementPage() {
     async function loadData() {
       const user = await currentUser.fetch();
       setUser(user);
-      const shopInfo = await shopInfoFetcher.fetch();
       setShopData(await shopManagementGeneralInfo.fetch());
       setNonWorkingDays(await getShopNonWorkingDays.fetch());
       setValidOpenTime(await getValidOpenTime.fetch());
-      if (shopInfo.length !== 0) {
-        setShopInfo(shopInfo[0]);
+      const shopInfoData = await shopInfoFetcher.fetch();
+      if (shopInfoData && shopInfoData.length){
+        setShopInfo(shopInfoData[0]);
       }
-      await shopManagementAdditionalForm.actions.initialize(user.account_id);
     }
-
     loadData();
   }, []);
-
-  useEffect(() => {
-    console.log(shopData);
-  }, [shopData]);
-
-  
 
   const onTabChange = async (tab) => {
     setActiveTab(tab);
@@ -93,10 +85,12 @@ export default function ShopManagementPage() {
                     />
                   </BoxWrapper>
                   <BoxWrapper padding>
-                    <AdditionalInfo
-                      shopData={shopInfo}
-                      setShopData={setShopData}
-                    />
+                    {
+                      shopInfo && 
+                      <AdditionalInfo
+                        shopData={shopInfo}
+                        setShopData={setShopInfo}
+                    />}
                   </BoxWrapper>
                 </Col>
               </Row>
