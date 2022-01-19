@@ -3,19 +3,17 @@ import { MaxConstraints } from "@/components/styled/layout";
 import {
   appointmentConfirmation,
   appointmentForm,
-  appointmentReview,
   brandFetcher,
   deviceFetcher,
   invalidTimeFetcher,
   modelFetcher,
   openTimeFetcher,
-  payForAppointment,
   serviceFetcher,
 } from "@/components/appointment/modules";
 import { getShopProfileByInformationServer } from "@/service/account/operations";
 import React, { useCallback, useEffect, useState } from "react";
-import BookingInfo from "@/components/appointment/BookingInfo";
 import styled, { css } from "styled-components";
+import BookingInfo from "@/components/appointment/BookingInfo";
 import { SubTitle } from "@/components/styled/text";
 import { Field } from "@/modules/forms/Blocks";
 import LocationSelector, {
