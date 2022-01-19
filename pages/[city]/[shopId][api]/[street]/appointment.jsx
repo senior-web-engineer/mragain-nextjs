@@ -12,6 +12,7 @@ import {
 } from "@/components/appointment/modules";
 import { getShopProfileByInformationServer } from "@/service/account/operations";
 import React, { useCallback, useEffect, useState } from "react";
+import styled, { css } from "styled-components";
 import BookingInfo from "@/components/appointment/BookingInfo";
 import { SubTitle } from "@/components/styled/text";
 import { Field } from "@/modules/forms/Blocks";
