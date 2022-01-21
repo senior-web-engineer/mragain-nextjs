@@ -1,14 +1,14 @@
 .checkout-review-page {
   width: 100%;
   height: 937px;
-  padding: 100px 150px;
+  padding: 100px 0;
   &-container {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     .checkout-review-page-main {
-      width: 604px;
+      // width: 804px;
       height: 740px;
       &-title {
         text-align: center;
@@ -17,13 +17,25 @@
         margin-bottom: 50px;
       }
       .checkout-review-board {
-        width: 602px;
-        height: 632px;
+        background-color: white;
+        @media (min-width: 767px) {
+          padding-right: 120px;
+          display: flex;
+          width: 100%;
+        }
+        width: 95%;
+        margin: 0 auto;
+
+        height: auto;
         border: 1px solid #dcdcdc;
         border-radius: 10px;
-        box-shadow: 0px 0px 20px #dcdcdc;
-        padding: 50px 0px 50px 66px;
+        box-shadow: 0 0 20px #dcdcdc;
+        padding: 60px 40px 40px 40px;
         color: #5b5b5b;
+        
+        .checkout-review-board-title {
+          width: 150px;
+        }
         &-title {
           width: 100%;
           height: 48px;
@@ -42,15 +54,24 @@
           height: 43px;
           display: flex;
           .title {
-            width: 165px;
+            width: 100px;
+            @media (min-width: 767px) {
+              width: 165px;
+            }
           }
+
+          @media (max-width: 768px) {
+            display: flex;
+            justify-content: space-between;
+          }
+          
         }
         .recommend {
           width: 100%;
-          height: 43px;
-          display: flex;
+          height: auto;
+          margin-bottom: 20px;
           .title {
-            width: 246px;
+            margin-bottom: 15px;
           }
         }
         .client-name-input-group {
@@ -64,31 +85,50 @@
               height: 50px;
               margin-right: 10px;
             }
+            @media (max-width: 767px) {
+              padding-top: 20px;
+            }
           }
           .ant-radio-wrapper:first-child {
             .ant-radio {
               display: none;
             }
             span {
-              padding: 0px;
+              padding: 0;
             }
+            @media (max-width: 767px) {
+              padding-top: 0;
+            }
+          }
+          .client-name-margin {
+            margin-left: 15px;
           }
         }
         .comment-input {
           margin-bottom: 20px;
-          input {
+          padding: 10px;
+          border: 0.859235px solid #E4E4E4;
+          border-radius: 3.5px;
+          textarea {
             height: 100px;
-            width: 90%;
+            width: 100%;
+            padding: 10px;
+            border: 0;
+            background-color: #FAFAFA;
           }
         }
         .submit-review {
-          width: 312px;
+          @media (min-width: 767px) {
+            width: 312px;
+          }
+          width: 100%;
           height: 50px;
           background-color: #06c978;
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 500;
           letter-spacing: 1px;
           color: #fff;
+          border-radius: 181px;
         }
       }
     }

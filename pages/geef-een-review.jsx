@@ -10,7 +10,7 @@ import {
 } from "service/appointments/operations.js";
 
 import shopReviewIcon from "@/assets/images/shop-review.png";
-import { Layout } from "@/components/global";
+import DefaultLayout from "@/components/layouts/Homepage";
 
 const CheckoutReview = (routerProps) => {
   const [shopInfo, setShopInfo] = useState({});
@@ -27,7 +27,9 @@ const CheckoutReview = (routerProps) => {
     shop: 0,
   });
 
+  console.log("shopInfo", shopInfo);
   const router = useRouter();
+  const { TextArea } = Input;
 
   useEffect(() => {
     if (isLoad === false) {
@@ -126,7 +128,7 @@ const CheckoutReview = (routerProps) => {
   }
 
   return (
-    <Layout>
+    <DefaultLayout>
       <div className="checkout-review-page">
         <div className="checkout-review-page-container">
           <div className="checkout-review-page-main">
@@ -146,110 +148,113 @@ const CheckoutReview = (routerProps) => {
                 />
                 {shopInfo.shop_name}
               </div>
-              <div className="rate-mark">
-                <div className="title">Prijs</div>
-                <div className="star">
-                  <Rate
-                    value={review.price_mark}
-                    className="star-rate"
-                    name="price_mark"
-                    onChange={(e) => {
-                      handleRateChange(e, "price_mark");
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="rate-mark">
-                <div className="title">Kwaliteit</div>
-                <div className="star">
-                  <Rate
-                    value={review.quality_mark}
-                    className="star-rate"
-                    name="quality_mark"
-                    onChange={(e) => {
-                      handleRateChange(e, "quality_mark");
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="rate-mark">
-                <div className="title">Personeel</div>
-                <div className="star">
-                  <Rate
-                    value={review.service_mark}
-                    className="star-rate"
-                    name="service_mark"
-                    onChange={(e) => {
-                      handleRateChange(e, "service_mark");
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="rate-mark">
-                <div className="title">Wachttijd</div>
-                <div className="star">
-                  <Rate
-                    value={review.wait_mark}
-                    className="star-rate"
-                    name="wait_mark"
-                    onChange={(e) => {
-                      handleRateChange(e, "wait_mark");
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="recommend">
-                <div className="title">Beveel je deze reparateur aan?</div>
-                <Radio.Group
-                  defaultValue={1}
-                  onChange={(e) => {
-                    handleRateChange(e.target.value, "recommend");
-                  }}
-                >
-                  <Radio value={1}>Ja</Radio>
-                  <Radio value={0}>Nee</Radio>
-                </Radio.Group>
-              </div>
-              <div className="client-name-input-group">
-                <Radio.Group
-                  defaultValue={1}
-                  onChange={(e) => {
-                    handleClientChange(e.target.value);
-                  }}
-                >
-                  <Radio value={1}>
-                    <Input
-                      placeholder="Je naam"
+              <div>
+                <div className="rate-mark">
+                  <div className="title">Prijs</div>
+                  <div className="star">
+                    <Rate
+                      value={review.price_mark}
+                      className="star-rate"
+                      name="price_mark"
                       onChange={(e) => {
-                        handleRateChange(e.target.value, "client_name");
+                        handleRateChange(e, "price_mark");
                       }}
                     />
-                    Of
-                  </Radio>
-                  <Radio value={2}>Review anoniem</Radio>
-                </Radio.Group>
+                  </div>
+                </div>
+                <div className="rate-mark">
+                  <div className="title">Kwaliteit</div>
+                  <div className="star">
+                    <Rate
+                      value={review.quality_mark}
+                      className="star-rate"
+                      name="quality_mark"
+                      onChange={(e) => {
+                        handleRateChange(e, "quality_mark");
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="rate-mark">
+                  <div className="title">Personeel</div>
+                  <div className="star">
+                    <Rate
+                      value={review.service_mark}
+                      className="star-rate"
+                      name="service_mark"
+                      onChange={(e) => {
+                        handleRateChange(e, "service_mark");
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="rate-mark">
+                  <div className="title">Wachttijd</div>
+                  <div className="star">
+                    <Rate
+                      value={review.wait_mark}
+                      className="star-rate"
+                      name="wait_mark"
+                      onChange={(e) => {
+                        handleRateChange(e, "wait_mark");
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="recommend">
+                  <div className="title">Beveel je deze reparateur aan?</div>
+                  <Radio.Group
+                    defaultValue={1}
+                    onChange={(e) => {
+                      handleRateChange(e.target.value, "recommend");
+                    }}
+                  >
+                    <Radio value={1}>Ja</Radio>
+                    <Radio value={0}>Nee</Radio>
+                  </Radio.Group>
+                </div>
+                <div className="client-name-input-group">
+                  <Radio.Group
+                    defaultValue={1}
+                    onChange={(e) => {
+                      handleClientChange(e.target.value);
+                    }}
+                  >
+                    <Radio value={1}>
+                      <Input
+                        placeholder="Je naam"
+                        onChange={(e) => {
+                          handleRateChange(e.target.value, "client_name");
+                        }}
+                      />
+                      <span className="client-name-margin">Of</span>
+                    </Radio>
+                    <Radio value={2}>Review anoniem</Radio>
+                  </Radio.Group>
+                </div>
+                <div className="comment-input">
+                  <TextArea 
+                    rows={4} 
+                    placeholder="Schrijf hier je commentaar"
+                    onChange={(e) => {
+                      handleRateChange(e.target.value, "testmonial");
+                    }}
+                  />
+                </div>
+                  <Button
+                    className="submit-review"
+                    onClick={() => {
+                      submitReview();
+                    }}
+                  >
+                    Verzend review
+                  </Button>
+                </div>
               </div>
-              <div className="comment-input">
-                <Input
-                  placeholder="Schrijf hier je commentaar"
-                  onChange={(e) => {
-                    handleRateChange(e.target.value, "testmonial");
-                  }}
-                />
-              </div>
-              <Button
-                className="submit-review"
-                onClick={() => {
-                  submitReview();
-                }}
-              >
-                Verzend review
-              </Button>
-            </div>
           </div>
         </div>
       </div>
-    </Layout>
+    </DefaultLayout>
   );
 };
 
