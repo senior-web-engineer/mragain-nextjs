@@ -47,7 +47,7 @@ const LOCATIONS_OPTIONS = [
 
 export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
   const handleOnLocationSelected = (geo) => {
-      axios
+    axios
       .get(
         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${geo.lat},${geo.long}&key=AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE`
       )
@@ -81,8 +81,6 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
         }
       });
   };
-
- 
 
   return (
     <BoxWrapper>

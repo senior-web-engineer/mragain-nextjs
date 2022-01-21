@@ -19,7 +19,7 @@ export const LOCATION_OPTIONS = [
     description: "Wij komen naar jou!",
     icon: faHome,
     value: "home",
-    apiValue: "2"
+    apiValue: "2",
   },
   // {
   //   label: "Opsturen",
@@ -31,7 +31,10 @@ export const LOCATION_OPTIONS = [
 ];
 
 export function getLocationOptions(shop) {
-  return LOCATION_OPTIONS.map(option => ({...option, disabled: !shop.shop_type.includes(option.apiValue)}))
+  return LOCATION_OPTIONS.map((option) => ({
+    ...option,
+    disabled: !shop.shop_type.includes(option.apiValue),
+  }));
 }
 
 export default function LocationSelector(props) {

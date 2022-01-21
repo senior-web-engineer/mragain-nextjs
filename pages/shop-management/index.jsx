@@ -1,3 +1,6 @@
+import { Col, Row, Tabs } from "antd";
+import React, { useEffect, useState } from "react";
+
 import { Text } from "@/components/common/Text/Text";
 import DefaultLayout from "@/components/layouts/Dashboard";
 import { AdditionalInfo } from "@/components/templates/shop-management/AdditionalInfo";
@@ -15,11 +18,9 @@ import {
   saveValidOpenTime,
   shopInfoFetcher,
   shopManagementAdditionalForm,
-  shopManagementGeneralInfo
+  shopManagementGeneralInfo,
 } from "@/service/shop-management/modules";
 import { OnMobile } from "@/utils/media";
-import { Col, Row, Tabs } from "antd";
-import React, { useEffect, useState } from "react";
 
 const { TabPane } = Tabs;
 
@@ -64,8 +65,7 @@ export default function ShopManagementPage() {
 
   return (
     <DefaultLayout>
-      <Row type="flex" justify="space-between" align="middle">
-      </Row>
+      <Row type="flex" justify="space-between" align="middle"></Row>
       <OnMobile only>
         <h5>
           <b>Profiel beheer is nog niet beschikbaar op je mobiel.</b>
@@ -81,7 +81,10 @@ export default function ShopManagementPage() {
                 <Col span={4}></Col>
                 <Col span={20}>
                   <BoxWrapper>
-                    <GeneralInfo shopData={shopData} setShopData={setShopData} />
+                    <GeneralInfo
+                      shopData={shopData}
+                      setShopData={setShopData}
+                    />
                   </BoxWrapper>
 
                   <BoxWrapper padding>

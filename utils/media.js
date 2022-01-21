@@ -17,10 +17,10 @@ export function getScreenSize() {
     if (typeof window === "undefined") {
       return false;
     }
-    return window.matchMedia(`(max-width: ${sizes[key]}px)`).matches
+    return window.matchMedia(`(max-width: ${sizes[key]}px)`).matches;
   });
 
-  return sizeAsArr[index] || "uhd"
+  return sizeAsArr[index] || "uhd";
 }
 
 export default Object.keys(sizes).reduce((acc, label) => {

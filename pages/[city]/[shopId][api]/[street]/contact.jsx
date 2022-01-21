@@ -1,27 +1,28 @@
-import DefaultLayout from "@/components/layouts/Homepage";
-import { MaxConstraints } from "@/components/styled/layout";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import TextArea from "antd/lib/input/TextArea";
+import { useRouter } from "next/router";
+import React, { useCallback, useEffect, useState } from "react";
+import styled from "styled-components";
+
+import BookingInfo from "@/components/appointment/BookingInfo";
+import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
 import {
   appointmentConfirmation,
   appointmentForm,
   appointmentReview,
 } from "@/components/appointment/modules";
-import { getShopProfileByInformationServer } from "@/service/account/operations";
-import React, { useCallback, useEffect, useState } from "react";
-import BookingInfo from "@/components/appointment/BookingInfo";
-import styled from "styled-components";
-import { SubTitle } from "@/components/styled/text";
-import { Field } from "@/modules/forms/Blocks";
-import Form from "@/modules/forms";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { TextButton } from "@/components/ui/Button";
-import { FieldWrap } from "@/components/styled/Forms";
 import ConfirmationModal from "@/components/common/ConfirmationModal";
-import media, { OnMobile } from "@/utils/media";
-import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
+import DefaultLayout from "@/components/layouts/Homepage";
+import { FieldWrap } from "@/components/styled/Forms";
+import { MaxConstraints } from "@/components/styled/layout";
+import { SubTitle } from "@/components/styled/text";
+import { TextButton } from "@/components/ui/Button";
 import Button from "@/components/ui/Button";
-import { useRouter } from "next/router";
-import TextArea from "antd/lib/input/TextArea";
+import Form from "@/modules/forms";
+import { Field } from "@/modules/forms/Blocks";
+import { getShopProfileByInformationServer } from "@/service/account/operations";
+import media, { OnMobile } from "@/utils/media";
 
 const MainWrap = styled.div`
   padding-top: 1px;

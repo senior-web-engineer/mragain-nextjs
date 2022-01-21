@@ -82,7 +82,7 @@ function Section({ fields, showTitle }) {
   );
 }
 
-export default function UserInfo({showDate = true}) {
+export default function UserInfo({ showDate = true }) {
   return (
     <>
       <Section fields={USER_FIELDS} showTitle />

@@ -1,5 +1,16 @@
-import DefaultLayout from "@/components/layouts/Homepage";
-import { MaxConstraints } from "@/components/styled/layout";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import TextArea from "antd/lib/input/TextArea";
+import { useRouter } from "next/router";
+import React, { useCallback, useEffect, useState } from "react";
+import styled, { css } from "styled-components";
+
+import BookingInfo from "@/components/appointment/BookingInfo";
+import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
+import DateAndTime from "@/components/appointment/DateAndTime";
+import LocationSelector, {
+  getLocationOptions,
+} from "@/components/appointment/LocationSelector";
 import {
   appointmentConfirmation,
   appointmentForm,
@@ -10,31 +21,21 @@ import {
   openTimeFetcher,
   serviceFetcher,
 } from "@/components/appointment/modules";
-import { getShopProfileByInformationServer } from "@/service/account/operations";
-import React, { useCallback, useEffect, useState } from "react";
-import styled, { css } from "styled-components";
-import BookingInfo from "@/components/appointment/BookingInfo";
-import { SubTitle } from "@/components/styled/text";
-import { Field } from "@/modules/forms/Blocks";
-import LocationSelector, {
-  getLocationOptions,
-} from "@/components/appointment/LocationSelector";
 import PaymentSelector from "@/components/appointment/PaymentSelector";
-import Form, { useFormContext } from "@/modules/forms";
-import DateAndTime from "@/components/appointment/DateAndTime";
 import Steps from "@/components/appointment/Steps";
-import Switch from "@/components/common/Switch";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { TextButton } from "@/components/ui/Button";
-import { FieldWrap } from "@/components/styled/Forms";
 import ConfirmationModal from "@/components/common/ConfirmationModal";
-import media, { OnMobile } from "@/utils/media";
-import BookingInfoMobile from "@/components/appointment/BookingInfoMobile";
+import Switch from "@/components/common/Switch";
+import DefaultLayout from "@/components/layouts/Homepage";
+import { FieldWrap } from "@/components/styled/Forms";
+import { MaxConstraints } from "@/components/styled/layout";
+import { SubTitle } from "@/components/styled/text";
+import { TextButton } from "@/components/ui/Button";
 import Button from "@/components/ui/Button";
-import { useRouter } from "next/router";
 import { store } from "@/configureStore";
-import TextArea from "antd/lib/input/TextArea";
+import Form, { useFormContext } from "@/modules/forms";
+import { Field } from "@/modules/forms/Blocks";
+import { getShopProfileByInformationServer } from "@/service/account/operations";
+import media, { OnMobile } from "@/utils/media";
 
 const MainWrap = styled.div`
   padding-top: 1px;
@@ -349,13 +350,13 @@ export default function AppointmentPage({ shop }) {
                         label="Telefoon nummer"
                         autoComplete="tel"
                       />
-	            </InlineFields>
-                      <Field
-                        as={TextArea}
-                        rows={6}
-                        name="enquiry"
-                        label="Bericht"
-                      />
+                    </InlineFields>
+                    <Field
+                      as={TextArea}
+                      rows={6}
+                      name="enquiry"
+                      label="Bericht"
+                    />
                   </DetailsForm>
                 </Switch.Case>
                 <Switch.Case value={2}>
