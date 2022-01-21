@@ -146,9 +146,9 @@ const CheckoutReview = (routerProps) => {
                   className="shop-review-icon"
                   alt="Logo"
                 />
-                {shopInfo.shop_name}
               </div>
               <div>
+                <div className="shop-name">{shopInfo.shop_name}</div>
                 <div className="rate-mark">
                   <div className="title">Prijs</div>
                   <div className="star">
