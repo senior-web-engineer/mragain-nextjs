@@ -1,8 +1,10 @@
-import Modal from "@/modules/modal";
 import Image from "next/image";
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+
+import Modal from "@/modules/modal";
+
 import Button from "../ui/Button";
 
 const TYPE_TO_IMAGE_PATH = {

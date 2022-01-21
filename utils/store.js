@@ -28,7 +28,6 @@ function DEFAULT(state) {
 }
 
 export function createReducer(reducers) {
-
   const reducerInitialState = reducers.initialState || {};
   return function reducerFn(state = reducerInitialState, action) {
     const { type } = action;

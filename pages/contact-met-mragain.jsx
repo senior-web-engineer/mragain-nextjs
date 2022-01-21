@@ -45,7 +45,10 @@ const Contact = ({}) => {
             property="og:description"
             content="We horen graag van je, mail, bel of laat een berichtje achter."
           />
-          <meta name="og:url" content={FRONT_END_URL + "/contact-met-mragain"} />
+          <meta
+            name="og:url"
+            content={FRONT_END_URL + "/contact-met-mragain"}
+          />
           <meta
             property="og:image"
             content={FRONT_END_URL + "media/contact_banner_image.jpg"}

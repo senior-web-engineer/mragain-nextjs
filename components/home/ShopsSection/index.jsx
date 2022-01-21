@@ -135,8 +135,8 @@ const ShopImageWrap = styled.div`
     display: inline-block;
     height: 31px;
     ${(props) =>
-    props.tagColor &&
-    css`
+      props.tagColor &&
+      css`
         background-color: ${props.tagColor || "#ddd"};
       `}
     color: #fff;
@@ -190,7 +190,7 @@ export function ShopCard({ shop, onClick }) {
         <Image
           loading="lazy"
           src={shopLogo}
-	  alt={shop.name}
+          alt={shop.name}
           layout="fill"
           objectFit="contained"
         />

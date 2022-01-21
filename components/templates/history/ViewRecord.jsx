@@ -185,10 +185,7 @@ const ReparationDetailsForm = ({ data }) => {
         </Col>
         <Col span={8}>
           <FormItemStyled label="Model">
-            <Input
-              placeholder="Model"
-              value={data?.device.model_name}
-            />
+            <Input placeholder="Model" value={data?.device.model_name} />
           </FormItemStyled>
         </Col>
       </Row>
@@ -200,10 +197,7 @@ const ReparationDetailsForm = ({ data }) => {
         />
       </FormItemStyled>
       <FormItemStyled label="IMEI/referentie">
-        <Input
-          placeholder="IMEI of referentie"
-          value={data?.serialnumber}
-        />
+        <Input placeholder="IMEI of referentie" value={data?.serialnumber} />
       </FormItemStyled>
 
       <Row gutter={24}>

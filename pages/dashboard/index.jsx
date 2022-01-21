@@ -639,7 +639,12 @@ function DashboardPage({ isEditMode }) {
             <>
               <FormSectionTitle>Extra informatie</FormSectionTitle>
               <FieldWrapAdmin>
-                <Field as={Input} textarea name="comments" label="Opmerkingen" />
+                <Field
+                  as={Input}
+                  textarea
+                  name="comments"
+                  label="Opmerkingen"
+                />
               </FieldWrapAdmin>
 
               <FieldWrapAdmin>
@@ -664,15 +669,13 @@ function DashboardPage({ isEditMode }) {
         />
         <h2>Reparatie afgerond</h2>
         <p>
-          We sturen een email naar de klant om een review voor je achter te laten.
-          Wil je doorgaan en de reparatie afronden?
+          We sturen een email naar de klant om een review voor je achter te
+          laten. Wil je doorgaan en de reparatie afronden?
         </p>
       </Modal>
       <Modal module={cancelAppointmentModal} okText="Bevestig">
         <h2>Afspraak annuleren ?</h2>
-        <p>
-          Laat de klant weten dat je de afspraak hebt geannuleerd. 
-        </p>
+        <p>Laat de klant weten dat je de afspraak hebt geannuleerd.</p>
       </Modal>
     </DefaultLayout>
   );

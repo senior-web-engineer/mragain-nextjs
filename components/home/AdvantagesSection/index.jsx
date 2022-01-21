@@ -18,7 +18,7 @@ const ADVANTAGES = [
   {
     icon: faClock,
     title: "Cashback & beste prijs",
-    1: "Reparateurs beheren de prijzen op MrAgain, hierdoor krijg je altijd de beste prijs",	  
+    1: "Reparateurs beheren de prijzen op MrAgain, hierdoor krijg je altijd de beste prijs",
     2: "Veel reparateurs komen ook op locatie",
     3: "Reparateur zonder review? Schrijf de eerste en krijg €10 cashback",
   },

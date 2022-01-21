@@ -233,24 +233,24 @@ const CheckoutReview = (routerProps) => {
                   </Radio.Group>
                 </div>
                 <div className="comment-input">
-                  <TextArea 
-                    rows={4} 
+                  <TextArea
+                    rows={4}
                     placeholder="Schrijf hier je commentaar"
                     onChange={(e) => {
                       handleRateChange(e.target.value, "testmonial");
                     }}
                   />
                 </div>
-                  <Button
-                    className="submit-review"
-                    onClick={() => {
-                      submitReview();
-                    }}
-                  >
-                    Verzend review
-                  </Button>
-                </div>
+                <Button
+                  className="submit-review"
+                  onClick={() => {
+                    submitReview();
+                  }}
+                >
+                  Verzend review
+                </Button>
               </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,11 +1,9 @@
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Col, Row } from "antd";
 import { Rate } from "antd";
 import Image from "next/image";
 import React, { useState } from "react";
-
-
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Link from "@/assets/icons/link.svg";
 import MapMarker from "@/assets/icons/map-marker.svg";
@@ -67,17 +65,16 @@ export const GeneralInfo = ({ shopData, setShopData }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    (async() => {
+    (async () => {
       await shopManagementGeneralForm.actions.submit(
         shopManagementGeneralForm.state.values
       );
       setShopData({
         ...shopData,
-        ...shopManagementGeneralForm.state.values
+        ...shopManagementGeneralForm.state.values,
       });
       setEditing(false);
-    })()
-    
+    })();
   };
 
   const onEdit = async () => {
@@ -191,7 +188,8 @@ export const GeneralInfo = ({ shopData, setShopData }) => {
                   </Text.Body>
                 </span>
                 <span>
-                  <FontAwesomeIcon icon={faWhatsapp} />&nbsp;
+                  <FontAwesomeIcon icon={faWhatsapp} />
+                  &nbsp;
                   <Text.Body size="12" style={{ margin: 0 }}>
                     {shopData?.whatsapp_number}
                   </Text.Body>

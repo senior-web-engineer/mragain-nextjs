@@ -1,11 +1,11 @@
-import { H2, SubTitle } from "@/components/styled/text";
-import { StyledInput } from "@/components/ui/Input";
-import media from "@/utils/media";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useMemo } from "react";
 import styled, { css } from "styled-components";
 
+import { H2, SubTitle } from "@/components/styled/text";
+import { StyledInput } from "@/components/ui/Input";
+import media from "@/utils/media";
 
 const SearchWrap = styled.div`
   padding: 80px 0 40px;
@@ -95,7 +95,6 @@ export function DeviceFinder({
   searchTerm,
   onSearch,
 }) {
-
   const deviceTypes = useMemo(() => {
     return models.reduce((accumulator, model) => {
       if (accumulator.find((existing) => existing.name === model.device_name)) {
@@ -117,7 +116,6 @@ export function DeviceFinder({
         return accumulator;
       }
 
-
       if (accumulator.find((existing) => existing.name === model.brand_name)) {
         return accumulator;
       }
@@ -130,7 +128,6 @@ export function DeviceFinder({
       return accumulator;
     }, []);
   }, [models]);
-
 
   function renderDevice(brand) {
     return (
