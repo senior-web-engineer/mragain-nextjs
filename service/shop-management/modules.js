@@ -37,6 +37,13 @@ export const getReparations = dataFetcher({
   },
 });
 
+export const getPurchases = dataFetcher({
+  selectors: [""],
+  fetchData() {
+    return privateApi.get(`${API_PATH.GETPURCAHSES}/`);
+  },
+});
+
 export const shopInfoFetcher = dataFetcher({
   selectors: [],
   async fetchData() {
@@ -187,7 +194,7 @@ export const shopManagementAdditionalForm = createFormModule({
         devices: data.devices.map((id) => +id),
         brands: data.brands.map((id) => +id),
         cateredBrand: data.brands.map((id) => +id),
-        purchases: data.purchases.map((id) => +id),
+        purchases: data.purchases.map((b) => parseInt(b)),
       }
     );
 

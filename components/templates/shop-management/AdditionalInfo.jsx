@@ -12,6 +12,7 @@ import {
   getBrands,
   getDevices,
   getReparations,
+  getPurchases,
   shopManagementAdditionalForm,
 } from "@/service/shop-management/modules";
 
@@ -60,7 +61,7 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
   const [devices, setDevices] = useState([]);
   const [reparations, setReparations] = useState([]);
   const [selectedDevices, setSelectedDevices] = useState([]);
-  const [additionalInfoShopData, setAdditionalInfoShopData] = useState({});
+  const [purchases, setPurchases] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,6 +71,7 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
       setReparations(await getReparations.fetch());
       setDevices(await getDevices.fetch());
       setBrands(fetchedBrands);
+      setPurchases(await getPurchases.fetch());
     };
     fetchData();
   }, []);
@@ -113,6 +115,10 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
           (b) => parseInt(b)
         ),
         paymentMethod: shopManagementAdditionalForm.state.values?.payMethod,
+        replacementDevices: shopManagementAdditionalForm.state.values?.devices,
+        ShopPurchase: shopManagementAdditionalForm.state.values?.purchases.map(
+          (b) => parseInt(b)
+        ),
       });
 
       setEditing(false);
@@ -225,9 +231,9 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
                 adminInput
                 as={MultiSelect}
                 name="purchases"
-                options={reparations.map((reparation) => ({
-                  label: reparation.reparation_name,
-                  value: reparation.id,
+                options={purchases.map((purchase) => ({
+                  label: purchase.purchaseName,
+                  value: purchase.id,
                 }))}
               />
             </Col>
@@ -243,7 +249,7 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
               <Field
                 adminInput
                 as={MultiSelect}
-                name="purchases"
+                name="parkingArea"
                 options={parkingAreaOptions.map((option) => ({
                   label: option?.label,
                   value: option?.value,
@@ -296,7 +302,7 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
                 adminInput
                 simple
                 as={Switch}
-                defaultChecked={shopData.insurance === "No" ? false : true}
+                defaultChecked={shopData.insurance}
                 name="insurance"
               />
             </Col>
@@ -329,7 +335,6 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
                       shopData?.replacementDevices?.includes(device?.id || 0)
                     )
                     .map((device) => {
-                      if (device.device_image) {
                         return (
                           <img
                             width="40px"
@@ -337,7 +342,6 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
                             src={device?.device_image || ""}
                           />
                         );
-                      }
 
                       return <></>;
                     })}
@@ -406,12 +410,12 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
               </Col>
               <Col span={18}>
                 <div>
-                  {reparations
+                  {purchases
                     .filter((shopPurchase) =>
                       shopData?.ShopPurchase.includes(shopPurchase.id)
                     )
                     .map((shopPurchase) => (
-                      <Tag color="green">{shopPurchase.reparation_name}</Tag>
+                      <Tag color="green">{shopPurchase.purchaseName}</Tag>
                     ))}
                 </div>
               </Col>
