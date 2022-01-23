@@ -38,6 +38,7 @@ export default function RepairManagementPage() {
         zipcode: data.zip,
         city: data.city,
         country: data.country,
+        address: data.address,
       },
     });
   };
@@ -48,8 +49,7 @@ export default function RepairManagementPage() {
 
   return (
     <DefaultLayout>
-      <Row type="flex" justify="space-between" align="middle">
-      </Row>
+      <Row type="flex" justify="space-between" align="middle"></Row>
       <Tabs defaultActiveKey={activeTab} onChange={onTabChange}>
         <TabPane tab="Algemeen" key="general">
           <Row>
