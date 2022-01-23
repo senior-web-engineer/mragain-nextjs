@@ -1,4 +1,4 @@
-import { Col, Divider, Input, Modal, Row, TimePicker } from "antd";
+import { Col, Divider, Input, Modal, Row, Switch, TimePicker } from "antd";
 import moment from "moment";
 import React, { useCallback, useState } from "react";
 
@@ -8,8 +8,6 @@ import Select from "@/components/ui/Select";
 
 import { repeatingList } from "./helpers";
 import {
-  DateText,
-  DateWrapper,
   HeaderLargeText,
   HeaderSmallText,
   HoursEditor,
@@ -33,6 +31,7 @@ export const OperationalHoursCalendar = ({
       endTime: moment("23:59", "HH:mm"),
     },
     repeat: 0,
+    closed: false,
   });
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -172,18 +171,44 @@ export const OperationalHoursCalendar = ({
               </Row>
             </Col>
             <Col>
-              <HoursEditorTitle>Herhaling</HoursEditorTitle>
-              <Select
-                value={nonRegularHours.repeat}
-                options={repeatingList}
-                size="large"
-                onChange={(value) =>
-                  setNonRegularHours({
-                    ...nonRegularHours,
-                    repeat: value,
-                  })
-                }
-              />
+              <Row>
+                <Col span="6">
+                  <HoursEditorTitle>Closed</HoursEditorTitle>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      height: "40px",
+                    }}
+                  >
+                    <Switch
+                      name="closed"
+                      onChange={(value) => {
+                        console.log(value);
+                        setNonRegularHours({
+                          ...nonRegularHours,
+                          checked: value,
+                        });
+                      }}
+                      defaultChecked={nonRegularHours.closed}
+                    />
+                  </div>
+                </Col>
+                <Col span="18">
+                  <HoursEditorTitle>Herhaling</HoursEditorTitle>
+                  <Select
+                    value={nonRegularHours.repeat}
+                    options={repeatingList}
+                    size="large"
+                    onChange={(value) =>
+                      setNonRegularHours({
+                        ...nonRegularHours,
+                        repeat: value,
+                      })
+                    }
+                  />
+                </Col>
+              </Row>
             </Col>
             <Divider />
             <Row type="flex" justify="space-between">

@@ -163,7 +163,17 @@ export default function ShopManagementPage() {
           </TabPane>
           <TabPane tab="Openingstijden" key="operational-hours">
             <Row gutter={[40, 40]} type="flex">
-              <Col xxl={{ span: 12, order: 2 }} xs={{ span: 24, order: 1 }}>
+              <Col
+                xxl={{ span: 12 }}
+                xs={{ span: 24 }}
+                style={{ height: "fit-content" }}
+              >
+                <ScheduleList
+                  validOpenTime={validOpenTime}
+                  onSave={saveValidOpenTime}
+                />
+              </Col>
+              <Col xxl={{ span: 12 }} xs={{ span: 24 }}>
                 {nonWorkingDays && (
                   <OperationalHoursCalendar
                     nonWorkingDays={nonWorkingDays}
@@ -171,16 +181,6 @@ export default function ShopManagementPage() {
                     onDeleteNonWorkingDays={onDeleteNonWorkingDays}
                   />
                 )}
-              </Col>
-              <Col
-                xxl={{ span: 12, order: 1 }}
-                xs={{ span: 24, order: 2 }}
-                style={{ height: "fit-content" }}
-              >
-                <ScheduleList
-                  validOpenTime={validOpenTime}
-                  onSave={saveValidOpenTime}
-                />
               </Col>
             </Row>
             <Row style={{ marginTop: "40px" }}>
