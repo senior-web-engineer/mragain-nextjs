@@ -193,7 +193,7 @@ export default function ShopManagementPage() {
                       background: "#fafafa",
                     }}
                   >
-                    Irregular schedule overview
+                    Overzicht van je afwijkende openingstijden
                   </HeaderLargeText>
                   <TableWrapper
                     columns={columns(onDeleteNonWorkingDays)}

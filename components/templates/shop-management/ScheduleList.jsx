@@ -166,11 +166,10 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
         header={
           <>
             <HeaderLargeText style={{ padding: "0 18px", margin: "12px 0" }}>
-              Set your regular schedule
+              Openingstijden
             </HeaderLargeText>
             <HeaderSmallText style={{ padding: "0 18px", margin: "12px 0" }}>
-              Here you can configure the standard hours of operation for your
-              store
+              Stel hier je standaard openingstijden in
             </HeaderSmallText>
           </>
         }
@@ -219,7 +218,7 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
                 span="2"
                 style={{ display: "flex", justifyContent: "center" }}
               >
-                To
+                Tot
               </Col>
               <Col
                 span="5"

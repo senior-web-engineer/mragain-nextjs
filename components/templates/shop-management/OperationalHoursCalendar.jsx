@@ -107,14 +107,14 @@ export const OperationalHoursCalendar = ({
           <HoursEditor>
             <Col>
               <HeaderLargeText style={{ margin: "12px 0" }}>
-                Add customized schedule
+                Afwijkende openingstijden
               </HeaderLargeText>
               <HeaderSmallText style={{ margin: "12px 0" }}>
-                Add customized time slots based on your store closure{" "}
+                Dagen die afwijken van je standaard openingstijden voeg je hier toe{" "}
               </HeaderSmallText>
             </Col>
             <Col>
-              <HoursEditorTitle>Title</HoursEditorTitle>
+              <HoursEditorTitle>Bechrijving</HoursEditorTitle>
               <Input
                 small
                 placeholder="Beschrijving"
@@ -130,14 +130,14 @@ export const OperationalHoursCalendar = ({
               />
             </Col>
             <Col>
-              <HoursEditorTitle>Select date and time</HoursEditorTitle>
+              <HoursEditorTitle>Selecteer dag(en) en tijd</HoursEditorTitle>
               <Row type="flex" justify="space-between">
                 <Col span={12}>
                   <Input
                     onClick={() => setIsModalVisible(true)}
                     style={{ width: "90%" }}
                     size="large"
-                    value={`From ${nonRegularHours.range.startDate} - To: ${nonRegularHours.range.endDate}`}
+                    value={`Van ${nonRegularHours.range.startDate} - Tot: ${nonRegularHours.range.endDate}`}
                   />
                 </Col>
                 <Col span={6}>
