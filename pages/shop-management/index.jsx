@@ -146,8 +146,8 @@ export default function ShopManagementPage() {
     Modal.confirm({
       title: "Delete",
       icon: <ExclamationCircleOutlined />,
-      content: "Are you sure you want to delete this item?",
-      okText: "Confirm",
+      content: "Weet je zeker dat je deze wilt verwijderen?",
+      okText: "Bevestigen",
       cancelText: "Cancel",
       onOk: () => {
         deleteNonRegularHours(id);
