@@ -424,7 +424,7 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
             <Row style={rowStyle} type="flex" justify="space-between">
               <Col span={6}>
                 <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-                  Parking Area
+                  Parkeren
                 </Text.Body>
               </Col>
               <Col span={18}>
@@ -460,7 +460,7 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
             <Row style={rowStyle} type="flex" justify="space-between">
               <Col span={6}>
                 <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-                  Insurance
+                  Samenwerking verzekering
                 </Text.Body>
               </Col>
               <Col span={18}>{shopData?.insurance ? "Ja" : "Nee"}</Col>

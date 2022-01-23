@@ -173,7 +173,7 @@ export const OperationalHoursCalendar = ({
             <Col>
               <Row>
                 <Col span="6">
-                  <HoursEditorTitle>Closed</HoursEditorTitle>
+                  <HoursEditorTitle>Gesloten</HoursEditorTitle>
                   <div
                     style={{
                       display: "flex",
