@@ -1,5 +1,5 @@
-import { DeleteOutlined } from "@ant-design/icons";
-import { Col, Row, Tabs, Tag } from "antd";
+import { DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
+import { Col, Modal, Row, Tabs, Tag } from "antd";
 import React, { useEffect, useState } from "react";
 
 import DefaultLayout from "@/components/layouts/Dashboard";
@@ -96,6 +96,7 @@ export default function ShopManagementPage() {
   const [shopInfo, setShopInfo] = useState();
   const [shopData, setShopData] = useState();
   const [nonWorkingDays, setNonWorkingDays] = useState();
+  const [nonWorkingDaysLoading, setNonWorkingDaysLoading] = useState(false);
   const [validOpenTime, setValidOpenTime] = useState();
   const [user, setUser] = useState();
 
@@ -126,8 +127,21 @@ export default function ShopManagementPage() {
   };
 
   const onDeleteNonWorkingDays = async (id) => {
-    deleteNonRegularHours(id);
-    setNonWorkingDays(await getShopNonWorkingDays.fetch());
+    Modal.confirm({
+      title: "Delete",
+      icon: <ExclamationCircleOutlined />,
+      content: "Are you sure you want to delete this item?",
+      okText: "Confirm",
+      cancelText: "Cancel",
+      onOk: () => {
+        deleteNonRegularHours(id);
+        setNonWorkingDaysLoading(true);
+        setTimeout(async () => {
+          setNonWorkingDays(await getShopNonWorkingDays.fetch());
+          setNonWorkingDaysLoading(false);
+        }, 2000);
+      },
+    });
   };
 
   return (
@@ -196,6 +210,7 @@ export default function ShopManagementPage() {
                     Overzicht van je afwijkende openingstijden
                   </HeaderLargeText>
                   <TableWrapper
+                    loading={nonWorkingDaysLoading}
                     columns={columns(onDeleteNonWorkingDays)}
                     dataSource={nonWorkingDays}
                   />
