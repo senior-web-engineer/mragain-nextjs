@@ -9,6 +9,7 @@ import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
 
 import MyAddressMap from "./MyAddressMap";
+import LocationSearchInput from "./PlacesSearch";
 import {
   BoxWrapper,
   BoxWrapperContent,
@@ -85,23 +86,15 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
               </Row>
               <Row gutter={[16, 0]}>
                 <Col>
-                  {currentAddress || basicSettingsForm.state.values?.address}
-                  {/* <Field
-                    name="address"
-                    adminInput
-                    as={GooglePlaces}
-                    label="Address"
-                    customLabel
-                    onLocationSelected={handleOnLocationSelected}
-                    searchOptions={{
-                      componentRestrictions: {
-                        country: ["nl", "be"],
-                      },
-                      types: ["establishment"],
-                    }}
-                    size="small"
-                  /> */}
+                  <div style={{ marginBottom: "20px" }}>
+                    <b>Current Address:</b>{" "}
+                    {currentAddress || basicSettingsForm.state.values?.address}
+                  </div>
+
                   <MyAddressMap
+                    selectedAddress={
+                      currentAddress || basicSettingsForm.state.values?.address
+                    }
                     marker={{
                       lat: basicSettingsForm.state.values?.geo_lat,
                       lng: basicSettingsForm.state.values?.geo_long,
@@ -110,7 +103,25 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                       onLocationUpdate(data);
                       setCurrentAddress(data.address);
                     }}
-                  />
+                  >
+                    {(onPlacesSearch) => (
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "60px",
+                          left: "10px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: "250px",
+                          }}
+                        >
+                          <LocationSearchInput onSelect={onPlacesSearch} />
+                        </div>
+                      </div>
+                    )}
+                  </MyAddressMap>
                 </Col>
               </Row>
             </BoxWrapperContent>
