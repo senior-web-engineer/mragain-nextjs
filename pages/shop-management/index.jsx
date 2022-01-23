@@ -43,6 +43,16 @@ const renderRepeat = (repeat) => {
   );
 };
 
+
+const renderStatus = (status) => {
+  const res = getColor(status ? 2 : 0);
+  return (
+    <Tag color={res.color} key={res.value}>
+      {status ?  "Closed" : "Opened"}
+    </Tag>
+  );
+};
+
 const renderAction = (item, onDelete) => (
   <div size="middle">
     <ActionList onClick={() => onDelete(item.id)}>
@@ -82,6 +92,12 @@ const columns = (onDelete) => [
     key: "repeat",
     dataIndex: "repeat",
     render: renderRepeat,
+  },
+  {
+    title: "Status",
+    key: "closed",
+    dataIndex: "closed",
+    render: renderStatus
   },
   {
     title: "Actie",
@@ -124,6 +140,7 @@ export default function ShopManagementPage() {
     await saveShopNonWorkingDays(data);
     setNonWorkingDays(await getShopNonWorkingDays.fetch());
   };
+
 
   const onDeleteNonWorkingDays = async (id) => {
     Modal.confirm({

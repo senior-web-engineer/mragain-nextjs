@@ -184,10 +184,9 @@ export const OperationalHoursCalendar = ({
                     <Switch
                       name="closed"
                       onChange={(value) => {
-                        console.log(value);
                         setNonRegularHours({
                           ...nonRegularHours,
-                          checked: value,
+                          closed: value,
                         });
                       }}
                       defaultChecked={nonRegularHours.closed}
