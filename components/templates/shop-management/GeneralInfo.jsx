@@ -90,10 +90,9 @@ export const GeneralInfo = ({ shopData, setShopData }) => {
           <Form module={shopManagementGeneralForm} onSubmit={onSubmit}>
             <Row style={rowStyle} type="flex" justify="space-between">
               <Col span={6}>
-                <h3>About the company</h3>
+                <h3>Over het bedrijf</h3>
                 <p>
-                  Give a brief introduction to let your clients know more about
-                  you.
+                  Vertel over je bedrijf zodat klanten meer over je te weten komen.
                 </p>
               </Col>
               <Col span={18}>

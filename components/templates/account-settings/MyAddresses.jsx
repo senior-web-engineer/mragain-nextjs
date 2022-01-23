@@ -122,7 +122,7 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
               <Row gutter={[16, 0]}>
                 <Col>
                   <div style={{ marginBottom: "20px" }}>
-                    <b>Current Address:</b>{" "}
+                    <b>Huidig adres:</b>{" "}
                     {currentAddress || basicSettingsForm.state.values?.address}
                   </div>
 
