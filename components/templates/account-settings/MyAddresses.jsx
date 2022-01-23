@@ -102,6 +102,10 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                     size="small"
                   /> */}
                   <MyAddressMap
+                    marker={{
+                      lat: basicSettingsForm.state.values?.geo_lat,
+                      lng: basicSettingsForm.state.values?.geo_long,
+                    }}
                     onLocationUpdate={(data) => {
                       onLocationUpdate(data);
                       setCurrentAddress(data.address);

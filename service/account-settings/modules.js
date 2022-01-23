@@ -5,7 +5,6 @@ import { createFormModule } from "@/modules/forms";
 import { privateApi } from "@/utils/api";
 import { notification } from "antd";
 
-
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],
   fetchData() {
@@ -36,6 +35,8 @@ export const basicSettingsForm = createFormModule({
       email: fetchedData.email || "",
       iban: fetchedData.iban || "",
       kvk: fetchedData.kvk || "",
+      geo_lat: fetchedData.geo_lat || "",
+      geo_long: fetchedData.geo_long || "",
       name: fetchedData.name || "",
       ptype: fetchedData.ptype || 0,
       shop_active: fetchedData.shop_active || false,
@@ -88,17 +89,19 @@ export const changePasswordForm = createFormModule({
       shop,
     });
 
-    promise.then((response) => {
-      notification.success({
-        message: "Je wachtwoord is gewijzigd",
-      });
-    }).catch((res) => {
-      for (let message of res.errors) {
-        notification.error({
-          message: message,
+    promise
+      .then((response) => {
+        notification.success({
+          message: "Je wachtwoord is gewijzigd",
         });
-      }
-    })
+      })
+      .catch((res) => {
+        for (let message of res.errors) {
+          notification.error({
+            message: message,
+          });
+        }
+      });
     return promise;
   },
 });
