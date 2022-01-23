@@ -1,10 +1,10 @@
-import Loader from "@/components/common/Loader";
 import { Table as AntTable } from "antd";
 import React, { useMemo } from "react";
 import styled from "styled-components";
+
+import Loader from "@/components/common/Loader";
+
 import { useListContext } from ".";
-
-
 
 const StyledTable = styled(AntTable)`
   .ant-table-head {

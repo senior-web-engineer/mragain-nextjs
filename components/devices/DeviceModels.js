@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React, { useMemo } from "react";
 import styled from "styled-components";
 
@@ -46,15 +45,14 @@ export default function DeviceModels({
     }
 
     return models.filter(
-      (model) =>
-        model.brand_name === brandName && model.device_name === deviceName
+      (model) => model.brand_slug === brandName && model.slug === deviceName
     );
   }, [models, brandName, searchTerm]);
 
   function renderModel(model) {
     return (
       <ModelLink
-        href={`/devices/${model.device_name}/${model.brand_name}/${model.model_name}`}
+        href={`/devices/${model.slug}/${model.brand_slug}/${model.model_slug}`}
       >
         {model.model_name}
       </ModelLink>

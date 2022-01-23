@@ -48,6 +48,10 @@ const DatePickerWrap = styled.div`
     margin-bottom: 0;
   }
 
+  &&&&& .ant-select {
+    width: auto;
+  }
+
   .ant-radio-group {
     display: none;
   }
@@ -342,6 +346,11 @@ export default function DateAndTime({ required = true }) {
             appointmentForm.actions.onFieldChange({ name: "date", value });
             appointmentForm.actions.onFieldChange({ name: "time", value: "" });
           }}
+          css={`
+            & .ant-select.ant-fullcalendar-year-select.ant-select-sm {
+              background: papayawhip;
+            }
+          `}
         />
         <Field name="time" as={TimePicker} />
       </SchedueleContentWrap>

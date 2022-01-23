@@ -12,6 +12,7 @@ import {
   getBrands,
   getDevices,
   getReparations,
+  getPurchases,
   shopManagementAdditionalForm,
 } from "@/service/shop-management/modules";
 
@@ -33,6 +34,12 @@ const reparationLocationOptions = [
   },
 ];
 
+const parkingAreaOptions = [
+  { value: 1, label: "Ja, betaald parkeren."},
+  { value: 2, label: "Ja, gratis parkeren"},
+  { value: 3, label: "Nee"}
+];
+
 const renderDevicesList = (devices, selectedDevices, onChange) => (
   <Row gutter={[16, 16]}>
     {devices.map((device, index) => (
@@ -40,7 +47,7 @@ const renderDevicesList = (devices, selectedDevices, onChange) => (
         <SwitchGroup
           title={device.device_name}
           description={device.synonyms}
-          defaultChecked={selectedDevices.includes(device.id)}
+          defaultChecked={selectedDevices?.includes(device.id)}
           onChange={(value) => onChange(device.id, value)}
         />
       </Col>
@@ -48,21 +55,23 @@ const renderDevicesList = (devices, selectedDevices, onChange) => (
   </Row>
 );
 
-export const AdditionalInfo = ({ shopData }) => {
+export const AdditionalInfo = ({ shopData, setShopData }) => {
   const [editing, setEditing] = useState(false);
   const [brands, setBrands] = useState([]);
   const [devices, setDevices] = useState([]);
   const [reparations, setReparations] = useState([]);
   const [selectedDevices, setSelectedDevices] = useState([]);
+  const [purchases, setPurchases] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const user = await currentUser.fetch();
-      shopManagementAdditionalForm.actions.initialize(user.account_id);
+      await shopManagementAdditionalForm.actions.initialize(user.account_id);
       const fetchedBrands = await getBrands.fetch();
       setReparations(await getReparations.fetch());
       setDevices(await getDevices.fetch());
       setBrands(fetchedBrands);
+      setPurchases(await getPurchases.fetch());
     };
     fetchData();
   }, []);
@@ -79,9 +88,9 @@ export const AdditionalInfo = ({ shopData }) => {
 
   const onDeviceSelected = (id, value) => {
     let newSelectedDevices = [...selectedDevices];
-    if (newSelectedDevices.includes(id) && value === false) {
+    if (newSelectedDevices?.includes(id) && value === false) {
       newSelectedDevices.splice(newSelectedDevices.indexOf(id), 1);
-    } else if (!newSelectedDevices.includes(id)) {
+    } else if (!newSelectedDevices?.includes(id)) {
       newSelectedDevices = [...newSelectedDevices, id];
     }
     shopManagementAdditionalForm.actions.batchChange({
@@ -94,48 +103,61 @@ export const AdditionalInfo = ({ shopData }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    shopManagementAdditionalForm.actions.submit(
-      shopManagementAdditionalForm.state.values
-    );
-    setEditing(false);
+    (async () => {
+      await shopManagementAdditionalForm.actions.submit(
+        shopManagementAdditionalForm.state.values
+      );
+
+      setShopData({
+        ...shopData,
+        ...shopManagementAdditionalForm.state.values,
+        cateredBrand: shopManagementAdditionalForm.state.values?.brands?.map(
+          (b) => parseInt(b)
+        ),
+        paymentMethod: shopManagementAdditionalForm.state.values?.payMethod,
+        replacementDevices: shopManagementAdditionalForm.state.values?.devices,
+        ShopPurchase: shopManagementAdditionalForm.state.values?.purchases.map(
+          (b) => parseInt(b)
+        ),
+      });
+
+      setEditing(false);
+    })();
+  };
+
+  const onEdit = async () => {
+    setEditing(true);
+    await shopManagementAdditionalForm.actions.initialize(shopData?.shop_id);
   };
 
   return (
     <>
-      <Form module={shopManagementAdditionalForm} onSubmit={onSubmit}>
-        <Row type="flex" justify="space-between" align="middle">
-          <Col>
-            <HeaderSmallText>Algemene informatie</HeaderSmallText>
-          </Col>
-          <Col>
-            {editing ? (
-              <>
-                <Button
-                  style={{ marginRight: "10px" }}
-                  onClick={() => setEditing(false)}
-                >
-                  Annuleren
-                </Button>
-                <Button type="primary" htmlType="submit">
-                  Opslaan
-                </Button>
-              </>
-            ) : (
-              <Button type="primary" onClick={() => setEditing(true)}>
-                Wijzigen
+      {editing ? (
+        <Form module={shopManagementAdditionalForm} onSubmit={onSubmit}>
+          <Row type="flex" justify="space-between" align="middle">
+            <Col>
+              <HeaderSmallText>Algemene informatie</HeaderSmallText>
+            </Col>
+            <Col>
+              <Button
+                style={{ marginRight: "10px" }}
+                onClick={() => setEditing(false)}
+              >
+                Annuleren
               </Button>
-            )}
-          </Col>
-        </Row>
-        <Divider />
-        <Row style={rowStyle} type="flex" justify="space-between">
-          <Col span={6}>
-            <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-              Apparaten
-            </Text.Body>
-          </Col>
-          <Col span={18}>
-            {editing ? (
+              <Button type="primary" htmlType="submit">
+                Opslaan
+              </Button>
+            </Col>
+          </Row>
+          <Divider />
+          <Row style={rowStyle} type="flex" justify="space-between">
+            <Col span={6}>
+              <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                Apparaten
+              </Text.Body>
+            </Col>
+            <Col span={18}>
               <div>
                 {renderDevicesList(
                   devices,
@@ -143,38 +165,16 @@ export const AdditionalInfo = ({ shopData }) => {
                   onDeviceSelected
                 )}
               </div>
-            ) : (
-              <div>
-                {devices
-                  .filter((device) =>
-                    shopData?.replacementDevices.includes(device?.id || 0)
-                  )
-                  .map((device) => {
-                    if (device.device_image) {
-                      return (
-                        <img
-                          width="40px"
-                          height="40px"
-                          src={device?.device_image || ""}
-                        />
-                      );
-                    }
+            </Col>
+          </Row>
 
-                    return <></>;
-                  })}
-              </div>
-            )}
-          </Col>
-        </Row>
-
-        <Row style={rowStyle} type="flex" justify="space-between">
-          <Col span={6}>
-            <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-              Merken
-            </Text.Body>
-          </Col>
-          <Col span={18}>
-            {editing ? (
+          <Row style={rowStyle} type="flex" justify="space-between">
+            <Col span={6}>
+              <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                Merken
+              </Text.Body>
+            </Col>
+            <Col span={18}>
               <Field
                 adminInput
                 as={MultiSelect}
@@ -184,82 +184,32 @@ export const AdditionalInfo = ({ shopData }) => {
                   label: item.brand_name,
                 }))}
               />
-            ) : (
-              <div>
-                {brands
-                  .filter((brand) => shopData?.cateredBrand.includes(brand.id))
-                  .map((brand) => (
-                    <Tag color="green">{brand.brand_name}</Tag>
-                  ))}
-              </div>
-            )}
-          </Col>
-        </Row>
+            </Col>
+          </Row>
 
-        <Row style={rowStyle} type="flex" justify="space-between">
-          <Col span={6}>
-            <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-              Betaal methoden
-            </Text.Body>
-          </Col>
-          <Col span={18}>
-            {editing ? (
+          <Row style={rowStyle} type="flex" justify="space-between">
+            <Col span={6}>
+              <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                Betaal methoden
+              </Text.Body>
+            </Col>
+            <Col span={18}>
               <Field
                 adminInput
                 as={MultiSelect}
                 name="payMethod"
                 options={additionalInfoOptions.paymentMethods}
               />
-            ) : (
-              <div>
-                {additionalInfoOptions.paymentMethods
-                  .filter((item) =>
-                    shopData?.paymentMethod.includes(item.value)
-                  )
-                  .map((item) => (
-                    <Tag color="blue">{item.label}</Tag>
-                  ))}
-              </div>
-            )}
-          </Col>
-        </Row>
-
-        <Row style={rowStyle} type="flex" justify="space-between">
-          <Col span={6}>
-            <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-              Locatie opties
-            </Text.Body>
-          </Col>
-          <Col span={18}>
-            {editing ? (
+            </Col>
+          </Row>
+          <Row style={rowStyle} type="flex" justify="space-between">
+            <Col span={6}>
+              <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                Locatie opties
+              </Text.Body>
+            </Col>
+            <Col span={18}>
               <Row gutter={[0, 16]}>
-                {/* <Col span={24}>
-                  <Field
-                    adminInput
-                    simple
-                    as={SwitchGroup}
-                    name="locationOptions.inStoreService"
-                    title="Reparatie in de winkel"
-                  />
-                </Col>
-                <Col span={24}>
-                  <Field
-                    adminInput
-                    simple
-                    as={SwitchGroup}
-                    name="locationOptions.homeService"
-                    title="Reparatie op locatie"
-                  />
-                </Col>
-                <Col span={24}>
-                  <Field
-                    adminInput
-                    simple
-                    as={SwitchGroup}
-                    name="locationOptions.doorToDoorDelivery"
-                    title="Toestel opsturen"
-                  />
-                </Col> */}
                 <Field
                   adminInput
                   as={MultiSelect}
@@ -267,80 +217,70 @@ export const AdditionalInfo = ({ shopData }) => {
                   options={reparationLocationOptions}
                 />
               </Row>
-            ) : (
-              shopData?.reparationOption.map((id) => (
-                <div>
-                  {find(reparationLocationOptions, ["value", +id])?.label}
-                </div>
-              ))
-            )}
-          </Col>
-        </Row>
+            </Col>
+          </Row>
 
-        <Row style={rowStyle} type="flex" justify="space-between">
-          <Col span={6}>
-            <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-              Beschikbare reparaties
-            </Text.Body>
-          </Col>
-          <Col span={18}>
-            {editing ? (
+          <Row style={rowStyle} type="flex" justify="space-between">
+            <Col span={6}>
+              <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                Beschikbare reparaties
+              </Text.Body>
+            </Col>
+            <Col span={18}>
               <Field
                 adminInput
                 as={MultiSelect}
                 name="purchases"
-                options={reparations.map((reparation) => ({
-                  label: reparation.reparation_name,
-                  value: reparation.id,
+                options={purchases.map((purchase) => ({
+                  label: purchase.purchaseName,
+                  value: purchase.id,
                 }))}
               />
-            ) : (
-              <div>
-                {reparations
-                  .filter((shopPurchase) =>
-                    shopData?.ShopPurchase.includes(shopPurchase.id)
-                  )
-                  .map((shopPurchase) => (
-                    <Tag color="green">{shopPurchase.reparation_name}</Tag>
-                  ))}
-              </div>
-            )}
-          </Col>
-        </Row>
+            </Col>
+          </Row>
 
-        <Row style={rowStyle} type="flex" justify="space-between">
-          <Col span={6}>
-            <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-              Vervangend toestel
-            </Text.Body>
-          </Col>
-          <Col span={18}>
-            {editing ? (
+          <Row style={rowStyle} type="flex" justify="space-between">
+            <Col span={6}>
+              <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                Parking Area
+              </Text.Body>
+            </Col>
+            <Col span={18}>
+              <Field
+                adminInput
+                as={MultiSelect}
+                name="parkingArea"
+                options={parkingAreaOptions.map((option) => ({
+                  label: option?.label,
+                  value: option?.value,
+                }))}
+              />
+            </Col>
+          </Row>
+          <Row style={rowStyle} type="flex" justify="space-between">
+            <Col span={6}>
+              <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                Vervangend toestel
+              </Text.Body>
+            </Col>
+            <Col span={18}>
               <Field
                 adminInput
                 simple
                 as={Switch}
-                defaultChecked={
-                  shopData?.temporaryReplacement === 1 ? true : false
-                }
+                defaultChecked={shopData?.temporaryReplacement}
                 name="temporaryReplacement"
               />
-            ) : shopData?.temporaryReplacement === 0 ? (
-              "Nee"
-            ) : (
-              "Ja"
-            )}
-          </Col>
-        </Row>
+            </Col>
+          </Row>
 
-        <Row style={rowStyle} type="flex" justify="space-between">
-          <Col span={6}>
-            <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
-              Wachtruimte
-            </Text.Body>
-          </Col>
-          <Col span={18}>
-            {editing ? (
+          <Row style={rowStyle} type="flex" justify="space-between">
+            <Col span={6}>
+              <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                Wachtruimte
+              </Text.Body>
+            </Col>
+            <Col span={18}>
               <Field
                 adminInput
                 simple
@@ -348,12 +288,186 @@ export const AdditionalInfo = ({ shopData }) => {
                 defaultChecked={shopData.waitingArea === "No" ? false : true}
                 name="waitingArea"
               />
-            ) : (
-              shopData?.waitingArea
-            )}
-          </Col>
-        </Row>
-      </Form>
+            </Col>
+          </Row>
+
+          <Row style={rowStyle} type="flex" justify="space-between">
+            <Col span={6}>
+              <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                Insurance
+              </Text.Body>
+            </Col>
+            <Col span={18}>
+              <Field
+                adminInput
+                simple
+                as={Switch}
+                defaultChecked={shopData.insurance}
+                name="insurance"
+              />
+            </Col>
+          </Row>
+        </Form>
+      ) : (
+        <div>
+          <Form module={shopManagementAdditionalForm} onSubmit={onSubmit}>
+            <Row type="flex" justify="space-between" align="middle">
+              <Col>
+                <HeaderSmallText>Algemene informatie</HeaderSmallText>
+              </Col>
+              <Col>
+                <Button type="primary" onClick={onEdit}>
+                  Wijzigen
+                </Button>
+              </Col>
+            </Row>
+            <Divider />
+            <Row style={rowStyle} type="flex" justify="space-between">
+              <Col span={6}>
+                <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                  Apparaten
+                </Text.Body>
+              </Col>
+              <Col span={18}>
+                <div>
+                  {devices
+                    .filter((device) =>
+                      shopData?.replacementDevices?.includes(device?.id || 0)
+                    )
+                    .map((device) => {
+                        return (
+                          <img
+                            width="40px"
+                            height="40px"
+                            src={device?.device_image || ""}
+                          />
+                        );
+
+                      return <></>;
+                    })}
+                </div>
+              </Col>
+            </Row>
+
+            <Row style={rowStyle} type="flex" justify="space-between">
+              <Col span={6}>
+                <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                  Merken
+                </Text.Body>
+              </Col>
+              <Col span={18}>
+                <div>
+                  {brands
+                    .filter((brand) =>
+                      shopData?.cateredBrand?.includes(brand.id)
+                    )
+                    .map((brand) => (
+                      <Tag color="green">{brand.brand_name}</Tag>
+                    ))}
+                </div>
+              </Col>
+            </Row>
+
+            <Row style={rowStyle} type="flex" justify="space-between">
+              <Col span={6}>
+                <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                  Betaal methoden
+                </Text.Body>
+              </Col>
+              <Col span={18}>
+                <div>
+                  {additionalInfoOptions.paymentMethods
+                    .filter((item) =>
+                      shopData?.paymentMethod?.includes(item.value)
+                    )
+                    .map((item) => (
+                      <Tag color="blue">{item.label}</Tag>
+                    ))}
+                </div>
+              </Col>
+            </Row>
+
+            <Row style={rowStyle} type="flex" justify="space-between">
+              <Col span={6}>
+                <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                  Locatie opties
+                </Text.Body>
+              </Col>
+              <Col span={18}>
+                {shopData?.reparationOption.map((id) => (
+                  <Tag color="green">
+                    {find(reparationLocationOptions, ["value", +id])?.label}
+                  </Tag>
+                ))}
+              </Col>
+            </Row>
+
+            <Row style={rowStyle} type="flex" justify="space-between">
+              <Col span={6}>
+                <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                  Beschikbare reparaties
+                </Text.Body>
+              </Col>
+              <Col span={18}>
+                <div>
+                  {purchases
+                    .filter((shopPurchase) =>
+                      shopData?.ShopPurchase.includes(shopPurchase.id)
+                    )
+                    .map((shopPurchase) => (
+                      <Tag color="green">{shopPurchase.purchaseName}</Tag>
+                    ))}
+                </div>
+              </Col>
+            </Row>
+
+            <Row style={rowStyle} type="flex" justify="space-between">
+              <Col span={6}>
+                <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                  Parking Area
+                </Text.Body>
+              </Col>
+              <Col span={18}>
+                <div>
+                  {parkingAreaOptions
+                    .filter((option) =>
+                      shopData?.parkingArea.includes(option.value?.toString())
+                    )
+                    .map((option) => (
+                      <Tag color="green">{option.label}</Tag>
+                    ))}
+                </div>
+              </Col>
+            </Row>
+            <Row style={rowStyle} type="flex" justify="space-between">
+              <Col span={6}>
+                <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                  Vervangend toestel
+                </Text.Body>
+              </Col>
+              <Col span={18}>
+                {shopData?.temporaryReplacement ? "Ja" : "Nee"}
+              </Col>
+            </Row>
+            <Row style={rowStyle} type="flex" justify="space-between">
+              <Col span={6}>
+                <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                  Wachtruimte
+                </Text.Body>
+              </Col>
+              <Col span={18}>{shopData?.waitingArea ? "Yes" : "No"}</Col>
+            </Row>
+            <Row style={rowStyle} type="flex" justify="space-between">
+              <Col span={6}>
+                <Text.Body size="14" weight="bold" style={{ margin: 0 }}>
+                  Insurance
+                </Text.Body>
+              </Col>
+              <Col span={18}>{shopData?.insurance ? "Yes" : "No"}</Col>
+            </Row>
+          </Form>
+        </div>
+      )}
     </>
   );
 };

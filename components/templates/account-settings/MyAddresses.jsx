@@ -38,16 +38,51 @@ const DURATION_OPTIONS = [
 ];
 
 const LOCATIONS_OPTIONS = [
-  { label: "Fysieke werkplaats", value: "0" },
+  { label: "Fysieke werkplaats", value: "1" },
   {
     label: "Mobiele werkplaats (reparatie op locatie)",
-    value: "1",
+    value: "2",
   },
-  { label: "Allebei", value: "2" },
+  { label: "Allebei", value: "1,2" },
 ];
 
 export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
   const [currentAddress, setCurrentAddress] = useState("");
+  const handleOnLocationSelected = (geo) => {
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${geo.lat},${geo.long}&key=AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE`
+      )
+      .then((res) => {
+        if (res.data.results.length !== 0) {
+          const data = {
+            city: "",
+            st_number: "",
+            street: "",
+            country: "",
+            zip: "",
+          };
+          res.data.results[0].address_components.forEach((comp) => {
+            if (comp.types.includes("route")) {
+              data.street = comp.long_name;
+            }
+            if (comp.types.includes("street_number")) {
+              data.st_number = comp.long_name;
+            }
+            if (comp.types.includes("country")) {
+              data.country = comp.long_name;
+            }
+            if (comp.types.includes("locality")) {
+              data.city = comp.long_name;
+            }
+            if (comp.types.includes("postal_code")) {
+              data.zip = comp.long_name;
+            }
+          });
+          onLocationUpdate(data);
+        }
+      });
+  };
 
   return (
     <BoxWrapper>
@@ -73,7 +108,7 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                 <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
                   <Field
                     adminInput
-                    name="address_type"
+                    name="shop_type"
                     as={Select}
                     placeholder="Kies je locatie type"
                     label="Locatie type"

@@ -37,6 +37,13 @@ export const getReparations = dataFetcher({
   },
 });
 
+export const getPurchases = dataFetcher({
+  selectors: [""],
+  fetchData() {
+    return privateApi.get(`${API_PATH.GETPURCAHSES}/`);
+  },
+});
+
 export const shopInfoFetcher = dataFetcher({
   selectors: [],
   async fetchData() {
@@ -119,7 +126,6 @@ export const shopManagementGeneralForm = createFormModule({
     const fetchedData = await privateApi.get(
       `${API_PATH.ACCOUNTSETTING}/${id}`
     );
-    console.log("FD", fetchedData);
     return {
       about_us: fetchedData.about_us || "",
       phone_number: fetchedData.phone_number || "",
@@ -152,20 +158,22 @@ export const shopManagementAdditionalForm = createFormModule({
     const shopInfoData = await privateApi.get(
       `${API_PATH.GETSHOPGENERALINFO}/${shopId}/`
     );
+
     if (shopInfoData.length !== 0) {
       return {
         devices: shopInfoData[0].replacementDevices || [],
-        brands: shopInfoData[0].cateredBrand.map((id) => id.toString()) || [],
+        brands: shopInfoData[0].cateredBrand?.map((id) => id.toString()) || [],
+        cateredBrand: shopInfoData[0].cateredBrand?.map((id) => id.toString()) || [],
         payMethod: shopInfoData[0].paymentMethod || [],
         purchases:
-          shopInfoData[0].ShopPurchase.map((id) => id.toString()) || [],
+          shopInfoData[0]?.ShopPurchase?.map((id) => id.toString()) || [],
         temporaryReplacement: !!shopInfoData[0].temporaryReplacement,
         waitingArea: shopInfoData[0].waitingArea,
         reparationOption:
-          shopInfoData[0].reparationOption.map((id) => id.toString()) || [],
-        services: shopInfoData[0].services || [],
-        parkingArea: shopInfoData[0].parkingArea || [],
-        insurance: shopInfoData[0].insurance || [],
+          shopInfoData[0]?.reparationOption?.map((id) => id.toString()) || [],
+        services: shopInfoData[0]?.services || [],
+        parkingArea: shopInfoData[0]?.parkingArea || [],
+        insurance: shopInfoData[0]?.insurance,
       };
     }
 
@@ -177,15 +185,16 @@ export const shopManagementAdditionalForm = createFormModule({
       `${API_PATH.UPDATESHOPGENERALINFO}/${shop}/`,
       {
         payMethod: data.payMethod.map((id) => +id),
-        repairOption: data.purchases.map((id) => +id),
+        repairOption: data.reparationOption.map((id) => +id),
         services: "",
         waitingArea: data.waitingArea ? 1 : 0,
         temporaryReplacement: data.temporaryReplacement ? 1 : 0,
-        parkingArea: [1, 2],
-        insurance: 0,
+        parkingArea: data?.parkingArea?.map((id) => +id),
+        insurance: data?.insurance,
         devices: data.devices.map((id) => +id),
         brands: data.brands.map((id) => +id),
-        purchases: [],
+        cateredBrand: data.brands.map((id) => +id),
+        purchases: data.purchases.map((b) => parseInt(b)),
       }
     );
 

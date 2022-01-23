@@ -33,4 +33,4 @@ export const H1 = styled.h1`
   color: #303030;
   font-weight: 400;
   font-family: "Montserrat";
- `;
+`;

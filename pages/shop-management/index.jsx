@@ -2,6 +2,7 @@ import { DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import { Col, Modal, Row, Tabs, Tag } from "antd";
 import React, { useEffect, useState } from "react";
 
+import { Text } from "@/components/common/Text/Text";
 import DefaultLayout from "@/components/layouts/Dashboard";
 import { AdditionalInfo } from "@/components/templates/shop-management/AdditionalInfo";
 import { GeneralInfo } from "@/components/templates/shop-management/GeneralInfo";
@@ -93,7 +94,7 @@ const { TabPane } = Tabs;
 
 export default function ShopManagementPage() {
   const [activeTab, setActiveTab] = useState("profile-settings");
-  const [shopInfo, setShopInfo] = useState();
+  const [shopInfo, setShopInfo] = useState(null);
   const [shopData, setShopData] = useState();
   const [nonWorkingDays, setNonWorkingDays] = useState();
   const [nonWorkingDaysLoading, setNonWorkingDaysLoading] = useState(false);
@@ -104,16 +105,14 @@ export default function ShopManagementPage() {
     async function loadData() {
       const user = await currentUser.fetch();
       setUser(user);
-      const shopInfo = await shopInfoFetcher.fetch();
       setShopData(await shopManagementGeneralInfo.fetch());
       setNonWorkingDays(await getShopNonWorkingDays.fetch());
       setValidOpenTime(await getValidOpenTime.fetch());
-      if (shopInfo.length !== 0) {
-        setShopInfo(shopInfo[0]);
+      const shopInfoData = await shopInfoFetcher.fetch();
+      if (shopInfoData && shopInfoData.length){
+        setShopInfo(shopInfoData[0]);
       }
-      await shopManagementAdditionalForm.actions.initialize(user.account_id);
     }
-
     loadData();
   }, []);
 
@@ -157,7 +156,6 @@ export default function ShopManagementPage() {
           <TabPane tab="Profiel" key="profile-settings">
             <>
               <ImageSection shopData={shopData} authUser={user} />
-
               <Row>
                 <Col span={4}></Col>
                 <Col span={20}>
@@ -167,9 +165,13 @@ export default function ShopManagementPage() {
                       setShopData={setShopData}
                     />
                   </BoxWrapper>
-
                   <BoxWrapper padding>
-                    <AdditionalInfo shopData={shopInfo} />
+                    {
+                      shopInfo && 
+                      <AdditionalInfo
+                        shopData={shopInfo}
+                        setShopData={setShopInfo}
+                    />}
                   </BoxWrapper>
                 </Col>
               </Row>

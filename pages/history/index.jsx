@@ -45,15 +45,14 @@ const MobileContent = styled.div`
 `;
 
 const AntdInput = styled(Input)`
-  .ant-input-suffix{
+  .ant-input-suffix {
     right: 4px;
   }
-  .arrow-svg{
+  .arrow-svg {
     margin-left: 5px;
   }
   font-size: 12px;
 `;
-
 
 export default function HistoryPage({ auth_user }) {
   const [loading, setLoading] = useState(false);

@@ -1,7 +1,5 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Icon } from "antd";
-import Link from "next/link";
 import React, { useMemo } from "react";
 import styled, { css } from "styled-components";
 
@@ -102,7 +100,11 @@ export function DeviceFinder({
       if (accumulator.find((existing) => existing.name === model.device_name)) {
         return accumulator;
       }
-      accumulator.push({ name: model.device_name, id: model.device_id });
+      accumulator.push({
+        name: model.device_name,
+        id: model.device_id,
+        slug: model.slug,
+      });
 
       return accumulator;
     }, []);
@@ -110,14 +112,18 @@ export function DeviceFinder({
 
   const brands = useMemo(() => {
     return models.reduce((accumulator, model) => {
-      if (model.device_name !== deviceName) {
+      if (model.slug !== deviceName) {
         return accumulator;
       }
 
       if (accumulator.find((existing) => existing.name === model.brand_name)) {
         return accumulator;
       }
-      accumulator.push({ name: model.brand_name, id: model.brand_id });
+      accumulator.push({
+        name: model.brand_name,
+        id: model.brand_id,
+        slug: model.brand_slug,
+      });
 
       return accumulator;
     }, []);
@@ -126,9 +132,9 @@ export function DeviceFinder({
   function renderDevice(brand) {
     return (
       <DeviceWrap
-        href={`/devices/${brand.name}`}
+        href={`/devices/${brand.slug}`}
         key={brand.id}
-        isSelected={deviceName === brand.name}
+        isSelected={deviceName === brand.slug}
       >
         {brand.name}
       </DeviceWrap>
@@ -138,7 +144,7 @@ export function DeviceFinder({
   function renderBrand(brand) {
     return (
       <BrandWrap
-        href={`/devices/${deviceName}/${brand.name}`}
+        href={`/devices/${deviceName}/${brand.slug}`}
         key={brand.id}
         isSelected={brandName === brand.name}
       >
