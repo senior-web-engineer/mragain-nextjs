@@ -1,7 +1,7 @@
-import media from "@/utils/media";
 import React, { useMemo } from "react";
 import styled from "styled-components";
 
+import media from "@/utils/media";
 
 const ModelsWrap = styled.div`
   background-color: #fff;
@@ -45,8 +45,7 @@ export default function DeviceModels({
     }
 
     return models.filter(
-      (model) =>
-        model.brand_slug === brandName && model.slug === deviceName
+      (model) => model.brand_slug === brandName && model.slug === deviceName
     );
   }, [models, brandName, searchTerm]);
 

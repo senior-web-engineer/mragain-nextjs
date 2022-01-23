@@ -63,8 +63,7 @@ export default function ShopManagementPage() {
 
   return (
     <DefaultLayout>
-      <Row type="flex" justify="space-between" align="middle">
-      </Row>
+      <Row type="flex" justify="space-between" align="middle"></Row>
       <OnMobile only>
         <h5>
           <b>Profiel beheer is nog niet beschikbaar op je mobiel.</b>

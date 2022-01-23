@@ -48,8 +48,7 @@ export default function RepairManagementPage() {
 
   return (
     <DefaultLayout>
-      <Row type="flex" justify="space-between" align="middle">
-      </Row>
+      <Row type="flex" justify="space-between" align="middle"></Row>
       <Tabs defaultActiveKey={activeTab} onChange={onTabChange}>
         <TabPane tab="Algemeen" key="general">
           <Row>

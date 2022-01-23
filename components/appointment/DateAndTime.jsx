@@ -48,6 +48,10 @@ const DatePickerWrap = styled.div`
     margin-bottom: 0;
   }
 
+  &&&&& .ant-select {
+    width: auto;
+  }
+
   .ant-radio-group {
     display: none;
   }
@@ -325,11 +329,14 @@ function TimePicker({ value, onChange }) {
   );
 }
 
-export default function DateAndTime({required = true}) {
+export default function DateAndTime({ required = true }) {
   return (
     <DatePickerWrap>
       <header>
-        <SubTitle>Kies een dag en tijd voor je reparatie {required ? '' : '(Let op: dit kan nog wijzigen)'}</SubTitle>
+        <SubTitle>
+          Kies een dag en tijd voor je reparatie{" "}
+          {required ? "" : "(Let op: dit kan nog wijzigen)"}
+        </SubTitle>
       </header>
       <SchedueleContentWrap>
         <Field
@@ -339,6 +346,11 @@ export default function DateAndTime({required = true}) {
             appointmentForm.actions.onFieldChange({ name: "date", value });
             appointmentForm.actions.onFieldChange({ name: "time", value: "" });
           }}
+          css={`
+            & .ant-select.ant-fullcalendar-year-select.ant-select-sm {
+              background: papayawhip;
+            }
+          `}
         />
         <Field name="time" as={TimePicker} />
       </SchedueleContentWrap>
