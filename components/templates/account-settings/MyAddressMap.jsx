@@ -4,8 +4,13 @@ import React, { useEffect, useState } from "react";
 
 const KEY = "AIzaSyBE2P-vg2-gzleHsoAYa7pesL7CLpPpISE";
 
-const MyAddressMap = ({ google, onLocationUpdate, marker }) => {
-  const selectedPlace = "ABC";
+const MyAddressMap = ({
+  google,
+  onLocationUpdate,
+  marker,
+  selectedAddress,
+  children,
+}) => {
   const [center, setCenter] = useState({ lat: 52.378356, lng: 4.906071 });
 
   const [showingInfoWindow, setShowingInfoWindow] = useState(false);
@@ -14,20 +19,24 @@ const MyAddressMap = ({ google, onLocationUpdate, marker }) => {
 
   useEffect(() => {
     if (marker) {
-      console.log("MARKER", marker);
       setMarkers([marker]);
       setCenter(marker);
     }
   }, []);
 
+  const onPlacesSearch = (data) => {
+    const searchedMarker = { lat: data.lat, lng: data.lng };
+    setMarkers([searchedMarker]);
+    setCenter(searchedMarker);
+    handleOnLocationSelected(searchedMarker);
+  };
+
   const handleOnLocationSelected = (geo) => {
-    console.log("GEO", geo);
     axios
       .get(
         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${geo.lat},${geo.lng}&key=${KEY}`
       )
       .then((res) => {
-        console.log("RES", res);
         if (res.data.results.length !== 0) {
           const data = {
             city: "",
@@ -66,23 +75,16 @@ const MyAddressMap = ({ google, onLocationUpdate, marker }) => {
   };
 
   const onInfoWindowClose = (data) => {
-    console.log(data);
     setActiveMarker(null);
     setShowingInfoWindow(false);
   };
 
   const onMarkerClick = (data, marker) => {
-    console.log(data, marker);
     setActiveMarker(marker);
     setShowingInfoWindow(true);
   };
 
   const onMapClick = (props, data, location) => {
-    console.log(props, data, location.latLng.lat(), location.latLng.lng());
-    // setMarkers([
-    //   ...markers,
-    //   { lat: location.latLng.lat(), lng: location.latLng.lng() },
-    // ]);
     const latLng = { lat: location.latLng.lat(), lng: location.latLng.lng() };
     handleOnLocationSelected(latLng);
     setMarkers([latLng]);
@@ -93,25 +95,26 @@ const MyAddressMap = ({ google, onLocationUpdate, marker }) => {
       <Map
         google={google}
         initialCenter={center}
+        center={center}
         zoom={10}
         onClick={onMapClick}
       >
+        <div>AAA{children(onPlacesSearch)}</div>
         {markers.map((marker, index) => (
           <Marker
-            ket={`marker-${index}`}
+            key={`marker-${index}`}
             position={marker}
             onClick={onMarkerClick}
             name={"Current location"}
           />
         ))}
-
         <InfoWindow
           marker={activeMarker}
           visible={showingInfoWindow}
           onClose={onInfoWindowClose}
         >
           <div>
-            <h1>{selectedPlace}</h1>
+            <h5>{selectedAddress}</h5>
           </div>
         </InfoWindow>
       </Map>
