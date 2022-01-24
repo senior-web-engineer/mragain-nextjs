@@ -171,42 +171,42 @@ const FooterView = (routerProps) => {
                 <FollowUsTitle>steden</FollowUsTitle>
                 <ul>
                   <li>
-                    <Link prefetch={false} href="/">
+                    <Link prefetch={false} href="/amsterdam">
                       Amsterdam
                     </Link>
                   </li>
                   <li>
-                    <Link prefetch={false} href="/over-ons">
+                    <Link prefetch={false} href="/rotterdam">
                       Rotterdam
                     </Link>
                   </li>
                   <li>
-                    <Link prefetch={false} href="/reparatie">
+                    <Link prefetch={false} href="/den-haag">
                       Den Haag
                     </Link>
                   </li>
                   <li>
-                    <Link prefetch={false} href="/meld-je-aan-als-reparateur">
+                    <Link prefetch={false} href="/utrecht">
                       Utrecht
                     </Link>
                   </li>
                   <li>
-                    <Link prefetch={false} href="/contact-met-mragain">
+                    <Link prefetch={false} href="/groningen">
                       Groningen
                     </Link>
                   </li>
                   <li>
-                    <Link prefetch={false} href="/veel-gestelde-vragen">
+                    <Link prefetch={false} href="/den-bosch">
                       Den Bosch
                     </Link>
                   </li>
                   <li>
-                    <Link prefetch={false} href="/blog">
+                    <Link prefetch={false} href="/tilburg">
                       Tilburg
                     </Link>
                   </li>
                   <li>
-                    <Link prefetch={false} href="/blog">
+                    <Link prefetch={false} href="/maastricht">
                       Maastricht
                     </Link>
                   </li>
@@ -218,17 +218,17 @@ const FooterView = (routerProps) => {
                 <FooterSitemapTitle>Zoek je device</FooterSitemapTitle>
                 <ul>
                   <li>
-                    <Link prefetch={false} href="/over-ons">
+                    <Link prefetch={false} href="/devices/smartphone">
                       Smartphones
                     </Link>
                   </li>
                   <li>
-                    <Link prefetch={false} href="/reparatie">
+                    <Link prefetch={false} href="/devices/tablet">
                       Tablets
                     </Link>
                   </li>
                   <li>
-                    <Link prefetch={false} href="/meld-je-aan-als-reparateur">
+                    <Link prefetch={false} href="/devices/laptop">
                       Laptops
                     </Link>
                   </li>
@@ -238,17 +238,17 @@ const FooterView = (routerProps) => {
                 <FollowUsTitle>Reparaties</FollowUsTitle>
                 <ul>
                   <li>
-                    <Link prefetch={false} href="/">
+                    <Link prefetch={false} href="/devices/smartphone">
                       Telefoon reparatie
                     </Link>
                   </li>
                   <li>
-                    <Link prefetch={false} href="/over-ons">
+                    <Link prefetch={false} href="/devices/tablet">
                       Tablet reparatie
                     </Link>
                   </li>
                   <li>
-                    <Link prefetch={false} href="/reparatie">
+                    <Link prefetch={false} href="/devices/laptop">
                       Laptop reparatie
                     </Link>
                   </li>
@@ -298,7 +298,7 @@ const FooterView = (routerProps) => {
       </FooterViewContainer>
       <FooterCopyright>
         {" "}
-        Copyright @ 2021 MrAgain - info@mragain.nl{" "}
+        Copyright @ 2022 MrAgain - info@mragain.nl{" "}
       </FooterCopyright>
       {!!notBot && <CookieBanner />}
     </FooterViewSection>
