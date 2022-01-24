@@ -1,7 +1,9 @@
 @import '../../../assets/styles/variables.less';
 .footer-link-area ul {
   color: #06c987;
-  padding-left: 19px;
+  list-style: none;
+  padding-left: 0;
+  
   a {
     color: #fff;
     height: 40px;
@@ -27,30 +29,22 @@
     background-color: #fff;
     border-radius: 50%;
   }
-  
-  .facebook {
-    .anticon {
-      right: 26%
-    }
-  }
-  
-  .linkedin {
-    .anticon {
-      background-color: @green-color;
-      color: #fff;
-      border-radius: 50%;
-    }
-  }
-  
-  .instagram {
-    .anticon {
-      border-radius: 23%;
-    }
-  }
 }
 
 .footer-link-area .follow-us ul {
   padding-left: 0px;
+}
+
+.footer-link-area .follow-us ul a {
+  color: #BDD6CD;
+}
+
+.footer-link-area ul li {
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .follow-us ul li {
@@ -59,8 +53,27 @@
 }
 
 .footer-brand-content {
-  color: #fff;
+  color: #BDD6CD;
   font-size: 15px;
+  width: 80%;
+  @media (max-width: 768px) {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.footer-mobile-social {
+  @media (max-width: 768px) {
+    display: block;
+  }
+  display: none;
+}
+
+.footer-web-social {
+  @media (max-width: 768px) {
+    display: none;
+  }
+  display: block;
 }
 
 
