@@ -298,7 +298,11 @@ const FooterView = (routerProps) => {
       </FooterViewContainer>
       <FooterCopyright>
         {" "}
+<<<<<<< HEAD
         Copyright @ 2022 MrAgain - info@mragain.nl{" "}
+=======
+        Copyright @ ${new Date().getFullYear()} MrAgain - info@mragain.nl{" "}
+>>>>>>> develop
       </FooterCopyright>
       {!!notBot && <CookieBanner />}
     </FooterViewSection>

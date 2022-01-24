@@ -38,6 +38,9 @@ export default function RepairManagementPage() {
         zipcode: data.zip,
         city: data.city,
         country: data.country,
+        address: data.address,
+        geo_lat: data.geo_lat,
+        geo_long: data.geo_long,
       },
     });
   };

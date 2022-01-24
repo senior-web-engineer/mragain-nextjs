@@ -1,5 +1,5 @@
 import { Button, Col, Divider, Row } from "antd";
-import axios from "axios";
+import { GoogleApiWrapper, InfoWindow, Map, Marker } from "google-maps-react";
 import React, { useState } from "react";
 
 import GooglePlaces from "@/components/common/GooglePlaces";
@@ -8,6 +8,8 @@ import Select from "@/components/ui/Select";
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
 
+import MyAddressMap from "./MyAddressMap";
+import LocationSearchInput from "./PlacesSearch";
 import {
   BoxWrapper,
   BoxWrapperContent,
@@ -46,6 +48,7 @@ const LOCATIONS_OPTIONS = [
 ];
 
 export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
+  const [currentAddress, setCurrentAddress] = useState("");
   const handleOnLocationSelected = (geo) => {
     axios
       .get(
@@ -117,79 +120,45 @@ export const MyAddresses = ({ basicSettingsForm, onLocationUpdate }) => {
                 </Col>
               </Row>
               <Row gutter={[16, 0]}>
-                <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
-                  <Field
-                    adminInput
-                    name="city"
-                    as={GooglePlaces}
-                    label="Stad"
-                    onLocationSelected={handleOnLocationSelected}
-                    customLabel
-                    searchOptions={{
-                      componentRestrictions: {
-                        country: ["nl", "be"],
-                      },
-                      types: ["(cities)"],
+                <Col>
+                  <div style={{ marginBottom: "20px" }}>
+                    <b>Huidig adres:</b>{" "}
+                    {currentAddress || basicSettingsForm.state.values?.address}
+                  </div>
+
+                  <MyAddressMap
+                    selectedAddress={
+                      currentAddress || basicSettingsForm.state.values?.address
+                    }
+                    marker={{
+                      lat: basicSettingsForm.state.values?.geo_lat,
+                      lng: basicSettingsForm.state.values?.geo_long,
                     }}
-                    size="small"
-                  />
-                </Col>
-                <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
-                  <Field
-                    name="street"
-                    adminInput
-                    as={GooglePlaces}
-                    label="Straat"
-                    customLabel
-                    onLocationSelected={handleOnLocationSelected}
-                    searchOptions={{
-                      componentRestrictions: {
-                        country: ["nl", "be"],
-                      },
-                      types: ["address"],
+                    onLocationUpdate={(data) => {
+                      onLocationUpdate(data);
+                      setCurrentAddress(data.address);
                     }}
-                    size="small"
-                  />
+                  >
+                    {(onPlacesSearch) => (
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "60px",
+                          left: "10px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: "250px",
+                          }}
+                        >
+                          <LocationSearchInput onSelect={onPlacesSearch} />
+                        </div>
+                      </div>
+                    )}
+                  </MyAddressMap>
                 </Col>
               </Row>
-              <Col>
-                <Row gutter={[16, 0]}>
-                  <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
-                    <Field
-                      adminInput
-                      name="zipcode"
-                      as={Input}
-                      label="Postcode"
-                      customLabel
-                      size="small"
-                    />
-                  </Col>
-                  <Col xxl={{ span: 12 }} lg={{ span: 12 }} md={{ span: 24 }}>
-                    <Field
-                      adminInput
-                      name="st_number"
-                      as={Input}
-                      disabled={!basicSettingsForm.state?.values?.zipcode}
-                      label="Huisnummer"
-                      customLabel
-                      size="small"
-                    />
-                  </Col>
-                </Row>
-              </Col>
-              {/* <Row>
-                <Col xxl={{ span: 8 }} lg={{ span: 12 }} md={{ span: 24 }}>
-                  <Field
-                    adminInput
-                    name="intervals"
-                    as={Select}
-                    label="Tijd per afspraak"
-                    size="small"
-                    options={DURATION_OPTIONS}
-                    allowClear
-                  />
-                </Col>
-              </Row> */}
             </BoxWrapperContent>
             <Divider />
             <ButtonsWrapper>

@@ -1,4 +1,4 @@
-import { Row, Table, Tag } from "antd";
+import { Col, Row, Table, Tag } from "antd";
 import styled from "styled-components";
 
 export const rowStyle = {
@@ -16,11 +16,17 @@ export const ContactInfo = styled.div`
   }
 `;
 
+export const HeaderLargeText = styled.h3`
+  font-size: 16px;
+  line-height: 16px;
+  margin: 0;
+`;
+
 export const HeaderSmallText = styled.p`
   display: block;
-  font-size: 12px;
-  line-height: 10px;
-  color: #3090b4;
+  font-size: 11px;
+  line-height: 16px;
+  color: #909090;
   margin: 0;
 `;
 
@@ -137,12 +143,11 @@ export const HoursEditor = styled.div`
 
 export const HoursEditorTitle = styled.div`
   width: 100%;
-  padding: 26px 0 10px 0;
+  padding: 38px 0 20px 0;
   margin: 0;
   letter-spacing: 0.05em;
-  font-size: 14px;
-  text-transform: uppercase;
-  color: #707070;
+  font-size: 12px;
+  color: #909090;
 `;
 
 export const PaddingWrapper = styled.div`
@@ -172,7 +177,18 @@ export const ListItemWrapper = styled.div`
   }
 `;
 
+export const TableSection = styled.div`
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+`;
+
 export const TableWrapper = styled(Table)`
+  .ant-table {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    overflow: hidden;
+  }
   .ant-table-tbody {
     background: white;
   }
@@ -183,5 +199,34 @@ export const TagWrapper = styled(Tag)`
 `;
 
 export const Action = styled.a`
-  color: #0077cc;
+  color: blue;
+`;
+
+export const ActionList = styled.a`
+  color: gray;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f0;
+
+  &:hover {
+    color: white;
+    background: ${(props) => props.color || "#ed5556"};
+  }
+`;
+
+export const DateWrapper = styled(Col)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const DateText = styled(HoursEditorTitle)`
+  margin: 0;
+  margin-right: 6px;
+  width: 60px;
+  padding: 0;
 `;
