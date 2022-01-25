@@ -118,6 +118,7 @@ function CalendarField({ value, onChange }) {
   const invalidTimes = useFetcher({ dataFetcher: invalidTimeFetcher });
   const openedTimes = useFetcher({ dataFetcher: openTimeFetcher });
 
+
   const shortDays = useMemo(() => {
     if (!invalidTimes.data) {
       return [];
@@ -146,7 +147,7 @@ function CalendarField({ value, onChange }) {
           ["gesloten", "closed"].includes(
             openedTimes?.data?.[DAYS_OF_WEEK[day - 1]]?.toLowerCase()
           );
-        return isClosed;
+        return false;
       }}
       onSelect={(value) => onChange(moment(value).toString())}
       onPanelChange={(value) => onChange(moment(value).toString())}
@@ -344,7 +345,6 @@ export default function DateAndTime({ required = true }) {
           as={CalendarField}
           onChange={(value) => {
             appointmentForm.actions.onFieldChange({ name: "date", value });
-            appointmentForm.actions.onFieldChange({ name: "time", value: "" });
           }}
           css={`
             & .ant-select.ant-fullcalendar-year-select.ant-select-sm {
