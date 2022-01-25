@@ -66,7 +66,7 @@ const Login = () => {
 
   let title = "Inloggen bij MrAgain | MrAgain";
   let description =
-    "Inloggen bij MrAgai? Snel en eenvoudig inzicht in al je reparaties | MrAgain";
+    "Inloggen bij MrAgain? Snel en eenvoudig inzicht in al je reparaties | MrAgain";
   let url = `${FRONT_END_URL}/login`;
 
   const tokenConfig1 = (token) => {
