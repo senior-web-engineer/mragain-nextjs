@@ -118,7 +118,6 @@ function CalendarField({ value, onChange }) {
   const invalidTimes = useFetcher({ dataFetcher: invalidTimeFetcher });
   const openedTimes = useFetcher({ dataFetcher: openTimeFetcher });
 
-
   const shortDays = useMemo(() => {
     if (!invalidTimes.data) {
       return [];
@@ -133,7 +132,6 @@ function CalendarField({ value, onChange }) {
   return (
     <Calendar
       fullscreen={false}
-      value={moment(value)}
       disabledDate={(date) => {
         const now = moment();
         const isBefore = date.isBefore(now);
@@ -147,7 +145,7 @@ function CalendarField({ value, onChange }) {
           ["gesloten", "closed"].includes(
             openedTimes?.data?.[DAYS_OF_WEEK[day - 1]]?.toLowerCase()
           );
-        return false;
+        return isClosed;
       }}
       onSelect={(value) => onChange(moment(value).toString())}
       onPanelChange={(value) => onChange(moment(value).toString())}
@@ -344,6 +342,7 @@ export default function DateAndTime({ required = true }) {
           name="date"
           as={CalendarField}
           onChange={(value) => {
+            console.log(value);
             appointmentForm.actions.onFieldChange({ name: "date", value });
           }}
           css={`
