@@ -132,7 +132,6 @@ function CalendarField({ value, onChange }) {
   return (
     <Calendar
       fullscreen={false}
-      value={moment(value)}
       disabledDate={(date) => {
         const now = moment();
         const isBefore = date.isBefore(now);
@@ -343,8 +342,8 @@ export default function DateAndTime({ required = true }) {
           name="date"
           as={CalendarField}
           onChange={(value) => {
+            console.log(value);
             appointmentForm.actions.onFieldChange({ name: "date", value });
-            appointmentForm.actions.onFieldChange({ name: "time", value: "" });
           }}
           css={`
             & .ant-select.ant-fullcalendar-year-select.ant-select-sm {

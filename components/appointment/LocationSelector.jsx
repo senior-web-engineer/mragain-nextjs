@@ -33,7 +33,7 @@ export const LOCATION_OPTIONS = [
 export function getLocationOptions(shop) {
   return LOCATION_OPTIONS.map((option) => ({
     ...option,
-    disabled: !shop.shop_type.includes(option.apiValue),
+    disabled: !shop.shop_type?.includes(option.apiValue),
   }));
 }
 

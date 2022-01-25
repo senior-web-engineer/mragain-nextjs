@@ -686,15 +686,14 @@ function ShopPrice({ item }) {
 
 function ShopItem({ item }) {
   const router = useRouter();
-  const { selectedShop, updateSelectedShop, showMap } =
-    useContext(ShopBridgeContext);
+  const { selectedShop, updateSelectedShop, showMap } = useContext(ShopBridgeContext);
   const location = [item.shop.city || ""].filter(Boolean).join(", ");
   function renderService(service) {
     return <ShopDetails.Service>{service.device_name}</ShopDetails.Service>;
   }
 
   const tags = item.shop_type_text;
-  console.log(item);
+
   const formState = filtersFormModule.state.values;
   // API changed does not include the city any longer?
   // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
@@ -730,6 +729,7 @@ function ShopItem({ item }) {
           width={150}
           height={150}
           objectFit="contain"
+          alt=""
         />
         <d-def>{item.shop.distance} km</d-def>
       </ShopImageWrap>
@@ -741,7 +741,11 @@ function ShopItem({ item }) {
                 const props = {
                   [`data-${TAG_TO_COLOR[value]}`.replace("#", "")]: true,
                 };
-                return <tag {...props}>{value}</tag>;
+                return (
+                  <tag key={value} {...props}>
+                    {value}
+                  </tag>
+                );
               })
             : null}
         </div>
