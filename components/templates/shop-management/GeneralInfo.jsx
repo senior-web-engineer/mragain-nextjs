@@ -75,7 +75,6 @@ export const GeneralInfo = ({ shopData, setShopData }) => {
       });
       setEditing(false);
     })();
-    
   };
 
   const onEdit = async () => {

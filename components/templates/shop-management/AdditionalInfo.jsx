@@ -11,8 +11,8 @@ import {
   currentUser,
   getBrands,
   getDevices,
-  getReparations,
   getPurchases,
+  getReparations,
   shopManagementAdditionalForm,
 } from "@/service/shop-management/modules";
 
@@ -35,9 +35,9 @@ const reparationLocationOptions = [
 ];
 
 const parkingAreaOptions = [
-  { value: 1, label: "Ja, betaald parkeren."},
-  { value: 2, label: "Ja, gratis parkeren"},
-  { value: 3, label: "Nee"}
+  { value: 1, label: "Ja, betaald parkeren." },
+  { value: 2, label: "Ja, gratis parkeren" },
+  { value: 3, label: "Nee" },
 ];
 
 const renderDevicesList = (devices, selectedDevices, onChange) => (
@@ -335,13 +335,13 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
                       shopData?.replacementDevices?.includes(device?.id || 0)
                     )
                     .map((device) => {
-                        return (
-                          <img
-                            width="40px"
-                            height="40px"
-                            src={device?.device_image || ""}
-                          />
-                        );
+                      return (
+                        <img
+                          width="40px"
+                          height="40px"
+                          src={device?.device_image || ""}
+                        />
+                      );
 
                       return <></>;
                     })}

@@ -1,12 +1,12 @@
 import Link from "next/link";
 import React from "react";
 import { connect } from "react-redux";
+import styled from "styled-components";
 
 import ArrowLeft from "@/assets/icons/arrow-left.svg";
 import Error404 from "@/assets/icons/error404.svg";
 import Error404_mobile from "@/assets/icons/error404_mobile.svg";
 import DefaultLayout from "@/components/layouts/Homepage";
-import styled from "styled-components";
 
 export const MainContainer = styled.div`
   max-width: 1130px;
@@ -94,17 +94,13 @@ export const Error404ContentTop = styled.div`
   color: #000000;
 `;
 
-export const Error404HomeButton = styled.div`
+export const Error404HomeButton = styled.a`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 12px 37px;
   margin-top: 40px;
   width: 365px;
-  @media (max-width: 768px) {
-    width: 100%;
-    padding: 12px 20px;
-  }
   height: 72px;
   left: 0px;
   top: 240px;
@@ -112,6 +108,14 @@ export const Error404HomeButton = styled.div`
   border: 2px solid #06c987;
   box-sizing: border-box;
   border-radius: 181px;
+  text-decoration: none;
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 12px 20px;
+  }
+  &:hover {
+    text-decoration: none;
+  }
 `;
 
 export const Error404HomeButtonContent = styled.div`
@@ -172,7 +176,7 @@ const Error404View = () => {
             <Error404ContentTop>
               We can’t seem to find the page you are looking for.
             </Error404ContentTop>
-            <Error404HomeButton>
+            <Error404HomeButton href="/">
               <div>
                 <img src={ArrowLeft} alt="ArrowLeft" />
               </div>

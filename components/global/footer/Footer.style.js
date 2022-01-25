@@ -65,12 +65,12 @@ export const FooterLogoIcon = styled.div`
 
 export const FooterBrandTitle = styled.div``;
 
-export const FooterButton = styled.div`
+export const FooterButton = styled.a`
   background: #06c987;
   border: 1px solid #06c987;
   box-sizing: border-box;
   border-radius: 72px;
-
+  color: #fafafa;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,6 +79,7 @@ export const FooterButton = styled.div`
 
   width: 255px;
   height: 51px;
+  text-decoration: none;
   @media (min-width: 769px) {
     float: right;
   }
@@ -89,6 +90,11 @@ export const FooterButton = styled.div`
   @media (max-width: 768px) {
     margin: 0 auto;
     margin-top: 40px;
+  }
+
+  &:hover {
+    color: #fafafa;
+    text-decoration: none;
   }
 `;
 
@@ -149,8 +155,17 @@ export const FooterSocialItems = styled.div`
 
   .twitter,
   .linkedin,
-  .gmail {
+  .gmail,
+  .facebook {
     cursor: pointer;
+  }
+
+  .facebook {
+    background: #06c987;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    padding: 5px;
   }
 
   div p {

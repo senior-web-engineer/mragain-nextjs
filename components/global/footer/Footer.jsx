@@ -7,6 +7,7 @@ import { withUserAgent } from "next-useragent";
 import React from "react";
 
 import Cash from "@/assets/icons/cash.svg";
+import Facebook from "@/assets/icons/facebook.svg";
 import Google from "@/assets/icons/google.svg";
 import Linkedin from "@/assets/icons/linkedin.svg";
 import MasterCard from "@/assets/icons/mastercard.svg";
@@ -120,6 +121,9 @@ const FooterView = (routerProps) => {
                 <div className="gmail">
                   <img src={Google} alt="Google" />
                 </div>
+                <div className="facebook">
+                  <img src={Facebook} alt="Facebook" />
+                </div>
               </FooterSocialItems>
 
               <FooterCards>
@@ -130,7 +134,7 @@ const FooterView = (routerProps) => {
             </div>
           </FooterBrandArea>
           <div>
-            <FooterButton>MELD JE REPARATIE AAN</FooterButton>
+            <FooterButton href="/">MELD JE REPARATIE AAN</FooterButton>
             <FooterLinkArea className="footer-link-area">
               <FooterSitemap ClassName="custome-footer-sitename">
                 <FooterSitemapTitle>Over MrAgain</FooterSitemapTitle>
@@ -269,22 +273,13 @@ const FooterView = (routerProps) => {
                 </a>
               </div>
               <div className="linkedin">
-                <a
-                  href="https://www.linkedin.com/company/mragain/"
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                >
-                  <img src={Linkedin} alt="Linkedin" />
-                </a>
+                <img src={Linkedin} alt="Linkedin" />
               </div>
               <div className="gmail">
-                <a
-                  href="https://www.linkedin.com/company/mragain/"
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                >
-                  <img src={Google} alt="Google" />
-                </a>
+                <img src={Google} alt="Google" />
+              </div>
+              <div className="facebook">
+                <img src={Facebook} alt="Facebook" />
               </div>
             </FooterSocialItems>
 

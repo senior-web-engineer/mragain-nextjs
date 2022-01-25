@@ -40,7 +40,7 @@ export default function ShopManagementPage() {
       setNonWorkingDays(await getShopNonWorkingDays.fetch());
       setValidOpenTime(await getValidOpenTime.fetch());
       const shopInfoData = await shopInfoFetcher.fetch();
-      if (shopInfoData && shopInfoData.length){
+      if (shopInfoData && shopInfoData.length) {
         setShopInfo(shopInfoData[0]);
       }
     }
@@ -84,12 +84,12 @@ export default function ShopManagementPage() {
                     />
                   </BoxWrapper>
                   <BoxWrapper padding>
-                    {
-                      shopInfo && 
+                    {shopInfo && (
                       <AdditionalInfo
                         shopData={shopInfo}
                         setShopData={setShopInfo}
-                    />}
+                      />
+                    )}
                   </BoxWrapper>
                 </Col>
               </Row>
