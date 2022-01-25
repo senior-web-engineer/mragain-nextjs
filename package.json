@@ -33,6 +33,7 @@
     "file-loader": "^6.2.0",
     "fs-extra": "^9.0.1",
     "google-map-react": "^2.1.9",
+    "google-maps-react": "^2.0.6",
     "html-react-parser": "^1.1.1",
     "immer": "^8.0.1",
     "joi": "^17.4.0",

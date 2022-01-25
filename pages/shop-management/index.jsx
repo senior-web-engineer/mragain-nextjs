@@ -1,14 +1,22 @@
-import { Col, Row, Tabs } from "antd";
+import { DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
+import { Col, Modal, Row, Tabs, Tag } from "antd";
 import React, { useEffect, useState } from "react";
 
 import { Text } from "@/components/common/Text/Text";
 import DefaultLayout from "@/components/layouts/Dashboard";
 import { AdditionalInfo } from "@/components/templates/shop-management/AdditionalInfo";
 import { GeneralInfo } from "@/components/templates/shop-management/GeneralInfo";
+import { repeatingList } from "@/components/templates/shop-management/helpers";
 import { ImageSection } from "@/components/templates/shop-management/ImageSection";
 import { OperationalHoursCalendar } from "@/components/templates/shop-management/OperationalHoursCalendar";
 import { ScheduleList } from "@/components/templates/shop-management/ScheduleList";
-import { BoxWrapper } from "@/components/templates/shop-management/styles";
+import {
+  ActionList,
+  BoxWrapper,
+  HeaderLargeText,
+  TableSection,
+  TableWrapper,
+} from "@/components/templates/shop-management/styles";
 import {
   currentUser,
   deleteNonRegularHours,
@@ -22,6 +30,82 @@ import {
 } from "@/service/shop-management/modules";
 import { OnMobile } from "@/utils/media";
 
+const getColor = (repeat) => {
+  return repeatingList[repeat];
+};
+
+const renderRepeat = (repeat) => {
+  const res = getColor(repeat);
+  return (
+    <Tag color={res.color} key={res.value}>
+      {res.label}
+    </Tag>
+  );
+};
+
+
+const renderStatus = (status) => {
+  const res = getColor(status ? 2 : 0);
+  return (
+    <Tag color={res.color} key={res.value}>
+      {status ?  "Closed" : "Opened"}
+    </Tag>
+  );
+};
+
+const renderAction = (item, onDelete) => (
+  <div size="middle">
+    <ActionList onClick={() => onDelete(item.id)}>
+      <DeleteOutlined />
+    </ActionList>
+  </div>
+);
+
+const columns = (onDelete) => [
+  {
+    title: "Naam",
+    dataIndex: "name",
+    key: "name",
+  },
+  {
+    title: "Begin datum",
+    dataIndex: "startDate",
+    key: "startDate",
+  },
+  {
+    title: "Eind datum",
+    dataIndex: "endDate",
+    key: "endDate",
+  },
+  {
+    title: "Van",
+    dataIndex: "startTime",
+    key: "startTime",
+  },
+  {
+    title: "Tot",
+    dataIndex: "endTime",
+    key: "endTime",
+  },
+  {
+    title: "Herhaling",
+    key: "repeat",
+    dataIndex: "repeat",
+    render: renderRepeat,
+  },
+  {
+    title: "Status",
+    key: "closed",
+    dataIndex: "closed",
+    render: renderStatus
+  },
+  {
+    title: "Actie",
+    key: "action",
+    render: (value, item) => renderAction(item, onDelete),
+  },
+];
+
 const { TabPane } = Tabs;
 
 export default function ShopManagementPage() {
@@ -29,6 +113,7 @@ export default function ShopManagementPage() {
   const [shopInfo, setShopInfo] = useState(null);
   const [shopData, setShopData] = useState();
   const [nonWorkingDays, setNonWorkingDays] = useState();
+  const [nonWorkingDaysLoading, setNonWorkingDaysLoading] = useState(false);
   const [validOpenTime, setValidOpenTime] = useState();
   const [user, setUser] = useState();
 
@@ -56,9 +141,23 @@ export default function ShopManagementPage() {
     setNonWorkingDays(await getShopNonWorkingDays.fetch());
   };
 
+
   const onDeleteNonWorkingDays = async (id) => {
-    deleteNonRegularHours(id);
-    setNonWorkingDays(await getShopNonWorkingDays.fetch());
+    Modal.confirm({
+      title: "Delete",
+      icon: <ExclamationCircleOutlined />,
+      content: "Weet je zeker dat je deze wilt verwijderen?",
+      okText: "Bevestigen",
+      cancelText: "Cancel",
+      onOk: () => {
+        deleteNonRegularHours(id);
+        setNonWorkingDaysLoading(true);
+        setTimeout(async () => {
+          setNonWorkingDays(await getShopNonWorkingDays.fetch());
+          setNonWorkingDaysLoading(false);
+        }, 2000);
+      },
+    });
   };
 
   return (
@@ -97,7 +196,17 @@ export default function ShopManagementPage() {
           </TabPane>
           <TabPane tab="Openingstijden" key="operational-hours">
             <Row gutter={[40, 40]} type="flex">
-              <Col xxl={{ span: 14, order: 1 }} xs={{ span: 24, order: 2 }}>
+              <Col
+                xxl={{ span: 12 }}
+                xs={{ span: 24 }}
+                style={{ height: "fit-content" }}
+              >
+                <ScheduleList
+                  validOpenTime={validOpenTime}
+                  onSave={saveValidOpenTime}
+                />
+              </Col>
+              <Col xxl={{ span: 12 }} xs={{ span: 24 }}>
                 {nonWorkingDays && (
                   <OperationalHoursCalendar
                     nonWorkingDays={nonWorkingDays}
@@ -106,15 +215,25 @@ export default function ShopManagementPage() {
                   />
                 )}
               </Col>
-              <Col
-                xxl={{ span: 10, order: 2 }}
-                xs={{ span: 24, order: 1 }}
-                style={{ height: "fit-content" }}
-              >
-                <ScheduleList
-                  validOpenTime={validOpenTime}
-                  onSave={saveValidOpenTime}
-                />
+            </Row>
+            <Row style={{ marginTop: "40px" }}>
+              <Col span={24}>
+                <TableSection>
+                  <HeaderLargeText
+                    style={{
+                      width: "100%",
+                      padding: "20px 16px",
+                      background: "#fafafa",
+                    }}
+                  >
+                    Overzicht van je afwijkende openingstijden
+                  </HeaderLargeText>
+                  <TableWrapper
+                    loading={nonWorkingDaysLoading}
+                    columns={columns(onDeleteNonWorkingDays)}
+                    dataSource={nonWorkingDays}
+                  />
+                </TableSection>
               </Col>
             </Row>
           </TabPane>

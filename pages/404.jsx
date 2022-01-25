@@ -172,29 +172,28 @@ const Error404View = () => {
         <FlexLayout>
           <ContentLayout>
             <Error404BigTitle>Error 404</Error404BigTitle>
-            <Error404SmallTitle>Something went wrong.</Error404SmallTitle>
+            <Error404SmallTitle>Oeps, er gaat wat fout.</Error404SmallTitle>
             <Error404ContentTop>
-              We can’t seem to find the page you are looking for.
+              We kunnen de pagina die je zoekt niet vinden.
             </Error404ContentTop>
             <Error404HomeButton href="/">
               <div>
                 <img src={ArrowLeft} alt="ArrowLeft" />
               </div>
               <Error404HomeButtonContent>
-                Go back to Home Page
+                Ga terug naar de homepage
               </Error404HomeButtonContent>
             </Error404HomeButton>
             <Error404ContentBottom>
-              Maybe these categories can help you find what you are looking for
+              Mogelijk staat wat je zoekt hiertussen
               :
             </Error404ContentBottom>
             <Error404PageLinks>
               <Link href="/login">Reparatie</Link>
-              <Link href="/over-ons">Over Ons</Link>
+              <Link href="/over-ons">Over ons</Link>
               <Link href="/veel-gestelde-vragen">FAQ</Link>
-              <Link href="/login">Repair shops nearby</Link>
-              <Link href="/login">Other cities</Link>
-              <Link href="/login">Prices</Link>
+              <Link href="/">Reparateurs in de buurt</Link>
+              <Link href="/">Andere steden</Link>
             </Error404PageLinks>
           </ContentLayout>
           <ImageLayout>

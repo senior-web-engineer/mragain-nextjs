@@ -187,7 +187,7 @@ function HeaderLinks() {
     <>
       <Link href="/">Home</Link>
       <Link href="/over-ons">Over ons</Link>
-      <Link href="/reparatie">Reparatie</Link>
+      <Link href="/devices">Reparatie</Link>
       <Link href="/meld-je-aan-als-reparateur">Meld je aan als reparateur</Link>
       <Link href="/contact-met-mragain">Contact</Link>
       <Link href="/veel-gestelde-vragen">FAQ</Link>

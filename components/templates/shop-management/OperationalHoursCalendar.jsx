@@ -1,76 +1,19 @@
-import { Button, Col, Divider, Input, Row, Tag, TimePicker } from "antd";
+import { Col, Divider, Input, Modal, Row, Switch, TimePicker } from "antd";
 import moment from "moment";
 import React, { useCallback, useState } from "react";
 
 import { CalendarRange } from "@/components/common/Calendar/CalendarRange";
+import Button from "@/components/ui/Button";
 import Select from "@/components/ui/Select";
 
 import { repeatingList } from "./helpers";
 import {
-  Action,
+  HeaderLargeText,
+  HeaderSmallText,
   HoursEditor,
   HoursEditorTitle,
   RowWrapper,
-  TableWrapper,
 } from "./styles";
-
-const getColor = (repeat) => {
-  return repeatingList[repeat];
-};
-
-const renderRepeat = (repeat) => {
-  const res = getColor(repeat);
-  return (
-    <Tag color={res.color} key={res.value}>
-      {res.label}
-    </Tag>
-  );
-};
-
-const renderAction = (item, onDelete) => (
-  <div size="middle">
-    <Action onClick={() => onDelete(item)}>Delete</Action>
-  </div>
-);
-
-const columns = (onDelete) => [
-  {
-    title: "Naam",
-    dataIndex: "name",
-    key: "name",
-  },
-  {
-    title: "Begin datum",
-    dataIndex: "startDate",
-    key: "startDate",
-  },
-  {
-    title: "Eind datum",
-    dataIndex: "endDate",
-    key: "endDate",
-  },
-  {
-    title: "Van",
-    dataIndex: "startTime",
-    key: "startTime",
-  },
-  {
-    title: "Tot",
-    dataIndex: "endTime",
-    key: "endTime",
-  },
-  {
-    title: "Herhaling",
-    key: "repeat",
-    dataIndex: "repeat",
-    render: renderRepeat,
-  },
-  {
-    title: "Actie",
-    key: "action",
-    render: (value, item) => renderAction(item, onDelete),
-  },
-];
 
 export const OperationalHoursCalendar = ({
   nonWorkingDays,
@@ -79,8 +22,8 @@ export const OperationalHoursCalendar = ({
 }) => {
   const [nonRegularHours, setNonRegularHours] = useState({
     range: {
-      startDate: moment(moment.now()).toDate(),
-      endDate: moment(moment.now()).add(5, "days").toDate(),
+      startDate: moment(moment.now()).format("YYYY-MM-DD"),
+      endDate: moment(moment.now()).add(5, "days").format("YYYY-MM-DD"),
     },
     name: "",
     time: {
@@ -88,7 +31,10 @@ export const OperationalHoursCalendar = ({
       endTime: moment("23:59", "HH:mm"),
     },
     repeat: 0,
+    closed: false,
   });
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const onAdd = useCallback(() => {
     onNonWorkingDaysSaved({
@@ -121,6 +67,10 @@ export const OperationalHoursCalendar = ({
     setNonRegularHours({
       ...nonRegularHours,
       name: "",
+      range: {
+        startDate: moment(moment.now()).format("YYYY-MM-DD"),
+        endDate: moment(moment.now()).add(5, "days").format("YYYY-MM-DD"),
+      },
       time: {
         startTime: moment("00:00", "HH:mm"),
         endTime: moment("23:59", "HH:mm"),
@@ -133,34 +83,38 @@ export const OperationalHoursCalendar = ({
     onDeleteNonWorkingDays(item.id);
   };
 
+  const closeDatePicker = () => {
+    console.log("AAA");
+    setIsModalVisible(false);
+    setNonRegularHours({
+      ...nonRegularHours,
+      range: {
+        startDate: moment(moment.now()).format("YYYY-MM-DD"),
+        endDate: moment(moment.now()).add(5, "days").format("YYYY-MM-DD"),
+      },
+    });
+  };
+
+  const onConfirmDatePicker = (value) => {
+    setIsModalVisible(false);
+    console.log(value);
+  };
+
   return (
     <>
       <RowWrapper>
-        <Col span={16}>
-          <CalendarRange
-            repeatingList={repeatingList}
-            disabledDates={nonWorkingDays.map((item) => ({
-              startDate: moment(item.startDate, "YYYY-MM-DD").toDate(),
-              endDate: moment(item.endDate, "YYYY-MM-DD").toDate(),
-              type: item.repeat,
-            }))}
-            onChange={(value) => {
-              setNonRegularHours({
-                ...nonRegularHours,
-                range: {
-                  startDate: moment(value.startDate).format("YYYY-MM-DD"),
-                  endDate: moment(value.endDate).format("YYYY-MM-DD"),
-                },
-              });
-            }}
-          />
-        </Col>
-        <Col span={8}>
+        <Col span={24}>
           <HoursEditor>
             <Col>
-              <HoursEditorTitle>
-                Beschrijving afwijkende openingstijd
-              </HoursEditorTitle>
+              <HeaderLargeText style={{ margin: "12px 0" }}>
+                Afwijkende openingstijden
+              </HeaderLargeText>
+              <HeaderSmallText style={{ margin: "12px 0" }}>
+                Dagen die afwijken van je standaard openingstijden voeg je hier toe{" "}
+              </HeaderSmallText>
+            </Col>
+            <Col>
+              <HoursEditorTitle>Bechrijving</HoursEditorTitle>
               <Input
                 small
                 placeholder="Beschrijving"
@@ -176,13 +130,22 @@ export const OperationalHoursCalendar = ({
               />
             </Col>
             <Col>
-              <HoursEditorTitle>Openingstijd</HoursEditorTitle>
-              <Row>
+              <HoursEditorTitle>Selecteer dag(en) en tijd</HoursEditorTitle>
+              <Row type="flex" justify="space-between">
                 <Col span={12}>
+                  <Input
+                    onClick={() => setIsModalVisible(true)}
+                    style={{ width: "90%" }}
+                    size="large"
+                    value={`Van ${nonRegularHours.range.startDate} - Tot: ${nonRegularHours.range.endDate}`}
+                  />
+                </Col>
+                <Col span={6}>
                   <TimePicker
                     size="large"
                     value={nonRegularHours.time.startTime}
                     format="HH:mm"
+                    style={{ width: "90%" }}
                     onChange={(value) =>
                       setNonRegularHours({
                         ...nonRegularHours,
@@ -191,9 +154,10 @@ export const OperationalHoursCalendar = ({
                     }
                   />
                 </Col>
-                <Col span={12}>
+                <Col span={6}>
                   <TimePicker
                     size="large"
+                    style={{ width: "90%" }}
                     value={nonRegularHours.time.endTime}
                     format="HH:mm"
                     onChange={(value) =>
@@ -207,37 +171,88 @@ export const OperationalHoursCalendar = ({
               </Row>
             </Col>
             <Col>
-              <HoursEditorTitle>Herhaling</HoursEditorTitle>
-              <Select
-                value={nonRegularHours.repeat}
-                options={repeatingList}
-                size="large"
-                onChange={(value) =>
-                  setNonRegularHours({
-                    ...nonRegularHours,
-                    repeat: value,
-                  })
-                }
-              />
+              <Row>
+                <Col span="6">
+                  <HoursEditorTitle>Gesloten</HoursEditorTitle>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      height: "40px",
+                    }}
+                  >
+                    <Switch
+                      name="closed"
+                      onChange={(value) => {
+                        setNonRegularHours({
+                          ...nonRegularHours,
+                          closed: value,
+                        });
+                      }}
+                      defaultChecked={nonRegularHours.closed}
+                    />
+                  </div>
+                </Col>
+                <Col span="18">
+                  <HoursEditorTitle>Herhaling</HoursEditorTitle>
+                  <Select
+                    value={nonRegularHours.repeat}
+                    options={repeatingList}
+                    size="large"
+                    onChange={(value) =>
+                      setNonRegularHours({
+                        ...nonRegularHours,
+                        repeat: value,
+                      })
+                    }
+                  />
+                </Col>
+              </Row>
             </Col>
             <Divider />
             <Row type="flex" justify="space-between">
-              <Button onClick={onClear}>Wis</Button>
-              <Button type="primary" onClick={onAdd} disabled={isAddDisabled()}>
+              <Button
+                style={{
+                  background: "transparent",
+                  color: "#06c987",
+                  border: "solid 1px #06c987",
+                }}
+                onClick={onClear}
+              >
+                Wis
+              </Button>
+              <Button onClick={onAdd} disabled={isAddDisabled()}>
                 Voeg toe
               </Button>
             </Row>
           </HoursEditor>
         </Col>
       </RowWrapper>
-      <RowWrapper style={{ marginTop: "40px" }}>
-        <Col span={24}>
-          <TableWrapper
-            columns={columns(handelOnDelete)}
-            dataSource={nonWorkingDays}
-          />
-        </Col>
-      </RowWrapper>
+
+      <Modal
+        visible={isModalVisible}
+        onCancel={closeDatePicker}
+        onOk={onConfirmDatePicker}
+        width={1000}
+      >
+        <CalendarRange
+          repeatingList={repeatingList}
+          disabledDates={nonWorkingDays.map((item) => ({
+            startDate: moment(item.startDate, "YYYY-MM-DD").toDate(),
+            endDate: moment(item.endDate, "YYYY-MM-DD").toDate(),
+            type: item.repeat,
+          }))}
+          onChange={(value) => {
+            setNonRegularHours({
+              ...nonRegularHours,
+              range: {
+                startDate: moment(value.startDate).format("YYYY-MM-DD"),
+                endDate: moment(value.endDate).format("YYYY-MM-DD"),
+              },
+            });
+          }}
+        />
+      </Modal>
     </>
   );
 };

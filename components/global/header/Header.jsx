@@ -260,8 +260,8 @@ const HeaderView = (routerProps) => {
               Over MrAgain
             </Link>
           </Menu.Item>
-          <Menu.Item key="/reparatie">
-            <Link prefetch={false} href="/reparatie">
+          <Menu.Item key="/devices">
+            <Link prefetch={false} href="/devices">
               Reparatie
             </Link>
           </Menu.Item>

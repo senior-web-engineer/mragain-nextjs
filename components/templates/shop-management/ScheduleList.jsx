@@ -1,3 +1,4 @@
+import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import { Col, List, Switch, Tag, TimePicker } from "antd";
 import moment from "moment-timezone";
 import React, { useCallback, useEffect, useState } from "react";
@@ -5,7 +6,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Text } from "@/components/common/Text/Text";
 
 import {
-  Action,
+  ActionList,
+  HeaderLargeText,
   HeaderSmallText,
   ListItemWrapper,
   ScheduleListWrapper,
@@ -162,41 +164,29 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
     <ScheduleListWrapper>
       <List
         header={
-          <HeaderSmallText style={{ padding: "0 18px", margin: "12px 0" }}>
-            Openingstijden
-          </HeaderSmallText>
+          <>
+            <HeaderLargeText style={{ padding: "0 18px", margin: "12px 0" }}>
+              Openingstijden
+            </HeaderLargeText>
+            <HeaderSmallText style={{ padding: "0 18px", margin: "12px 0" }}>
+              Stel hier je standaard openingstijden in
+            </HeaderSmallText>
+          </>
         }
         size="large"
         dataSource={workingHours}
         renderItem={(item, index) => (
-          <List.Item>
+          <List.Item
+            style={{
+              paddingTop: "10px",
+              paddingBottom: "10px",
+            }}
+          >
             <ListItemWrapper>
               <Col span="6">
                 <Text.Headline size="14" weight="regular" style={{ margin: 0 }}>
                   <b>{item.day}</b>
                 </Text.Headline>
-              </Col>
-              <Col span="6">
-                {editingRow === index ? (
-                  <TimePicker
-                    value={item.start ? moment(item.start, "HH:mm") : null}
-                    format="HH:mm"
-                    onChange={(value) => setNewTime("start", index, value)}
-                  />
-                ) : (
-                  <p>{item.start || "..."}</p>
-                )}
-              </Col>
-              <Col span="6">
-                {editingRow === index ? (
-                  <TimePicker
-                    value={item.end ? moment(item.end, "HH:mm") : null}
-                    format="HH:mm"
-                    onChange={(value) => setNewTime("end", index, value)}
-                  />
-                ) : (
-                  <p>{item.end || "..."}</p>
-                )}
               </Col>
               <Col span="4">
                 {editingRow === index ? (
@@ -210,11 +200,55 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
                   </TagWrapper>
                 )}
               </Col>
+              <Col
+                span="5"
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                {editingRow === index ? (
+                  <TimePicker
+                    value={item.start ? moment(item.start, "HH:mm") : null}
+                    format="HH:mm"
+                    onChange={(value) => setNewTime("start", index, value)}
+                  />
+                ) : (
+                  <p>{item.start || "..."}</p>
+                )}
+              </Col>
+              <Col
+                span="2"
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                Tot
+              </Col>
+              <Col
+                span="5"
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                {editingRow === index ? (
+                  <TimePicker
+                    value={item.end ? moment(item.end, "HH:mm") : null}
+                    format="HH:mm"
+                    onChange={(value) => setNewTime("end", index, value)}
+                  />
+                ) : (
+                  <p>{item.end || "..."}</p>
+                )}
+              </Col>
               <Col span="4">
                 {editingRow === index ? (
-                  <Action onClick={() => onSaveClick(index)}>Opslaan</Action>
+                  <ActionList
+                    color="#52c41a"
+                    onClick={() => onSaveClick(index)}
+                  >
+                    <SaveOutlined />
+                  </ActionList>
                 ) : (
-                  <Action onClick={() => onEditClick(index)}>Wijzigen</Action>
+                  <ActionList
+                    color="#1890ff"
+                    onClick={() => onEditClick(index)}
+                  >
+                    <EditOutlined />
+                  </ActionList>
                 )}
               </Col>
             </ListItemWrapper>
