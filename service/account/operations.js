@@ -1,9 +1,7 @@
+import { registerFormModule } from "@/components/land/RegisterSection/RegisterForm/modules";
 import { notification } from "antd";
 import { default as Axios, default as axios } from "axios";
 import router from "next/router";
-
-import { registerFormModule } from "@/components/land/RegisterSection/RegisterForm/modules";
-
 import { API_PATH } from "../../constants";
 import {
   authenticated,
@@ -27,8 +25,10 @@ import {
   setLoadPBM,
   setSuccessData,
   setUpdateScheduleTime,
-  signupFail,
+  signupFail
 } from "./action";
+
+
 
 export const tokenConfig = () => {
   const token = localStorage.getItem("auth-token");
@@ -248,6 +248,18 @@ export function getShopProfileByInformationServer(str) {
 export function getGeneralShopInfoServer(shopId) {
   return axios
     .get(`${API_PATH.GETSHOPGENERALINFO}/${shopId}`)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err);
+      return err;
+    });
+}
+
+export function getGeneralShopInfoDetailServer(shopId) {
+  return axios
+    .get(`${API_PATH.GETSHOPGENERALINFODETAIL}/${shopId}`)
     .then((res) => {
       return res.data;
     })

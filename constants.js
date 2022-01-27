@@ -98,6 +98,7 @@ export const API_PATH = {
   GETALLNOTIFICATIONS: `${API_URL}/get-notification`,
   GETDASHSTATS: `${API_URL}/get-appointment-stats`,
   GETSHOPGENERALINFO: `${API_URL}/getshopGeneralInfo`,
+  GETSHOPGENERALINFODETAIL: `${API_URL}/getshopGeneralInfoDetail`,
   GETACTIVEBRANDS: `${API_URL}/get-active-brands`,
   GETPURCAHSES: `${API_URL}/get-purchases`,
   UPDATESHOPGENERALINFO: `${API_URL}/update-shop-info`,

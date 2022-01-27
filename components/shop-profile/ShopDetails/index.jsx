@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import React, { useMemo } from "react";
 import styled from "styled-components";
+import { Tooltip } from 'antd';
 
 import { MaxConstraints } from "@/components/styled/layout";
 import { SubTitle } from "@/components/styled/text";
@@ -142,6 +143,9 @@ function ReparationImage() {
 }
 
 export default function ShopDetails({ shop }) {
+  console.log(shop);
+
+
   return (
     <MainWrap>
       <MaxConstraints>
@@ -150,38 +154,46 @@ export default function ShopDetails({ shop }) {
           <d-list>
             <d-term>Apparaten</d-term>
             <d-def>
-              <FontAwesomeIcon icon={faMobile} />{" "}
-              <FontAwesomeIcon icon={faLaptop} />
-              <FontAwesomeIcon icon={faTablet} />{" "}
-              <FontAwesomeIcon icon={faTv} />{" "}
-              <FontAwesomeIcon icon={faHeadphones} />
+              {shop?.replacementDevices?.map((device) => (<>
+                <Tooltip title={device?.device_name}>
+                  <Image
+                    src={device?.device_image}
+                    alt={device?.device_name}
+                    width={20}
+                    height={20}
+                    title="Apparaat"
+                  />
+                  </Tooltip>
+              </>))}
             </d-def>
             <d-term>Betaal methoden</d-term>
             <d-def>
-              <FontAwesomeIcon icon={faCcVisa} />
-              <FontAwesomeIcon icon={faCcMastercard} />
-              <FontAwesomeIcon icon={faPaypal} />
+              <span>{shop?.paymentMethod}</span>
             </d-def>
             <d-term>Reparatie opties</d-term>
             <d-def>
-              {/*<LocationWrap>
-                <FontAwesomeIcon icon={faHome} /> Reparatie op locatie
-              </LocationWrap>*/}
-              <LocationWrap>
-                <FontAwesomeIcon icon={faStore} /> Reparatie in winkel
-              </LocationWrap>
-              {/* <LocationWrap>
-                <FontAwesomeIcon icon={faBox} /> Opsturen
-              </LocationWrap>*/}
+              <span>{shop?.reparationOption}</span>
             </d-def>
             <d-term>Services</d-term>
-            <d-def>Mobiele accesoires</d-def>
+            <d-def><span>{shop?.services}</span></d-def>
+
             <d-term>Vervangend toestel</d-term>
             <d-def>Voor specifieke toestellen</d-def>
             <d-term>Wachtruimte</d-term>
-            <d-def>Beschikbaar</d-def>
+            <d-def>{shop?.waitingArea}</d-def>
             <d-term>Merken</d-term>
-            <d-def>Apple, Samsung</d-def>
+            <d-def>
+              {shop?.cateredBrand?.map((brand) => (<>
+                <Tooltip title={brand?.brand_name}>
+                  <Image
+                    src={brand?.brand_image}
+                    alt={brand?.brand_name}
+                    width={20}
+                    height={20}
+                  />
+                  </Tooltip>
+              </>))}
+            </d-def>
           </d-list>
         </div>
         <Form module={serviceFormModule}>
