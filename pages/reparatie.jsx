@@ -1,4 +1,4 @@
-IMPORt Head from "next/head";
+import Head from "next/head";
 import Link from "next/link";
 import React, { useEffect } from "react";
 
