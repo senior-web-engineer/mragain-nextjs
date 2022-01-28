@@ -116,13 +116,31 @@ const FooterView = (routerProps) => {
                   </a>
                 </div>
                 <div className="linkedin">
+                  <a
+                    href="https://www.linkedin.com/company/38085922/admin/"
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                  >
                   <img src={Linkedin} alt="Linkedin" />
+                  </a>
                 </div>
                 <div className="gmail">
+                  <a
+                    href="https://www.instagram.com/mragainofficial/"
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                  >
                   <img src={Google} alt="Google" />
+                  </a>
                 </div>
                 <div className="facebook">
+                  <a
+                    href="https://www.facebook.com/MrAgainofficial/"
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                  >
                   <img src={Facebook} alt="Facebook" />
+                  </a>
                 </div>
               </FooterSocialItems>
 
@@ -273,13 +291,31 @@ const FooterView = (routerProps) => {
                 </a>
               </div>
               <div className="linkedin">
-                <img src={Linkedin} alt="Linkedin" />
+	        <a
+	          href="https://www.linkedin.com/company/mragain/"
+	          target="_blank"
+	          rel="noopener noreferrer nofollow"
+	        >
+                  <img src={Linkedin} alt="Linkedin" />
+	        </a>
               </div>
               <div className="gmail">
-                <img src={Google} alt="Google" />
+	        <a
+	          href="https://www.instagram.com/mragainofficial/"
+	          target="_blank"
+	          rel="noopener noreferrer nofollow"
+	        >
+                  <img src={Google} alt="Google" />
+	        </a>
               </div>
               <div className="facebook">
-                <img src={Facebook} alt="Facebook" />
+	        <a
+	          href="https://www.facebook.com/MrAgainofficial/"
+	          target="_blank"
+	          rel="noopener noreferrer nofollow"
+	        >
+                  <img src={Facebook} alt="Facebook" />
+	        </a>
               </div>
             </FooterSocialItems>
 

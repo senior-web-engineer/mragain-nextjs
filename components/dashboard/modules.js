@@ -281,11 +281,11 @@ export function markAppointmentAsDone({ email, ...appointment }) {
       await promise;
       notification.success({
         message:
-          "Appointment marked as done. An email will be sent to the client",
+          "Afspraak afgerond, we hebben een review verzoek verstuurd naar de klant.",
       });
     } catch (err) {
       notification.success({
-        message: "Something went wrong",
+        message: "Er gaat iets fout, neem contact met ons op als dit blijft gebeuren.",
         description: err?.message,
       });
     }
