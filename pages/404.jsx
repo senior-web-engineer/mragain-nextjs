@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-
+import Head from "next/head";
 import ArrowLeft from "@/assets/icons/arrow-left.svg";
 import Error404 from "@/assets/icons/error404.svg";
 import Error404_mobile from "@/assets/icons/error404_mobile.svg";
