@@ -168,6 +168,10 @@ export const Error404PageLinks = styled.div`
 const Error404View = () => {
   return (
     <DefaultLayout>
+    <Head> 
+      <title>"Pagina niet gevonden | 404"</title>
+      <meta name="description" content="Oops, we hebben de pagina niet kunnen vinden" />
+    </Head>	  
       <MainContainer>
         <FlexLayout>
           <ContentLayout>
@@ -208,4 +212,4 @@ const Error404View = () => {
   );
 };
 
-export default Custom404Page;
+export default Error404View;
