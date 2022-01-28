@@ -208,4 +208,6 @@ const Error404View = () => {
   );
 };
 
-export default Error404View;
+export default function Custom404() {
+  return <h1>404 - Pagina niet gevonden</h1>
+}
