@@ -278,7 +278,8 @@ const FooterView = (routerProps) => {
 	          target="_blank"
 	          rel="noopener noreferrer nofollow"
 	        >
-                <img src={Linkedin} alt="Linkedin" />
+                  <img src={Linkedin} alt="Linkedin" />
+	        </a>
               </div>
               <div className="gmail">
 	        <a
@@ -286,7 +287,8 @@ const FooterView = (routerProps) => {
 	          target="_blank"
 	          rel="noopener noreferrer nofollow"
 	        >
-                <img src={Google} alt="Google" />
+                  <img src={Google} alt="Google" />
+	        </a>
               </div>
               <div className="facebook">
 	        <a
@@ -294,7 +296,8 @@ const FooterView = (routerProps) => {
 	          target="_blank"
 	          rel="noopener noreferrer nofollow"
 	        >
-                <img src={Facebook} alt="Facebook" />
+                  <img src={Facebook} alt="Facebook" />
+	        </a>
               </div>
             </FooterSocialItems>
 
