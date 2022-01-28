@@ -36,7 +36,7 @@ const ContactForm = () => {
       await contactFormModule.actions.submit();
 
       notification.success({
-        description: "Thank you for contacting us! You will hear from us soon!",
+        description: "Bedankt voor je bericht, we nemen zo snel mogelijk contact met je op.",
         duration: 2.5,
       });
 
