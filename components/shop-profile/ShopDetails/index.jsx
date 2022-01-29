@@ -157,7 +157,7 @@ export default function ShopDetails({ shop }) {
               {shop?.replacementDevices?.map((device) => (<>
                 <Tooltip title={device?.device_name}>
                   <Image
-                    src={device?.device_image}
+                    src={device?.device_image || ""}
                     alt={device?.device_name}
                     width={20}
                     height={20}
@@ -200,7 +200,7 @@ export default function ShopDetails({ shop }) {
               {shop?.cateredBrand?.map((brand) => (<>
                 <Tooltip title={brand?.brand_name}>
                   <Image
-                    src={brand?.brand_image}
+                    src={brand?.brand_image || ""}
                     alt={brand?.brand_name}
                     width={20}
                     height={20}
