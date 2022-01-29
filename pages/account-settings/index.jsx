@@ -1,6 +1,7 @@
 import { Col, Row, Tabs } from "antd";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import Head from "next/head";
 
 import { Text } from "@/components/common/Text/Text";
 import DefaultLayout from "@/components/layouts/Dashboard";
@@ -51,6 +52,10 @@ export default function RepairManagementPage() {
 
   return (
     <DefaultLayout>
+      <Head>	  
+	<title>Account gegevens | MrAgain</title>
+	<meta name="description" content="Beheer je account"/>
+      </Head>	  
       <Row type="flex" justify="space-between" align="middle"></Row>
       <Tabs defaultActiveKey={activeTab} onChange={onTabChange}>
         <TabPane tab="Algemeen" key="general">

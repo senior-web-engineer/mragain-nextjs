@@ -1,6 +1,7 @@
 import { DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import { Col, Modal, Row, Tabs, Tag } from "antd";
 import React, { useEffect, useState } from "react";
+import Head from "next/head";
 
 import { Text } from "@/components/common/Text/Text";
 import DefaultLayout from "@/components/layouts/Dashboard";
@@ -162,6 +163,10 @@ export default function ShopManagementPage() {
 
   return (
     <DefaultLayout>
+      <Head>
+	  <title>Profiel beheer | MrAgain</title>
+	  <meta name ="description" content="Hier beheer je je profiel"/>
+      </Head>
       <Row type="flex" justify="space-between" align="middle"></Row>
       <OnMobile only>
         <h5>
