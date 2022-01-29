@@ -14,10 +14,10 @@ import {
   faTv,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Tooltip } from "antd";
 import Image from "next/image";
 import React, { useMemo } from "react";
 import styled from "styled-components";
-import { Tooltip } from 'antd';
 
 import { MaxConstraints } from "@/components/styled/layout";
 import { SubTitle } from "@/components/styled/text";
@@ -154,16 +154,22 @@ export default function ShopDetails({ shop }) {
           <d-list>
             <d-term>Apparaten</d-term>
             <d-def>
-              {shop?.replacementDevices?.map((device) => (<>
-                <Tooltip title={device?.device_name}>
-                  <Image
-                    src={device?.device_image || ""}
-                    alt={device?.device_name}
-                    width={20}
-                    height={20}
-                  />
-                  </Tooltip>
-              </>))}
+              {shop?.replacementDevices?.map((device) => {
+                return (
+                  <>
+                    <Tooltip title={device?.device_name}>
+                      {device?.device_image && (
+                        <Image
+                          src={device?.device_image || ""}
+                          alt={device?.device_name}
+                          width={20}
+                          height={20}
+                        />
+                      )}
+                    </Tooltip>
+                  </>
+                );
+              })}
             </d-def>
             <d-term>Betaal methoden</d-term>
             <d-def>
@@ -182,9 +188,10 @@ export default function ShopDetails({ shop }) {
             <d-def>
               {shop?.ShopPurchase?.map((purchase) => (
                 <>
-                <Tooltip title={purchase?.purchaseName} key={purchase?.id}>
+                  <Tooltip title={purchase?.purchaseName} key={purchase?.id}>
                     <span>{purchase?.purchaseName}</span>
-                </Tooltip>, &nbsp;
+                  </Tooltip>
+                  , &nbsp;
                 </>
               ))}
             </d-def>
@@ -194,19 +201,25 @@ export default function ShopDetails({ shop }) {
 
             <d-term>Wachtruimte</d-term>
             <d-def>{shop?.waitingArea}</d-def>
-            
+
             <d-term>Merken</d-term>
             <d-def>
-              {shop?.cateredBrand?.map((brand) => (<>
-                <Tooltip title={brand?.brand_name}>
-                  <Image
-                    src={brand?.brand_image || ""}
-                    alt={brand?.brand_name}
-                    width={20}
-                    height={20}
-                  />
-                  </Tooltip>
-              </>))}
+              {shop?.cateredBrand?.map((brand) => {
+                return (
+                  <>
+                    <Tooltip title={brand?.brand_name}>
+                      {brand?.brand_image && (
+                        <Image
+                          src={brand?.brand_image}
+                          alt={brand?.brand_name}
+                          width={20}
+                          height={20}
+                        />
+                      )}
+                    </Tooltip>
+                  </>
+                );
+              })}
             </d-def>
           </d-list>
         </div>
