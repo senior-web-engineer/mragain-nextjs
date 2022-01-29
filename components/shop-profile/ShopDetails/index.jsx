@@ -136,6 +136,7 @@ function ReparationImage() {
           src={selectedReparation.reparation.repair_image}
           layout="fill"
           objectFit="cover"
+          alt=""
         />
       ) : null}
     </ReparationImageWrap>
@@ -144,7 +145,6 @@ function ReparationImage() {
 
 export default function ShopDetails({ shop }) {
   console.log(shop);
-
 
   return (
     <MainWrap>
@@ -161,7 +161,6 @@ export default function ShopDetails({ shop }) {
                     alt={device?.device_name}
                     width={20}
                     height={20}
-                    title="Apparaat"
                   />
                   </Tooltip>
               </>))}
@@ -175,12 +174,27 @@ export default function ShopDetails({ shop }) {
               <span>{shop?.reparationOption}</span>
             </d-def>
             <d-term>Services</d-term>
-            <d-def><span>{shop?.services}</span></d-def>
+            <d-def>
+              <span>{shop?.services}</span>
+            </d-def>
 
-            <d-term>Vervangend toestel</d-term>
-            <d-def>Voor specifieke toestellen</d-def>
+            <d-term>Store Availability</d-term>
+            <d-def>
+              {shop?.ShopPurchase?.map((purchase) => (
+                <>
+                <Tooltip title={purchase?.purchaseName} key={purchase?.id}>
+                    <span>{purchase?.purchaseName}</span>
+                </Tooltip>, &nbsp;
+                </>
+              ))}
+            </d-def>
+
+            <d-term>Temporary Replacement</d-term>
+            <d-def>{shop?.temporaryReplacement}</d-def>
+
             <d-term>Wachtruimte</d-term>
             <d-def>{shop?.waitingArea}</d-def>
+            
             <d-term>Merken</d-term>
             <d-def>
               {shop?.cateredBrand?.map((brand) => (<>
