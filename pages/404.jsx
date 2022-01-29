@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-
+import Head from "next/head";
 import ArrowLeft from "@/assets/icons/arrow-left.svg";
 import Error404 from "@/assets/icons/error404.svg";
 import Error404_mobile from "@/assets/icons/error404_mobile.svg";
@@ -168,6 +168,10 @@ export const Error404PageLinks = styled.div`
 const Error404View = () => {
   return (
     <DefaultLayout>
+    <Head> 
+      <title>Pagina niet gevonden | 404</title>
+      <meta name="description" content="Oops, we hebben de pagina niet kunnen vinden" />
+    </Head>	  
       <MainContainer>
         <FlexLayout>
           <ContentLayout>
