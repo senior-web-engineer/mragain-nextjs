@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, DatePicker, Icon, Row, TimePicker } from "antd";
 import { Dropdown, Menu } from "antd";
 import get from "lodash/get";
+import Head from "next/head";
 import moment from "moment";
 import Image from "next/image";
 import React, { useCallback, useEffect, useState } from "react";
@@ -408,6 +409,10 @@ function DashboardPage({ isEditMode }) {
 
   return (
     <DefaultLayout>
+    <Head>
+      <title>Dashboard | MrAgain</title>
+      <meta name="description" content="Je dashboard" />
+    </Head>	  
       <PageTitle>
         <OnMobile only>
           <Notifications />
