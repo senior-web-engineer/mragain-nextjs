@@ -171,37 +171,7 @@ export default function ShopDetails({ shop }) {
                 );
               })}
             </d-def>
-            <d-term>Betaal methoden</d-term>
-            <d-def>
-              <span>{shop?.paymentMethod}</span>
-            </d-def>
-            <d-term>Reparatie opties</d-term>
-            <d-def>
-              <span>{shop?.reparationOption}</span>
-            </d-def>
-            <d-term>Services</d-term>
-            <d-def>
-              <span>{shop?.services}</span>
-            </d-def>
-
-            <d-term>Store Availability</d-term>
-            <d-def>
-              {shop?.ShopPurchase?.map((purchase) => (
-                <>
-                  <Tooltip title={purchase?.purchaseName} key={purchase?.id}>
-                    <span>{purchase?.purchaseName}</span>
-                  </Tooltip>
-                  , &nbsp;
-                </>
-              ))}
-            </d-def>
-
-            <d-term>Temporary Replacement</d-term>
-            <d-def>{shop?.temporaryReplacement}</d-def>
-
-            <d-term>Wachtruimte</d-term>
-            <d-def>{shop?.waitingArea}</d-def>
-
+            
             <d-term>Merken</d-term>
             <d-def>
               {shop?.cateredBrand?.map((brand) => {
@@ -221,6 +191,41 @@ export default function ShopDetails({ shop }) {
                 );
               })}
             </d-def>
+
+            <d-term>Betaal methoden</d-term>
+            <d-def>
+              <span>{shop?.paymentMethod}</span>
+            </d-def>
+            <d-term>Reparatie opties</d-term>
+            <d-def>
+              <span>{shop?.reparationOption}</span>
+            </d-def>
+            <d-term>Services</d-term>
+            <d-def>
+              <span>{shop?.services}</span>
+            </d-def>
+
+            <d-term>Extra service &amp; producten</d-term>
+            <d-def>
+              {shop?.ShopPurchase?.map((purchase) => (
+                <>
+                  <Tooltip title={purchase?.purchaseName} key={purchase?.id}>
+                    <span>{purchase?.purchaseName}</span>
+                  </Tooltip>
+                  , &nbsp;
+                </>
+              ))}
+            </d-def>
+
+            <d-term>Vervangend toestel</d-term>
+            <d-def>{shop?.temporaryReplacement}</d-def>
+
+            <d-term>Wachtruimte</d-term>
+            <d-def>{shop?.waitingArea}</d-def>
+            
+            <d-term>Samenwerking verzekering</d-term>
+            <d-def>{shop?.waitingArea}</d-def>
+           
           </d-list>
         </div>
         <Form module={serviceFormModule}>
