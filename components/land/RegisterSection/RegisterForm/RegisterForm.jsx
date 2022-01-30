@@ -172,7 +172,7 @@ const RegisterForm = () => {
         </div>
       </div>
       <Modal
-        title={<SubTitle>Agreement</SubTitle>}
+        title={<SubTitle>Voorwaarden</SubTitle>}
         footer={null}
         module={agrementModal}
       >

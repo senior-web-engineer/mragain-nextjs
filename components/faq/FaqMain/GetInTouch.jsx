@@ -22,7 +22,7 @@ const GetInTouch = () => {
             Neem contact met ons op en we komen zo snel mogelijk bij je terug.
           </Subtitle>
         </GetInTouchText>
-        <GetInTouchButton onClick={() => router.push("/contact")}>
+        <GetInTouchButton onClick={() => router.push("/contact-met-mragain")}>
           Neem contact op
         </GetInTouchButton>
       </Content>

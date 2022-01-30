@@ -90,7 +90,7 @@ const Contact = ({}) => {
               <ContactInfo>info@mragain.nl</ContactInfo>
               <Space />
               <ContactTitle>Telefoon nummer</ContactTitle>
-              <ContactInfo>+31 643972 9000</ContactInfo>
+              <ContactInfo>+31 643972 900</ContactInfo>
             </BoxInfoWrap>
           </Box>
         </Wrapper>
