@@ -120,7 +120,9 @@ const ShopProfile = (routerProps) => {
         <OnMobile only>
           <LoadableReviews shop={shopProfileServerInfo} />
         </OnMobile>
-        <ShopDetails shop={shopGeneralInfo} />
+        {
+          shopGeneralInfo && <ShopDetails shop={shopGeneralInfo} />
+        }
         <LoadableMap shop={shopProfileServerInfo} />
         {shopGeneralInfo && (
           <GeneralShopInfo shopGeneralInfo={shopGeneralInfo} />
