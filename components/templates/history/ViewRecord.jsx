@@ -180,12 +180,12 @@ const ReparationDetailsForm = ({ data }) => {
         </Col>
         <Col span={8}>
           <FormItemStyled label="Merk">
-            <Input placeholder="Merk" value={data?.device.brand_name} />
+            <Input placeholder="Merk" value={data?.brand.brand_name} />
           </FormItemStyled>
         </Col>
         <Col span={8}>
           <FormItemStyled label="Model">
-            <Input placeholder="Model" value={data?.device.model_name} />
+            <Input placeholder="Model" value={data?.model.model_name} />
           </FormItemStyled>
         </Col>
       </Row>
