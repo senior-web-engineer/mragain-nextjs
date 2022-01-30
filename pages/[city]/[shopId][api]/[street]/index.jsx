@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import {
   getGeneralShopInfoServer,
+  getGeneralShopInfoDetailServer,
   getShopProfileByInformationServer,
 } from "service/account/operations";
 import styled from "styled-components";
@@ -119,7 +120,9 @@ const ShopProfile = (routerProps) => {
         <OnMobile only>
           <LoadableReviews shop={shopProfileServerInfo} />
         </OnMobile>
-        <ShopDetails shop={shopProfileServerInfo} />
+        {
+          shopGeneralInfo && <ShopDetails shop={shopGeneralInfo} />
+        }
         <LoadableMap shop={shopProfileServerInfo} />
         {shopGeneralInfo && (
           <GeneralShopInfo shopGeneralInfo={shopGeneralInfo} />
@@ -137,13 +140,14 @@ export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
       ? shopProfileServerInfo[0]
       : shopProfileServerInfo;
 
-  const shopGeneralInfo = await getGeneralShopInfoServer(
+  const shopGeneralInfo = await getGeneralShopInfoDetailServer(
     firstShopProfileServerInfo?.id
   );
+  
   return {
     props: {
       shopProfileServerInfo: firstShopProfileServerInfo,
-      shopGeneralInfo: shopGeneralInfo?.[0] || null,
+      shopGeneralInfo,
     },
   };
 });
