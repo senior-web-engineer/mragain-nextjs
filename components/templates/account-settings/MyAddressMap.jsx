@@ -24,17 +24,19 @@ const MyAddressMap = ({
     }
   }, []);
 
-  const onPlacesSearch = (data) => {
+  const onPlacesSearch = (data, address) => {
     const searchedMarker = { lat: data.lat, lng: data.lng };
     setMarkers([searchedMarker]);
     setCenter(searchedMarker);
-    handleOnLocationSelected(searchedMarker);
+    handleOnLocationSelected(searchedMarker, address);
   };
 
-  const handleOnLocationSelected = (geo) => {
+  const handleOnLocationSelected = (searchedMarker, address) => {
     axios
       .get(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${geo.lat},${geo.lng}&key=${KEY}`
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${address
+          .split(" ")
+          .join("+")}&key=${KEY}`
       )
       .then((res) => {
         if (res.data.results.length !== 0) {
@@ -45,8 +47,8 @@ const MyAddressMap = ({
             country: "",
             zip: "",
             address: "",
-            geo_lat: geo.lat,
-            geo_long: geo.lng,
+            geo_lat: searchedMarker.lat,
+            geo_long: searchedMarker.lng,
           };
           res.data.results[0].address_components.forEach((comp) => {
             if (comp.types.includes("route")) {
@@ -84,22 +86,10 @@ const MyAddressMap = ({
     setShowingInfoWindow(true);
   };
 
-  const onMapClick = (props, data, location) => {
-    const latLng = { lat: location.latLng.lat(), lng: location.latLng.lng() };
-    handleOnLocationSelected(latLng);
-    setMarkers([latLng]);
-  };
-
   return (
     <div style={{ width: "100%", height: "500px" }}>
-      <Map
-        google={google}
-        initialCenter={center}
-        center={center}
-        zoom={10}
-        onClick={onMapClick}
-      >
-        <div>AAA{children(onPlacesSearch)}</div>
+      <Map google={google} initialCenter={center} center={center} zoom={10}>
+        <div>{children(onPlacesSearch)}</div>
         {markers.map((marker, index) => (
           <Marker
             key={`marker-${index}`}
