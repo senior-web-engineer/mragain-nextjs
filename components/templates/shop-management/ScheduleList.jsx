@@ -85,9 +85,12 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
     const savingTimeObject = {};
     workingHours.forEach((day) => {
       if (day.start && day.end) {
-        savingTimeObject[day.key] = `${moment(day.start, "HH:mm").format(
-          "HH:mm"
-        )}-${moment(day.end, "HH:mm").format("HH:mm")}`;
+        savingTimeObject[day.key] = day.opened
+          ? `${moment(day.start, "HH:mm").format("HH:mm")}-${moment(
+              day.end,
+              "HH:mm"
+            ).format("HH:mm")}`
+          : "CLOSED";
       } else {
         savingTimeObject[day.key] = "";
       }
@@ -146,7 +149,6 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
   };
 
   const onShopOpenChange = (value, index) => {
-    console.log(value);
     setWorkingHours((wh) =>
       wh.map((day, dayIndex) => {
         if (index === dayIndex) {
