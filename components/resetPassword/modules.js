@@ -5,7 +5,7 @@ import { createFormModule } from "@/modules/forms";
 import api from "@/utils/api";
 
 const resetPasswordValidator = yup.object({
-  email: yup.string().required().email("Email is not valid"),
+  email: yup.string().required().email("Het emailadres is niet juist"),
 });
 
 export const resetPasswordModule = createFormModule({

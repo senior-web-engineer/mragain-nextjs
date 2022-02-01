@@ -5,8 +5,8 @@ import { createFormModule } from "@/modules/forms";
 import api from "@/utils/api";
 
 const loginValidator = yup.object({
-  email: yup.string().required().email("Email is not valid"),
-  password: yup.string().required("No password provided"),
+  email: yup.string().required().email("Emailadres is niet juist."),
+  password: yup.string().required("Je hebt geen wachtwoord opgegeven"),
 });
 
 export const loginModule = createFormModule({
