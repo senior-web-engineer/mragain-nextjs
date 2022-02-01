@@ -91,9 +91,9 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
                 day.end,
                 "HH:mm"
               ).format("HH:mm")}`
-            : "CLOSED";
+            : "Gesloten";
       } else {
-        savingTimeObject[day.key] = "CLOSED";
+        savingTimeObject[day.key] = "Gesloten";
       }
     });
     onSave(JSON.stringify(savingTimeObject));
@@ -106,7 +106,7 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
       const newData = template.map((day) => {
         const time =
           parsedWeekTimes[day.key] === "" ||
-          parsedWeekTimes[day.key] === "CLOSED"
+          parsedWeekTimes[day.key] === "Gesloten"
             ? undefined
             : parsedWeekTimes[day.key].split("-");
 
@@ -123,7 +123,7 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
             start: time ? time[0] : undefined,
             end: time ? time[1] : undefined,
             hours,
-            opened: parsedWeekTimes[day.key] === "CLOSED" || hours > 0,
+            opened: parsedWeekTimes[day.key] === "Gesloten" || hours > 0,
           };
         } else {
           return {
