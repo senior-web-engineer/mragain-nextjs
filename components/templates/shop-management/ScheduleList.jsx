@@ -85,14 +85,15 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
     const savingTimeObject = {};
     workingHours.forEach((day) => {
       if (day.start && day.end) {
-        savingTimeObject[day.key] = day.opened
-          ? `${moment(day.start, "HH:mm").format("HH:mm")}-${moment(
-              day.end,
-              "HH:mm"
-            ).format("HH:mm")}`
-          : "CLOSED";
+        savingTimeObject[day.key] =
+          day.opened && day.start !== undefined
+            ? `${moment(day.start, "HH:mm").format("HH:mm")}-${moment(
+                day.end,
+                "HH:mm"
+              ).format("HH:mm")}`
+            : "CLOSED";
       } else {
-        savingTimeObject[day.key] = "";
+        savingTimeObject[day.key] = "CLOSED";
       }
     });
     onSave(JSON.stringify(savingTimeObject));
@@ -104,22 +105,34 @@ export const ScheduleList = ({ validOpenTime, onSave }) => {
       const parsedWeekTimes = JSON.parse(validOpenTime[0].valid_day_time);
       const newData = template.map((day) => {
         const time =
-          parsedWeekTimes[day.key] === ""
+          parsedWeekTimes[day.key] === "" ||
+          parsedWeekTimes[day.key] === "CLOSED"
             ? undefined
             : parsedWeekTimes[day.key].split("-");
 
-        const hours = time
-          ? moment
-              .duration(moment(time[1], "HH:mm").diff(moment(time[0], "HH:mm")))
-              .asHours()
-          : 0;
-        return {
-          ...day,
-          start: time ? time[0] : undefined,
-          end: time ? time[1] : undefined,
-          hours,
-          opened: hours > 0,
-        };
+        if (time !== undefined) {
+          const hours = time
+            ? moment
+                .duration(
+                  moment(time[1], "HH:mm").diff(moment(time[0], "HH:mm"))
+                )
+                .asHours()
+            : 0;
+          return {
+            ...day,
+            start: time ? time[0] : undefined,
+            end: time ? time[1] : undefined,
+            hours,
+            opened: parsedWeekTimes[day.key] === "CLOSED" || hours > 0,
+          };
+        } else {
+          return {
+            ...day,
+            start: undefined,
+            end: undefined,
+            opened: false,
+          };
+        }
       });
       setWorkingHours(newData);
     }
