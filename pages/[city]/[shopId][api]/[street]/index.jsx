@@ -81,7 +81,7 @@ const ShopProfile = (routerProps) => {
         "ratingValue": "${shopAccountProfile.mark}",
 	"bestRating": "5",
 	"ratingCount": "21",
-	"worstRating": "4"
+	"worstRating": "0"
       },
       "name": "${shopAccountProfile.name}",
       "telephone": "${shopAccountProfile.phone_number}",
