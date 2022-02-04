@@ -95,7 +95,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           ></link>
           <script
-            async
+            async defer
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
           ></script>
           <noscript>
@@ -109,7 +109,7 @@ export default class MyDocument extends Document {
           {isProduction ? (
             <>
               <script
-                async
+                async defer
                 custom-element="amp-analytics"
                 src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
               />
@@ -118,6 +118,11 @@ export default class MyDocument extends Document {
               <script dangerouslySetInnerHTML={{ __html: facebookScript }} />
             </>
           ) : null}
+          {isProduction ? <>
+            {/* Start of HubSpot Embed Code  */}
+            <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/7189486.js"></script>
+            {/* End of HubSpot Embed Code  */}
+          </> :null}
         </HeadWithoutPreload>
         <body>
           <Main />
@@ -131,9 +136,7 @@ export default class MyDocument extends Document {
               />
             </>
           ) : null}
-           {/* Start of HubSpot Embed Code  */}
-          <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/7189486.js"></script>
-           {/* End of HubSpot Embed Code  */}
+           
         </body>
       </Html>
     );
