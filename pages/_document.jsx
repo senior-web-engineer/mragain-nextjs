@@ -131,6 +131,9 @@ export default class MyDocument extends Document {
               />
             </>
           ) : null}
+           {/* Start of HubSpot Embed Code  */}
+          <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/7189486.js"></script>
+           {/* End of HubSpot Embed Code  */}
         </body>
       </Html>
     );
