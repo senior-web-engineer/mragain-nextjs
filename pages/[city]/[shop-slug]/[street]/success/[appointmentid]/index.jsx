@@ -189,7 +189,7 @@ const HorizontalLine = styled.div`
 `;
 
 export async function getServerSideProps(ctx) {
-  const shopId = ctx.query["shopId][api"];
+  const shopId = ctx.query["shop-slug"];
   const shopProfileServerInfo = await getShopProfileByInformationServer(shopId);
   return {
     props: {

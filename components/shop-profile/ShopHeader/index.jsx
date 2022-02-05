@@ -273,7 +273,7 @@ const ADVANTAGES = [
 
 export function ContactButton(...props) {
   const router = useRouter();
-  const nextLocation = `/${router.query["city"]}/${router.query["shopId][api"]}/${router.query["street"]}/contact`;
+  const nextLocation = `/${router.query["city"]}/${router.query["shop-slug"]}/${router.query["street"]}/contact`;
 
   return (
     <Link href={nextLocation}>

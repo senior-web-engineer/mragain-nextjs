@@ -136,7 +136,7 @@ const ShopProfile = (routerProps) => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
-  const shopId = ctx.query["shopId][api"];
+  const shopId = ctx.query["shop-slug"];
   const shopProfileServerInfo = await getShopProfileByInformationServer(shopId);
   const firstShopProfileServerInfo =
     shopProfileServerInfo && shopProfileServerInfo[0]
