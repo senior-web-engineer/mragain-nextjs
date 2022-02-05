@@ -190,7 +190,7 @@ function MobileAppointmentButton({ searchUrlData }) {
   return (
     <OnMobile only>
       <MobileToolbar>
-        <Link href={`/zoek-een-reparateur?${urlData}`}>
+        <Link href={`/zoek-een-reparateur?${urlData}`} prefetch={false} passHref>
           <Button disabled={!service} as="a">
             Bekijk reparateurs
           </Button>
@@ -240,7 +240,7 @@ export default function ModelPage({ data, reparations }) {
               <price>&euro;{data?.price?.[0]}</price>
             </div>
           ) : null}
-          <Link href={`/zoek-een-reparateur?${urlData}`}>
+          <Link href={`/zoek-een-reparateur?${urlData}`} prefetch={false} passHref>
             <Button as="a">
               <FontAwesomeIcon icon={faArrowRight} />
             </Button>
