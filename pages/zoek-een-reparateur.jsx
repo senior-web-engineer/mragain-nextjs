@@ -1203,24 +1203,35 @@ export default function SearchResults() {
   const [selectedShop, updateSelectedShop] = useState(null);
   const [showMap, updateShowMap] = useState(false);
   const mobileSelectorsRef = useRef(null);
+  const router = useRouter();
+  const querystring = router.query;
+
+ 
 
   useEffect(() => {
-    async function main() {
-      await loadScript();
-      const formValues = filtersFormModule.state.values;
-      if (formValues.device) {
-        await brandFetcher.key(formValues.device).fetch();
+    (async () => {
+      const formValues = filtersFormModule?.state?.values;
+      
+      if (formValues?.device  || querystring?.device) {
+        await brandFetcher
+          .key(formValues?.device || querystring?.device)
+          .fetch();
       }
-      if (formValues.brand) {
-        await modelFetcher.key(formValues.brand).fetch();
+      if (formValues?.brand || querystring.brand) {
+        await modelFetcher.key(formValues?.brand || querystring.brand).fetch();
+      }
+  
+      if (formValues?.model || querystring.model) {
+        await serviceFetcher
+          .key(formValues?.model || querystring.model)
+          .fetch();
       }
 
-      if (formValues.model) {
-        await serviceFetcher.key(formValues.model).fetch();
-      }
-    }
-    main();
-  }, []);
+      await loadScript();
+
+    })();
+  }, [router.asPath]);
+
 
   useEffect(() => {
     if (shopRefs[selectedShop]) {
