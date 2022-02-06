@@ -144,8 +144,6 @@ function ReparationImage() {
 }
 
 export default function ShopDetails({ shop }) {
-  console.log(shop);
-
   return (
     <MainWrap>
       <MaxConstraints>
@@ -225,7 +223,10 @@ export default function ShopDetails({ shop }) {
             
             <d-term>Samenwerking verzekering</d-term>
             <d-def>{shop?.waitingArea}</d-def>
-           
+
+            <d-term>Parking Area</d-term>
+            <d-def>{shop?.parkingArea}</d-def>
+            
           </d-list>
         </div>
         <Form module={serviceFormModule}>
