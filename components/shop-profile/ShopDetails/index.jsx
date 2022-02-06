@@ -127,13 +127,14 @@ function ReparationImage() {
   const selectedReparation = useMemo(() => {
     return listItems.find((item) => item.id === formState.values.service);
   }, [listItems, formState.values]);
-
+  const defaultImageIndex = Math.floor(Math.random() * (listItems.length + 1))
+  const imageUrl = selectedReparation?.reparation?.repair_image || listItems[defaultImageIndex]?.reparation?.repair_image;
   return (
     <ReparationImageWrap>
-      {selectedReparation?.reparation?.repair_image ? (
+      {imageUrl ? (
         <Image
           loading="lazy"
-          src={selectedReparation.reparation.repair_image}
+          src={imageUrl}
           layout="fill"
           objectFit="cover"
           alt=""
