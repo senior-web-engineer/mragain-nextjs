@@ -19,7 +19,10 @@ const ImagePreviwer = styled.div`
   position: relative;
 `;
 
-export default function PicturesWall({ value = [], onChange }) {
+export default function PicturesWall({ value = [], onChange, ...props }) {
+  const {appointmentForm} = props;
+
+
   const [modalState, setModalState] = useState({
     previewVisible: false,
     previewImage: "",
@@ -59,7 +62,7 @@ export default function PicturesWall({ value = [], onChange }) {
   return (
     <>
       <Upload
-        action={API_PATH.UPLOADIMAGE}
+        action={API_PATH.UPLOAD_APPOINTMENT_IMAGE}
         listType="picture-card"
         // unfreeze immer payload
         fileList={[...value].map((file) => ({ ...file }))}
@@ -70,7 +73,7 @@ export default function PicturesWall({ value = [], onChange }) {
           return {
             image: file,
             // we need to send a shop id, but we need an endpoint where this is not needed
-            shop_id: 1,
+            appointment: appointmentForm?.state?.values?.id
           };
         }}
       >

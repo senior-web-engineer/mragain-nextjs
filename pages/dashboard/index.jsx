@@ -656,6 +656,7 @@ function DashboardPage({ isEditMode }) {
                 <Field
                   as={PicturesWall}
                   textarea
+                  appointmentForm={appointmentForm}
                   name="images"
                   label="Foto's"
                 />

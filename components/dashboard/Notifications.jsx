@@ -87,7 +87,6 @@ export default function Notifications() {
   });
 
   function renderNotification(notification) {
-    console.log(notification.n_type);
     return (
       <MessageWrap>
         <strong>
