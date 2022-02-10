@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { MaxConstraints } from "@/components/styled/layout";
+import parse from "html-react-parser";
 
 const MainWrap = styled.div`
   background-color: #f3f3f3;
@@ -23,14 +24,14 @@ const Header = styled.h3`
   padding-bottom: 24px;
 `;
 
-const Text = styled.p`
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 24px;
-  color: #404040;
-`;
+// const Text = styled.p`
+//   font-family: Montserrat;
+//   font-style: normal;
+//   font-weight: normal;
+//   font-size: 14px;
+//   line-height: 24px;
+//   color: #404040;
+// `;
 
 const StyledCol = styled(Col)`
   margin: 24px 0;
@@ -49,8 +50,8 @@ export default function GeneralShopInfo({ shopGeneralInfo }) {
           >
             {shopGeneralInfo?.content?.map((info) => (
               <StyledCol xs={24} sm={12} md={12}>
-                <Header>{info?.header}</Header>
-                <Text>{info?.content}</Text>
+                <Header>{parse(info?.header ? info?.header : "")}</Header>
+                <div>{parse(info?.content ? info.content : "")}</div>
               </StyledCol>
             ))}
           </Row>
