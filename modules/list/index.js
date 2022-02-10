@@ -47,7 +47,7 @@ export function createListModule({
     });
   }
 
-  const debouncedFetchItems = debounce(fetchItems, 1000);
+  const debouncedFetchItems = debounce(fetchItems, 10);
 
   function dispatch(action) {
     store.ref.dispatch(action);
