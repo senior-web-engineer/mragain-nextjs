@@ -155,8 +155,8 @@ function SearchButton() {
     <Link
       href={`/zoek-een-reparateur?zip=${zip}&device=${device}&long=${currentLocation.long}&lat=${currentLocation.lat}&distance=15&sort=1`}
     >
-      <Button aria-label="Zoek" as="a">
-        <span>Zoek</span>
+	<Button aria-label="Zoek" as="a">
+	 Zoek
         <FontAwesomeIcon icon={faArrowRight} />
       </Button>
     </Link>

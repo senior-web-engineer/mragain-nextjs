@@ -272,7 +272,7 @@ function SubscribeForm() {
   const { submitted } = useFormContext().state;
 
   if (submitted) {
-    return <success>Thank you for subscribing</success>;
+    return <success>Bedankt voor je aanmelding!</success>;
   }
 
   return (
