@@ -102,6 +102,7 @@ const ContactForm = () => {
               />
             </FlexHelper>
             <Button type="submit">
+	      Verzend
               <FontAwesomeIcon icon={faArrowRight} style={{ color: "white" }} />
             </Button>
           </Form>
