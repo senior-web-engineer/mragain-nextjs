@@ -105,19 +105,6 @@ const SearchWrap = styled.div`
     margin-top: 160px;
   }
 
-  ${Button} {
-    margin-top: 20px;
-    margin-bottom: 10px;
-
-    .svg-inline--fa {
-      margin-right: 0;
-    }
-
-    span {
-      display: inline-block;
-    }
-  }
-
   ${media.tablet`
     ${Button} {
       min-width: 51px;

@@ -1,5 +1,6 @@
 import "./geef-een-review.less";
 
+import Head from "next/head";
 import { Button, Input, message, Radio, Rate } from "antd";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -129,6 +130,9 @@ const CheckoutReview = (routerProps) => {
 
   return (
     <DefaultLayout>
+      <Head>
+	<title>Geef je review | MrAgain </title>
+      </Head>	  
       <div className="checkout-review-page">
         <div className="checkout-review-page-container">
           <div className="checkout-review-page-main">
