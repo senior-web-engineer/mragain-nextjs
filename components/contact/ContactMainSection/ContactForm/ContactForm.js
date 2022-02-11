@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { notification } from "antd";
 import router from "next/router";
 import React, { useEffect } from "react";
+import Button from "@/components/ui/Button";
 
 import Form from "@/modules/forms";
 import { Field } from "@/modules/forms/Blocks";
 
 import {
-  Button,
   FlexHelper,
   FormBox,
   FormText,
