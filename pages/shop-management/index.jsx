@@ -49,7 +49,7 @@ const renderStatus = (status) => {
   const res = getColor(status ? 2 : 0);
   return (
     <Tag color={res.color} key={res.value}>
-      {status ?  "Closed" : "Opened"}
+      {status ?  "Gesloten" : "Open"}
     </Tag>
   );
 };
