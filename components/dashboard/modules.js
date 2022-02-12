@@ -1,8 +1,3 @@
-import { notification } from "antd";
-import { uniqueId } from "lodash";
-import moment from "moment";
-import Router from "next/router";
-
 import { store } from "@/configureStore";
 import { API_PATH, BACK_END_URL } from "@/constants";
 import dataFetcher, { keyedDataFetcher } from "@/modules/dataFetcher";
@@ -10,6 +5,11 @@ import { createFormModule } from "@/modules/forms";
 import { createListModule } from "@/modules/list";
 import { createModalModule } from "@/modules/modal";
 import api, { privateApi } from "@/utils/api";
+import { notification } from "antd";
+import { uniqueId } from "lodash";
+import moment from "moment";
+import Router from "next/router";
+
 
 export const currentUser = dataFetcher({
   selectors: ["currentUser"],
@@ -107,8 +107,8 @@ export const appointmentForm = createFormModule({
           guarantee_time: reparation.guarantee,
           comments: reparation.comments,
           appointmentId: reparation.appointment.id,
-          images: JSON.parse(reparation.images || "[]").map((url) => ({
-            url: url.startsWith("/") ? BACK_END_URL + url : url,
+          images: JSON.parse(reparation?.images || "[]")?.map((url) => ({
+            url: url?.startsWith("/") ? BACK_END_URL + url : url,
             uid: uniqueId(),
           })),
         };
