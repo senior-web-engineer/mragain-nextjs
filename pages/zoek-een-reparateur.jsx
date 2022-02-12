@@ -584,10 +584,10 @@ const MobileToolbar = styled.div`
 `;
 
 ShopDetails.PriceWrap = styled.div`
-  display: none;
-  margin-left: 40px;
+  display: block;
 
   ${media.tablet`
+    margin-left: 40px;
     display: block;
   `}
 `;
@@ -618,16 +618,17 @@ ShopDetails.AppointmentInfo = styled.div`
   margin-top: 10px;
   padding-top: 8px;
   border-top: 2px solid #ddd;
+  display: flex;
+  justify-content: space-between;
   label {
     margin-bottom: 0;
   }
   date {
     font-size: 13px;
   }
-
   form {
-    display: none;
-  }
+      display: block;
+    }
 
   ${media.tablet`
     padding-top: 0;
@@ -635,11 +636,6 @@ ShopDetails.AppointmentInfo = styled.div`
     margin-top: 0;
     display: flex;
     align-items: center;
-
-    form {
-      display: block;
-    }
-
 
     label {
       margin-bottom: 5px;
@@ -671,8 +667,8 @@ const shopRefs = {};
 const ShopBridgeContext = createContext();
 
 function ShopPrice({ item }) {
-  const { values } = useFormContext().state;
-  if (!item.price || values.service === "0") {
+  const value = useFormContext()?.state;
+  if (!item.price || value?.values?.service === "0") {
     return null;
   }
 
