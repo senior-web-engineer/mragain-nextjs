@@ -107,7 +107,7 @@ export const appointmentForm = createFormModule({
           guarantee_time: reparation.guarantee,
           comments: reparation.comments,
           appointmentId: reparation.appointment.id,
-          images: JSON.parse(reparation?.images || "[]")?.map((url) => ({
+          images: reparation?.images?.map((url) => ({
             url: url?.startsWith("/") ? BACK_END_URL + url : url,
             uid: uniqueId(),
           })),
