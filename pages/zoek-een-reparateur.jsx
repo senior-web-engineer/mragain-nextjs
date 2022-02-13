@@ -443,7 +443,7 @@ const ShopDetails = styled.div`
   margin-left: 21px;
   flex-grow: 1;
 
-  tag {
+  span {
     position: absolute;
     top: 15px;
     left: 0;
@@ -685,7 +685,11 @@ function ShopItem({ item }) {
   const { selectedShop, updateSelectedShop, showMap } = useContext(ShopBridgeContext);
   const location = [item.shop.city || ""].filter(Boolean).join(", ");
   function renderService(service) {
-    return <ShopDetails.Service>{service.device_name}</ShopDetails.Service>;
+    return (
+      <ShopDetails.Service key={service?.id}>
+        {service.device_name}
+      </ShopDetails.Service>
+    );
   }
 
   const tags = item.shop_type_text;
@@ -738,9 +742,9 @@ function ShopItem({ item }) {
                   [`data-${TAG_TO_COLOR[value]}`.replace("#", "")]: true,
                 };
                 return (
-                  <tag key={value} {...props}>
+                  <span key={value} {...props} >
                     {value}
-                  </tag>
+                  </span>
                 );
               })
             : null}

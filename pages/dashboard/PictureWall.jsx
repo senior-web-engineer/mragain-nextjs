@@ -22,7 +22,6 @@ const ImagePreviwer = styled.div`
 export default function PicturesWall({ value = [], onChange, ...props }) {
   const {appointmentForm} = props;
 
-
   const [modalState, setModalState] = useState({
     previewVisible: false,
     previewImage: "",
@@ -73,7 +72,7 @@ export default function PicturesWall({ value = [], onChange, ...props }) {
           return {
             image: file,
             // we need to send a shop id, but we need an endpoint where this is not needed
-            appointment: appointmentForm?.state?.values?.id
+            appointment: appointmentForm?.state?.values?.appointmentId
           };
         }}
       >
