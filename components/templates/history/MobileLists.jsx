@@ -159,15 +159,15 @@ const ListItem = ({
           <Row>
             <Col span={12}>
               <Text.Body lineHeight="16" upperCase>
-                Warranty
+                Garantie
               </Text.Body>
               <Text.Body lineHeight="16" weight="bold">
-                {data[index].guarantee} months
+                {data[index].guarantee} maanden
               </Text.Body>
             </Col>
             <Col span={12}>
               <Text.Body lineHeight="16" upperCase>
-                Price
+                Prijs
               </Text.Body>
               <Text.Body lineHeight="16" weight="bold">
                 {data
@@ -211,9 +211,9 @@ const ListItem = ({
                 "months"
               )
             )
-              ? "Valid"
-              : "Invalid"}{" "}
-            Warranty
+              ? "Geldige"
+              : "Verlopen"}{" "}
+            garantie
           </Text.Body>
         </GuaranteeBox>
       </BoxContent>
