@@ -698,7 +698,7 @@ function ShopItem({ item }) {
   // API changed does not include the city any longer?
   // const shopRoute = `/${item.shop.name}--${item.shop.city}?device=${formState.device}&brand=${formState.brand}&model=${formState.model}`;
 
-  const shopRoute = `${getShopRoute(item.shop)}?device=${
+  const shopRoute = `${getShopRoute(item)}?device=${
     formState.device
   }&brand=${formState.brand}&model=${formState.model}`;
 

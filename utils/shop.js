@@ -1,5 +1,5 @@
-export function getShopRoute(shop) {
-  return `${shop.city || "_"}/${shop.name}/${shop.street || "_"}`
+export function getShopRoute(item) {
+  return `${item.city_slug || "_"}/${item.slug}/${item.street_slug || "_"}`
     .split(" ")
     .join("-");
 }
