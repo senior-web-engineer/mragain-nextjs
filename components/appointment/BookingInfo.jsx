@@ -242,7 +242,7 @@ export default function BookingInfo({
             <price>&euro;{service?.price}</price>
           </ServiceCostWrap>
           <TotalWrap>
-            <label>Te betalen bij reparateur</label>
+            <label>Reparatiekosten</label>
             <price>&euro;{service?.price}</price>
           </TotalWrap>
         </>

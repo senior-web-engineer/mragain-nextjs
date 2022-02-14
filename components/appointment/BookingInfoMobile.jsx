@@ -249,7 +249,7 @@ export default function BookingInfoMobile({ shop, showPrices = true }) {
         </ShopWrap>
         {showPrices && service?.price ? (
           <TotalWrap>
-            <label>Te betalen bij reparateur</label>
+            <label>Reparatiekosten</label>
             <price>&euro;{service.price}</price>
             <FontAwesomeIcon icon={faChevronDown} />
           </TotalWrap>
