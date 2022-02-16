@@ -6,7 +6,8 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Col, DatePicker, Icon, Row, TimePicker } from "antd";
+import { Col, DatePicker, Icon, Row, TimePicker, Input,  Typography , Button as AntdButton , Form as AntdForm } from "antd";
+
 import { Dropdown, Menu } from "antd";
 import get from "lodash/get";
 import Head from "next/head";
@@ -36,8 +37,6 @@ import {
 import Notifications from "@/components/dashboard/Notifications";
 import Stats from "@/components/dashboard/Stats";
 import DefaultLayout from "@/components/layouts/Dashboard";
-import { FieldWrapAdmin } from "@/components/styled/Forms";
-import { SubTitle } from "@/components/styled/text";
 import {
   BoxContent,
   BoxElement,
@@ -46,7 +45,7 @@ import {
   Separator,
 } from "@/components/templates/history/MobileLists";
 import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input";
+// import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
 import { createSelectComponent } from "@/modules/dataFetcher";
 import Form, { useFormContext } from "@/modules/forms";
@@ -57,8 +56,53 @@ import Modal, { Drawer } from "@/modules/modal";
 import media, { OnMobile, useScreenSize } from "@/utils/media";
 
 import PicturesWall from "./PictureWall";
-//
+import { ArrowLeftOutlined } from "@ant-design/icons";
+import DrawerDivider from "../../assets/icons/ReactSVGIcons/DrawerDivider";
 
+const { Title } = Typography;
+
+const DrawerStyled = styled(Drawer)`
+  .ant-drawer-header {
+    background: #06c987;
+    height: 81px;
+    display: flex;
+    align-items: center;
+    border-radius: 0;
+    span {
+      font-weight: 600;
+      font-size: 20px;
+    }
+  }
+  .ant-drawer-title {
+    color: #fafafa;
+    display: flex;
+    justify-content: center;
+  }
+  .ant-drawer-close {
+    color: #fafafa;
+  }
+  .ant-upload-picture-card-wrapper {
+    padding: 5px;
+    background-color: #fafafa;
+  }
+`;
+const FormItemStyled = styled(AntdForm.Item)`
+  label {
+    color: #909090;
+    font-size: 14px;
+    line-height: 20px;
+  }
+`;
+const UploadPhotosWrapper = styled.div`
+  border: 2px dashed #e4e4e4;
+  padding: 20px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+`;
 const PageTitle = styled.h1`
   font-family: Montserrat;
   font-style: normal;
@@ -93,12 +137,6 @@ const TableCellContent = styled.div`
     font-weight: normal;
     color: #909090;
   }
-`;
-
-const FormSectionTitle = styled(SubTitle)`
-  border-bottom: 1px solid #f0f0f0;
-  padding-bottom: 11px;
-  margin-bottom: 24px;
 `;
 
 export const CreateButton = styled(Button)`
@@ -407,6 +445,8 @@ function DashboardPage({ isEditMode }) {
     }
   }, []);
 
+  const [screenSize, setScreenSize] = useState(600);
+
   return (
     <DefaultLayout>
     <Head>
@@ -535,137 +575,187 @@ function DashboardPage({ isEditMode }) {
           />
         </OnMobile>
       </List>
-      <Drawer
-        width={size === "mobile" ? "90%" : "600px"}
+      <DrawerStyled
+        title={
+          <>
+            <ArrowLeftOutlined
+              style={{
+                fontWeight: 700,
+              }}
+              onClick={() => {
+                createAppointmentFormModal.actions.close();
+              }}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span>New Appointment</span>
+          </>
+        }
+        width={screenSize}
         module={createAppointmentFormModal}
       >
         <Form module={appointmentForm}>
-          <FormSectionTitle>Klant gegevens</FormSectionTitle>
-          <FieldWrapAdmin>
+          <Title level={4}>Appointment details</Title>
+          <DrawerDivider />
+          <FormItemStyled label="Customer Name">
             <Field
               as={Input}
               name="customerName"
-              label="Naam"
               disabled={isEditMode}
             />
-          </FieldWrapAdmin>
-          <FieldWrapAdmin>
+          </FormItemStyled>
+          <FormItemStyled label="Email Address">
             <Field
               as={Input}
               name="email"
-              label="E-mailadres"
               disabled={isEditMode}
             />
-          </FieldWrapAdmin>
-          <FieldWrapAdmin>
+          </FormItemStyled>
+          <FormItemStyled label="Contact Number">
             <Field
               as={Input}
               name="contactNumber"
-              label="Telefoon nummer"
               disabled={isEditMode}
             />
-          </FieldWrapAdmin>
-          <FormSectionTitle>Reparatie details</FormSectionTitle>
-          <InlineFields>
-            <FieldWrapAdmin>
-              <DeviceSelector
-                as={Select}
-                label="Apparaat"
-                name="device"
-                onChange={onDeviceChange}
-                dropdownStyle={{ minWidth: "200px" }}
-              />
-            </FieldWrapAdmin>
-            <FieldWrapAdmin>
-              <BrandSelector
-                as={Select}
-                label="Merk"
-                name="brand"
-                onChange={onBandChange}
-                dropdownStyle={{ minWidth: "200px" }}
-              />
-            </FieldWrapAdmin>
-            <FieldWrapAdmin>
-              <ModelSelector
-                as={Select}
-                label="Model"
-                name="model"
-                onChange={onModelChange}
-                dropdownStyle={{ minWidth: "200px" }}
-              />
-            </FieldWrapAdmin>
-          </InlineFields>
-          <FieldWrapAdmin>
+          </FormItemStyled>
+          <Row gutter={24}>
+            <Col span={12}>
+              <FormItemStyled label="Date">
+                <Field
+                  as={DatePicker}
+                  name="date"
+                  disabled={isEditMode}
+                />
+              </FormItemStyled>
+            </Col>
+            <Col span={12}>
+              <FormItemStyled label="Time">
+                <Field
+                  as={TimePicker}
+                  name="time"
+                  format="HH:mm"
+                  disabled={isEditMode}
+                  minuteStep={15}
+                />
+              </FormItemStyled>
+            </Col>
+          </Row>
+          <Row gutter={24}>
+            <Col span={12}>
+                <FormItemStyled label="Duration">
+                  <Input type="time" placeholder="" name="duration" />
+              </FormItemStyled>
+            </Col>
+          </Row>
+          <Row gutter={24}>
+            <Col span={12}>
+              <FormItemStyled label="Price" >
+                <Field
+                  as={Input}
+                  name="price"
+                  disabled={isEditMode}
+                />
+              </FormItemStyled>
+            </Col>
+            <Col span={12}>
+              <FormItemStyled label="Guarantee" >
+                <Field
+                  as={Select}
+                  name="guarantee_time"
+                  disabled={isEditMode}
+                />
+              </FormItemStyled>
+            </Col>
+          </Row>
+          <Title level={4}>Reparation details</Title>
+          <DrawerDivider />
+          <Row gutter={24}>
+            <Col span={8}>
+              <FormItemStyled label="Device Type" >
+                <DeviceSelector
+                  as={Select}
+                  name="device"
+                  onChange={onDeviceChange}
+                  dropdownStyle={{ minWidth: "200px" }}
+                />
+              </FormItemStyled>
+            </Col>
+            <Col span={8}>
+              <FormItemStyled label="Brand">
+                <BrandSelector
+                  as={Select}
+                  name="brand"
+                  onChange={onBandChange}
+                  dropdownStyle={{ minWidth: "200px" }}
+                />
+              </FormItemStyled>
+            </Col>
+            <Col span={8}>
+              <FormItemStyled label="Model">
+                <ModelSelector
+                  as={Select}
+                  name="model"
+                  onChange={onModelChange}
+                  dropdownStyle={{ minWidth: "200px" }}
+                />
+              </FormItemStyled>
+            </Col>
+          </Row>
+          <FormItemStyled label="Reparation type">
             <ServiceSelector
               as={Select}
-              label="Reparatie"
               name="reparation"
               onChange={onReparationChange}
             />
-          </FieldWrapAdmin>
-          <FormSectionTitle>Datum & Tijd</FormSectionTitle>
-          <InlineFields>
-            <FieldWrapAdmin>
-              <Field
-                as={DatePicker}
-                label="Datum"
-                name="date"
-                disabled={isEditMode}
-              />
-            </FieldWrapAdmin>
-            <FieldWrapAdmin>
-              <Field
-                as={TimePicker}
-                label="Tijd"
-                name="time"
-                format="HH:mm"
-                disabled={isEditMode}
-                minuteStep={15}
-              />
-            </FieldWrapAdmin>
-          </InlineFields>
-          <FieldWrapAdmin>
+          </FormItemStyled>
+          <FormItemStyled label="IMEI/referentie" >
             <Field
               as={Input}
-              name="price"
-              label="Prijs"
+              name="referentie"
+              placeholder="IMEI of referentie" 
               disabled={isEditMode}
             />
-          </FieldWrapAdmin>
-          <FieldWrapAdmin>
-            <Field
-              as={Input}
-              name="guarantee_time"
-              label="Garantie"
-              disabled={isEditMode}
-            />
-          </FieldWrapAdmin>
-          {isEditMode ? (
-            <>
-              <FormSectionTitle>Extra informatie</FormSectionTitle>
-              <FieldWrapAdmin>
-                <Field
-                  as={Input}
-                  textarea
+          </FormItemStyled>
+          <Title level={4}>Remarks</Title>
+          <DrawerDivider />
+          <FormItemStyled label="Complaints and remarks" name="comments">
+                 <Field
+                  as={Input.TextArea}
+                  rows={4}
                   name="comments"
-                  label="Opmerkingen"
-                />
-              </FieldWrapAdmin>
-
-              <FieldWrapAdmin>
-                <Field
+               />
+          </FormItemStyled>
+          <FormItemStyled name="images" label="Add a photo/video of the device">
+            <UploadPhotosWrapper>
+              <Field
                   as={PicturesWall}
                   textarea
                   appointmentForm={appointmentForm}
                   name="images"
-                  label="Foto's"
                 />
-              </FieldWrapAdmin>
-            </>
-          ) : null}
-          <Button>{isEditMode ? "Update afspraak" : "Maak afspraak"}</Button>
+            </UploadPhotosWrapper>
+          </FormItemStyled>
+          <ButtonContainer>
+            <AntdButton
+              size="large"
+              shape="round"
+              block
+              onClick={() => {
+                createAppointmentFormModal.actions.close();
+              }}
+            >
+              Cannel
+            </AntdButton>
+            <AntdButton
+              type="primary"
+              size="large"
+              shape="round"
+              block
+            >
+              {isEditMode ? "Update Appointment" : "Add Appointment"}
+            </AntdButton>
+          </ButtonContainer>
         </Form>
-      </Drawer>
+      </DrawerStyled>  
       <Modal module={markCompleteModal} okText="Bevestig">
         <Image
           src="/images/complete_repairment.png"

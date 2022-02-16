@@ -17,7 +17,7 @@ const StyledSelect = styled(AntdSelect)`
   }
 
   .ant-select-selection {
-    border: 0;
+    ${'' /* border: 0; */}
   }
 
   .ant-select-arrow {
