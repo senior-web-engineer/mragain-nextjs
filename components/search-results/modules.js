@@ -1,15 +1,15 @@
-import { notification } from "antd";
-import router from "next/router";
-import querystring from "querystring";
-
 import { API_PATH } from "@/constants";
 import dataFetcher, { keyedDataFetcher } from "@/modules/dataFetcher";
 import { createFormModule } from "@/modules/forms";
 import { createListModule } from "@/modules/list";
 import { createModalModule } from "@/modules/modal";
 import api from "@/utils/api";
-
+import { notification } from "antd";
+import router from "next/router";
+import querystring from "querystring";
 import { getLongAndLat } from "../common/GooglePlaces";
+
+
 
 //
 
@@ -70,45 +70,6 @@ export const shopListModule = createListModule({
         guarantee: parseInt(params.guarantee),
         sort: params.sort,
       });
-
-      let shopDevices = await api.post(`${API_PATH.SHOP_DEVICES}/`, {
-        shops: data.map((item) => item.shop.id).join(","),
-      });
-      data = data.map((item) => {
-        item.devices = [];
-        for (let device of shopDevices) {
-          if (device.shop_id === item.shop.id) {
-            item.devices.push(device);
-          }
-        }
-        return item;
-      });
-
-      api
-        .post(`${API_PATH.NEXT_SLOTS}/`, {
-          shops: data.map((item) => item.shop.id).join(","),
-        })
-        .then((slots) => {
-          const items = shopListModule.state.items;
-          const refreshed = Object.keys(items).reduce((accumulator, key) => {
-            accumulator[key] = items[key].map((item) => {
-              const slot = slots.find(
-                (s) => `${s.shop_id}` === `${item.shop.id}`
-              );
-              if (slot) {
-                return {
-                  ...item,
-                  ...slot,
-                };
-              }
-
-              return item;
-            });
-            return accumulator;
-          }, {});
-
-          shopListModule.actions.refreshItems(refreshed);
-        });
 
       return {
         items: data,

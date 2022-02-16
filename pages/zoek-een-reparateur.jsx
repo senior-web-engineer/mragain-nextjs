@@ -684,12 +684,10 @@ function ShopItem({ item }) {
   const router = useRouter();
   const { selectedShop, updateSelectedShop, showMap } = useContext(ShopBridgeContext);
   const location = [item.shop.city || ""].filter(Boolean).join(", ");
+
+
   function renderService(service) {
-    return (
-      <ShopDetails.Service key={service?.id}>
-        {service.device_name}
-      </ShopDetails.Service>
-    );
+    return <ShopDetails.Service>{service}</ShopDetails.Service>;
   }
 
   const tags = item.shop_type_text;
@@ -711,7 +709,6 @@ function ShopItem({ item }) {
       router.push(shopRoute);
       return;
     }
-
     updateSelectedShop(item.shop.id);
   }
 
@@ -1206,6 +1203,7 @@ export default function SearchResults() {
   const router = useRouter();
   const querystring = router.query;
 
+  console.log(shopListModule);
  
 
   useEffect(() => {
