@@ -659,26 +659,6 @@ function DashboardPage({ isEditMode }) {
               </FormItemStyled>
             </Col>
           </Row>
-          <Row gutter={24}>
-            <Col span={12}>
-              <FormItemStyled label="Price" >
-                <Field
-                  as={Input}
-                  name="price"
-                  disabled={isEditMode}
-                />
-              </FormItemStyled>
-            </Col>
-            <Col span={12}>
-              <FormItemStyled label="Guarantee" >
-                <Field
-                  as={Select}
-                  name="guarantee_time"
-                  disabled={isEditMode}
-                />
-              </FormItemStyled>
-            </Col>
-          </Row>
           <Title level={4}>Reparation details</Title>
           <DrawerDivider />
           <Row gutter={24}>
@@ -720,6 +700,24 @@ function DashboardPage({ isEditMode }) {
               onChange={onReparationChange}
             />
           </FormItemStyled>
+          <Row gutter={24}>
+            <Col span={12}>
+              <FormItemStyled label="Price" >
+                <Field
+                  as={Input}
+                  name="price"
+                />
+              </FormItemStyled>
+            </Col>
+            <Col span={12}>
+              <FormItemStyled label="Guarantee" >
+                <Field
+                  as={Select}
+                  name="guarantee_time"
+                />
+              </FormItemStyled>
+            </Col>
+          </Row>
           <FormItemStyled label="IMEI/referentie" >
             <Field
               as={Input}
