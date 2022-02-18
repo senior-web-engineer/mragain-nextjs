@@ -739,20 +739,14 @@ function DashboardPage({ isEditMode }) {
               size="large"
               shape="round"
               block
+              style={{ height: '50px' }}
               onClick={() => {
                 createAppointmentFormModal.actions.close();
               }}
             >
               Cannel
             </AntdButton>
-            <AntdButton
-              type="primary"
-              size="large"
-              shape="round"
-              block
-            >
-              {isEditMode ? "Update Appointment" : "Add Appointment"}
-            </AntdButton>
+            <Button style={{width: '100%'}}>{isEditMode ? "Update afspraak" : "Maak afspraak"}</Button>
           </ButtonContainer>
         </Form>
       </DrawerStyled>  
