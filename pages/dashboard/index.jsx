@@ -90,7 +90,13 @@ const FormItemStyled = styled(AntdForm.Item)`
   label {
     color: #909090;
     font-size: 14px;
-    line-height: 20px;
+    line-height: 16px;
+  }
+  .ant-calendar-picker{
+    width: 100%;
+  }
+  .ant-time-picker{
+    width: 100%;
   }
 `;
 const UploadPhotosWrapper = styled.div`
@@ -591,6 +597,7 @@ function DashboardPage({ isEditMode }) {
           </>
         }
         width={screenSize}
+        maskClosable={false}
         module={createAppointmentFormModal}
       >
         <Form module={appointmentForm}>
@@ -641,8 +648,14 @@ function DashboardPage({ isEditMode }) {
           </Row>
           <Row gutter={24}>
             <Col span={12}>
-                <FormItemStyled label="Duration">
-                  <Input type="time" placeholder="" name="duration" />
+              <FormItemStyled label="Duration">
+                <Field
+                  as={TimePicker}
+                  name="duration"
+                  format="HH:mm"
+                  disabled={isEditMode}
+                  minuteStep={5}
+                />
               </FormItemStyled>
             </Col>
           </Row>
