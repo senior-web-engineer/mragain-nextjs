@@ -712,7 +712,8 @@ function DashboardPage({ isEditMode }) {
             <Col span={12}>
               <FormItemStyled label="Guarantee" >
                 <Field
-                  as={Select}
+                  as={Input}
+                  disabled
                   name="guarantee_time"
                 />
               </FormItemStyled>
