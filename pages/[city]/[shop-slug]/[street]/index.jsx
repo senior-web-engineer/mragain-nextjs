@@ -63,8 +63,8 @@ const ShopProfile = (routerProps) => {
       ? shopProfileServerInfo
       : shop_account_profile;
 
-  let title = `${shopAccountProfile.name} ${shopAccountProfile.city} - ${devices} Telefoon Reparatie - MrAgain.nl`;
-  let description = `${shopAccountProfile.name}, ${shopAccountProfile.street}, ${shopAccountProfile.zipcode}, ${shopAccountProfile.city}. Telefoon kapot? Laat je telefoon repareren bij ${shopAccountProfile.name} via mragain.nl. Transparant, betrouwbaar en snel!`;
+  let title = `${shopAccountProfile?.name} ${shopAccountProfile?.city} - ${devices} Telefoon Reparatie - MrAgain.nl`;
+  let description = `${shopAccountProfile?.name}, ${shopAccountProfile?.street}, ${shopAccountProfile?.zipcode}, ${shopAccountProfile?.city}. Telefoon kapot? Laat je telefoon repareren bij ${shopAccountProfile?.name} via mragain.nl. Transparant, betrouwbaar en snel!`;
 
   const shopSchema = `
     {
@@ -72,20 +72,20 @@ const ShopProfile = (routerProps) => {
       "@type": "LocalBusiness",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "${shopAccountProfile.city}",
-        "postalCode": "${shopAccountProfile.zipcode}",
-        "streetAddress": "${shopAccountProfile.street}"
+        "addressLocality": "${shopAccountProfile?.city}",
+        "postalCode": "${shopAccountProfile?.zipcode}",
+        "streetAddress": "${shopAccountProfile?.street}"
       },
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": "${shopAccountProfile.mark}",
+        "ratingValue": "${shopAccountProfile?.mark}",
 	"bestRating": "5",
 	"ratingCount": "21",
 	"worstRating": "0"
       },
-      "name": "${shopAccountProfile.name}",
-      "telephone": "${shopAccountProfile.phone_number}",
-      "url": "${shopAccountProfile.site_url}"
+      "name": "${shopAccountProfile?.name}",
+      "telephone": "${shopAccountProfile?.phone_number}",
+      "url": "${shopAccountProfile?.site_url}"
     }
   `
     .split(`\n`)
@@ -106,8 +106,8 @@ const ShopProfile = (routerProps) => {
         <meta
           property="og:image"
           content={
-            shopAccountProfile.bg_photo !== undefined &&
-            shopAccountProfile.bg_photo
+            shopAccountProfile?.bg_photo !== undefined &&
+            shopAccountProfile?.bg_photo
           }
         />
         <script
@@ -138,6 +138,7 @@ const ShopProfile = (routerProps) => {
 export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
   const shopId = ctx.query["shop-slug"];
   const shopProfileServerInfo = await getShopProfileByInformationServer(shopId);
+
   const firstShopProfileServerInfo =
     shopProfileServerInfo && shopProfileServerInfo[0]
       ? shopProfileServerInfo[0]
@@ -146,7 +147,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
   const shopGeneralInfo = await getGeneralShopInfoDetailServer(
     firstShopProfileServerInfo?.id
   );
-  
+
   return {
     props: {
       shopProfileServerInfo: firstShopProfileServerInfo,

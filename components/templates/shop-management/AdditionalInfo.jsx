@@ -82,9 +82,9 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
     }
   }, [shopData]);
 
-  if (!shopData) {
-    return <div>DATA MISSING</div>;
-  }
+  // if (!shopData) {
+  //   return <div>DATA MISSING</div>;
+  // }
 
   const onDeviceSelected = (id, value) => {
     let newSelectedDevices = [...selectedDevices];
@@ -161,7 +161,7 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
               <div>
                 {renderDevicesList(
                   devices,
-                  shopData.replacementDevices,
+                  shopData?.replacementDevices,
                   onDeviceSelected
                 )}
               </div>
@@ -285,7 +285,7 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
                 adminInput
                 simple
                 as={Switch}
-                defaultChecked={shopData.waitingArea === "No" ? false : true}
+                defaultChecked={shopData?.waitingArea === "No" ? false : true}
                 name="waitingArea"
               />
             </Col>
@@ -302,7 +302,7 @@ export const AdditionalInfo = ({ shopData, setShopData }) => {
                 adminInput
                 simple
                 as={Switch}
-                defaultChecked={shopData.insurance}
+                defaultChecked={shopData?.insurance}
                 name="insurance"
               />
             </Col>
