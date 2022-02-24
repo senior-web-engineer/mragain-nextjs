@@ -593,7 +593,7 @@ function DashboardPage({ isEditMode }) {
               }}
             />
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <span>New Appointment</span>
+            <span>{isEditMode ? "Edit Appointment" : "New Appointment"}</span>
           </>
         }
         width={screenSize}
