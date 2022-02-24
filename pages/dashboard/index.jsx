@@ -646,7 +646,7 @@ function DashboardPage({ isEditMode }) {
               </FormItemStyled>
             </Col>
           </Row>
-          <Row gutter={24}>
+          {/* <Row gutter={24}>
             <Col span={12}>
               <FormItemStyled label="Duur">
                 <Field
@@ -658,7 +658,7 @@ function DashboardPage({ isEditMode }) {
                 />
               </FormItemStyled>
             </Col>
-          </Row>
+          </Row> */}
           <Title level={4}>Reparatie gegevens</Title>
           <DrawerDivider />
           <Row gutter={24}>

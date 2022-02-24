@@ -111,7 +111,7 @@ export const appointmentForm = createFormModule({
             url: url?.startsWith("/") ? BACK_END_URL + url : url,
             uid: uniqueId(),
           })),
-          duration: moment(reparation.appointment.duration, "HH:mm:ss")
+          // duration: moment(reparation.appointment.duration, "HH:mm:ss")
         };
       }
     }
@@ -142,7 +142,7 @@ export const appointmentForm = createFormModule({
           brand: data.brand,
           model: data.model,
           shop,
-          duration: data.duration,
+          // duration: data.duration,
           reparation: data.reparation,
           price: data.price,
           guarantee_time: parseInt(data.guarantee_time),
@@ -186,7 +186,7 @@ export const appointmentForm = createFormModule({
           price: data.price,
           guarantee_time: data.guarantee_time,
           guarantee: data.guarantee_time,
-          duration: data.duration,
+          // duration: data.duration,
         },
       });
     }
