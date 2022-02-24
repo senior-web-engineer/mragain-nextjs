@@ -593,7 +593,7 @@ function DashboardPage({ isEditMode }) {
               }}
             />
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <span>Nieuwe afspraak</span>
+            <span>{isEditMode ? "Bewerking afspraak" : "Nieuwe afspraak"}</span>
           </>
         }
         width={screenSize}
