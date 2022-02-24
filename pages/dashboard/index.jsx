@@ -593,7 +593,7 @@ function DashboardPage({ isEditMode }) {
               }}
             />
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <span>{isEditMode ? "Edit Appointment" : "New Appointment"}</span>
+            <span>Nieuwe afspraak</span>
           </>
         }
         width={screenSize}
@@ -601,23 +601,23 @@ function DashboardPage({ isEditMode }) {
         module={createAppointmentFormModal}
       >
         <Form module={appointmentForm}>
-          <Title level={4}>Appointment details</Title>
+          <Title level={4}>Afspraak gegevens</Title>
           <DrawerDivider />
-          <FormItemStyled label="Customer Name">
+          <FormItemStyled label="Klant">
             <Field
               as={Input}
               name="customerName"
               disabled={isEditMode}
             />
           </FormItemStyled>
-          <FormItemStyled label="Email Address">
+          <FormItemStyled label="E-mailadres">
             <Field
               as={Input}
               name="email"
               disabled={isEditMode}
             />
           </FormItemStyled>
-          <FormItemStyled label="Contact Number">
+          <FormItemStyled label="Telefoonnummer">
             <Field
               as={Input}
               name="contactNumber"
@@ -626,7 +626,7 @@ function DashboardPage({ isEditMode }) {
           </FormItemStyled>
           <Row gutter={24}>
             <Col span={12}>
-              <FormItemStyled label="Date">
+              <FormItemStyled label="Datum">
                 <Field
                   as={DatePicker}
                   name="date"
@@ -635,7 +635,7 @@ function DashboardPage({ isEditMode }) {
               </FormItemStyled>
             </Col>
             <Col span={12}>
-              <FormItemStyled label="Time">
+              <FormItemStyled label="Tijd">
                 <Field
                   as={TimePicker}
                   name="time"
@@ -648,7 +648,7 @@ function DashboardPage({ isEditMode }) {
           </Row>
           <Row gutter={24}>
             <Col span={12}>
-              <FormItemStyled label="Duration">
+              <FormItemStyled label="Duur">
                 <Field
                   as={TimePicker}
                   name="duration"
@@ -659,11 +659,11 @@ function DashboardPage({ isEditMode }) {
               </FormItemStyled>
             </Col>
           </Row>
-          <Title level={4}>Reparation details</Title>
+          <Title level={4}>Reparatie gegevens</Title>
           <DrawerDivider />
           <Row gutter={24}>
             <Col span={8}>
-              <FormItemStyled label="Device Type" >
+              <FormItemStyled label="Apparaat" >
                 <DeviceSelector
                   as={Select}
                   name="device"
@@ -673,7 +673,7 @@ function DashboardPage({ isEditMode }) {
               </FormItemStyled>
             </Col>
             <Col span={8}>
-              <FormItemStyled label="Brand">
+              <FormItemStyled label="Merk">
                 <BrandSelector
                   as={Select}
                   name="brand"
@@ -693,7 +693,7 @@ function DashboardPage({ isEditMode }) {
               </FormItemStyled>
             </Col>
           </Row>
-          <FormItemStyled label="Reparation type">
+          <FormItemStyled label="Reparatie">
             <ServiceSelector
               as={Select}
               name="reparation"
@@ -702,7 +702,7 @@ function DashboardPage({ isEditMode }) {
           </FormItemStyled>
           <Row gutter={24}>
             <Col span={12}>
-              <FormItemStyled label="Price" >
+              <FormItemStyled label="Prijs (€)" >
                 <Field
                   as={Input}
                   name="price"
@@ -710,7 +710,7 @@ function DashboardPage({ isEditMode }) {
               </FormItemStyled>
             </Col>
             <Col span={12}>
-              <FormItemStyled label="Guarantee" >
+              <FormItemStyled label="Garantie (maanden)" >
                 <Field
                   as={Input}
                   disabled
@@ -727,16 +727,16 @@ function DashboardPage({ isEditMode }) {
               disabled={isEditMode}
             />
           </FormItemStyled>
-          <Title level={4}>Remarks</Title>
+          <Title level={4}>Extra informatie</Title>
           <DrawerDivider />
-          <FormItemStyled label="Complaints and remarks" name="comments">
+          <FormItemStyled label="Opmerkingen" name="comments">
                  <Field
                   as={Input.TextArea}
                   rows={4}
                   name="comments"
                />
           </FormItemStyled>
-          <FormItemStyled name="images" label="Add a photo/video of the device">
+          <FormItemStyled name="images" label="Foto's">
             <UploadPhotosWrapper>
               <Field
                   as={PicturesWall}
@@ -756,7 +756,7 @@ function DashboardPage({ isEditMode }) {
                 createAppointmentFormModal.actions.close();
               }}
             >
-              Cannel
+              Cancel
             </AntdButton>
             <Button style={{width: '100%'}}>{isEditMode ? "Update afspraak" : "Maak afspraak"}</Button>
           </ButtonContainer>
