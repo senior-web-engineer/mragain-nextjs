@@ -73,7 +73,6 @@ const DrawerStyled = styled(Drawer)`
   .ant-drawer-content-wrapper{
     max-width: 100%; 
   }
-  max-width: 100%;
   .ant-drawer-header {
     background: #06c987;
     height: 81px;
