@@ -1,12 +1,18 @@
 import {
+  fas,
   faCheck,
   faEdit,
   faEllipsisV,
   faPlus,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
+import fontawesome from '@fortawesome/fontawesome'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, DatePicker, Icon, Row, TimePicker, Input,  Typography , Button as AntdButton , Form as AntdForm } from "antd";
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 import { Dropdown, Menu } from "antd";
 import get from "lodash/get";
@@ -59,9 +65,15 @@ import PicturesWall from "./PictureWall";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import DrawerDivider from "../../assets/icons/ReactSVGIcons/DrawerDivider";
 
+
+fontawesome.library.add(fab,fas, faCheck, faEdit, faEllipsisV, faPlus, faTimes)
 const { Title } = Typography;
 
 const DrawerStyled = styled(Drawer)`
+  .ant-drawer-content-wrapper{
+    max-width: 100%; 
+  }
+  max-width: 100%;
   .ant-drawer-header {
     background: #06c987;
     height: 81px;
@@ -277,7 +289,7 @@ const columns = [
                 .fetch();
             }}
           >
-            <FontAwesomeIcon icon={faEdit} /> Bewerk afspraak
+            <FontAwesomeIcon icon="edit" /> Bewerk afspraak
           </Menu.Item>
           <Menu.Item
             onClick={() =>
@@ -287,17 +299,17 @@ const columns = [
               })
             }
           >
-            <FontAwesomeIcon icon={faCheck} /> Afronden
+            <FontAwesomeIcon icon="check" /> Afronden
           </Menu.Item>
           <Menu.Item hidden danger onClick={() => cancelAppointment(data)}>
-            <FontAwesomeIcon icon={faTimes} /> Annuleer afspraak
+            <FontAwesomeIcon icon="times" /> Annuleer afspraak
           </Menu.Item>
         </Menu>
       );
       return (
         <Dropdown overlay={menu} trigger="click">
           <AppointmentMenuWrap>
-            <FontAwesomeIcon icon={faEllipsisV} />
+          <FontAwesomeIcon icon="ellipsis-v" />
           </AppointmentMenuWrap>
         </Dropdown>
       );
@@ -477,7 +489,7 @@ function DashboardPage({ isEditMode }) {
           devicesFetcher.fetch();
         }}
       >
-        <FontAwesomeIcon icon={faPlus} /> Nieuwe afspraak
+        <FontAwesomeIcon icon="plus" /> Nieuwe afspraak
       </CreateButton>
       <List module={reparationsList}>
         <OnMobile show={false}>

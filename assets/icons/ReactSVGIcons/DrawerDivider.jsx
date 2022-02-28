@@ -5,7 +5,7 @@ function DrawerDivider(props) {
     <svg
       width="493"
       height="4"
-      viewBox="120 10495 4"
+      viewBox="120 10495 4 0"
       fill="none"
       {...props}
     >
