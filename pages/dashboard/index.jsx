@@ -462,8 +462,10 @@ function DashboardPage({ isEditMode }) {
     }
   }, []);
 
-  const [screenSize, setScreenSize] = useState(600);
-
+  const [screenSize, setScreenSize] = useState(560);
+  useEffect(() => {
+    setScreenSize(window.innerWidth < 600 ? "100%" : 560);
+  }, []);
   return (
     <DefaultLayout>
     <Head>
