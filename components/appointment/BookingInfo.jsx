@@ -227,6 +227,12 @@ export default function BookingInfo({
                 <ModelName />
               </strong>
             </div>
+	    <div>
+	      <label>Reparatie:</label>
+	      <strong>
+	        <item>{service?.reparation?.reparation_name}</item>
+	      </strong>
+	      </div>
           </ServiceDetails>
         </ServiceDetailsWrap>
       ) : null}
@@ -238,7 +244,7 @@ export default function BookingInfo({
       {showPrices && service ? (
         <>
           <ServiceCostWrap>
-            <item>Reparatie: {service?.reparation?.reparation_name}</item>
+            <item>{service?.reparation?.reparation_name}</item>
           </ServiceCostWrap>
         </>
       ) : null}
