@@ -241,13 +241,6 @@ export default function BookingInfo({
           showDate={appointmentForm.state?.values?.type !== "contact"}
         />
       </Form>
-      {showPrices && service ? (
-        <>
-          <ServiceCostWrap>
-            <item>{service?.reparation?.reparation_name}</item>
-          </ServiceCostWrap>
-        </>
-      ) : null}
       <ButtonWrapper onClick={nextStep} aria-label="Next step">
         {isLastStep ? (
           <span>{finalButtonLabel}</span>
