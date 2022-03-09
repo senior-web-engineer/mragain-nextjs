@@ -216,8 +216,7 @@ export default function BookingInfoMobile({ shop, showPrices = true }) {
       </Form>
       {showPrices && service ? (
         <ServiceCostWrap>
-          <item>{service?.reparation?.reparation_name}</item>
-          <price>&euro;{service?.price}</price>
+          <item>Reparatie: {service?.reparation?.reparation_name}</item>
         </ServiceCostWrap>
       ) : null}
     </>
@@ -249,8 +248,6 @@ export default function BookingInfoMobile({ shop, showPrices = true }) {
         </ShopWrap>
         {showPrices && service?.price ? (
           <TotalWrap>
-            <label>Reparatiekosten</label>
-            <price>&euro;{service.price}</price>
             <FontAwesomeIcon icon={faChevronDown} />
           </TotalWrap>
         ) : null}

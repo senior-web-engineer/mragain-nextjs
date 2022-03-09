@@ -238,13 +238,8 @@ export default function BookingInfo({
       {showPrices && service ? (
         <>
           <ServiceCostWrap>
-            <item>{service?.reparation?.reparation_name}</item>
-            <price>&euro;{service?.price}</price>
+            <item>Reparatie: {service?.reparation?.reparation_name}</item>
           </ServiceCostWrap>
-          <TotalWrap>
-            <label>Reparatiekosten</label>
-            <price>&euro;{service?.price}</price>
-          </TotalWrap>
         </>
       ) : null}
       <ButtonWrapper onClick={nextStep} aria-label="Next step">
