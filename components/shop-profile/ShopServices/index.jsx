@@ -612,7 +612,7 @@ export default function ShopServices({ shop }) {
           Selecteer je apparaat, merk en model & bekijk onze reparaties
         </SubTitle>
         <SubTitleDescription>
-          Selecteer je reparatie en maak een afspraak als je bij ons langs wilt komen, dan zorgen we dat we tijd voor je hebben.<br><br>
+          Selecteer je reparatie en maak een afspraak als je bij ons langs wilt komen, dan zorgen we dat we tijd voor je hebben.
 	  Staat je device of reparatie er niet tussen? Waarschijnlijk kunnen we je wel helpen. 
 	  Maak een afspraak of stuur een offerte verzoek en we nemen zo snel mogelijk contact met je op. 
         </SubTitleDescription>
