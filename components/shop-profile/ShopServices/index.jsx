@@ -464,7 +464,7 @@ function AppointmentButton() {
                   type: "success",
                   message: "Algemene afspraak",
                   description:
-                    "Je hebt geen reparatie geselecteerd, als je een afspraak wilt maken maken we daarom een algemene diagnose afspraak voor je.",
+                    "Je hebt geen reparatie geselecteerd. We zullen je toestel bekijken om vast te stellen wat het defect is.",
                   buttonLabel: "Prima!",
                 })
                 .then(() => {
@@ -612,8 +612,9 @@ export default function ShopServices({ shop }) {
           Selecteer je apparaat, merk en model & bekijk onze reparaties
         </SubTitle>
         <SubTitleDescription>
-          Staat je model of reparatie er niet tussen? Waarschijnlijk kunnen we
-          je wel helpen, maak een afspraak en we kijken er naar!
+          Selecteer je reparatie en maak een afspraak als je bij ons langs wilt komen, dan zorgen we dat we tijd voor je hebben.
+	  Staat je device of reparatie er niet tussen? Waarschijnlijk kunnen we je wel helpen. 
+	  Maak een afspraak of stuur een offerte verzoek en we nemen zo snel mogelijk contact met je op. 
         </SubTitleDescription>
         <Form module={filtersFormModule}>
           <OnMobile only>

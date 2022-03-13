@@ -1264,7 +1264,6 @@ export default function SearchResults() {
             name="description"
             content="Telefoon maken of telefoon reparatie? Bekijk de zoek resultaten bij MrAgain"
           />
-          <link rel="canonical" href={FRONT_END_URL + "/zoek-een-reparateur"} />
           {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
           <meta property="og:type" content="website" />
           <meta
@@ -1276,7 +1275,6 @@ export default function SearchResults() {
             property="og:description"
             content="Zoek een telefoon reparateur"
           />
-          <meta name="og:url" content={FRONT_END_URL} />
           <meta property="og:image" content="" />
           <meta
             name="og_site_name"

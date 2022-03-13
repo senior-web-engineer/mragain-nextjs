@@ -278,7 +278,7 @@ export function ContactButton(...props) {
   return (
     <Link href={nextLocation}>
       <Button {...props} aria-label="Book service">
-        <FontAwesomeIcon icon={faAddressBook} /> Contact
+        <FontAwesomeIcon icon={faAddressBook} /> Offerte
       </Button>
     </Link>
   );

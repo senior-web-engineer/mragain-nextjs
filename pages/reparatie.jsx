@@ -57,7 +57,7 @@ const Advantages = ({}) => {
 		              name="Keywords"
 		              content="Reparatie via MrAgain en jouw voordelen"
 		            />
-		            <link rel="canonical" href={FRONT_END_URL} />
+		            <link rel="canonical" href={FRONT_END_URL + "/reparatie"} />
 		            {/**Below mentioned meta tags are og tags that are used when website is through any socaial media.*/}
 		            <meta
 		              name="og_title"
