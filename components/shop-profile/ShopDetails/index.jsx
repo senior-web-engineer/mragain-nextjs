@@ -154,17 +154,11 @@ export default function ShopDetails({ shop }) {
             <d-term>Apparaten</d-term>
             <d-def>
               {shop?.replacementDevices?.map((device) => {
+                console.log(device)
                 return (
                   <>
                     <Tooltip title={device?.device_name}>
-                      {device?.device_image && (
-                        <Image
-                          src={device?.device_image || ""}
-                          alt={device?.device_name}
-                          width={20}
-                          height={20}
-                        />
-                      )}
+                      {device?.device_name},&nbsp;
                     </Tooltip>
                   </>
                 );
@@ -177,14 +171,7 @@ export default function ShopDetails({ shop }) {
                 return (
                   <>
                     <Tooltip title={brand?.brand_name}>
-                      {brand?.brand_image && (
-                        <Image
-                          src={brand?.brand_image}
-                          alt={brand?.brand_name}
-                          width={20}
-                          height={20}
-                        />
-                      )}
+                      {brand?.brand_name},&nbsp; 
                     </Tooltip>
                   </>
                 );
