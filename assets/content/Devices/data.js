@@ -1,11 +1,11 @@
 const posts = [
   {
     id: 1,
-    subheadline: "Telefoon Reparatie ",
+    subheadline: "Telefoon & smartphone reparatie",
     description: [
       {
         content:
-	"<p>Batterij vervangen, waterschade en scherm vervangen zijn de top drie telefoon reparaties die worden uitgevoerd bij telefoon reparateurs. De telefoon batterij vervangen verlengt de levensduur van je telefoon en voorkomt dat deze constant aan de oplader moet.<br></p>"      
+	"<p>Op MrAgain vind je reparateurs voor alle typen smartphones en merken. Via deze pagina zie je eenvoudig en snel welke reparateurs ook jouw device repareren en binnen willen marge de reparatie prijzen vallen. Momenteel kun je telefoonwinkels en repair shops vinden voor de volgende telefoonmerken:<br><br><ul><li>Apple iPhone reparatie</li></ul></p>"      
       },
       {
         content:
