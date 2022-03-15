@@ -15,37 +15,25 @@ const posts = [
   },
   {
     id: 2,
-    subheadline: "iPhone reparatie",
+    subheadline: "Tablet en iPad reparatie",
     description: [
       {
         content:
-	"<p>Heb je een barst in je iPhone, wil je de iPhone batterij vervangen of is hij in een plas water gevallen? Wat de oorzaak ook is, natuurlijk wil je dat je iPhone het zo snel mogelijk weer doet.<br></p>"
+	"<p>Inmiddels zijn er veel merken die tablets aanbieden en er komen er steeds meer bij. De meeste reparateurs repareren standaard de Apple iPads en Samsung Tabs, maar bij andere merken wordt dat al snel minder. Slim om dus vantevoren te bekijken welke tablet reparateur je kan helpen.<br></p>"
       },
       {
         content:
-	"<p>Voor iPhone reparaties is het verstandig om contact op te nemen met een telefoon reparateur. Deze heeft de onderdelen en expertise om je telefoon te repareren. Vaak zijn reparateurs erkende Apple serviceproviders en werken ze met originele Apple onderdelen. Hierdoor krijgt je telefoon dezelfde onderdelen als een nieuwe iPhone, zoals bijvoorbeeld een originele batterij.<br></p>" 
+"<p>Via MrAgain vind je tablet reparateurs voor de volgende merken:<br><br><ul><li>Apple</li><li>Samsung</li><li>Lenovo</li><li>Alcatel</li><li>Acer</li><li>Archos</li><li>Google</li><li>Sony</li></ul></p>" 
       },
       {
         content:
-	"<p>In de meeste gevallen kunnen reparaties snel uitgevoerd worden. Zo kan het vervangen van de batterij meestal binnen 30 minuten. Je hebt jouw iPhone met een nieuwe batterij dus vaak zo weer terug. Duurt de reparatie toch langer? Dan is het vaak mogelijk om een leen toestel mee te krijgen voor het tijdelijk vervangen van de iPhone.<br></p>" 
-      },
-      {
-        content:
-	"<p>Voor minder voorkomende defecten is het verstandig van tevoren te controleren wie deze reparaties uitvoert. Denk hierbij aan het vervangen van je backcover of camera. Niet elke reparateur biedt deze aan.<br></p>"
-      },
-      {
-        content:
-	"<p>Is je telefoon niet kapot, maar wil je data overzetten of je telefoon van nieuwe software voorzien? Ook dan ben je bij de meeste telefoon reparateurs aan het juiste adres. Vaak kun je terecht voor de reparaties vanaf iPhone 5 en iPhone 6<br></p>" 
-      },
-      {
-        content:
-	"<p>Heb je nog een iphone 4? Check dan via MrAgain wie ook die nog repareert. Ook zie je snel wat het kost en hoeveel maanden garantie je krijgt. Je kunt dan ook direct een afspraak maken zodat je iPhone het zo snel mogelijk weer doet.<br></p>"
+	"<p>Tablet reparaties zijn veelal te vergelijken met telefoon reparaties, ze hebben immers vergelijkbare componenten. Het is dan ook geen wonder dat de meeste telefoon reparateurs ook tablets repareren. Qua reparaties tref je vaak het volgende aanbod aan:<br><br><ul><li>Vervangen van tablet scherm</li><li>Vervangen tablet batterij of accu</li><li>Tablet waterschade behandeling</li><li>Aan uit button reparatie</li><li>Tablet volumeknop vervangen</li><li>Oplaadpunt van tablet vervangen</li><li>Tablet moederbord reparatie</li><li>Tablet camera vervangen</li><li>Tablet speaker reparatie</li></ul><br></p>" 
       },
     ],
   },
   {
     id: 3,
-    subheadline: "Reparatie op locatie",
+    subheadline: "Laptop en Macbook reparatie",
     description: [
       {
         content:
@@ -63,7 +51,7 @@ const posts = [
   },
   {
     id: 4,
-    subheadline: "Telefoon scherm reparatie",
+    subheadline: "Desktop reparatie",
     description: [
       {
         content:
@@ -77,7 +65,7 @@ const posts = [
   },
   {
     id: 5,
-    subheadline: "iPhone scherm reparatie",
+    subheadline: "Headphone reparatie",
     description: [
       {
 	content:
@@ -95,7 +83,7 @@ const posts = [
   },	
   {
     id: 6,
-    subheadline: "iPad reparatie",
+    subheadline: "Televisie reparatie",
     description: [
       {
 	content:
@@ -113,7 +101,7 @@ const posts = [
   },
   {
     id: 7,
-    subheadline: "Laptop reparatie",
+    subheadline: "Smartwatch reparatie",
     description: [
       {
 	content:
@@ -123,7 +111,7 @@ const posts = [
   },
   {
     id: 8,
-    subheadline: "Landelijke dekking",
+    subheadline: "Witgoed reparatie",
     description: [
       {
 	content:
@@ -137,7 +125,7 @@ const posts = [
   },
   {
     id: 9,
-    subheadline: "Telefoon repareren of een nieuwe kopen?",
+    subheadline: "Game console reparatie",
     description: [
       {
 	content:
@@ -155,7 +143,7 @@ const posts = [
   },
   {
     id: 10, 
-    subheadline: "Smartwatch reparatie",
+    subheadline: "Drone reparatie",
     description: [
       {
 	content:
@@ -169,7 +157,7 @@ const posts = [
   },
   {
     id: 11, 
-    subheadline: "Witgoed reparatie",
+    subheadline: "Audio reparatie",
     description: [
       {
 	content:
