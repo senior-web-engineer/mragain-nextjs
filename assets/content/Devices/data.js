@@ -5,15 +5,11 @@ const posts = [
     description: [
       {
         content:
-	"<p>Op MrAgain vind je reparateurs voor alle typen smartphones en merken. Via deze pagina zie je eenvoudig en snel welke reparateurs ook jouw device repareren en binnen willen marge de reparatie prijzen vallen. Momenteel kun je telefoonwinkels en repair shops vinden voor de volgende telefoonmerken:<br><br><ul><li>Apple iPhone reparatie</li></ul></p>"      
+"<p>Op MrAgain vind je reparateurs voor alle typen smartphones en merken. Via deze pagina zie je eenvoudig en snel welke reparateurs ook jouw device repareren en binnen willen marge de reparatie prijzen vallen. Momenteel kun je telefoonwinkels en repair shops vinden voor de volgende telefoonmerken:<br><br><ul><li>Apple iPhone reparatie</li><li>Samsung reparatie</li><li>Huawei reparatie</li><li>Xiaom reparatie</li><li>Nokia reparatie</li><li>OnePlus reparatie</li><li>Google reparatie</li><li>LG reparatie</li><li>Oppo reparatie</li><li>Motorola reparatie</li><li>Sony reparatie</li></ul></p>"      
       },
       {
         content:
-	"<p>Is je telefoon in het water gevallen? Ga dan snel naar een telefoonwinkel voor een waterschade behandeling. Als je geluk hebt valt de schade mee. Leg de telefoon niet in een bak met rijst zoals op internet gesuggereerd wordt. Dit helpt oppervlakkig maar zorgt er niet voor dat het vocht bij kritische componenten wordt weggehaald. Hierdoor loop je het risico op meer schade.<br></p>"
-      },
-      {
-        content:
-	"<p>Functioneert de smartphone die je hebt gekocht niet meer naar behoren? Via MrAgain zie je snel wie jouw toestel kan repareren en bijvoorbeeld de batterij van je iPhone kan vervangen. Datzelfde geldt voor je telefoon scherm vervangen en telefoon maken in algemene zin.<br></p> "
+	"<p>Het gros van de telefoonreparaties die worden uitgevoerd betreffen het vervangen van telefoonschermen en batterijen. Daarnaast is ook waterschade behandeling een vaak voorkomende klacht. <br> Maar er zijn natuurlijk veel meer reparaties. Via MrAgain vind je reparateurs voor vrijwel alle denkbare reparaties zoals:<br><br><ul><li>Het vervangen van je telefoonscherm</li><li>Batterij vervangen</li><li>Waterschade behandelingen</li><li>Vervangen van voor en achter camera's</li><li>Repareren van volumeknoppen</li><li>Vervangen van aaan/uit buttons</li><li>Verhelpen van wifi problemen</li><li>Reparatie van trilmodules</li><li>Oplaadpunt reparaties</li><li>Moederbord reparaties</li><li>Speaker reparaties</li></ul></p>"
       },
     ],
   },
