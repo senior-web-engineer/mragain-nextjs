@@ -17,7 +17,7 @@ const posts = [
       },
       {
 	content:
-	"<p>Via MrAgain zie je ook eenvoudig welke telefoon reparateur de reparatie uitvoer waar jij naar op zoek bent. Wellicht wil je je telefoon scherm vervangen, of je batterij laten vervangen. In het algemeen vind je voor de volgende type telefoon reparaties snel een geschikte repair shop bij jou in de buurt:<br><br><ul><li>Telefoon scherm vervangen</li><li>Telefoon batterij vervangen</li><li>Camera's vervangen(voor en achter)</li><li>Vervangen van volumeknoppen en aan/uit buttons</li><li>Waterschade behandeling</li><li>Moederbord reparaties</li><li>Oplaadconnector vervangen</li><li>Trilmodule vervangen</li>Reparatie van speakers en microfoon</li><li>Software updates</li></ul></p>
+	"<p>Via MrAgain zie je ook eenvoudig welke telefoon reparateur de reparatie uitvoer waar jij naar op zoek bent. Wellicht wil je je telefoon scherm vervangen, of je batterij laten vervangen. In het algemeen vind je voor de volgende type telefoon reparaties snel een geschikte repair shop bij jou in de buurt:<br><br><ul><li>Telefoon scherm vervangen</li><li>Telefoon batterij vervangen</li><li>Camera's vervangen(voor en achter)</li><li>Vervangen van volumeknoppen en aan/uit buttons</li><li>Waterschade behandeling</li><li>Moederbord reparaties</li><li>Oplaadconnector vervangen</li><li>Trilmodule vervangen</li>Reparatie van speakers en microfoon</li><li>Software updates</li></ul></p>"
       },	      
     ],
   },
