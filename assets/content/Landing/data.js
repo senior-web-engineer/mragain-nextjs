@@ -45,15 +45,15 @@ const posts = [
     description: [
       {
         content:
-	"<p>Een kapotte telefoon maar geen tijd om naar de telefoonwinkel te gaan? Maak je geen zorgen: veel telefoon reparateurs bieden tegenwoordig reparatie op locatie aan. Een extra service waarbij de reparateur naar jou toekomt en je dus thuis kan blijven, of kan blijven werken.<br></p>"
+	"<p>Een kapotte telefoon maar geen tijd om naar de telefoonwinkel te gaan? Maak je geen zorgen: veel telefoon reparateurs bieden tegenwoordig reparatie op locatie aan. Een extra service waarbij de reparateur naar jou toekomt en je dus thuis kan blijven, of kan blijven werken. De reparateurs die deze service aanbieden kunnen je telefoon maken bij jou op de stoep.<br></p>"
       },
       {
         content:
-	"<p>Gelukkig bieden de meeste reparateurs tegenwoordig een haal en breng service, of reparatie op locatie aan. Zo kun jij door met werken terwijl je telefoon bij je op de stoep gemaakt wordt.<br></p>"
+	"<p>Via MrAgain zie je snel welke repair shops ook bij jou komen. Je plant eenvoudig een afspraak in via onze afsprakentool en geeft aan wanneer het jou uitkomt. De reparateur komt dan zo snel mogelijk bij je terug met een bevestiging.<br></p>"
       },
       {
         content:
-	"<p>Wil je snel weten welke reparateurs ook bij jou op locatie repareren? Gebruik dan het zoekfilter op onze website en en zie direct welke reparateurs ook bij jou komen. Ook zie je direct wat ze repareren en hoe duur de reparatie is. Natuurlijk kun je hiervoor ook makkelijk een afspraak maken via onze website.<br></p>"
+	"<p>Naast reparatie op locatie zie je dat de zogenaamde haal & breng service ook aan populariteit wint. Hierbij haalt de reparateur je device op bij thuis of op het werk. Als de reparatie succesvol is afgerond brengen ze deze weer bij je terug. Natuurlijk zie je ook direct wie deze service aanbiedt.<br></p>"
       },
     ],
   },
