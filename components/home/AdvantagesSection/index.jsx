@@ -17,22 +17,22 @@ import media from "@/utils/media";
 const ADVANTAGES = [
   {
     icon: faClock,
-    title: "Cashback & beste prijs",
-    1: "Reparateurs beheren de prijzen op MrAgain, hierdoor krijg je altijd de beste prijs",
-    2: "Veel reparateurs komen ook op locatie",
-    3: "Reparateur zonder review? Schrijf de eerste en krijg €10 cashback",
+    title: "De snelste reparatie",
+    1: "Niet wachten, maar direct geholpen worden",
+    2: "Onderdelen op voorraad doordat men weet waarvoor je komt",
+    3: "Jij kiest het moment dat jou uitkomt",
   },
   {
     icon: faReceipt,
-    title: "Vooraf duidelijkheid",
-    1: "Direct inzicht in reparatiekosten en garantie die je krijgt",
-    2: "Authentieke reviews van klanten die je voorgingen",
+    title: "Jouw review is geld waard",
+    1: "Standaard 5 euro korting bij een afspraak via MrAgain",
+    2: "Natuurlijk laat je daarom een review achter",
   },
   {
     icon: faTree,
-    title: "Je bent goed bezig",
-    1: "Je helpt het milieu door duurzaam met je apparaat om te gaan",
-    2: "Door jouw review help je anderen",
+    title: "Duidelijkheid",
+    1: "Reparateurs beheren de prijzen op MrAgain",
+    2: "Direct duidelijkheid door prijzen, garantie en reviews",	  
   },
 ];
 
@@ -119,8 +119,8 @@ export default function AdvantagesSection() {
 
   return (
     <>
-      <SubTitle>mragain.nl</SubTitle>
-      <H2>Jouw voordelen</H2>
+      <SubTitle>www.mragain.nl</SubTitle>
+      <H2>Dit is waarom je een afspraak maakt via MrAgain</H2>
       <AdvantagesWrap>
         <SliderOnMobile
           tabletConfig={{
