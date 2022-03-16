@@ -5,16 +5,19 @@ const posts = [
     description: [
       {
         content:
-	"<p>Batterij vervangen, waterschade en scherm vervangen zijn de top drie telefoon reparaties die worden uitgevoerd bij telefoon reparateurs. De telefoon batterij vervangen verlengt de levensduur van je telefoon en voorkomt dat deze constant aan de oplader moet.<br></p>"      
+	"<p>Batterij vervangen, waterschade en scherm vervangen zijn de top drie telefoon reparaties die worden uitgevoerd bij telefoon reparateurs. Maar hoe weet je nou waar je je telefoon het beste kan laten repareren? Of waar men een oud toestel ook nog aan de praat weet te krijge? Deze en andere vragen beantwoord je snel via MrAgain.<br></p>"      
       },
       {
         content:
-	"<p>Is je telefoon in het water gevallen? Ga dan snel naar een telefoonwinkel voor een waterschade behandeling. Als je geluk hebt valt de schade mee. Leg de telefoon niet in een bak met rijst zoals op internet gesuggereerd wordt. Dit helpt oppervlakkig maar zorgt er niet voor dat het vocht bij kritische componenten wordt weggehaald. Hierdoor loop je het risico op meer schade.<br></p>"
+	"<p>Via MrAgain vind je snel en eenvoudig telefoon reparateurs bij jou in de buurt. Zo weet je snel waar jouw device wordt gerepareerd. Ook zie je wat de repariekosten zijn, hoeveel maanden garantie je krijgt en welke reviews een repair shop heeft. De meeste reparateurs die bij MrAgain zijn aangesloten proberen snelle service te leveren. Dat betekent dat ze inzetten op het repareren van jouw telefoon in minder dan 30 minuten. Vaak zijn ze dus letterlijk klaar terwijl je wacht. In de meeste gevallen repareren telefoon winkels zowel smartphones en tablets en maken ze zoveel mogelijk gebruik van originele onderdelen.<br></p>"
       },
       {
         content:
-	"<p>Functioneert de smartphone die je hebt gekocht niet meer naar behoren? Via MrAgain zie je snel wie jouw toestel kan repareren en bijvoorbeeld de batterij van je iPhone kan vervangen. Datzelfde geldt voor je telefoon scherm vervangen en telefoon maken in algemene zin.<br></p> "
+	"<p>Via onze website vind je snel waar jouw telefoon wordt gerepareerd en wat de garantie op de reparatie is. Op basis van die informatie en de reparatiekosten kun je beslissen waar je je smartphone wilt laten repareren. Je vindt op onze website onder andere reparateurs voor de volgende telefoon merken:<br><br><ul><li>Apple</li><li>Samsung</li><li>Oppo</li><li>Huawei</li><li>Sony</li><li>Xiaomi</li><li>LG</li><li>Google</li><li>Nokia</li><li>Motorola</li></ul></p> "
       },
+      {
+	content:
+	"<p>Via MrAgain zie je ook eenvoudig welke telefoon reparateur de reparatie uitvoer waar jij naar op zoek bent. Wellicht wil je je telefoon scherm vervangen, of je batterij laten vervangen. In het algemeen vind je voor de volgende type telefoon reparaties snel een geschikte repair shop bij jou in de buurt:<br><br><ul><li>Telefoon scherm vervangen</li><li>Telefoon batterij vervangen</li><li>Camera's vervangen(voor en achter)</li><li>Vervangen van volumeknoppen en aan/uit buttons</li><li>Waterschade behandeling</li><li>Moederbord reparaties</li><li>Oplaadconnector vervangen</li><li>Trilmodule vervangen</li>Reparatie van speakers en microfoon</li><li>Software updates</li></ul>       
     ],
   },
   {
