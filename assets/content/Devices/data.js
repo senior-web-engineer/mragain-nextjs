@@ -33,19 +33,19 @@ const posts = [
   },
   {
     id: 3,
-    subheadline: "Laptop en Macbook reparatie",
+    subheadline: "Laptop reparatie",
     description: [
       {
         content:
-	"<p>Een kapotte telefoon maar geen tijd om naar de telefoonwinkel te gaan? Maak je geen zorgen: veel telefoon reparateurs bieden tegenwoordig reparatie op locatie aan. Een extra service waarbij de reparateur naar jou toekomt en je dus thuis kan blijven, of kan blijven werken.<br></p>"
+	"<p>Laptop reparaties worden in de regel uitgevoerd door computerzaken, maar tegenwoordig zie je ook veel telefoon reparateurs die zich ook in laptops zijn gaan verdiepen. Er is dus veel keuze als het aankomt op de reparatie van je laptop. Omdat niet elke reparateur elk merk laptops repareert doe je er verstandig aan eerst onderzoek te doen naar de mogelijkheden. Via MrAgain vind je een computer specialist voor vrijwel elk merk en probleem.<br></p>"
       },
       {
         content:
-	"<p>Gelukkig bieden de meeste reparateurs tegenwoordig een haal en breng service, of reparatie op locatie aan. Zo kun jij door met werken terwijl je telefoon bij je op de stoep gemaakt wordt.<br></p>"
+	"<p>Je vind hier ondere andere reparateurs voor de volgende laptop merken:<br><br><ul><li>HP (Hewlett Packard)</li><li>Apple</li><li>Lenovo</li><li>Asus</li><li>Dell</li><li>Acer</li><li>MSI</li></ul></p>"
       },
       {
         content:
-	"<p>Wil je snel weten welke reparateurs ook bij jou op locatie repareren? Gebruik dan het zoekfilter op onze website en en zie direct welke reparateurs ook bij jou komen. Ook zie je direct wat ze repareren en hoe duur de reparatie is. Natuurlijk kun je hiervoor ook makkelijk een afspraak maken via onze website.<br></p>"
+	"<p>Het soort laptop reparatie verschilt niet veel per merk. Je komt al snel uit op de meest gebruikelijke issues zoals problemen met het display, de accu of het geheugen. Een vrij complete lijst van het aanbod dat je hier kunt aantreffen is:<br><br><ul><li>Verwijderen virussen en herinstallatie</li><li>Laptop accu vervangen</li><li>Toetsenbord vervangen</li><li>Val en waterschade behandelen</li><li>Harde schijf vervangen</li><li>Vervangen van het laptop scherm</li><li>Videokaart vervangen</li><li>Vervangen van koelpasta</li></ul>Naast deze klachten kunnen er ook symptomen van problemen zijn die nader onderzoek vereissen. Bijvoorbeeld als de laptop opeens trager is, of niet meer wilt opstarten.<br></p>"
       },
     ],
   },
