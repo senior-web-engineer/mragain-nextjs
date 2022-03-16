@@ -17,7 +17,7 @@ const posts = [
       },
       {
 	content:
-	"<p>Via MrAgain zie je ook eenvoudig welke telefoon reparateur de reparatie uitvoer waar jij naar op zoek bent. Wellicht wil je je telefoon scherm vervangen, of je batterij laten vervangen. In het algemeen vind je voor de volgende type telefoon reparaties snel een geschikte repair shop bij jou in de buurt:<br><br><ul><li>Telefoon scherm vervangen</li><li>Telefoon batterij vervangen</li><li>Camera's vervangen(voor en achter)</li><li>Vervangen van volumeknoppen en aan/uit buttons</li><li>Waterschade behandeling</li><li>Moederbord reparaties</li><li>Oplaadconnector vervangen</li><li>Trilmodule vervangen</li>Reparatie van speakers en microfoon</li><li>Software updates</li></ul></p>"
+	"<p>Via MrAgain zie je ook eenvoudig welke telefoon reparateur de reparatie uitvoert waar jij naar op zoek bent. Wellicht wil je je telefoon scherm vervangen, of je batterij laten vervangen. In het algemeen vind je voor de volgende type telefoon reparaties snel een geschikte repair shop bij jou in de buurt:<br><br><ul><li>Telefoon scherm vervangen</li><li>Telefoon batterij vervangen</li><li>Camera's vervangen(voor en achter)</li><li>Vervangen van volumeknoppen en aan/uit buttons</li><li>Waterschade behandeling</li><li>Moederbord reparaties</li><li>Oplaadconnector vervangen</li><li>Trilmodule vervangen</li><li>Reparatie van speakers en microfoon</li><li>Software updates</li></ul></p>"
       },	      
     ],
   },
@@ -27,27 +27,15 @@ const posts = [
     description: [
       {
         content:
-	"<p>Heb je een barst in je iPhone, wil je de iPhone batterij vervangen of is hij in een plas water gevallen? Wat de oorzaak ook is, natuurlijk wil je dat je iPhone het zo snel mogelijk weer doet.<br></p>"
+	"<p>Er is bijna geen telefoonwinkel te bekennen waar ze geen iPhones repareren en dus vind je ook de perfecte iPhone reparateurs bij jou in de buurt op MrAgain. Wat vaker voorkomt is dat reparateurs zich specialiseren in Apple producten. Dat betekent dat ze zowel iPhones, iPads en Macbooks repareren, maar juist geen andere merken.<br></p>"
       },
       {
         content:
-	"<p>Voor iPhone reparaties is het verstandig om contact op te nemen met een telefoon reparateur. Deze heeft de onderdelen en expertise om je telefoon te repareren. Vaak zijn reparateurs erkende Apple serviceproviders en werken ze met originele Apple onderdelen. Hierdoor krijgt je telefoon dezelfde onderdelen als een nieuwe iPhone, zoals bijvoorbeeld een originele batterij.<br></p>" 
+	"<p>Het komt dus wel voor dat er gespecialiseerde Apple service centers zijn. Hier kunnen ze je helpen met alle iPhone issues en werken ze zoveel mogelijk met originele Apple onderdelen. Veel voorkomende reparaties die je daar kunt laten uitvoeren zijn:<br><br><ul><li>iPhone scherm vervangen</li><li>iPhone batterij vervangen</li><li>iPhone camera vervangen (achter en voor)</li><li>iPhone backcover vervangen</li><li>iPhone knoppen vervangen (volume, aan/uit)</li><li>iPhone speaker reparatie</li><li>iPhone microfoon reparatie</li><li>iPhone moederbord reparatie</li></ul></p>" 
       },
       {
         content:
-	"<p>In de meeste gevallen kunnen reparaties snel uitgevoerd worden. Zo kan het vervangen van de batterij meestal binnen 30 minuten. Je hebt jouw iPhone met een nieuwe batterij dus vaak zo weer terug. Duurt de reparatie toch langer? Dan is het vaak mogelijk om een leen toestel mee te krijgen voor het tijdelijk vervangen van de iPhone.<br></p>" 
-      },
-      {
-        content:
-	"<p>Voor minder voorkomende defecten is het verstandig van tevoren te controleren wie deze reparaties uitvoert. Denk hierbij aan het vervangen van je backcover of camera. Niet elke reparateur biedt deze aan.<br></p>"
-      },
-      {
-        content:
-	"<p>Is je telefoon niet kapot, maar wil je data overzetten of je telefoon van nieuwe software voorzien? Ook dan ben je bij de meeste telefoon reparateurs aan het juiste adres. Vaak kun je terecht voor de reparaties vanaf iPhone 5 en iPhone 6<br></p>" 
-      },
-      {
-        content:
-	"<p>Heb je nog een iphone 4? Check dan via MrAgain wie ook die nog repareert. Ook zie je snel wat het kost en hoeveel maanden garantie je krijgt. Je kunt dan ook direct een afspraak maken zodat je iPhone het zo snel mogelijk weer doet.<br></p>"
+	"<p>In algemene zin geldt dat de meeste telefoon reparateurs alle iPhone modellen vanaf de iPhone 4 nog repareren en daar ook materialen voor op voorraad hebben. Je bent dan ook bij vrijwel iedere telefoonwinkel verzekerd van een snelle service. Wat per repair center verschilt zijn de prijze, de garantie voorwaarden en natuurlijk de reviews. Vergelijk daarom goed voordat je een afspraak maakt.<br></p>" 
       },
     ],
   },
