@@ -17,22 +17,22 @@ import media from "@/utils/media";
 const ADVANTAGES = [
   {
     icon: faClock,
-    title: "De snelst mogelijke reparatie",
-    1: "Doordat de reparateur weet dat je komt word je direct geholpen",
-    2: "Onderdelen op jouw fix zijn op voorraad doortdat men weet waarvoor je komt",
+    title: "De snelste reparatie",
+    1: "Niet wachten, maar direct geholpen worden",
+    2: "Onderdelen op voorraad doordat men weet waarvoor je komt",
     3: "Jij kiest het moment dat jou uitkomt",
   },
   {
     icon: faReceipt,
-    title: "Je review is geld waard",
+    title: "Jouw review is geld waard",
     1: "Standaard 5 euro korting bij een afspraak via MrAgain",
     2: "Natuurlijk laat je daarom een review achter",
   },
   {
     icon: faTree,
-    title: "Duidelijkheid & transparantie",
+    title: "Duidelijkheid",
     1: "Reparateurs beheren de prijzen op MrAgain",
-    2: "Direct duidelijkheid door prijzen, garantie en reviews",
+    2: "Direct duidelijkheid door prijzen, garantie en reviews",	  
   },
 ];
 
