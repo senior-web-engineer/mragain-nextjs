@@ -153,29 +153,25 @@ export default function ShopDetails({ shop }) {
           <d-list>
             <d-term>Apparaten</d-term>
             <d-def>
-              {shop?.replacementDevices?.map((device) => {
-                console.log(device)
-                return (
-                  <>
-                    <Tooltip title={device?.device_name}>
-                      {device?.device_name},&nbsp;
-                    </Tooltip>
-                  </>
-                );
-              })}
+              {shop?.replacementDevices?.map((device) => (
+                <>
+                  <Tooltip title={device?.device_name} >
+                    <span>{device?.device_name}</span>
+                  </Tooltip>
+                  , &nbsp;
+                </>
+              ))}
             </d-def>
-            
             <d-term>Merken</d-term>
             <d-def>
-              {shop?.cateredBrand?.map((brand) => {
-                return (
-                  <>
-                    <Tooltip title={brand?.brand_name}>
-                      {brand?.brand_name},&nbsp; 
-                    </Tooltip>
-                  </>
-                );
-              })}
+              {shop?.cateredBrand?.map((brand) => (
+                <>
+                  <Tooltip title={brand?.brand_name} >
+                    <span>{brand?.brand_name}</span>
+                  </Tooltip>
+                  , &nbsp;
+                </>
+              ))}
             </d-def>
 
             <d-term>Betaal methoden</d-term>
