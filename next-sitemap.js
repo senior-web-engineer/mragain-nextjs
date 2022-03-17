@@ -8,6 +8,11 @@ module.exports = {
             '/dashboard/PictureWall',
             '/devices',
             '/history',
+	    '/account-setting',
+            '/algemene-voorwaarden',
+	    '/geef-een-review',
+	    '/reset-je-wachtwoord',
+	    '/zoek-een-reparateur',
             '/repair-management',
             '/shop-management'],
   robotsTxtOptions: {

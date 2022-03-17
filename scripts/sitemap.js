@@ -5,7 +5,7 @@ const formatDate = require("./formatDate");
 // ROBOTS.txt
 const robotsTxt = `User-agent: *
 Sitemap: https://www.mragain.nl/sitemap_local.xml
-Disallow:`;
+Disallow: /zoek-een-reparateur`;
 
 fs.writeFileSync("public/robots.txt", robotsTxt);
 console.log("robots.txt saved!");
