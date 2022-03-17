@@ -26,9 +26,6 @@ export default function City({ cityInfo }) {
       <div className="block" key={index}>
         <h4>{block?.header}</h4>
         <div dangerouslySetInnerHTML={{ __html: block?.content }}></div>
-        <div className="show-more">
-          <span>Meer weergeven</span> <PlusIcon />
-        </div>
       </div>
     );
   };
