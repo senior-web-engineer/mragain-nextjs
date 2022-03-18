@@ -151,7 +151,7 @@ const posts = [
       },
       {
 	content: 
-	"<p>De Iwatch of Apple Watch is een bekende, maar je hebt ook de Fitbit en Huawei en Samsung smart watches. Bij smartwatch reparaties zijn scherm reparatie en batterij vervangen veel voorkomend. Daarna ben je al snel aangewezen op een diagnose afspraak omdat de meeste andere defecten zich moeilijk laten raden.<br></p>"
+	"<p>De Iwatch of Apple Watch is een bekende, maar je hebt ook de Fitbit, Huawei en Samsung smart watches. Bij smartwatch reparaties zijn scherm reparatie en batterij vervangen veel voorkomend. Daarna ben je al snel aangewezen op een diagnose afspraak omdat de meeste andere defecten zich moeilijk laten raden. Voor de volgende smart watch merken vind je repair centers op MrAgain:<br><ul><li>Apple Watch</li><li>Garmin</li><li>Fitbit</li><li>Samsung</li><li>Huawei</li><li>Fossil</li><li>Armani</li></ul><br>Er zijn nog veel meer merken actief in de smartwatch industrie en dus zal dit aanbod zich uitbreiden.<br><br>En wat voor reparaties worden er uitgevoerd?Vrij simpel, meest voorkomend zijn:<br><ul><li>Smart Watch glas vervangen</li><li>Smart Watch batterij vervangen</li><li>Smart Watch touch screen reparatie</li><li>Smart Watch buttons vervangen</li></ul>En dan houdt het eigenlijk als snel op.<br> Geen idee wat er mis is met je SmartWatch? Plan dan een gratis diagnose afspraak in.</p>"
       },
     ],
   },
