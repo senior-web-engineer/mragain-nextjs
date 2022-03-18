@@ -67,7 +67,7 @@ const posts = [
       },
       {
         content:
-	"<p>Als je telefoon scherm laat vervangen heb je vaak meerdere opties afhankelijk van de kwaliteit die je zoekt en het geld dat je er aan wilt uitgeven. De meest voorkomende opties zijn:<br><br><ul><li><strong>Een OEM of origineel scherm</strong>OEM staat voor Original Equipment Manufacturer en betekent in feite dat je een origineel scherm laat terugzetten. Dit is vaak de duurste optie.</li><li><strong>Refurbished scherm</strong>Een refurbished scherm is een origineel scherm waar vaak een nieuwe touchscreen laag op is gezet. De kwaliteit is dus nagenoeg hetzelfde als een OEM scherm, maar wel goedkoper.</li><li><strong>Copy schermen</strong>Copy of namaak schermen komen er in vele soorten. Ze worden vaak in andere fabrieken gemaakt en veel van de copy schermen hebben een uitstekende kwaliteit. Op MrAgain vind je high copy schermen. Dit zijn schermen van de hoogste kwaliteit. Let hierbij wel op: er zijn zeer veel verschillende copy schermen dus controleer dit goed als je deze er op laat zetten.</li></ul><br><br>Copy schermen worden ook vaak aangeduid met AAA+ of AA+ kwaliteit, wat verschillen in de kwaliteit van deze schermen aangeeft.</p>"
+	"<p>Als je telefoon scherm laat vervangen heb je vaak meerdere opties afhankelijk van de kwaliteit die je zoekt en het geld dat je er aan wilt uitgeven. De meest voorkomende opties zijn:<br><br><ul><li><strong>Een OEM of origineel scherm</strong><br>OEM staat voor Original Equipment Manufacturer en betekent in feite dat je een origineel scherm laat terugzetten. Dit is vaak de duurste optie.</li><li><strong>Refurbished scherm</strong><br>Een refurbished scherm is een origineel scherm waar vaak een nieuwe touchscreen laag op is gezet. De kwaliteit is dus nagenoeg hetzelfde als een OEM scherm, maar wel goedkoper.</li><li><strong>Copy schermen</strong><br>Copy of namaak schermen komen er in vele soorten. Ze worden vaak in andere fabrieken gemaakt en veel van de copy schermen hebben een uitstekende kwaliteit. Op MrAgain vind je high copy schermen. Dit zijn schermen van de hoogste kwaliteit. Let hierbij wel op: er zijn zeer veel verschillende copy schermen dus controleer dit goed als je deze er op laat zetten.</li></ul><br>Copy schermen worden ook vaak aangeduid met AAA+ of AA+ kwaliteit, wat verschillen in de kwaliteit van deze schermen aangeeft.</p>"
       },
     ],
   },
@@ -95,15 +95,15 @@ const posts = [
     description: [
       {
 	content:
-	"<p>Als je iPad of tablet kapot is kun je vaak ook bij telefoon reparateurs terecht. Voor de bekendere merken zoals Apple, Samsung en Huawei hebben ze vaak originele onderdelen op voorraad. Bijvoorbeeld schermen en accu’s waardoor je snel geholpen kunt worden.<br></p>"
+	"<p>Als je iPad of tablet kapot is kun je vaak ook bij phone repair shops terecht om je tablet te laten maken. De meeste service centers voeren de reparaties binnen 30 minuten uit en meestal krijg je tussen de 3 en 12 maanden garantie op je fix.<br></p>"
       },
       {
 	content:
-	"<p>Minder voorkomende reparaties zoals die aan het moederbord worden niet door elke reparateur uitgevoerd. In dit geval is het slim om vooraf te controleren wie deze reparatie wel kan uitvoeren.<br></p>"
+	"<p>Op onze website vind je snel en eenvoudig telefoonwinkels waar je je tablet kunt laten fixen. We raden je aan om wel vantevoren te checken wie ook jouw merk repareert. Sommige reparatie shops repareren namelijk alleen iPads en Samsung Tabs, maar er zijn natuurlijk meer merken. Voor de volgende merken vind je reparateurs op MrAgain:<br><ul><li>Apple</li><li>Samsung</li>Lenovo</li>Sony</li><li>Acer</li><li>Alcatel</li><li>Asus</li><li>Google</li></ul></p>"
       },
       {
         content:
-	"<p>Datzelfde geldt voor de reparatie van specifieke modellen, zoals de oudere iPad versies, welke niet meer door iedereen worden gerepareerd.<br></p>"
+	"<p>Tablet reparatie verschillen vrijwel niet van smartphone reparaties. Bij tablet maken gaat het dan ook vaak om de volgende reparaties:<br><ul><li>Tablet scherm vervangen</li><li>Tablet batterij vervangen</li><li>Tablet waterschade</li><li>Tablet oplaadconnector reparatie</li><li>Tablet camera's vervangen</li><li>Tablet buttons (volume, aan uit knop) vervangen</li><li>Tablet software updates</li><li>Tablet moederbord reparaties</li></ul><br><br>Als je niet weet wat er mis is, kun je altijd wel een gratis diagnose afspraak inplannen.</p>"
       },
     ],
   },
