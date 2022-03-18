@@ -63,11 +63,11 @@ const posts = [
     description: [
       {
         content:
-	"<p>Als je een gebarsten scherm hebt doe je er verstandig aan deze snel te laten vervangen. Hierdoor voorkom je verdere schade, bijvoorbeeld doordat er vuil je telefoon in komt, en dat je je bezeert. Voor telefoon scherm reparatie is het belangrijk dat je oplet met de kwaliteit van het scherm dat je koopt. In de regel geldt dat hoe duurder het scherm is waarmee je het oude scherm vervangt,  hoe beter de kwaliteit is.<br></p>"
+	"<p>Als je een gebarsten scherm hebt doe je er verstandig aan deze snel te laten vervangen. Hierdoor voorkom je verdere schade, bijvoorbeeld doordat er vuil je telefoon in komt, en dat je je bezeert. Voor telefoon scherm reparatie is het belangrijk dat je oplet met de kwaliteit van het scherm dat je koopt. Er zijn namelijk nogal wat verschillende opties.<br></p>"
       },
       {
         content:
-	"<p>Veel copy schermen zijn echter van zeer goede kwaliteit tegenwoordig, het is dus niet noodzakelijk dat je een origineel scherm laat plaatsen. Het vervangen van je telefoon scherm is een reparatie die normaal snel uitgevoerd kan worden (binnen 30 minuten). Dit geldt ook voor iPhone scherm reparaties.<br></p>"
+	"<p>Als je telefoon scherm laat vervangen heb je vaak meerdere opties afhankelijk van de kwaliteit die je zoekt en het geld dat je er aan wilt uitgeven. De meest voorkomende opties zijn:<br><br><ul><li><strong>Een OEM of origineel scherm</strong>OEM staat voor Original Equipment Manufacturer en betekent in feite dat je een origineel scherm laat terugzetten. Dit is vaak de duurste optie.</li><li><strong>Refurbished scherm</strong>Een refurbished scherm is een origineel scherm waar vaak een nieuwe touchscreen laag op is gezet. De kwaliteit is dus nagenoeg hetzelfde als een OEM scherm, maar wel goedkoper.</li><li><strong>Copy schermen</strong>Copy of namaak schermen komen er in vele soorten. Ze worden vaak in andere fabrieken gemaakt en veel van de copy schermen hebben een uitstekende kwaliteit. Op MrAgain vind je high copy schermen. Dit zijn schermen van de hoogste kwaliteit. Let hierbij wel op: er zijn zeer veel verschillende copy schermen dus controleer dit goed als je deze er op laat zetten.</li></ul><br><br>Copy schermen worden ook vaak aangeduid met AAA+ of AA+ kwaliteit, wat verschillen in de kwaliteit van deze schermen aangeeft.</p>"
       },
     ],
   },
@@ -77,15 +77,15 @@ const posts = [
     description: [
       {
 	content:
-	"<p>Als je iPhone scherm kapot is, dan is het verstandig om deze zo snel mogelijk te laten vervangen. Een kapot scherm kan namelijk op meerdere manieren schade aanbrengen. Loszittende stukjes kunnen je verwonden, terwijl er ook vuil in je telefoon kan komen met mogelijk meer schade tot gevolg.<br></p>"
+	"<p>Als je iPhone scherm kapot is, dan wil je je telefoon maken, zo simpel is het. Tot en met de iPhone 8 hebben alle modellen standaard een LCD scherm. De modellen hierna zijn uitgevoerd met een OLED scherm. Daarom kun je bij het vervangen van je iPhone scherm bij eerdere modellen ook kiezen voor een OLED scherm in plaats van een LCD scherm.<br></p>"
       },
       {
 	content:
-	"<p>Dus, je zoekt op iPhone scherm vervangen, maar welk scherm heb je nodig? Afhankelijk van je budget en de kwaliteit die je zoekt heb je meerdere opties. Bijvoorbeeld  een origineel scherm, een high-copy scherm of andere copy schermen.<br></p>"
+	"<p>Wat is het verschil tussen een LCD en OLED scherm? We leggen het uit.<br><br><ul><li>Een LCD scherm staat voor Liquid Crystal Display. Ze gebruiken vloeibare kristallen die zelf geen licht uitzenden. Dit betekent dat een LCD schemr altijd een lichtbron nodig heeft aan de achterkant om een beeld te laten zien.</li><li>OLED staat voor Organic Light Emitting Diode. Deze diodes kunnen wel zelf licht uitzenden en geven daarom een veel scherper beeld dan LCD schermen.</li></ul></p>"
       },
       {
         content:
-	"<p>Natuurlijk geldt vaak dat hoe goedkoper het scherm is, hoe minder de kwaliteit van het scherm voor je smartphone reparatie. Maak daarbij dus een goede afweging en vraag advies aan de telefoon reparateur indien je twijfelt. Daarna snel erop laten zetten zodat je scherm weer perfect is.<br></p>"
+	"<p>Mocht je nog een oud model iPhone hebben dan kun je dus overwegen om hier een OLED scherm op te laten zetten, hou er rekening mee dat OLED schermen wel een stuk duurder zijn.<br></p>"
       },
     ],
   },	
