@@ -99,7 +99,7 @@ const posts = [
       },
       {
 	content:
-	"<p>Op onze website vind je snel en eenvoudig telefoonwinkels waar je je tablet kunt laten fixen. We raden je aan om wel vantevoren te checken wie ook jouw merk repareert. Sommige reparatie shops repareren namelijk alleen iPads en Samsung Tabs, maar er zijn natuurlijk meer merken. Voor de volgende merken vind je reparateurs op MrAgain:<br><ul><li>Apple</li><li>Samsung</li>Lenovo</li>Sony</li><li>Acer</li><li>Alcatel</li><li>Asus</li><li>Google</li></ul></p>"
+	"<p>Op onze website vind je snel en eenvoudig telefoonwinkels waar je je tablet kunt laten fixen. We raden je aan om wel vantevoren te checken wie ook jouw merk repareert. Sommige reparatie shops repareren namelijk alleen iPads en Samsung Tabs, maar er zijn natuurlijk meer merken. Voor de volgende merken vind je reparateurs op MrAgain:<br><ul><li>Apple</li><li>Samsung</li><li>Lenovo</li><li>Sony</li><li>Acer</li><li>Alcatel</li><li>Asus</li><li>Google</li></ul></p>"
       },
       {
         content:
@@ -113,7 +113,7 @@ const posts = [
     description: [
       {
 	content:
-	"<p>Ook voor laptop reparatie kun je via onze website de beste reparateurs vinden. Dat geldt ook voor Macbook reparatie en alles wat met laptops te maken heeft. De meest voorkomende laptop reparaties zijn het vervangen van het scherm, vergroten van het geheugen met extra RAM en natuurlijk het vervangen van accu's.<br></p>"   
+	"<p>Ook voor de reparatie van je laptop vind je via MrAgain de beste reparateurs bij jou in de buurt. Het komt voor dat telefoon reparateurs zich ook op laptops zijn gaan specialiseren, maar er zijn ook veel computer reparatie zaken die zich hebben gespecialiseerd op computer problemen. Je vindt hier o.a. reparateurs voor:<br><ul<li>Macbook reparatie</li><li>Desktop reparatie</li><li>Laptop reparatie</li><li>iMac reparatie</li></ul><br>Alle bekende merken kun je vinden, zoals Apple, Dell, HP, Lenovo en nog veel meer.<br><br>Typische laptop reparatie zijn:<br><ul><li>Het vervangen van een laptop toetsenbord</li><li>Vervangen laptop scherm</li><li>Vervangen van laptop accu/batterij</li><li>Toevoegen van extra geheugen</li><li>Verhelpen van val en waterschade</li></ul></p>"   
       },
     ],
   },
@@ -137,16 +137,8 @@ const posts = [
     description: [
       {
 	content:
-	"<p>Je telefoon laten repareren of een nieuwe iPhone kopen? Veel mensen vragen zich dit af wanneer hun telefoon kapot gaat. Er zijn verschillende factoren om dan mee te wegen. Hoe oud is de telefoon en wat zijn de reparatiekosten? En hoe lang gaat hij nog mee na een reparatie?<br></p>"
+	"<p>Dit is een vraag die veel mensen zichzelf stellen zodra hun telefoon kapot is. En terecht: een telefoon reparatie kan duur zijn en dus vraag je je af of je niet beter een nieuwe kunt kopen. Omdat MrAgain gaat voor een wereld zonder E-waste zullen wij je altijd aanraden om eerst te kijken of je je telefoon nog kunt repareren. Mocht dat te duur zijn, dan zijn er tegenwoordig veel keuzes op het gebied van refurbished smartphones. Een duurzame optie als je toch een nieuw toestel wilt kopen. Meer over het kopen van een nieuw toestel of het laten repareren lees in onze blog die we erover schreven.</p>"
       },	      
-      {
-	content:
-	"<p>Op basis van die informatie kun je afgewogen keuze maken. Natuurlijk is het beter voor het milieu als je probeert om je telefoon zo lang mogelijk te gebruiken. We schreven er eerder een artikel over en beschreven wat je mogelijkheden zijn. voor wat betreft duurzaamheid zijn dit de beste opties:<br></p>"     
-      },
-      {	
-	content:   
-	"<p><ul><li>Repareren wanneer dat kan</li><li>Als je een nieuwe koopt, ga dan voor een refurbished telefoon</li><li>Toch geen refurbished, koop dan een Fairphone</li><li>Kan het echt niet anders? Dan maar een nieuwe iPhone</li></ul></p>"
-      },
     ],
   },
   {
