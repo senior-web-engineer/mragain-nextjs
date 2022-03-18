@@ -51,15 +51,11 @@ const posts = [
   },
   {
     id: 4,
-    subheadline: "Desktop reparatie",
+    subheadline: "Laptop & Desktop reparatie",
     description: [
       {
         content:
-	"<p>Als je een gebarsten scherm hebt doe je er verstandig aan deze snel te laten vervangen. Hierdoor voorkom je verdere schade, bijvoorbeeld doordat er vuil je telefoon in komt, en dat je je bezeert. Voor telefoon scherm reparatie is het belangrijk dat je oplet met de kwaliteit van het scherm dat je koopt. In de regel geldt dat hoe duurder het scherm is waarmee je het oude scherm vervangt,  hoe beter de kwaliteit is.<br></p>"
-      },
-      {
-        content:
-	"<p>Veel copy schermen zijn echter van zeer goede kwaliteit tegenwoordig, het is dus niet noodzakelijk dat je een origineel scherm laat plaatsen. Het vervangen van je telefoon scherm is een reparatie die normaal snel uitgevoerd kan worden (binnen 30 minuten). Dit geldt ook voor iPhone scherm reparaties.<br></p>"
+	"<p>Via onze website vind je ook voor desktops, laptops, iMacs en Macbooks de beste reparateurs. Er zijn vele merken in de omloop op desktop en laptop gebied. We noemen enkele computermerken waarvoor je op MrAgain reparateurs vindt:<br><ul><li>Dell</li><li>Medion</li><li>Lenovo</li><li>Apple (Macbooks, iMac)</li><li>PcMan</li><li>HP</li><li>Samsung</li><li>Acer</li>Asus</li><li>Toshiba</li><li>Sony</li><li>Microsoft</li></ul><br><br>Wat zijn de meest voorkomende laptop reparaties? Dat zijn er niet zo veel, namelijk:<br><ul><li>Laptop scherm vervangen</li><li>Laptop batterij vervangen</li><li>Laptop toetsenbord vervangen</li><li>Val en waterschade</li></ul><br>Natuurlijk wordt deze lijst aangevuld met het toevoegen van extra harde schijven en software updates.</p>"
       },
     ],
   },
@@ -69,15 +65,7 @@ const posts = [
     description: [
       {
 	content:
-	"<p>Als je iPhone scherm kapot is, dan is het verstandig om deze zo snel mogelijk te laten vervangen. Een kapot scherm kan namelijk op meerdere manieren schade aanbrengen. Loszittende stukjes kunnen je verwonden, terwijl er ook vuil in je telefoon kan komen met mogelijk meer schade tot gevolg.<br></p>"
-      },
-      {
-	content:
-	"<p>Dus, je zoekt op iPhone scherm vervangen, maar welk scherm heb je nodig? Afhankelijk van je budget en de kwaliteit die je zoekt heb je meerdere opties. Bijvoorbeeld  een origineel scherm, een high-copy scherm of andere copy schermen.<br></p>"
-      },
-      {
-        content:
-	"<p>Natuurlijk geldt vaak dat hoe goedkoper het scherm is, hoe minder de kwaliteit van het scherm voor je smartphone reparatie. Maak daarbij dus een goede afweging en vraag advies aan de telefoon reparateur indien je twijfelt. Daarna snel erop laten zetten zodat je scherm weer perfect is.<br></p>"
+	"<p><br></p>"
       },
     ],
   },	
@@ -87,15 +75,7 @@ const posts = [
     description: [
       {
 	content:
-	"<p>Als je iPad of tablet kapot is kun je vaak ook bij telefoon reparateurs terecht. Voor de bekendere merken zoals Apple, Samsung en Huawei hebben ze vaak originele onderdelen op voorraad. Bijvoorbeeld schermen en accu’s waardoor je snel geholpen kunt worden.<br></p>"
-      },
-      {
-	content:
-	"<p>Minder voorkomende reparaties zoals die aan het moederbord worden niet door elke reparateur uitgevoerd. In dit geval is het slim om vooraf te controleren wie deze reparatie wel kan uitvoeren.<br></p>"
-      },
-      {
-        content:
-	"<p>Datzelfde geldt voor de reparatie van specifieke modellen, zoals de oudere iPad versies, welke niet meer door iedereen worden gerepareerd.<br></p>"
+	"<p><br></p>"
       },
     ],
   },
@@ -161,11 +141,11 @@ const posts = [
     description: [
       {
 	content:
-	"<p>Niets vervelenders dan een wasmachine of vaatwasser die het niet meer doet. Gelukkig zie je nu via MrAgain ook welke reparateur bij jou in de buurt kan langskomen en tegen welke kosten. Omdat het van de buitenkant vaak lastig te zien is wat er kapot is ben je vaak het beste af met een diagnose afspraak.<br></p>"
+	"<p><br></p>"
       },
       {
 	content: 
-	"<p>Normaal gesproken betaal je een vast bedrag voor de voorrijkosten en het eerste half uur aan onderzoekskosten. Het tarief daarna is afhankelijk van de tijd en de onderdelen die een reparateur nodig heeft.<br></p>"
+	"<p><br></p>"
       },
     ],
   },
@@ -175,11 +155,11 @@ const posts = [
     description: [
       {
 	content:
-	"<p>Het komt niet vaak voor, maar ook TV's gaan van tijd tot tijd kapot. In plaats van direct een nieuwe te kopen doe je er goed aan om hier ook je reparatiekosten te onderzoeken. Wellicht kan hij immers snel en goed gemaakt worden.<br></p>"
+	"<p><br></p>"
       },
       {
 	content: 
-	"<p>Bij een audio specialist ben je dan aan het juiste adres. Via deze pagina zie je direct welke reparateur jouw model repareert.<br></p>"
+	"<p><br></p>"
       },
     ],
   },
