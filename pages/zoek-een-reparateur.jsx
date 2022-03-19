@@ -22,6 +22,8 @@ import React, {
 import { Waypoint } from "react-waypoint";
 import styled, { css } from "styled-components";
 
+import { createModalModule } from "@/modules/modal";
+import ConfirmationModal from "@/components/common/modals/ConfirmationModal";
 import GooglePlaces, { loadScript } from "@/components/common/GooglePlaces";
 import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
 import DefaultLayout from "@/components/layouts/Homepage";
@@ -666,6 +668,8 @@ const Options = styled.div`
 const shopRefs = {};
 const ShopBridgeContext = createContext();
 
+const searchResultPageModal = createModalModule();
+
 function ShopPrice({ item }) {
   const value = useFormContext()?.state;
   if (!item.price || value?.values?.service === "0") {
@@ -1203,9 +1207,6 @@ export default function SearchResults() {
   const router = useRouter();
   const querystring = router.query;
 
-  console.log(shopListModule);
- 
-
   useEffect(() => {
     (async () => {
       const formValues = filtersFormModule?.state?.values;
@@ -1229,6 +1230,27 @@ export default function SearchResults() {
 
     })();
   }, [router.asPath]);
+  
+ 
+
+  useEffect(() => {
+    (async () => {
+      setTimeout(() => {
+        searchResultPageModal.actions
+        .open({
+          type: null,
+          message: "Algemene afspraak",
+          description:
+            "Je hebt geen reparatie geselecteerd. We zullen je toestel bekijken om vast te stellen wat het defect is.",
+          buttonLabel: "Prima!",
+        })
+        .then(() => {
+          
+        });
+      }, 4000)
+    })();
+  }, []);
+
 
 
   useEffect(() => {
@@ -1393,6 +1415,7 @@ export default function SearchResults() {
           </OnMobile>
         </MainWrap>
       </DefaultLayout>
+      <ConfirmationModal module={searchResultPageModal} />
     </ShopBridgeContext.Provider>
   );
 }
