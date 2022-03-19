@@ -57,7 +57,7 @@ import { Listing, NoResults } from "@/modules/list/Blocks.js";
 import Modal from "@/modules/modal/index.js";
 import media, { OnMobile } from "@/utils/media.js";
 import { getShopLogo, getShopRoute } from "@/utils/shop";
-
+import cookieCutter from "cookie-cutter";
 import { FRONT_END_URL } from "../constants.js";
 
 //
@@ -1236,22 +1236,26 @@ export default function SearchResults() {
   useEffect(() => {
     (async () => {
       setTimeout(() => {
-        searchResultPageModal.actions
-        .open({
-          type: null,
-          message: "Algemene afspraak",
-          description:
-            "Je hebt geen reparatie geselecteerd. We zullen je toestel bekijken om vast te stellen wat het defect is.",
-          buttonLabel: "Prima!",
-        })
-        .then(() => {
-          
-        });
+        if(cookieCutter.get("search_result_page_modal") !== "true") {
+          searchResultPageModal.actions
+          .open({
+            type: null,
+            message: "Algemene afspraak",
+            description: "Je hebt geen reparatie geselecteerd. We zullen je toestel bekijken om vast te stellen wat het defect is.",
+            buttonLabel: "Prima!",
+          })
+          .then(() => {
+              const tomorrow = new Date(
+                new Date().getTime() + 4 * 60 * 60 * 1000
+              );
+            cookieCutter.set("search_result_page_modal", "true", {
+              expires: tomorrow,
+            })
+          });
+        }
       }, 4000)
     })();
   }, []);
-
-
 
   useEffect(() => {
     if (shopRefs[selectedShop]) {
