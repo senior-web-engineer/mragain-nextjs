@@ -1240,9 +1240,9 @@ export default function SearchResults() {
           searchResultPageModal.actions
           .open({
             type: null,
-            message: "Algemene afspraak",
-            description: "Je hebt geen reparatie geselecteerd. We zullen je toestel bekijken om vast te stellen wat het defect is.",
-            buttonLabel: "Prima!",
+            message: "Wist je dat...",
+            description: "Door een afspraak te maken via MrAgain krijg je standaard 5 euro korting op je reparatie.",
+            buttonLabel: "Top!",
           })
           .then(() => {
               const tomorrow = new Date(
