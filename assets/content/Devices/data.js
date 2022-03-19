@@ -85,7 +85,7 @@ const posts = [
     description: [
       {
 	content:
-	"<p>Ook voor laptop reparatie kun je via onze website de beste reparateurs vinden. Dat geldt ook voor Macbook reparatie en alles wat met laptops te maken heeft. De meest voorkomende laptop reparaties zijn het vervangen van het scherm, vergroten van het geheugen met extra RAM en natuurlijk het vervangen van accu's.<br></p>"   
+	"<p><br></p>"   
       },
     ],
   },
@@ -95,12 +95,8 @@ const posts = [
     description: [
       {
 	content:
-	"<p>Via <a href=https://www.mragain.nl>MrAgain </a> vind je reparateurs door het hele land. Of je nu in de buurt van Maastricht, of Groningen op zoek bent, het maakt niet uit. Overal is er een reparateur die je kan helpen. Klik hier snel door naar een overzicht van reparateurs in de grootste steden.<br></p>"
+	"<p><br></p>"
       },	      
-      {
-	content:
-	"<p><ul><li><a href=https://www.mragain.nl/enschede>Telefoon reparatie Enschede</a></li> <li><a href=https://www.mragain.nl/almere>Telefoon reparatie Almere</a></li> <li><a href=https://www.mragain.nl/utrecht>Telefoon reparatie Utrecht</a></li><li><a href=https://www.mragain.nl/den-haag>Telefoon reparatie Den Haag</a></li><li><a href=https://www.mragain.nl/amsterdam>Telefoon reparatie Amsterdam</a></li><li><a href=https://www.mragain.nl/rotterdam>Telefoon reparatie Rotterdam</a></li><li><a href=https://www.mragain.nl/apeldoorn>Telefoon reparatie Apeldoorn</a></li><li><a href=https://www.mragain.nl/groningen>Telefoon reparatie Groningen</a></li><li><a href=https://www.mragain.nl/zoetermeer>Telefoon reparatie Zoetermeer</a></li><li><a href=https://www.mragain.nl/nijmegen>Telefoon reparatie Nijmegen</a></li><li><a href=https://www.mragain.nl/zwolle>Telefoon reparatie Zwolle</a></li><li><a href=https://www.mragain.nl/ede>Telefoon reparatie Ede</a></li></ul></p>"     
-      },
     ],
   },
   {
@@ -109,16 +105,8 @@ const posts = [
     description: [
       {
 	content:
-	"<p>Je telefoon laten repareren of een nieuwe iPhone kopen? Veel mensen vragen zich dit af wanneer hun telefoon kapot gaat. Er zijn verschillende factoren om dan mee te wegen. Hoe oud is de telefoon en wat zijn de reparatiekosten? En hoe lang gaat hij nog mee na een reparatie?<br></p>"
+	"<p><br></p>"
       },	      
-      {
-	content:
-	"<p>Op basis van die informatie kun je afgewogen keuze maken. Natuurlijk is het beter voor het milieu als je probeert om je telefoon zo lang mogelijk te gebruiken. We schreven er eerder een artikel over en beschreven wat je mogelijkheden zijn. voor wat betreft duurzaamheid zijn dit de beste opties:<br></p>"     
-      },
-      {	
-	content:   
-	"<p><ul><li>Repareren wanneer dat kan</li><li>Als je een nieuwe koopt, ga dan voor een refurbished telefoon</li><li>Toch geen refurbished, koop dan een Fairphone</li><li>Kan het echt niet anders? Dan maar een nieuwe iPhone</li></ul></p>"
-      },
     ],
   },
   {
@@ -127,11 +115,7 @@ const posts = [
     description: [
       {
 	content:
-	"<p>De smartwatch wint steeds meer aan terrein. Je kunt er inmiddels al vrijwel alles mee, berichten sturen, foto's maken en zelfs bellen. Het is dan ook niet verwonderlijk dat de meeste telefoon reparateurs ook smartwatches repareren.<br></p>"
-      },
-      {
-	content: 
-	"<p>De Iwatch of Apple Watch is een bekende, maar je hebt ook de Fitbit en Huawei en Samsung smart watches. Bij smartwatch reparaties zijn scherm reparatie en batterij vervangen veel voorkomend. Daarna ben je al snel aangewezen op een diagnose afspraak omdat de meeste andere defecten zich moeilijk laten raden.<br></p>"
+	"<p><br></p>"
       },
     ],
   },
