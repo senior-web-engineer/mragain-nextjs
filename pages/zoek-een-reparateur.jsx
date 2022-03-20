@@ -22,6 +22,8 @@ import React, {
 import { Waypoint } from "react-waypoint";
 import styled, { css } from "styled-components";
 
+import { createModalModule } from "@/modules/modal";
+import ConfirmationModal from "@/components/common/modals/ConfirmationModal";
 import GooglePlaces, { loadScript } from "@/components/common/GooglePlaces";
 import { TAG_TO_COLOR } from "@/components/home/ShopsSection";
 import DefaultLayout from "@/components/layouts/Homepage";
@@ -55,7 +57,7 @@ import { Listing, NoResults } from "@/modules/list/Blocks.js";
 import Modal from "@/modules/modal/index.js";
 import media, { OnMobile } from "@/utils/media.js";
 import { getShopLogo, getShopRoute } from "@/utils/shop";
-
+import cookieCutter from "cookie-cutter";
 import { FRONT_END_URL } from "../constants.js";
 
 //
@@ -666,6 +668,8 @@ const Options = styled.div`
 const shopRefs = {};
 const ShopBridgeContext = createContext();
 
+const searchResultPageModal = createModalModule();
+
 function ShopPrice({ item }) {
   const value = useFormContext()?.state;
   if (!item.price || value?.values?.service === "0") {
@@ -1203,9 +1207,6 @@ export default function SearchResults() {
   const router = useRouter();
   const querystring = router.query;
 
-  console.log(shopListModule);
- 
-
   useEffect(() => {
     (async () => {
       const formValues = filtersFormModule?.state?.values;
@@ -1229,7 +1230,32 @@ export default function SearchResults() {
 
     })();
   }, [router.asPath]);
+  
+ 
 
+  useEffect(() => {
+    (async () => {
+      setTimeout(() => {
+        if(cookieCutter.get("search_result_page_modal") !== "true") {
+          searchResultPageModal.actions
+          .open({
+            type: null,
+            message: "Wist je dat...",
+            description: "Door een afspraak te maken via MrAgain krijg je standaard 5 euro korting op je reparatie.",
+            buttonLabel: "Top!",
+          })
+          .then(() => {
+              const tomorrow = new Date(
+                new Date().getTime() + 4 * 60 * 60 * 1000
+              );
+            cookieCutter.set("search_result_page_modal", "true", {
+              expires: tomorrow,
+            })
+          });
+        }
+      }, 4000)
+    })();
+  }, []);
 
   useEffect(() => {
     if (shopRefs[selectedShop]) {
@@ -1393,6 +1419,7 @@ export default function SearchResults() {
           </OnMobile>
         </MainWrap>
       </DefaultLayout>
+      <ConfirmationModal module={searchResultPageModal} />
     </ShopBridgeContext.Provider>
   );
 }

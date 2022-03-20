@@ -63,15 +63,9 @@ export default function RepairManagementPage() {
       const currentModels = await getRepairBrandModel.fetch();
       setDevices(
         fetchedDevices.map((device) => {
-          const icon = find(additionalInfoOptions.devices, ["id", device.id]);
           return {
             title: (
               <DeviceItemWrapper>
-                <div className="device-icon">
-                  {icon ? (
-                    <Image width={40} height={40} src={icon.icon} />
-                  ) : null}
-                </div>
                 <div className="device-info">
                   <div>
                     <b>{device.device_name}</b>
