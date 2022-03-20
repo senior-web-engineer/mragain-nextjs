@@ -25,8 +25,8 @@ const ADVANTAGES = [
   {
     icon: faReceipt,
     title: "Jouw review is geld waard",
-    1: "Standaard 5 euro korting bij een afspraak via MrAgain",
-    2: "Natuurlijk laat je daarom een review achter",
+    1: "Standaard 5 cashback bij het geven van een review",
+    2: "Je ontvangt een review verzoek zodra je reparatie klaar is",
   },
   {
     icon: faTree,

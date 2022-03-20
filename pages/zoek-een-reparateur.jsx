@@ -1241,7 +1241,7 @@ export default function SearchResults() {
           .open({
             type: null,
             message: "Wist je dat...",
-            description: "Door een afspraak te maken via MrAgain krijg je standaard 5 euro korting op je reparatie.",
+            description: "Je krijgt standaard 5 euro cashback na het geven van een review op MrAgain. Dit geldt alleen als je via MrAgain een afspraak hebt gemaakt.",
             buttonLabel: "Top!",
           })
           .then(() => {
