@@ -6,8 +6,12 @@ module.exports = {
             '/HeadWithoutPreload',
             '/dashboard',
             '/dashboard/PictureWall',
-            '/devices',
             '/history',
+	    '/account-settings',
+            '/algemene-voorwaarden',
+	    '/geef-een-review',
+	    '/reset-je-wachtwoord',
+	    '/zoek-een-reparateur',
             '/repair-management',
             '/shop-management'],
   robotsTxtOptions: {

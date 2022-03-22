@@ -1,5 +1,8 @@
 # *
 User-agent: *
+Disallow: /zoek-een-reparateur/
+
+User-agent: *
 Allow: /
 
 # Sitemaps

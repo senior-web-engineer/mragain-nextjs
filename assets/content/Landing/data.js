@@ -5,16 +5,20 @@ const posts = [
     description: [
       {
         content:
-	"<p>Batterij vervangen, waterschade en scherm vervangen zijn de top drie telefoon reparaties die worden uitgevoerd bij telefoon reparateurs. De telefoon batterij vervangen verlengt de levensduur van je telefoon en voorkomt dat deze constant aan de oplader moet.<br></p>"      
+	"<p>Batterij vervangen, waterschade en scherm vervangen zijn de top drie telefoon reparaties die worden uitgevoerd bij telefoon reparateurs. Maar hoe weet je nou waar je je telefoon het beste kan laten repareren? Of waar men een oud toestel ook nog aan de praat weet te krijge? Deze en andere vragen beantwoord je snel via MrAgain.<br></p>"      
       },
       {
         content:
-	"<p>Is je telefoon in het water gevallen? Ga dan snel naar een telefoonwinkel voor een waterschade behandeling. Als je geluk hebt valt de schade mee. Leg de telefoon niet in een bak met rijst zoals op internet gesuggereerd wordt. Dit helpt oppervlakkig maar zorgt er niet voor dat het vocht bij kritische componenten wordt weggehaald. Hierdoor loop je het risico op meer schade.<br></p>"
+	"<p>Via MrAgain vind je snel en eenvoudig telefoon reparateurs bij jou in de buurt. Zo weet je snel waar jouw device wordt gerepareerd. Ook zie je wat de repariekosten zijn, hoeveel maanden garantie je krijgt en welke reviews een repair shop heeft. De meeste reparateurs die bij MrAgain zijn aangesloten proberen snelle service te leveren. Dat betekent dat ze inzetten op het repareren van jouw telefoon in minder dan 30 minuten. Vaak zijn ze dus letterlijk klaar terwijl je wacht. In de meeste gevallen repareren telefoon winkels zowel smartphones en tablets en maken ze zoveel mogelijk gebruik van originele onderdelen.<br></p>"
       },
       {
         content:
-	"<p>Functioneert de smartphone die je hebt gekocht niet meer naar behoren? Via MrAgain zie je snel wie jouw toestel kan repareren en bijvoorbeeld de batterij van je iPhone kan vervangen. Datzelfde geldt voor je telefoon scherm vervangen en telefoon maken in algemene zin.<br></p> "
+	"<p>Via onze website vind je snel waar jouw telefoon wordt gerepareerd en wat de garantie op de reparatie is. Op basis van die informatie en de reparatiekosten kun je beslissen waar je je smartphone wilt laten repareren. Je vindt op onze website onder andere reparateurs voor de volgende telefoon merken:<br><br><ul><li>Apple</li><li>Samsung</li><li>Oppo</li><li>Huawei</li><li>Sony</li><li>Xiaomi</li><li>LG</li><li>Google</li><li>Nokia</li><li>Motorola</li></ul></p> "
       },
+      {
+	content:
+	"<p>Via MrAgain zie je ook eenvoudig welke telefoon reparateur de reparatie uitvoert waar jij naar op zoek bent. Wellicht wil je je telefoon scherm vervangen, of je batterij laten vervangen. In het algemeen vind je voor de volgende type telefoon reparaties snel een geschikte repair shop bij jou in de buurt:<br><br><ul><li>Telefoon scherm vervangen</li><li>Telefoon batterij vervangen</li><li>Camera's vervangen(voor en achter)</li><li>Vervangen van volumeknoppen en aan/uit buttons</li><li>Waterschade behandeling</li><li>Moederbord reparaties</li><li>Oplaadconnector vervangen</li><li>Trilmodule vervangen</li><li>Reparatie van speakers en microfoon</li><li>Software updates</li></ul></p>"
+      },	      
     ],
   },
   {
@@ -23,27 +27,15 @@ const posts = [
     description: [
       {
         content:
-	"<p>Heb je een barst in je iPhone, wil je de iPhone batterij vervangen of is hij in een plas water gevallen? Wat de oorzaak ook is, natuurlijk wil je dat je iPhone het zo snel mogelijk weer doet.<br></p>"
+	"<p>Er is bijna geen telefoonwinkel te bekennen waar ze geen iPhones repareren en dus vind je ook de perfecte iPhone reparateurs bij jou in de buurt op MrAgain. Wat vaker voorkomt is dat reparateurs zich specialiseren in Apple producten. Dat betekent dat ze zowel iPhones, iPads en Macbooks repareren, maar juist geen andere merken.<br></p>"
       },
       {
         content:
-	"<p>Voor iPhone reparaties is het verstandig om contact op te nemen met een telefoon reparateur. Deze heeft de onderdelen en expertise om je telefoon te repareren. Vaak zijn reparateurs erkende Apple serviceproviders en werken ze met originele Apple onderdelen. Hierdoor krijgt je telefoon dezelfde onderdelen als een nieuwe iPhone, zoals bijvoorbeeld een originele batterij.<br></p>" 
+	"<p>Het komt dus wel voor dat er gespecialiseerde Apple service centers zijn. Hier kunnen ze je helpen met alle iPhone issues en werken ze zoveel mogelijk met originele Apple onderdelen. Veel voorkomende reparaties die je daar kunt laten uitvoeren zijn:<br><br><ul><li>iPhone scherm vervangen</li><li>iPhone batterij vervangen</li><li>iPhone camera vervangen (achter en voor)</li><li>iPhone backcover vervangen</li><li>iPhone knoppen vervangen (volume, aan/uit)</li><li>iPhone speaker reparatie</li><li>iPhone microfoon reparatie</li><li>iPhone moederbord reparatie</li></ul></p>" 
       },
       {
         content:
-	"<p>In de meeste gevallen kunnen reparaties snel uitgevoerd worden. Zo kan het vervangen van de batterij meestal binnen 30 minuten. Je hebt jouw iPhone met een nieuwe batterij dus vaak zo weer terug. Duurt de reparatie toch langer? Dan is het vaak mogelijk om een leen toestel mee te krijgen voor het tijdelijk vervangen van de iPhone.<br></p>" 
-      },
-      {
-        content:
-	"<p>Voor minder voorkomende defecten is het verstandig van tevoren te controleren wie deze reparaties uitvoert. Denk hierbij aan het vervangen van je backcover of camera. Niet elke reparateur biedt deze aan.<br></p>"
-      },
-      {
-        content:
-	"<p>Is je telefoon niet kapot, maar wil je data overzetten of je telefoon van nieuwe software voorzien? Ook dan ben je bij de meeste telefoon reparateurs aan het juiste adres. Vaak kun je terecht voor de reparaties vanaf iPhone 5 en iPhone 6<br></p>" 
-      },
-      {
-        content:
-	"<p>Heb je nog een iphone 4? Check dan via MrAgain wie ook die nog repareert. Ook zie je snel wat het kost en hoeveel maanden garantie je krijgt. Je kunt dan ook direct een afspraak maken zodat je iPhone het zo snel mogelijk weer doet.<br></p>"
+"<p>In algemene zin geldt dat de meeste telefoon reparateurs alle iPhone modellen vanaf de iPhone 4 nog repareren en daar ook materialen voor op voorraad hebben. Je bent dan ook bij vrijwel iedere telefoonwinkel verzekerd van een snelle service. Wat per repair center verschilt zijn de prijze, de garantie voorwaarden en natuurlijk de reviews. Vergelijk daarom goed voordat je een afspraak maakt. Voor een snel overzicht van iPhone reparaties kun je hier kijken:<ul><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-4>iPhone 4reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-4s>iPhone 4S reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-5>iPhone 5 reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-5c>iPhone 5C reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-5s>iPhone 5S reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-6>iPhone 6 reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-6-plus>iPhone 6 plus reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-6s>iPhone 6S reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-6s-plus>iPhone 6 plus reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-se-2016>iPhone SE (2016) reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-7>iPhone 7 reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-7-plus>iPhone 7 plus reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-8>iPhone 8 reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-8-plus>iPhone 8 plus reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-x>iPhone X reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-11>iPhone 11 reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-11-pro-max>iPhone 11 Pro Max reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-11-pro>iPhone 11 Pro reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-se-2020>iPhone SE (2020) reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-12>iPhone 12 reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-12-pro-max>iPhone 12 Pro Max reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-12-pro>iPhone 12 Pro reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-12-mini>iPhone 12 Mini reparatie</a></li><li><a href=https://www.mragain.nl/devices/smartphones/apple/iphone-13>iPhone 13 reparatie</a></li></ul><br><br></p>"      
       },
     ],
   },
@@ -53,15 +45,15 @@ const posts = [
     description: [
       {
         content:
-	"<p>Een kapotte telefoon maar geen tijd om naar de telefoonwinkel te gaan? Maak je geen zorgen: veel telefoon reparateurs bieden tegenwoordig reparatie op locatie aan. Een extra service waarbij de reparateur naar jou toekomt en je dus thuis kan blijven, of kan blijven werken.<br></p>"
+	"<p>Een kapotte telefoon maar geen tijd om naar de telefoonwinkel te gaan? Maak je geen zorgen: veel telefoon reparateurs bieden tegenwoordig reparatie op locatie aan. Een extra service waarbij de reparateur naar jou toekomt en je dus thuis kan blijven, of kan blijven werken. De reparateurs die deze service aanbieden kunnen je telefoon maken bij jou op de stoep.<br></p>"
       },
       {
         content:
-	"<p>Gelukkig bieden de meeste reparateurs tegenwoordig een haal en breng service, of reparatie op locatie aan. Zo kun jij door met werken terwijl je telefoon bij je op de stoep gemaakt wordt.<br></p>"
+	"<p>Via MrAgain zie je snel welke repair shops ook bij jou komen. Je plant eenvoudig een afspraak in via onze afsprakentool en geeft aan wanneer het jou uitkomt. De reparateur komt dan zo snel mogelijk bij je terug met een bevestiging.<br></p>"
       },
       {
         content:
-	"<p>Wil je snel weten welke reparateurs ook bij jou op locatie repareren? Gebruik dan het zoekfilter op onze website en en zie direct welke reparateurs ook bij jou komen. Ook zie je direct wat ze repareren en hoe duur de reparatie is. Natuurlijk kun je hiervoor ook makkelijk een afspraak maken via onze website.<br></p>"
+	"<p>Naast reparatie op locatie zie je dat de zogenaamde haal & breng service ook aan populariteit wint. Hierbij haalt de reparateur je device op bij jou thuis of op het werk. Als de reparatie succesvol is afgerond brengen ze deze weer bij je terug. Natuurlijk zie je op MrAgain ook direct wie deze service aanbiedt.<br></p>"
       },
     ],
   },
@@ -71,11 +63,11 @@ const posts = [
     description: [
       {
         content:
-	"<p>Als je een gebarsten scherm hebt doe je er verstandig aan deze snel te laten vervangen. Hierdoor voorkom je verdere schade, bijvoorbeeld doordat er vuil je telefoon in komt, en dat je je bezeert. Voor telefoon scherm reparatie is het belangrijk dat je oplet met de kwaliteit van het scherm dat je koopt. In de regel geldt dat hoe duurder het scherm is waarmee je het oude scherm vervangt,  hoe beter de kwaliteit is.<br></p>"
+	"<p>Als je een gebarsten scherm hebt doe je er verstandig aan deze snel te laten vervangen. Hierdoor voorkom je verdere schade, bijvoorbeeld doordat er vuil je telefoon in komt, en dat je je bezeert. Voor telefoon scherm reparatie is het belangrijk dat je oplet met de kwaliteit van het scherm dat je koopt. Er zijn namelijk nogal wat verschillende opties.<br></p>"
       },
       {
         content:
-	"<p>Veel copy schermen zijn echter van zeer goede kwaliteit tegenwoordig, het is dus niet noodzakelijk dat je een origineel scherm laat plaatsen. Het vervangen van je telefoon scherm is een reparatie die normaal snel uitgevoerd kan worden (binnen 30 minuten). Dit geldt ook voor iPhone scherm reparaties.<br></p>"
+	"<p>Als je telefoon scherm laat vervangen heb je vaak meerdere opties afhankelijk van de kwaliteit die je zoekt en het geld dat je er aan wilt uitgeven. De meest voorkomende opties zijn:<br><br><ul><li><strong>Een OEM of origineel scherm</strong><br>OEM staat voor Original Equipment Manufacturer en betekent in feite dat je een origineel scherm laat terugzetten. Dit is vaak de duurste optie.</li><li><strong>Refurbished scherm</strong><br>Een refurbished scherm is een origineel scherm waar vaak een nieuwe touchscreen laag op is gezet. De kwaliteit is dus nagenoeg hetzelfde als een OEM scherm, maar wel goedkoper.</li><li><strong>Copy schermen</strong><br>Copy of namaak schermen komen er in vele soorten. Ze worden vaak in andere fabrieken gemaakt en veel van de copy schermen hebben een uitstekende kwaliteit. Op MrAgain vind je high copy schermen. Dit zijn schermen van de hoogste kwaliteit. Let hierbij wel op: er zijn zeer veel verschillende copy schermen dus controleer dit goed als je deze er op laat zetten.</li></ul><br>Copy schermen worden ook vaak aangeduid met AAA+ of AA+ kwaliteit, wat verschillen in de kwaliteit van deze schermen aangeeft.</p>"
       },
     ],
   },
@@ -85,15 +77,15 @@ const posts = [
     description: [
       {
 	content:
-	"<p>Als je iPhone scherm kapot is, dan is het verstandig om deze zo snel mogelijk te laten vervangen. Een kapot scherm kan namelijk op meerdere manieren schade aanbrengen. Loszittende stukjes kunnen je verwonden, terwijl er ook vuil in je telefoon kan komen met mogelijk meer schade tot gevolg.<br></p>"
+	"<p>Als je iPhone scherm kapot is, dan wil je je telefoon maken, zo simpel is het. Tot en met de iPhone 8 hebben alle modellen standaard een LCD scherm. De modellen hierna zijn uitgevoerd met een OLED scherm. Daarom kun je bij het vervangen van je iPhone scherm bij eerdere modellen ook kiezen voor een OLED scherm in plaats van een LCD scherm.<br></p>"
       },
       {
 	content:
-	"<p>Dus, je zoekt op iPhone scherm vervangen, maar welk scherm heb je nodig? Afhankelijk van je budget en de kwaliteit die je zoekt heb je meerdere opties. Bijvoorbeeld  een origineel scherm, een high-copy scherm of andere copy schermen.<br></p>"
+	"<p>Wat is het verschil tussen een LCD en OLED scherm? We leggen het uit.<br><br><ul><li>Een LCD scherm staat voor Liquid Crystal Display. Ze gebruiken vloeibare kristallen die zelf geen licht uitzenden. Dit betekent dat een LCD schemr altijd een lichtbron nodig heeft aan de achterkant om een beeld te laten zien.</li><li>OLED staat voor Organic Light Emitting Diode. Deze diodes kunnen wel zelf licht uitzenden en geven daarom een veel scherper beeld dan LCD schermen.</li></ul></p>"
       },
       {
         content:
-	"<p>Natuurlijk geldt vaak dat hoe goedkoper het scherm is, hoe minder de kwaliteit van het scherm voor je smartphone reparatie. Maak daarbij dus een goede afweging en vraag advies aan de telefoon reparateur indien je twijfelt. Daarna snel erop laten zetten zodat je scherm weer perfect is.<br></p>"
+	"<p>Mocht je nog een oud model iPhone hebben dan kun je dus overwegen om hier een OLED scherm op te laten zetten, hou er rekening mee dat OLED schermen wel een stuk duurder zijn.<br></p>"
       },
     ],
   },	
@@ -103,15 +95,15 @@ const posts = [
     description: [
       {
 	content:
-	"<p>Als je iPad of tablet kapot is kun je vaak ook bij telefoon reparateurs terecht. Voor de bekendere merken zoals Apple, Samsung en Huawei hebben ze vaak originele onderdelen op voorraad. Bijvoorbeeld schermen en accu’s waardoor je snel geholpen kunt worden.<br></p>"
+	"<p>Als je iPad of tablet kapot is kun je vaak ook bij phone repair shops terecht om je tablet te laten maken. De meeste service centers voeren de reparaties binnen 30 minuten uit en meestal krijg je tussen de 3 en 12 maanden garantie op je fix.<br></p>"
       },
       {
 	content:
-	"<p>Minder voorkomende reparaties zoals die aan het moederbord worden niet door elke reparateur uitgevoerd. In dit geval is het slim om vooraf te controleren wie deze reparatie wel kan uitvoeren.<br></p>"
+	"<p>Op onze website vind je snel en eenvoudig telefoonwinkels waar je je tablet kunt laten fixen. We raden je aan om wel vantevoren te checken wie ook jouw merk repareert. Sommige reparatie shops repareren namelijk alleen iPads en Samsung Tabs, maar er zijn natuurlijk meer merken. Voor de volgende merken vind je reparateurs op MrAgain:<br><ul><li>Apple</li><li>Samsung</li><li>Lenovo</li><li>Sony</li><li>Acer</li><li>Alcatel</li><li>Asus</li><li>Google</li></ul></p>"
       },
       {
         content:
-	"<p>Datzelfde geldt voor de reparatie van specifieke modellen, zoals de oudere iPad versies, welke niet meer door iedereen worden gerepareerd.<br></p>"
+	"<p>Tablet reparatie verschillen vrijwel niet van smartphone reparaties. Bij tablet maken gaat het dan ook vaak om de volgende reparaties:<br><ul><li>Tablet scherm vervangen</li><li>Tablet batterij vervangen</li><li>Tablet waterschade</li><li>Tablet oplaadconnector reparatie</li><li>Tablet camera's vervangen</li><li>Tablet buttons (volume, aan uit knop) vervangen</li><li>Tablet software updates</li><li>Tablet moederbord reparaties</li></ul><br><br>Als je niet weet wat er mis is, kun je altijd wel een gratis diagnose afspraak inplannen.</p>"
       },
     ],
   },
@@ -121,7 +113,7 @@ const posts = [
     description: [
       {
 	content:
-	"<p>Ook voor laptop reparatie kun je via onze website de beste reparateurs vinden. Dat geldt ook voor Macbook reparatie en alles wat met laptops te maken heeft. De meest voorkomende laptop reparaties zijn het vervangen van het scherm, vergroten van het geheugen met extra RAM en natuurlijk het vervangen van accu's.<br></p>"   
+	"<p>Ook voor de reparatie van je laptop vind je via MrAgain de beste reparateurs bij jou in de buurt. Het komt voor dat telefoon reparateurs zich ook op laptops zijn gaan specialiseren, maar er zijn ook veel computer reparatie zaken die zich hebben gespecialiseerd op computer problemen. Je vindt hier o.a. reparateurs voor:<br><ul<li>Macbook reparatie</li><li>Desktop reparatie</li><li>Laptop reparatie</li><li>iMac reparatie</li></ul><br>Alle bekende merken kun je vinden, zoals Apple, Dell, HP, Lenovo en nog veel meer.<br><br>Typische laptop reparatie zijn:<br><ul><li>Het vervangen van een laptop toetsenbord</li><li>Vervangen laptop scherm</li><li>Vervangen van laptop accu/batterij</li><li>Toevoegen van extra geheugen</li><li>Verhelpen van val en waterschade</li></ul></p>"   
       },
     ],
   },
@@ -145,16 +137,8 @@ const posts = [
     description: [
       {
 	content:
-	"<p>Je telefoon laten repareren of een nieuwe iPhone kopen? Veel mensen vragen zich dit af wanneer hun telefoon kapot gaat. Er zijn verschillende factoren om dan mee te wegen. Hoe oud is de telefoon en wat zijn de reparatiekosten? En hoe lang gaat hij nog mee na een reparatie?<br></p>"
+	"<p>Dit is een vraag die veel mensen zichzelf stellen zodra hun telefoon kapot is. En terecht: een telefoon reparatie kan duur zijn en dus vraag je je af of je niet beter een nieuwe kunt kopen. Omdat MrAgain gaat voor een wereld zonder E-waste zullen wij je altijd aanraden om eerst te kijken of je je telefoon nog kunt repareren. Mocht dat te duur zijn, dan zijn er tegenwoordig veel keuzes op het gebied van refurbished smartphones. Een duurzame optie als je toch een nieuw toestel wilt kopen. Meer over het kopen van een nieuw toestel of het laten repareren lees in onze blog die we erover schreven.</p>"
       },	      
-      {
-	content:
-	"<p>Op basis van die informatie kun je afgewogen keuze maken. Natuurlijk is het beter voor het milieu als je probeert om je telefoon zo lang mogelijk te gebruiken. We schreven er eerder een artikel over en beschreven wat je mogelijkheden zijn. voor wat betreft duurzaamheid zijn dit de beste opties:<br></p>"     
-      },
-      {	
-	content:   
-	"<p><ul><li>Repareren wanneer dat kan</li><li>Als je een nieuwe koopt, ga dan voor een refurbished telefoon</li><li>Toch geen refurbished, koop dan een Fairphone</li><li>Kan het echt niet anders? Dan maar een nieuwe iPhone</li></ul></p>"
-      },
     ],
   },
   {
@@ -167,7 +151,7 @@ const posts = [
       },
       {
 	content: 
-	"<p>De Iwatch of Apple Watch is een bekende, maar je hebt ook de Fitbit en Huawei en Samsung smart watches. Bij smartwatch reparaties zijn scherm reparatie en batterij vervangen veel voorkomend. Daarna ben je al snel aangewezen op een diagnose afspraak omdat de meeste andere defecten zich moeilijk laten raden.<br></p>"
+	"<p>De Iwatch of Apple Watch is een bekende, maar je hebt ook de Fitbit, Huawei en Samsung smart watches. Bij smartwatch reparaties zijn scherm reparatie en batterij vervangen veel voorkomend. Daarna ben je al snel aangewezen op een diagnose afspraak omdat de meeste andere defecten zich moeilijk laten raden. Voor de volgende smart watch merken vind je repair centers op MrAgain:<br><ul><li>Apple Watch</li><li>Garmin</li><li>Fitbit</li><li>Samsung</li><li>Huawei</li><li>Fossil</li><li>Armani</li></ul><br>Er zijn nog veel meer merken actief in de smartwatch industrie en dus zal dit aanbod zich uitbreiden.<br><br>En wat voor reparaties worden er uitgevoerd?Vrij simpel, meest voorkomend zijn:<br><ul><li>Smart Watch glas vervangen</li><li>Smart Watch batterij vervangen</li><li>Smart Watch touch screen reparatie</li><li>Smart Watch buttons vervangen</li></ul>En dan houdt het eigenlijk als snel op.<br> Geen idee wat er mis is met je SmartWatch? Plan dan een gratis diagnose afspraak in.</p>"
       },
     ],
   },

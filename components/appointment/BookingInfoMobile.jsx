@@ -206,6 +206,12 @@ export default function BookingInfoMobile({ shop, showPrices = true }) {
                 <ModelName />
               </strong>
             </div>
+	    <div> 
+	      <label>Reparatie:</label>
+	      <strong>
+	        <item>{service?.reparation?.reparation_name}</item>
+	      </strong>
+	    </div>  
           </ServiceDetails>
         </ServiceDetailsWrap>
       ) : null}
@@ -214,12 +220,6 @@ export default function BookingInfoMobile({ shop, showPrices = true }) {
           showDate={appointmentForm.state?.values?.type !== "contact"}
         />
       </Form>
-      {showPrices && service ? (
-        <ServiceCostWrap>
-          <item>{service?.reparation?.reparation_name}</item>
-          <price>&euro;{service?.price}</price>
-        </ServiceCostWrap>
-      ) : null}
     </>
   );
 
@@ -249,8 +249,6 @@ export default function BookingInfoMobile({ shop, showPrices = true }) {
         </ShopWrap>
         {showPrices && service?.price ? (
           <TotalWrap>
-            <label>Reparatiekosten</label>
-            <price>&euro;{service.price}</price>
             <FontAwesomeIcon icon={faChevronDown} />
           </TotalWrap>
         ) : null}

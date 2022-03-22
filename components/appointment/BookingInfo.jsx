@@ -227,6 +227,12 @@ export default function BookingInfo({
                 <ModelName />
               </strong>
             </div>
+	    <div>
+	      <label>Reparatie:</label>
+	      <strong>
+	        <item>{service?.reparation?.reparation_name}</item>
+	      </strong>
+	      </div>
           </ServiceDetails>
         </ServiceDetailsWrap>
       ) : null}
@@ -235,18 +241,6 @@ export default function BookingInfo({
           showDate={appointmentForm.state?.values?.type !== "contact"}
         />
       </Form>
-      {showPrices && service ? (
-        <>
-          <ServiceCostWrap>
-            <item>{service?.reparation?.reparation_name}</item>
-            <price>&euro;{service?.price}</price>
-          </ServiceCostWrap>
-          <TotalWrap>
-            <label>Reparatiekosten</label>
-            <price>&euro;{service?.price}</price>
-          </TotalWrap>
-        </>
-      ) : null}
       <ButtonWrapper onClick={nextStep} aria-label="Next step">
         {isLastStep ? (
           <span>{finalButtonLabel}</span>

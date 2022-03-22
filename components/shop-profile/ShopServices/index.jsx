@@ -464,7 +464,7 @@ function AppointmentButton() {
                   type: "success",
                   message: "Algemene afspraak",
                   description:
-                    "Je hebt geen reparatie geselecteerd, als je een afspraak wilt maken maken we daarom een algemene diagnose afspraak voor je.",
+                    "Je hebt geen reparatie geselecteerd. We zullen je toestel bekijken om vast te stellen wat het defect is.",
                   buttonLabel: "Prima!",
                 })
                 .then(() => {
@@ -513,6 +513,7 @@ export default function ShopServices({ shop }) {
       serviceFormModule.actions.initialize();
       const devices = await deviceFetcher.fetch();
       const formValues = filtersFormModule.state.values;
+
       if (formValues.device) {
         brandFetcher.key(formValues.device).fetch();
       }
@@ -520,24 +521,45 @@ export default function ShopServices({ shop }) {
         modelFetcher.key(formValues.brand).fetch();
       }
 
-      if (formValues.device === "0" && devices.length > 0) {
-        filtersFormModule.actions.batchChange({
-          updates: {
-            device: `${devices[0].id}`,
-          },
-        });
-        const brands = await brandFetcher.key(`${devices[0].id}`).fetch();
-        const models = await modelFetcher.key(`${brands[0].id}`).fetch();
-        const updates = {
-          device: devices.length > 0 ? `${devices[0].id}` : `0`,
-          brand: brands.length > 0 ? `${brands[0].id}` : `0`,
-          model: models.length > 0 ? `${models[0].id}` : `0`,
-        };
+      if (
+        (formValues.device === "0" ||
+          formValues.brand === "0" ||
+          formValues.model === "0") &&
+        devices.length > 0
+      ) {
+
+        if (formValues.device === "0") {
+          filtersFormModule.actions.batchChange({
+            updates: {
+              device: `${devices[0].id}`,
+            },
+          });
+        }
+
+        let brands = [],
+          models = [], updates = {
+            device: devices.length > 0 ? `${devices[0].id}` : `0`,
+          };
+
+        if (formValues.brand === "0") {
+          brands = await brandFetcher.key(`${devices[0].id}`).fetch();
+          updates.brand = brands.length > 0 ? `${brands[0].id}` : `0`;
+        } else {
+          brands = await brandFetcher.key(formValues.device).fetch();
+        }
+
+        if (formValues.model === "0") {
+          models = await modelFetcher.key(`${brands[0].id}`).fetch();
+          updates.model = models.length > 0 ? `${models[0].id}` : `0`;
+        } else {
+          models = await modelFetcher.key(formValues.brand).fetch();
+        }
 
         filtersFormModule.actions.batchChange({
           updates,
         });
       }
+
 
       shopServicesListModule.actions.initialize();
     }
@@ -560,7 +582,7 @@ export default function ShopServices({ shop }) {
         model: models.length > 0 ? `${models[0].id}` : `0`,
       },
     });
-    // brandFetcher.key(`${value}`).fetch();
+    brandFetcher.key(`${value}`).fetch();
   });
 
   const onBandChange = useCallback(async (value) => {
@@ -590,8 +612,9 @@ export default function ShopServices({ shop }) {
           Selecteer je apparaat, merk en model & bekijk onze reparaties
         </SubTitle>
         <SubTitleDescription>
-          Staat je model of reparatie er niet tussen? Waarschijnlijk kunnen we
-          je wel helpen, maak een afspraak en we kijken er naar!
+          Selecteer je reparatie en maak een afspraak als je bij ons langs wilt komen, dan zorgen we dat we tijd voor je hebben.
+	  Staat je device of reparatie er niet tussen? Waarschijnlijk kunnen we je wel helpen. 
+	  Maak een afspraak of stuur een offerte verzoek en we nemen zo snel mogelijk contact met je op. 
         </SubTitleDescription>
         <Form module={filtersFormModule}>
           <OnMobile only>
