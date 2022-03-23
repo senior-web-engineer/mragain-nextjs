@@ -321,7 +321,7 @@ function MobileServiceItem({ item }) {
         ) : null}
       </ServiceMobileItemWrap.FirstColumn>
       <price>
-        {item.price ? (
+        {item.price>0 ? (
           <span>&euro;{item.price}</span>
         ) : (
           <PriceOnDemand>Prijs op aanvraag</PriceOnDemand>
