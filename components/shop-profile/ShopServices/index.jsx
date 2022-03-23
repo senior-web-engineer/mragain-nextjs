@@ -206,7 +206,7 @@ const SERVICE_COLUMNS = [
     key: "guarantee_time",
     render: (data) => {
       if (
-        data.price ===
+        data.price === 0
       ) {
         return {
           props: {
