@@ -206,9 +206,7 @@ const SERVICE_COLUMNS = [
     key: "guarantee_time",
     render: (data) => {
       if (
-        data.guarantee_time === 0 &&
-        data.price === 0 &&
-        data.reparation_time === "0"
+        data.price ===
       ) {
         return {
           props: {
@@ -230,9 +228,7 @@ const SERVICE_COLUMNS = [
     key: "reparation_time",
     render: (data) => {
       if (
-        data.guarantee_time === 0 &&
-        data.price === 0 &&
-        data.reparation_time === "0"
+        data.price === 0
       ) {
         return {
           props: {
@@ -249,9 +245,7 @@ const SERVICE_COLUMNS = [
     key: "price",
     render: (data) => {
       if (
-        data.guarantee_time === 0 &&
         data.price === 0 &&
-        data.reparation_time === "0"
       ) {
         return {
           props: {
@@ -321,7 +315,7 @@ function MobileServiceItem({ item }) {
         ) : null}
       </ServiceMobileItemWrap.FirstColumn>
       <price>
-        {item.price>0 ? (
+        {item.price ? (
           <span>&euro;{item.price}</span>
         ) : (
           <PriceOnDemand>Prijs op aanvraag</PriceOnDemand>
