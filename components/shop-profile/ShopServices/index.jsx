@@ -245,7 +245,7 @@ const SERVICE_COLUMNS = [
     key: "price",
     render: (data) => {
       if (
-        data.price === 0 &&
+        data.price === 0 
       ) {
         return {
           props: {
