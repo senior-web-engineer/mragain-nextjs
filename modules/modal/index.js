@@ -1,10 +1,10 @@
+import { store } from "@/configureStore";
 import { Drawer as AntDrawer } from "antd";
 import Dialog from "rc-dialog";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { v4 as uuid } from "uuid";
 
-import { store } from "@/configureStore";
 export function createModalModule() {
   const guid = uuid();
 
@@ -117,6 +117,14 @@ const Modal = connect((state, ownProps) => ({
     <StyledDialog
       className="custom-modal"
       {...rest}
+      onClose={
+        () => {
+          if (rest.onModalClose) {
+            rest.onModalClose();
+          }
+          rest.onClose();
+        }
+      }
       footer={footer?.({ module, okText })}
     />
   );
