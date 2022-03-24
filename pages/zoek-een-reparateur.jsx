@@ -1419,7 +1419,14 @@ export default function SearchResults() {
           </OnMobile>
         </MainWrap>
       </DefaultLayout>
-      <ConfirmationModal module={searchResultPageModal} />
+      <ConfirmationModal module={searchResultPageModal} onModalClose={() => {
+        const tomorrow = new Date(
+          new Date().getTime() + 4 * 60 * 60 * 1000
+        );
+        cookieCutter.set("search_result_page_modal", "true", {
+          expires: tomorrow,
+        },)
+      }}/>
     </ShopBridgeContext.Provider>
   );
 }
