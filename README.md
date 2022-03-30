@@ -5,4 +5,4 @@ Thanks
 ##
 Hi Heorhii, 
 Sure, let's meet here: https://meet.google.com/nqi-dbrd-utz
-Pim
+
